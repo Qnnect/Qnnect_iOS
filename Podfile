@@ -14,4 +14,6 @@ target 'Qnnect' do
   	pod 'RxDataSources', '~> 5.0'
   	pod 'RxAlamofire'
 	pod 'Then'
+	pod 'Firebase/Messaging'
+	pod 'KakaoSDK'
 end
