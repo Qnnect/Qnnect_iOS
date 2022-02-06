@@ -12,6 +12,8 @@
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
 		AE59A60227AEAE890081A0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */; };
 		AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */; };
+		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
+		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		AE59A60327AEAE890081A0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
+		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,6 +75,7 @@
 		AE59A5F427AEAE890081A0FA /* Qnnect */ = {
 			isa = PBXGroup;
 			children = (
+				AEF294AD27B01864004EFE4D /* Util */,
 				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
 				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
 				AE59A5F527AEAE890081A0FA /* AppDelegate.swift */,
@@ -80,6 +85,23 @@
 				AE59A60327AEAE890081A0FA /* Info.plist */,
 			);
 			path = Qnnect;
+			sourceTree = "<group>";
+		};
+		AEF294AD27B01864004EFE4D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AEF294AE27B01890004EFE4D /* Base */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AEF294AE27B01890004EFE4D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AEF294AF27B01898004EFE4D /* ViewModelType.swift */,
+				AEF294B127B018AB004EFE4D /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		C68BB39B5478E078B9326607 /* Frameworks */ = {
@@ -206,7 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
+				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
+				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
