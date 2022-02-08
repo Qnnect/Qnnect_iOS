@@ -54,6 +54,134 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AE176A2F27B24F380040A4C3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				AE176A3C27B252E20040A4C3 /* HomeScene */,
+				AE176A3B27B252DC0040A4C3 /* LoginScene */,
+				AE176A3A27B252CB0040A4C3 /* OnBoardingScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		AE176A3027B24F550040A4C3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AE176A3827B251F00040A4C3 /* Network */,
+				AE176A3727B251E80040A4C3 /* DB */,
+				AE176A3527B24F770040A4C3 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AE176A3127B24F590040A4C3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AE176A3927B2526B0040A4C3 /* Repositoriy */,
+				AE176A3327B24F660040A4C3 /* UseCases */,
+				AE176A3227B24F610040A4C3 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AE176A3227B24F610040A4C3 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		AE176A3327B24F660040A4C3 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AE176A3527B24F770040A4C3 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		AE176A3727B251E80040A4C3 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		AE176A3827B251F00040A4C3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AE176A3927B2526B0040A4C3 /* Repositoriy */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositoriy;
+			sourceTree = "<group>";
+		};
+		AE176A3A27B252CB0040A4C3 /* OnBoardingScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OnBoardingScene;
+			sourceTree = "<group>";
+		};
+		AE176A3B27B252DC0040A4C3 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		AE176A3C27B252E20040A4C3 /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeScene;
+			sourceTree = "<group>";
+		};
+		AE176A3E27B253420040A4C3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				AE59A5FE27AEAE890081A0FA /* Assets.xcassets */,
+				AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */,
+				AE59A60327AEAE890081A0FA /* Info.plist */,
+				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
+				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		AE176A3F27B253550040A4C3 /* APP */ = {
+			isa = PBXGroup;
+			children = (
+				AE59A5F527AEAE890081A0FA /* AppDelegate.swift */,
+				AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */,
+			);
+			path = APP;
+			sourceTree = "<group>";
+		};
+		AE176A4027B253BB0040A4C3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AE176A4127B253DD0040A4C3 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Secret;
+			sourceTree = "<group>";
+		};
 		AE59A5E927AEAE890081A0FA = {
 			isa = PBXGroup;
 			children = (
@@ -75,14 +203,13 @@
 		AE59A5F427AEAE890081A0FA /* Qnnect */ = {
 			isa = PBXGroup;
 			children = (
+				AE176A4127B253DD0040A4C3 /* Secret */,
+				AE176A3F27B253550040A4C3 /* APP */,
+				AE176A3E27B253420040A4C3 /* Resource */,
+				AE176A3127B24F590040A4C3 /* Domain */,
+				AE176A3027B24F550040A4C3 /* Data */,
+				AE176A2F27B24F380040A4C3 /* Presentation */,
 				AEF294AD27B01864004EFE4D /* Util */,
-				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
-				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
-				AE59A5F527AEAE890081A0FA /* AppDelegate.swift */,
-				AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */,
-				AE59A5FE27AEAE890081A0FA /* Assets.xcassets */,
-				AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */,
-				AE59A60327AEAE890081A0FA /* Info.plist */,
 			);
 			path = Qnnect;
 			sourceTree = "<group>";
@@ -90,6 +217,7 @@
 		AEF294AD27B01864004EFE4D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AE176A4027B253BB0040A4C3 /* Extension */,
 				AEF294AE27B01890004EFE4D /* Base */,
 			);
 			path = Util;
