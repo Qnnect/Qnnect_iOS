@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double RxAlamofireVersionNumber;
-FOUNDATION_EXPORT const unsigned char RxAlamofireVersionString[];
+FOUNDATION_EXPORT double MoyaVersionNumber;
+FOUNDATION_EXPORT const unsigned char MoyaVersionString[];
 

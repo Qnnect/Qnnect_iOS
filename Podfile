@@ -9,11 +9,13 @@ target 'Qnnect' do
 	pod 'SnapKit', '~> 5.0.0'
 	pod 'RxGesture'
  	pod 'RxSwift', '6.5.0'
-  	pod 'RxCocoa', '6.5.0'
-  	pod 'Kingfisher', '~> 7.0'
-  	pod 'RxDataSources', '~> 5.0'
-  	pod 'RxAlamofire'
+  pod 'RxCocoa', '6.5.0'
+  pod 'Kingfisher', '~> 7.0'
+  pod 'RxDataSources', '~> 5.0'
 	pod 'Then'
 	pod 'Firebase/Messaging'
 	pod 'KakaoSDK'
+  pod 'Moya'
+  pod 'RxAppState'
+  
 end
