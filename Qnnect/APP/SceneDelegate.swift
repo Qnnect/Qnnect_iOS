@@ -19,8 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let rootVC = UINavigationController()
+        let appCoordinator = AppCoordinator(navigationController: rootVC)
+        
+        //TODO: 자동로그인 로직 구현, 테스트를 위해 하드코딩
+        appCoordinator.start(isLogin: false)
+        
         self.window = UIWindow(windowScene: windowScene)
-        //self.window?.rootViewController =
+        self.window?.backgroundColor = .systemBackground
+        self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
     }
 
