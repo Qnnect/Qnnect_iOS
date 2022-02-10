@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
 		AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */; };
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.debug.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.release.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.release.xcconfig"; sourceTree = "<group>"; };
+		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
 		AE59A5F227AEAE890081A0FA /* Qnnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qnnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59A5F527AEAE890081A0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		AE176A4127B253DD0040A4C3 /* Secret */ = {
 			isa = PBXGroup;
 			children = (
+				AE0D336327B4B01600C4B955 /* APP.swift */,
 			);
 			path = Secret;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
+				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
