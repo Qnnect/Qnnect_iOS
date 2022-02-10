@@ -13,6 +13,9 @@
 		AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336927B4C88500C4B955 /* AppCoordinator.swift */; };
 		AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */; };
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
+		AE0D337827B4D76200C4B955 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337727B4D76200C4B955 /* LoginUseCase.swift */; };
+		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
+		AE0D337C27B4DE7300C4B955 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337B27B4DE7300C4B955 /* AuthManager.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
 		AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */; };
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
@@ -32,6 +35,9 @@
 		AE0D336927B4C88500C4B955 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		AE0D337127B4CDB500C4B955 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AE0D337727B4D76200C4B955 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AE0D337B27B4DE7300C4B955 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AE59A5F227AEAE890081A0FA /* Qnnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qnnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59A5F527AEAE890081A0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +91,7 @@
 		AE0D336E27B4CC6A00C4B955 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -95,6 +102,14 @@
 				AE0D336927B4C88500C4B955 /* AppCoordinator.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		AE0D337527B4D75300C4B955 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AE0D337727B4D76200C4B955 /* LoginUseCase.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		AE176A2F27B24F380040A4C3 /* Presentation */ = {
@@ -138,6 +153,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AE0D337527B4D75300C4B955 /* Auth */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -159,6 +175,7 @@
 		AE176A3827B251F00040A4C3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AE0D337B27B4DE7300C4B955 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -410,10 +427,13 @@
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
+				AE0D337C27B4DE7300C4B955 /* AuthManager.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
+				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
+				AE0D337827B4D76200C4B955 /* LoginUseCase.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,8 +14,7 @@ target 'Qnnect' do
   pod 'RxDataSources', '~> 5.0'
 	pod 'Then'
 	pod 'Firebase/Messaging'
-	pod 'KakaoSDK'
+	pod 'RxKakaoSDK'
   pod 'Moya'
   pod 'RxAppState'
-  
 end

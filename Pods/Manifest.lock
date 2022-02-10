@@ -50,15 +50,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
-  - KakaoSDK (2.8.5):
-    - KakaoSDKAuth (= 2.8.5)
-    - KakaoSDKCommon (= 2.8.5)
-    - KakaoSDKLink (= 2.8.5)
-    - KakaoSDKNavi (= 2.8.5)
-    - KakaoSDKStory (= 2.8.5)
-    - KakaoSDKTalk (= 2.8.5)
-    - KakaoSDKTemplate (= 2.8.5)
-    - KakaoSDKUser (= 2.8.5)
   - KakaoSDKAuth (2.8.5):
     - KakaoSDKCommon (= 2.8.5)
   - KakaoSDKCommon (2.8.5):
@@ -93,6 +84,11 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
   - RxAppState (1.7.1):
     - RxCocoa (~> 6.2)
     - RxSwift (~> 6.2)
@@ -106,6 +102,42 @@ PODS:
   - RxGesture (4.0.3):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
+  - RxKakaoSDK (2.8.5):
+    - KakaoSDKNavi (= 2.8.5)
+    - KakaoSDKTemplate (= 2.8.5)
+    - RxKakaoSDKAuth (= 2.8.5)
+    - RxKakaoSDKCommon (= 2.8.5)
+    - RxKakaoSDKLink (= 2.8.5)
+    - RxKakaoSDKStory (= 2.8.5)
+    - RxKakaoSDKTalk (= 2.8.5)
+    - RxKakaoSDKUser (= 2.8.5)
+  - RxKakaoSDKAuth (2.8.5):
+    - KakaoSDKAuth (= 2.8.5)
+    - RxKakaoSDKCommon (= 2.8.5)
+  - RxKakaoSDKCommon (2.8.5):
+    - RxKakaoSDKCommon/Common (= 2.8.5)
+    - RxKakaoSDKCommon/Network (= 2.8.5)
+  - RxKakaoSDKCommon/Common (2.8.5):
+    - KakaoSDKCommon/Common (= 2.8.5)
+    - RxCocoa
+    - RxSwift (~> 6.0)
+  - RxKakaoSDKCommon/Network (2.8.5):
+    - KakaoSDKCommon/Network (= 2.8.5)
+    - RxAlamofire (~> 6.0)
+    - RxKakaoSDKCommon/Common (= 2.8.5)
+  - RxKakaoSDKLink (2.8.5):
+    - KakaoSDKLink (= 2.8.5)
+    - RxKakaoSDKCommon (= 2.8.5)
+  - RxKakaoSDKStory (2.8.5):
+    - KakaoSDKStory (= 2.8.5)
+    - RxKakaoSDKUser (= 2.8.5)
+  - RxKakaoSDKTalk (2.8.5):
+    - KakaoSDKTalk (= 2.8.5)
+    - KakaoSDKTemplate (= 2.8.5)
+    - RxKakaoSDKUser (= 2.8.5)
+  - RxKakaoSDKUser (2.8.5):
+    - KakaoSDKUser (= 2.8.5)
+    - RxKakaoSDKAuth (= 2.8.5)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
@@ -114,13 +146,13 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Messaging
-  - KakaoSDK
   - Kingfisher (~> 7.0)
   - Moya
   - RxAppState
   - RxCocoa (= 6.5.0)
   - RxDataSources (~> 5.0)
   - RxGesture
+  - RxKakaoSDK
   - RxSwift (= 6.5.0)
   - SnapKit (~> 5.0.0)
   - Then
@@ -136,7 +168,6 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
-    - KakaoSDK
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKLink
@@ -149,10 +180,18 @@ SPEC REPOS:
     - Moya
     - nanopb
     - PromisesObjC
+    - RxAlamofire
     - RxAppState
     - RxCocoa
     - RxDataSources
     - RxGesture
+    - RxKakaoSDK
+    - RxKakaoSDKAuth
+    - RxKakaoSDKCommon
+    - RxKakaoSDKLink
+    - RxKakaoSDKStory
+    - RxKakaoSDKTalk
+    - RxKakaoSDKUser
     - RxRelay
     - RxSwift
     - SnapKit
@@ -168,7 +207,6 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 02e248e8997f71fa8cc9d78e9d49ec1a701ba14a
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
-  KakaoSDK: f634244173eccab9198766e5f974c605095f80e8
   KakaoSDKAuth: a9033bd3fbbb9a8c74dcd0dbd7705f7a2bc50ff1
   KakaoSDKCommon: b98d08cf838effdc9b82aca7dee3e50c048880ca
   KakaoSDKLink: 0c93cf5ad2bf73c4e2cb8db5820cd71a9c97feb8
@@ -181,15 +219,23 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxAppState: 9c34f951d4ff8b9034f84016fe766202365bceb2
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxGesture: abadd243fc36db74df43dfc893829ddde94f1a3d
+  RxKakaoSDK: d827d0723293704903b805c9f3747e3ebc30a706
+  RxKakaoSDKAuth: ae3b2fb29efa31961b71eb374e9e3243d5a80022
+  RxKakaoSDKCommon: c1d64e3ebd6ff2721257684f222599f14cf6acf2
+  RxKakaoSDKLink: 48e3013259f21819cc40137c6e243df24c729889
+  RxKakaoSDKStory: ea2353027445e3717a6ef10dfd0f3c601e3f0991
+  RxKakaoSDKTalk: 1eadd942f1bc3c4be84af4c64ddfa0192b541d6a
+  RxKakaoSDKUser: a8246bf552f86715295607bd62e7ff188f06ced3
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: c39242532d0baef6f2474a27c2ee3c056446938c
+PODFILE CHECKSUM: 5dca0fcca8f651714b629cdc7e5b9636b2d83976
 
 COCOAPODS: 1.11.2
