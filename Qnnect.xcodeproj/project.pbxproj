@@ -152,9 +152,6 @@
 			children = (
 				AE59A5FE27AEAE890081A0FA /* Assets.xcassets */,
 				AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */,
-				AE59A60327AEAE890081A0FA /* Info.plist */,
-				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
-				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -203,6 +200,9 @@
 		AE59A5F427AEAE890081A0FA /* Qnnect */ = {
 			isa = PBXGroup;
 			children = (
+				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
+				AE59A60327AEAE890081A0FA /* Info.plist */,
+				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
 				AE176A4127B253DD0040A4C3 /* Secret */,
 				AE176A3F27B253550040A4C3 /* APP */,
 				AE176A3E27B253420040A4C3 /* Resource */,
