@@ -24,10 +24,16 @@ final class LoginViewController: BaseViewController {
     }
     
     private let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
-    var viewModel: LoginViewModel!
+    private var viewModel: LoginViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+        
+    static func create(with viewModel: LoginViewModel) -> LoginViewController {
+        let vc = LoginViewController()
+        vc.viewModel = viewModel
+        return vc
     }
     
     override func configureUI() {

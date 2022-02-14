@@ -20,10 +20,17 @@ final class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = LoginViewController()
+        let viewModel = LoginViewModel(coordinator: self)
+        let vc = LoginViewController.create(with: viewModel)
         let loginManager = LoginManager(vc: vc)
-        let viewModel = LoginViewModel(loginManager: loginManager)
-        vc.viewModel = viewModel
+        viewModel.loginManager = loginManager
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showInputNameVC() {
+        let inputUseCase = DefaultInputUseCase()
+        let viewModel = InputNameViewModel(coordinator: self, inputUseCase: inputUseCase)
+        let vc = InputNameViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
 }

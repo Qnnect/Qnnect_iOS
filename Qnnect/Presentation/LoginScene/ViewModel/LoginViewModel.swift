@@ -20,19 +20,32 @@ final class LoginViewModel: ViewModelType {
         let isSuccess: Signal<Bool>
     }
     
-    private let loginManager: LoginManager
+    var loginManager: LoginManager!
+    private let coordinator: LoginCoordinator
     
-    init(loginManager: LoginManager) {
-        self.loginManager = loginManager
+    init(coordinator: LoginCoordinator) {
+        //self.loginManager = loginManager
+        self.coordinator = coordinator
     }
+    
     func transform(from input: Input) -> Output {
         let kakaoLogin = input.didTapKakaoButton
-            .flatMap(self.loginManager.kakaoLogin)
+            .compactMap(self.loginManager.kakaoLogin)
+            .flatMap{ $0 }
         
         let appleLogin = input.didTapAppleButton
-            .flatMap(self.loginManager.appleLogin)
+            .compactMap(self.loginManager.appleLogin)
+            .flatMap{ $0 }
+        
+        let isSuccess = Observable.merge(kakaoLogin,appleLogin)
+            .do(onNext :{ [weak self] isSuccess in
+                if isSuccess {
+                    self?.coordinator.showInputNameVC()
+                }
+            })
+                
         return Output(
-            isSuccess: Observable.merge(kakaoLogin,appleLogin).asSignal(onErrorJustReturn: false)
+            isSuccess: isSuccess.asSignal(onErrorJustReturn: false)
         )
     }
 }
