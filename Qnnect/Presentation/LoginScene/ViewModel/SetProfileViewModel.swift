@@ -23,7 +23,7 @@ final class SetProfileViewModel: ViewModelType {
         let completion: Signal<Void>
     }
     
-    private let coordinator: LoginCoordinator
+    private weak var coordinator: LoginCoordinator?
     private let inputUseCase: InputUseCase
     
     init(coordinator: LoginCoordinator, inputUseCase: InputUseCase) {
@@ -46,7 +46,7 @@ final class SetProfileViewModel: ViewModelType {
             .mapToVoid()
             .do(onNext: {
                 [weak self] _ in
-                self?.coordinator.showTermsVC()
+                self?.coordinator?.showTermsVC()
             })
         return Output(
             nameLength: nameLength.asDriver(onErrorJustReturn: 0),

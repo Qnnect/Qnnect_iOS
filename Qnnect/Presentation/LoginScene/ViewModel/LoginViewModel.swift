@@ -21,7 +21,7 @@ final class LoginViewModel: ViewModelType {
     }
     
     var loginManager: LoginManager!
-    private let coordinator: LoginCoordinator
+    private weak var coordinator: LoginCoordinator?
     
     init(coordinator: LoginCoordinator) {
         //self.loginManager = loginManager
@@ -40,7 +40,7 @@ final class LoginViewModel: ViewModelType {
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
             .do(onNext :{ [weak self] isSuccess in
                 if isSuccess {
-                    self?.coordinator.showInputNameVC()
+                    self?.coordinator?.showInputNameVC()
                 }
             })
                 
