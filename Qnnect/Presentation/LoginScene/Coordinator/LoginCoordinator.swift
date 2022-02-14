@@ -32,8 +32,8 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     
     func showInputNameVC() {
         let inputUseCase = DefaultInputUseCase()
-        let viewModel = InputNameViewModel(coordinator: self, inputUseCase: inputUseCase)
-        let vc = InputNameViewController.create(with: viewModel)
+        let viewModel = SetProfileViewModel(coordinator: self, inputUseCase: inputUseCase)
+        let vc = SetProfileViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

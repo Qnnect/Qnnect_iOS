@@ -26,10 +26,10 @@
 		AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont.swift */; };
 		AECC131127B9ED12006866FC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131027B9ED12006866FC /* Roboto-Regular.ttf */; };
 		AECC131327B9EE03006866FC /* BMJUA_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131227B9EE03006866FC /* BMJUA_ttf.ttf */; };
-		AECC131727BA1033006866FC /* InputNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131627BA1033006866FC /* InputNameViewController.swift */; };
+		AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131627BA1033006866FC /* SetProfileViewController.swift */; };
 		AECC131D27BA1266006866FC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131C27BA1266006866FC /* UIColor+.swift */; };
 		AECC132A27BA24F7006866FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132927BA24F7006866FC /* Constants.swift */; };
-		AECC132C27BA25A9006866FC /* InputNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132B27BA25A9006866FC /* InputNameViewModel.swift */; };
+		AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */; };
 		AECC132F27BA27C1006866FC /* InputUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132E27BA27C1006866FC /* InputUseCase.swift */; };
 		AECC133127BA341B006866FC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133027BA341B006866FC /* UIButton+.swift */; };
 		AECC133327BA35DA006866FC /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133227BA35DA006866FC /* UILabel+.swift */; };
@@ -67,10 +67,10 @@
 		AECC130E27B9EAC2006866FC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		AECC131027B9ED12006866FC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		AECC131227B9EE03006866FC /* BMJUA_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_ttf.ttf; sourceTree = "<group>"; };
-		AECC131627BA1033006866FC /* InputNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNameViewController.swift; sourceTree = "<group>"; };
+		AECC131627BA1033006866FC /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		AECC131C27BA1266006866FC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AECC132927BA24F7006866FC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		AECC132B27BA25A9006866FC /* InputNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNameViewModel.swift; sourceTree = "<group>"; };
+		AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
 		AECC132E27BA27C1006866FC /* InputUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUseCase.swift; sourceTree = "<group>"; };
 		AECC133027BA341B006866FC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AECC133227BA35DA006866FC /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				AE0D337127B4CDB500C4B955 /* LoginViewController.swift */,
-				AECC131627BA1033006866FC /* InputNameViewController.swift */,
+				AECC131627BA1033006866FC /* SetProfileViewController.swift */,
 				AECC133427BA3DD0006866FC /* TermsViewController.swift */,
 			);
 			path = ViewController;
@@ -127,7 +127,7 @@
 			children = (
 				AECC12FA27B9DCCD006866FC /* LoginManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
-				AECC132B27BA25A9006866FC /* InputNameViewModel.swift */,
+				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -554,13 +554,13 @@
 				AECC132F27BA27C1006866FC /* InputUseCase.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
-				AECC131727BA1033006866FC /* InputNameViewController.swift in Sources */,
+				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AECC133327BA35DA006866FC /* UILabel+.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
-				AECC132C27BA25A9006866FC /* InputNameViewModel.swift in Sources */,
+				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 				AECC133127BA341B006866FC /* UIButton+.swift in Sources */,
 			);

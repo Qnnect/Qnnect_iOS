@@ -10,7 +10,7 @@ import Then
 import SnapKit
 import RxSwift
 
-final class InputNameViewController: BaseViewController {
+final class SetProfileViewController: BaseViewController {
     private let nameTextField = UITextField().then {
         $0.placeholder = Constants.nameTextFieldPlaceHolderText
     }
@@ -25,10 +25,10 @@ final class InputNameViewController: BaseViewController {
     private let nameLengthLabel = UILabel().then {
         $0.text = "0/8"
     }
-    private var viewModel: InputNameViewModel!
+    private var viewModel: SetProfileViewModel!
     
-    static func create(with viewModel: InputNameViewModel) -> InputNameViewController {
-        let vc = InputNameViewController()
+    static func create(with viewModel: SetProfileViewModel) -> SetProfileViewController {
+        let vc = SetProfileViewController()
         vc.viewModel = viewModel
         return vc
     }
@@ -65,7 +65,7 @@ final class InputNameViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = InputNameViewModel.Input(
+        let input = SetProfileViewModel.Input(
             inputName: self.nameTextField.rx.text.asObservable(),
             didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.rx.text.asObservable())
                 .compactMap{ $0 }
@@ -92,7 +92,7 @@ final class InputNameViewController: BaseViewController {
 
 
 // MARK: - 최대 글자 수 이상 입력 제한
-extension InputNameViewController: UITextFieldDelegate {
+extension SetProfileViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let max = Constants.nameMaxLength
         if let char = string.cString(using: String.Encoding.utf8) {

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-final class InputNameViewModel: ViewModelType {
+final class SetProfileViewModel: ViewModelType {
     
     struct Input {
         let inputName: Observable<String?>
