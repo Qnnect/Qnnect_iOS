@@ -143,6 +143,9 @@
 		AE176A2F27B24F380040A4C3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AECC134427BA494C006866FC /* MyPageScene */,
+				AECC134327BA4939006866FC /* StoreScene */,
+				AECC134227BA4930006866FC /* BookMarkScene */,
 				AE0D337327B4CF8F00C4B955 /* Common */,
 				AE176A3C27B252E20040A4C3 /* HomeScene */,
 				AE176A3B27B252DC0040A4C3 /* LoginScene */,
@@ -365,6 +368,27 @@
 				AECC133D27BA4256006866FC /* HomeCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AECC134227BA4930006866FC /* BookMarkScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BookMarkScene;
+			sourceTree = "<group>";
+		};
+		AECC134327BA4939006866FC /* StoreScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StoreScene;
+			sourceTree = "<group>";
+		};
+		AECC134427BA494C006866FC /* MyPageScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPageScene;
 			sourceTree = "<group>";
 		};
 		AEF294AD27B01864004EFE4D /* Util */ = {
