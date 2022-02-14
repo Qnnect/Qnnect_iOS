@@ -28,7 +28,7 @@ final class AppCoordinator: Coordinator {
             //TODO: 로그인 화면 건너뛰고 바로 홈화면으로
         } else {
             //TODO: 로그인 화면 으로
-            let loginCoordinator = LoginCoordinator(navigationController: self.navigationController)
+            let loginCoordinator = DefaultLoginCoordinator(navigationController: self.navigationController)
             self.childCoordinators.append(loginCoordinator)
             loginCoordinator.start()
         }

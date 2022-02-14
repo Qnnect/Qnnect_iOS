@@ -7,8 +7,11 @@
 
 import UIKit
 
-
-final class LoginCoordinator: Coordinator {
+protocol LoginCoordinator: Coordinator {
+    func showInputNameVC()
+    func showTermsVC()
+}
+final class DefaultLoginCoordinator: LoginCoordinator {
     var childCoordinators: [Coordinator] = []
     
     var navigationController: UINavigationController
