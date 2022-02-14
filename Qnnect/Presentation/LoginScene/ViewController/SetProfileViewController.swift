@@ -25,6 +25,11 @@ final class SetProfileViewController: BaseViewController {
     private let nameLengthLabel = UILabel().then {
         $0.text = "0/8"
     }
+    
+    private let cautionLabel = UILabel().then {
+        $0.text = "2-8글자 사이로 입력해주세요"
+        $0.textColor = .red
+    }
     private var viewModel: SetProfileViewModel!
     
     static func create(with viewModel: SetProfileViewModel) -> SetProfileViewController {
@@ -42,7 +47,8 @@ final class SetProfileViewController: BaseViewController {
         [
             self.nameTextField,
             self.completionButton,
-            self.nameLengthLabel
+            self.nameLengthLabel,
+            self.cautionLabel
         ].forEach {
             self.view.addSubview($0)
         }
@@ -59,14 +65,22 @@ final class SetProfileViewController: BaseViewController {
         }
         
         self.nameLengthLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(nameTextField)
-            make.top.equalTo(nameTextField.snp.bottom)
+            make.trailing.equalTo(self.nameTextField)
+            make.top.equalTo(self.nameTextField.snp.bottom)
+        }
+        
+        self.cautionLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.nameTextField.snp.bottom).offset(8.0)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(0)
         }
     }
     
     override func bind() {
         let input = SetProfileViewModel.Input(
-            inputName: self.nameTextField.rx.text.asObservable(),
+            inputName: self.nameTextField.rx.text
+                .asObservable()
+                .skip(while: { ($0?.count ?? 0) == 0}),
             didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.rx.text.asObservable())
                 .compactMap{ $0 }
         )
@@ -76,6 +90,7 @@ final class SetProfileViewController: BaseViewController {
         
         //Rx+/UIBUtton+
         output.isValidName
+            .do(onNext: self.setCautionLabel(_:))
             .drive(self.completionButton.rx.setEnabled)
             .disposed(by: self.disposeBag)
         
@@ -90,7 +105,23 @@ final class SetProfileViewController: BaseViewController {
     }
 }
 
-
+private extension SetProfileViewController {
+    func setCautionLabel(_ isVaild: Bool) {
+        UIView.animate(withDuration: 1.0) {
+            [weak self] in
+            if isVaild {
+                self?.cautionLabel.snp.updateConstraints { make in
+                    make.height.equalTo(0)
+                }
+            } else {
+                self?.cautionLabel.snp.updateConstraints { make in
+                    make.height.equalTo(50.0)
+                }
+            }
+            self?.view.layoutIfNeeded()
+        }
+    }
+}
 // MARK: - 최대 글자 수 이상 입력 제한
 extension SetProfileViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
