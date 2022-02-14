@@ -11,7 +11,7 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var appCoordinator: AppCoordinator!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,10 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let rootVC = UINavigationController()
-        let appCoordinator = AppCoordinator(navigationController: rootVC)
+        self.appCoordinator = AppCoordinator(navigationController: rootVC)
         
         //TODO: 자동로그인 로직 구현, 테스트를 위해 하드코딩
-        appCoordinator.start(isLogin: false)
+        self.appCoordinator.start(isLogin: false)
         
         self.window = UIWindow(windowScene: windowScene)
         self.window?.backgroundColor = .systemBackground
