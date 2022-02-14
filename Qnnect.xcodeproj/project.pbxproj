@@ -34,6 +34,9 @@
 		AECC133127BA341B006866FC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133027BA341B006866FC /* UIButton+.swift */; };
 		AECC133327BA35DA006866FC /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133227BA35DA006866FC /* UILabel+.swift */; };
 		AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133427BA3DD0006866FC /* TermsViewController.swift */; };
+		AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133B27BA41DD006866FC /* HomeViewController.swift */; };
+		AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133D27BA4256006866FC /* HomeCoordinator.swift */; };
+		AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133F27BA45C0006866FC /* HomeViewModel.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
@@ -72,6 +75,9 @@
 		AECC133027BA341B006866FC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AECC133227BA35DA006866FC /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AECC133427BA3DD0006866FC /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		AECC133B27BA41DD006866FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AECC133D27BA4256006866FC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		AECC133F27BA45C0006866FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,7 +224,6 @@
 		AE176A3B27B252DC0040A4C3 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
-				AECC131827BA106E006866FC /* View */,
 				AE0D336E27B4CC6A00C4B955 /* ViewModel */,
 				AE0D336C27B4CC6000C4B955 /* ViewController */,
 				AE0D336B27B4CC5A00C4B955 /* Coordinator */,
@@ -229,6 +234,9 @@
 		AE176A3C27B252E20040A4C3 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				AECC133827BA41C5006866FC /* Coordinator */,
+				AECC133727BA41C2006866FC /* ViewController */,
+				AECC133627BA41BD006866FC /* ViewModel */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -327,19 +335,36 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		AECC131827BA106E006866FC /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		AECC132D27BA27BA006866FC /* Input */ = {
 			isa = PBXGroup;
 			children = (
 				AECC132E27BA27C1006866FC /* InputUseCase.swift */,
 			);
 			path = Input;
+			sourceTree = "<group>";
+		};
+		AECC133627BA41BD006866FC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AECC133F27BA45C0006866FC /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AECC133727BA41C2006866FC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AECC133B27BA41DD006866FC /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AECC133827BA41C5006866FC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AECC133D27BA4256006866FC /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		AEF294AD27B01864004EFE4D /* Util */ = {
@@ -492,9 +517,12 @@
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
+				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
 				AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */,
+				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
+				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
