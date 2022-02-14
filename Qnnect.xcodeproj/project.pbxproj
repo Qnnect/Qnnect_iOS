@@ -33,6 +33,7 @@
 		AECC132F27BA27C1006866FC /* InputUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132E27BA27C1006866FC /* InputUseCase.swift */; };
 		AECC133127BA341B006866FC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133027BA341B006866FC /* UIButton+.swift */; };
 		AECC133327BA35DA006866FC /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133227BA35DA006866FC /* UILabel+.swift */; };
+		AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133427BA3DD0006866FC /* TermsViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
@@ -70,6 +71,7 @@
 		AECC132E27BA27C1006866FC /* InputUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUseCase.swift; sourceTree = "<group>"; };
 		AECC133027BA341B006866FC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AECC133227BA35DA006866FC /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		AECC133427BA3DD0006866FC /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 			children = (
 				AE0D337127B4CDB500C4B955 /* LoginViewController.swift */,
 				AECC131627BA1033006866FC /* InputNameViewController.swift */,
+				AECC133427BA3DD0006866FC /* TermsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,

@@ -66,7 +66,9 @@ final class InputNameViewController: BaseViewController {
     
     override func bind() {
         let input = InputNameViewModel.Input(
-            inputName: self.nameTextField.rx.text.asObservable()
+            inputName: self.nameTextField.rx.text.asObservable(),
+            didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.rx.text.asObservable())
+                .compactMap{ $0 }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -80,6 +82,10 @@ final class InputNameViewController: BaseViewController {
         //Rx+/UILabel+
         output.nameLength
             .drive(self.nameLengthLabel.rx.nameLength)
+            .disposed(by: self.disposeBag)
+        
+        output.completion
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }

@@ -33,4 +33,9 @@ final class LoginCoordinator: Coordinator {
         let vc = InputNameViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
+    
+    func showTermsVC() {
+        let vc = TermsViewController.create()
+        self.navigationController.pushViewController(vc, animated: true)
+    }
 }
