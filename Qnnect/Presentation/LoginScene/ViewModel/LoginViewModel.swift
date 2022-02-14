@@ -24,7 +24,6 @@ final class LoginViewModel: ViewModelType {
     private weak var coordinator: LoginCoordinator?
     
     init(coordinator: LoginCoordinator) {
-        //self.loginManager = loginManager
         self.coordinator = coordinator
     }
     
