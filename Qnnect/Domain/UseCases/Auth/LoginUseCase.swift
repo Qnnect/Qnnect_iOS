@@ -10,7 +10,7 @@ import RxSwift
 
 protocol LoginUseCase: AnyObject {
     func kakaoLogin() -> Observable<Bool>
-    func appleLogin()
+    func appleLogin() -> Observable<Bool>
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
@@ -23,7 +23,7 @@ final class DefaultLoginUseCase: LoginUseCase {
         return self.authManager.kakaoLogin()
     }
     
-    func appleLogin() {
-        
+    func appleLogin() -> Observable<Bool> {
+        return self.authManager.appleLogin()
     }
 }

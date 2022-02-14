@@ -13,14 +13,14 @@
 		AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336927B4C88500C4B955 /* AppCoordinator.swift */; };
 		AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */; };
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
-		AE0D337827B4D76200C4B955 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337727B4D76200C4B955 /* LoginUseCase.swift */; };
 		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
-		AE0D337C27B4DE7300C4B955 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337B27B4DE7300C4B955 /* AuthManager.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
 		AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */; };
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
 		AE59A60227AEAE890081A0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */; };
 		AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */; };
+		AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* LoginManager.swift */; };
+		AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
@@ -35,9 +35,8 @@
 		AE0D336927B4C88500C4B955 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		AE0D337127B4CDB500C4B955 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		AE0D337727B4D76200C4B955 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		AE0D337B27B4DE7300C4B955 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
 		AE59A5F227AEAE890081A0FA /* Qnnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qnnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59A5F527AEAE890081A0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +44,8 @@
 		AE59A60127AEAE890081A0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE59A60327AEAE890081A0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
+		AECC12FA27B9DCCD006866FC /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+.swift"; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +91,7 @@
 		AE0D336E27B4CC6A00C4B955 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AECC12FA27B9DCCD006866FC /* LoginManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
@@ -107,7 +108,6 @@
 		AE0D337527B4D75300C4B955 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				AE0D337727B4D76200C4B955 /* LoginUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -175,7 +175,6 @@
 		AE176A3827B251F00040A4C3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				AE0D337B27B4DE7300C4B955 /* AuthManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -232,6 +231,7 @@
 		AE176A4027B253BB0040A4C3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AECC130527B9E3DF006866FC /* Rx+ */,
 				AE0D336527B4C37400C4B955 /* Observable+.swift */,
 			);
 			path = Extension;
@@ -266,7 +266,7 @@
 		AE59A5F427AEAE890081A0FA /* Qnnect */ = {
 			isa = PBXGroup;
 			children = (
-				AE59A60D27AEBA320081A0FA /* Qnnect.entitlements */,
+				AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */,
 				AE59A60327AEAE890081A0FA /* Info.plist */,
 				AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */,
 				AE176A4127B253DD0040A4C3 /* Secret */,
@@ -278,6 +278,14 @@
 				AEF294AD27B01864004EFE4D /* Util */,
 			);
 			path = Qnnect;
+			sourceTree = "<group>";
+		};
+		AECC130527B9E3DF006866FC /* Rx+ */ = {
+			isa = PBXGroup;
+			children = (
+				AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */,
+			);
+			path = "Rx+";
 			sourceTree = "<group>";
 		};
 		AEF294AD27B01864004EFE4D /* Util */ = {
@@ -424,16 +432,16 @@
 			files = (
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
+				AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
-				AE0D337C27B4DE7300C4B955 /* AuthManager.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
+				AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
-				AE0D337827B4D76200C4B955 /* LoginUseCase.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HWBJNMY98D;
@@ -594,6 +603,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iame.qnnect.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -607,6 +617,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HWBJNMY98D;
@@ -626,6 +637,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iame.qnnect.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

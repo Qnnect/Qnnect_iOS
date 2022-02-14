@@ -20,9 +20,9 @@ final class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let useCase = DefaultLoginUseCase(authManager: DefaultAuthManager())
-        let viewModel = LoginViewModel(loginUseCase: useCase)
         let vc = LoginViewController()
+        let loginManager = LoginManager(vc: vc)
+        let viewModel = LoginViewModel(loginManager: loginManager)
         vc.viewModel = viewModel
         self.navigationController.pushViewController(vc, animated: true)
     }

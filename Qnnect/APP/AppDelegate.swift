@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import KakaoSDKCommon
+import KakaoSDKUser
+import AuthenticationServices
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // KAKAO
         KakaoSDK.initSDK(appKey: APP.KAKAO_NATIVE_APP_KEY)
+        
+        
+
         
         //FCM 현재 등록 토큰 확인
         Messaging.messaging().token { token, error in

@@ -11,8 +11,10 @@ import Then
 import AuthenticationServices
 import RxSwift
 import RxCocoa
+import CryptoKit
 
 final class LoginViewController: BaseViewController {
+    
     
     private let kakaoButton = UIButton().then {
         $0.setTitle("KAKAO로 시작하기", for: .normal)
@@ -21,11 +23,7 @@ final class LoginViewController: BaseViewController {
         $0.layer.cornerRadius = 8.0
     }
     
-    private let appleButton = ASAuthorizationAppleIDButton(
-        authorizationButtonType: .signIn,
-        authorizationButtonStyle: .black
-    )
-    
+    private let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
     var viewModel: LoginViewModel!
     
     override func viewDidLoad() {
@@ -50,6 +48,7 @@ final class LoginViewController: BaseViewController {
         self.appleButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.kakaoButton)
             make.top.equalTo(self.kakaoButton.snp.bottom).offset(16.0)
+            make.height.equalTo(60.0)
         }
     }
     
@@ -66,7 +65,10 @@ final class LoginViewController: BaseViewController {
             }
         ).disposed(by: self.disposeBag)
     }
+    
 }
+
+
 extension Reactive where Base: ASAuthorizationAppleIDButton{
     
     /// Reactive wrapper for `TouchUpInside` control event.
@@ -74,3 +76,6 @@ extension Reactive where Base: ASAuthorizationAppleIDButton{
         controlEvent(.touchUpInside)
     }
 }
+
+
+

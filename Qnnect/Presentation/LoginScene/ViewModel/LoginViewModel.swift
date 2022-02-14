@@ -20,17 +20,19 @@ final class LoginViewModel: ViewModelType {
         let isSuccess: Signal<Bool>
     }
     
-    private let loginUseCase: LoginUseCase
+    private let loginManager: LoginManager
     
-    init(loginUseCase: LoginUseCase) {
-        self.loginUseCase = loginUseCase
+    init(loginManager: LoginManager) {
+        self.loginManager = loginManager
     }
     func transform(from input: Input) -> Output {
         let kakaoLogin = input.didTapKakaoButton
-            .flatMap(self.loginUseCase.kakaoLogin)
+            .flatMap(self.loginManager.kakaoLogin)
         
+        let appleLogin = input.didTapAppleButton
+            .flatMap(self.loginManager.appleLogin)
         return Output(
-            isSuccess: kakaoLogin.asSignal(onErrorJustReturn: false)
+            isSuccess: Observable.merge(kakaoLogin,appleLogin).asSignal(onErrorJustReturn: false)
         )
     }
 }
