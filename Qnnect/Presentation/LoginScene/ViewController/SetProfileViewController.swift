@@ -17,7 +17,7 @@ final class SetProfileViewController: BaseViewController {
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
-        $0.backgroundColor = .PRIMARY01
+        $0.backgroundColor = .p_brown
         $0.setTitleColor(.black, for: .normal)
         $0.isEnabled = false
     }

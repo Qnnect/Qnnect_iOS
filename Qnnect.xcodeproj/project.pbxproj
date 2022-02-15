@@ -19,6 +19,9 @@
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
 		AE59A60227AEAE890081A0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */; };
 		AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */; };
+		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
+		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
+		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
 		AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* LoginManager.swift */; };
 		AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */; };
 		AECC130B27B9EA1E006866FC /* IM_Hyemin-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC130927B9EA1E006866FC /* IM_Hyemin-Bold.ttf */; };
@@ -60,6 +63,9 @@
 		AE59A60127AEAE890081A0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE59A60327AEAE890081A0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
+		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+.swift"; sourceTree = "<group>"; };
 		AECC130927B9EA1E006866FC /* IM_Hyemin-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.ttf"; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 				AECC12FA27B9DCCD006866FC /* LoginManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
 				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
+				AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -136,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				AE0D336927B4C88500C4B955 /* AppCoordinator.swift */,
+				AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */,
+				AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -227,6 +236,7 @@
 		AE176A3B27B252DC0040A4C3 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE5B1C1927BB346B00F24981 /* View */,
 				AE0D336E27B4CC6A00C4B955 /* ViewModel */,
 				AE0D336C27B4CC6000C4B955 /* ViewController */,
 				AE0D336B27B4CC5A00C4B955 /* Coordinator */,
@@ -315,6 +325,13 @@
 				AEF294AD27B01864004EFE4D /* Util */,
 			);
 			path = Qnnect;
+			sourceTree = "<group>";
+		};
+		AE5B1C1927BB346B00F24981 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AECC130527B9E3DF006866FC /* Rx+ */ = {
@@ -560,8 +577,11 @@
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AECC133327BA35DA006866FC /* UILabel+.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
+				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
+				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
+				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AECC133127BA341B006866FC /* UIButton+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

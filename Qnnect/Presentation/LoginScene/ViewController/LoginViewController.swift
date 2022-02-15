@@ -15,15 +15,13 @@ import CryptoKit
 
 final class LoginViewController: BaseViewController {
     
-    
     private let kakaoButton = UIButton().then {
-        $0.setTitle("KAKAO로 시작하기", for: .normal)
-        $0.backgroundColor = .black
-        $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 8.0
+        $0.setImage(UIImage(named: "kakao_login_large_wide"), for: .normal)
     }
     
-    private let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+    //TODO: Apple Login button custom
+    private let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .white)
+    
     private var viewModel: LoginViewModel!
     
     override func viewDidLoad() {
@@ -45,16 +43,19 @@ final class LoginViewController: BaseViewController {
             self.view.addSubview($0)
         }
         
+        self.view.backgroundColor = .p_brown
+        
+        
         self.kakaoButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(32.0)
-            make.leading.trailing.equalToSuperview().inset(16.0)
-            make.height.equalTo(self.appleButton)
+            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.height.equalTo(52.0)
         }
         
         self.appleButton.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(self.kakaoButton)
-            make.top.equalTo(self.kakaoButton.snp.bottom).offset(16.0)
-            make.height.equalTo(60.0)
+            make.bottom.equalToSuperview().inset(110.0)
+            make.top.equalTo(self.kakaoButton.snp.bottom).offset(8.0)
+            make.leading.trailing.height.equalTo(self.kakaoButton)
+            
         }
     }
     

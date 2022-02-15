@@ -10,6 +10,7 @@ import UIKit
 protocol LoginCoordinator: Coordinator {
     func showInputNameVC()
     func showTermsVC()
+    func showHomeVC()
 }
 final class DefaultLoginCoordinator: LoginCoordinator {
     var childCoordinators: [Coordinator] = []
@@ -38,7 +39,14 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     }
     
     func showTermsVC() {
-        let vc = TermsViewController.create()
+        let viewModel = TermsViewModel(coordinator: self)
+        let vc = TermsViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showHomeVC() {
+        //TODO: 탭바 세팅, push HomeVC
+        
+        
     }
 }
