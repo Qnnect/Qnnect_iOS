@@ -22,7 +22,7 @@ extension UIColor {
     class var GREEN02: UIColor? { return UIColor(named: "GREEN02") }
     class var PINK01: UIColor? { return UIColor(named: "PINK02") }
     class var PINK02: UIColor? { return UIColor(named: "PINK02") }
-    class var PRIMARY01: UIColor? { return UIColor(named: "PRIMARY01") }
+    class var p_brown: UIColor? { return UIColor(named: "p_brown") }
     class var PRIMARY02: UIColor? { return UIColor(named: "PRIMARY02") }
     class var PURPLE01: UIColor? { return UIColor(named: "PURPLE01") }
     class var PURPLE02: UIColor? { return UIColor(named: "PURPLE02") }
@@ -32,4 +32,5 @@ extension UIColor {
     class var SECONDARY02: UIColor? { return UIColor(named: "SECONDARY02") }
     class var SECONDARY03: UIColor? { return UIColor(named: "SECONDARY03") }
     class var SECONDARY04: UIColor? { return UIColor(named: "SECONDARY04") }
+    class var p_ivory: UIColor? { return UIColor(named: "p_ivory") }
 }
