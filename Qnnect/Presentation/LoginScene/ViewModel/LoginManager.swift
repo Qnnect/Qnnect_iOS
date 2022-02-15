@@ -26,6 +26,7 @@ final class LoginManager: NSObject {
                 .map{
                     token -> Bool in
                     //TODO: token 서버로 전송,로컬 저장
+                    print("KaKao Token : \(token)")
                     return true
                 }.catchAndReturn(false)
             
@@ -34,6 +35,7 @@ final class LoginManager: NSObject {
                 .map{
                     token -> Bool in
                     //TODO: token 서버로 전송,로컬 저장
+                    print("KaKao Token : \(token)")
                     return true
                 }.catchAndReturn(false)
             

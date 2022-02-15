@@ -36,6 +36,8 @@ final class LoginViewModel: ViewModelType {
             .compactMap(self.loginManager.appleLogin)
             .flatMap{ $0 }
         
+        
+        // TODO: 소셜 로그인 후 서버로 토큰을 전송해 기존에 존재해 있는 회원인지 확인 후 분기 처리
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
             .do(onNext :{ [weak self] isSuccess in
                 if isSuccess {
