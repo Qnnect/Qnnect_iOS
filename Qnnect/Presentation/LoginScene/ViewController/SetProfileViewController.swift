@@ -96,7 +96,7 @@ final class SetProfileViewController: BaseViewController {
         
         self.completionButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
-            make.height.equalTo(52.0)
+            make.height.equalTo(Constants.bottomButtonHeight)
             make.top.equalTo(self.nameTextField.snp.bottom).offset(58.0)
         }
         
