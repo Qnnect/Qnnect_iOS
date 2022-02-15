@@ -18,9 +18,9 @@ extension UIFont {
         var name: String {
             switch self {
             case .bold:
-                return "IM_Hyemin-Bold"
+                return "IMHyemin-Bold"
             case .regular:
-                return "IM_Hyemin-Regular"
+                return "IMHyemin-Regular"
             }
         }
     }

@@ -10,6 +10,6 @@ import Foundation
 struct Constants {
     private init() { }
     
-    static let nameTextFieldPlaceHolderText = "닉네임 (2~\(Constants.nameMaxLength)글자이내)"
+    static let nameTextFieldPlaceHolderText = "닉네임 (2~\(Constants.nameMaxLength)자 이하)"
     static let nameMaxLength = 8
 }

@@ -19,13 +19,13 @@
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
 		AE59A60227AEAE890081A0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60027AEAE890081A0FA /* LaunchScreen.storyboard */; };
 		AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */; };
+		AE5B1C1F27BB42DB00F24981 /* IM_Hyemin-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */; };
+		AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
 		AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* LoginManager.swift */; };
 		AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */; };
-		AECC130B27B9EA1E006866FC /* IM_Hyemin-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC130927B9EA1E006866FC /* IM_Hyemin-Bold.ttf */; };
-		AECC130C27B9EA1E006866FC /* IM_Hyemin-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC130A27B9EA1E006866FC /* IM_Hyemin-Regular.ttf */; };
 		AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont.swift */; };
 		AECC131127B9ED12006866FC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131027B9ED12006866FC /* Roboto-Regular.ttf */; };
 		AECC131327B9EE03006866FC /* BMJUA_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131227B9EE03006866FC /* BMJUA_ttf.ttf */; };
@@ -63,13 +63,13 @@
 		AE59A60127AEAE890081A0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE59A60327AEAE890081A0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE59A60B27AEB8390081A0FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Regular.otf"; sourceTree = "<group>"; };
+		AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+.swift"; sourceTree = "<group>"; };
-		AECC130927B9EA1E006866FC /* IM_Hyemin-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.ttf"; sourceTree = "<group>"; };
-		AECC130A27B9EA1E006866FC /* IM_Hyemin-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Regular.ttf"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		AECC131027B9ED12006866FC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		AECC131227B9EE03006866FC /* BMJUA_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_ttf.ttf; sourceTree = "<group>"; };
@@ -347,10 +347,10 @@
 		AECC130827B9EA06006866FC /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */,
+				AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */,
 				AECC131227B9EE03006866FC /* BMJUA_ttf.ttf */,
 				AECC131027B9ED12006866FC /* Roboto-Regular.ttf */,
-				AECC130927B9EA1E006866FC /* IM_Hyemin-Bold.ttf */,
-				AECC130A27B9EA1E006866FC /* IM_Hyemin-Regular.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -498,11 +498,11 @@
 			files = (
 				AECC131327B9EE03006866FC /* BMJUA_ttf.ttf in Resources */,
 				AECC131127B9ED12006866FC /* Roboto-Regular.ttf in Resources */,
-				AECC130C27B9EA1E006866FC /* IM_Hyemin-Regular.ttf in Resources */,
+				AE5B1C1F27BB42DB00F24981 /* IM_Hyemin-Regular.otf in Resources */,
 				AE59A60227AEAE890081A0FA /* LaunchScreen.storyboard in Resources */,
 				AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */,
+				AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */,
 				AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */,
-				AECC130B27B9EA1E006866FC /* IM_Hyemin-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
