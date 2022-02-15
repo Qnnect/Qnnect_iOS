@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let rootVC = UINavigationController()
+        rootVC.isNavigationBarHidden = true
         self.appCoordinator = AppCoordinator(navigationController: rootVC)
         
         //TODO: 자동로그인 로직 구현, 테스트를 위해 하드코딩
