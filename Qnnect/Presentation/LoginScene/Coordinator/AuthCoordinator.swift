@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol LoginCoordinator: Coordinator {
+protocol AuthCoordinator: Coordinator {
     func showInputNameVC()
     func showTermsVC()
     func showHomeVC()
 }
-final class DefaultLoginCoordinator: LoginCoordinator {
+final class DefaultAuthCoordinator: AuthCoordinator {
     var childCoordinators: [Coordinator] = []
     
     var navigationController: UINavigationController

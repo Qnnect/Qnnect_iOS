@@ -12,7 +12,7 @@
 		AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336527B4C37400C4B955 /* Observable+.swift */; };
 		AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336727B4C3B000C4B955 /* Coordinator.swift */; };
 		AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336927B4C88500C4B955 /* AppCoordinator.swift */; };
-		AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */; };
+		AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336F27B4CD1800C4B955 /* AuthCoordinator.swift */; };
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
 		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
@@ -55,7 +55,7 @@
 		AE0D336527B4C37400C4B955 /* Observable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+.swift"; sourceTree = "<group>"; };
 		AE0D336727B4C3B000C4B955 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AE0D336927B4C88500C4B955 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		AE0D336F27B4CD1800C4B955 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		AE0D337127B4CDB500C4B955 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		AE0D336B27B4CC5A00C4B955 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				AE0D336F27B4CD1800C4B955 /* LoginCoordinator.swift */,
+				AE0D336F27B4CD1800C4B955 /* AuthCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
-				AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */,
+				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,

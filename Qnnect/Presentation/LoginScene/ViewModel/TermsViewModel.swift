@@ -24,10 +24,10 @@ final class TermsViewModel: ViewModelType {
         let isCheckedAllAgreement: Signal<Bool> // 전체 동의 버튼 체크했는 지
     }
     
-    private weak var coordinator: LoginCoordinator?
+    private weak var coordinator: AuthCoordinator?
     private let signUpUseCase: SignUpUseCase
     init(
-        coordinator: LoginCoordinator,
+        coordinator: AuthCoordinator,
         signUpUseCase: SignUpUseCase
     ) {
         self.coordinator = coordinator

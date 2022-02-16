@@ -24,12 +24,12 @@ final class SetProfileViewModel: ViewModelType {
         let profileImageURL: Driver<URL?>
     }
     
-    private weak var coordinator: LoginCoordinator?
+    private weak var coordinator: AuthCoordinator?
     private let inputUseCase: SignUpUseCase
     var authManager: AuthManager!
     
     init(
-        coordinator: LoginCoordinator,
+        coordinator: AuthCoordinator,
         inputUseCase: SignUpUseCase
     ) {
         self.coordinator = coordinator
