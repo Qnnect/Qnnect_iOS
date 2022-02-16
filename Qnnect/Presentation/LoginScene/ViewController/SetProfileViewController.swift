@@ -60,6 +60,7 @@ final class SetProfileViewController: BaseViewController {
         $0.text = "2-8글자 사이로 입력해주세요"
         $0.textColor = .red
         $0.font = .IM_Hyemin(.regular, size: 14.0)
+       
     }
     
     private var viewModel: SetProfileViewModel!
@@ -169,7 +170,7 @@ final class SetProfileViewController: BaseViewController {
 
 private extension SetProfileViewController {
     func setCautionLabel(_ isVaild: Bool) {
-        UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 0.5) {
             [weak self] in
             if isVaild {
                 self?.cautionLabel.snp.updateConstraints { make in
@@ -177,7 +178,7 @@ private extension SetProfileViewController {
                 }
             } else {
                 self?.cautionLabel.snp.updateConstraints { make in
-                    make.height.equalTo(50.0)
+                    make.height.equalTo(30.0)
                 }
             }
             self?.view.layoutIfNeeded()
