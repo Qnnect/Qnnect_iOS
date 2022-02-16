@@ -19,6 +19,8 @@ final class StoreViewController: BaseViewController {
         $0.image = Constants.pointImage
         $0.tintColor = .p_brown
     }
+    
+    
     static func create(with viewModel: StoreViewModel) -> StoreViewController {
         let vc = StoreViewController()
         vc.viewModel = viewModel
@@ -31,6 +33,7 @@ final class StoreViewController: BaseViewController {
     
     override func configureUI() {
         self.navigationItem.leftBarButtonItems = [self.pointImageLeftBarItem]
+        self.view.backgroundColor = .p_ivory
     }
     
     override func bind() {

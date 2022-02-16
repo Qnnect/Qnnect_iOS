@@ -24,7 +24,7 @@ final class BookmarkViewController: BaseViewController {
     }
     
     override func configureUI() {
-        
+        self.view.backgroundColor = .p_ivory
     }
     
     override func bind() {
