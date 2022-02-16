@@ -15,6 +15,8 @@ final class SetProfileViewController: BaseViewController {
     
     private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 50.0
+        $0.clipsToBounds = true
     }
     
     private let cameraImageView = UIImageView().then {
@@ -64,6 +66,7 @@ final class SetProfileViewController: BaseViewController {
     
     static func create(with viewModel: SetProfileViewModel, profileImageURL: URL?) -> SetProfileViewController {
         let vc = SetProfileViewController()
+       
         vc.profileImageView.kf.setImage(
             with: profileImageURL,
             placeholder: UIImage(named: "ProfileDefaultImage")
@@ -71,6 +74,7 @@ final class SetProfileViewController: BaseViewController {
         vc.viewModel = viewModel
         return vc
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -90,9 +94,7 @@ final class SetProfileViewController: BaseViewController {
             self.view.addSubview($0)
         }
         self.view.backgroundColor = .systemBackground
-        
-        
-        
+                
         self.nameTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.equalTo(self.welcomeLabel.snp.bottom).offset(23.0)
