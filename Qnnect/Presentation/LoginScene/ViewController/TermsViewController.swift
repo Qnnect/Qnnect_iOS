@@ -19,7 +19,7 @@ final class TermsViewController: BaseViewController {
         $0.textColor = .GRAY01
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.23
-        $0.attributedText = NSMutableAttributedString(string: "시작 전에\n약관에 동의해주세요", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        $0.attributedText = NSMutableAttributedString(string: Constants.TermsSceneTitle, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
     
     private let dividingLine = UIView().then {

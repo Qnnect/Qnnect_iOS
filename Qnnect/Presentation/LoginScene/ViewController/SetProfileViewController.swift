@@ -15,12 +15,12 @@ final class SetProfileViewController: BaseViewController {
     
     private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 50.0
+        $0.layer.cornerRadius = Constants.profileImageHeight / 2.0
         $0.clipsToBounds = true
     }
     
     private let cameraImageView = UIImageView().then {
-        $0.image = UIImage(named:"camera")
+        $0.image = Constants.cameraImage
     }
     
     private let welcomeLabel = UILabel().then {
@@ -29,7 +29,7 @@ final class SetProfileViewController: BaseViewController {
         var paragraphStyle = NSMutableParagraphStyle()
         //줄간격
         paragraphStyle.lineHeightMultiple = 1.23
-        $0.attributedText = NSMutableAttributedString(string: "환영합니다!\n님네임을 입력해주세요", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        $0.attributedText = NSMutableAttributedString(string: Constants.firstProfileSetSceneTitle, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
     private let nameTextField = UITextField().then {
         $0.placeholder = Constants.nameTextFieldPlaceHolderText
@@ -51,13 +51,13 @@ final class SetProfileViewController: BaseViewController {
     }
     
     private let nameLengthLabel = UILabel().then {
-        $0.text = "0/8"
+        $0.text = "0/\(Constants.nameMaxLength)"
         $0.textColor = .GRAY04
         $0.font = .Roboto(.regular, size: 14.0)
     }
     
     private let cautionLabel = UILabel().then {
-        $0.text = "2-8글자 사이로 입력해주세요"
+        $0.text = Constants.nameInputCaution
         $0.textColor = .red
         $0.font = .IM_Hyemin(.regular, size: 14.0)
        
@@ -70,7 +70,7 @@ final class SetProfileViewController: BaseViewController {
        
         vc.profileImageView.kf.setImage(
             with: profileImageURL,
-            placeholder: UIImage(named: "ProfileDefaultImage")
+            placeholder: Constants.profileDefaultImage
             )
         vc.viewModel = viewModel
         return vc
@@ -121,7 +121,8 @@ final class SetProfileViewController: BaseViewController {
         }
         
         self.profileImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(100.0)
+            make.width.equalTo(Constants.profileImageWidth)
+            make.height.equalTo(Constants.profileImageHeight)
             make.top.equalToSuperview().inset(110.0)
             make.centerX.equalToSuperview()
         }
