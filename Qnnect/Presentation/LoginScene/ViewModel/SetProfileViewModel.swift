@@ -14,18 +14,24 @@ final class SetProfileViewModel: ViewModelType {
     struct Input {
         let inputName: Observable<String?>
         let didTapCompletionButton: Observable<String>
+        let viewDidLoad: Observable<Void>
     }
     
     struct Output {
         let nameLength: Driver<Int>
         let isValidName: Driver<Bool>
         let completion: Signal<Void>
+        let profileImageURL: Driver<URL?>
     }
     
     private weak var coordinator: LoginCoordinator?
     private let inputUseCase: SignUpUseCase
+    var authManager: AuthManager!
     
-    init(coordinator: LoginCoordinator, inputUseCase: SignUpUseCase) {
+    init(
+        coordinator: LoginCoordinator,
+        inputUseCase: SignUpUseCase
+    ) {
         self.coordinator = coordinator
         self.inputUseCase = inputUseCase
     }
@@ -45,12 +51,15 @@ final class SetProfileViewModel: ViewModelType {
             .mapToVoid()
             .do(onNext: {
                 [weak self] _ in
-                self?.coordinator?.showTermsVC()
+                self?.coordinator?.showHomeVC()
             })
+        let profileImageURL = input.viewDidLoad
+                .flatMap(self.authManager.getUserProfileImageInKakao)
         return Output(
             nameLength: nameLength.asDriver(onErrorJustReturn: 0),
             isValidName: isValidName.asDriver(onErrorJustReturn: false),
-            completion: completion.asSignal(onErrorJustReturn: ())
+            completion: completion.asSignal(onErrorJustReturn: ()),
+            profileImageURL: profileImageURL.asDriver(onErrorJustReturn: nil)
         )
     }
 }

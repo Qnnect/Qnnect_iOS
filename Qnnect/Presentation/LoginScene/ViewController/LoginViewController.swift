@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import CryptoKit
 
+//TODO: 소셜 로그인 후 서버로 부터 존재해 있는 유저인지 확인 후 회원가입,로그인 진행
 final class LoginViewController: BaseViewController {
     
     private let kakaoButton = UIButton().then {

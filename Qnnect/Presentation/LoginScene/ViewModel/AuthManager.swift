@@ -12,10 +12,10 @@ import RxKakaoSDKUser
 import KakaoSDKUser
 import RxCocoa
 
-final class LoginManager: NSObject {
-    private let vc: LoginViewController!
+final class AuthManager: NSObject {
+    private let vc: UIViewController!
     
-    init(vc: LoginViewController) {
+    init(vc: UIViewController) {
         self.vc = vc
     }
     
@@ -48,6 +48,7 @@ final class LoginManager: NSObject {
             .map { $0.kakaoAccount?.profile?.profileImageUrl }
             
     }
+    
     func appleLogin() -> Observable<Bool> {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -63,7 +64,7 @@ final class LoginManager: NSObject {
     }
 }
 
-extension LoginManager: ASAuthorizationControllerDelegate {
+extension AuthManager: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         //TODO: didCompleteWithAuthorization 후 동작
@@ -74,7 +75,7 @@ extension LoginManager: ASAuthorizationControllerDelegate {
     }
 }
 
-extension LoginManager: ASAuthorizationControllerPresentationContextProviding {
+extension AuthManager: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.vc.view.window ?? UIWindow()
     }

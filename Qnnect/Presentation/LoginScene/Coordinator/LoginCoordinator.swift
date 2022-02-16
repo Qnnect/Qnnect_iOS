@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginCoordinator: Coordinator {
-    func showInputNameVC(profileImageURL: URL?)
+    func showInputNameVC()
     func showTermsVC()
     func showHomeVC()
 }
@@ -26,18 +26,20 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     func start() {
         let viewModel = LoginViewModel(coordinator: self)
         let vc = LoginViewController.create(with: viewModel)
-        let loginManager = LoginManager(vc: vc)
-        viewModel.loginManager = loginManager
+        let authManager = AuthManager(vc: vc)
+        viewModel.authManager = authManager
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showInputNameVC(profileImageURL: URL?) {
+    func showInputNameVC() {
         let signUpUseCase = DefaultSignUpUseCase()
         let viewModel = SetProfileViewModel(
             coordinator: self,
             inputUseCase: signUpUseCase
         )
-        let vc = SetProfileViewController.create(with: viewModel,profileImageURL: profileImageURL)
+        let vc = SetProfileViewController.create(with: viewModel)
+        let authManager = AuthManager(vc: vc)
+        viewModel.authManager = authManager
         self.navigationController.pushViewController(vc, animated: true)
     }
     
@@ -53,7 +55,6 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     
     func showHomeVC() {
         //TODO: 탭바 세팅, push HomeVC
-        
-        
+
     }
 }

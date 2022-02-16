@@ -38,7 +38,7 @@ final class TermsViewModel: ViewModelType {
         let start = input.didTapAgreementButton
             .do {
                 [weak self] _ in
-                self?.coordinator?.showHomeVC()
+                self?.coordinator?.showInputNameVC()
             }
         
         let isCompletedAgreement = input.checkeditem

@@ -88,13 +88,8 @@ final class SetProfileViewController: BaseViewController {
     private var viewModel: SetProfileViewModel!
     
     
-    static func create(with viewModel: SetProfileViewModel, profileImageURL: URL?) -> SetProfileViewController {
+    static func create(with viewModel: SetProfileViewModel) -> SetProfileViewController {
         let vc = SetProfileViewController()
-        
-        vc.profileImageView.kf.setImage(
-            with: profileImageURL,
-            placeholder: Constants.profileDefaultImage
-        )
         vc.viewModel = viewModel
         return vc
     }
@@ -173,7 +168,8 @@ final class SetProfileViewController: BaseViewController {
                 .asObservable()
                 .skip(while: { ($0?.count ?? 0) == 0}),
             didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.rx.text.asObservable())
-                .compactMap{ $0 }
+                .compactMap{ $0 },
+            viewDidLoad: Observable.just(())
         )
         
         let output = self.viewModel.transform(from: input)
@@ -194,15 +190,19 @@ final class SetProfileViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
         
+        output.profileImageURL
+            .drive(onNext:self.setProfileImageView)
+            .disposed(by: self.disposeBag)
+                
         self.profileImageView.rx.tapGesture()
-                .when(.recognized)
-                .subscribe(onNext: {
-                    [weak self] _ in
-                    guard let self = self else { return }
-                    self.present(self.bottomSheet, animated: true, completion: nil)
-                })
-                .disposed(by: self.disposeBag)
-        }
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.bottomSheet, animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+    }
 }
 
 private extension SetProfileViewController {
@@ -222,7 +222,12 @@ private extension SetProfileViewController {
         }
     }
     
-    
+    func setProfileImageView(_ url: URL?) {
+        self.profileImageView.kf.setImage(
+            with: url,
+            placeholder: Constants.profileDefaultImage
+        )
+    }
 }
 // MARK: - 최대 글자 수 이상 입력 제한
 extension SetProfileViewController: UITextFieldDelegate {
