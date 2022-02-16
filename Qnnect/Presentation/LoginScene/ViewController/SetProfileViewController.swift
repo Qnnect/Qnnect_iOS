@@ -60,18 +60,41 @@ final class SetProfileViewController: BaseViewController {
         $0.text = Constants.nameInputCaution
         $0.textColor = .red
         $0.font = .IM_Hyemin(.regular, size: 14.0)
-       
+        
     }
+    
+    private lazy var imagePickController: UIImagePickerController = {
+        let controller = UIImagePickerController()
+        controller.sourceType = .photoLibrary
+        return controller
+    }()
+    
+    private lazy var bottomSheet: UIAlertController = {
+        let sheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let galleryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
+            self.present(self.imagePickController, animated: true, completion: nil)
+        }
+        let defaultImageAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { _ in
+            self.profileImageView.image = Constants.profileDefaultImage
+        }
+        
+        let cancelAction = UIAlertAction(title:"취소",style: .cancel)
+        sheet.addAction(galleryAction)
+        sheet.addAction(defaultImageAction)
+        sheet.addAction(cancelAction)
+        return sheet
+    }()
     
     private var viewModel: SetProfileViewModel!
     
+    
     static func create(with viewModel: SetProfileViewModel, profileImageURL: URL?) -> SetProfileViewController {
         let vc = SetProfileViewController()
-       
+        
         vc.profileImageView.kf.setImage(
             with: profileImageURL,
             placeholder: Constants.profileDefaultImage
-            )
+        )
         vc.viewModel = viewModel
         return vc
     }
@@ -94,8 +117,10 @@ final class SetProfileViewController: BaseViewController {
         ].forEach {
             self.view.addSubview($0)
         }
+        
         self.view.backgroundColor = .systemBackground
-                
+        self.imagePickController.delegate = self
+        
         self.nameTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.equalTo(self.welcomeLabel.snp.bottom).offset(23.0)
@@ -141,6 +166,8 @@ final class SetProfileViewController: BaseViewController {
     }
     
     override func bind() {
+        
+        
         let input = SetProfileViewModel.Input(
             inputName: self.nameTextField.rx.text
                 .asObservable()
@@ -166,7 +193,16 @@ final class SetProfileViewController: BaseViewController {
         output.completion
             .emit()
             .disposed(by: self.disposeBag)
-    }
+        
+        self.profileImageView.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: {
+                    [weak self] _ in
+                    guard let self = self else { return }
+                    self.present(self.bottomSheet, animated: true, completion: nil)
+                })
+                .disposed(by: self.disposeBag)
+        }
 }
 
 private extension SetProfileViewController {
@@ -200,6 +236,22 @@ extension SetProfileViewController: UITextFieldDelegate {
         }
         guard textField.text!.count < max else { return false }
         return true
+    }
+}
+
+extension SetProfileViewController: UIImagePickerControllerDelegate&UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var newImage: UIImage? = nil // update 할 이미지
+        
+        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            newImage = possibleImage // 수정된 이미지가 있을 경우
+        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            newImage = possibleImage // 원본 이미지가 있을 경우
+        }
+        
+        self.profileImageView.image = newImage // 받아온 이미지를 update
+        picker.dismiss(animated: true, completion: nil) // picker를 닫아줌
     }
 }
 
