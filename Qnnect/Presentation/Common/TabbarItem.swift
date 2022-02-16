@@ -31,11 +31,11 @@ enum TabbarItem: CaseIterable {
         case .home:
             return (UIImage(named: "home_default"),UIImage(named: "home_selected"))
         case .bookmark:
-            return (UIImage(named: "bookmark_default"),UIImage(named: "bookmark_default"))
+            return (UIImage(named: "bookmark_default"),UIImage(named: "bookmark_selected"))
         case .store:
-            return (UIImage(named: "store_default"),UIImage(named: "store_default"))
+            return (UIImage(named: "store_default"),UIImage(named: "store_selected"))
         case .myPage:
-            return (UIImage(named: "mypage_default"),UIImage(named: "mypage_default"))
+            return (UIImage(named: "mypage_default"),UIImage(named: "mypage_selected"))
         }
 
     }

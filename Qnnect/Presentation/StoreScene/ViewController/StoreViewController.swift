@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import KakaoSDKCommon
 
 
 // MARK: - 상점 Scene
@@ -15,11 +16,7 @@ final class StoreViewController: BaseViewController {
     
     private var viewModel: StoreViewModel!
     
-    private let pointImageLeftBarItem = UIBarButtonItem().then {
-        $0.image = Constants.pointImage
-        $0.tintColor = .p_brown
-    }
-    
+    private let pointBar = PointBar()
     
     static func create(with viewModel: StoreViewModel) -> StoreViewController {
         let vc = StoreViewController()
@@ -32,8 +29,20 @@ final class StoreViewController: BaseViewController {
     }
     
     override func configureUI() {
-        self.navigationItem.leftBarButtonItems = [self.pointImageLeftBarItem]
+        
+        [
+            self.pointBar
+        ].forEach {
+            self.view.addSubview($0)
+        }
+        
         self.view.backgroundColor = .p_ivory
+        self.navigationController?.isNavigationBarHidden = true
+        
+        self.pointBar.snp.makeConstraints { make in
+            make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(50.0)
+        }
     }
     
     override func bind() {

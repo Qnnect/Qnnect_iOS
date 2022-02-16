@@ -25,4 +25,5 @@ struct Constants {
     
     
     static let pointImage: UIImage? = UIImage(named: "kong")
+    static let notificationIcon: UIImage? = UIImage(named: "notification")
 }

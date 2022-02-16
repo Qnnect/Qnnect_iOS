@@ -69,6 +69,6 @@ extension UIFont {
     
     // MARK: - BM_JUA
     static func BM_JUA(size: CGFloat) -> UIFont {
-        return UIFont(name: "BMJUA_ttf", size: size)!
+        return UIFont(name: "BMJUA", size: size)!
     }
 }

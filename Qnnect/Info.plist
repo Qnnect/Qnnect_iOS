@@ -8,6 +8,7 @@
 	<string>카메라 사용을 허용해주세요.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>BMJUA.ttf</string>
 		<string>Roboto-Regular.ttf</string>
 		<string>IM_Hyemin-Bold.otf</string>
 		<string>IM_Hyemin-Regular.otf</string>
