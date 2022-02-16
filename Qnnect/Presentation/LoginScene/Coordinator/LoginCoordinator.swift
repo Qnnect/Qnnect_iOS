@@ -32,14 +32,21 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     }
     
     func showInputNameVC() {
-        let inputUseCase = DefaultInputUseCase()
-        let viewModel = SetProfileViewModel(coordinator: self, inputUseCase: inputUseCase)
+        let signUpUseCase = DefaultSignUpUseCase()
+        let viewModel = SetProfileViewModel(
+            coordinator: self,
+            inputUseCase: signUpUseCase
+        )
         let vc = SetProfileViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
     func showTermsVC() {
-        let viewModel = TermsViewModel(coordinator: self)
+        let signUpUseCase = DefaultSignUpUseCase()
+        let viewModel = TermsViewModel(
+            coordinator: self,
+            signUpUseCase: signUpUseCase
+        )
         let vc = TermsViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }

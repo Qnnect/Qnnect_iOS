@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
 		AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336527B4C37400C4B955 /* Observable+.swift */; };
 		AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336727B4C3B000C4B955 /* Coordinator.swift */; };
@@ -34,7 +35,7 @@
 		AECC131D27BA1266006866FC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131C27BA1266006866FC /* UIColor+.swift */; };
 		AECC132A27BA24F7006866FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132927BA24F7006866FC /* Constants.swift */; };
 		AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */; };
-		AECC132F27BA27C1006866FC /* InputUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132E27BA27C1006866FC /* InputUseCase.swift */; };
+		AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132E27BA27C1006866FC /* SignUpUseCase.swift */; };
 		AECC133127BA341B006866FC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133027BA341B006866FC /* UIButton+.swift */; };
 		AECC133327BA35DA006866FC /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133227BA35DA006866FC /* UILabel+.swift */; };
 		AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133427BA3DD0006866FC /* TermsViewController.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.debug.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.release.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.release.xcconfig"; sourceTree = "<group>"; };
+		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
 		AE0D336527B4C37400C4B955 /* Observable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+.swift"; sourceTree = "<group>"; };
 		AE0D336727B4C3B000C4B955 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 		AECC131C27BA1266006866FC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AECC132927BA24F7006866FC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
-		AECC132E27BA27C1006866FC /* InputUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUseCase.swift; sourceTree = "<group>"; };
+		AECC132E27BA27C1006866FC /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		AECC133027BA341B006866FC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AECC133227BA35DA006866FC /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		AECC133427BA3DD0006866FC /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		AE0D336E27B4CC6A00C4B955 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AE0B2BF527BC80AC00E164BC /* Term.swift */,
 				AECC12FA27B9DCCD006866FC /* LoginManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
 				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
@@ -195,7 +198,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				AECC132D27BA27BA006866FC /* Input */,
+				AECC132D27BA27BA006866FC /* Auth */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -358,12 +361,12 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		AECC132D27BA27BA006866FC /* Input */ = {
+		AECC132D27BA27BA006866FC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				AECC132E27BA27C1006866FC /* InputUseCase.swift */,
+				AECC132E27BA27C1006866FC /* SignUpUseCase.swift */,
 			);
-			path = Input;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		AECC133627BA41BD006866FC /* ViewModel */ = {
@@ -571,10 +574,11 @@
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
-				AECC132F27BA27C1006866FC /* InputUseCase.swift in Sources */,
+				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* LoginCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
+				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* LoginManager.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,

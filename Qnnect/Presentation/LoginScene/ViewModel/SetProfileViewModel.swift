@@ -23,9 +23,9 @@ final class SetProfileViewModel: ViewModelType {
     }
     
     private weak var coordinator: LoginCoordinator?
-    private let inputUseCase: InputUseCase
+    private let inputUseCase: SignUpUseCase
     
-    init(coordinator: LoginCoordinator, inputUseCase: InputUseCase) {
+    init(coordinator: LoginCoordinator, inputUseCase: SignUpUseCase) {
         self.coordinator = coordinator
         self.inputUseCase = inputUseCase
     }

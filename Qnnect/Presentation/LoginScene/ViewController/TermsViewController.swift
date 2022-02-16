@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxGesture
+import RxSwift
 
 final class TermsViewController: BaseViewController {
     
@@ -25,21 +27,10 @@ final class TermsViewController: BaseViewController {
         $0.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
     }
     
-    private let allAgreementView = AgreementItemView(type: .all).then {
-        $0.update(with: "네, 모두 동의합니다.")
-    }
-    
-    private let personalInfoAgreementView = AgreementItemView(type: .essential).then {
-        $0.update(with: "개인정보 처리방침")
-    }
-    
-    private let serviceAgreementView = AgreementItemView(type: .essential).then {
-        $0.update(with: "서비스 이용약관")
-    }
-    
-    private let pushNotiAgreementView = AgreementItemView(type: .choice).then {
-        $0.update(with: "푸쉬 알림 동의 여부")
-    }
+    private let allAgreementView = AgreementItemView(type: .all)
+    private let personalInfoAgreementView = AgreementItemView(type: .personal)
+    private let serviceAgreementView = AgreementItemView(type: .service)
+    private let pushNotiAgreementView = AgreementItemView(type: .pushnoti)
     
     private let agreementStackView = UIStackView().then {
         $0.distribution = .fillEqually
@@ -51,6 +42,7 @@ final class TermsViewController: BaseViewController {
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.backgroundColor = .GRAY04
         $0.layer.cornerRadius = 10.0
+        $0.isEnabled = false
     }
     
     private var viewModel: TermsViewModel!
@@ -58,7 +50,7 @@ final class TermsViewController: BaseViewController {
     static func create(with viewModel: TermsViewModel) -> TermsViewController {
         let vc = TermsViewController()
         vc.viewModel = viewModel
-        return vc 
+        return vc
     }
     
     override func viewDidLoad() {
@@ -116,15 +108,81 @@ final class TermsViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = TermsViewModel.Input(
-            didTapStartButton: self.agreementButton.rx.tap
-                .asObservable()
-                .mapToVoid()
-        )
+        let items = Observable.combineLatest(
+            self.personalInfoAgreementView.checkBox.rx.tap
+                .scan(false, accumulator: { last, new in
+                    !last
+                }).do(onNext: {
+                    [weak self] flag in
+                    self?.personalInfoAgreementView.checkBox.isSelected = flag
+                })
+            ,
+            self.serviceAgreementView.checkBox.rx.tap
+                .scan(false, accumulator: { last, new in
+                    !last
+                }).do(onNext: {
+                    [weak self] flag in
+                    self?.serviceAgreementView.checkBox.isSelected = flag
+                }),
+            self.pushNotiAgreementView.checkBox.rx.tap
+                .scan(false, accumulator: { last, new in
+                    !last
+                }).do(onNext: {
+                    [weak self] flag in
+                    self?.pushNotiAgreementView.checkBox.isSelected = flag
+                })
+                ) {
+                (personal:$0, service: $1, pushNoti: $2)
+            }
         
+        let input = TermsViewModel.Input(
+            didTapAgreementButton: self.agreementButton.rx.tap
+                .asObservable(),
+            didCheckAllAgreement: self.allAgreementView.checkBox.rx.tap
+                .map{
+                    [weak self] _ in
+                    guard let self = self else { return false}
+                    return !self.allAgreementView.checkBox.isSelected
+                },
+            checkeditem: items
+        )
+    
         let output = self.viewModel.transform(from: input)
+        
         output.start
             .emit()
             .disposed(by: self.disposeBag)
+        
+        output.isCompletedAgreement
+            .emit(onNext: self.setAgreementButton(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.isAllAgreement
+            .emit(onNext: self.setAllAgreementCheckBox(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.isCheckedAllAgreement
+            .emit(onNext: self.sendActionCheckBoxes(_:))
+            .disposed(by: self.disposeBag)
+    }
+}
+
+private extension TermsViewController {
+    func setAgreementButton(_ isCompleted: Bool) {
+        self.agreementButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
+        self.agreementButton.isEnabled = isCompleted
+    }
+    
+    func setAllAgreementCheckBox(_ isAllAgreed: Bool) {
+        self.allAgreementView.checkBox.isSelected = isAllAgreed
+    }
+    
+    func sendActionCheckBoxes(_ isAllAgreed: Bool) {
+        self.agreementStackView.arrangedSubviews.forEach {
+            let view = $0 as? AgreementItemView
+            if view?.checkBox.isSelected != isAllAgreed {
+                view?.checkBox.sendActions(for: .touchUpInside)
+            }
+        }
     }
 }

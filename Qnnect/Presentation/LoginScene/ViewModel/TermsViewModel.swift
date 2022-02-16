@@ -12,27 +12,48 @@ import RxCocoa
 final class TermsViewModel: ViewModelType {
     
     struct Input {
-        let didTapStartButton: Observable<Void>
+        let didTapAgreementButton: Observable<Void>
+        let didCheckAllAgreement: Observable<Bool>
+        let checkeditem: Observable<(personal: Bool, service: Bool, pushNoti: Bool)>
     }
     
     struct Output {
         let start: Signal<Void>
+        let isCompletedAgreement: Signal<Bool> //필수 항목들 체크 완료 했는 지
+        let isAllAgreement: Signal<Bool> // 항목들을 전부 체크 완료 했는 지
+        let isCheckedAllAgreement: Signal<Bool> // 전체 동의 버튼 체크했는 지
     }
     
     private weak var coordinator: LoginCoordinator?
-    
-    init(coordinator: LoginCoordinator) {
+    private let signUpUseCase: SignUpUseCase
+    init(
+        coordinator: LoginCoordinator,
+        signUpUseCase: SignUpUseCase
+    ) {
         self.coordinator = coordinator
+        self.signUpUseCase = signUpUseCase
     }
     
     func transform(from input: Input) -> Output {
-        let start = input.didTapStartButton
-            .do(onNext: {
+        let start = input.didTapAgreementButton
+            .do {
                 [weak self] _ in
                 self?.coordinator?.showHomeVC()
-            })
+            }
+        
+        let isCompletedAgreement = input.checkeditem
+            .map(self.signUpUseCase.isEssentialItemChecked)
+        
+        let isAllAgreement = input.checkeditem
+            .map(self.signUpUseCase.isAllAgreement(_:))
+            
         return Output(
-            start: start.asSignal(onErrorJustReturn: ())
-        )
+            start: start.asSignal(onErrorJustReturn: ()),
+            isCompletedAgreement: isCompletedAgreement.asSignal(onErrorJustReturn: false),
+            isAllAgreement: isAllAgreement.asSignal(onErrorJustReturn: false),
+            isCheckedAllAgreement: input.didCheckAllAgreement.asSignal(onErrorJustReturn: false)
+            )
+        
+          
     }
 }
