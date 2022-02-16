@@ -9,8 +9,27 @@ import UIKit
 import SnapKit
 import Then
 import KakaoSDKCommon
+import TTGTags
 
-
+enum Ingredient: CaseIterable {
+    case all
+    case iceOrBase
+    case main
+    case topping
+    
+    var title: String {
+        switch self {
+        case .all:
+            return "전체"
+        case .iceOrBase:
+            return "얼음ㆍ베이스"
+        case .main:
+            return "주 재료"
+        case .topping:
+            return "토핑"
+        }
+    }
+}
 // MARK: - 상점 Scene
 final class StoreViewController: BaseViewController {
     
@@ -18,6 +37,50 @@ final class StoreViewController: BaseViewController {
     
     private let pointBar = PointBar()
     
+    private lazy var tagCollectionView = TTGTextTagCollectionView().then { tagView in
+        tagView.numberOfLines = 1
+        tagView.scrollDirection = .horizontal
+        tagView.showsHorizontalScrollIndicator = false
+        tagView.selectionLimit = 1
+        tagView.delegate = self
+
+       
+        let extraSpace = CGSize(width: 24.0, height: 20.0)
+        let style = TTGTextTagStyle()
+        style.backgroundColor = .p_ivory ?? .white
+        style.cornerRadius = 44.0
+        style.borderWidth = 1.0
+        style.borderColor = .tagBorderColor ?? .black
+        style.extraSpace = extraSpace
+        
+        let selectedStyle = TTGTextTagStyle()
+        selectedStyle.backgroundColor = .p_brown ?? .brown
+        selectedStyle.cornerRadius = 44.0
+        selectedStyle.extraSpace = extraSpace
+       
+        
+        Ingredient.allCases.forEach{
+            ingredient in
+            let font = UIFont.IM_Hyemin(.bold, size: 12.0)
+            let tagContents = TTGTextTagStringContent(
+                text: ingredient.title,
+                textFont: font,
+                textColor: .blackLabel
+            )
+            let selectedTagContents = TTGTextTagStringContent(
+                text: ingredient.title,
+                textFont: font,
+                textColor: .p_ivory
+            )
+            let tag = TTGTextTag(
+                content: tagContents,
+                style: style,
+                selectedContent: selectedTagContents,
+                selectedStyle: selectedStyle
+            )
+            tagView.addTag(tag)
+        }
+    }
     static func create(with viewModel: StoreViewModel) -> StoreViewController {
         let vc = StoreViewController()
         vc.viewModel = viewModel
@@ -31,7 +94,8 @@ final class StoreViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.pointBar
+            self.pointBar,
+            self.tagCollectionView
         ].forEach {
             self.view.addSubview($0)
         }
@@ -43,9 +107,18 @@ final class StoreViewController: BaseViewController {
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(50.0)
         }
+        
+        self.tagCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.top.equalTo(self.pointBar.snp.bottom).offset(17.0)
+        }
     }
     
     override func bind() {
         
     }
+}
+
+extension StoreViewController: TTGTextTagCollectionViewDelegate {
+    
 }

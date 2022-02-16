@@ -37,7 +37,7 @@ final class DefaultMainCoordinator: MainCoordinator {
             return vc
         }
         self.tabbarController.tabBar.layer.borderWidth = 1.0
-        self.tabbarController.tabBar.layer.borderColor = UIColor.tabbarBorderColor?.cgColor
+        self.tabbarController.tabBar.layer.borderColor = UIColor.brownBorderColor?.cgColor
         self.tabbarController.viewControllers = viewControllers
         self.navigationController.pushViewController(tabbarController, animated: true)
     }
