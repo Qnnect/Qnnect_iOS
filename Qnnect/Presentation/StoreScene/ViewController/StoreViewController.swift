@@ -37,25 +37,23 @@ final class StoreViewController: BaseViewController {
     
     private let pointBar = PointBar()
     
-    private lazy var tagCollectionView = TTGTextTagCollectionView().then { tagView in
+    private let tagCollectionView = TTGTextTagCollectionView().then { tagView in
         tagView.numberOfLines = 1
         tagView.scrollDirection = .horizontal
         tagView.showsHorizontalScrollIndicator = false
         tagView.selectionLimit = 1
-        tagView.delegate = self
-
-       
+        
         let extraSpace = CGSize(width: 24.0, height: 20.0)
         let style = TTGTextTagStyle()
         style.backgroundColor = .p_ivory ?? .white
-        style.cornerRadius = 44.0
+        style.cornerRadius = Constants.tagCornerRadius
         style.borderWidth = 1.0
         style.borderColor = .tagBorderColor ?? .black
         style.extraSpace = extraSpace
         
         let selectedStyle = TTGTextTagStyle()
         selectedStyle.backgroundColor = .p_brown ?? .brown
-        selectedStyle.cornerRadius = 44.0
+        selectedStyle.cornerRadius = Constants.tagCornerRadius
         selectedStyle.extraSpace = extraSpace
        
         
@@ -105,13 +103,15 @@ final class StoreViewController: BaseViewController {
         
         self.pointBar.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(50.0)
+            make.height.equalTo(Constants.pointBarHeight)
         }
         
         self.tagCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.equalTo(self.pointBar.snp.bottom).offset(17.0)
         }
+        
+        self.tagCollectionView.delegate = self
     }
     
     override func bind() {
@@ -120,5 +120,4 @@ final class StoreViewController: BaseViewController {
 }
 
 extension StoreViewController: TTGTextTagCollectionViewDelegate {
-    
 }
