@@ -116,6 +116,7 @@ final class TermsViewController: BaseViewController {
                     [weak self] flag in
                     self?.personalInfoAgreementView.checkBox.isSelected = flag
                 })
+                .startWith(false)
             ,
             self.serviceAgreementView.checkBox.rx.tap
                 .scan(false, accumulator: { last, new in
@@ -123,17 +124,17 @@ final class TermsViewController: BaseViewController {
                 }).do(onNext: {
                     [weak self] flag in
                     self?.serviceAgreementView.checkBox.isSelected = flag
-                }),
+                }).startWith(false),
             self.pushNotiAgreementView.checkBox.rx.tap
                 .scan(false, accumulator: { last, new in
                     !last
                 }).do(onNext: {
                     [weak self] flag in
                     self?.pushNotiAgreementView.checkBox.isSelected = flag
-                })
+                }).startWith(false)
                 ) {
                 (personal:$0, service: $1, pushNoti: $2)
-            }
+                }
         
         let input = TermsViewModel.Input(
             didTapAgreementButton: self.agreementButton.rx.tap

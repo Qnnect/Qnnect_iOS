@@ -20,7 +20,7 @@ final class BookmarkViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
     }
     
     override func configureUI() {

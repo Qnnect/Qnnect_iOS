@@ -29,11 +29,11 @@ enum Term:CaseIterable {
     var title: String {
         switch self {
         case .personal:
-            return "개인정보 처리방침 \(self.agreementType.rawValue)"
+            return "개인정보 처리방침 (\(self.agreementType.rawValue))"
         case .service:
-            return "서비스 이용약관 \(self.agreementType.rawValue)"
+            return "서비스 이용약관 (\(self.agreementType.rawValue))"
         case .pushnoti:
-            return "푸쉬 알림 동의 여부 \(self.agreementType.rawValue)"
+            return "푸쉬 알림 동의 여부 (\(self.agreementType.rawValue))"
         case .all:
             return "네. 모두 동의합니다"
         }
