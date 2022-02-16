@@ -42,6 +42,12 @@ final class LoginManager: NSObject {
         }
     }
     
+    func getUserProfileImageInKakao() -> Observable<URL?> {
+        return UserApi.shared.rx.me()
+            .asObservable()
+            .map { $0.kakaoAccount?.profile?.profileImageUrl }
+            
+    }
     func appleLogin() -> Observable<Bool> {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()

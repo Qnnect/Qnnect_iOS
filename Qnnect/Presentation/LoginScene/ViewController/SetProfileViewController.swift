@@ -9,11 +9,11 @@ import UIKit
 import Then
 import SnapKit
 import RxSwift
+import Kingfisher
 
 final class SetProfileViewController: BaseViewController {
     
     private let profileImageView = UIImageView().then {
-        $0.image = UIImage(named: "ProfileDefaultImage")
         $0.contentMode = .scaleAspectFill
     }
     
@@ -62,8 +62,12 @@ final class SetProfileViewController: BaseViewController {
     
     private var viewModel: SetProfileViewModel!
     
-    static func create(with viewModel: SetProfileViewModel) -> SetProfileViewController {
+    static func create(with viewModel: SetProfileViewModel, profileImageURL: URL?) -> SetProfileViewController {
         let vc = SetProfileViewController()
+        vc.profileImageView.kf.setImage(
+            with: profileImageURL,
+            placeholder: UIImage(named: "ProfileDefaultImage")
+            )
         vc.viewModel = viewModel
         return vc
     }
@@ -86,6 +90,8 @@ final class SetProfileViewController: BaseViewController {
             self.view.addSubview($0)
         }
         self.view.backgroundColor = .systemBackground
+        
+        
         
         self.nameTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
@@ -175,6 +181,8 @@ private extension SetProfileViewController {
             self?.view.layoutIfNeeded()
         }
     }
+    
+    
 }
 // MARK: - 최대 글자 수 이상 입력 제한
 extension SetProfileViewController: UITextFieldDelegate {

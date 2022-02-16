@@ -17,7 +17,7 @@ final class LoginViewModel: ViewModelType {
     }
     
     struct Output {
-        let isSuccess: Signal<Bool>
+        let isSuccess: Signal<URL?>
     }
     
     var loginManager: LoginManager!
@@ -32,21 +32,24 @@ final class LoginViewModel: ViewModelType {
             .compactMap(self.loginManager.kakaoLogin)
             .flatMap{ $0 }
         
-        let appleLogin = input.didTapAppleButton
+        let appleLoginSuccess = input.didTapAppleButton
             .compactMap(self.loginManager.appleLogin)
             .flatMap{ $0 }
+            .filter{ $0 }
+            .map{ URL(string: $0.description) } // 애플 로그인은 사진을 가져 올수 없기 때문에 nil을 반환
         
-        
+        let kakaoLoginSuccess = kakaoLogin.filter { $0 }
+            .mapToVoid()
+            .flatMap(self.loginManager.getUserProfileImageInKakao)
+            
         // TODO: 소셜 로그인 후 서버로 토큰을 전송해 기존에 존재해 있는 회원인지 확인 후 분기 처리
-        let isSuccess = Observable.merge(kakaoLogin,appleLogin)
-            .do(onNext :{ [weak self] isSuccess in
-                if isSuccess {
-                    self?.coordinator?.showInputNameVC()
-                }
+        let isSuccess = Observable.merge(kakaoLoginSuccess,appleLoginSuccess)
+            .do(onNext :{ [weak self] url in
+                self?.coordinator?.showInputNameVC(profileImageURL: url)
             })
                 
         return Output(
-            isSuccess: isSuccess.asSignal(onErrorJustReturn: false)
+            isSuccess: isSuccess.asSignal(onErrorJustReturn: nil)
         )
     }
 }

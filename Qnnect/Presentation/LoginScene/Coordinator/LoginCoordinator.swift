@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginCoordinator: Coordinator {
-    func showInputNameVC()
+    func showInputNameVC(profileImageURL: URL?)
     func showTermsVC()
     func showHomeVC()
 }
@@ -31,13 +31,13 @@ final class DefaultLoginCoordinator: LoginCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showInputNameVC() {
+    func showInputNameVC(profileImageURL: URL?) {
         let signUpUseCase = DefaultSignUpUseCase()
         let viewModel = SetProfileViewModel(
             coordinator: self,
             inputUseCase: signUpUseCase
         )
-        let vc = SetProfileViewController.create(with: viewModel)
+        let vc = SetProfileViewController.create(with: viewModel,profileImageURL: profileImageURL)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
