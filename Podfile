@@ -17,4 +17,5 @@ target 'Qnnect' do
 	pod 'RxKakaoSDK'
   pod 'Moya'
   pod 'RxAppState'
+  pod "TTGTagCollectionView"
 end
