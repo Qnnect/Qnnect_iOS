@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //TODO: 자동로그인 로직 구현, 테스트를 위해 하드코딩
         self.appCoordinator.start(isLogin: false)
         
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
+        UITabBar.appearance().tintColor = .p_brown
         self.window = UIWindow(windowScene: windowScene)
         self.window?.backgroundColor = .systemBackground
         self.window?.rootViewController = rootVC

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KakaoSDK.initSDK(appKey: APP.KAKAO_NATIVE_APP_KEY)
         
         
-
+        
         
         //FCM 현재 등록 토큰 확인
         Messaging.messaging().token { token, error in

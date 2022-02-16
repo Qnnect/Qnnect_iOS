@@ -10,7 +10,7 @@ import UIKit
 protocol AuthCoordinator: Coordinator {
     func showInputNameVC()
     func showTermsVC()
-    func showHomeVC()
+    func showMain()
 }
 final class DefaultAuthCoordinator: AuthCoordinator {
     var childCoordinators: [Coordinator] = []
@@ -53,8 +53,12 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showHomeVC() {
+    func showMain() {
         //TODO: 탭바 세팅, push HomeVC
-
+        let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
+        self.parentCoordinator?.childCoordinators.append(coordinator)
+        self.navigationController.popToRootViewController(animated: true)
+        coordinator.start()
+        self.parentCoordinator?.childCoordinators.remove(at: 0)
     }
 }

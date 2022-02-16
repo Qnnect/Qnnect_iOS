@@ -51,7 +51,7 @@ final class SetProfileViewModel: ViewModelType {
             .mapToVoid()
             .do(onNext: {
                 [weak self] _ in
-                self?.coordinator?.showHomeVC()
+                self?.coordinator?.showMain()
             })
         let profileImageURL = input.viewDidLoad
                 .flatMap(self.authManager.getUserProfileImageInKakao)
