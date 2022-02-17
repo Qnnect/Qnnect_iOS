@@ -149,6 +149,7 @@ final class StoreViewController: BaseViewController {
         }
         
         self.tagCollectionView.delegate = self
+        self.tagCollectionView.updateTag(at: 0, selected: true)
         
         self.ingredientCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.tagCollectionView.snp.bottom).offset(25.0)
@@ -162,19 +163,28 @@ final class StoreViewController: BaseViewController {
     }
     
     override func bind() {
+        
+        //TODO: 테스트를위한 구독
+        self.tagCollectionView.rx.tappedTagTitle
+            .subscribe(onNext: { test in
+                self.ingredientCollectionView.setContentOffset(.zero, animated: true)
+                print("Tapped Tag title!!!",test)
+            }).disposed(by: self.disposeBag)
         Observable.just(dummyData)
             .bind(to: self.ingredientCollectionView.rx.items(cellIdentifier: IngredientCell.identifier, cellType: IngredientCell.self)) { index, model, cell in
                 cell.update(with: model)
             }.disposed(by: self.disposeBag)
+        
+        
     }
 }
 
 extension StoreViewController: TTGTextTagCollectionViewDelegate {
     func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
-        let tags = textTagCollectionView.allTags() ?? []
+        let tags = textTagCollectionView?.allTags() ?? []
         tags.enumerated().forEach {
             if $0.element != tag, $0.element.selected {
-                textTagCollectionView.updateTag(at: UInt($0.offset), selected: false)
+                textTagCollectionView?.updateTag(at: UInt($0.offset), selected: false)
             }
         }
     }
