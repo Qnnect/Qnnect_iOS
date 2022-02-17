@@ -108,8 +108,10 @@ final class StoreViewController: BaseViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = .init(width: Constants.ingredientCellWidth, height: Constants.ingredientCellHeight)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 3.0, bottom: 0, right: 3.0)
         $0.collectionViewLayout = layout
         $0.showsVerticalScrollIndicator = false
+        $0.backgroundColor = .p_ivory
         $0.register(IngredientCell.self, forCellWithReuseIdentifier: IngredientCell.identifier)
     }
     
@@ -150,7 +152,7 @@ final class StoreViewController: BaseViewController {
         
         self.ingredientCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.tagCollectionView.snp.bottom).offset(25.0)
-            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.leading.trailing.equalToSuperview().inset(17.0)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
         }
         
@@ -183,3 +185,20 @@ extension StoreViewController: TTGTextTagCollectionViewDelegate {
 
 
 
+import SwiftUI
+struct StoreViewController_Priviews: PreviewProvider {
+    static var previews: some View {
+        Contatiner().edgesIgnoringSafeArea(.all)
+    }
+    struct Contatiner: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController {
+            let vc = StoreViewController() //보고 싶은 뷰컨 객체
+            return UINavigationController(rootViewController: vc)
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+            
+        }
+        typealias UIViewControllerType =  UIViewController
+    }
+}

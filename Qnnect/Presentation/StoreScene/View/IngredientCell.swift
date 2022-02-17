@@ -64,6 +64,7 @@ final class IngredientCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 16.0
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
+        self.contentView.layer.masksToBounds = true
         
         self.icon.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16.0)
