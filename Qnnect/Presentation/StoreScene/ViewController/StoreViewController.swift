@@ -60,48 +60,8 @@ final class StoreViewController: BaseViewController {
         Ingredient(type: .topping, name: "휘핑크림", price: 600)
         
     ]
-    private let tagCollectionView = TTGTextTagCollectionView().then { tagView in
-        tagView.numberOfLines = 1
-        tagView.scrollDirection = .horizontal
-        tagView.showsHorizontalScrollIndicator = false
-        tagView.selectionLimit = 2
-        
-        let extraSpace = Constants.tagExtraSpace
-        let style = TTGTextTagStyle()
-        style.backgroundColor = .p_ivory ?? .white
-        style.cornerRadius = Constants.tagCornerRadius
-        style.borderWidth = Constants.tagBorderWidth
-        style.borderColor = .tagBorderColor ?? .black
-        style.extraSpace = extraSpace
-        
-        let selectedStyle = TTGTextTagStyle()
-        selectedStyle.backgroundColor = .p_brown ?? .brown
-        selectedStyle.cornerRadius = Constants.tagCornerRadius
-        selectedStyle.extraSpace = extraSpace
-       
-        tagView.addWholeTag(style: style, selectedStyle: selectedStyle)
-        
-        IngredientType.allCases.forEach{
-            ingredient in
-            let font = UIFont.IM_Hyemin(.bold, size: 12.0)
-            let tagContents = TTGTextTagStringContent(
-                text: ingredient.title,
-                textFont: font,
-                textColor: .blackLabel
-            )
-            let selectedTagContents = TTGTextTagStringContent(
-                text: ingredient.title,
-                textFont: font,
-                textColor: .p_ivory
-            )
-            let tag = TTGTextTag(
-                content: tagContents,
-                style: style,
-                selectedContent: selectedTagContents,
-                selectedStyle: selectedStyle
-            )
-            tagView.addTag(tag)
-        }
+    private let tagCollectionView = CustomTagCollectionView().then {
+        $0.update(with: IngredientType.allCases.map { $0.title })
     }
     
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {

@@ -38,6 +38,7 @@
 		AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */; };
 		AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */; };
 		AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */; };
+		AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -99,6 +100,7 @@
 		AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TTGTextTagCollectionView+.swift"; sourceTree = "<group>"; };
 		AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+TTGTextTagCollectionView.swift"; sourceTree = "<group>"; };
 		AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUseCase.swift; sourceTree = "<group>"; };
+		AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagCollectionview.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */,
 				AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */,
 				AE45938B27BD23D1009737B2 /* PointBar.swift */,
+				AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
+				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
