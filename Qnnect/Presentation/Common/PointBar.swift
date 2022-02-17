@@ -22,7 +22,7 @@ final class PointBar: UIView {
         $0.textColor = .BLACK_121212
     }
     
-    private let alarmImageView = UIImageView().then {
+    let alarmImageView = UIImageView().then {
         $0.image = Constants.notificationIcon
         $0.isHidden = true
     }

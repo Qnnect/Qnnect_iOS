@@ -39,6 +39,8 @@
 		AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */; };
 		AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */; };
 		AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */; };
+		AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */; };
+		AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA4A027BE08F100FA2154 /* Bookmark.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -101,6 +103,8 @@
 		AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+TTGTextTagCollectionView.swift"; sourceTree = "<group>"; };
 		AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUseCase.swift; sourceTree = "<group>"; };
 		AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagCollectionview.swift; sourceTree = "<group>"; };
+		AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		AE6FA4A027BE08F100FA2154 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
+				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -465,6 +470,14 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		AE6FA49D27BE079200FA2154 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AECC130527B9E3DF006866FC /* Rx+ */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +535,7 @@
 		AECC134227BA4930006866FC /* BookMarkScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE6FA49D27BE079200FA2154 /* View */,
 				AE6964BA27BCD8EE00BF2A80 /* Coordinator */,
 				AE6964B927BCD8EB00BF2A80 /* ViewModel */,
 				AE6964B827BCD8E600BF2A80 /* ViewController */,
@@ -731,6 +745,7 @@
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */,
+				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
@@ -743,6 +758,7 @@
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
+				AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,6 +34,10 @@ struct Constants {
     static let tagCornerRadius: CGFloat = 44.0
     static let tagExtraSpace: CGSize = CGSize(width: 24.0, height: 20.0) // 여백
     static let tagBorderWidth: CGFloat = 1.0
+    static let tagCollectionViewHorizontalInset: CGFloat = 20.0
+    
+    //tag+pointBar
+    static let tagBetweenPointBarSpace: CGFloat = 17.0
     
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")

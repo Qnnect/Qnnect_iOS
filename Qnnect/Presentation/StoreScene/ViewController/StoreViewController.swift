@@ -104,8 +104,8 @@ final class StoreViewController: BaseViewController {
         }
         
         self.tagCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20.0)
-            make.top.equalTo(self.pointBar.snp.bottom).offset(17.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
+            make.top.equalTo(self.pointBar.snp.bottom).offset(Constants.tagBetweenPointBarSpace)
         }
         
         self.tagCollectionView.delegate = self
@@ -116,9 +116,6 @@ final class StoreViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(17.0)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
         }
-        
-
-        
         
     }
     
