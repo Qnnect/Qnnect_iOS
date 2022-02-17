@@ -33,7 +33,9 @@ final class StoreViewController: BaseViewController {
     
     private var viewModel: StoreViewModel!
     
-    private let pointBar = PointBar()
+    private let pointBar = PointBar().then {
+        $0.alarmImageView.isHidden = true
+    }
     
     private let dummyData = [
         Ingredient(type: .iceOrBase, name: "얼음", price: 100),

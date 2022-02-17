@@ -15,9 +15,7 @@ final class BookmarkViewController: BaseViewController {
     
     private var viewModel: BookmarkViewModel!
     
-    private let pointBar = PointBar().then {
-        $0.alarmImageView.isHidden = true
-    }
+    private let pointBar = PointBar()
     
     private let tagCollectionView = CustomTagCollectionView().then {
         $0.update(with: [

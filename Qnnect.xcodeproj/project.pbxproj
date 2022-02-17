@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				AE0D337127B4CDB500C4B955 /* LoginViewController.swift */,
-				AECC131627BA1033006866FC /* SetProfileViewController.swift */,
 				AECC133427BA3DD0006866FC /* TermsViewController.swift */,
+				AECC131627BA1033006866FC /* SetProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -174,8 +174,8 @@
 				AE0B2BF527BC80AC00E164BC /* Term.swift */,
 				AECC12FA27B9DCCD006866FC /* AuthManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
-				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
 				AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */,
+				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
