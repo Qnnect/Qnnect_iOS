@@ -33,12 +33,15 @@
 		AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964D027BCDD7D00BF2A80 /* MyPageViewController.swift */; };
 		AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964D227BCDDCD00BF2A80 /* MyPageViewModel.swift */; };
 		AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964D427BCDDF300BF2A80 /* MyPageCoordinator.swift */; };
+		AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */; };
+		AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */; };
+		AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
 		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
 		AECC130727B9E3F1006866FC /* ASAuthorizationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */; };
-		AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont.swift */; };
+		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
 		AECC131127B9ED12006866FC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131027B9ED12006866FC /* Roboto-Regular.ttf */; };
 		AECC131327B9EE03006866FC /* BMJUA.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131227B9EE03006866FC /* BMJUA.ttf */; };
 		AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131627BA1033006866FC /* SetProfileViewController.swift */; };
@@ -89,12 +92,15 @@
 		AE6964D027BCDD7D00BF2A80 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		AE6964D227BCDDCD00BF2A80 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		AE6964D427BCDDF300BF2A80 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TTGTextTagCollectionView+.swift"; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* ASAuthorizationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASAuthorizationController+.swift"; sourceTree = "<group>"; };
-		AECC130E27B9EAC2006866FC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		AECC131027B9ED12006866FC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		AECC131227B9EE03006866FC /* BMJUA.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA.ttf; sourceTree = "<group>"; };
 		AECC131627BA1033006866FC /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 		AE176A3227B24F610040A4C3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -304,8 +311,9 @@
 			children = (
 				AECC130527B9E3DF006866FC /* Rx+ */,
 				AE0D336527B4C37400C4B955 /* Observable+.swift */,
-				AECC130E27B9EAC2006866FC /* UIFont.swift */,
+				AECC130E27B9EAC2006866FC /* UIFont+.swift */,
 				AECC131C27BA1266006866FC /* UIColor+.swift */,
+				AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -433,6 +441,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		AE6FA49127BDCADA00FA2154 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AECC130527B9E3DF006866FC /* Rx+ */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +515,7 @@
 		AECC134327BA4939006866FC /* StoreScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE6FA49127BDCADA00FA2154 /* View */,
 				AE6964BD27BCD8F800BF2A80 /* Coordinator */,
 				AE6964BC27BCD8F600BF2A80 /* ViewModel */,
 				AE6964BB27BCD8F300BF2A80 /* ViewController */,
@@ -683,11 +700,13 @@
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
+				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
+				AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
-				AECC130F27B9EAC2006866FC /* UIFont.swift in Sources */,
+				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
 				AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
@@ -695,6 +714,7 @@
 				AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AECC133327BA35DA006866FC /* UILabel+.swift in Sources */,
+				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,

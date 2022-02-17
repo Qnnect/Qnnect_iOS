@@ -27,10 +27,13 @@ struct Constants {
     //tag
     static let tagCornerRadius: CGFloat = 44.0
     static let tagExtraSpace: CGSize = CGSize(width: 24.0, height: 20.0) // 여백
+    static let tagBorderWidth: CGFloat = 1.0
     
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
     static let pointImage: UIImage? = UIImage(named: "kong")
     static let notificationIcon: UIImage? = UIImage(named: "notification")
+    static let priceImage: UIImage? = UIImage(named: "price")
+    
 }
