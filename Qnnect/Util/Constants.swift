@@ -24,6 +24,12 @@ struct Constants {
     static let profileImageHeight: CGFloat = 100.0
     static let pointBarHeight: CGFloat = 50.0
     
+    //ingredentCollectionView
+    static let ingredientCollectionViewHorizontalMargin: CGFloat = 20.0
+    static let ingredientCellWidth: CGFloat = (UIScreen.main.bounds.width - (Constants.ingredientCollectionViewHorizontalMargin * 2.0)) / 2.0 - ingredientCellSpacing - 2.0
+    static let ingredientCellHeight: CGFloat = 170.0
+    static let ingredientCellSpacing: CGFloat = 8.0
+    
     //tag
     static let tagCornerRadius: CGFloat = 44.0
     static let tagExtraSpace: CGSize = CGSize(width: 24.0, height: 20.0) // 여백
