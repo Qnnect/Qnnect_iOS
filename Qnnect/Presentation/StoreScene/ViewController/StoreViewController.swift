@@ -64,7 +64,7 @@ final class StoreViewController: BaseViewController {
         tagView.numberOfLines = 1
         tagView.scrollDirection = .horizontal
         tagView.showsHorizontalScrollIndicator = false
-        tagView.selectionLimit = 1
+        tagView.selectionLimit = 2
         
         let extraSpace = Constants.tagExtraSpace
         let style = TTGTextTagStyle()
@@ -107,7 +107,7 @@ final class StoreViewController: BaseViewController {
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = .init(width:(UIScreen.main.bounds.width - (20.0 * 2)) / 2 - 8.0 , height:170.0)
+        layout.itemSize = .init(width:(UIScreen.main.bounds.width - (20.0 * 2)) / 2 - 8.0 - 2.0 , height:170.0)
         $0.collectionViewLayout = layout
         $0.showsVerticalScrollIndicator = false
         $0.register(IngredientCell.self, forCellWithReuseIdentifier: IngredientCell.identifier)
@@ -167,7 +167,19 @@ final class StoreViewController: BaseViewController {
     }
 }
 
-extension StoreViewController: TTGTextTagCollectionViewDelegate {}
+extension StoreViewController: TTGTextTagCollectionViewDelegate {
+    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
+        let tags = textTagCollectionView.allTags() ?? []
+        tags.enumerated().forEach {
+            if $0.element != tag, $0.element.selected {
+                textTagCollectionView.updateTag(at: UInt($0.offset), selected: false)
+            }
+        }
+    }
+    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, canTap tag: TTGTextTag!, at index: UInt) -> Bool {
+        return !tag.selected
+    }
+}
 
 
 
