@@ -73,7 +73,6 @@ final class StoreViewController: BaseViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 3.0, bottom: 0, right: 3.0)
         $0.collectionViewLayout = layout
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .p_ivory
         $0.register(IngredientCell.self, forCellWithReuseIdentifier: IngredientCell.identifier)
     }
     
@@ -97,7 +96,7 @@ final class StoreViewController: BaseViewController {
             self.view.addSubview($0)
         }
         
-        self.view.backgroundColor = .p_ivory
+        self.view.backgroundColor = .systemBackground
         self.navigationController?.isNavigationBarHidden = true
         
         self.pointBar.snp.makeConstraints { make in

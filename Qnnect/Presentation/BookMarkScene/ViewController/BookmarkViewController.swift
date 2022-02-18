@@ -30,7 +30,6 @@ final class BookmarkViewController: BaseViewController {
     
     private let bookmarkTableView = UITableView().then {
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
-        $0.backgroundColor = .p_ivory
     }
     
     static func create(with viewModel: BookmarkViewModel) -> BookmarkViewController{
@@ -53,7 +52,7 @@ final class BookmarkViewController: BaseViewController {
             self.view.addSubview($0)
         }
         
-        self.view.backgroundColor = .p_ivory
+        self.view.backgroundColor = .systemBackground
         self.navigationController?.isNavigationBarHidden = true
         self.pointBar.snp.makeConstraints { make in
             make.leading.top.trailing.equalTo(self.view.safeAreaLayoutGuide)

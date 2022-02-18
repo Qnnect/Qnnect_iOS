@@ -24,7 +24,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configureUI() {
-        self.view.backgroundColor = .p_ivory
+        self.view.backgroundColor = .systemBackground
     }
     
     override func bind() {

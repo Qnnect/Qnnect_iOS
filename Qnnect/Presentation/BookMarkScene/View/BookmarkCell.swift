@@ -42,7 +42,6 @@ final class BookmarkCell: UITableViewCell {
             self.contentView.addSubview($0)
         }
         
-        self.contentView.backgroundColor = .p_ivory
         
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()

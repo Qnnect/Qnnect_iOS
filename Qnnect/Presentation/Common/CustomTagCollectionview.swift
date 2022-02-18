@@ -31,7 +31,7 @@ final class CustomTagCollectionView: TTGTextTagCollectionView {
     func update(with titles: [String]) {
         let extraSpace = Constants.tagExtraSpace
         let style = TTGTextTagStyle()
-        style.backgroundColor = .p_ivory ?? .white
+        style.backgroundColor = .systemBackground
         style.cornerRadius = Constants.tagCornerRadius
         style.borderWidth = Constants.tagBorderWidth
         style.borderColor = .tagBorderColor ?? .black
@@ -50,7 +50,7 @@ final class CustomTagCollectionView: TTGTextTagCollectionView {
             let tagContents = TTGTextTagStringContent(
                 text: title,
                 textFont: font,
-                textColor: .blackLabel
+                textColor: .GRAY01
             )
             let selectedTagContents = TTGTextTagStringContent(
                 text: title,
