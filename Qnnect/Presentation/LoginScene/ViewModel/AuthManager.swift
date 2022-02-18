@@ -46,7 +46,6 @@ final class AuthManager: NSObject {
         return UserApi.shared.rx.me()
             .asObservable()
             .map { $0.kakaoAccount?.profile?.profileImageUrl }
-            
     }
     
     func appleLogin() -> Observable<Bool> {
@@ -57,6 +56,7 @@ final class AuthManager: NSObject {
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.rx.delegate.setForwardToDelegate(self, retainDelegate: false)
+        //authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
         
@@ -68,6 +68,20 @@ extension AuthManager: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         //TODO: didCompleteWithAuthorization 후 동작
+        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            
+            let idToken = credential.identityToken!
+            let tokenStr = String(data: idToken, encoding: .utf8)
+            print(tokenStr ?? "apple token nil")
+            
+            guard let code = credential.authorizationCode else { return }
+            let codeStr = String(data: code, encoding: .utf8)
+            print(codeStr ?? "apple authorizationCode nil")
+            
+            let user = credential.user
+            print(user)
+            
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

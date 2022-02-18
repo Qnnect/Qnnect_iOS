@@ -905,6 +905,8 @@
 				DEVELOPMENT_TEAM = HWBJNMY98D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -939,6 +941,8 @@
 				DEVELOPMENT_TEAM = HWBJNMY98D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
