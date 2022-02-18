@@ -15,7 +15,11 @@ final class BookmarkViewController: BaseViewController {
     
     private var viewModel: BookmarkViewModel!
     
-    private let pointBar = PointBar()
+    private let navigationTitleLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 18.0)
+        $0.textColor = .BLACK_121212
+        $0.text = "북마크"
+    }
     
     private let tagCollectionView = CustomTagCollectionView().then {
         $0.update(with: [
@@ -46,7 +50,6 @@ final class BookmarkViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.pointBar,
             self.tagCollectionView,
             self.bookmarkTableView
         ].forEach {
@@ -54,16 +57,17 @@ final class BookmarkViewController: BaseViewController {
         }
         
         self.view.backgroundColor = .p_ivory
-        self.navigationController?.isNavigationBarHidden = true
         
-        self.pointBar.snp.makeConstraints { make in
-            make.leading.top.trailing.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(Constants.pointBarHeight)
-        }
+        self.navigationItem.leftBarButtonItems = [
+            Constants.navigationLeftPadding,
+            UIBarButtonItem(customView: self.navigationTitleLabel)
+        ]
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
         
         self.tagCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
-            make.top.equalTo(self.pointBar.snp.bottom).offset(Constants.tagBetweenPointBarSpace)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
         }
         
         self.tagCollectionView.delegate = self
