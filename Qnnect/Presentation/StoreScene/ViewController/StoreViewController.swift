@@ -71,9 +71,6 @@ final class StoreViewController: BaseViewController {
         $0.textColor = .BLACK_121212
     }
     
-    private let navigationLeftPaddingItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
-        $0.width = 18.0
-    }
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -107,7 +104,7 @@ final class StoreViewController: BaseViewController {
         self.view.backgroundColor = .p_ivory
         self.navigationItem.leftBarButtonItems =
             [
-                self.navigationLeftPaddingItem,
+                Constants.navigationLeftPadding,
                 UIBarButtonItem(customView: self.navigationTitleView)
             ]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.store_navigation_bar_icon, style: .plain, target: nil, action: nil)
