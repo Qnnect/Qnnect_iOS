@@ -57,6 +57,7 @@ final class TodayQuestionCell: UICollectionViewCell {
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
         self.contentView.layer.cornerRadius = Constants.HomeCellCornerRadius
         
+        
         self.groupNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(26.0)
             make.leading.trailing.equalToSuperview().inset(12.0)
@@ -72,12 +73,35 @@ final class TodayQuestionCell: UICollectionViewCell {
             make.center.equalToSuperview()
             make.bottom.equalToSuperview().inset(48.0)
         }
+        
+        self.drawBottomShadow()
     }
     
     func update(with question: Question) {
         self.groupNameLabel.text = question.groupName
         self.questionLabel.text = question.content
         self.d_dayLabel.text = question.d_day
+    }
+    
+    private func drawBottomShadow() {
+        
+        let path = UIBezierPath(
+            roundedRect: CGRect(
+                x: self.contentView.bounds.minX,
+                y: self.contentView.bounds.minY,
+                width: self.contentView.bounds.width,
+                height: self.contentView.bounds.height + 4.0
+            ),
+            cornerRadius: Constants.HomeCellCornerRadius
+        )
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.lineWidth = path.lineWidth
+        shapeLayer.strokeColor = self.layer.borderColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        self.contentView.layer.addSublayer(shapeLayer)
+        
     }
 }
 
