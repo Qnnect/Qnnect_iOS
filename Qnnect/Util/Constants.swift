@@ -39,12 +39,16 @@ struct Constants {
     //tag+pointBar
     static let tagBetweenPointBarSpace: CGFloat = 17.0
     
+    //Home CollectionView Cell
+    static let HomeCellCornerRadius: CGFloat = 16.0
+    
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
     static let pointImage: UIImage? = UIImage(named: "kong")
     static let notificationIcon: UIImage? = UIImage(named: "notification")
     static let priceImage: UIImage? = UIImage(named: "price")
+    static let groupPlusImage: UIImage? = UIImage(named: "group_plus")
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

@@ -32,7 +32,7 @@ final class HomeSectionHeaderView: UICollectionReusableView {
         
         self.titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(19.0)
+            make.leading.trailing.equalToSuperview().inset(10.0)
         }
     }
     

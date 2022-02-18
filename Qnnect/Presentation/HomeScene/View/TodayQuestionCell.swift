@@ -55,7 +55,7 @@ final class TodayQuestionCell: UICollectionViewCell {
         self.contentView.backgroundColor = .SECONDARY01
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
-        self.contentView.layer.cornerRadius = 16.0
+        self.contentView.layer.cornerRadius = Constants.HomeCellCornerRadius
         
         self.groupNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(26.0)
@@ -69,7 +69,7 @@ final class TodayQuestionCell: UICollectionViewCell {
         
         self.questionLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(31.0)
-            make.top.equalTo(self.groupNameLabel.snp.bottom).offset(21.0)
+            make.center.equalToSuperview()
             make.bottom.equalToSuperview().inset(48.0)
         }
     }

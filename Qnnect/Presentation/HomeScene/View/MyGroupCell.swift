@@ -52,7 +52,7 @@ final class MyGroupCell: UICollectionViewCell {
         self.contentView.backgroundColor = .groupPink
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.brownBorderColor?.cgColor
-        self.layer.cornerRadius = 16.0
+        self.layer.cornerRadius = Constants.HomeCellCornerRadius
         self.clipsToBounds = true
         
         self.groupNameLabel.snp.makeConstraints { make in

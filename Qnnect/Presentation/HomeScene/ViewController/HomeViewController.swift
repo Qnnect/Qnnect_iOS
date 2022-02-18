@@ -25,7 +25,9 @@ final class HomeViewController: BaseViewController {
         $0.register(TodayQuestionCell.self, forCellWithReuseIdentifier: TodayQuestionCell.identifier)
         $0.register(MyGroupCell.self, forCellWithReuseIdentifier: MyGroupCell.identifier)
         $0.register(HomeSectionHeaderView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,withReuseIdentifier: HomeSectionHeaderView.identifier)
+        $0.register(AddGroupCell.self, forCellWithReuseIdentifier: AddGroupCell.identifier)
         $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .p_ivory
     }
     
@@ -75,6 +77,7 @@ final class HomeViewController: BaseViewController {
         ]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = self.view.backgroundColor
         
         self.pointImageView.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview()
@@ -86,8 +89,8 @@ final class HomeViewController: BaseViewController {
         }
         
         self.homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(30.0)
-            make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview().inset(10.0)
         }
         self.homeCollectionView.collectionViewLayout = self.createLayout()
     }
@@ -101,7 +104,7 @@ final class HomeViewController: BaseViewController {
             Question(groupName: "INFP 5인방 모임", d_day: "D-14", content: content1),
             Question(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
             Question(groupName: "아아메 5인방 모임", d_day: "D-7", content: content)
-            ]
+        ]
         let dummyGroups = [
             Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
             Group(name: "INFP 5인방 모임", createdDay: "2022.2.12~", headCount: 5),
@@ -109,6 +112,7 @@ final class HomeViewController: BaseViewController {
             Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
             Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
             Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
+            Group(name: "마지막", createdDay: "adfas",headCount: 2)
         ]
         
         let user = Observable.just(dummyUser)
@@ -160,7 +164,7 @@ private extension HomeViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 26.0, trailing: 5.0)
+        section.contentInsets = .init(top: 20.0, leading: 5.0, bottom: 26.0, trailing: 5.0)
         
         return section
     }
@@ -177,7 +181,7 @@ private extension HomeViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 31.0, trailing: 10.0)
+        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 20.0, trailing: 15.0)
         
         return section
     }
@@ -186,9 +190,9 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10.0, leading: 9.0, bottom: 10, trailing: 9.0)
+        item.contentInsets = .init(top: 10, leading: 9.0, bottom: 10, trailing: 9.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(175.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(210.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -200,7 +204,7 @@ private extension HomeViewController {
     
     //SectionHeader layout설정
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-         
+        
         //Section Header 사이즈
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60.0))
         
@@ -225,6 +229,11 @@ private extension HomeViewController {
                 cell.update(with: question)
                 return cell
             case.mygroupSectionItem(group: let group):
+                //TODO: 일단 테스트를 위한 코드 ... 꼭 바꾸자 이 로직
+                if group.name == "마지막" {
+                    print("마지막 !!")
+                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddGroupCell.identifier, for: indexPath)
+                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyGroupCell.identifier, for: indexPath) as! MyGroupCell
                 cell.update(with: group)
                 return cell
