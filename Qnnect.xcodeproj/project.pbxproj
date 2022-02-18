@@ -44,10 +44,15 @@
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
-		AEA56AFA27BF34640029A6CB /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AF927BF34640029A6CB /* HomeDataSource.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyGroupCell.swift */; };
+		AEA56B0427BF4E4D0029A6CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0327BF4E4D0029A6CB /* User.swift */; };
+		AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0527BF4E6B0029A6CB /* Question.swift */; };
+		AEA56B0827BF4E940029A6CB /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0727BF4E940029A6CB /* Group.swift */; };
+		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
+		AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */; };
+		AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */; };
 		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
@@ -112,10 +117,15 @@
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
-		AEA56AF927BF34640029A6CB /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupCell.swift; sourceTree = "<group>"; };
+		AEA56B0327BF4E4D0029A6CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AEA56B0527BF4E6B0029A6CB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		AEA56B0727BF4E940029A6CB /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
+		AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
+		AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -196,6 +206,7 @@
 				AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */,
 				AE45938B27BD23D1009737B2 /* PointBar.swift */,
 				AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */,
+				AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -239,6 +250,9 @@
 			children = (
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
+				AEA56B0327BF4E4D0029A6CB /* User.swift */,
+				AEA56B0527BF4E6B0029A6CB /* Question.swift */,
+				AEA56B0727BF4E940029A6CB /* Group.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -490,10 +504,11 @@
 		AEA56AF827BF34580029A6CB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA56AF927BF34640029A6CB /* HomeDataSource.swift */,
+				AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */,
 				AEA56AFD27BF37E70029A6CB /* TitleCell.swift */,
 				AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */,
 				AEA56B0127BF380B0029A6CB /* MyGroupCell.swift */,
+				AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -733,7 +748,6 @@
 			files = (
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
-				AEA56AFA27BF34640029A6CB /* HomeDataSource.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
@@ -751,9 +765,12 @@
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
+				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
+				AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */,
 				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
+				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
@@ -761,7 +778,9 @@
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
+				AEA56B0427BF4E4D0029A6CB /* User.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
+				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
 				AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
@@ -779,6 +798,7 @@
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
+				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,

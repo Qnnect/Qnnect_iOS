@@ -16,6 +16,7 @@ final class MyGroupCell: UICollectionViewCell {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .BLACK_121212
         $0.numberOfLines = 0
+        $0.lineBreakMode = .byCharWrapping
     }
     
     private let createdDateLabel = UILabel().then {
@@ -23,9 +24,19 @@ final class MyGroupCell: UICollectionViewCell {
         $0.textColor = .GRAY01
     }
     
-    private let headcountLabel = UILabel().then {
+    private let headCountLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textColor = .BLACK_121212
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.configureUI()
     }
     
     private func configureUI() {
@@ -33,10 +44,16 @@ final class MyGroupCell: UICollectionViewCell {
         [
             self.groupNameLabel,
             self.createdDateLabel,
-            self.headcountLabel
+            self.headCountLabel
         ].forEach {
             self.contentView.addSubview($0)
         }
+        
+        self.contentView.backgroundColor = .groupPink
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.brownBorderColor?.cgColor
+        self.layer.cornerRadius = 16.0
+        self.clipsToBounds = true
         
         self.groupNameLabel.snp.makeConstraints { make in
             make.leading.top.trailing.equalToSuperview().inset(19.0)
@@ -47,13 +64,15 @@ final class MyGroupCell: UICollectionViewCell {
             make.leading.trailing.equalTo(self.groupNameLabel)
         }
         
-        self.headcountLabel.snp.makeConstraints { make in
+        self.headCountLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(18.0)
             make.bottom.equalToSuperview().inset(15.0)
         }
     }
     
-    func update() {
-        
+    func update(with group: Group) {
+        self.groupNameLabel.text = group.name
+        self.createdDateLabel.text = group.createdDay
+        self.headCountLabel.text = "\(group.headCount)명"
     }
 }

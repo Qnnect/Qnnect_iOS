@@ -52,7 +52,8 @@ final class TitleCell: UICollectionViewCell {
         }
     }
     
-    func update() {
-        
+    func update(with user: User) {
+        self.profileImageView.image = Constants.profileDefaultImage
+        self.titleLabel.text = "\(user.name) 님의 다이어리"
     }
 }

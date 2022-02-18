@@ -37,4 +37,5 @@ extension UIColor {
     class var blackLabel: UIColor? { return UIColor(named: "blackLabel") }
     class var tagBorderColor: UIColor? { return UIColor(named: "tagBorder") }
     class var ingredientCellBackground: UIColor? { return UIColor(named: "ingredientCellBackground") }
+    class var groupPink: UIColor? { return UIColor(named: "GroupPink") }
 }
