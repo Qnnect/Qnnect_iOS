@@ -46,4 +46,7 @@ struct Constants {
     static let notificationIcon: UIImage? = UIImage(named: "notification")
     static let priceImage: UIImage? = UIImage(named: "price")
     
+    //navigation Bar
+    static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
+    
 }

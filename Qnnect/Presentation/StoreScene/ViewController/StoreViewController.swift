@@ -33,9 +33,7 @@ final class StoreViewController: BaseViewController {
     
     private var viewModel: StoreViewModel!
     
-    private let pointBar = PointBar().then {
-        $0.alarmImageView.isHidden = true
-    }
+
     
     private let dummyData = [
         Ingredient(type: .iceOrBase, name: "얼음", price: 100),
@@ -62,16 +60,27 @@ final class StoreViewController: BaseViewController {
         Ingredient(type: .topping, name: "휘핑크림", price: 600)
         
     ]
+    
     private let tagCollectionView = CustomTagCollectionView().then {
         $0.update(with: IngredientType.allCases.map { $0.title })
     }
     
+    private let navigationTitleView = UILabel().then {
+        $0.text = "상점"
+        $0.font = .IM_Hyemin(.bold, size: 18.0)
+        $0.textColor = .BLACK_121212
+    }
+    
+    private let navigationLeftPaddingItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
+        $0.width = 18.0
+    }
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = .init(width: Constants.ingredientCellWidth, height: Constants.ingredientCellHeight)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 3.0, bottom: 0, right: 3.0)
         $0.collectionViewLayout = layout
+        $0.backgroundColor = .p_ivory
         $0.showsVerticalScrollIndicator = false
         $0.register(IngredientCell.self, forCellWithReuseIdentifier: IngredientCell.identifier)
     }
@@ -89,24 +98,25 @@ final class StoreViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.pointBar,
             self.tagCollectionView,
             self.ingredientCollectionView
         ].forEach {
             self.view.addSubview($0)
         }
         
-        self.view.backgroundColor = .systemBackground
-        self.navigationController?.isNavigationBarHidden = true
-        
-        self.pointBar.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(Constants.pointBarHeight)
-        }
+        self.view.backgroundColor = .p_ivory
+        self.navigationItem.leftBarButtonItems =
+            [
+                self.navigationLeftPaddingItem,
+                UIBarButtonItem(customView: self.navigationTitleView)
+            ]
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.store_navigation_bar_icon, style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
+
         
         self.tagCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
-            make.top.equalTo(self.pointBar.snp.bottom).offset(Constants.tagBetweenPointBarSpace)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
         }
         
         self.tagCollectionView.delegate = self

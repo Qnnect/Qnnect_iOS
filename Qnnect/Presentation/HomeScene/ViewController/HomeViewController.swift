@@ -13,6 +13,12 @@ final class HomeViewController: BaseViewController {
     
     private var viewModel: HomeViewModel!
     
+    private let pointBar = PointBar()
+    
+//    private let mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+//        $0.back
+//    }
+    
     static func create(with viewModel: HomeViewModel) -> HomeViewController {
         let vc = HomeViewController()
         vc.viewModel = viewModel
@@ -24,7 +30,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func configureUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .p_ivory
     }
     
     override func bind() {
