@@ -37,11 +37,12 @@ final class TermsViewController: BaseViewController {
         $0.axis = .vertical
         $0.spacing = 8.0
     }
+    
     private let agreementButton = UIButton().then {
         $0.setTitle("동의합니다", for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.backgroundColor = .GRAY04
-        $0.layer.cornerRadius = 10.0
+        $0.layer.cornerRadius = Constants.bottomButtonCornerRadius
         $0.isEnabled = false
     }
     

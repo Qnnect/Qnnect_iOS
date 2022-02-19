@@ -48,7 +48,7 @@ final class LoginViewController: BaseViewController {
         
         
         self.kakaoButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
             make.height.equalTo(Constants.bottomButtonHeight)
         }
         
