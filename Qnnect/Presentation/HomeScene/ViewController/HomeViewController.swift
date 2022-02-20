@@ -46,6 +46,14 @@ final class HomeViewController: BaseViewController {
         $0.backgroundColor = .p_ivory
     }
     
+    private let addGroupButton = UIButton().then {
+        $0.layer.borderWidth = 1.2
+        $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.layer.cornerRadius = Constants.bottomButtonHeight / 2.0
+        $0.setTitle("그룹 추가하기", for: .normal)
+        $0.setTitleColor(.GRAY03, for: .normal)
+    }
     
     static func create(with viewModel: HomeViewModel) -> HomeViewController {
         let vc = HomeViewController()
@@ -62,11 +70,16 @@ final class HomeViewController: BaseViewController {
         [
             self.pointImageView,
             self.pointLabel,
-        ].forEach{
+        ].forEach {
             self.pointView.addSubview($0)
         }
-        
-        self.view.addSubview(self.homeCollectionView)
+    
+        [
+            self.addGroupButton,
+            self.homeCollectionView
+        ].forEach {
+            self.view.addSubview($0)
+        }
         
         self.view.backgroundColor = .p_ivory
         
@@ -89,10 +102,18 @@ final class HomeViewController: BaseViewController {
         }
         
         self.homeCollectionView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview().inset(10.0)
+            make.bottom.equalTo(self.addGroupButton.snp.top).offset(-14.0)
         }
+        
         self.homeCollectionView.collectionViewLayout = self.createLayout()
+        
+        self.addGroupButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
+            make.height.equalTo(Constants.bottomButtonHeight)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(12.0)
+        }
     }
     
     override func bind() {
@@ -164,7 +185,7 @@ private extension HomeViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 20.0, leading: 5.0, bottom: 26.0, trailing: 5.0)
+        section.contentInsets = .init(top: 10.0, leading: 5.0, bottom: 10.0, trailing: 5.0)
         
         return section
     }
@@ -192,7 +213,7 @@ private extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 9.0, bottom: 10, trailing: 9.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(210.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         //section
         let section = NSCollectionLayoutSection(group: group)
