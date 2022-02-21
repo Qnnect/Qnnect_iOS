@@ -12,7 +12,7 @@ import Then
 final class HomeSectionFooterView: UICollectionReusableView {
     static let identifier = "HomeSectionFooterView"
     
-    private let addGroupButton = UIButton().then {
+    private(set) var addGroupButton = UIButton().then {
         $0.layer.borderWidth = 1.2
         $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)

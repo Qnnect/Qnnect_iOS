@@ -148,6 +148,7 @@ final class HomeViewController: BaseViewController {
                 ]
             }.bind(to: self.homeCollectionView.rx.items(dataSource: datasource))
             .disposed(by: self.disposeBag)
+        
     }
 }
 
@@ -279,6 +280,12 @@ private extension HomeViewController {
                 guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
                     fatalError("Could not dequeReusableView")
                 }
+                footerView.addGroupButton.rx.tap
+                    .subscribe(onNext: { [weak self]_ in
+                        let vc = AddGroupViewController()
+                        vc.modalPresentationStyle = .overCurrentContext
+                        self?.present(vc, animated: false)}
+                    ).disposed(by: self.disposeBag)
                 return footerView
             }
             return UICollectionReusableView()
