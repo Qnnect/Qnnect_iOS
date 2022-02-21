@@ -55,7 +55,7 @@ final class TodayQuestionCell: UICollectionViewCell {
         self.contentView.backgroundColor = .SECONDARY01
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
-        self.contentView.layer.cornerRadius = Constants.HomeCellCornerRadius
+        self.contentView.layer.cornerRadius = Constants.homeCellCornerRadius
         
         
         self.groupNameLabel.snp.makeConstraints { make in
@@ -92,7 +92,7 @@ final class TodayQuestionCell: UICollectionViewCell {
                 width: self.contentView.bounds.width,
                 height: self.contentView.bounds.height + 4.0
             ),
-            cornerRadius: Constants.HomeCellCornerRadius
+            cornerRadius: Constants.homeCellCornerRadius
         )
         
         let shapeLayer = CAShapeLayer()

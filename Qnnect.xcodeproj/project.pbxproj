@@ -70,6 +70,10 @@
 		AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133B27BA41DD006866FC /* HomeViewController.swift */; };
 		AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133D27BA4256006866FC /* HomeCoordinator.swift */; };
 		AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133F27BA45C0006866FC /* HomeViewModel.swift */; };
+		AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */; };
+		AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362427C315AA00D0A127 /* ProfileCell.swift */; };
+		AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362627C319F900D0A127 /* PointCell.swift */; };
+		AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362927C326BD00D0A127 /* MyPageItemCell.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
@@ -144,6 +148,10 @@
 		AECC133B27BA41DD006866FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AECC133D27BA4256006866FC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		AECC133F27BA45C0006866FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionModel.swift; sourceTree = "<group>"; };
+		AEEF362427C315AA00D0A127 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		AEEF362627C319F900D0A127 /* PointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCell.swift; sourceTree = "<group>"; };
+		AEEF362927C326BD00D0A127 /* MyPageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageItemCell.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -595,11 +603,23 @@
 		AECC134427BA494C006866FC /* MyPageScene */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF362127C3135300D0A127 /* View */,
 				AE6964C027BCD90500BF2A80 /* Coordinator */,
 				AE6964BF27BCD90200BF2A80 /* ViewModel */,
 				AE6964BE27BCD8FC00BF2A80 /* ViewController */,
 			);
 			path = MyPageScene;
+			sourceTree = "<group>";
+		};
+		AEEF362127C3135300D0A127 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */,
+				AEEF362427C315AA00D0A127 /* ProfileCell.swift */,
+				AEEF362627C319F900D0A127 /* PointCell.swift */,
+				AEEF362927C326BD00D0A127 /* MyPageItemCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AEF294AD27B01864004EFE4D /* Util */ = {
@@ -762,7 +782,9 @@
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
+				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
+				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyGroupCell.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
@@ -780,6 +802,7 @@
 				AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
+				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AEA56B0427BF4E4D0029A6CB /* User.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
@@ -797,6 +820,7 @@
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE04FC6027BF763F00229B96 /* AddGroupCell.swift in Sources */,
+				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,

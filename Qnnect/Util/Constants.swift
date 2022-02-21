@@ -16,6 +16,7 @@ struct Constants {
     static let nameInputCaution = "2-8글자 사이로 입력해주세요"
     static let firstProfileSetSceneTitle = "환영합니다!\n님네임을 입력해주세요"
     static let TermsSceneTitle = "시작 전에\n약관에 동의해주세요"
+    static let loginTypeText = "\(UserDefaults.standard.value(forKey: "loginType") ?? "알수없음")으로 로그인하셨어요!"
     
     // MARK: - Layout
     static let nameMaxLength = 8
@@ -44,7 +45,12 @@ struct Constants {
     static let tagBetweenPointBarSpace: CGFloat = 17.0
     
     //Home CollectionView Cell
-    static let HomeCellCornerRadius: CGFloat = 16.0
+    static let homeCellCornerRadius: CGFloat = 16.0
+    
+    //MyPage
+    static let myPageProfileImageWidth: CGFloat = 60.0
+    static let myPageProfileImageHeight: CGFloat = 60.0
+    static let myPageCornerRadius: CGFloat = 16.0
     
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")

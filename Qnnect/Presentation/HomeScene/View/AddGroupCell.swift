@@ -31,7 +31,7 @@ final class AddGroupCell: UICollectionViewCell {
         
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.addGroupCellBorder?.cgColor
-        self.contentView.layer.cornerRadius = Constants.HomeCellCornerRadius
+        self.contentView.layer.cornerRadius = Constants.homeCellCornerRadius
         
         self.addGroupIcon.snp.makeConstraints { make in
             make.center.equalToSuperview()
