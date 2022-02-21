@@ -55,14 +55,6 @@ final class HomeViewController: BaseViewController {
         $0.backgroundColor = .p_ivory
     }
     
-//    private let addGroupButton = UIButton().then {
-//        $0.layer.borderWidth = 1.2
-//        $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
-//        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
-//        $0.layer.cornerRadius = Constants.bottomButtonHeight / 2.0
-//        $0.setTitle("그룹 추가하기", for: .normal)
-//        $0.setTitleColor(.GRAY03, for: .normal)
-//    }
     
     static func create(with viewModel: HomeViewModel) -> HomeViewController {
         let vc = HomeViewController()
@@ -84,7 +76,6 @@ final class HomeViewController: BaseViewController {
         }
     
         [
-//            self.addGroupButton,
             self.homeCollectionView
         ].forEach {
             self.view.addSubview($0)
@@ -118,11 +109,6 @@ final class HomeViewController: BaseViewController {
         
         self.homeCollectionView.collectionViewLayout = self.createLayout()
         
-//        self.addGroupButton.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
-//            make.height.equalTo(Constants.bottomButtonHeight)
-//            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(12.0)
-//        }
     }
     
     override func bind() {
