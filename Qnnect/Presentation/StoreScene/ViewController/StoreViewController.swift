@@ -11,6 +11,7 @@ import Then
 import KakaoSDKCommon
 import TTGTags
 import RxSwift
+import RxDataSources
 
 enum IngredientType: CaseIterable,Codable {
     case iceOrBase
@@ -61,9 +62,6 @@ final class StoreViewController: BaseViewController {
         
     ]
     
-    private let tagCollectionView = CustomTagCollectionView().then {
-        $0.update(with: IngredientType.allCases.map { $0.title })
-    }
     
     private let navigationTitleView = UILabel().then {
         $0.text = "상점"
@@ -76,10 +74,16 @@ final class StoreViewController: BaseViewController {
         layout.scrollDirection = .vertical
         layout.itemSize = .init(width: Constants.ingredientCellWidth, height: Constants.ingredientCellHeight)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 3.0, bottom: 0, right: 3.0)
+        layout.headerReferenceSize = CGSize(width: $0.frame.width, height: 60.0)
         $0.collectionViewLayout = layout
         $0.backgroundColor = .p_ivory
         $0.showsVerticalScrollIndicator = false
         $0.register(IngredientCell.self, forCellWithReuseIdentifier: IngredientCell.identifier)
+        $0.register(
+            StoreSectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: StoreSectionHeaderView.identifier
+        )
     }
     
     static func create(with viewModel: StoreViewModel) -> StoreViewController {
@@ -95,13 +99,19 @@ final class StoreViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.tagCollectionView,
             self.ingredientCollectionView
         ].forEach {
             self.view.addSubview($0)
         }
         
         self.view.backgroundColor = .p_ivory
+        
+        let barAppearance = self.navigationController?.navigationBar.standardAppearance
+        barAppearance?.shadowColor = UIColor.black.withAlphaComponent(0.08)
+        barAppearance?.backgroundColor = .p_ivory
+        self.navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
+        self.navigationController?.navigationBar.compactAppearance = barAppearance
+        
         self.navigationItem.leftBarButtonItems =
             [
                 Constants.navigationLeftPadding,
@@ -111,38 +121,34 @@ final class StoreViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
 
         
-        self.tagCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
-        }
+//        self.tagCollectionView.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
+//            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
+//        }
         
-        self.tagCollectionView.delegate = self
-        self.tagCollectionView.updateTag(at: 0, selected: true)
-        
+//        self.tagCollectionView.delegate = self
+//        self.tagCollectionView.updateTag(at: 0, selected: true)
+//
         self.ingredientCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.tagCollectionView.snp.bottom).offset(25.0)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview().inset(17.0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
     }
     
     override func bind() {
-        
-        //TODO: 테스트를위한 구독
-        self.tagCollectionView.rx.tappedTagTitle
-            .subscribe(onNext: { test in
-                self.ingredientCollectionView.setContentOffset(.zero, animated: true)
-                print("Tapped Tag title!!!",test)
-            }).disposed(by: self.disposeBag)
+
         Observable.just(dummyData)
-            .bind(to: self.ingredientCollectionView.rx.items(cellIdentifier: IngredientCell.identifier, cellType: IngredientCell.self)) { index, model, cell in
-                cell.update(with: model)
-            }.disposed(by: self.disposeBag)
-        
-        
+            .map {
+                 ingredients -> [StoreSectionModel] in
+                let items = ingredients.map { StoreSectionItem.IngredientSectionItem(Ingredient: $0)}
+                return [StoreSectionModel.IngredientSection(title: "", items: items)]
+            }.bind(to: self.ingredientCollectionView.rx.items(dataSource: self.createDataSource()))
+            .disposed(by: self.disposeBag)
     }
 }
+
 
 extension StoreViewController: TTGTextTagCollectionViewDelegate {
     func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
@@ -158,7 +164,30 @@ extension StoreViewController: TTGTextTagCollectionViewDelegate {
     }
 }
 
-
+private extension StoreViewController {
+    func createDataSource() -> RxCollectionViewSectionedReloadDataSource<StoreSectionModel> {
+        return RxCollectionViewSectionedReloadDataSource { dataSource, collectionView, indexPath, item in
+            switch item {
+            case .IngredientSectionItem(Ingredient: let ingredient):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCell.identifier, for: indexPath) as! IngredientCell
+                cell.update(with: ingredient)
+                return cell
+            }
+        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: StoreSectionHeaderView.identifier,
+                    for: indexPath
+                ) as! StoreSectionHeaderView
+                view.tagCollectionView.delegate = self
+                return view
+            } else {
+                return UICollectionReusableView()
+            }
+        }
+    }
+}
 
 import SwiftUI
 struct StoreViewController_Priviews: PreviewProvider {
@@ -167,7 +196,11 @@ struct StoreViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = StoreViewController() //보고 싶은 뷰컨 객체
+            let vc = StoreViewController.create(
+                with: StoreViewModel(
+                    coordinator: DefaultStoreCoordinator(navigationController: UINavigationController())
+                )
+            ) //보고 싶은 뷰컨 객체
             return UINavigationController(rootViewController: vc)
         }
         

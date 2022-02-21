@@ -80,6 +80,8 @@ final class EditProfileViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
         }
         
+        self.nameTextField.textField.delegate = self
+        
         self.completionButton.snp.makeConstraints { make in
             make.top.equalTo(self.nameTextField.snp.bottom).offset(72.0)
             make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
@@ -116,6 +118,21 @@ final class EditProfileViewController: BaseViewController {
 private extension EditProfileViewController {
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - 최대 글자 수 이상 입력 제한
+extension EditProfileViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let max = Constants.nameMaxLength
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < max else { return false }
+        return true
     }
 }
 
