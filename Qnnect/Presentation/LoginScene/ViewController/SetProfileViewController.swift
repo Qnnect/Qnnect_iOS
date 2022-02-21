@@ -32,15 +32,6 @@ final class SetProfileViewController: BaseViewController {
         paragraphStyle.lineHeightMultiple = 1.23
         $0.attributedText = NSMutableAttributedString(string: Constants.firstProfileSetSceneTitle, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
-//    private let nameTextField = UITextField().then {
-//        $0.placeholder = Constants.nameTextFieldPlaceHolderText
-//        $0.layer.cornerRadius = 10.0
-//        $0.layer.borderWidth = 1
-//        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20.0, height: $0.frame.height))
-//        $0.leftViewMode = .always
-//        $0.font = .IM_Hyemin(.regular, size: 14.0)
-//        $0.layer.borderColor = UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1).cgColor
-//    }
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -50,12 +41,7 @@ final class SetProfileViewController: BaseViewController {
         $0.isEnabled = false
         $0.layer.cornerRadius = 10.0
     }
-    
-//    private let nameLengthLabel = UILabel().then {
-//        $0.text = "0/\(Constants.nameMaxLength)"
-//        $0.textColor = .GRAY04
-//        $0.font = .Roboto(.regular, size: 14.0)
-//    }
+
     private let nameTextField = NameTextField().then {
         $0.textField.placeholder = Constants.nameTextFieldPlaceHolderText
     }
@@ -108,8 +94,6 @@ final class SetProfileViewController: BaseViewController {
         [
             self.nameTextField,
             self.completionButton,
-            //self.nameLengthLabel,
-            self.cautionLabel,
             self.editProfileImageView,
             self.welcomeLabel
         ].forEach {
@@ -131,16 +115,6 @@ final class SetProfileViewController: BaseViewController {
             make.top.equalTo(self.nameTextField.snp.bottom).offset(58.0)
         }
         
-//        self.nameLengthLabel.snp.makeConstraints { make in
-//            make.trailing.equalTo(self.nameTextField)
-//            make.top.equalTo(self.nameTextField.snp.bottom).offset(4.0)
-//        }
-        
-        self.cautionLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.nameTextField.snp.bottom)
-            make.leading.equalTo(self.nameTextField).offset(8.0)
-            make.height.equalTo(0)
-        }
         
         self.editProfileImageView.snp.makeConstraints { make in
             make.width.equalTo(Constants.profileImageWidth)
@@ -148,12 +122,6 @@ final class SetProfileViewController: BaseViewController {
             make.top.equalToSuperview().inset(110.0)
             make.centerX.equalToSuperview()
         }
-        
-//        self.cameraImageView.snp.makeConstraints { make in
-//            make.width.height.equalTo(28.0)
-//            make.trailing.equalTo(self.profileImageView)
-//            make.bottom.equalTo(self.profileImageView).inset(5.0)
-//        }
         
         self.welcomeLabel.snp.makeConstraints { make in
             make.top.equalTo(self.editProfileImageView.snp.bottom).offset(31.0)
@@ -179,7 +147,13 @@ final class SetProfileViewController: BaseViewController {
         
         //Rx+/UIBUtton+
         output.isValidName
-            .do(onNext: self.setCautionLabel(_:))
+            .do(onNext: {
+                [weak self] isValid in
+                UIView.animate(withDuration: 0.5) {
+                    self?.nameTextField.setCautionLabel(isValid)
+                    self?.view.layoutIfNeeded()
+                }
+            })
             .drive(self.completionButton.rx.setEnabled)
             .disposed(by: self.disposeBag)
         
@@ -208,22 +182,6 @@ final class SetProfileViewController: BaseViewController {
 }
 
 private extension SetProfileViewController {
-    func setCautionLabel(_ isVaild: Bool) {
-        UIView.animate(withDuration: 0.5) {
-            [weak self] in
-            if isVaild {
-                self?.cautionLabel.snp.updateConstraints { make in
-                    make.height.equalTo(0)
-                }
-            } else {
-                self?.cautionLabel.snp.updateConstraints { make in
-                    make.height.equalTo(30.0)
-                }
-            }
-            self?.view.layoutIfNeeded()
-        }
-    }
-    
     func setProfileImageView(_ url: URL?) {
         self.editProfileImageView.setImage(url: url)
     }

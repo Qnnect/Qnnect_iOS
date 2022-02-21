@@ -27,6 +27,12 @@ final class NameTextField: UIView {
         $0.font = .Roboto(.regular, size: 14.0)
     }
     
+    private(set) var cautionLabel = UILabel().then {
+        $0.text = Constants.nameInputCaution
+        $0.textColor = .red
+        $0.font = .IM_Hyemin(.regular, size: 14.0)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -41,7 +47,8 @@ final class NameTextField: UIView {
         
         [
             self.textField,
-            self.nameLengthLabel
+            self.nameLengthLabel,
+            self.cautionLabel
         ].forEach {
             self.addSubview($0)
         }
@@ -54,6 +61,23 @@ final class NameTextField: UIView {
         self.nameLengthLabel.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.textField.snp.bottom).offset(4.0)
+        }
+        
+        self.cautionLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.textField.snp.bottom)
+            make.leading.equalTo(self.textField).offset(8.0)
+            make.height.equalTo(0)
+        }
+    }
+    func setCautionLabel(_ isVaild: Bool) {
+        if isVaild {
+            self.cautionLabel.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
+        } else {
+            self.cautionLabel.snp.updateConstraints { make in
+                make.height.equalTo(30.0)
+            }
         }
     }
 }

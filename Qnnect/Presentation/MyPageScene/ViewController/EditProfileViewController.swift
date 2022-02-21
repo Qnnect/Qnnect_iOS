@@ -101,6 +101,13 @@ final class EditProfileViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.isVaildName
+            .do(onNext: {
+                [weak self] isValid in
+                UIView.animate(withDuration: 0.5) {
+                    self?.nameTextField.setCautionLabel(isValid)
+                    self?.view.layoutIfNeeded()
+                }
+            })
             .emit(to: self.completionButton.rx.setEnabled)
             .disposed(by: self.disposeBag)
     }
