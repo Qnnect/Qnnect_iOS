@@ -35,7 +35,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         let signUpUseCase = DefaultSignUpUseCase()
         let viewModel = SetProfileViewModel(
             coordinator: self,
-            inputUseCase: signUpUseCase
+            signUpUseCase: signUpUseCase
         )
         let vc = SetProfileViewController.create(with: viewModel)
         let authManager = AuthManager(vc: vc)

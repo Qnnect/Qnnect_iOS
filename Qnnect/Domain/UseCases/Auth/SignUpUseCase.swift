@@ -7,23 +7,12 @@
 
 import Foundation
 
-protocol SignUpUseCase: AnyObject {
-    func isVaildName(_ name: String) -> Bool
-    func getNameLength(_ name: String) -> Int
+protocol SignUpUseCase: InputUseCase {
     func isEssentialItemChecked(_ items: (Bool,Bool,Bool)) -> Bool
     func isAllAgreement(_ items: (Bool,Bool,Bool)) -> Bool
 }
 
 final class DefaultSignUpUseCase: SignUpUseCase {
-    func isVaildName(_ name: String) -> Bool {
-        let length = name.count
-        return length >= 2 && length <= 8 ? true : false
-    }
-    
-    func getNameLength(_ name: String) -> Int {
-        return name.count
-    }
-    
     func isEssentialItemChecked(_ items: (Bool,Bool,Bool)) -> Bool {
         if items.0,items.1 {
             return true

@@ -78,6 +78,7 @@
 		AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362D27C3503000D0A127 /* EditProfileViewModel.swift */; };
 		AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362F27C351BB00D0A127 /* EditProfileImageView.swift */; };
 		AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363127C3579300D0A127 /* NameTextField.swift */; };
+		AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363327C36CF100D0A127 /* InputUseCase.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
 		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
@@ -160,6 +161,7 @@
 		AEEF362D27C3503000D0A127 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		AEEF362F27C351BB00D0A127 /* EditProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageView.swift; sourceTree = "<group>"; };
 		AEEF363127C3579300D0A127 /* NameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextField.swift; sourceTree = "<group>"; };
+		AEEF363327C36CF100D0A127 /* InputUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUseCase.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -562,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				AECC132E27BA27C1006866FC /* SignUpUseCase.swift */,
+				AEEF363327C36CF100D0A127 /* InputUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyGroupCell.swift in Sources */,
+				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,

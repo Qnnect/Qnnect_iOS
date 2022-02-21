@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class EditProfileViewController: BaseViewController {
     
@@ -64,6 +66,7 @@ final class EditProfileViewController: BaseViewController {
             action: #selector(didTapBackButton)
         )
         
+
         self.view.backgroundColor = .p_ivory
         
         self.profileImageView.snp.makeConstraints { make in
@@ -86,6 +89,20 @@ final class EditProfileViewController: BaseViewController {
     
     override func bind() {
         
+        let input = EditProfileViewModel.Input(
+            inputName: self.nameTextField.textField.rx.text.orEmpty
+                .asObservable()
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.nameLength
+            .drive(self.nameTextField.nameLengthLabel.rx.nameLength)
+            .disposed(by: self.disposeBag)
+        
+        output.isVaildName
+            .emit(to: self.completionButton.rx.setEnabled)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -102,7 +119,10 @@ struct EditProfileViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = EditProfileViewController.create(with: EditProfileViewModel()) //보고 싶은 뷰컨 객체
+            let vc = EditProfileViewController.create(with: EditProfileViewModel(
+                inputUseCase: DefaultInputUseCase(),
+                coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController())
+            )) //보고 싶은 뷰컨 객체
             return vc
         }
         

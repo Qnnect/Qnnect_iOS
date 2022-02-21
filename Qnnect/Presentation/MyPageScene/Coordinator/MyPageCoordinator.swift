@@ -28,8 +28,10 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
         
     func showEditProfileScene() {
-        print("call")
-        let viewModel = EditProfileViewModel()
+        let viewModel = EditProfileViewModel(
+            inputUseCase: DefaultInputUseCase(),
+            coordinator: self
+        )
         let vc = EditProfileViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }

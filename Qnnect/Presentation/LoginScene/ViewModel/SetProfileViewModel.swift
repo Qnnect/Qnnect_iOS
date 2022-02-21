@@ -25,26 +25,26 @@ final class SetProfileViewModel: ViewModelType {
     }
     
     private weak var coordinator: AuthCoordinator?
-    private let inputUseCase: SignUpUseCase
+    private let signUpUseCase: SignUpUseCase
     var authManager: AuthManager!
     
     init(
         coordinator: AuthCoordinator,
-        inputUseCase: SignUpUseCase
+        signUpUseCase: SignUpUseCase
     ) {
         self.coordinator = coordinator
-        self.inputUseCase = inputUseCase
+        self.signUpUseCase = signUpUseCase
     }
     
     func transform(from input: Input) -> Output {
         
         let isValidName = input.inputName
             .compactMap{ $0 } // nil 제거
-            .map(self.inputUseCase.isVaildName(_:))
+            .map(self.signUpUseCase.isVaildName(_:))
         
         let nameLength = input.inputName
             .compactMap{ $0 } // nil 제거
-            .map(self.inputUseCase.getNameLength(_:))
+            .map(self.signUpUseCase.getNameLength(_:))
         
         //TODO: 완료버튼 클릭 시 같이 전달되는 닉네임을 서버로 전송
         let completion = input.didTapCompletionButton
