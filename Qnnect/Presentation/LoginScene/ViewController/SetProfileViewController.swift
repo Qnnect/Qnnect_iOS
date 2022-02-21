@@ -100,7 +100,6 @@ final class SetProfileViewController: BaseViewController {
             self.view.addSubview($0)
         }
         
-        self.view.backgroundColor = .systemBackground
         self.imagePickController.delegate = self
         
         self.nameTextField.snp.makeConstraints { make in

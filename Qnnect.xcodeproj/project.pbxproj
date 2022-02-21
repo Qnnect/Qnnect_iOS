@@ -221,6 +221,9 @@
 		AE0D337327B4CF8F00C4B955 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AEF294AF27B01898004EFE4D /* ViewModelType.swift */,
+				AEF294B127B018AB004EFE4D /* BaseViewController.swift */,
+				AE0D336727B4C3B000C4B955 /* Coordinator.swift */,
 				AE0D336927B4C88500C4B955 /* AppCoordinator.swift */,
 				AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */,
 				AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */,
@@ -641,20 +644,9 @@
 			isa = PBXGroup;
 			children = (
 				AE176A4027B253BB0040A4C3 /* Extension */,
-				AEF294AE27B01890004EFE4D /* Base */,
 				AECC132927BA24F7006866FC /* Constants.swift */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		AEF294AE27B01890004EFE4D /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				AEF294AF27B01898004EFE4D /* ViewModelType.swift */,
-				AEF294B127B018AB004EFE4D /* BaseViewController.swift */,
-				AE0D336727B4C3B000C4B955 /* Coordinator.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		C68BB39B5478E078B9326607 /* Frameworks */ = {

@@ -117,18 +117,6 @@ final class PointCell: UITableViewCell {
             make.height.equalTo(64.0)
         }
         
-//        self.makedDrinksButton.snp.makeConstraints { make in
-//            make.leading.bottom.equalToSuperview()
-//            make.height.equalTo(64.0)
-//            make.top.equalTo(self.pointView.snp.bottom).offset(11.0)
-//            make.width.equalTo(self.contentView.frame.width / 2.0 - 5.0)
-//        }
-//
-//        self.sendedQuestionButton.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview()
-//            make.bottom.top.equalTo(self.makedDrinksButton)
-//            make.leading.equalTo(self.makedDrinksButton.snp.trailing).offset(10.0)
-//        }
         self.buttonStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.pointView.snp.bottom).offset(11.0)
