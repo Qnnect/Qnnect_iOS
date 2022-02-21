@@ -24,8 +24,17 @@ final class HomeViewController: BaseViewController {
         $0.register(TitleCell.self, forCellWithReuseIdentifier: TitleCell.identifier)
         $0.register(TodayQuestionCell.self, forCellWithReuseIdentifier: TodayQuestionCell.identifier)
         $0.register(MyGroupCell.self, forCellWithReuseIdentifier: MyGroupCell.identifier)
-        $0.register(HomeSectionHeaderView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,withReuseIdentifier: HomeSectionHeaderView.identifier)
+        $0.register(
+            HomeSectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: HomeSectionHeaderView.identifier
+        )
         $0.register(AddGroupCell.self, forCellWithReuseIdentifier: AddGroupCell.identifier)
+        $0.register(
+            HomeSectionFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: HomeSectionFooterView.identifier
+        )
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .p_ivory
@@ -46,14 +55,14 @@ final class HomeViewController: BaseViewController {
         $0.backgroundColor = .p_ivory
     }
     
-    private let addGroupButton = UIButton().then {
-        $0.layer.borderWidth = 1.2
-        $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
-        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
-        $0.layer.cornerRadius = Constants.bottomButtonHeight / 2.0
-        $0.setTitle("그룹 추가하기", for: .normal)
-        $0.setTitleColor(.GRAY03, for: .normal)
-    }
+//    private let addGroupButton = UIButton().then {
+//        $0.layer.borderWidth = 1.2
+//        $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
+//        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
+//        $0.layer.cornerRadius = Constants.bottomButtonHeight / 2.0
+//        $0.setTitle("그룹 추가하기", for: .normal)
+//        $0.setTitleColor(.GRAY03, for: .normal)
+//    }
     
     static func create(with viewModel: HomeViewModel) -> HomeViewController {
         let vc = HomeViewController()
@@ -75,7 +84,7 @@ final class HomeViewController: BaseViewController {
         }
     
         [
-            self.addGroupButton,
+//            self.addGroupButton,
             self.homeCollectionView
         ].forEach {
             self.view.addSubview($0)
@@ -103,17 +112,17 @@ final class HomeViewController: BaseViewController {
         
         self.homeCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview().inset(10.0)
-            make.bottom.equalTo(self.addGroupButton.snp.top).offset(-14.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.HomeCollectionViewHorizontalMargin)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         self.homeCollectionView.collectionViewLayout = self.createLayout()
         
-        self.addGroupButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
-            make.height.equalTo(Constants.bottomButtonHeight)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(12.0)
-        }
+//        self.addGroupButton.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
+//            make.height.equalTo(Constants.bottomButtonHeight)
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(12.0)
+//        }
     }
     
     override func bind() {
@@ -218,7 +227,8 @@ private extension HomeViewController {
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.boundarySupplementaryItems = [createSectionHeader()]
+        section.boundarySupplementaryItems = [createSectionHeader(),createSectionFooter()]
+
         section.contentInsets = .init(top: 0, leading: 5.0, bottom: 0, trailing: 5.0)
         
         return section
@@ -234,6 +244,16 @@ private extension HomeViewController {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
         
         return sectionHeader
+    }
+    
+    private func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        //Section Footer 사이즈
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(70.0))
+        
+        //Section Footer layout
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
+        
+        return sectionFooter
     }
 }
 
@@ -269,9 +289,13 @@ private extension HomeViewController {
                 print("Section Title!!!\(title)")
                 headerView.update(with: title)
                 return headerView
-            } else {
-                return UICollectionReusableView()
+            } else if indexPath.section == 2{
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
+                    fatalError("Could not dequeReusableView")
+                }
+                return footerView
             }
+            return UICollectionReusableView()
         }
     }
 }

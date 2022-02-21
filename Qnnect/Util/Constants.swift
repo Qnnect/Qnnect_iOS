@@ -25,6 +25,9 @@ struct Constants {
     static let profileImageHeight: CGFloat = 100.0
     static let pointBarHeight: CGFloat = 50.0
     
+    //HomeCollectionView
+    static let HomeCollectionViewHorizontalMargin: CGFloat = 10.0
+    
     // Auth Flow Bottom Button
     static let bottomButtonHorizontalMargin: CGFloat = 20.0
     static let bottomButtonCornerRadius: CGFloat = 10.0
