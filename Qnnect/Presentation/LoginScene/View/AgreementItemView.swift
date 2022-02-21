@@ -73,7 +73,7 @@ final class AgreementItemView: UIView {
         
         self.checkBox.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20.0)
-            make.width.height.equalTo(24.0)
+            make.width.height.equalTo(48.0)
             make.centerY.equalTo(self.titleLabel)
         }
     }

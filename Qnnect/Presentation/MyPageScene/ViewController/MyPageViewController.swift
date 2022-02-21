@@ -115,6 +115,8 @@ private extension MyPageViewController {
             }
         }titleForHeaderInSection: { _, _ in
             return "  "
+        }titleForFooterInSection: { _, _ in
+            return " "
         }
     }
 }
@@ -123,14 +125,18 @@ extension MyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 20
+            return 20.0
         case 1:
-            return 25
+            return 25.0
         case 2:
-            return 26
+            return 26.0
         default:
             return 0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
 }
 

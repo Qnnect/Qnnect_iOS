@@ -69,6 +69,10 @@ final class StoreViewController: BaseViewController {
         $0.textColor = .BLACK_121212
     }
     
+    private let rightBarButtonView = UIImageView(image: Constants.store_navigation_bar_icon).then {
+        $0.contentMode = .scaleAspectFill
+    }
+    
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -117,18 +121,10 @@ final class StoreViewController: BaseViewController {
                 Constants.navigationLeftPadding,
                 UIBarButtonItem(customView: self.navigationTitleView)
             ]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.store_navigation_bar_icon, style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.rightBarButtonView)
         self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
 
         
-//        self.tagCollectionView.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
-//            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
-//        }
-        
-//        self.tagCollectionView.delegate = self
-//        self.tagCollectionView.updateTag(at: 0, selected: true)
-//
         self.ingredientCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview().inset(17.0)
