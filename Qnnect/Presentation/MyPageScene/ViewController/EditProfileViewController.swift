@@ -27,6 +27,14 @@ final class EditProfileViewController: BaseViewController {
         $0.textField.text = "아아메"
     }
     
+    private let completionButton = UIButton().then {
+        $0.setTitle("완료", for: .normal)
+        $0.backgroundColor = .GRAY04
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.isEnabled = false
+        $0.layer.cornerRadius = 10.0
+    }
     static func create(with viewModel: EditProfileViewModel) -> EditProfileViewController {
         let vc = EditProfileViewController()
         vc.viewModel = viewModel
@@ -41,7 +49,8 @@ final class EditProfileViewController: BaseViewController {
         
         [
             self.profileImageView,
-            self.nameTextField
+            self.nameTextField,
+            self.completionButton
         ].forEach {
             self.view.addSubview($0)
         }
@@ -68,6 +77,11 @@ final class EditProfileViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
         }
         
+        self.completionButton.snp.makeConstraints { make in
+            make.top.equalTo(self.nameTextField.snp.bottom).offset(72.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
+            make.height.equalTo(50.0)
+        }
     }
     
     override func bind() {
