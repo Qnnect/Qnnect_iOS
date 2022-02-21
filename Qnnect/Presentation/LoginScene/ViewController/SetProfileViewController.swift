@@ -13,15 +13,16 @@ import Kingfisher
 
 final class SetProfileViewController: BaseViewController {
     
-    private let profileImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = Constants.profileImageHeight / 2.0
-        $0.clipsToBounds = true
-    }
-    
-    private let cameraImageView = UIImageView().then {
-        $0.image = Constants.cameraImage
-    }
+//    private let profileImageView = UIImageView().then {
+//        $0.contentMode = .scaleAspectFill
+//        $0.layer.cornerRadius = Constants.profileImageHeight / 2.0
+//        $0.clipsToBounds = true
+//    }
+//
+//    private let cameraImageView = UIImageView().then {
+//        $0.image = Constants.cameraImage
+//    }
+    private let editProfileImageView = EditProfileImageView()
     
     private let welcomeLabel = UILabel().then {
         $0.font = UIFont.IM_Hyemin(.bold, size: 20.0)
@@ -31,15 +32,15 @@ final class SetProfileViewController: BaseViewController {
         paragraphStyle.lineHeightMultiple = 1.23
         $0.attributedText = NSMutableAttributedString(string: Constants.firstProfileSetSceneTitle, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
-    private let nameTextField = UITextField().then {
-        $0.placeholder = Constants.nameTextFieldPlaceHolderText
-        $0.layer.cornerRadius = 10.5
-        $0.layer.borderWidth = 1
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20.0, height: $0.frame.height))
-        $0.leftViewMode = .always
-        $0.font = .IM_Hyemin(.regular, size: 14.0)
-        $0.layer.borderColor = UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1).cgColor
-    }
+//    private let nameTextField = UITextField().then {
+//        $0.placeholder = Constants.nameTextFieldPlaceHolderText
+//        $0.layer.cornerRadius = 10.0
+//        $0.layer.borderWidth = 1
+//        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20.0, height: $0.frame.height))
+//        $0.leftViewMode = .always
+//        $0.font = .IM_Hyemin(.regular, size: 14.0)
+//        $0.layer.borderColor = UIColor(red: 0.878, green: 0.878, blue: 0.878, alpha: 1).cgColor
+//    }
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -50,10 +51,13 @@ final class SetProfileViewController: BaseViewController {
         $0.layer.cornerRadius = 10.0
     }
     
-    private let nameLengthLabel = UILabel().then {
-        $0.text = "0/\(Constants.nameMaxLength)"
-        $0.textColor = .GRAY04
-        $0.font = .Roboto(.regular, size: 14.0)
+//    private let nameLengthLabel = UILabel().then {
+//        $0.text = "0/\(Constants.nameMaxLength)"
+//        $0.textColor = .GRAY04
+//        $0.font = .Roboto(.regular, size: 14.0)
+//    }
+    private let nameTextField = NameTextField().then {
+        $0.textField.placeholder = Constants.nameTextFieldPlaceHolderText
     }
     
     private let cautionLabel = UILabel().then {
@@ -75,7 +79,7 @@ final class SetProfileViewController: BaseViewController {
             self.present(self.imagePickController, animated: true, completion: nil)
         }
         let defaultImageAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { _ in
-            self.profileImageView.image = Constants.profileDefaultImage
+            self.editProfileImageView.setImage(image: Constants.profileDefaultImage)
         }
         
         let cancelAction = UIAlertAction(title:"취소",style: .cancel)
@@ -104,10 +108,9 @@ final class SetProfileViewController: BaseViewController {
         [
             self.nameTextField,
             self.completionButton,
-            self.nameLengthLabel,
+            //self.nameLengthLabel,
             self.cautionLabel,
-            self.profileImageView,
-            self.cameraImageView,
+            self.editProfileImageView,
             self.welcomeLabel
         ].forEach {
             self.view.addSubview($0)
@@ -117,22 +120,21 @@ final class SetProfileViewController: BaseViewController {
         self.imagePickController.delegate = self
         
         self.nameTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
             make.top.equalTo(self.welcomeLabel.snp.bottom).offset(23.0)
-            make.height.equalTo(50.0)
         }
-        self.nameTextField.delegate = self
+        self.nameTextField.textField.delegate = self
         
         self.completionButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.leading.trailing.equalTo(self.nameTextField)
             make.height.equalTo(Constants.bottomButtonHeight)
             make.top.equalTo(self.nameTextField.snp.bottom).offset(58.0)
         }
         
-        self.nameLengthLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(self.nameTextField)
-            make.top.equalTo(self.nameTextField.snp.bottom).offset(4.0)
-        }
+//        self.nameLengthLabel.snp.makeConstraints { make in
+//            make.trailing.equalTo(self.nameTextField)
+//            make.top.equalTo(self.nameTextField.snp.bottom).offset(4.0)
+//        }
         
         self.cautionLabel.snp.makeConstraints { make in
             make.top.equalTo(self.nameTextField.snp.bottom)
@@ -140,21 +142,21 @@ final class SetProfileViewController: BaseViewController {
             make.height.equalTo(0)
         }
         
-        self.profileImageView.snp.makeConstraints { make in
+        self.editProfileImageView.snp.makeConstraints { make in
             make.width.equalTo(Constants.profileImageWidth)
             make.height.equalTo(Constants.profileImageHeight)
             make.top.equalToSuperview().inset(110.0)
             make.centerX.equalToSuperview()
         }
         
-        self.cameraImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(28.0)
-            make.trailing.equalTo(self.profileImageView)
-            make.bottom.equalTo(self.profileImageView).inset(5.0)
-        }
+//        self.cameraImageView.snp.makeConstraints { make in
+//            make.width.height.equalTo(28.0)
+//            make.trailing.equalTo(self.profileImageView)
+//            make.bottom.equalTo(self.profileImageView).inset(5.0)
+//        }
         
         self.welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.profileImageView.snp.bottom).offset(31.0)
+            make.top.equalTo(self.editProfileImageView.snp.bottom).offset(31.0)
             make.leading.equalToSuperview().inset(20.0)
         }
         
@@ -164,10 +166,10 @@ final class SetProfileViewController: BaseViewController {
         
         
         let input = SetProfileViewModel.Input(
-            inputName: self.nameTextField.rx.text
+            inputName: self.nameTextField.textField.rx.text
                 .asObservable()
                 .skip(while: { ($0?.count ?? 0) == 0}),
-            didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.rx.text.asObservable())
+            didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.textField.rx.text.asObservable())
                 .compactMap{ $0 },
             viewDidLoad: Observable.just(())
         )
@@ -183,7 +185,7 @@ final class SetProfileViewController: BaseViewController {
         
         //Rx+/UILabel+
         output.nameLength
-            .drive(self.nameLengthLabel.rx.nameLength)
+                .drive(self.nameTextField.nameLengthLabel.rx.nameLength)
             .disposed(by: self.disposeBag)
         
         output.completion
@@ -194,7 +196,7 @@ final class SetProfileViewController: BaseViewController {
             .drive(onNext:self.setProfileImageView)
             .disposed(by: self.disposeBag)
                 
-        self.profileImageView.rx.tapGesture()
+        self.editProfileImageView.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: {
                 [weak self] _ in
@@ -223,10 +225,7 @@ private extension SetProfileViewController {
     }
     
     func setProfileImageView(_ url: URL?) {
-        self.profileImageView.kf.setImage(
-            with: url,
-            placeholder: Constants.profileDefaultImage
-        )
+        self.editProfileImageView.setImage(url: url)
     }
 }
 // MARK: - 최대 글자 수 이상 입력 제한
@@ -255,7 +254,7 @@ extension SetProfileViewController: UIImagePickerControllerDelegate&UINavigation
             newImage = possibleImage // 원본 이미지가 있을 경우
         }
         
-        self.profileImageView.image = newImage // 받아온 이미지를 update
+        self.editProfileImageView.setImage(image: newImage) // 받아온 이미지를 update
         picker.dismiss(animated: true, completion: nil) // picker를 닫아줌
     }
 }

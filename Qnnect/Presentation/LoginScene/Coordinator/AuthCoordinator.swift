@@ -57,6 +57,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         //TODO: 탭바 세팅, push HomeVC
         let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
         self.parentCoordinator?.childCoordinators.append(coordinator)
+        print("show Main",self.parentCoordinator)
         self.navigationController.popToRootViewController(animated: false)
         coordinator.start()
         self.parentCoordinator?.childCoordinators.remove(at: 0)

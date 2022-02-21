@@ -80,9 +80,19 @@ final class MyPageViewController: BaseViewController {
             .bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
+
+        let input = MyPageViewModel.Input(didTapProfileCell: self.mainTableView.rx.itemSelected
+                                            .filter{ $0.section == 0}
+                                            .mapToVoid()
+        )
+        
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
+        let output = self.viewModel.transform(from: input)
         
+        output.showEditProfileScene
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -104,19 +114,12 @@ private extension MyPageViewController {
                 return cell
             }
         }titleForHeaderInSection: { _, _ in
-            return " "
+            return "  "
         }
     }
 }
 
 extension MyPageViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-    
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
@@ -138,8 +141,8 @@ struct MyPageViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = MyPageViewController() //보고 싶은 뷰컨 객체
-            return UINavigationController(rootViewController: vc)
+            let vc = MyPageViewController.create(with: MyPageViewModel(coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()))) //보고 싶은 뷰컨 객체
+            return vc
         }
         
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {

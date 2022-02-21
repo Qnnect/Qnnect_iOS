@@ -52,6 +52,9 @@ struct Constants {
     static let myPageProfileImageHeight: CGFloat = 60.0
     static let myPageCornerRadius: CGFloat = 16.0
     
+    //EditNameTextField
+    static let EditNameTextFieldHorizontalMargin: CGFloat = 20.0
+    
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
@@ -62,6 +65,9 @@ struct Constants {
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
+    static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")
+    
+    // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
         $0.width = 18.0
     }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-protocol MyPageCoordinator: Coordinator { }
+protocol MyPageCoordinator: Coordinator {
+    func showEditProfileScene()
+}
 
 final class DefaultMyPageCoordinator: MyPageCoordinator {
     
@@ -24,5 +26,11 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         let vc = MyPageViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
-    
+        
+    func showEditProfileScene() {
+        print("call")
+        let viewModel = EditProfileViewModel()
+        let vc = EditProfileViewController.create(with: viewModel)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
 }

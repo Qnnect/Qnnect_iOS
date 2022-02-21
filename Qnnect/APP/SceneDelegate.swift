@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .p_brown
         
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.backgroundColor = .systemBackground
+        self.window?.backgroundColor = .p_ivory
         self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
     }

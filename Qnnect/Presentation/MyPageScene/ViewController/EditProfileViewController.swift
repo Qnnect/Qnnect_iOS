@@ -1,0 +1,100 @@
+//
+//  EditProfileViewController.swift
+//  Qnnect
+//
+//  Created by 재영신 on 2022/02/21.
+//
+
+import UIKit
+import SnapKit
+import Then
+
+final class EditProfileViewController: BaseViewController {
+    
+    private var viewModel: EditProfileViewModel!
+    
+    private let profileImageView = EditProfileImageView().then {
+        $0.setImage(image: Constants.profileDefaultImage)
+    }
+    
+    private let navigationTitleView = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.textColor = .GRAY01
+        $0.text = "프로필 수정"
+    }
+    
+    private let nameTextField = NameTextField().then {
+        $0.textField.text = "아아메"
+    }
+    
+    static func create(with viewModel: EditProfileViewModel) -> EditProfileViewController {
+        let vc = EditProfileViewController()
+        vc.viewModel = viewModel
+        return vc
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func configureUI() {
+        
+        [
+            self.profileImageView,
+            self.nameTextField
+        ].forEach {
+            self.view.addSubview($0)
+        }
+        
+        //navigation
+        self.navigationItem.titleView = self.navigationTitleView
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Constants.backBarButtonImage,
+            style: .plain,
+            target: self,
+            action: #selector(didTapBackButton)
+        )
+        
+        self.view.backgroundColor = .p_ivory
+        
+        self.profileImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(108.0)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(48.0)
+        }
+        
+        self.nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.profileImageView.snp.bottom).offset(24.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
+        }
+        
+    }
+    
+    override func bind() {
+        
+    }
+}
+
+private extension EditProfileViewController {
+    @objc func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+import SwiftUI
+struct EditProfileViewController_Priviews: PreviewProvider {
+    static var previews: some View {
+        Contatiner().edgesIgnoringSafeArea(.all)
+    }
+    struct Contatiner: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController {
+            let vc = EditProfileViewController.create(with: EditProfileViewModel()) //보고 싶은 뷰컨 객체
+            return vc
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+            
+        }
+        typealias UIViewControllerType =  UIViewController
+    }
+}

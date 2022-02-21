@@ -30,6 +30,7 @@ final class AppCoordinator: Coordinator {
             //TODO: 로그인 화면 으로
             let loginCoordinator = DefaultAuthCoordinator(navigationController: self.navigationController)
             self.childCoordinators.append(loginCoordinator)
+            loginCoordinator.parentCoordinator = self
             loginCoordinator.start()
         }
     }
