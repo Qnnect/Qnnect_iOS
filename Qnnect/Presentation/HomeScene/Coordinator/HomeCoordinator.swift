@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeCoordinator: Coordinator {
-    
+    func showAddGroupBottomSheet()
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -21,9 +21,17 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     }
     
     func start() {
-        let viewModel = HomeViewModel()
+        let viewModel = HomeViewModel(coordinator: self)
         let vc = HomeViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
+    func showAddGroupBottomSheet() {
+        let viewModel = AddGroupViewModel(
+            coordinator: self,
+            addGroupUseCase: DefaultAddGroupUseCase()
+        )
+        let vc = AddGroupViewController.create(with: viewModel)
+        self.navigationController.present(vc, animated: true, completion: nil)
+    }
 }

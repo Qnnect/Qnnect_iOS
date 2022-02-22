@@ -9,7 +9,9 @@ import UIKit
 import Then
 
 final class QuestionCycleSlider: UIView {
-    private(set) var slider = CustomCycleSlider()
+    private(set) var slider = CustomCycleSlider().then {
+        $0.maximumValue = 100.0
+    }
     
     
     override init(frame: CGRect) {
@@ -69,6 +71,22 @@ final class CustomCycleSlider: UISlider {
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-       
+        guard let cycleCount = cycleCount else {
+            return
+        }
+        
+        let dis = self.maximumValue / Float(cycleCount - 1) / 2.0
+        var start: Float = -1 * dis
+        var end = dis
+        for _ in 0 ..< cycleCount {
+            if start ..< end ~= self.value {
+                print(start,end)
+                self.value = end - dis
+                break
+            } else {
+                start = end
+                end += (dis * 2)
+            }
+        }
     }
 }

@@ -172,6 +172,15 @@ final class AddGroupViewController: BaseViewController {
         $0.backgroundColor = .GRAY04
         $0.layer.cornerRadius = 10.0
     }
+    
+    private var viewModel: AddGroupViewModel!
+    
+    static func create(with viewModel: AddGroupViewModel) -> AddGroupViewController{
+        let vc = AddGroupViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.viewModel = viewModel
+        return vc
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -276,16 +285,34 @@ final class AddGroupViewController: BaseViewController {
         self.nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.inputTitleLabel)
             make.height.equalTo(Constants.bottomButtonHeight)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(60.0)
-            make.top.greaterThanOrEqualTo(self.questionCycleSlider.snp.bottom).offset(16.0)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
         }
     }
     
     override func bind() {
+        
+        //diaryColorCollectionView 그리기
         Observable.just(DiaryColorType.allCases)
             .bind(to: self.diaryColorCollectionView.rx.items(cellIdentifier: DiaryColorCell.identifier, cellType: DiaryColorCell.self)) { indexPath, type, cell in
                 cell.update(with: type)
             }
+            .disposed(by: self.disposeBag)
+        
+        let value = self.questionCycleSlider.slider.rx.methodInvoked(#selector(self.questionCycleSlider.slider.endTracking(_:with:)))
+            .withLatestFrom(self.questionCycleSlider.slider.rx.value)
+        
+        let input = AddGroupViewModel.Input(
+            sliderValue: value
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.questionCycle
+            .drive(
+                onNext: {
+                    print($0)
+                }
+            )
             .disposed(by: self.disposeBag)
     }
     

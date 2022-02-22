@@ -135,7 +135,29 @@ final class HomeViewController: BaseViewController {
         let questions = Observable.just(dummyQuestions)
         let groups = Observable.just(dummyGroups)
         
+        let didTapAddGroupButton = PublishSubject<Void>()
         let datasource = self.createDataSource()
+        datasource.configureSupplementaryView = { datasource, collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeSectionHeaderView.identifier, for: indexPath) as? HomeSectionHeaderView else  {
+                    fatalError("Could not dequeReusableView")
+                }
+                let title = datasource.sectionModels[indexPath.section].title
+                print("Section Title!!!\(title)")
+                headerView.update(with: title)
+                return headerView
+            } else if indexPath.section == 2{
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
+                    fatalError("Could not dequeReusableView")
+                }
+                footerView.addGroupButton.rx.tap
+                    .subscribe(didTapAddGroupButton.asObserver())
+                    .disposed(by: self.disposeBag)
+                return footerView
+            }
+            return UICollectionReusableView()
+        }
+        
         Observable.combineLatest(user, questions, groups)
             .map { user,questions,groups -> [HomeSectionModel]in
                 let titleItem = HomeSectionItem.titleSectionItem(user: user)
@@ -149,6 +171,15 @@ final class HomeViewController: BaseViewController {
             }.bind(to: self.homeCollectionView.rx.items(dataSource: datasource))
             .disposed(by: self.disposeBag)
         
+        let input = HomeViewModel.Input(
+            didTapAddGroupButton: didTapAddGroupButton.asObservable()
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showAddGroupBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -267,29 +298,6 @@ private extension HomeViewController {
                 cell.update(with: group)
                 return cell
             }
-        }configureSupplementaryView: { datasource, collectionView, kind, indexPath in
-            if kind == UICollectionView.elementKindSectionHeader {
-                guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeSectionHeaderView.identifier, for: indexPath) as? HomeSectionHeaderView else  {
-                    fatalError("Could not dequeReusableView")
-                }
-                let title = datasource.sectionModels[indexPath.section].title
-                print("Section Title!!!\(title)")
-                headerView.update(with: title)
-                return headerView
-            } else if indexPath.section == 2{
-                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
-                    fatalError("Could not dequeReusableView")
-                }
-                footerView.addGroupButton.rx.tap
-                    .subscribe(onNext: { [weak self]_ in
-                        let vc = AddGroupViewController()
-                        vc.modalPresentationStyle = .overCurrentContext
-                        self?.present(vc, animated: false)
-                    }
-                    ).disposed(by: self.disposeBag)
-                return footerView
-            }
-            return UICollectionReusableView()
         }
     }
 }
