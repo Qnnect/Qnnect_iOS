@@ -134,13 +134,33 @@ final class StoreViewController: BaseViewController {
     }
     
     override func bind() {
-
+        let selectedTagTitle = PublishSubject<String>()
+        selectedTagTitle.subscribe(onNext: {
+            print("tap!!!\($0)")
+        })
+            .disposed(by: self.disposeBag)
+        let dataSource = self.createDataSource()
+        dataSource.configureSupplementaryView = { dataSource, collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: StoreSectionHeaderView.identifier,
+                    for: indexPath
+                ) as! StoreSectionHeaderView
+                view.tagCollectionView.delegate = self
+                view.tagCollectionView.rx.tappedTagTitle.subscribe(selectedTagTitle.asObserver())
+                    .disposed(by: self.disposeBag)
+                return view
+            } else {
+                return UICollectionReusableView()
+            }
+        }
         Observable.just(dummyData)
             .map {
                  ingredients -> [StoreSectionModel] in
                 let items = ingredients.map { StoreSectionItem.IngredientSectionItem(Ingredient: $0)}
                 return [StoreSectionModel.IngredientSection(title: "", items: items)]
-            }.bind(to: self.ingredientCollectionView.rx.items(dataSource: self.createDataSource()))
+            }.bind(to: self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
     }
 }
@@ -168,18 +188,6 @@ private extension StoreViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCell.identifier, for: indexPath) as! IngredientCell
                 cell.update(with: ingredient)
                 return cell
-            }
-        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
-            if kind == UICollectionView.elementKindSectionHeader {
-                let view = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: StoreSectionHeaderView.identifier,
-                    for: indexPath
-                ) as! StoreSectionHeaderView
-                view.tagCollectionView.delegate = self
-                return view
-            } else {
-                return UICollectionReusableView()
             }
         }
     }

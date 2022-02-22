@@ -41,8 +41,11 @@ final class AddGroupViewController: BaseViewController {
         }
     }
     
+}
+
+private extension AddGroupViewController {
     // 바텀 시트 표출 애니메이션
-    private func showBottomSheet() {
+    func showBottomSheet() {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(self.view.frame.height - 86.0)
@@ -52,7 +55,7 @@ final class AddGroupViewController: BaseViewController {
     }
     
     // 바텀 시트 사라지는 애니메이션
-    private func hideBottomSheetAndGoBack() {
+    func hideBottomSheetAndGoBack() {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(0)
@@ -64,33 +67,18 @@ final class AddGroupViewController: BaseViewController {
             }
         }
     }
-    private func setupGestureRecognizer() {
-           // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
-//           let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
-//           dimmedBackView.addGestureRecognizer(dimmedTap)
-//           dimmedBackView.isUserInteractionEnabled = true
-           
-           // 스와이프 했을 때, 바텀시트를 내리는 swipeGesture
-           let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(panGesture))
-           swipeGesture.direction = .down
-           view.addGestureRecognizer(swipeGesture)
-       }
-
-
-       // UITapGestureRecognizer 연결 함수 부분
-       @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
-           hideBottomSheetAndGoBack()
-       }
-       
-       // UISwipeGestureRecognizer 연결 함수 부분
-       @objc func panGesture(_ recognizer: UISwipeGestureRecognizer) {
-           if recognizer.state == .ended {
-               switch recognizer.direction {
-               case .down:
-                   hideBottomSheetAndGoBack()
-               default:
-                   break
-               }
-           }
-       }
+    func setupGestureRecognizer() {
+        // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
+        let tapGestue = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
+        self.view.addGestureRecognizer(tapGestue)
+        self.view.isUserInteractionEnabled = true
+        
+        
+    }
+    
+    
+    // UITapGestureRecognizer 연결 함수 부분
+    @objc func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+        hideBottomSheetAndGoBack()
+    }
 }
