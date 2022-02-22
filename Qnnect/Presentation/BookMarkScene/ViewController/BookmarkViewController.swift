@@ -22,6 +22,7 @@ final class BookmarkViewController: BaseViewController {
     }
     
     private let tagCollectionView = CustomTagCollectionView().then {
+        $0.addWholeTag()
         $0.update(with: [
             "신사고 4인방",
             "스윗 마이홈",
@@ -70,7 +71,6 @@ final class BookmarkViewController: BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
         }
         
-        self.tagCollectionView.delegate = self
         self.tagCollectionView.updateTag(at: 0, selected: true)
         
         self.bookmarkTableView.snp.makeConstraints { make in
@@ -93,19 +93,7 @@ final class BookmarkViewController: BaseViewController {
     }
 }
 
-extension BookmarkViewController: TTGTextTagCollectionViewDelegate {
-    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
-        let tags = textTagCollectionView?.allTags() ?? []
-        tags.enumerated().forEach {
-            if $0.element != tag, $0.element.selected {
-                textTagCollectionView?.updateTag(at: UInt($0.offset), selected: false)
-            }
-        }
-    }
-    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, canTap tag: TTGTextTag!, at index: UInt) -> Bool {
-        return !tag.selected
-    }
-}
+
 
 import SwiftUI
 struct BookmarkViewController_Priviews: PreviewProvider {

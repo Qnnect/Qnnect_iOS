@@ -13,6 +13,7 @@ final class StoreSectionHeaderView: UICollectionReusableView {
     static let identifier = "StoreSectionHeaderView"
     
     private(set) var tagCollectionView = CustomTagCollectionView().then {
+        $0.addWholeTag()
         $0.update(with: IngredientType.allCases.map { $0.title })
     }
     

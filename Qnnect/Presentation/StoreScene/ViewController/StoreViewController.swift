@@ -147,7 +147,6 @@ final class StoreViewController: BaseViewController {
                     withReuseIdentifier: StoreSectionHeaderView.identifier,
                     for: indexPath
                 ) as! StoreSectionHeaderView
-                view.tagCollectionView.delegate = self
                 view.tagCollectionView.rx.tappedTagTitle.subscribe(selectedTagTitle.asObserver())
                     .disposed(by: self.disposeBag)
                 return view
@@ -162,21 +161,6 @@ final class StoreViewController: BaseViewController {
                 return [StoreSectionModel.IngredientSection(title: "", items: items)]
             }.bind(to: self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
-    }
-}
-
-
-extension StoreViewController: TTGTextTagCollectionViewDelegate {
-    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
-        let tags = textTagCollectionView?.allTags() ?? []
-        tags.enumerated().forEach {
-            if $0.element != tag, $0.element.selected {
-                textTagCollectionView?.updateTag(at: UInt($0.offset), selected: false)
-            }
-        }
-    }
-    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, canTap tag: TTGTextTag!, at index: UInt) -> Bool {
-        return !tag.selected
     }
 }
 

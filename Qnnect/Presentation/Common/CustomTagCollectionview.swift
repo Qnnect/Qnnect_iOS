@@ -10,6 +10,21 @@ import TTGTags
 
 final class CustomTagCollectionView: TTGTextTagCollectionView {
     
+    private let style = TTGTextTagStyle().then {
+        $0.backgroundColor = .p_ivory ?? .white
+        $0.cornerRadius = Constants.tagCornerRadius
+        $0.borderWidth = Constants.tagBorderWidth
+        $0.borderColor = .tagBorderColor ?? .black
+        $0.extraSpace = Constants.tagExtraSpace
+    }
+    
+    private let selectedStyle = TTGTextTagStyle().then {
+        $0.backgroundColor = .p_brown ?? .brown
+        $0.cornerRadius = Constants.tagCornerRadius
+        $0.extraSpace = Constants.tagExtraSpace
+    }
+    
+    private let tagFont: UIFont = .IM_Hyemin(.bold, size: 14.0)
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -24,37 +39,20 @@ final class CustomTagCollectionView: TTGTextTagCollectionView {
         self.scrollDirection = .horizontal
         self.showsHorizontalScrollIndicator = false
         self.selectionLimit = 2
-        
-        
+        self.delegate = self
     }
     
     func update(with titles: [String]) {
-        let extraSpace = Constants.tagExtraSpace
-        let style = TTGTextTagStyle()
-        style.backgroundColor = .p_ivory ?? .white
-        style.cornerRadius = Constants.tagCornerRadius
-        style.borderWidth = Constants.tagBorderWidth
-        style.borderColor = .tagBorderColor ?? .black
-        style.extraSpace = extraSpace
-        
-        let selectedStyle = TTGTextTagStyle()
-        selectedStyle.backgroundColor = .p_brown ?? .brown
-        selectedStyle.cornerRadius = Constants.tagCornerRadius
-        selectedStyle.extraSpace = extraSpace
-       
-        self.addWholeTag(style: style, selectedStyle: selectedStyle)
-        
         titles.forEach{
             title in
-            let font = UIFont.IM_Hyemin(.bold, size: 12.0)
             let tagContents = TTGTextTagStringContent(
                 text: title,
-                textFont: font,
+                textFont: tagFont,
                 textColor: .GRAY01
             )
             let selectedTagContents = TTGTextTagStringContent(
                 text: title,
-                textFont: font,
+                textFont: tagFont,
                 textColor: .p_ivory
             )
             let tag = TTGTextTag(
@@ -65,5 +63,39 @@ final class CustomTagCollectionView: TTGTextTagCollectionView {
             )
             self.addTag(tag)
         }
+    }
+    
+    func addWholeTag() {
+        let tagContents = TTGTextTagStringContent(
+            text: "전체",
+            textFont: tagFont,
+            textColor: .blackLabel
+        )
+        let selectedTagContents = TTGTextTagStringContent(
+            text: "전체",
+            textFont: tagFont,
+            textColor: .p_ivory
+        )
+        let tag = TTGTextTag(
+            content: tagContents,
+            style: style,
+            selectedContent: selectedTagContents,
+            selectedStyle: selectedStyle
+        )
+        self.addTag(tag)
+    }
+}
+
+extension CustomTagCollectionView: TTGTextTagCollectionViewDelegate {
+    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
+        let tags = textTagCollectionView?.allTags() ?? []
+        tags.enumerated().forEach {
+            if $0.element != tag, $0.element.selected {
+                textTagCollectionView?.updateTag(at: UInt($0.offset), selected: false)
+            }
+        }
+    }
+    func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, canTap tag: TTGTextTag!, at index: UInt) -> Bool {
+        return !tag.selected
     }
 }
