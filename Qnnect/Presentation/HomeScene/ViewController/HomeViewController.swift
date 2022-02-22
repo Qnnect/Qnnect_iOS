@@ -284,7 +284,8 @@ private extension HomeViewController {
                     .subscribe(onNext: { [weak self]_ in
                         let vc = AddGroupViewController()
                         vc.modalPresentationStyle = .overCurrentContext
-                        self?.present(vc, animated: false)}
+                        self?.present(vc, animated: false)
+                    }
                     ).disposed(by: self.disposeBag)
                 return footerView
             }

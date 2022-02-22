@@ -13,15 +13,6 @@ import Kingfisher
 
 final class SetProfileViewController: BaseViewController {
     
-//    private let profileImageView = UIImageView().then {
-//        $0.contentMode = .scaleAspectFill
-//        $0.layer.cornerRadius = Constants.profileImageHeight / 2.0
-//        $0.clipsToBounds = true
-//    }
-//
-//    private let cameraImageView = UIImageView().then {
-//        $0.image = Constants.cameraImage
-//    }
     private let editProfileImageView = EditProfileImageView()
     
     private let welcomeLabel = UILabel().then {

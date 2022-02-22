@@ -17,6 +17,9 @@
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
 		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
 		AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45938B27BD23D1009737B2 /* PointBar.swift */; };
+		AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */; };
+		AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */; };
+		AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
 		AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */; };
 		AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE59A5FE27AEAE890081A0FA /* Assets.xcassets */; };
@@ -36,12 +39,12 @@
 		AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964D427BCDDF300BF2A80 /* MyPageCoordinator.swift */; };
 		AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */; };
 		AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */; };
-		AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */; };
 		AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */; };
 		AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */; };
 		AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */; };
 		AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */; };
 		AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA4A027BE08F100FA2154 /* Bookmark.swift */; };
+		AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -102,6 +105,9 @@
 		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
 		AE45938B27BD23D1009737B2 /* PointBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBar.swift; sourceTree = "<group>"; };
+		AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomViewController.swift; sourceTree = "<group>"; };
+		AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomViewModel.swift; sourceTree = "<group>"; };
+		AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCell.swift; sourceTree = "<group>"; };
 		AE59A5F227AEAE890081A0FA /* Qnnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qnnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59A5F527AEAE890081A0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,12 +129,12 @@
 		AE6964D427BCDDF300BF2A80 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
-		AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TTGTextTagCollectionView+.swift"; sourceTree = "<group>"; };
 		AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+TTGTextTagCollectionView.swift"; sourceTree = "<group>"; };
 		AE6FA49927BDFD8E00FA2154 /* StoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUseCase.swift; sourceTree = "<group>"; };
 		AE6FA49B27BE03AD00FA2154 /* CustomTagCollectionview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagCollectionview.swift; sourceTree = "<group>"; };
 		AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		AE6FA4A027BE08F100FA2154 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCycleSlider.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -247,6 +253,7 @@
 		AE176A2F27B24F380040A4C3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AE538ED527C4681E00670FAF /* GroupScene */,
 				AECC134427BA494C006866FC /* MyPageScene */,
 				AECC134327BA4939006866FC /* StoreScene */,
 				AECC134227BA4930006866FC /* BookMarkScene */,
@@ -382,7 +389,6 @@
 				AE0D336527B4C37400C4B955 /* Observable+.swift */,
 				AECC130E27B9EAC2006866FC /* UIFont+.swift */,
 				AECC131C27BA1266006866FC /* UIColor+.swift */,
-				AE6FA49427BDD8C000FA2154 /* TTGTextTagCollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -393,6 +399,47 @@
 				AE0D336327B4B01600C4B955 /* APP.swift */,
 			);
 			path = Secret;
+			sourceTree = "<group>";
+		};
+		AE538ED527C4681E00670FAF /* GroupScene */ = {
+			isa = PBXGroup;
+			children = (
+				AE538ED927C4689A00670FAF /* View */,
+				AE538ED827C4689400670FAF /* ViewController */,
+				AE538ED727C4689100670FAF /* Coordinator */,
+				AE538ED627C4688C00670FAF /* ViewModel */,
+			);
+			path = GroupScene;
+			sourceTree = "<group>";
+		};
+		AE538ED627C4688C00670FAF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AE538ED727C4689100670FAF /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AE538ED827C4689400670FAF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AE538ED927C4689A00670FAF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AE59A5E927AEAE890081A0FA = {
@@ -548,6 +595,8 @@
 				AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */,
 				AE04FC5F27BF763F00229B96 /* AddGroupCell.swift */,
 				AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */,
+				AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */,
+				AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -797,6 +846,7 @@
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
+				AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
 				AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */,
@@ -813,17 +863,18 @@
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
+				AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
 				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
+				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
-				AE6FA49527BDD8C000FA2154 /* TTGTextTagCollectionView+.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
@@ -855,6 +906,7 @@
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
+				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
 				AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */,
