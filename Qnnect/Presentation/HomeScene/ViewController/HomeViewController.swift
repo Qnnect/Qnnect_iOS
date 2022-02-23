@@ -253,7 +253,7 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+        item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
@@ -262,7 +262,7 @@ private extension HomeViewController {
         section.boundarySupplementaryItems = [createSectionHeader(),createTodayQuestionSectionFooter()]
         section.orthogonalScrollingBehavior = .groupPagingCentered
         section.visibleItemsInvalidationHandler = self.visibleItemsInvalidationHandler
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 20.0, trailing: 15.0)
+        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 15.0, trailing: 15.0)
         
         return section
     }
@@ -271,15 +271,15 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10, leading: 9.0, bottom: 10, trailing: 9.0)
+        item.contentInsets = .init(top: 0, leading: 9.0, bottom: 10, trailing: 9.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.5))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.45))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [createSectionHeader(),createSectionFooter()]
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 0, trailing: 5.0)
+        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 16.0, trailing: 5.0)
         
         return section
     }
@@ -288,7 +288,7 @@ private extension HomeViewController {
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         
         //Section Header 사이즈
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60.0))
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(46.0))
         
         //Section Header layout
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
@@ -298,7 +298,7 @@ private extension HomeViewController {
     
     private func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         //Section Footer 사이즈
-        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(70.0))
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(36.0))
         
         //Section Footer layout
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
@@ -308,7 +308,7 @@ private extension HomeViewController {
     
     private func createTodayQuestionSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         //Section Footer 사이즈
-        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30.0))
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(6.0))
         
         //Section Footer layout
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
@@ -350,8 +350,11 @@ struct HomeViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = HomeViewController() //보고 싶은 뷰컨 객체
-            return UINavigationController(rootViewController: vc)
+            let vc = HomeViewController.create(
+                with: HomeViewModel(
+                    coordinator: DefaultHomeCoordinator(navigationController: UINavigationController())
+                )) //보고 싶은 뷰컨 객체
+            return vc
         }
         
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
