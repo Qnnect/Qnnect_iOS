@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeCoordinator: Coordinator {
     func showAddGroupBottomSheet()
+    func showSelectDrinkBottomSheet()
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -32,6 +33,13 @@ final class DefaultHomeCoordinator: HomeCoordinator {
             addGroupUseCase: DefaultAddGroupUseCase()
         )
         let vc = AddGroupViewController.create(with: viewModel)
+        self.navigationController.present(vc, animated: false, completion: nil)
+    }
+    
+    func showSelectDrinkBottomSheet() {
+        let vc = SelectDrinkViewController.create()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.navigationController.presentedViewController?.dismiss(animated: false, completion: nil)
         self.navigationController.present(vc, animated: false, completion: nil)
     }
 }

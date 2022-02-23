@@ -321,7 +321,9 @@ final class AddGroupViewController: BaseViewController {
                 },
             selectedDiaryColor: self.diaryColorCollectionView.rx.itemSelected
                 .do(onNext: self.changeDiaryColorCellState(_:))
-                .map(self.getSelectedDiaryColorString)
+                .map(self.getSelectedDiaryColorString),
+            didTapNextButton: self.nextButton.rx.tap
+                .mapToVoid()
         )
         
         
@@ -342,6 +344,10 @@ final class AddGroupViewController: BaseViewController {
         output.isCompleted
             .emit(onNext: self.setEnablementNextButton(_:))
             .disposed(by: self.disposeBag)
+        
+        output.showSelectDrinkBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
     }
     
 }
@@ -351,7 +357,7 @@ private extension AddGroupViewController {
     func showBottomSheet() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
-                make.height.equalTo(self.view.frame.height - 86.0)
+                make.height.equalTo(self.view.frame.height - 121.0)
             }
             self.view.layoutIfNeeded()
         }, completion: nil)

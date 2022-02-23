@@ -61,6 +61,8 @@
 		AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */; };
 		AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */; };
 		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
+		AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */; };
+		AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */; };
 		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
@@ -155,6 +157,8 @@
 		AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
+		AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkViewController.swift; sourceTree = "<group>"; };
+		AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */,
 				AEEF362F27C351BB00D0A127 /* EditProfileImageView.swift */,
 				AEEF363127C3579300D0A127 /* NameTextField.swift */,
+				AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -665,6 +670,7 @@
 			children = (
 				AECC133B27BA41DD006866FC /* HomeViewController.swift */,
 				AEF0FD3D27C3CB0200721D86 /* AddGroupViewController.swift */,
+				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -880,6 +886,7 @@
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyGroupCell.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
+				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
@@ -932,6 +939,7 @@
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
+				AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
 				AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */,
 				AEEF362C27C3501200D0A127 /* EditProfileViewController.swift in Sources */,

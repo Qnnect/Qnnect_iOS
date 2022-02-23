@@ -58,6 +58,8 @@ struct Constants {
     //EditNameTextField
     static let EditNameTextFieldHorizontalMargin: CGFloat = 20.0
     
+    //bottom Sheet
+    static let bottomSheetHorizontalMargin: CGFloat = 20.0
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
