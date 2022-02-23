@@ -10,11 +10,19 @@ import SnapKit
 import Then
 
 final class DiaryColorCell: UICollectionViewCell {
+    
     static let identifier = "DiaryColorCell"
     
     private(set) var type: DiaryColorType?
+    
     private let colorImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+    }
+    
+    var isChosen: Bool = false {
+        didSet {
+            self.colorImageView.image = isChosen ? type?.selectedImage : type?.defaultImage
+        }
     }
     
     override init(frame: CGRect) {
@@ -39,4 +47,5 @@ final class DiaryColorCell: UICollectionViewCell {
         self.type = type
         self.colorImageView.image = type.defaultImage
     }
+
 }

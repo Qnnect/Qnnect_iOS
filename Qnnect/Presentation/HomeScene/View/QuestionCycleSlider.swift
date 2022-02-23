@@ -33,8 +33,8 @@ final class QuestionCycleSlider: UIView {
     }
     
     func update(with cycles: [QuestionCycle]) {
+        self.slider.cycles = cycles
         let count = cycles.count
-        self.slider.cycleCount = count
         let path = UIBezierPath()
         path.lineWidth = 1.0
         cycles.enumerated().forEach {
@@ -64,24 +64,28 @@ final class QuestionCycleSlider: UIView {
 }
 
 final class CustomCycleSlider: UISlider {
-    var cycleCount: Int?
+    
+    var cycles: [QuestionCycle]?
+    var selectedIndex = 0
+    
     override func trackRect(forBounds bound: CGRect) -> CGRect {
         //Here, set track frame
         return CGRect(origin: bound.origin, size: CGSize(width: bound.width, height: 11.0))
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        guard let cycleCount = cycleCount else {
+        guard let cycles = cycles else {
             return
         }
-        
+        let cycleCount = cycles.count
         let dis = self.maximumValue / Float(cycleCount - 1) / 2.0
         var start: Float = -1 * dis
         var end = dis
-        for _ in 0 ..< cycleCount {
+        for i in 0 ..< cycleCount {
             if start ..< end ~= self.value {
                 print(start,end)
                 self.value = end - dis
+                selectedIndex = i
                 break
             } else {
                 start = end

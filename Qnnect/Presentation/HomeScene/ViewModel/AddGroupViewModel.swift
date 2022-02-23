@@ -12,11 +12,16 @@ import RxCocoa
 final class AddGroupViewModel: ViewModelType {
     
     struct Input {
-        let sliderValue: Observable<Float>
+        let selectedCycle: Observable<Int>
+        let inputName: Observable<String>
+        let selectedGroupType: Observable<GroupType>
+        let selectedDiaryColor: Observable<String>
     }
     
     struct Output {
         let questionCycle: Driver<Int>
+        let isValidName: Signal<Bool>
+        let isCompleted: Signal<Bool>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -31,11 +36,23 @@ final class AddGroupViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let questionCycle = input.sliderValue
-            .map(self.addGroupUseCase.adjustQuestionCycle(_:))
+        let questionCycle = input.selectedCycle
         
+        let isValidName = input.inputName
+            .map(self.addGroupUseCase.isValidName(_:))
+        
+        let isCompleted = Observable.combineLatest(
+            isValidName,
+            input.selectedGroupType,
+            input.selectedDiaryColor
+        ).map {
+            $0.0
+        }
+    
         return Output(
-            questionCycle: questionCycle.asDriver(onErrorJustReturn: 0)
+            questionCycle: questionCycle.asDriver(onErrorJustReturn: 0),
+            isValidName: isValidName.asSignal(onErrorJustReturn: false),
+            isCompleted: isCompleted.asSignal(onErrorJustReturn: false)
         )
     }
 }

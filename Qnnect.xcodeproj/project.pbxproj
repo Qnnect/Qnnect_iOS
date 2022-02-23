@@ -59,6 +59,8 @@
 		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
 		AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */; };
 		AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */; };
+		AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */; };
+		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
 		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
@@ -151,6 +153,8 @@
 		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
+		AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 				AE0D336527B4C37400C4B955 /* Observable+.swift */,
 				AECC130E27B9EAC2006866FC /* UIFont+.swift */,
 				AECC131C27BA1266006866FC /* UIColor+.swift */,
+				AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */,
 				AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */,
 				AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */,
+				AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -907,6 +913,7 @@
 				AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
+				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddGroupViewController.swift in Sources */,
@@ -919,6 +926,7 @@
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
+				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,

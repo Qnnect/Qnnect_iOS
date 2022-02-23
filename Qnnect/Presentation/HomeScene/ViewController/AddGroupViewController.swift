@@ -28,7 +28,7 @@ enum GroupType: CaseIterable {
     }
 }
 
-enum DiaryColorType: CaseIterable{
+enum DiaryColorType: String, CaseIterable{
     case orange
     case pink
     case yellow
@@ -99,6 +99,7 @@ final class AddGroupViewController: BaseViewController {
     private let dimmendView = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.5)
     }
+    
     private let dismissButton = UIButton().then {
         $0.setImage(Constants.xmarkImage, for: .normal)
         $0.addTarget(self, action: #selector(didTapDismissButton), for: .touchUpInside)
@@ -138,7 +139,7 @@ final class AddGroupViewController: BaseViewController {
         $0.text = "다이어리 색상을 골라주세요"
     }
     
-    private let diaryColorCollectionView = UICollectionView(
+    private let diaryColorCollectionView = DiaryColorCollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
     ).then {
@@ -150,6 +151,7 @@ final class AddGroupViewController: BaseViewController {
             DiaryColorCell.self,
             forCellWithReuseIdentifier: DiaryColorCell.identifier
         )
+        $0.allowsSelection = true
         $0.backgroundColor = .p_ivory
     }
     
@@ -299,11 +301,29 @@ final class AddGroupViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         let value = self.questionCycleSlider.slider.rx.methodInvoked(#selector(self.questionCycleSlider.slider.endTracking(_:with:)))
-            .withLatestFrom(self.questionCycleSlider.slider.rx.value)
+            .map{ [weak self] _ -> Int in
+                guard let self = self else { return 0 }
+                return self.questionCycleSlider.slider.selectedIndex
+            }
         
         let input = AddGroupViewModel.Input(
-            sliderValue: value
+            selectedCycle: value,
+            inputName: self.inputTitleTextField.rx.text.orEmpty
+                .asObservable(),
+            selectedGroupType: self.groupTypeTagCollectionView.rx.tappedTagTitle
+                .map { title -> GroupType in
+                    for type in GroupType.allCases {
+                        if type.title == title {
+                            return type
+                        }
+                    }
+                    return .friend // default or thrash
+                },
+            selectedDiaryColor: self.diaryColorCollectionView.rx.itemSelected
+                .do(onNext: self.changeDiaryColorCellState(_:))
+                .map(self.getSelectedDiaryColorString)
         )
+        
         
         let output = self.viewModel.transform(from: input)
         
@@ -313,6 +333,14 @@ final class AddGroupViewController: BaseViewController {
                     print($0)
                 }
             )
+            .disposed(by: self.disposeBag)
+        
+        output.isValidName
+            .emit(onNext: { print($0)})
+            .disposed(by: self.disposeBag)
+        
+        output.isCompleted
+            .emit(onNext: self.setEnablementNextButton(_:))
             .disposed(by: self.disposeBag)
     }
     
@@ -369,6 +397,30 @@ private extension AddGroupViewController {
     
     @objc func didTapDismissButton() {
         hideBottomSheetAndGoBack()
+    }
+    
+    //선택된 DiaryColor Cell 선택 상태 변경
+    func changeDiaryColorCellState(_ indexPath: IndexPath) {
+        let cell = self.diaryColorCollectionView.cellForItem(at: indexPath) as! DiaryColorCell
+        cell.isChosen.toggle()
+        self.diaryColorCollectionView.lastSelectedCell?.isChosen.toggle()
+        self.diaryColorCollectionView.lastSelectedCell = cell
+    }
+
+    
+    /// 선택된 DiaryColorCell 의 색상 이름을 조회하는 함수
+    /// - Parameter indexPath: 선택된 Cell의 IndexPath
+    /// - Returns: 색상 이름
+    func getSelectedDiaryColorString(_ indexPath: IndexPath) -> String {
+        let cell = self.diaryColorCollectionView.cellForItem(at: indexPath) as! DiaryColorCell
+        return cell.type?.rawValue ?? DiaryColorType.brown.rawValue
+    }
+    
+    /// 모든 항목의 유효한 입력이 왼료됐는 지 에 따라 button 활성화 결정
+    /// - Parameter isCompleted: 모든 항목 유요한 항목 입력 했는 지 여부
+    func setEnablementNextButton(_ isCompleted: Bool) {
+        self.nextButton.isEnabled = isCompleted
+        self.nextButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
     }
 }
 

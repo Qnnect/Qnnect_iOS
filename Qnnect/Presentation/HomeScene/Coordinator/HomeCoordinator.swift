@@ -32,6 +32,6 @@ final class DefaultHomeCoordinator: HomeCoordinator {
             addGroupUseCase: DefaultAddGroupUseCase()
         )
         let vc = AddGroupViewController.create(with: viewModel)
-        self.navigationController.present(vc, animated: true, completion: nil)
+        self.navigationController.present(vc, animated: false, completion: nil)
     }
 }

@@ -9,18 +9,12 @@ import Foundation
 
 protocol AddGroupUseCase: AnyObject {
     func isValidName(_ name: String) -> Bool
-    func adjustQuestionCycle(_ value: Float) -> Int
 }
 
 final class DefaultAddGroupUseCase: AddGroupUseCase {
 
     func isValidName(_ name: String) -> Bool {
-        
-        return false
-    }
-    
-    func adjustQuestionCycle(_ value: Float) -> Int {
-        
-        return 0
+        let length = name.count
+        return length >= 2 && length <= 10 ? true : false
     }
 }
