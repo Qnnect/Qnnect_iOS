@@ -37,12 +37,16 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     
     func showOnboarding() {
         print("showOnboarding call!!")
-        let vc = OnboardingViewController.create()
+        let viewModel = OnboardingViewModel(coordinator: self)
+        let vc = OnboardingViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
     func showLogin() {
-        
+        let coordinator = DefaultAuthCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.parentCoordinator?.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self.parentCoordinator
     }
     
     func showMain() {

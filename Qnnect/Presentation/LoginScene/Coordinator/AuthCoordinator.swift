@@ -29,6 +29,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         let authManager = AuthManager(vc: vc)
         viewModel.authManager = authManager
         self.navigationController.pushViewController(vc, animated: true)
+        self.navigationController.viewControllers.removeAll { $0 != vc }
     }
     
     func showInputNameVC() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class OnboardingViewController: UIPageViewController{
     private var pages = [UIViewController]()
@@ -27,12 +28,17 @@ final class OnboardingViewController: UIPageViewController{
         $0.layer.cornerRadius = Constants.bottomButtonCornerRadius
     }
     
-    static func create() -> OnboardingViewController {
+    private var viewModel: OnboardingViewModel!
+    
+    private let disposeBag = DisposeBag()
+    
+    static func create(with viewModel: OnboardingViewModel) -> OnboardingViewController {
         let vc = OnboardingViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal,
             options: nil
         )
+        vc.viewModel = viewModel
         return vc
     }
     override func viewDidLoad() {
@@ -57,10 +63,23 @@ final class OnboardingViewController: UIPageViewController{
             make.height.equalTo(0)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(24.0)
         }
+        
+        self.bind()
     }
 }
 
 private extension OnboardingViewController {
+    
+    func bind() {
+        
+        let input = OnboardingViewModel.Input(didTapStartButton: self.startButton.rx.tap.mapToVoid())
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showLoingScene
+            .emit()
+            .disposed(by: self.disposeBag)
+    }
     func makePageVC() {
         let vc1 = PageItemViewController()
         vc1.textLabel.text = "Test1"
@@ -107,7 +126,7 @@ private extension OnboardingViewController {
         //        UIView.animate(withDuration: 0.5) {
         //            self.view.layoutIfNeeded()
         //        }
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.curveEaseInOut],animations: {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [.curveEaseInOut],animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
         

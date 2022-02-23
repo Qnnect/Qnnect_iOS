@@ -66,6 +66,7 @@
 		AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCFC27C661E8002BDBCD /* LoginRequestDTO.swift */; };
 		AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCFE27C6659F002BDBCD /* LoginResponseDTO.swift */; };
 		AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */; };
+		AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */; };
 		AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */; };
 		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
 		AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */; };
@@ -179,6 +180,7 @@
 		AEB8FCFC27C661E8002BDBCD /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
 		AEB8FCFE27C6659F002BDBCD /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
 		AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginInfo.swift; sourceTree = "<group>"; };
+		AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
 		AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkViewController.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 			isa = PBXGroup;
 			children = (
 				AEBC9ECD27C6294A0070399A /* SplashViewModel.swift */,
+				AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
+				AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
 				AEB8FCF627C65C6C002BDBCD /* AuthNetworkManager.swift in Sources */,
