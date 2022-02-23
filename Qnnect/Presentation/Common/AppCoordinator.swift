@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    var childCoordinators: [Coordinator] = []
+    var childCoordinators: [Coordinator] = [] {
+        didSet {
+            print("AppCoordinator ChildCoordinators : \(childCoordinators)")
+        }
+    }
     
     var navigationController: UINavigationController
     

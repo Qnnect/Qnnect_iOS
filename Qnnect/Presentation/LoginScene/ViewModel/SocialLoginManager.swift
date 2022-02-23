@@ -12,33 +12,23 @@ import RxKakaoSDKUser
 import KakaoSDKUser
 import RxCocoa
 
-final class AuthManager: NSObject {
+final class SocialLoginManager: NSObject {
     private let vc: UIViewController!
     
     init(vc: UIViewController) {
         self.vc = vc
     }
     
-    func kakaoLogin() -> Observable<Bool>{
+    func kakaoLogin() -> Observable<String>{
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
             return UserApi.shared.rx.loginWithKakaoTalk()
-                .map{
-                    token -> Bool in
-                    //TODO: token 서버로 전송,로컬 저장
-                    print("KaKao Token : \(token)")
-                    return true
-                }.catchAndReturn(false)
+                .map { $0.accessToken }
             
         } else {
             return UserApi.shared.rx.loginWithKakaoAccount(prompts: [.Login])
-                .map{
-                    token -> Bool in
-                    //TODO: token 서버로 전송,로컬 저장
-                    print("KaKao Token : \(token)")
-                    return true
-                }.catchAndReturn(false)
-            
+                .map{ $0.accessToken }
+                .debug()
         }
     }
     
@@ -64,7 +54,7 @@ final class AuthManager: NSObject {
     }
 }
 
-extension AuthManager: ASAuthorizationControllerDelegate {
+extension SocialLoginManager: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         //TODO: didCompleteWithAuthorization 후 동작
@@ -89,7 +79,7 @@ extension AuthManager: ASAuthorizationControllerDelegate {
     }
 }
 
-extension AuthManager: ASAuthorizationControllerPresentationContextProviding {
+extension SocialLoginManager: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.vc.view.window ?? UIWindow()
     }

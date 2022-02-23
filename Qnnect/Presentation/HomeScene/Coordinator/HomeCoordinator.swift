@@ -25,6 +25,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         let viewModel = HomeViewModel(coordinator: self)
         let vc = HomeViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
+        self.navigationController.viewControllers.removeAll { $0 != vc }
     }
     
     func showAddGroupBottomSheet() {

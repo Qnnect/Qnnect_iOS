@@ -67,11 +67,14 @@ final class LoginViewController: BaseViewController {
         )
         
         let output = self.viewModel.transform(from: input)
-        output.isSuccess.emit(
-            onNext: {
-                print($0)
-            }
-        ).disposed(by: self.disposeBag)
+        
+        output.showHomeScene
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+//        output.showTermsScene
+//            .emit()
+//            .disposed(by: self.disposeBag)
     }
     
 }

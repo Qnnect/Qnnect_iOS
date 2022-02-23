@@ -81,7 +81,7 @@
 		AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ED827C62E9E0070399A /* AuthRepository.swift */; };
 		AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */; };
 		AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */; };
-		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
+		AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* SocialLoginManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
 		AECC131127B9ED12006866FC /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECC131027B9ED12006866FC /* Roboto-Regular.ttf */; };
@@ -195,7 +195,7 @@
 		AEBC9ED827C62E9E0070399A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		AECC12FA27B9DCCD006866FC /* SocialLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		AECC131027B9ED12006866FC /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				AE0B2BF527BC80AC00E164BC /* Term.swift */,
-				AECC12FA27B9DCCD006866FC /* AuthManager.swift */,
+				AECC12FA27B9DCCD006866FC /* SocialLoginManager.swift */,
 				AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */,
 				AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */,
 				AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */,
@@ -1030,7 +1030,7 @@
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
-				AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */,
+				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,

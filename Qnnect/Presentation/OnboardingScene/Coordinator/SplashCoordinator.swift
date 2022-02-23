@@ -47,6 +47,7 @@ final class DefaultSplashCoordinator: SplashCoordinator {
         coordinator.start()
         self.parentCoordinator?.childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self.parentCoordinator
+        self.parentCoordinator?.childCoordinators.removeAll(where: { $0 === self })
     }
     
     func showMain() {

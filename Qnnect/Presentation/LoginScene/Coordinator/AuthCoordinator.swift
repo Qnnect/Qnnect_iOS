@@ -24,10 +24,18 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     }
     
     func start() {
-        let viewModel = LoginViewModel(coordinator: self)
+        let repository = DefaultAuthRepository(
+            localStorage: DefaultUserDefaultManager(),
+            authNetworkManager: AuthNetworkManager()
+        )
+        let useCase = DefaultLoginUseCase(authRepository: repository)
+        let viewModel = LoginViewModel(
+            coordinator: self,
+            loginUseCase: useCase
+        )
         let vc = LoginViewController.create(with: viewModel)
-        let authManager = AuthManager(vc: vc)
-        viewModel.authManager = authManager
+        let socialLoginManager = SocialLoginManager(vc: vc)
+        viewModel.socialLoginManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
         self.navigationController.viewControllers.removeAll { $0 != vc }
     }
@@ -39,8 +47,8 @@ final class DefaultAuthCoordinator: AuthCoordinator {
             signUpUseCase: signUpUseCase
         )
         let vc = SetProfileViewController.create(with: viewModel)
-        let authManager = AuthManager(vc: vc)
-        viewModel.authManager = authManager
+        let socialLoginManager = SocialLoginManager(vc: vc)
+        viewModel.authManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
     }
     
@@ -58,8 +66,6 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         //TODO: 탭바 세팅, push HomeVC
         let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
         self.parentCoordinator?.childCoordinators.append(coordinator)
-        print("show Main",self.parentCoordinator)
-        self.navigationController.popToRootViewController(animated: false)
         coordinator.start()
         self.parentCoordinator?.childCoordinators.remove(at: 0)
     }

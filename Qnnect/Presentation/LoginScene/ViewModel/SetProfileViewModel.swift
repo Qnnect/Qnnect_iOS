@@ -26,7 +26,7 @@ final class SetProfileViewModel: ViewModelType {
     
     private weak var coordinator: AuthCoordinator?
     private let signUpUseCase: SignUpUseCase
-    var authManager: AuthManager!
+    var authManager: SocialLoginManager!
     
     init(
         coordinator: AuthCoordinator,
