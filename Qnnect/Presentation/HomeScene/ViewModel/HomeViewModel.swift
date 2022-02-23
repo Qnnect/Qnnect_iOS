@@ -13,10 +13,12 @@ final class HomeViewModel: ViewModelType {
     
     struct Input {
         let didTapAddGroupButton: Observable<Void>
+        let curQuestionPage: Observable<Int>
     }
     
     struct Output {
         let showAddGroupBottomSheet: Signal<Void>
+        let curQuestionPage: Driver<Int>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -31,7 +33,8 @@ final class HomeViewModel: ViewModelType {
                 self?.coordinator?.showAddGroupBottomSheet()
             })
         return Output(
-            showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
+            curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0)
         )
     }
 }

@@ -35,6 +35,11 @@ final class HomeViewController: BaseViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: HomeSectionFooterView.identifier
         )
+        $0.register(
+            TodayQuestionFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: TodayQuestionFooterView.identifier
+        )
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .p_ivory
@@ -55,6 +60,11 @@ final class HomeViewController: BaseViewController {
         $0.backgroundColor = .p_ivory
     }
     
+    @objc dynamic func visibleItemsInvalidationHandler(
+        items: [NSCollectionLayoutVisibleItem],
+        contentOffset: CGPoint,
+        environment: NSCollectionLayoutEnvironment
+    ) { }
     
     static func create(with viewModel: HomeViewModel) -> HomeViewController {
         let vc = HomeViewController()
@@ -74,7 +84,7 @@ final class HomeViewController: BaseViewController {
         ].forEach {
             self.pointView.addSubview($0)
         }
-    
+        
         [
             self.homeCollectionView
         ].forEach {
@@ -136,6 +146,8 @@ final class HomeViewController: BaseViewController {
         let groups = Observable.just(dummyGroups)
         
         let didTapAddGroupButton = PublishSubject<Void>()
+        let curQuestionPage = PublishSubject<Int>()
+        
         let datasource = self.createDataSource()
         datasource.configureSupplementaryView = { datasource, collectionView, kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
@@ -143,15 +155,24 @@ final class HomeViewController: BaseViewController {
                     fatalError("Could not dequeReusableView")
                 }
                 let title = datasource.sectionModels[indexPath.section].title
-                print("Section Title!!!\(title)")
                 headerView.update(with: title)
                 return headerView
-            } else if indexPath.section == 2{
+            } else if indexPath.section == 2 {
                 guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
                     fatalError("Could not dequeReusableView")
                 }
                 footerView.addGroupButton.rx.tap
                     .subscribe(didTapAddGroupButton.asObserver())
+                    .disposed(by: self.disposeBag)
+                return footerView
+            } else if indexPath.section == 1 {
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: TodayQuestionFooterView.identifier, for: indexPath) as? TodayQuestionFooterView else {
+                    fatalError("Could not dequeReusableView")
+                }
+                
+                footerView.pageControl.numberOfPages = datasource.sectionModels[1].items.count
+                curQuestionPage
+                    .subscribe(footerView.pageControl.rx.currentPage)
                     .disposed(by: self.disposeBag)
                 return footerView
             }
@@ -172,13 +193,24 @@ final class HomeViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         let input = HomeViewModel.Input(
-            didTapAddGroupButton: didTapAddGroupButton.asObservable()
+            didTapAddGroupButton: didTapAddGroupButton.asObservable(),
+            curQuestionPage:   self.rx.methodInvoked(#selector( HomeViewController.visibleItemsInvalidationHandler))
+                .map{
+                    param -> Int in
+                    let point = param[1] as? CGPoint ?? .zero
+                    let env = param[2] as! NSCollectionLayoutEnvironment
+                    return Int(max(0, round(point.x / env.container.contentSize.width)))
+                }
         )
         
         let output = self.viewModel.transform(from: input)
         
         output.showAddGroupBottomSheet
             .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.curQuestionPage
+            .drive(curQuestionPage)
             .disposed(by: self.disposeBag)
     }
 }
@@ -227,8 +259,9 @@ private extension HomeViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [createSectionHeader()]
+        section.boundarySupplementaryItems = [createSectionHeader(),createTodayQuestionSectionFooter()]
         section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.visibleItemsInvalidationHandler = self.visibleItemsInvalidationHandler
         section.contentInsets = .init(top: 0, leading: 5.0, bottom: 20.0, trailing: 15.0)
         
         return section
@@ -246,7 +279,6 @@ private extension HomeViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [createSectionHeader(),createSectionFooter()]
-
         section.contentInsets = .init(top: 0, leading: 5.0, bottom: 0, trailing: 5.0)
         
         return section
@@ -273,6 +305,16 @@ private extension HomeViewController {
         
         return sectionFooter
     }
+    
+    private func createTodayQuestionSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        //Section Footer 사이즈
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30.0))
+        
+        //Section Footer layout
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
+        
+        return sectionFooter
+    }
 }
 
 // MARK: - RxDataSources
@@ -291,7 +333,6 @@ private extension HomeViewController {
             case.mygroupSectionItem(group: let group):
                 //TODO: 일단 테스트를 위한 코드 ... 꼭 바꾸자 이 로직
                 if group.name == "마지막" {
-                    print("마지막 !!")
                     return collectionView.dequeueReusableCell(withReuseIdentifier: AddGroupCell.identifier, for: indexPath)
                 }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyGroupCell.identifier, for: indexPath) as! MyGroupCell
@@ -319,3 +360,5 @@ struct HomeViewController_Priviews: PreviewProvider {
         typealias UIViewControllerType =  UIViewController
     }
 }
+
+

@@ -63,6 +63,7 @@
 		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
 		AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */; };
 		AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */; };
+		AEBC9EC127C5F44F0070399A /* TodayQuestionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */; };
 		AECC12FB27B9DCCD006866FC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* AuthManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
@@ -159,6 +160,7 @@
 		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
 		AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkViewController.swift; sourceTree = "<group>"; };
 		AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionFooterView.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 				AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */,
 				AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */,
 				AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */,
+				AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
+				AEBC9EC127C5F44F0070399A /* TodayQuestionFooterView.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
