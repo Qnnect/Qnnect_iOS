@@ -158,7 +158,6 @@ final class AddGroupViewController: BottomSheetViewController {
     
     static func create(with viewModel: AddGroupViewModel) -> AddGroupViewController{
         let vc = AddGroupViewController()
-        vc.modalPresentationStyle = .overCurrentContext
         vc.viewModel = viewModel
         return vc
     }
@@ -189,12 +188,10 @@ final class AddGroupViewController: BottomSheetViewController {
         ].forEach {
             self.bottomSheetView.addSubview($0)
         }
-        
-        self.view.backgroundColor = .black.withAlphaComponent(0.5)
-        
+        //self.view.backgroundColor = .black.withAlphaComponent(0.5)
         self.inputTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dismissButton.snp.bottom).offset(22.0)
-            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.leading.trailing.equalToSuperview().inset(Constants.bottomSheetHorizontalMargin)
         }
         
         self.inputTitleTextField.snp.makeConstraints { make in

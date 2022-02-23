@@ -33,6 +33,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
             addGroupUseCase: DefaultAddGroupUseCase()
         )
         let vc = AddGroupViewController.create(with: viewModel)
+        vc.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(vc, animated: false, completion: nil)
     }
     

@@ -69,7 +69,6 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             make.centerY.equalTo(self.dismissButton)
         }
         
-        self.view.backgroundColor = .black.withAlphaComponent(0.5)
         
         dismissButton.rx.tap
             .mapToVoid()
@@ -78,6 +77,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         
         self.setupGestureRecognizer()
         super.viewDidLoad()
+        self.view.backgroundColor = .black.withAlphaComponent(0.5)
     }
     
     override func viewDidAppear(_ animated: Bool) {
