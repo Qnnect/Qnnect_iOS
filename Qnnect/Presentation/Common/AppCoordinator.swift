@@ -19,7 +19,14 @@ final class AppCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() { }
+    
+    /// Splash Scene Start!!!
+    func start() {
+        let coordinator = DefaultSplashCoordinator(navigationController: self.navigationController)
+        self.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
     
     /// rootViewController 시작 메소드
     /// - Parameter isLogin: 로그인 유무(자동로그인)

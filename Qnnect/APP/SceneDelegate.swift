@@ -23,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootVC.isNavigationBarHidden = true
         self.appCoordinator = AppCoordinator(navigationController: rootVC)
         
-        //TODO: 자동로그인 로직 구현, 테스트를 위해 하드코딩
-        self.appCoordinator.start(isLogin: false)
+        //splash
+        self.appCoordinator.start()
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
         UITabBar.appearance().tintColor = .p_brown

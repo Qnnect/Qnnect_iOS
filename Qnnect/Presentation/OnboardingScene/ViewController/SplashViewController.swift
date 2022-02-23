@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Photos
+import RxSwift
 
 final class SplashViewController: BaseViewController {
     
@@ -18,8 +19,10 @@ final class SplashViewController: BaseViewController {
         $0.textColor = .GRAY01
     }
     
-    static func create() -> SplashViewController {
+    private var viewModel: SplashViewModel!
+    static func create(with viewModel: SplashViewModel) -> SplashViewController {
         let vc = SplashViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -34,30 +37,28 @@ final class SplashViewController: BaseViewController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().multipliedBy(0.7)
         }
-            
+    }
+    
+    override func bind() {
         
-
-        PHPhotoLibrary.requestAuthorization( { status in
-                    switch status{
-                    case .authorized:
-                        print("Album: 권한 허용")
-                    case .denied:
-                        print("Album: 권한 거부")
-                    case .restricted, .notDetermined:
-                        print("Album: 선택하지 않음")
-                    default:
-                        break
-                    }
-        })
-        
-        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        if status == .notDetermined || status == .restricted || status == .denied {
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
+        let didEndSplash = PublishSubject<Void>()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            didEndSplash.onNext(())
         }
+        let input = SplashViewModel.Input(didEndSplash: didEndSplash.asObservable())
         
+        let output = self.viewModel.transform(from: input)
+        
+        output.showLogin
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showMain
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showOnboarding
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }

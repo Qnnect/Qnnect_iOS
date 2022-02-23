@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct LoginRequestDTO: Codable {
+    let accessToken: String
+    let loginType: LoginType
+}
