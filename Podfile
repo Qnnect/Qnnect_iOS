@@ -15,7 +15,7 @@ target 'Qnnect' do
 	pod 'Then'
 	pod 'Firebase/Messaging'
 	pod 'RxKakaoSDK'
-  pod 'Moya'
+  pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxAppState'
   pod "TTGTagCollectionView"
 end

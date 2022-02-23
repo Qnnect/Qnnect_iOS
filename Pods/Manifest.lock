@@ -74,10 +74,11 @@ PODS:
   - KakaoSDKUser (2.8.5):
     - KakaoSDKAuth (= 2.8.5)
   - Kingfisher (7.1.2)
-  - Moya (15.0.0):
-    - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -148,7 +149,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Messaging
   - Kingfisher (~> 7.0)
-  - Moya
+  - Moya/RxSwift (~> 15.0)
   - RxAppState
   - RxCocoa (= 6.5.0)
   - RxDataSources (~> 5.0)
@@ -240,6 +241,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: 3fd0b6de52a224028b002615619644f4d6b67a9d
+PODFILE CHECKSUM: 166b9356407fdf978154a3c81ecff57027c09cc1
 
 COCOAPODS: 1.11.2
