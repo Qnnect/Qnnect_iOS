@@ -86,30 +86,9 @@ enum QuestionCycle: CaseIterable {
     }
 }
 
-final class AddGroupViewController: BaseViewController {
+final class AddGroupViewController: BottomSheetViewController {
     
-    // 바텀 시트 뷰
-    private let bottomSheetView = UIView().then {
-        $0.backgroundColor = .p_ivory
-        $0.layer.cornerRadius = 24.0
-        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        $0.clipsToBounds = true
-    }
     
-    private let dimmendView = UIView().then {
-        $0.backgroundColor = .black.withAlphaComponent(0.5)
-    }
-    
-    private let dismissButton = UIButton().then {
-        $0.setImage(Constants.xmarkImage, for: .normal)
-        $0.addTarget(self, action: #selector(didTapDismissButton), for: .touchUpInside)
-    }
-    
-    private let titleLabel = UILabel().then {
-        $0.font = .IM_Hyemin(.bold, size: 16.0)
-        $0.textColor = .GRAY01
-        $0.text = "그룹추가"
-    }
     
     private let inputTitleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
@@ -186,12 +165,10 @@ final class AddGroupViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.setupGestureRecognizer()
+       
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.showBottomSheet()
         self.drawUnderLine()
         self.questionCycleSlider.update(with: QuestionCycle.allCases)
     }
@@ -199,8 +176,7 @@ final class AddGroupViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.dismissButton,
-            self.titleLabel,
+
             self.inputTitleLabel,
             self.inputTitleTextField,
             self.groupTypeLabel,
@@ -214,32 +190,7 @@ final class AddGroupViewController: BaseViewController {
             self.bottomSheetView.addSubview($0)
         }
         
-        [
-            self.dimmendView,
-            self.bottomSheetView
-        ].forEach {
-            self.view.addSubview($0)
-        }
-        
         self.view.backgroundColor = .black.withAlphaComponent(0.5)
-        
-        self.dimmendView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        self.bottomSheetView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(0)
-        }
-        
-        self.dismissButton.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(8.0)
-            make.width.height.equalTo(48.0)
-        }
-        
-        self.titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(self.dismissButton)
-        }
         
         self.inputTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dismissButton.snp.bottom).offset(22.0)
@@ -353,41 +304,7 @@ final class AddGroupViewController: BaseViewController {
 }
 
 private extension AddGroupViewController {
-    // 바텀 시트 표출 애니메이션
-    func showBottomSheet() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.bottomSheetView.snp.updateConstraints { make in
-                make.height.equalTo(self.view.frame.height - 121.0)
-            }
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    // 바텀 시트 사라지는 애니메이션
-    func hideBottomSheetAndGoBack() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.bottomSheetView.snp.updateConstraints { make in
-                make.height.equalTo(0)
-            }
-            self.view.layoutIfNeeded()
-        }) { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
-            }
-        }
-    }
-    func setupGestureRecognizer() {
-        // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
-        let tapGestue = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
-        self.dimmendView.addGestureRecognizer(tapGestue)
-        self.dimmendView.isUserInteractionEnabled = true
-    }
-    
-    // UITapGestureRecognizer 연결 함수 부분
-    @objc func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
-        hideBottomSheetAndGoBack()
-    }
-    
+
     //textField UnderLine 그리기
     func drawUnderLine() {
         let border = CALayer()
@@ -399,10 +316,6 @@ private extension AddGroupViewController {
         border.borderWidth = 1
         border.backgroundColor = UIColor.black.cgColor
         self.inputTitleTextField.layer.addSublayer(border)
-    }
-    
-    @objc func didTapDismissButton() {
-        hideBottomSheetAndGoBack()
     }
     
     //선택된 DiaryColor Cell 선택 상태 변경
