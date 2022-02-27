@@ -87,7 +87,6 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
     
     // 바텀 시트 표출 애니메이션
     func showBottomSheet() {
-        print("showBottomSheet!!!")
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(self.view.frame.height - 121.0)
@@ -105,10 +104,12 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.view.layoutIfNeeded()
         }) { _ in
             if self.presentingViewController != nil {
+                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
                 self.dismiss(animated: false, completion: nil)
             }
         }
     }
+    
     func setupGestureRecognizer() {
         // 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
         let tapGestue = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
