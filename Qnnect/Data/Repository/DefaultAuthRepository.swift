@@ -6,21 +6,20 @@
 //
 
 import Foundation
-import Moya
 import RxSwift
 import RxCocoa
 
 final class DefaultAuthRepository: AuthRepository {
     
     private let localStorage: UserDefaultManager
-    private let authNetworkManager: AuthNetworkManager
+    private let authNetworkService: AuthNetworkService
     
     init(
         localStorage: UserDefaultManager,
-        authNetworkManager: AuthNetworkManager
+        authNetworkService: AuthNetworkService
     ) {
         self.localStorage = localStorage
-        self.authNetworkManager = authNetworkManager
+        self.authNetworkService = authNetworkService
     }
     
     func fetchIsFirstAccess() -> Bool {
@@ -33,6 +32,6 @@ final class DefaultAuthRepository: AuthRepository {
     
     func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo> {
         let request = LoginRequestDTO(accessToken: accessToken, loginType: type)
-        return self.authNetworkManager.login(request: request).map { $0.toDomain() }
+        return self.authNetworkService.login(request: request).map { $0.toDomain() }
     }
 }
