@@ -38,7 +38,7 @@ final class SocialLoginManager: NSObject {
             .map { $0.kakaoAccount?.profile?.profileImageUrl }
     }
     
-    func appleLogin() -> Observable<Bool> {
+    func appleLogin() -> Observable<String> {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -46,7 +46,6 @@ final class SocialLoginManager: NSObject {
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.rx.delegate.setForwardToDelegate(self, retainDelegate: false)
-        //authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
         

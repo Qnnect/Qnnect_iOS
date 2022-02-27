@@ -34,8 +34,6 @@ final class StoreViewController: BaseViewController {
     
     private var viewModel: StoreViewModel!
     
-
-    
     private let dummyData = [
         Ingredient(type: .iceOrBase, name: "얼음", price: 100),
         Ingredient(type: .iceOrBase, name: "얼음", price: 100),
@@ -59,7 +57,6 @@ final class StoreViewController: BaseViewController {
         Ingredient(type: .topping, name: "휘핑크림", price: 400),
         Ingredient(type: .topping, name: "휘핑크림", price: 500),
         Ingredient(type: .topping, name: "휘핑크림", price: 600)
-        
     ]
     
     
@@ -110,11 +107,6 @@ final class StoreViewController: BaseViewController {
         
         self.view.backgroundColor = .p_ivory
         
-        let barAppearance = self.navigationController?.navigationBar.standardAppearance
-        barAppearance?.shadowColor = UIColor.black.withAlphaComponent(0.08)
-        barAppearance?.backgroundColor = .p_ivory
-        self.navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
-        self.navigationController?.navigationBar.compactAppearance = barAppearance
         
         self.navigationItem.leftBarButtonItems =
             [

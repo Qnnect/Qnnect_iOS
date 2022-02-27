@@ -17,8 +17,7 @@ final class LoginViewModel: ViewModelType {
     }
     
     struct Output {
-        let showHomeScene: Signal<Void>
-       // let showTermsScene: Signal<Void>
+        let showNextScene: Signal<Void>
     }
     
     var socialLoginManager: SocialLoginManager!
@@ -40,28 +39,20 @@ final class LoginViewModel: ViewModelType {
         let kakaoLogin = input.didTapKakaoButton
             .flatMap(self.socialLoginManager.kakaoLogin)
             .flatMap(self.kakaoLogin(_:))
-            .do(onNext: {
-                print("test\($0)")
-            })
-                let a = kakaoLogin
-            .map(self.isExistedUser(_:))
-                .do(onNext: {
-                    [weak self] in
-                    $0 ? self?.showHomeScene() : self?.showTermsScene()
-                })
-                .mapToVoid()
         
-    
+        let appleLogin = input.didTapAppleButton
+            .flatMap(self.socialLoginManager.appleLogin)
+            .flatMap(self.appleLogin(_:))
+
+        
+        let isSuccess = Observable.merge(kakaoLogin,appleLogin)
+            .map(self.isExistedUser(_:))
+            .do(onNext: self.showNextScene)
+            .mapToVoid()
                 
-//        let appleLoginSuccess = input.didTapAppleButton
-//            .compactMap(self.authManager.appleLogin)
-//            .flatMap{ $0 }
-//            .filter{ $0 }
-//            .mapToVoid()
                 
         return Output(
-            showHomeScene: a.asSignal(onErrorSignalWith: .empty())
-           // showTermsScene: notSetedUser.asSignal(onErrorSignalWith: .empty())
+            showNextScene: isSuccess.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
@@ -71,11 +62,18 @@ private extension LoginViewModel {
         return self.loginUseCase.login(accessToken: accessToken, type: .kakao)
     }
     
+    func appleLogin(_ accessToken: String) -> Observable<UserLoginInfo> {
+        return self.loginUseCase.login(accessToken: accessToken, type: .apple)
+    }
+    
     func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
         print((!userLoginInfo.isNewMember && userLoginInfo.userSettingDone))
         return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
     }
     
+    func showNextScene(isExisted: Bool) {
+        isExisted ? self.showHomeScene() : self.showTermsScene()
+    }
     func showHomeScene() {
         self.coordinator?.showMain()
     }
