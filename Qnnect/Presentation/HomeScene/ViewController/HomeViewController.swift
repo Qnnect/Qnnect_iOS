@@ -103,6 +103,7 @@ final class HomeViewController: BaseViewController {
             Constants.navigationLeftPadding,
             UIBarButtonItem(customView: self.pointView)
         ]
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .black
         self.navigationController?.navigationBar.barTintColor = self.view.backgroundColor

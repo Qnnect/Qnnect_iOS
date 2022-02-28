@@ -19,9 +19,14 @@ class BaseViewController: UIViewController {
         let barAppearance = self.navigationController?.navigationBar.standardAppearance
         barAppearance?.shadowColor = UIColor.black.withAlphaComponent(0.08)
         barAppearance?.backgroundColor = .p_ivory
+        barAppearance?.setBackIndicatorImage(Constants.backBarButtonImage, transitionMaskImage: Constants.backBarButtonImage)
         self.navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
         self.navigationController?.navigationBar.compactAppearance = barAppearance
         
+        let backBarButton = UIBarButtonItem()
+        backBarButton.title = ""
+        self.navigationItem.backBarButtonItem = backBarButton
+
         self.configureUI()
         self.bind()
     }
@@ -33,8 +38,12 @@ class BaseViewController: UIViewController {
     func bind() {
         
     }
- 
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.view.endEditing(true)
+        self.view.endEditing(true)
+    }
+    
+    @objc func pop() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

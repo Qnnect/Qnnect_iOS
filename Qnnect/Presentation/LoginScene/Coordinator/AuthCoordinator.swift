@@ -64,6 +64,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     
     func showMain() {
         //TODO: 탭바 세팅, push HomeVC
+        self.navigationController.isNavigationBarHidden = true
         let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
         self.parentCoordinator?.childCoordinators.append(coordinator)
         coordinator.start()

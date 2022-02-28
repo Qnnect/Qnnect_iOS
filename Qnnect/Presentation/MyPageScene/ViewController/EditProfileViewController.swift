@@ -59,14 +59,7 @@ final class EditProfileViewController: BaseViewController {
         
         //navigation
         self.navigationItem.titleView = self.navigationTitleView
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Constants.backBarButtonImage,
-            style: .plain,
-            target: self,
-            action: #selector(didTapBackButton)
-        )
         
-
         self.view.backgroundColor = .p_ivory
         
         self.profileImageView.snp.makeConstraints { make in
@@ -110,9 +103,9 @@ final class EditProfileViewController: BaseViewController {
                     self?.view.layoutIfNeeded()
                 }
             })
-            .emit(to: self.completionButton.rx.setEnabled)
-            .disposed(by: self.disposeBag)
-    }
+                .emit(to: self.completionButton.rx.setEnabled)
+                .disposed(by: self.disposeBag)
+                }
 }
 
 private extension EditProfileViewController {

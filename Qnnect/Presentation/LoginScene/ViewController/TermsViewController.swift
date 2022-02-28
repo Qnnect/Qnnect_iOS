@@ -46,6 +46,17 @@ final class TermsViewController: BaseViewController {
         $0.isEnabled = false
     }
     
+    private let backButton = UIButton().then {
+        $0.setImage(Constants.backBarButtonImage, for: .normal)
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = .init(top: 0, leading: Constants.leftImageInset.left, bottom: 0, trailing: 0)
+            $0.configuration = config
+        } else {
+            $0.imageEdgeInsets = Constants.leftImageInset
+        }
+        
+    }
     private var viewModel: TermsViewModel!
     
     static func create(with viewModel: TermsViewModel) -> TermsViewController {
@@ -57,6 +68,7 @@ final class TermsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     
     override func configureUI() {
         
@@ -77,7 +89,11 @@ final class TermsViewController: BaseViewController {
         ].forEach {
             self.agreementStackView.addArrangedSubview($0)
         }
+            
         
+        self.backButton.snp.makeConstraints { make in
+            make.width.height.equalTo(48.0)
+        }
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(21.0)
             make.top.equalToSuperview().inset(194.0)
