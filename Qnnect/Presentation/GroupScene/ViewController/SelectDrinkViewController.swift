@@ -60,7 +60,6 @@ final class SelectDrinkViewController: BottomSheetViewController {
             self.bottomSheetView.addSubview($0)
         }
         
-        //self.view.backgroundColor = .black.withAlphaComponent(0.5)
         
         self.mainLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dismissButton.snp.bottom).offset(16.0)

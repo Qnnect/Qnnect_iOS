@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class AddGroupViewModel: ViewModelType {
+final class AddCafeViewModel: ViewModelType {
     
     struct Input {
         let selectedCycle: Observable<Int>
@@ -23,7 +23,7 @@ final class AddGroupViewModel: ViewModelType {
         let questionCycle: Driver<Int>
         let isValidName: Signal<Bool>
         let isCompleted: Signal<Bool>
-        let showSelectDrinkBottomSheet: Signal<Void>
+        let showGroupScene: Signal<Void>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -51,17 +51,20 @@ final class AddGroupViewModel: ViewModelType {
             $0.0
         }
         
-        let showSelectDrinkBottomSheet = input.didTapNextButton
-            .do(onNext: {
-                [weak self] _ in
-                self?.coordinator?.showSelectDrinkBottomSheet()
-            })
+        let showGroupScene = input.didTapNextButton
+            .do(onNext: self.showGroupScene)
+        
         return Output(
             questionCycle: questionCycle.asDriver(onErrorJustReturn: 0),
             isValidName: isValidName.asSignal(onErrorJustReturn: false),
             isCompleted: isCompleted.asSignal(onErrorJustReturn: false),
-            showSelectDrinkBottomSheet: showSelectDrinkBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showGroupScene: showGroupScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
 
+private extension AddCafeViewModel {
+    func showGroupScene() {
+        self.coordinator?.showGroupScene()
+    }
+}

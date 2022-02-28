@@ -45,13 +45,14 @@
 		AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */; };
 		AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA4A027BE08F100FA2154 /* Bookmark.swift */; };
 		AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */; };
-		AE717B5D27C4BCC0008278D3 /* AddGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5C27C4BCC0008278D3 /* AddGroupViewModel.swift */; };
+		AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */; };
 		AE717B6127C4C278008278D3 /* AddGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B6027C4C278008278D3 /* AddGroupUseCase.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
 		AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */; };
 		AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */; };
+		AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -161,13 +162,14 @@
 		AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
 		AE6FA4A027BE08F100FA2154 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCycleSlider.swift; sourceTree = "<group>"; };
-		AE717B5C27C4BCC0008278D3 /* AddGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewModel.swift; sourceTree = "<group>"; };
+		AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewModel.swift; sourceTree = "<group>"; };
 		AE717B6027C4C278008278D3 /* AddGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupUseCase.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
 		AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewController.swift; sourceTree = "<group>"; };
 		AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewModel.swift; sourceTree = "<group>"; };
+		AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoordinator.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		AE538ED727C4689100670FAF /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */,
+				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -760,7 +764,7 @@
 			isa = PBXGroup;
 			children = (
 				AECC133F27BA45C0006866FC /* HomeViewModel.swift */,
-				AE717B5C27C4BCC0008278D3 /* AddGroupViewModel.swift */,
+				AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -770,7 +774,6 @@
 			children = (
 				AECC133B27BA41DD006866FC /* HomeViewController.swift */,
 				AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */,
-				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -981,7 +984,7 @@
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
-				AE717B5D27C4BCC0008278D3 /* AddGroupViewModel.swift in Sources */,
+				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
 				AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
@@ -1043,6 +1046,7 @@
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
+				AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,

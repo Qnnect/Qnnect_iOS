@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class GroupRoomViewController: BaseViewController {
     
@@ -29,5 +30,14 @@ final class GroupRoomViewController: BaseViewController {
     
     override func bind() {
         
+        let input = GroupRoomViewModel.Input(
+            viewDidLoad: Observable.just(Void())
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.roomInfo
+            .drive()
+            .disposed(by: self.disposeBag)
     }
 }

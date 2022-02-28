@@ -154,9 +154,9 @@ final class AddCafeViewController: BottomSheetViewController {
         $0.layer.cornerRadius = 10.0
     }
     
-    private var viewModel: AddGroupViewModel!
+    private var viewModel: AddCafeViewModel!
     
-    static func create(with viewModel: AddGroupViewModel) -> AddCafeViewController{
+    static func create(with viewModel: AddCafeViewModel) -> AddCafeViewController{
         let vc = AddCafeViewController()
         vc.viewModel = viewModel
         return vc
@@ -170,12 +170,6 @@ final class AddCafeViewController: BottomSheetViewController {
         self.drawUnderLine()
         self.questionCycleSlider.update(with: QuestionCycle.allCases)
         
-//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-//            self.nextButton.snp.updateConstraints { make in
-//                make.height.equalTo(Constants.bottomButtonHeight)
-//            }
-//            self.view.layoutIfNeeded()
-//        }, completion: nil)
     }
     
     override func configureUI() {
@@ -261,7 +255,7 @@ final class AddCafeViewController: BottomSheetViewController {
                 return self.questionCycleSlider.slider.selectedIndex
             }
         
-        let input = AddGroupViewModel.Input(
+        let input = AddCafeViewModel.Input(
             selectedCycle: value,
             inputName: self.inputTitleTextField.rx.text.orEmpty
                 .asObservable(),
@@ -300,8 +294,8 @@ final class AddCafeViewController: BottomSheetViewController {
             .emit(onNext: self.setEnablementNextButton(_:))
             .disposed(by: self.disposeBag)
         
-        output.showSelectDrinkBottomSheet
-            .emit()
+        output.showGroupScene
+            .emit(onNext: self.dismiss)
             .disposed(by: self.disposeBag)
     }
     
@@ -344,6 +338,10 @@ private extension AddCafeViewController {
     func setEnablementNextButton(_ isCompleted: Bool) {
         self.nextButton.isEnabled = isCompleted
         self.nextButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
+    }
+    
+    func dismiss() {
+        self.dismiss(animated: false, completion: nil)
     }
 }
 
