@@ -15,7 +15,7 @@ struct NetworkLoggerPlugin: PluginType {
             return
         }
 
-        let url = httpRequest.url
+        let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
 
         /// HTTP Request Summary

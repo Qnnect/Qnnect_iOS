@@ -26,7 +26,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     func start() {
         let repository = DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
-            authNetworkManager: AuthNetworkManager()
+            authNetworkService: AuthNetworkService()
         )
         let useCase = DefaultLoginUseCase(authRepository: repository)
         let viewModel = LoginViewModel(

@@ -42,4 +42,5 @@ extension UIColor {
     class var profileImageBorder: UIColor? { return UIColor(named: "profileImageBorder") }
     class var secondaryBorder: UIColor? { return UIColor(named: "secondaryBorder") }
     class var myPageButtonBackgroud: UIColor? { return UIColor(named: "myPageButtonBackgroud") }
+    class var shadowBackground: UIColor? { return UIColor(named: "shadowBackground") }
 }

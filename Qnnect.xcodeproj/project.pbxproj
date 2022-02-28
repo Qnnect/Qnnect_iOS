@@ -50,6 +50,8 @@
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
+		AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */; };
+		AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyGroupCell.swift */; };
@@ -164,6 +166,8 @@
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
+		AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewController.swift; sourceTree = "<group>"; };
+		AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewModel.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupCell.swift; sourceTree = "<group>"; };
@@ -575,6 +579,7 @@
 		AE6964BB27BCD8F300BF2A80 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */,
 				AE6964CA27BCDB2800BF2A80 /* StoreViewController.swift */,
 			);
 			path = ViewController;
@@ -584,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6964CC27BCDB9000BF2A80 /* StoreViewModel.swift */,
+				AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1032,6 +1038,7 @@
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
+				AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
@@ -1040,6 +1047,7 @@
 				AEF0FD3E27C3CB0200721D86 /* AddGroupViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
+				AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */,
 				AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */,
 				AE04FC6027BF763F00229B96 /* AddGroupCell.swift in Sources */,
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,

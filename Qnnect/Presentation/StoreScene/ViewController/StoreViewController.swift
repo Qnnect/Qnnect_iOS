@@ -153,6 +153,24 @@ final class StoreViewController: BaseViewController {
                 return [StoreSectionModel.IngredientSection(title: "", items: items)]
             }.bind(to: self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
+        
+        
+        let input = StoreViewModel.Input(
+            didTapIngredient: self.ingredientCollectionView.rx.modelSelected(StoreSectionItem.self)
+                .map{ item -> Ingredient in
+                    switch item {
+                    case .IngredientSectionItem(Ingredient: let ingredient):
+                        return ingredient
+                    }
+                }
+                .asObservable()
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showIngredientBuyAlert
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
