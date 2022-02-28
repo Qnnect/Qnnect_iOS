@@ -109,9 +109,7 @@ final class EditProfileViewController: BaseViewController {
 }
 
 private extension EditProfileViewController {
-    @objc func didTapBackButton() {
-        self.navigationController?.popViewController(animated: true)
-    }
+   
 }
 
 // MARK: - 최대 글자 수 이상 입력 제한
