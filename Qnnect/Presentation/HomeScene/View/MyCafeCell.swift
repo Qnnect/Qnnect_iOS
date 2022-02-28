@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class MyGroupCell: UICollectionViewCell {
+final class MyCafeCell: UICollectionViewCell {
     static let identifier = "MyGroupCell"
     
     private let groupNameLabel = UILabel().then {

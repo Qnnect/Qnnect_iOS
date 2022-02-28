@@ -23,13 +23,13 @@ final class HomeViewController: BaseViewController {
     ).then {
         $0.register(TitleCell.self, forCellWithReuseIdentifier: TitleCell.identifier)
         $0.register(TodayQuestionCell.self, forCellWithReuseIdentifier: TodayQuestionCell.identifier)
-        $0.register(MyGroupCell.self, forCellWithReuseIdentifier: MyGroupCell.identifier)
+        $0.register(MyCafeCell.self, forCellWithReuseIdentifier: MyCafeCell.identifier)
         $0.register(
             HomeSectionHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: HomeSectionHeaderView.identifier
         )
-        $0.register(AddGroupCell.self, forCellWithReuseIdentifier: AddGroupCell.identifier)
+        $0.register(AddCafeCell.self, forCellWithReuseIdentifier: AddCafeCell.identifier)
         $0.register(
             HomeSectionFooterView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -193,7 +193,7 @@ final class HomeViewController: BaseViewController {
                 return [
                     HomeSectionModel.titleSection(title: "", items: [titleItem]),
                     HomeSectionModel.todayQuestionSection(title: "오늘의 질문", items: questionItem),
-                    HomeSectionModel.mygroupSection(title: "나의 그룹", items: groupItem)
+                    HomeSectionModel.mygroupSection(title: "나의 카페", items: groupItem)
                 ]
             }.bind(to: self.homeCollectionView.rx.items(dataSource: datasource))
             .disposed(by: self.disposeBag)
@@ -339,9 +339,9 @@ private extension HomeViewController {
             case.mygroupSectionItem(group: let group):
                 //TODO: 일단 테스트를 위한 코드 ... 꼭 바꾸자 이 로직
                 if group.name == "마지막" {
-                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddGroupCell.identifier, for: indexPath)
+                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddCafeCell.identifier, for: indexPath)
                 }
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyGroupCell.identifier, for: indexPath) as! MyGroupCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeCell.identifier, for: indexPath) as! MyCafeCell
                 cell.update(with: group)
                 return cell
             }

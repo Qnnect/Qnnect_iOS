@@ -34,7 +34,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
     let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
-        $0.text = "그룹추가"
+        $0.text = "카페 만들기"
     }
     override func viewDidLoad() {
         [

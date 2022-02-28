@@ -33,7 +33,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
             coordinator: self,
             addGroupUseCase: DefaultAddGroupUseCase()
         )
-        let vc = AddGroupViewController.create(with: viewModel)
+        let vc = AddCafeViewController.create(with: viewModel)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(vc, animated: false, completion: nil)
     }

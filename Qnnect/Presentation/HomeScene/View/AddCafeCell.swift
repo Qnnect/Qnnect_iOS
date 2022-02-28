@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class AddGroupCell: UICollectionViewCell {
+final class AddCafeCell: UICollectionViewCell {
     static let identifier = "AddGroupCell"
     
     private let addGroupIcon = UIImageView(image: Constants.groupPlusImage).then {

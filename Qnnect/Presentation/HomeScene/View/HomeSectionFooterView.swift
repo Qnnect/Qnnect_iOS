@@ -17,7 +17,7 @@ final class HomeSectionFooterView: UICollectionReusableView {
         $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
         $0.layer.cornerRadius = 18.0
-        $0.setTitle("그룹 추가하기", for: .normal)
+        $0.setTitle("카페 만들기", for: .normal)
         $0.setTitleColor(.GRAY03, for: .normal)
     }
     

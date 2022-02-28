@@ -86,7 +86,7 @@ enum QuestionCycle: CaseIterable {
     }
 }
 
-final class AddGroupViewController: BottomSheetViewController {
+final class AddCafeViewController: BottomSheetViewController {
     
     
     
@@ -156,8 +156,8 @@ final class AddGroupViewController: BottomSheetViewController {
     
     private var viewModel: AddGroupViewModel!
     
-    static func create(with viewModel: AddGroupViewModel) -> AddGroupViewController{
-        let vc = AddGroupViewController()
+    static func create(with viewModel: AddGroupViewModel) -> AddCafeViewController{
+        let vc = AddCafeViewController()
         vc.viewModel = viewModel
         return vc
     }
@@ -307,7 +307,7 @@ final class AddGroupViewController: BottomSheetViewController {
     
 }
 
-private extension AddGroupViewController {
+private extension AddCafeViewController {
 
     //textField UnderLine 그리기
     func drawUnderLine() {
@@ -355,7 +355,7 @@ struct AddGroupViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = AddGroupViewController() //보고 싶은 뷰컨 객체
+            let vc = AddCafeViewController() //보고 싶은 뷰컨 객체
             return UINavigationController(rootViewController: vc)
         }
         
