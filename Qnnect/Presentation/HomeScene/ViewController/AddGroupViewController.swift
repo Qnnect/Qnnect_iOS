@@ -170,12 +170,12 @@ final class AddGroupViewController: BottomSheetViewController {
         self.drawUnderLine()
         self.questionCycleSlider.update(with: QuestionCycle.allCases)
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.nextButton.snp.updateConstraints { make in
-                make.height.equalTo(Constants.bottomButtonHeight)
-            }
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+//            self.nextButton.snp.updateConstraints { make in
+//                make.height.equalTo(Constants.bottomButtonHeight)
+//            }
+//            self.view.layoutIfNeeded()
+//        }, completion: nil)
     }
     
     override func configureUI() {
@@ -241,8 +241,8 @@ final class AddGroupViewController: BottomSheetViewController {
         
         self.nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.inputTitleLabel)
-            make.height.equalTo(0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
+            make.height.equalTo(Constants.bottomButtonHeight)
+            make.top.equalTo(self.questionCycleSlider.snp.bottom).offset(69.0)
         }
     }
     
