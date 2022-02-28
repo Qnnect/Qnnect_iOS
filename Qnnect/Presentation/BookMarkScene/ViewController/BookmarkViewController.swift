@@ -21,6 +21,8 @@ final class BookmarkViewController: BaseViewController {
         $0.text = "북마크"
     }
     
+    private let headerView = UIView()
+    
     private let tagCollectionView = CustomTagCollectionView().then {
         $0.addWholeTag()
         $0.update(with: [
@@ -33,7 +35,7 @@ final class BookmarkViewController: BaseViewController {
         ])
     }
     
-    private let bookmarkTableView = UITableView().then {
+    private let bookmarkTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
         $0.backgroundColor = .p_ivory
     }
@@ -50,13 +52,7 @@ final class BookmarkViewController: BaseViewController {
     
     override func configureUI() {
         
-        [
-            self.tagCollectionView,
-            self.bookmarkTableView
-        ].forEach {
-            self.view.addSubview($0)
-        }
-        
+        self.view.addSubview(self.bookmarkTableView)
         self.view.backgroundColor = .p_ivory
         
         self.navigationItem.leftBarButtonItems = [
@@ -66,18 +62,23 @@ final class BookmarkViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
         
-        self.tagCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.tagCollectionViewHorizontalInset)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(Constants.tagBetweenPointBarSpace)
-        }
-        
         self.tagCollectionView.updateTag(at: 0, selected: true)
         
         self.bookmarkTableView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20.0)
-            make.top.equalTo(self.tagCollectionView.snp.bottom).offset(36.0)
+            make.leading.trailing.equalToSuperview().inset(17.0)
+            make.top.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(8.0)
         }
+        self.bookmarkTableView.sectionHeaderHeight = 60.0
+        
+        
+        self.headerView.addSubview(self.tagCollectionView)
+        
+        self.tagCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
     }
     private let dummyData: [Bookmark] = [
         Bookmark(number: 1, title: "함께 가장 가고싶은 여행지는 어디인가요?", date: "22.12.22"),
@@ -85,14 +86,24 @@ final class BookmarkViewController: BaseViewController {
         Bookmark(number: 3, title: "가장 받고싶은 칭찬은 무엇인가요?", date: "22.12.22"),
         Bookmark(number: 4, title: "서로의 첫인상이 어땠나요?", date: "22.12.22")
     ]
+    
     override func bind() {
         Observable.just(self.dummyData)
             .bind(to: self.bookmarkTableView.rx.items(cellIdentifier: BookmarkCell.identifier, cellType: BookmarkCell.self)) { index, model, cell in
                 cell.update(with: model)
             }.disposed(by: self.disposeBag)
+        
+        self.bookmarkTableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
     }
+    
 }
 
+extension BookmarkViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.headerView
+    }
+}
 
 
 import SwiftUI
