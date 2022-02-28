@@ -71,7 +71,6 @@ final class BookmarkViewController: BaseViewController {
         }
         self.bookmarkTableView.sectionHeaderHeight = 60.0
         
-        
         self.headerView.addSubview(self.tagCollectionView)
         
         self.tagCollectionView.snp.makeConstraints { make in
@@ -100,8 +99,17 @@ final class BookmarkViewController: BaseViewController {
 }
 
 extension BookmarkViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.headerView
+    }
+    
+    // section 의 separator 지우는 기능
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let border = CALayer()
+        border.backgroundColor = tableView.backgroundColor?.cgColor
+        border.frame = CGRect(x: 0, y: view.frame.size.height, width: view.frame.size.width, height: 1)
+        view.layer.addSublayer(border)
     }
 }
 
