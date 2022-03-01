@@ -74,6 +74,7 @@ private extension LoginViewModel {
     func showNextScene(isExisted: Bool) {
         isExisted ? self.showHomeScene() : self.showTermsScene()
     }
+    
     func showHomeScene() {
         self.coordinator?.showMain()
     }

@@ -92,7 +92,6 @@
 		AECC131D27BA1266006866FC /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC131C27BA1266006866FC /* UIColor+.swift */; };
 		AECC132A27BA24F7006866FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132927BA24F7006866FC /* Constants.swift */; };
 		AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */; };
-		AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC132E27BA27C1006866FC /* SignUpUseCase.swift */; };
 		AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133027BA341B006866FC /* Rx+UIButton.swift */; };
 		AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133227BA35DA006866FC /* Rx+UILabel.swift */; };
 		AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133427BA3DD0006866FC /* TermsViewController.swift */; };
@@ -209,7 +208,6 @@
 		AECC131C27BA1266006866FC /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AECC132927BA24F7006866FC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AECC132B27BA25A9006866FC /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
-		AECC132E27BA27C1006866FC /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		AECC133027BA341B006866FC /* Rx+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UIButton.swift"; sourceTree = "<group>"; };
 		AECC133227BA35DA006866FC /* Rx+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UILabel.swift"; sourceTree = "<group>"; };
 		AECC133427BA3DD0006866FC /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -753,7 +751,6 @@
 		AECC132D27BA27BA006866FC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				AECC132E27BA27C1006866FC /* SignUpUseCase.swift */,
 				AEEF363327C36CF100D0A127 /* InputUseCase.swift */,
 				AEBC9ED127C62B3B0070399A /* LoginUseCase.swift */,
 			);
@@ -1014,7 +1011,6 @@
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
-				AECC132F27BA27C1006866FC /* SignUpUseCase.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,

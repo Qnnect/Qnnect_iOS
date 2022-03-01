@@ -25,13 +25,13 @@ final class TermsViewModel: ViewModelType {
     }
     
     private weak var coordinator: AuthCoordinator?
-    private let signUpUseCase: SignUpUseCase
+    private let inputUseCase: InputUseCase
     init(
         coordinator: AuthCoordinator,
-        signUpUseCase: SignUpUseCase
+        inputUseCase: InputUseCase
     ) {
         self.coordinator = coordinator
-        self.signUpUseCase = signUpUseCase
+        self.inputUseCase = inputUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -42,10 +42,10 @@ final class TermsViewModel: ViewModelType {
             }
         
         let isCompletedAgreement = input.checkeditem
-            .map(self.signUpUseCase.isEssentialItemChecked)
+            .map(self.inputUseCase.isEssentialItemChecked)
         
         let isAllAgreement = input.checkeditem
-            .map(self.signUpUseCase.isAllAgreement(_:))
+            .map(self.inputUseCase.isAllAgreement(_:))
             
         return Output(
             start: start.asSignal(onErrorJustReturn: ()),

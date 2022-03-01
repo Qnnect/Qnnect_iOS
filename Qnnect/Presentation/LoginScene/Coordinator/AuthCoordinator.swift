@@ -41,10 +41,10 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     }
     
     func showInputNameVC() {
-        let signUpUseCase = DefaultSignUpUseCase()
+        let inputUseCase = DefaultInputUseCase()
         let viewModel = SetProfileViewModel(
             coordinator: self,
-            signUpUseCase: signUpUseCase
+            inputUseCase: inputUseCase
         )
         let vc = SetProfileViewController.create(with: viewModel)
         let socialLoginManager = SocialLoginManager(vc: vc)
@@ -53,10 +53,10 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     }
     
     func showTermsVC() {
-        let signUpUseCase = DefaultSignUpUseCase()
+        let inputUseCase = DefaultInputUseCase()
         let viewModel = TermsViewModel(
             coordinator: self,
-            signUpUseCase: signUpUseCase
+            inputUseCase: inputUseCase
         )
         let vc = TermsViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
