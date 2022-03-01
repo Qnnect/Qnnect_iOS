@@ -22,11 +22,11 @@ final class LoginViewModel: ViewModelType {
     
     var socialLoginManager: SocialLoginManager!
     private weak var coordinator: AuthCoordinator?
-    private let loginUseCase: LoginUseCase
+    private let loginUseCase: AuthUseCase
     
     init(
         coordinator: AuthCoordinator,
-        loginUseCase: LoginUseCase
+        loginUseCase: AuthUseCase
     ) {
         self.coordinator = coordinator
         self.loginUseCase = loginUseCase

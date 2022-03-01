@@ -22,11 +22,11 @@ final class SplashViewModel: ViewModelType {
     }
     
     private weak var coordinator: SplashCoordinator?
-    private let loginUseCase: LoginUseCase
+    private let loginUseCase: AuthUseCase
     
     init(
         coordinator: SplashCoordinator,
-        loginUseCase: LoginUseCase
+        loginUseCase: AuthUseCase
     ) {
         self.coordinator = coordinator
         self.loginUseCase = loginUseCase

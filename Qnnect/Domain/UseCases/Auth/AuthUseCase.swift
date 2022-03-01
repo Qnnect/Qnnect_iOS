@@ -9,13 +9,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol LoginUseCase: AnyObject {
+protocol AuthUseCase: AnyObject {
     func fetchIsFirstAccess() -> Bool
     func fetchToken() -> (access: String, refresh: String, type: LoginType)?
     func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo>
 }
 
-final class DefaultLoginUseCase: LoginUseCase {
+final class DefaultAuthUseCase: AuthUseCase {
     private let authRepository: AuthRepository
     
     init(authRepository: AuthRepository) {

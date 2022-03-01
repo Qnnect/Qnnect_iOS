@@ -79,7 +79,7 @@
 		AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ECB27C61A790070399A /* PageItemViewController.swift */; };
 		AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ECD27C6294A0070399A /* SplashViewModel.swift */; };
 		AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ECF27C62A480070399A /* SplashCoordinator.swift */; };
-		AEBC9ED227C62B3B0070399A /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ED127C62B3B0070399A /* LoginUseCase.swift */; };
+		AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ED127C62B3B0070399A /* AuthUseCase.swift */; };
 		AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ED827C62E9E0070399A /* AuthRepository.swift */; };
 		AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */; };
 		AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */; };
@@ -195,7 +195,7 @@
 		AEBC9ECB27C61A790070399A /* PageItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PageItemViewController.swift; path = Qnnect/Presentation/OnBoardingScene/ViewController/PageItemViewController.swift; sourceTree = SOURCE_ROOT; };
 		AEBC9ECD27C6294A0070399A /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		AEBC9ECF27C62A480070399A /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
-		AEBC9ED127C62B3B0070399A /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		AEBC9ED127C62B3B0070399A /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		AEBC9ED827C62E9E0070399A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -752,7 +752,7 @@
 			isa = PBXGroup;
 			children = (
 				AEEF363327C36CF100D0A127 /* InputUseCase.swift */,
-				AEBC9ED127C62B3B0070399A /* LoginUseCase.swift */,
+				AEBC9ED127C62B3B0070399A /* AuthUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1063,7 +1063,7 @@
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
-				AEBC9ED227C62B3B0070399A /* LoginUseCase.swift in Sources */,
+				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */,
