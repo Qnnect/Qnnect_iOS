@@ -31,7 +31,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = LoginViewModel(
             coordinator: self,
-            loginUseCase: useCase
+            authUseCase: useCase
         )
         let vc = LoginViewController.create(with: viewModel)
         let socialLoginManager = SocialLoginManager(vc: vc)

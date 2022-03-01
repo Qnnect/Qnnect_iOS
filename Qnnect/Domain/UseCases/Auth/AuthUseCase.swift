@@ -11,8 +11,9 @@ import RxCocoa
 
 protocol AuthUseCase: AnyObject {
     func fetchIsFirstAccess() -> Bool
-    func fetchToken() -> (access: String, refresh: String, type: LoginType)?
+    func fetchToken() -> Token?
     func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo>
+    func saveToken(access: String, refresh: String, type: LoginType)
 }
 
 final class DefaultAuthUseCase: AuthUseCase {
@@ -26,11 +27,20 @@ final class DefaultAuthUseCase: AuthUseCase {
         return self.authRepository.fetchIsFirstAccess()
     }
     
-    func fetchToken() -> (access: String, refresh: String, type: LoginType)? {
-        self.authRepository.fetchToken()
+    func fetchToken() -> Token? {
+        return self.authRepository.fetchToken()
     }
     
     func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo> {
-        self.authRepository.login(accessToken: accessToken, type: type)
+        return self.authRepository.login(accessToken: accessToken, type: type)
+    }
+    
+    func saveToken(access: String, refresh: String, type: LoginType) {
+        let token = Token(
+            access: access,
+            refresh: refresh,
+            type: type
+        )
+        return self.authRepository.saveToken(token: token)
     }
 }

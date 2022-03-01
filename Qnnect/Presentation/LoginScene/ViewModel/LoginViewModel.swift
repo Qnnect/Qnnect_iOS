@@ -22,14 +22,14 @@ final class LoginViewModel: ViewModelType {
     
     var socialLoginManager: SocialLoginManager!
     private weak var coordinator: AuthCoordinator?
-    private let loginUseCase: AuthUseCase
+    private let authUseCase: AuthUseCase
     
     init(
         coordinator: AuthCoordinator,
-        loginUseCase: AuthUseCase
+        authUseCase: AuthUseCase
     ) {
         self.coordinator = coordinator
-        self.loginUseCase = loginUseCase
+        self.authUseCase = authUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -39,13 +39,16 @@ final class LoginViewModel: ViewModelType {
         let kakaoLogin = input.didTapKakaoButton
             .flatMap(self.socialLoginManager.kakaoLogin)
             .flatMap(self.kakaoLogin(_:))
+            .map { ($0,LoginType.kakao) }
         
         let appleLogin = input.didTapAppleButton
             .flatMap(self.socialLoginManager.appleLogin)
             .flatMap(self.appleLogin(_:))
-
+            .map { ($0,LoginType.apple) }
         
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
+            .do(onNext: self.saveToken)
+            .map { $0.0 }
             .map(self.isExistedUser(_:))
             .do(onNext: self.showNextScene)
             .mapToVoid()
@@ -59,11 +62,11 @@ final class LoginViewModel: ViewModelType {
 
 private extension LoginViewModel {
     func kakaoLogin(_ accessToken: String) -> Observable<UserLoginInfo> {
-        return self.loginUseCase.login(accessToken: accessToken, type: .kakao)
+        return self.authUseCase.login(accessToken: accessToken, type: .kakao)
     }
     
     func appleLogin(_ accessToken: String) -> Observable<UserLoginInfo> {
-        return self.loginUseCase.login(accessToken: accessToken, type: .apple)
+        return self.authUseCase.login(accessToken: accessToken, type: .apple)
     }
     
     func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
@@ -80,7 +83,14 @@ private extension LoginViewModel {
     }
     
     func showTermsScene() {
-        print("call!!!")
         self.coordinator?.showTermsVC()
+    }
+    
+    func saveToken(_ userLoginInfoWithType: (UserLoginInfo, LoginType)) {
+        self.authUseCase.saveToken(
+            access: userLoginInfoWithType.0.accessToken,
+            refresh: userLoginInfoWithType.0.refreshToken,
+            type: userLoginInfoWithType.1
+        )
     }
 }

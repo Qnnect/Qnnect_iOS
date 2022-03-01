@@ -53,6 +53,7 @@
 		AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */; };
 		AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */; };
 		AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */; };
+		AE7F483F27CE679300954971 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483E27CE679300954971 /* Token.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -169,6 +170,7 @@
 		AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewController.swift; sourceTree = "<group>"; };
 		AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewModel.swift; sourceTree = "<group>"; };
 		AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoordinator.swift; sourceTree = "<group>"; };
+		AE7F483E27CE679300954971 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -333,12 +335,12 @@
 			children = (
 				AE176A3927B2526B0040A4C3 /* Repository */,
 				AE176A3327B24F660040A4C3 /* UseCases */,
-				AE176A3227B24F610040A4C3 /* Entity */,
+				AE176A3227B24F610040A4C3 /* Model */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		AE176A3227B24F610040A4C3 /* Entity */ = {
+		AE176A3227B24F610040A4C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
@@ -347,8 +349,9 @@
 				AEA56B0527BF4E6B0029A6CB /* Question.swift */,
 				AEA56B0727BF4E940029A6CB /* Group.swift */,
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
+				AE7F483E27CE679300954971 /* Token.swift */,
 			);
-			path = Entity;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
@@ -538,8 +541,8 @@
 				AE176A3F27B253550040A4C3 /* APP */,
 				AE176A3E27B253420040A4C3 /* Resource */,
 				AEE4750627CB858A00A3449B /* Network */,
-				AE176A3127B24F590040A4C3 /* Domain */,
 				AE176A3027B24F550040A4C3 /* Data */,
+				AE176A3127B24F590040A4C3 /* Domain */,
 				AE176A2F27B24F380040A4C3 /* Presentation */,
 				AEF294AD27B01864004EFE4D /* Util */,
 			);
@@ -1012,6 +1015,7 @@
 				AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
+				AE7F483F27CE679300954971 /* Token.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AEBC9EC127C5F44F0070399A /* TodayQuestionFooterView.swift in Sources */,

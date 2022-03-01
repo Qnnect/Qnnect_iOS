@@ -26,7 +26,7 @@ final class DefaultSplashCoordinator: SplashCoordinator {
             localStorage: DefaultUserDefaultManager(),
             authNetworkService: AuthNetworkService()
         )
-        let useCase = DefaultLoginUseCase(authRepository: repository)
+        let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = SplashViewModel(
             coordinator: self,
             loginUseCase: useCase

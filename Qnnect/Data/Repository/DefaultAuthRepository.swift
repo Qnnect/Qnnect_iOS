@@ -26,7 +26,7 @@ final class DefaultAuthRepository: AuthRepository {
         return self.localStorage.isFirstAccess ?? true
     }
     
-    func fetchToken() -> (access: String, refresh: String, type: LoginType)? {
+    func fetchToken() -> Token? {
         return self.localStorage.token
     }
     
@@ -34,4 +34,12 @@ final class DefaultAuthRepository: AuthRepository {
         let request = LoginRequestDTO(accessToken: accessToken, loginType: type)
         return self.authNetworkService.login(request: request).map { $0.toDomain() }
     }
+    
+    func saveToken(token: Token) {
+        localStorage.token = token
+        if let token = localStorage.token {
+            print("token save success 😎!!!: \(token)")
+        }
+    }
+    
 }

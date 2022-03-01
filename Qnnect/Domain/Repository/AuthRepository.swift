@@ -10,6 +10,7 @@ import RxSwift
 
 protocol AuthRepository: AnyObject {
     func fetchIsFirstAccess() -> Bool
-    func fetchToken() -> (access: String, refresh: String, type: LoginType)?
+    func fetchToken() -> Token?
     func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo>
+    func saveToken(token: Token)
 }

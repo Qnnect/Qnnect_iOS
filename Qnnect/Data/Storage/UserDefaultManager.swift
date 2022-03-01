@@ -13,19 +13,28 @@ enum LoginType: String,Codable {
 }
 
 protocol UserDefaultManager: AnyObject {
-    var token: (access: String, refresh: String, type: LoginType)? { get set }
+    var token: Token? { get set }
     var isFirstAccess: Bool? { get set }
 }
 
 final class DefaultUserDefaultManager: UserDefaultManager {
     
-    var token: (access: String, refresh: String, type: LoginType)? {
+    var token: Token? {
         get {
-            return UserDefaults.standard.object(forKey: "token") as? (access: String, refresh: String, type: LoginType)
+            if let data = UserDefaults.standard.object(forKey: "token") as? Data {
+                if let token = try? JSONDecoder().decode(Token.self, from: data) {
+                    print("token get : \(token)")
+                    return token
+                }
+            }
+            return nil
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: "token")
+            if let token = try? JSONEncoder().encode(newValue) {
+                UserDefaults.standard.setValue(token, forKey: "token")
+                print("token set : \(token)")
+            }
         }
     }
     
