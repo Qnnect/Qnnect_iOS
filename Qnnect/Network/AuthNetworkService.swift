@@ -13,11 +13,24 @@ final class AuthNetworkService: Networkable {
     typealias Target = AuthAPI
     let provider = makeProvider()
     
-    func login(request: LoginRequestDTO) -> Observable<LoginResponseDTO> {
+    func login(request: LoginRequestDTO) -> Observable<Result<LoginResponseDTO, LoginError>> {
         return self.provider.rx.request(.login(request: request))
-            .asObservable()
-            .map { try JSONDecoder().decode(LoginResponseDTO.self, from: $0.data) }
-            .catchAndReturn(nil)
-            .compactMap{ $0 }
+            .map {
+                response -> Result<LoginResponseDTO, LoginError> in
+                switch response.statusCode {
+                case 200:
+                    do {
+                        let loginResponseDTO = try JSONDecoder().decode(LoginResponseDTO.self, from: response.data)
+                        return .success(loginResponseDTO)
+                    } catch let error {
+                        print("Decoding Error 😭!!! : \(error)")
+                        return .failure(LoginError.decodingError)
+                    }
+                case 400...500:
+                    return .failure(LoginError(rawValue: response.statusCode) ?? .unknownError)
+                default:
+                    return .failure(.unknownError)
+                }
+            }.asObservable()
     }
 }

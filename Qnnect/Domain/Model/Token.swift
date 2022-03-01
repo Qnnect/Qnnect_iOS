@@ -10,5 +10,5 @@ import Foundation
 struct Token: Codable {
     let access: String
     let refresh: String
-    let type: LoginType
+    let loginType: LoginType
 }

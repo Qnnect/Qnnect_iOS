@@ -22,33 +22,33 @@ final class SplashViewModel: ViewModelType {
     }
     
     private weak var coordinator: SplashCoordinator?
-    private let loginUseCase: AuthUseCase
+    private let authUseCase: AuthUseCase
     
     init(
         coordinator: SplashCoordinator,
-        loginUseCase: AuthUseCase
+        authUseCase: AuthUseCase
     ) {
         self.coordinator = coordinator
-        self.loginUseCase = loginUseCase
+        self.authUseCase = authUseCase
     }
     
     func transform(from input: Input) -> Output {
         
         let firstAccess = input.didEndSplash
-            .map(self.loginUseCase.fetchIsFirstAccess)
+            .map(self.authUseCase.fetchIsFirstAccess)
             .filter{ $0 }
             .mapToVoid()
             .do(onNext: self.showOnboardingScene)
         
         //TODO: 가져온 토큰으로 로그인 진행 후 프로필 설정 못했으면 프로필설정화면 으로 분기처리해야함
         let autoLogin = input.didEndSplash
-            .map(self.loginUseCase.fetchToken)
+            .map(self.authUseCase.fetchToken)
             .compactMap { $0 }
-            .filter{ $0.type == .kakao } //현재 카카오 로그인 만 된다.
+            .do(onNext: self.login(token:))
             .mapToVoid()
         
         let needToLogin = input.didEndSplash
-            .map(self.loginUseCase.fetchToken)
+            .map(self.authUseCase.fetchToken)
             .filter { $0 == nil }
             .mapToVoid()
         
@@ -65,5 +65,9 @@ final class SplashViewModel: ViewModelType {
 private extension SplashViewModel {
     func showOnboardingScene() {
         self.coordinator?.showOnboarding()
+    }
+    
+    func login(token: Token) {
+        self.authUseCase.login(accessToken: token.access, loginType: token.loginType)
     }
 }

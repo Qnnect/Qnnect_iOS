@@ -29,7 +29,7 @@ final class DefaultSplashCoordinator: SplashCoordinator {
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = SplashViewModel(
             coordinator: self,
-            loginUseCase: useCase
+            authUseCase: useCase
         )
         let vc = SplashViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)

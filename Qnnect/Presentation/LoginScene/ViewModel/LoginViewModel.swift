@@ -39,11 +39,13 @@ final class LoginViewModel: ViewModelType {
         let kakaoLogin = input.didTapKakaoButton
             .flatMap(self.socialLoginManager.kakaoLogin)
             .flatMap(self.kakaoLogin(_:))
+            .compactMap(self.convertToUserLoginInfo)
             .map { ($0,LoginType.kakao) }
         
         let appleLogin = input.didTapAppleButton
             .flatMap(self.socialLoginManager.appleLogin)
             .flatMap(self.appleLogin(_:))
+            .compactMap(self.convertToUserLoginInfo)
             .map { ($0,LoginType.apple) }
         
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
@@ -61,16 +63,15 @@ final class LoginViewModel: ViewModelType {
 }
 
 private extension LoginViewModel {
-    func kakaoLogin(_ accessToken: String) -> Observable<UserLoginInfo> {
-        return self.authUseCase.login(accessToken: accessToken, type: .kakao)
+    func kakaoLogin(_ accessToken: String) -> Observable<Result<UserLoginInfo,LoginError>> {
+        return self.authUseCase.login(accessToken: accessToken, loginType: .kakao)
     }
     
-    func appleLogin(_ accessToken: String) -> Observable<UserLoginInfo> {
-        return self.authUseCase.login(accessToken: accessToken, type: .apple)
+    func appleLogin(_ accessToken: String) -> Observable<Result<UserLoginInfo,LoginError>> {
+        return self.authUseCase.login(accessToken: accessToken, loginType: .apple)
     }
     
     func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
-        print((!userLoginInfo.isNewMember && userLoginInfo.userSettingDone))
         return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
     }
     
@@ -86,11 +87,16 @@ private extension LoginViewModel {
         self.coordinator?.showTermsVC()
     }
     
+    func convertToUserLoginInfo(_ result: Result<UserLoginInfo, LoginError>) -> UserLoginInfo? {
+        guard case let .success(userLoginInfo) = result  else { return nil }
+        return userLoginInfo
+    }
+    
     func saveToken(_ userLoginInfoWithType: (UserLoginInfo, LoginType)) {
         self.authUseCase.saveToken(
             access: userLoginInfoWithType.0.accessToken,
             refresh: userLoginInfoWithType.0.refreshToken,
-            type: userLoginInfoWithType.1
+            loginType: userLoginInfoWithType.1
         )
     }
 }

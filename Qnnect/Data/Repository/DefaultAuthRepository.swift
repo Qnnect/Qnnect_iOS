@@ -30,9 +30,18 @@ final class DefaultAuthRepository: AuthRepository {
         return self.localStorage.token
     }
     
-    func login(accessToken: String, type: LoginType) -> Observable<UserLoginInfo> {
+    func login(accessToken: String, type: LoginType) -> Observable<Result<UserLoginInfo, LoginError>> {
         let request = LoginRequestDTO(accessToken: accessToken, loginType: type)
-        return self.authNetworkService.login(request: request).map { $0.toDomain() }
+        return self.authNetworkService.login(request: request)
+            .map {
+                result in
+                switch result {
+                case .success(let loginResponseDTO):
+                    return .success(loginResponseDTO.toDomain())
+                case .failure(let loginError):
+                    return .failure(loginError)
+                }
+            }
     }
     
     func saveToken(token: Token) {
