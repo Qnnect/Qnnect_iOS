@@ -58,10 +58,12 @@ final class TermsViewController: BaseViewController {
         
     }
     private var viewModel: TermsViewModel!
+    private var token: Token!
     
-    static func create(with viewModel: TermsViewModel) -> TermsViewController {
+    static func create(with viewModel: TermsViewModel, _ token: Token) -> TermsViewController {
         let vc = TermsViewController()
         vc.viewModel = viewModel
+        vc.token = token
         return vc
     }
     
@@ -162,7 +164,8 @@ final class TermsViewController: BaseViewController {
                     guard let self = self else { return false}
                     return !self.allAgreementView.checkBox.isSelected
                 },
-            checkeditem: items
+            checkeditem: items,
+            token: Observable.just(self.token)
         )
     
         let output = self.viewModel.transform(from: input)

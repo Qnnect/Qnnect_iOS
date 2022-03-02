@@ -57,6 +57,11 @@
 		AE7F484227CE7DB400954971 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F484127CE7DB400954971 /* LoginError.swift */; };
 		AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */; };
 		AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF627CF024E0009EEC6 /* ReissueResponseDTO.swift */; };
+		AEA14CFA27CF749D0009EEC6 /* SetProfileRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF927CF749D0009EEC6 /* SetProfileRequestDTO.swift */; };
+		AEA14CFC27CF74A70009EEC6 /* SetProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CFB27CF74A70009EEC6 /* SetProfileResponseDTO.swift */; };
+		AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CFD27CF76220009EEC6 /* UserAPI.swift */; };
+		AEA14D0027CF76C70009EEC6 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */; };
+		AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -177,6 +182,11 @@
 		AE7F484127CE7DB400954971 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueRequestDTO.swift; sourceTree = "<group>"; };
 		AEA14CF627CF024E0009EEC6 /* ReissueResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14CF927CF749D0009EEC6 /* SetProfileRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileRequestDTO.swift; sourceTree = "<group>"; };
+		AEA14CFB27CF74A70009EEC6 /* SetProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14CFD27CF76220009EEC6 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
+		AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEnableNotificationRequestDTO.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -700,6 +710,16 @@
 			path = Reissue;
 			sourceTree = "<group>";
 		};
+		AEA14CF827CF74880009EEC6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14CF927CF749D0009EEC6 /* SetProfileRequestDTO.swift */,
+				AEA14CFB27CF74A70009EEC6 /* SetProfileResponseDTO.swift */,
+				AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		AEA56AF827BF34580029A6CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */,
+				AEA14CFD27CF76220009EEC6 /* UserAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -729,6 +750,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEA14CF827CF74880009EEC6 /* User */,
 				AEA14CF327CF01BA0009EEC6 /* Reissue */,
 				AEA14CF227CF01B20009EEC6 /* Login */,
 			);
@@ -856,6 +878,7 @@
 			isa = PBXGroup;
 			children = (
 				AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */,
+				AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1030,6 +1053,7 @@
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
+				AEA14CFC27CF74A70009EEC6 /* SetProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
@@ -1067,7 +1091,10 @@
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
 				AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */,
+				AEA14D0027CF76C70009EEC6 /* UserNetworkService.swift in Sources */,
+				AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */,
 				AEBC9ECA27C619FB0070399A /* OnboardingViewController.swift in Sources */,
+				AEA14CFA27CF749D0009EEC6 /* SetProfileRequestDTO.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
@@ -1098,6 +1125,7 @@
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
+				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,

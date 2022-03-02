@@ -35,12 +35,6 @@ final class DefaultAuthUseCase: AuthUseCase {
     
     func login(accessToken: String, loginType: LoginType) -> Observable<Result<UserLoginInfo,LoginError>> {
         return self.authRepository.login(accessToken: accessToken, type: loginType)
-            .do(onNext: {
-                [weak self] result in
-                guard case let .success(userLoginInfo) = result else { return }
-                let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
-                self?.saveToken(token: token)
-            })
     }
     
     func saveToken(token: Token) {

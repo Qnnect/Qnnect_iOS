@@ -15,6 +15,7 @@ final class TermsViewModel: ViewModelType {
         let didTapAgreementButton: Observable<Void>
         let didCheckAllAgreement: Observable<Bool>
         let checkeditem: Observable<(personal: Bool, service: Bool, pushNoti: Bool)>
+        let token: Observable<Token>
     }
     
     struct Output {
@@ -35,12 +36,21 @@ final class TermsViewModel: ViewModelType {
     }
     
     func transform(from input: Input) -> Output {
-        let start = input.didTapAgreementButton
-            .do {
-                [weak self] _ in
-                self?.coordinator?.showInputNameVC()
+        
+        let isAgreedNoti = input.checkeditem
+            .map { _, _, pushNoti in
+                return pushNoti
             }
         
+        let start = input.didTapAgreementButton
+            .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti))
+            .do {
+                [weak self] token, isAgreedNoti in
+                self?.coordinator?.showSetProfileScene(token: token, isAgreedNoti: isAgreedNoti)
+            }
+            .mapToVoid()
+            
+            
         let isCompletedAgreement = input.checkeditem
             .map(self.inputUseCase.isEssentialItemChecked)
         

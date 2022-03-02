@@ -67,11 +67,14 @@ final class SetProfileViewController: BaseViewController {
     }()
     
     private var viewModel: SetProfileViewModel!
+    private var token: Token!
+    private var isAgreedNoti: Bool!
     
-    
-    static func create(with viewModel: SetProfileViewModel) -> SetProfileViewController {
+    static func create(with viewModel: SetProfileViewModel,_ token: Token, _ isAgreedNoti: Bool) -> SetProfileViewController {
         let vc = SetProfileViewController()
         vc.viewModel = viewModel
+        vc.token = token
+        vc.isAgreedNoti = isAgreedNoti
         return vc
     }
     

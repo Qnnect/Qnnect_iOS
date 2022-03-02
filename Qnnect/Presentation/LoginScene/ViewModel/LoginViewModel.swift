@@ -50,7 +50,13 @@ final class LoginViewModel: ViewModelType {
         
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
             .map { $0.0 }
-            //.map(self.isExistedUser(_:))
+            .do{
+                [weak self] userLoginInfo in
+                if !userLoginInfo.isNewMember, userLoginInfo.userSettingDone {
+                    let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
+                    self?.authUseCase.saveToken(token: token)
+                }
+            }
             .do(onNext: self.showNextScene)
             .mapToVoid()
                 
@@ -70,20 +76,17 @@ private extension LoginViewModel {
         return self.authUseCase.login(accessToken: accessToken, loginType: .apple)
     }
     
-    func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
-        return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
-    }
-    
     func showNextScene(_ userLoginInfo: UserLoginInfo) {
-        (userLoginInfo.isNewMember || !userLoginInfo.userSettingDone) ? self.showTermsScene() : self.showHomeScene()
+        let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
+        (userLoginInfo.isNewMember || !userLoginInfo.userSettingDone) ? self.showTermsScene(token: token) : self.showHomeScene()
     }
     
     func showHomeScene() {
         self.coordinator?.showMain()
     }
     
-    func showTermsScene() {
-        self.coordinator?.showTermsVC()
+    func showTermsScene(token: Token) {
+        self.coordinator?.showTermsVC(token: token)
     }
     
     func convertToUserLoginInfo(_ result: Result<UserLoginInfo, LoginError>) -> UserLoginInfo? {

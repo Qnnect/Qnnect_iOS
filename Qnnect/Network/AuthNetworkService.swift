@@ -8,14 +8,12 @@
 import Foundation
 import Moya
 import RxSwift
-import SwiftUI
 
 final class AuthNetworkService: Networkable {
     typealias Target = AuthAPI
     let provider = makeProvider()
     
     func login(request: LoginRequestDTO) -> Observable<Result<LoginResponseDTO, LoginError>> {
-        print("loginRequest \(request)")
         return self.provider.rx.request(.login(request: request))
             .map {
                 response -> Result<LoginResponseDTO, LoginError> in

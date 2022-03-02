@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AuthCoordinator: Coordinator {
-    func showInputNameVC()
-    func showTermsVC()
+    func showSetProfileScene(token: Token, isAgreedNoti: Bool)
+    func showTermsVC(token: Token)
     func showMain()
 }
 final class DefaultAuthCoordinator: AuthCoordinator {
@@ -40,25 +40,25 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         self.navigationController.viewControllers.removeAll { $0 != vc }
     }
     
-    func showInputNameVC() {
+    func showSetProfileScene(token: Token, isAgreedNoti: Bool) {
         let inputUseCase = DefaultInputUseCase()
         let viewModel = SetProfileViewModel(
             coordinator: self,
             inputUseCase: inputUseCase
         )
-        let vc = SetProfileViewController.create(with: viewModel)
+        let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.authManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showTermsVC() {
+    func showTermsVC(token: Token) {
         let inputUseCase = DefaultInputUseCase()
         let viewModel = TermsViewModel(
             coordinator: self,
             inputUseCase: inputUseCase
         )
-        let vc = TermsViewController.create(with: viewModel)
+        let vc = TermsViewController.create(with: viewModel,token)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
