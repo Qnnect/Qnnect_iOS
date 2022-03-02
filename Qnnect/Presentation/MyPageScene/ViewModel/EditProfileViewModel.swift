@@ -19,22 +19,22 @@ final class EditProfileViewModel: ViewModelType {
         let isVaildName: Signal<Bool>
         let nameLength: Driver<Int>
     }
-    private let inputUseCase: InputUseCase
+    private let authUseCase: AuthUseCase
     private weak var coordinator: MyPageCoordinator?
     
-    init(inputUseCase: InputUseCase, coordinator: MyPageCoordinator) {
-        self.inputUseCase = inputUseCase
+    init(authUseCase: AuthUseCase, coordinator: MyPageCoordinator) {
+        self.authUseCase = authUseCase
         self.coordinator = coordinator
     }
     
     func transform(from input: Input) -> Output {
         let isValidName = input.inputName
             .compactMap{ $0 } // nil 제거
-            .map(self.inputUseCase.isVaildName(_:))
+            .map(self.authUseCase.isVaildName(_:))
         
         let nameLength = input.inputName
             .compactMap{ $0 } // nil 제거
-            .map(self.inputUseCase.getNameLength(_:))
+            .map(self.authUseCase.getNameLength(_:))
         
         return Output(
             isVaildName: isValidName.asSignal(onErrorJustReturn: false),

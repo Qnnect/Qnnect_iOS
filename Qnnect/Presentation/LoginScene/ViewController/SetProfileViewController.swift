@@ -132,7 +132,10 @@ final class SetProfileViewController: BaseViewController {
                 .skip(while: { ($0?.count ?? 0) == 0}),
             didTapCompletionButton: self.completionButton.rx.tap.withLatestFrom(self.nameTextField.textField.rx.text.asObservable())
                 .compactMap{ $0 },
-            viewDidLoad: Observable.just(())
+            viewDidLoad: Observable.just(()),
+            token: Observable.just(self.token),
+            isAgreedNoti: Observable.just(self.isAgreedNoti),
+            profileImageData: self.editProfileImageView.imageData
         )
         
         let output = self.viewModel.transform(from: input)
@@ -159,7 +162,7 @@ final class SetProfileViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
         
-        output.profileImageURL
+        output.kakaoProfileImageURL
             .drive(onNext:self.setProfileImageView)
             .disposed(by: self.disposeBag)
                 

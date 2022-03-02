@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol AuthUseCase: AnyObject {
+protocol AuthUseCase: InputUseCase {
     func fetchIsFirstAccess() -> Bool
     func fetchToken() -> Token?
     func login(accessToken: String, loginType: LoginType) -> Observable<Result<UserLoginInfo,LoginError>>

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import RxSwift
 
 final class EditProfileImageView: UIView {
     
@@ -59,5 +60,11 @@ final class EditProfileImageView: UIView {
     
     func setImage(image: UIImage?) {
         self.profileImageView.image = image
+    }
+    
+    var imageData: Observable<Data> {
+        return self.profileImageView.rx.observe(UIImage.self, "image")
+            .map{ $0?.pngData() }
+            .compactMap {$0 }
     }
 }

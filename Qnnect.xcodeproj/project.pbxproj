@@ -62,10 +62,13 @@
 		AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CFD27CF76220009EEC6 /* UserAPI.swift */; };
 		AEA14D0027CF76C70009EEC6 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */; };
 		AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */; };
+		AEA14D0427CFB6990009EEC6 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0327CFB6990009EEC6 /* UserRepository.swift */; };
+		AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0527CFB7B10009EEC6 /* User.swift */; };
+		AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */; };
+		AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
-		AEA56B0427BF4E4D0029A6CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0327BF4E4D0029A6CB /* User.swift */; };
 		AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0527BF4E6B0029A6CB /* Question.swift */; };
 		AEA56B0827BF4E940029A6CB /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0727BF4E940029A6CB /* Group.swift */; };
 		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
@@ -187,10 +190,13 @@
 		AEA14CFD27CF76220009EEC6 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEnableNotificationRequestDTO.swift; sourceTree = "<group>"; };
+		AEA14D0327CFB6990009EEC6 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		AEA14D0527CFB7B10009EEC6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
-		AEA56B0327BF4E4D0029A6CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AEA56B0527BF4E6B0029A6CB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		AEA56B0727BF4E940029A6CB /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
@@ -362,11 +368,11 @@
 				AE7F484027CE7DAB00954971 /* Error */,
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
-				AEA56B0327BF4E4D0029A6CB /* User.swift */,
 				AEA56B0527BF4E6B0029A6CB /* Question.swift */,
 				AEA56B0727BF4E940029A6CB /* Group.swift */,
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
 				AE7F483E27CE679300954971 /* Token.swift */,
+				AEA14D0527CFB7B10009EEC6 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AEA14D0B27CFB97D0009EEC6 /* User */,
 				AE717B5F27C4C260008278D3 /* Group */,
 				AE6FA49827BDFD6B00FA2154 /* Store */,
 				AECC132D27BA27BA006866FC /* Auth */,
@@ -385,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */,
+				AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -412,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				AEBC9ED827C62E9E0070399A /* AuthRepository.swift */,
+				AEA14D0327CFB6990009EEC6 /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -716,6 +725,14 @@
 				AEA14CF927CF749D0009EEC6 /* SetProfileRequestDTO.swift */,
 				AEA14CFB27CF74A70009EEC6 /* SetProfileResponseDTO.swift */,
 				AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		AEA14D0B27CFB97D0009EEC6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1032,6 +1049,7 @@
 			files = (
 				AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */,
 				AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */,
+				AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */,
 				AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */,
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
@@ -1065,6 +1083,7 @@
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
+				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AE717B6127C4C278008278D3 /* AddGroupUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
 				AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */,
@@ -1085,7 +1104,6 @@
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
-				AEA56B0427BF4E4D0029A6CB /* User.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
@@ -1118,6 +1136,7 @@
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
+				AEA14D0427CFB6990009EEC6 /* UserRepository.swift in Sources */,
 				AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */,
 				AEBC9EC327C604210070399A /* SplashViewController.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
@@ -1128,6 +1147,7 @@
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
+				AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */,
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class DefaultAuthRepository: AuthRepository {
-    
+
     private let localStorage: UserDefaultManager
     private let authNetworkService: AuthNetworkService
     

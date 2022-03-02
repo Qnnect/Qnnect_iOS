@@ -60,7 +60,7 @@ final class MyPageViewController: BaseViewController {
     
     override func bind() {
         
-        let dummyUser = Observable.just(User(profileImage: nil, name: "아아메"))
+        let dummyUser = Observable.just(User(name: "", point: 500, profileImage: ""))
         let dummyPoint = Observable.just(500)
         let items = Observable.just(MyPageItem.allCases)
         

@@ -128,7 +128,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func bind() {
-        let dummyUser = User(profileImage: URL(string: "Abc"), name: "제제로")
+        let dummyUser = User(name: "제제로", point: 500, profileImage: "")
         let content = "친구와 함께 가장 가고싶은 외국 여행지는 어디인가요? 글자수가 여기서 넘치면 마침표를 넣습니다넣습니다넣습니다넣..."
         let content1 = "우리중에 가장 I같은 사람은 누구일까요~?????"
         let dummyQuestions = [

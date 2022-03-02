@@ -28,8 +28,9 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
         
     func showEditProfileScene() {
+        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
         let viewModel = EditProfileViewModel(
-            inputUseCase: DefaultInputUseCase(),
+            authUseCase: authUseCase,
             coordinator: self
         )
         let vc = EditProfileViewController.create(with: viewModel)

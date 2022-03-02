@@ -2,12 +2,13 @@
 //  User.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/02/18.
+//  Created by 재영신 on 2022/03/02.
 //
 
 import Foundation
 
 struct User {
-    let profileImage: URL?
     let name: String
+    let point: Int
+    let profileImage: String
 }

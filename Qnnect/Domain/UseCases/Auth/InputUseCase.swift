@@ -14,7 +14,7 @@ protocol InputUseCase: AnyObject {
     func isAllAgreement(_ items: (Bool,Bool,Bool)) -> Bool
 }
 
-final class DefaultInputUseCase: InputUseCase {
+extension InputUseCase {
     func isVaildName(_ name: String) -> Bool {
         let length = name.count
         return length >= 2 && length <= 8 ? true : false

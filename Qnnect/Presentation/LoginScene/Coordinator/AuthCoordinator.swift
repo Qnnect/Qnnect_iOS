@@ -41,10 +41,12 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     }
     
     func showSetProfileScene(token: Token, isAgreedNoti: Bool) {
-        let inputUseCase = DefaultInputUseCase()
+        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let userUseCase = DefaultUserUseCase(userRepository: DefaultUserRepositry(userNetworkService: UserNetworkService()))
         let viewModel = SetProfileViewModel(
             coordinator: self,
-            inputUseCase: inputUseCase
+            authUseCase: authUseCase,
+            userUseCase: userUseCase
         )
         let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti)
         let socialLoginManager = SocialLoginManager(vc: vc)
@@ -53,10 +55,10 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     }
     
     func showTermsVC(token: Token) {
-        let inputUseCase = DefaultInputUseCase()
+        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
         let viewModel = TermsViewModel(
             coordinator: self,
-            inputUseCase: inputUseCase
+            authUseCase: authUseCase
         )
         let vc = TermsViewController.create(with: viewModel,token)
         self.navigationController.pushViewController(vc, animated: true)

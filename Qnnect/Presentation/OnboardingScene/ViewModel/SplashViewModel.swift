@@ -70,6 +70,10 @@ final class SplashViewModel: ViewModelType {
             .mapToVoid()
         
         let showLogin = Observable.merge(tokenNil,needToLogin)
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showLogin()
+            }
         
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),

@@ -134,8 +134,9 @@ struct EditProfileViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
+            let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
             let vc = EditProfileViewController.create(with: EditProfileViewModel(
-                inputUseCase: DefaultInputUseCase(),
+                authUseCase: authUseCase,
                 coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController())
             )) //보고 싶은 뷰컨 객체
             return vc

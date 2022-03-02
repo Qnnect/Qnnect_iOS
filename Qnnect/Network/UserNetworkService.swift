@@ -15,8 +15,8 @@ final class UserNetworkService: Networkable {
     
     private let provider = makeProvider()
     
-    func setProfile(request: SetProfileRequestDTO) -> Observable<Result<SetProfileResponseDTO,Error>>{
-        return provider.rx.request(.setProfile(request: request))
+    func setProfile(request: SetProfileRequestDTO, accessToken: String) -> Observable<Result<SetProfileResponseDTO,Error>>{
+        return provider.rx.request(.setProfile(request: request,accessToken: accessToken))
             .filter(statusCode: 200)
             .map(SetProfileResponseDTO.self)
             .map{ Result.success($0)}
@@ -24,8 +24,8 @@ final class UserNetworkService: Networkable {
             .asObservable()
     }
     
-    func setEnableNotification(request: SetEnableNotificationRequestDTO) -> Observable<Void> {
-        return provider.rx.request(.setEnableNotification(request: request))
+    func setEnableNotification(request: SetEnableNotificationRequestDTO, accessToken: String) -> Observable<Void> {
+        return provider.rx.request(.setEnableNotification(request: request,accessToken: accessToken))
             .filter(statusCode: 200)
             .asObservable()
             .mapToVoid()
