@@ -13,7 +13,9 @@ protocol AuthUseCase: AnyObject {
     func fetchIsFirstAccess() -> Bool
     func fetchToken() -> Token?
     func login(accessToken: String, loginType: LoginType) -> Observable<Result<UserLoginInfo,LoginError>>
-    func saveToken(access: String, refresh: String, loginType: LoginType)
+    func saveToken(token: Token)
+    func reissueToken(token: Token) -> Observable<Result<Token, Error>>
+    func updateFirstAccess()
 }
 
 final class DefaultAuthUseCase: AuthUseCase {
@@ -33,14 +35,28 @@ final class DefaultAuthUseCase: AuthUseCase {
     
     func login(accessToken: String, loginType: LoginType) -> Observable<Result<UserLoginInfo,LoginError>> {
         return self.authRepository.login(accessToken: accessToken, type: loginType)
+            .do(onNext: {
+                [weak self] result in
+                guard case let .success(userLoginInfo) = result else { return }
+                let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
+                self?.saveToken(token: token)
+            })
     }
     
-    func saveToken(access: String, refresh: String, loginType: LoginType) {
-        let token = Token(
-            access: access,
-            refresh: refresh,
-            loginType: loginType
-        )
+    func saveToken(token: Token) {
         return self.authRepository.saveToken(token: token)
+    }
+    
+    func reissueToken(token: Token) -> Observable<Result<Token, Error>> {
+        return self.authRepository.reissueToken(token: token)
+            .do(onNext: {
+                [weak self] result in
+                guard case let .success(token) = result else { return }
+                self?.saveToken(token: token)
+            })
+    }
+    
+    func updateFirstAccess() {
+        return self.authRepository.updateFirstAccess()
     }
 }

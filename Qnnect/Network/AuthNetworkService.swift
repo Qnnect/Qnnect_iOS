@@ -8,12 +8,14 @@
 import Foundation
 import Moya
 import RxSwift
+import SwiftUI
 
 final class AuthNetworkService: Networkable {
     typealias Target = AuthAPI
     let provider = makeProvider()
     
     func login(request: LoginRequestDTO) -> Observable<Result<LoginResponseDTO, LoginError>> {
+        print("loginRequest \(request)")
         return self.provider.rx.request(.login(request: request))
             .map {
                 response -> Result<LoginResponseDTO, LoginError> in
@@ -32,5 +34,15 @@ final class AuthNetworkService: Networkable {
                     return .failure(.unknownError)
                 }
             }.asObservable()
+    }
+    
+    func reissueToken(request: ReissueRequestDTO) -> Observable<Result<ReissueResponseDTO, Error>> {
+        return self.provider.rx.request(.reissue(request: request))
+            .filter(statusCode: 200)
+            .map(ReissueResponseDTO.self)
+            .do { print("Reissue Token !!! \($0)")}
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
     }
 }

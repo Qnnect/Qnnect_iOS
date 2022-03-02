@@ -33,7 +33,7 @@ final class DefaultUserDefaultManager: UserDefaultManager {
         set {
             if let token = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.setValue(token, forKey: "token")
-                print("token set : \(token)")
+                print("token set : \(String(describing: newValue))")
             }
         }
     }

@@ -51,6 +51,10 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     }
     
     func showMain() {
-        
+        let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
+        coordinator.start()
+        self.parentCoordinator?.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self.parentCoordinator
+        self.parentCoordinator?.childCoordinators.removeAll(where: { $0 === self })
     }
 }

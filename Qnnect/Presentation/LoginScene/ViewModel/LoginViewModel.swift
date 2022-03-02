@@ -49,9 +49,8 @@ final class LoginViewModel: ViewModelType {
             .map { ($0,LoginType.apple) }
         
         let isSuccess = Observable.merge(kakaoLogin,appleLogin)
-            .do(onNext: self.saveToken)
             .map { $0.0 }
-            .map(self.isExistedUser(_:))
+            //.map(self.isExistedUser(_:))
             .do(onNext: self.showNextScene)
             .mapToVoid()
                 
@@ -75,8 +74,8 @@ private extension LoginViewModel {
         return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
     }
     
-    func showNextScene(isExisted: Bool) {
-        isExisted ? self.showHomeScene() : self.showTermsScene()
+    func showNextScene(_ userLoginInfo: UserLoginInfo) {
+        (userLoginInfo.isNewMember || !userLoginInfo.userSettingDone) ? self.showTermsScene() : self.showHomeScene()
     }
     
     func showHomeScene() {
@@ -92,11 +91,4 @@ private extension LoginViewModel {
         return userLoginInfo
     }
     
-    func saveToken(_ userLoginInfoWithType: (UserLoginInfo, LoginType)) {
-        self.authUseCase.saveToken(
-            access: userLoginInfoWithType.0.accessToken,
-            refresh: userLoginInfoWithType.0.refreshToken,
-            loginType: userLoginInfoWithType.1
-        )
-    }
 }

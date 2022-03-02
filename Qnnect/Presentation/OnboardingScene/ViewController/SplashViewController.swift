@@ -42,23 +42,31 @@ final class SplashViewController: BaseViewController {
     override func bind() {
         
         let didEndSplash = PublishSubject<Void>()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             didEndSplash.onNext(())
+            print("abc")
         }
+        
         let input = SplashViewModel.Input(didEndSplash: didEndSplash.asObservable())
         
         let output = self.viewModel.transform(from: input)
         
         output.showLogin
-            .emit()
+            .emit(onNext: {
+                print("show Login")
+            })
             .disposed(by: self.disposeBag)
         
         output.showMain
-            .emit()
+            .emit(onNext: {
+                print("show Main")
+            })
             .disposed(by: self.disposeBag)
         
         output.showOnboarding
-            .emit()
+            .emit(onNext: {
+                print("show Onboarding")
+            })
             .disposed(by: self.disposeBag)
     }
 }

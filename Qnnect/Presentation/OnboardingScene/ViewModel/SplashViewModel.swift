@@ -38,23 +38,42 @@ final class SplashViewModel: ViewModelType {
             .map(self.authUseCase.fetchIsFirstAccess)
             .filter{ $0 }
             .mapToVoid()
-            .do(onNext: self.showOnboardingScene)
+            .do(onNext: self.authUseCase.updateFirstAccess)
+            .do(onNext: self.showOnboardingScene) { error in
+                print("first Aceess error !!! : \(error)")
+            }
         
-        //TODO: 가져온 토큰으로 로그인 진행 후 프로필 설정 못했으면 프로필설정화면 으로 분기처리해야함
-        let autoLogin = input.didEndSplash
+        let reissueToken = input.didEndSplash
             .map(self.authUseCase.fetchToken)
-            .compactMap { $0 }
-            .do(onNext: self.login(token:))
-            .mapToVoid()
+            .compactMap{ $0 } // nil 삭제
+            .flatMap(self.authUseCase.reissueToken(token:))
+            .share()
         
-        let needToLogin = input.didEndSplash
+        let autoLogin = reissueToken
+            .filter {
+                guard case .success(_) = $0 else { return false }
+                return true
+            }
+            .mapToVoid()
+            .do(onNext: self.showMain)
+    
+        let tokenNil = input.didEndSplash
             .map(self.authUseCase.fetchToken)
             .filter { $0 == nil }
             .mapToVoid()
         
+        let needToLogin = reissueToken
+            .filter {
+                guard case .failure(_) = $0 else { return false }
+                return true
+            }//TODO: 500에러로 변경
+            .mapToVoid()
+        
+        let showLogin = Observable.merge(tokenNil,needToLogin)
+        
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),
-            showLogin: needToLogin.asSignal(onErrorSignalWith: .empty()),
+            showLogin: showLogin.asSignal(onErrorSignalWith: .empty()),
             showMain: autoLogin.asSignal(onErrorSignalWith: .empty())
         )
     }
@@ -67,7 +86,25 @@ private extension SplashViewModel {
         self.coordinator?.showOnboarding()
     }
     
-    func login(token: Token) {
-        self.authUseCase.login(accessToken: token.access, loginType: token.loginType)
+    func showMain() {
+        self.coordinator?.showMain()
+    }
+    
+    func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
+        return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
+    }
+    
+    func convertToUserLoginInfo(_ result: Result<UserLoginInfo, LoginError>) -> UserLoginInfo? {
+        guard case let .success(userLoginInfo) = result  else { return nil }
+        return userLoginInfo
+    }
+    
+    func isAccessTokenExpiration(result: Result<UserLoginInfo,LoginError>) -> Bool {
+        if case let .failure(loginError) = result {
+            if loginError == .accessTokenExpiration {
+                return true
+            }
+        }
+        return false
     }
 }

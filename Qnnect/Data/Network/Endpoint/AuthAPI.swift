@@ -10,6 +10,7 @@ import Moya
 
 enum AuthAPI {
     case login(request: LoginRequestDTO)
+    case reissue(request: ReissueRequestDTO)
 }
 
 extension AuthAPI: TargetType {
@@ -21,12 +22,16 @@ extension AuthAPI: TargetType {
         switch self {
         case .login(_):
             return "api/v1/auth/login"
+        case .reissue(_):
+            return "api/v1/auth/reissue"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .login(_):
+            return .post
+        case .reissue(_):
             return .post
         }
     }
@@ -35,6 +40,8 @@ extension AuthAPI: TargetType {
         switch self {
         case .login(let loginRequestDTO):
             return .requestJSONEncodable(loginRequestDTO)
+        case .reissue(let reissueRequestDTO):
+            return .requestJSONEncodable(reissueRequestDTO)
         }
     }
     

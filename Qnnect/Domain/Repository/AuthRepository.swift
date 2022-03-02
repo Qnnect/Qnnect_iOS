@@ -13,4 +13,6 @@ protocol AuthRepository: AnyObject {
     func fetchToken() -> Token?
     func login(accessToken: String, type: LoginType) -> Observable<Result<UserLoginInfo, LoginError>>
     func saveToken(token: Token)
+    func reissueToken(token: Token) -> Observable<Result<Token,Error>>
+    func updateFirstAccess()
 }

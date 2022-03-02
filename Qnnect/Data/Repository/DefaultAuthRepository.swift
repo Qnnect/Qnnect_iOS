@@ -51,4 +51,24 @@ final class DefaultAuthRepository: AuthRepository {
         }
     }
     
+    func reissueToken(token: Token) -> Observable<Result<Token, Error>> {
+        let request = ReissueRequestDTO(
+            accessToken: token.access,
+            refreshToken: token.refresh
+        )
+        return self.authNetworkService.reissueToken(request: request)
+            .map{
+                result -> Result<Token,Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func updateFirstAccess() {
+        self.localStorage.isFirstAccess = false
+    }
 }

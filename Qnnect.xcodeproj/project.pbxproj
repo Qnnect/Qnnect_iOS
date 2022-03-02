@@ -55,6 +55,8 @@
 		AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */; };
 		AE7F483F27CE679300954971 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483E27CE679300954971 /* Token.swift */; };
 		AE7F484227CE7DB400954971 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F484127CE7DB400954971 /* LoginError.swift */; };
+		AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */; };
+		AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF627CF024E0009EEC6 /* ReissueResponseDTO.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -173,6 +175,8 @@
 		AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoordinator.swift; sourceTree = "<group>"; };
 		AE7F483E27CE679300954971 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		AE7F484127CE7DB400954971 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueRequestDTO.swift; sourceTree = "<group>"; };
+		AEA14CF627CF024E0009EEC6 /* ReissueResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResponseDTO.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -678,6 +682,24 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		AEA14CF227CF01B20009EEC6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AEB8FCFC27C661E8002BDBCD /* LoginRequestDTO.swift */,
+				AEB8FCFE27C6659F002BDBCD /* LoginResponseDTO.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AEA14CF327CF01BA0009EEC6 /* Reissue */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */,
+				AEA14CF627CF024E0009EEC6 /* ReissueResponseDTO.swift */,
+			);
+			path = Reissue;
+			sourceTree = "<group>";
+		};
 		AEA56AF827BF34580029A6CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -707,8 +729,8 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				AEB8FCFC27C661E8002BDBCD /* LoginRequestDTO.swift */,
-				AEB8FCFE27C6659F002BDBCD /* LoginResponseDTO.swift */,
+				AEA14CF327CF01BA0009EEC6 /* Reissue */,
+				AEA14CF227CF01B20009EEC6 /* Login */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -986,6 +1008,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */,
+				AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */,
 				AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */,
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
@@ -1068,6 +1091,7 @@
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
+				AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */,
 				AEBC9EC327C604210070399A /* SplashViewController.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
 				AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */,
