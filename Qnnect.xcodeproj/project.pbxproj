@@ -68,6 +68,7 @@
 		AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */; };
 		AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */; };
 		AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0F27D2879F0009EEC6 /* LoginType.swift */; };
+		AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -198,6 +199,7 @@
 		AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserResponseDTO.swift; sourceTree = "<group>"; };
 		AEA14D0F27D2879F0009EEC6 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				AEEF362F27C351BB00D0A127 /* EditProfileImageView.swift */,
 				AEEF363127C3579300D0A127 /* NameTextField.swift */,
 				AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */,
+				AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
+				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
