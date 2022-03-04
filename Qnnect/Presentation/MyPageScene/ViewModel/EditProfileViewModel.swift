@@ -14,22 +14,35 @@ final class EditProfileViewModel: ViewModelType {
     struct Input {
         let inputName: Observable<String>
         let didTapProfileImageView: Observable<Void>
+        let didTapCompletionButton: Observable<Void>
+        let profileImage: Observable<Data>
+        let user: Observable<User>
     }
     
     struct Output {
         let isVaildName: Signal<Bool>
         let nameLength: Driver<Int>
         let showBottomSheet: Signal<Void>
+        let completion: Signal<Void>
+        let pop: Signal<Void>
     }
+    
     private let authUseCase: AuthUseCase
+    private let userUseCase: UserUseCase
     private weak var coordinator: MyPageCoordinator?
     
-    init(authUseCase: AuthUseCase, coordinator: MyPageCoordinator) {
+    init(
+        authUseCase: AuthUseCase,
+        coordinator: MyPageCoordinator,
+        userUseCase: UserUseCase
+    ) {
         self.authUseCase = authUseCase
         self.coordinator = coordinator
+        self.userUseCase = userUseCase
     }
     
     func transform(from input: Input) -> Output {
+        
         let isValidName = input.inputName
             .compactMap{ $0 } // nil 제거
             .map(self.authUseCase.isVaildName(_:))
@@ -38,10 +51,46 @@ final class EditProfileViewModel: ViewModelType {
             .compactMap{ $0 } // nil 제거
             .map(self.authUseCase.getNameLength(_:))
         
+        let userInfo = Observable.combineLatest(
+            input.profileImage,
+            input.inputName,
+            input.user
+        )
+        
+        let inputChanging = Observable.merge(
+            input.inputName.skip(1)
+                .withLatestFrom(input.user,resultSelector: { ($0,$1) })
+                .filter { [weak self] name, originalUser in
+                    return self?.userUseCase.isModifiedName(inputName: name, originalUser: originalUser) ?? false
+                }.mapToVoid(),
+            input.profileImage.skip(1)
+                .mapToVoid()
+        ).withLatestFrom(userInfo)
+        
+        let updateProfile = input.didTapCompletionButton
+            .withLatestFrom(inputChanging)
+            .map{($0.0 , $0.1)}
+            .flatMap(self.userUseCase.setProfile)
+            .debug()
+            .do {
+                [weak self] _ in
+                self?.coordinator?.pop()
+            }
+            .mapToVoid()
+        
+        let pop = input.didTapCompletionButton
+            .take(until: updateProfile)
+            .do{
+                [weak self] _ in
+                self?.coordinator?.pop()
+            }
+        
         return Output(
             isVaildName: isValidName.asSignal(onErrorJustReturn: false),
             nameLength: nameLength.asDriver(onErrorDriveWith: .empty()),
-            showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty())
+            showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty()),
+            completion: updateProfile.asSignal(onErrorSignalWith: .empty()),
+            pop: pop.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

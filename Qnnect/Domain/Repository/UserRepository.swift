@@ -11,5 +11,6 @@ import RxSwift
 protocol UserRepository: AnyObject {
     func setEnableNotification(isAgreedNoti: Bool, accessToken: String) -> Observable<Void>
     func setProfile(profileImage: Data, name: String, accessToken: String) -> Observable<Result<User,Error>>
+    func setProfile(profileImage: Data, name: String) -> Observable<Result<User,Error>>
     func fetchUser() -> Observable<Result<User,Error>>
 }

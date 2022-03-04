@@ -118,7 +118,11 @@ final class EditProfileViewController: BaseViewController {
                 .asObservable(),
             didTapProfileImageView: self.profileImageView.rx.tapGesture()
                 .when(.recognized)
-                .mapToVoid()
+                .mapToVoid(),
+            didTapCompletionButton: self.completionButton.rx.tap
+                .asObservable(),
+            profileImage: self.profileImageView.imageData,
+            user: Observable.just(self.user)
         )
         
         let output = self.viewModel.transform(from: input)
@@ -140,6 +144,14 @@ final class EditProfileViewController: BaseViewController {
         
         output.showBottomSheet
             .emit(onNext: self.showBottomSheet)
+            .disposed(by: self.disposeBag)
+        
+        output.completion
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.pop
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }
@@ -189,9 +201,14 @@ struct EditProfileViewController_Priviews: PreviewProvider {
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
             let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+            let userRepository = DefaultUserRepositry(
+                userNetworkService: UserNetworkService(),
+                localStorage: DefaultUserDefaultManager()
+            )
+            let userUseCase = DefaultUserUseCase(userRepository: userRepository)
             let vc = EditProfileViewController.create(with: EditProfileViewModel(
                 authUseCase: authUseCase,
-                coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController())
+                coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()), userUseCase: userUseCase
             ), User(name: "제제로", point: 500, profileImage: "")) //보고 싶은 뷰컨 객체
             return vc
         }

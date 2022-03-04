@@ -40,6 +40,21 @@ final class DefaultUserRepositry: UserRepository {
             }
     }
     
+    func setProfile(profileImage: Data, name: String) -> Observable<Result<User, Error>> {
+        guard let token = self.localStorage.token else { return .empty() }
+        let request = SetProfileRequestDTO(profilePicture: profileImage, nickName: name)
+        return self.userNetworkService.setProfile(request: request, accessToken: token.access)
+            .map {
+                result -> Result<User,Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
     func fetchUser() -> Observable<Result<User, Error>> {
         guard let token = self.localStorage.token else { return .empty() }
         return self.userNetworkService.fetchUser(accessToken: token.access)
