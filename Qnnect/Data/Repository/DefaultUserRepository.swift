@@ -11,9 +11,14 @@ import RxSwift
 final class DefaultUserRepositry: UserRepository {
     
     private let userNetworkService: UserNetworkService
+    private let localStorage: UserDefaultManager
     
-    init(userNetworkService: UserNetworkService) {
+    init(
+        userNetworkService: UserNetworkService,
+        localStorage: UserDefaultManager
+    ) {
         self.userNetworkService = userNetworkService
+        self.localStorage = localStorage
     }
     
     func setEnableNotification(isAgreedNoti: Bool, accessToken: String) -> Observable<Void> {
@@ -24,6 +29,20 @@ final class DefaultUserRepositry: UserRepository {
     func setProfile(profileImage: Data, name: String, accessToken: String) -> Observable<Result<User,Error>> {
         let request = SetProfileRequestDTO(profilePicture: profileImage, nickName: name)
         return self.userNetworkService.setProfile(request: request, accessToken: accessToken)
+            .map {
+                result -> Result<User,Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchUser() -> Observable<Result<User, Error>> {
+        guard let token = self.localStorage.token else { return .empty() }
+        return self.userNetworkService.fetchUser(accessToken: token.access)
             .map {
                 result -> Result<User,Error> in
                 switch result {

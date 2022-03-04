@@ -126,6 +126,6 @@ final class PointCell: UITableViewCell {
     }
     
     func update(with point: Int) {
-        self.pointLabel.text = "\(500)P"
+        self.pointLabel.text = "\(point)P"
     }
 }

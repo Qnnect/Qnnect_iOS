@@ -42,7 +42,11 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     
     func showSetProfileScene(token: Token, isAgreedNoti: Bool) {
         let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
-        let userUseCase = DefaultUserUseCase(userRepository: DefaultUserRepositry(userNetworkService: UserNetworkService()))
+        let userRepository = DefaultUserRepositry(
+            userNetworkService: UserNetworkService(),
+            localStorage: DefaultUserDefaultManager()
+        )
+        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
         let viewModel = SetProfileViewModel(
             coordinator: self,
             authUseCase: authUseCase,

@@ -66,6 +66,7 @@
 		AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0527CFB7B10009EEC6 /* User.swift */; };
 		AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */; };
 		AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */; };
+		AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -194,6 +195,7 @@
 		AEA14D0527CFB7B10009EEC6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
 		AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserResponseDTO.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 				AEA14CF927CF749D0009EEC6 /* SetProfileRequestDTO.swift */,
 				AEA14CFB27CF74A70009EEC6 /* SetProfileResponseDTO.swift */,
 				AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */,
+				AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1121,6 +1124,7 @@
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */,
+				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,

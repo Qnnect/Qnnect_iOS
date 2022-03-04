@@ -11,6 +11,7 @@ import Moya
 enum UserAPI {
     case setProfile(request: SetProfileRequestDTO, accessToken: String)
     case setEnableNotification(request: SetEnableNotificationRequestDTO, accessToken: String)
+    case fetchUser(accessToken: String)
 }
 
 extension UserAPI: TargetType {
@@ -24,6 +25,8 @@ extension UserAPI: TargetType {
             return "api/v1/user/profile"
         case .setEnableNotification(_,_):
             return "api/v1/user/enablenotification"
+        case .fetchUser(_):
+            return "api/v1/user"
         }
     }
     
@@ -33,6 +36,8 @@ extension UserAPI: TargetType {
             return .patch
         case .setEnableNotification(_,_):
             return .patch
+        case .fetchUser(_):
+            return .get
         }
     }
     
@@ -47,6 +52,8 @@ extension UserAPI: TargetType {
         case .setEnableNotification(let request,_):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .fetchUser(_):
+            return .requestPlain
         }
     }
     
@@ -57,7 +64,7 @@ extension UserAPI: TargetType {
                 "Content-Type": "multipart/form-data",
                 "Authorization": "Bearer \(accessToken)"
             ]
-        case .setEnableNotification(_,let accessToken):
+        case .setEnableNotification(_,let accessToken), .fetchUser(let accessToken):
             return [
                 "Content-Type": "application/json",
                 "Authorization": "Bearer \(accessToken)"

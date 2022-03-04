@@ -14,6 +14,7 @@ final class HomeViewModel: ViewModelType {
     struct Input {
         let didTapAddGroupButton: Observable<Void>
         let curQuestionPage: Observable<Int>
+        let viewWillAppear: Observable<Void>
     }
     
     struct Output {
@@ -29,9 +30,11 @@ final class HomeViewModel: ViewModelType {
     func transform(from input: Input) -> Output {
         
         let showAddGroupBottomSheet = input.didTapAddGroupButton
-            .do(onNext: { [weak self] _ in
+            .do{ [weak self] _ in
                 self?.coordinator?.showAddGroupBottomSheet()
-            })
+            }
+        
+                
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
             curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0)

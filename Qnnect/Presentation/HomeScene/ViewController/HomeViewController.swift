@@ -11,6 +11,7 @@ import Then
 import RxCocoa
 import RxDataSources
 import RxSwift
+import RxAppState
 
 final class HomeViewController: BaseViewController {
     
@@ -206,7 +207,8 @@ final class HomeViewController: BaseViewController {
                     let point = param[1] as? CGPoint ?? .zero
                     let env = param[2] as! NSCollectionLayoutEnvironment
                     return Int(max(0, round(point.x / env.container.contentSize.width)))
-                }
+                },
+            viewWillAppear: self.rx.viewWillAppear.mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)

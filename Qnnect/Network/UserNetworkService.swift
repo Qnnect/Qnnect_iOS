@@ -30,4 +30,13 @@ final class UserNetworkService: Networkable {
             .asObservable()
             .mapToVoid()
     }
+    
+    func fetchUser(accessToken: String) -> Observable<Result<FetchUserResponseDTO,Error>>{
+        return provider.rx.request(.fetchUser(accessToken: accessToken))
+            .filter(statusCode: 200)
+            .map(FetchUserResponseDTO.self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

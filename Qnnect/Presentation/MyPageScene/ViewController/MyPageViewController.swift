@@ -60,15 +60,29 @@ final class MyPageViewController: BaseViewController {
     
     override func bind() {
         
-        let dummyUser = Observable.just(User(name: "", point: 500, profileImage: ""))
-        let dummyPoint = Observable.just(500)
         let items = Observable.just(MyPageItem.allCases)
+
+        let input = MyPageViewModel.Input(
+            didTapProfileCell: self.mainTableView.rx.itemSelected
+                .filter{ $0.section == 0}
+                .mapToVoid(),
+            viewWillAppear: self.rx.viewWillAppear.mapToVoid()
+        )
+        
+        self.mainTableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showEditProfileScene
+            .emit()
+            .disposed(by: self.disposeBag)
         
         let dataSource = self.createDataSource()
-        Observable.combineLatest(dummyUser, dummyPoint, items)
-            .map{ user,point,items -> [MyPageSectionModel] in
+        Observable.combineLatest(output.user.asObservable(), items)
+            .map{ user,items -> [MyPageSectionModel] in
                 let profileSectionItem = MyPageSectionItem.profileSectionItem(user: user)
-                let pointSectionItem = MyPageSectionItem.pointSectionItem(point: point)
+                let pointSectionItem = MyPageSectionItem.pointSectionItem(point: user.point)
                 let myPageListSectionItem = items.map { MyPageSectionItem.itemListSectionItem(item: $0)}
                 
                 return [
@@ -78,20 +92,6 @@ final class MyPageViewController: BaseViewController {
                 ]
             }
             .bind(to: self.mainTableView.rx.items(dataSource: dataSource))
-            .disposed(by: self.disposeBag)
-        
-
-        let input = MyPageViewModel.Input(didTapProfileCell: self.mainTableView.rx.itemSelected
-                                            .filter{ $0.section == 0}
-                                            .mapToVoid()
-        )
-        
-        self.mainTableView.rx.setDelegate(self)
-            .disposed(by: self.disposeBag)
-        let output = self.viewModel.transform(from: input)
-        
-        output.showEditProfileScene
-            .emit()
             .disposed(by: self.disposeBag)
     }
 }
@@ -119,6 +119,7 @@ private extension MyPageViewController {
             return " "
         }
     }
+    
 }
 
 extension MyPageViewController: UITableViewDelegate {
@@ -147,7 +148,12 @@ struct MyPageViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = MyPageViewController.create(with: MyPageViewModel(coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()))) //보고 싶은 뷰컨 객체
+            let userRepository = DefaultUserRepositry(
+                userNetworkService: UserNetworkService(),
+                localStorage: DefaultUserDefaultManager()
+            )
+            let userUseCase = DefaultUserUseCase(userRepository: userRepository)
+            let vc = MyPageViewController.create(with: MyPageViewModel(coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()), userUseCase: userUseCase)) //보고 싶은 뷰컨 객체
             return vc
         }
         

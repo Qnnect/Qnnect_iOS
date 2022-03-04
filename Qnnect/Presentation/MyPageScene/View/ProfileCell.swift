@@ -17,6 +17,7 @@ final class ProfileCell: UITableViewCell {
         $0.layer.cornerRadius = Constants.myPageProfileImageHeight / 2.0
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.profileImageBorder?.cgColor
+        $0.clipsToBounds = true
     }
     
     private let nameLabel = UILabel().then {
@@ -72,7 +73,10 @@ final class ProfileCell: UITableViewCell {
     
     
     func update(with user: User) {
-        self.nameLabel.text = "아아메"
-        self.profileImageView.image = Constants.profileDefaultImage
+        self.nameLabel.text = user.name
+        self.profileImageView.kf.setImage(
+            with: URL(string:user.profileImage),
+            placeholder: Constants.profileDefaultImage
+        )
     }
 }

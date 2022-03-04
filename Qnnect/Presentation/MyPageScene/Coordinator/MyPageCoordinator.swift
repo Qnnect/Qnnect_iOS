@@ -22,7 +22,12 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
     
     func start() {
-        let viewModel = MyPageViewModel(coordinator: self)
+        let userRepository = DefaultUserRepositry(
+            userNetworkService: UserNetworkService(),
+            localStorage: DefaultUserDefaultManager()
+        )
+        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
+        let viewModel = MyPageViewModel(coordinator: self,userUseCase: userUseCase)
         let vc = MyPageViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
