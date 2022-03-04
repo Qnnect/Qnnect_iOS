@@ -16,6 +16,7 @@ final class TermsViewModel: ViewModelType {
         let didCheckAllAgreement: Observable<Bool>
         let checkeditem: Observable<(personal: Bool, service: Bool, pushNoti: Bool)>
         let token: Observable<Token>
+        let loginType: Observable<LoginType>
     }
     
     struct Output {
@@ -43,10 +44,10 @@ final class TermsViewModel: ViewModelType {
             }
         
         let start = input.didTapAgreementButton
-            .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti))
+            .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti, input.loginType))
             .do {
-                [weak self] token, isAgreedNoti in
-                self?.coordinator?.showSetProfileScene(token: token, isAgreedNoti: isAgreedNoti)
+                [weak self] token, isAgreedNoti, loginType in
+                self?.coordinator?.showSetProfileScene(token: token, isAgreedNoti: isAgreedNoti, loginType: loginType)
             }
             .mapToVoid()
             

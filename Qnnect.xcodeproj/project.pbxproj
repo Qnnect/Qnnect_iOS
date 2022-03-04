@@ -67,6 +67,7 @@
 		AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */; };
 		AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */; };
 		AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */; };
+		AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0F27D2879F0009EEC6 /* LoginType.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -196,6 +197,7 @@
 		AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
 		AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14D0F27D2879F0009EEC6 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
 				AE7F483E27CE679300954971 /* Token.swift */,
 				AEA14D0527CFB7B10009EEC6 /* User.swift */,
+				AEA14D0F27D2879F0009EEC6 /* LoginType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
+				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,

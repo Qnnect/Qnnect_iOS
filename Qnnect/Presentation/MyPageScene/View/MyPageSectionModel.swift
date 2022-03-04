@@ -37,7 +37,7 @@ enum MyPageSectionModel {
 }
 
 enum MyPageSectionItem {
-    case profileSectionItem(user: User)
+    case profileSectionItem(user: User, loginType: LoginType)
     case pointSectionItem(point: Int)
     case itemListSectionItem(item: MyPageItem)
 }

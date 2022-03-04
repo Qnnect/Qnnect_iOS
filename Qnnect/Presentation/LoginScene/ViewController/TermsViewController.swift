@@ -59,11 +59,13 @@ final class TermsViewController: BaseViewController {
     }
     private var viewModel: TermsViewModel!
     private var token: Token!
+    private var loginType: LoginType!
     
-    static func create(with viewModel: TermsViewModel, _ token: Token) -> TermsViewController {
+    static func create(with viewModel: TermsViewModel, _ token: Token, _ loginType: LoginType) -> TermsViewController {
         let vc = TermsViewController()
         vc.viewModel = viewModel
         vc.token = token
+        vc.loginType = loginType
         return vc
     }
     
@@ -165,9 +167,10 @@ final class TermsViewController: BaseViewController {
                     return !self.allAgreementView.checkBox.isSelected
                 },
             checkeditem: items,
-            token: Observable.just(self.token)
+            token: Observable.just(self.token),
+            loginType: Observable.just(self.loginType)
         )
-    
+        
         let output = self.viewModel.transform(from: input)
         
         output.start

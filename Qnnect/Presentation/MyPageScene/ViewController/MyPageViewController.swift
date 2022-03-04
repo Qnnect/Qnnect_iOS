@@ -66,7 +66,8 @@ final class MyPageViewController: BaseViewController {
             didTapProfileCell: self.mainTableView.rx.itemSelected
                 .filter{ $0.section == 0}
                 .mapToVoid(),
-            viewWillAppear: self.rx.viewWillAppear.mapToVoid()
+            viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
+            viewDidLoad: Observable.just(())
         )
         
         self.mainTableView.rx.setDelegate(self)
@@ -79,9 +80,9 @@ final class MyPageViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         let dataSource = self.createDataSource()
-        Observable.combineLatest(output.user.asObservable(), items)
-            .map{ user,items -> [MyPageSectionModel] in
-                let profileSectionItem = MyPageSectionItem.profileSectionItem(user: user)
+        Observable.combineLatest(output.user.asObservable(), items, output.loginType.asObservable())
+            .map{ user, items, loginType -> [MyPageSectionModel] in
+                let profileSectionItem = MyPageSectionItem.profileSectionItem(user: user,loginType:  loginType)
                 let pointSectionItem = MyPageSectionItem.pointSectionItem(point: user.point)
                 let myPageListSectionItem = items.map { MyPageSectionItem.itemListSectionItem(item: $0)}
                 
@@ -100,9 +101,9 @@ private extension MyPageViewController {
     func createDataSource() -> RxTableViewSectionedReloadDataSource<MyPageSectionModel> {
         return RxTableViewSectionedReloadDataSource<MyPageSectionModel> { datasource, tableView, indexPath, item in
             switch item {
-            case .profileSectionItem(let user):
+            case let .profileSectionItem(user,loginType):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-                cell.update(with: user)
+                cell.update(with: user,loginType)
                 return cell
             case .pointSectionItem(let point):
                 let cell = tableView.dequeueReusableCell(withIdentifier: PointCell.identifier, for: indexPath) as! PointCell

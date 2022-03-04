@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AuthCoordinator: Coordinator {
-    func showSetProfileScene(token: Token, isAgreedNoti: Bool)
-    func showTermsVC(token: Token)
+    func showSetProfileScene(token: Token, isAgreedNoti: Bool, loginType: LoginType)
+    func showTermsVC(token: Token, loginType: LoginType)
     func showMain()
 }
 final class DefaultAuthCoordinator: AuthCoordinator {
@@ -40,7 +40,7 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         self.navigationController.viewControllers.removeAll { $0 != vc }
     }
     
-    func showSetProfileScene(token: Token, isAgreedNoti: Bool) {
+    func showSetProfileScene(token: Token, isAgreedNoti: Bool, loginType: LoginType) {
         let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
         let userRepository = DefaultUserRepositry(
             userNetworkService: UserNetworkService(),
@@ -52,19 +52,19 @@ final class DefaultAuthCoordinator: AuthCoordinator {
             authUseCase: authUseCase,
             userUseCase: userUseCase
         )
-        let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti)
+        let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti, loginType)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.authManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showTermsVC(token: Token) {
+    func showTermsVC(token: Token, loginType: LoginType) {
         let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
         let viewModel = TermsViewModel(
             coordinator: self,
             authUseCase: authUseCase
         )
-        let vc = TermsViewController.create(with: viewModel,token)
+        let vc = TermsViewController.create(with: viewModel,token,loginType)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

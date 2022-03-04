@@ -16,6 +16,7 @@ protocol AuthUseCase: InputUseCase {
     func saveToken(token: Token)
     func reissueToken(token: Token) -> Observable<Result<Token, Error>>
     func updateFirstAccess()
+    func saveLoginType(_ type: LoginType)
 }
 
 final class DefaultAuthUseCase: AuthUseCase {
@@ -52,5 +53,9 @@ final class DefaultAuthUseCase: AuthUseCase {
     
     func updateFirstAccess() {
         return self.authRepository.updateFirstAccess()
+    }
+    
+    func saveLoginType(_ type: LoginType) {
+        self.authRepository.saveLoginType(type)
     }
 }

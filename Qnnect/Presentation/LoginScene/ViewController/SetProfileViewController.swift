@@ -69,12 +69,19 @@ final class SetProfileViewController: BaseViewController {
     private var viewModel: SetProfileViewModel!
     private var token: Token!
     private var isAgreedNoti: Bool!
+    private var loginType: LoginType!
     
-    static func create(with viewModel: SetProfileViewModel,_ token: Token, _ isAgreedNoti: Bool) -> SetProfileViewController {
+    static func create(
+        with viewModel: SetProfileViewModel,
+        _ token: Token,
+        _ isAgreedNoti: Bool,
+        _ loginType: LoginType
+    ) -> SetProfileViewController {
         let vc = SetProfileViewController()
         vc.viewModel = viewModel
         vc.token = token
         vc.isAgreedNoti = isAgreedNoti
+        vc.loginType = loginType
         return vc
     }
     
@@ -135,7 +142,8 @@ final class SetProfileViewController: BaseViewController {
             viewDidLoad: Observable.just(()),
             token: Observable.just(self.token),
             isAgreedNoti: Observable.just(self.isAgreedNoti),
-            profileImageData: self.editProfileImageView.imageData
+            profileImageData: self.editProfileImageView.imageData,
+            loginType: Observable.just(self.loginType)
         )
         
         let output = self.viewModel.transform(from: input)

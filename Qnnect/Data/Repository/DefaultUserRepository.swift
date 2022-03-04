@@ -68,4 +68,8 @@ final class DefaultUserRepositry: UserRepository {
                 }
             }
     }
+    
+    func fetchLoginType() -> LoginType? {
+        return self.localStorage.loginType
+    }
 }

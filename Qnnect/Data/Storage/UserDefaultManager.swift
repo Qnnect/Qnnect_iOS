@@ -7,14 +7,12 @@
 
 import Foundation
 
-enum LoginType: String,Codable {
-    case kakao
-    case apple
-}
+
 
 protocol UserDefaultManager: AnyObject {
     var token: Token? { get set }
     var isFirstAccess: Bool? { get set }
+    var loginType: LoginType? { get set }
 }
 
 final class DefaultUserDefaultManager: UserDefaultManager {
@@ -46,6 +44,17 @@ final class DefaultUserDefaultManager: UserDefaultManager {
         
         set {
             UserDefaults.standard.setValue(newValue, forKey: "isFirstAccess")
+        }
+    }
+    
+    var loginType: LoginType? {
+        
+        get {
+            return LoginType(rawValue: UserDefaults.standard.object(forKey: "LoginType") as? String ?? "")
+        }
+        
+        set {
+            UserDefaults.standard.setValue(newValue?.rawValue, forKey: "LoginType")
         }
     }
 }

@@ -71,4 +71,8 @@ final class DefaultAuthRepository: AuthRepository {
     func updateFirstAccess() {
         self.localStorage.isFirstAccess = false
     }
+    
+    func saveLoginType(_ type: LoginType) {
+        self.localStorage.loginType = type
+    }
 }

@@ -16,11 +16,13 @@ final class MyPageViewModel: ViewModelType {
         //TODO: 나중에 프로필이랑 이미지 사진 전송해야함 Void -> User
         let didTapProfileCell: Observable<Void>
         let viewWillAppear: Observable<Void>
+        let viewDidLoad: Observable<Void>
     }
     
     struct Output {
         let showEditProfileScene: Signal<Void>
         let user: Driver<User>
+        let loginType: Driver<LoginType>
     }
     
     private weak var coordinator: MyPageCoordinator?
@@ -51,9 +53,13 @@ final class MyPageViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let loginType = input.viewDidLoad
+            .map(self.userUseCase.fetchLoginType)
+        
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
-            user: fetchedUser.asDriver(onErrorDriveWith: .empty())
+            user: fetchedUser.asDriver(onErrorDriveWith: .empty()),
+            loginType: loginType.asDriver(onErrorJustReturn: .unknown)
         )
     }
 }

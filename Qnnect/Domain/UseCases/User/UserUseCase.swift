@@ -14,6 +14,7 @@ protocol UserUseCase: AnyObject {
     func setProfile(profileImage: Data, name: String) -> Observable<Result<User,Error>>
     func fetchUser() -> Observable<Result<User,Error>>
     func isModifiedName(inputName: String, originalUser: User) -> Bool
+    func fetchLoginType() -> LoginType
 }
 
 final class DefaultUserUseCase: UserUseCase {
@@ -41,5 +42,9 @@ final class DefaultUserUseCase: UserUseCase {
     
     func isModifiedName(inputName: String, originalUser: User) -> Bool {
         return originalUser.name != inputName 
+    }
+    
+    func fetchLoginType() -> LoginType {
+        return self.userRepository.fetchLoginType() ?? .unknown
     }
 }

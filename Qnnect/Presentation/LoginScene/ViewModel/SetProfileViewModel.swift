@@ -19,6 +19,7 @@ final class SetProfileViewModel: ViewModelType {
         let token: Observable<Token>
         let isAgreedNoti: Observable<Bool>
         let profileImageData: Observable<Data>
+        let loginType: Observable<LoginType>
     }
     
     struct Output {
@@ -73,10 +74,11 @@ final class SetProfileViewModel: ViewModelType {
             }
         
         let completion = Observable.zip(settingEnableNotification, settingProfile)
-            .withLatestFrom(input.token)
+            .withLatestFrom(Observable.combineLatest(input.token, input.loginType))
             .do {
-                [weak self] token in
+                [weak self] token,loginType in
                 self?.authUseCase.saveToken(token: token)
+                self?.authUseCase.saveLoginType(loginType)
             }
             .mapToVoid()
             .do {
