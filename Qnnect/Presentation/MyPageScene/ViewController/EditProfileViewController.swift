@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 final class EditProfileViewController: BaseViewController {
-        
+    
     private let profileImageView = EditProfileImageView().then {
         $0.setImage(image: Constants.profileDefaultImage)
     }
@@ -35,6 +35,28 @@ final class EditProfileViewController: BaseViewController {
         $0.isEnabled = false
         $0.layer.cornerRadius = 10.0
     }
+    
+    private lazy var bottomSheet: UIAlertController = {
+        let sheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let galleryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
+            self.present(self.imagePickController, animated: true, completion: nil)
+        }
+        let defaultImageAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { _ in
+            self.profileImageView.setImage(image: Constants.profileDefaultImage)
+        }
+        
+        let cancelAction = UIAlertAction(title:"취소",style: .cancel)
+        sheet.addAction(galleryAction)
+        sheet.addAction(defaultImageAction)
+        sheet.addAction(cancelAction)
+        return sheet
+    }()
+    
+    private lazy var imagePickController: UIImagePickerController = {
+        let controller = UIImagePickerController()
+        controller.sourceType = .photoLibrary
+        return controller
+    }()
     
     private var viewModel: EditProfileViewModel!
     
@@ -93,7 +115,10 @@ final class EditProfileViewController: BaseViewController {
         
         let input = EditProfileViewModel.Input(
             inputName: self.nameTextField.textField.rx.text.orEmpty
-                .asObservable()
+                .asObservable(),
+            didTapProfileImageView: self.profileImageView.rx.tapGesture()
+                .when(.recognized)
+                .mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -103,20 +128,42 @@ final class EditProfileViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.isVaildName
-            .do(onNext: {
+            .do{
                 [weak self] isValid in
                 UIView.animate(withDuration: 0.5) {
                     self?.nameTextField.setCautionLabel(isValid)
                     self?.view.layoutIfNeeded()
                 }
-            })
-                .emit(to: self.completionButton.rx.setEnabled)
-                .disposed(by: self.disposeBag)
-                }
+            }
+            .emit(to: self.completionButton.rx.setEnabled)
+            .disposed(by: self.disposeBag)
+        
+        output.showBottomSheet
+            .emit(onNext: self.showBottomSheet)
+            .disposed(by: self.disposeBag)
+    }
 }
 
 private extension EditProfileViewController {
-   
+    func showBottomSheet() {
+        self.present(self.bottomSheet, animated: true, completion: nil)
+    }
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate&UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var newImage: UIImage? = nil // update 할 이미지
+        
+        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            newImage = possibleImage // 수정된 이미지가 있을 경우
+        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            newImage = possibleImage // 원본 이미지가 있을 경우
+        }
+        
+        self.profileImageView.setImage(image: newImage) // 받아온 이미지를 update
+        picker.dismiss(animated: true, completion: nil) // picker를 닫아줌
+    }
 }
 
 // MARK: - 최대 글자 수 이상 입력 제한

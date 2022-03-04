@@ -13,11 +13,13 @@ final class EditProfileViewModel: ViewModelType {
     
     struct Input {
         let inputName: Observable<String>
+        let didTapProfileImageView: Observable<Void>
     }
     
     struct Output {
         let isVaildName: Signal<Bool>
         let nameLength: Driver<Int>
+        let showBottomSheet: Signal<Void>
     }
     private let authUseCase: AuthUseCase
     private weak var coordinator: MyPageCoordinator?
@@ -38,7 +40,8 @@ final class EditProfileViewModel: ViewModelType {
         
         return Output(
             isVaildName: isValidName.asSignal(onErrorJustReturn: false),
-            nameLength: nameLength.asDriver(onErrorDriveWith: .empty())
+            nameLength: nameLength.asDriver(onErrorDriveWith: .empty()),
+            showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
