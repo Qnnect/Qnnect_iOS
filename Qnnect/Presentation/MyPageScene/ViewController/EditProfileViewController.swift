@@ -12,9 +12,7 @@ import RxSwift
 import RxCocoa
 
 final class EditProfileViewController: BaseViewController {
-    
-    private var viewModel: EditProfileViewModel!
-    
+        
     private let profileImageView = EditProfileImageView().then {
         $0.setImage(image: Constants.profileDefaultImage)
     }
@@ -37,9 +35,15 @@ final class EditProfileViewController: BaseViewController {
         $0.isEnabled = false
         $0.layer.cornerRadius = 10.0
     }
-    static func create(with viewModel: EditProfileViewModel) -> EditProfileViewController {
+    
+    private var viewModel: EditProfileViewModel!
+    
+    private var user: User!
+    
+    static func create(with viewModel: EditProfileViewModel, _ user: User) -> EditProfileViewController {
         let vc = EditProfileViewController()
         vc.viewModel = viewModel
+        vc.user = user
         return vc
     }
     
@@ -68,12 +72,15 @@ final class EditProfileViewController: BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide).inset(48.0)
         }
         
+        self.profileImageView.setImage(url: URL(string: self.user.profileImage))
+        
         self.nameTextField.snp.makeConstraints { make in
             make.top.equalTo(self.profileImageView.snp.bottom).offset(24.0)
             make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
         }
         
         self.nameTextField.textField.delegate = self
+        self.nameTextField.textField.text = self.user.name
         
         self.completionButton.snp.makeConstraints { make in
             make.top.equalTo(self.nameTextField.snp.bottom).offset(72.0)
@@ -138,7 +145,7 @@ struct EditProfileViewController_Priviews: PreviewProvider {
             let vc = EditProfileViewController.create(with: EditProfileViewModel(
                 authUseCase: authUseCase,
                 coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController())
-            )) //보고 싶은 뷰컨 객체
+            ), User(name: "제제로", point: 500, profileImage: "")) //보고 싶은 뷰컨 객체
             return vc
         }
         

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MyPageCoordinator: Coordinator {
-    func showEditProfileScene()
+    func showEditProfileScene(user: User)
 }
 
 final class DefaultMyPageCoordinator: MyPageCoordinator {
@@ -32,13 +32,13 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
         
-    func showEditProfileScene() {
+    func showEditProfileScene(user: User) {
         let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
         let viewModel = EditProfileViewModel(
             authUseCase: authUseCase,
             coordinator: self
         )
-        let vc = EditProfileViewController.create(with: viewModel)
+        let vc = EditProfileViewController.create(with: viewModel,user)
         self.navigationController.pushViewController(vc, animated: true)
     }
 }

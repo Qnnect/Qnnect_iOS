@@ -35,12 +35,6 @@ final class MyPageViewModel: ViewModelType {
     }
     
     func transform(from input: Input) -> Output {
-        
-        let showEditProfileScene = input.didTapProfileCell
-            .do{
-                [weak self] _ in
-                self?.coordinator?.showEditProfileScene()
-            }
             
         let fetchedUser = input.viewWillAppear
             .flatMap(self.userUseCase.fetchUser)
@@ -48,6 +42,14 @@ final class MyPageViewModel: ViewModelType {
                 guard case let .success(user) = result else { return nil }
                 return user
             }
+        
+        let showEditProfileScene = input.didTapProfileCell
+            .withLatestFrom(fetchedUser)
+            .do{
+                [weak self] user in
+                self?.coordinator?.showEditProfileScene(user: user)
+            }
+            .mapToVoid()
         
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
