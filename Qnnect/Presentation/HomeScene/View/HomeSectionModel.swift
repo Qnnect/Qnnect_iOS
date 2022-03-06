@@ -15,7 +15,7 @@ enum HomeSectionModel {
 }
 enum HomeSectionItem {
     case titleSectionItem(user: User)
-    case todayQuestionSectionItem(question: Question)
+    case todayQuestionSectionItem(question: Question_test)
     case mygroupSectionItem(group: Group)
 }
 

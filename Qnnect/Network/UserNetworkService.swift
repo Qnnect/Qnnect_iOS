@@ -9,14 +9,10 @@ import Foundation
 import RxSwift
 import Moya
 
-final class UserNetworkService: Networkable {
-    
-    typealias Target = UserAPI
-    
-    private let provider = makeProvider()
-    
-    func setProfile(request: SetProfileRequestDTO, accessToken: String) -> Observable<Result<SetProfileResponseDTO,Error>>{
-        return provider.rx.request(.setProfile(request: request,accessToken: accessToken))
+final class UserNetworkService: BaseNetworkService<UserAPI> {
+        
+    func setProfile(request: SetProfileRequestDTO) -> Observable<Result<SetProfileResponseDTO,Error>>{
+        return self.request(.setProfile(request: request))
             .filter(statusCode: 200)
             .map(SetProfileResponseDTO.self)
             .map{ Result.success($0)}
@@ -24,15 +20,15 @@ final class UserNetworkService: Networkable {
             .asObservable()
     }
     
-    func setEnableNotification(request: SetEnableNotificationRequestDTO, accessToken: String) -> Observable<Void> {
-        return provider.rx.request(.setEnableNotification(request: request,accessToken: accessToken))
+    func setEnableNotification(request: SetEnableNotificationRequestDTO) -> Observable<Void> {
+        return self.request(.setEnableNotification(request: request))
             .filter(statusCode: 200)
             .asObservable()
             .mapToVoid()
     }
     
-    func fetchUser(accessToken: String) -> Observable<Result<FetchUserResponseDTO,Error>>{
-        return provider.rx.request(.fetchUser(accessToken: accessToken))
+    func fetchUser() -> Observable<Result<FetchUserResponseDTO,Error>>{
+        return self.request(.fetchUser(()))
             .filter(statusCode: 200)
             .map(FetchUserResponseDTO.self)
             .map{ Result.success($0)}

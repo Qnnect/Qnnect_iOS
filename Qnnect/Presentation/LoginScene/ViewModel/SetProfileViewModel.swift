@@ -58,14 +58,18 @@ final class SetProfileViewModel: ViewModelType {
         
         let setting = input.didTapCompletionButton
             .withLatestFrom(userInfo)
+            .do{
+                [weak self] token, _ , _ , _ in
+                self?.authUseCase.saveToken(access: token.access, refresh: token.refresh)
+            }
             .share()
         
         let settingEnableNotification = setting
-            .map{ ($0.1,$0.0.access) }
+            .map{ ($0.1) }
             .flatMap(self.userUseCase.setEnableNotification)
             
         let settingProfile = setting
-            .map{ ($0.2, $0.3, $0.0.access) }
+            .map{ ($0.2, $0.3) }
             .flatMap(self.userUseCase.setProfile)
             .compactMap{
                 result -> User? in
@@ -74,10 +78,9 @@ final class SetProfileViewModel: ViewModelType {
             }
         
         let completion = Observable.zip(settingEnableNotification, settingProfile)
-            .withLatestFrom(Observable.combineLatest(input.token, input.loginType))
+            .withLatestFrom(input.loginType)
             .do {
-                [weak self] token,loginType in
-                self?.authUseCase.saveToken(token: token)
+                [weak self] loginType in
                 self?.authUseCase.saveLoginType(loginType)
             }
             .mapToVoid()

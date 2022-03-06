@@ -1,16 +1,16 @@
 //
-//  ToDayQuestionCell.swift
+//  GroupQuestionCell.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/02/18.
+//  Created by 재영신 on 2022/03/05.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-final class TodayQuestionCell: UICollectionViewCell {
-    static let identifier = "TodayQuestionCell"
+final class GroupToDayQuestionCell: UICollectionViewCell {
+    static let identifier = "GroupToDayQuestionCell"
     
     private let groupNameLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
@@ -104,24 +104,3 @@ final class TodayQuestionCell: UICollectionViewCell {
         
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13.0, *)
-struct presentable: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) { }
-    func makeUIView(context: Context) -> some UIView {
-        let a = TodayQuestionCell()
-        a.update(with: Question_test(groupName: "INFP5인방", d_day: "D-7", content: "Dsfadsfasdfsdafasdfdasfsdakjfsdikfjasdfjsdffsdak;fjasdklfjasdklsd"))
-        return a
-    }
-}
-
-@available(iOS 13.0, *)
-struct TodayQuestionCell_Priview: PreviewProvider {
-    static var previews: some View {
-        presentable()
-            .previewLayout(.fixed(width: 333.0, height: 200.0))
-    }
-}
-#endif

@@ -10,31 +10,11 @@ import Foundation
 
 
 protocol UserDefaultManager: AnyObject {
-    var token: Token? { get set }
     var isFirstAccess: Bool? { get set }
     var loginType: LoginType? { get set }
 }
 
 final class DefaultUserDefaultManager: UserDefaultManager {
-    
-    var token: Token? {
-        get {
-            if let data = UserDefaults.standard.object(forKey: "token") as? Data {
-                if let token = try? JSONDecoder().decode(Token.self, from: data) {
-                    print("token get : \(token)")
-                    return token
-                }
-            }
-            return nil
-        }
-        
-        set {
-            if let token = try? JSONEncoder().encode(newValue) {
-                UserDefaults.standard.setValue(token, forKey: "token")
-                print("token set : \(String(describing: newValue))")
-            }
-        }
-    }
     
     var isFirstAccess: Bool? {
         

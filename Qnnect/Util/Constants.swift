@@ -78,4 +78,8 @@ struct Constants {
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
         $0.width = 18.0
     }
+    
+    // MARK: - Key
+    static let accessTokenKey: String = "accessToken"
+    static let refreshTokenKey: String = "refreshToken"
 }

@@ -27,7 +27,11 @@ final class DefaultAuthRepository: AuthRepository {
     }
     
     func fetchToken() -> Token? {
-        return self.localStorage.token
+        guard let accessToken = KeyChain.read(key: Constants.accessTokenKey),
+              let refreshToken = KeyChain.read(key: Constants.refreshTokenKey)
+        else { return nil }
+        
+        return Token(access: accessToken, refresh: refreshToken)
     }
     
     func login(accessToken: String, type: LoginType) -> Observable<Result<UserLoginInfo, LoginError>> {
@@ -44,10 +48,12 @@ final class DefaultAuthRepository: AuthRepository {
             }
     }
     
-    func saveToken(token: Token) {
-        localStorage.token = token
-        if let token = localStorage.token {
-            print("token save success 😎!!!: \(token)")
+    func saveToken(access: String, refresh: String) {
+        KeyChain.create(key: Constants.accessTokenKey, token: access)
+        KeyChain.create(key: Constants.refreshTokenKey, token: refresh)
+        if let accessToken = KeyChain.read(key: Constants.accessTokenKey),
+           let refreshToken = KeyChain.read(key: Constants.refreshTokenKey) {
+            print("token save success 😎  access: \(accessToken), refresh: \(refreshToken)")
         }
     }
     

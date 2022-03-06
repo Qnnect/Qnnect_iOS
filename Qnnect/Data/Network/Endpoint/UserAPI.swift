@@ -9,67 +9,69 @@ import Foundation
 import Moya
 
 enum UserAPI {
-    case setProfile(request: SetProfileRequestDTO, accessToken: String)
-    case setEnableNotification(request: SetEnableNotificationRequestDTO, accessToken: String)
-    case fetchUser(accessToken: String)
+    case setProfile(request: SetProfileRequestDTO)
+    case setEnableNotification(request: SetEnableNotificationRequestDTO)
+    case fetchUser(Void)
 }
 
-extension UserAPI: TargetType {
+extension UserAPI: TargetType, AccessTokenAuthorizable {
     var baseURL: URL {
         return APP.baseURL
     }
     
     var path: String {
         switch self {
-        case .setProfile(_,_):
+        case .setProfile(_):
             return "api/v1/user/profile"
-        case .setEnableNotification(_,_):
+        case .setEnableNotification(_):
             return "api/v1/user/enablenotification"
-        case .fetchUser(_):
+        case .fetchUser():
             return "api/v1/user"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .setProfile(_,_):
+        case .setProfile(_):
             return .patch
-        case .setEnableNotification(_,_):
+        case .setEnableNotification(_):
             return .patch
-        case .fetchUser(_):
+        case .fetchUser():
             return .get
         }
     }
     
     var task: Task {
         switch self {
-        case .setProfile(let request,_):
+        case .setProfile(let request):
             let imageData = request.profilePicture
             let name = request.nickName.data(using: .utf8) ?? Data()
             var formData: [Moya.MultipartFormData] = [Moya.MultipartFormData(provider: .data(imageData), name: "profilePicture", fileName: "profilePicture", mimeType: "image/png")]
             formData.append(Moya.MultipartFormData(provider: .data(name), name: "nickName"))
             return .uploadMultipart(formData)
-        case .setEnableNotification(let request,_):
+        case .setEnableNotification(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-        case .fetchUser(_):
+        case .fetchUser():
             return .requestPlain
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .setProfile(_,let accessToken):
+        case .setProfile(_):
             return [
-                "Content-Type": "multipart/form-data",
-                "Authorization": "Bearer \(accessToken)"
+                "Content-Type": "multipart/form-data"
+               
             ]
-        case .setEnableNotification(_,let accessToken), .fetchUser(let accessToken):
+        case .setEnableNotification(_), .fetchUser():
             return [
-                "Content-Type": "application/json",
-                "Authorization": "Bearer \(accessToken)"
+                "Content-Type": "application/json"
             ]
         }
     }
     
+    var authorizationType: AuthorizationType? {
+        return .bearer
+    }
 }

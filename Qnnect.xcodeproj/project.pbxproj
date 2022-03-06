@@ -69,10 +69,19 @@
 		AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */; };
 		AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0F27D2879F0009EEC6 /* LoginType.swift */; };
 		AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */; };
+		AEA14D1427D320530009EEC6 /* GroupTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */; };
+		AEA14D1627D323530009EEC6 /* GroupDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */; };
+		AEA14D1827D326D40009EEC6 /* GroupToDayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */; };
+		AEA14D1B27D33A160009EEC6 /* CafeCreateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1A27D33A160009EEC6 /* CafeCreateResponseDTO.swift */; };
+		AEA14D1D27D33A460009EEC6 /* CafeQuestionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */; };
+		AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1E27D33BBE0009EEC6 /* Question.swift */; };
+		AEA14D2727D397E10009EEC6 /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2627D397E10009EEC6 /* BaseNetworkService.swift */; };
+		AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2827D39D320009EEC6 /* TokenService.swift */; };
+		AEA14D2B27D456680009EEC6 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2A27D456680009EEC6 /* KeyChain.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
-		AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0527BF4E6B0029A6CB /* Question.swift */; };
+		AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0527BF4E6B0029A6CB /* Question_test.swift */; };
 		AEA56B0827BF4E940029A6CB /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0727BF4E940029A6CB /* Group.swift */; };
 		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
 		AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */; };
@@ -200,10 +209,19 @@
 		AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserResponseDTO.swift; sourceTree = "<group>"; };
 		AEA14D0F27D2879F0009EEC6 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTitleCell.swift; sourceTree = "<group>"; };
+		AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDrinkCell.swift; sourceTree = "<group>"; };
+		AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupToDayQuestionCell.swift; sourceTree = "<group>"; };
+		AEA14D1A27D33A160009EEC6 /* CafeCreateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeCreateResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeQuestionResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14D1E27D33BBE0009EEC6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		AEA14D2627D397E10009EEC6 /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
+		AEA14D2827D39D320009EEC6 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
+		AEA14D2A27D456680009EEC6 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
-		AEA56B0527BF4E6B0029A6CB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		AEA56B0527BF4E6B0029A6CB /* Question_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question_test.swift; sourceTree = "<group>"; };
 		AEA56B0727BF4E940029A6CB /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
@@ -375,12 +393,13 @@
 				AE7F484027CE7DAB00954971 /* Error */,
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
-				AEA56B0527BF4E6B0029A6CB /* Question.swift */,
+				AEA56B0527BF4E6B0029A6CB /* Question_test.swift */,
 				AEA56B0727BF4E940029A6CB /* Group.swift */,
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
 				AE7F483E27CE679300954971 /* Token.swift */,
 				AEA14D0527CFB7B10009EEC6 /* User.swift */,
 				AEA14D0F27D2879F0009EEC6 /* LoginType.swift */,
+				AEA14D1E27D33BBE0009EEC6 /* Question.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */,
+				AEA14D2A27D456680009EEC6 /* KeyChain.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -420,6 +440,7 @@
 				AEB8FCF327C65C45002BDBCD /* Endpoint */,
 				AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */,
 				AEB8FCF927C65CB4002BDBCD /* Networkable.swift */,
+				AEA14D2627D397E10009EEC6 /* BaseNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -543,6 +564,9 @@
 		AE538ED927C4689A00670FAF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */,
+				AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */,
+				AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -746,6 +770,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		AEA14D1927D3396A0009EEC6 /* Cafe */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14D1A27D33A160009EEC6 /* CafeCreateResponseDTO.swift */,
+				AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */,
+			);
+			path = Cafe;
+			sourceTree = "<group>";
+		};
 		AEA56AF827BF34580029A6CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -776,6 +809,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEA14D1927D3396A0009EEC6 /* Cafe */,
 				AEA14CF827CF74880009EEC6 /* User */,
 				AEA14CF327CF01BA0009EEC6 /* Reissue */,
 				AEA14CF227CF01B20009EEC6 /* Login */,
@@ -905,6 +939,7 @@
 			children = (
 				AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */,
 				AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */,
+				AEA14D2827D39D320009EEC6 /* TokenService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1066,25 +1101,30 @@
 				AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
+				AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
 				AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
+				AEA14D2B27D456680009EEC6 /* KeyChain.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
 				AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */,
 				AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */,
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
+				AEA14D1B27D33A160009EEC6 /* CafeCreateResponseDTO.swift in Sources */,
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
+				AEA14D1627D323530009EEC6 /* GroupDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* SetProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
+				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
@@ -1099,9 +1139,10 @@
 				AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
-				AEA56B0627BF4E6B0029A6CB /* Question.swift in Sources */,
+				AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
+				AEA14D1427D320530009EEC6 /* GroupTitleCell.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
@@ -1114,6 +1155,7 @@
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
+				AEA14D1D27D33A460009EEC6 /* CafeQuestionResponseDTO.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
@@ -1160,9 +1202,11 @@
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */,
+				AEA14D2727D397E10009EEC6 /* BaseNetworkService.swift in Sources */,
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
+				AEA14D1827D326D40009EEC6 /* GroupToDayQuestionCell.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,

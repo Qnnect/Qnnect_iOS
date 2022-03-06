@@ -43,4 +43,5 @@ extension UIColor {
     class var secondaryBorder: UIColor? { return UIColor(named: "secondaryBorder") }
     class var myPageButtonBackgroud: UIColor? { return UIColor(named: "myPageButtonBackgroud") }
     class var shadowBackground: UIColor? { return UIColor(named: "shadowBackground") }
+    class var drinkSelectButtonBackground: UIColor? { return UIColor(named: "drinkSelectButtonBackground") }
 }

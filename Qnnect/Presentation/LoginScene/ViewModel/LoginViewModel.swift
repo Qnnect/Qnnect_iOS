@@ -52,8 +52,7 @@ final class LoginViewModel: ViewModelType {
             .do{
                 [weak self] userLoginInfo,loginType in
                 if !userLoginInfo.isNewMember, userLoginInfo.userSettingDone {
-                    let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
-                    self?.authUseCase.saveToken(token: token)
+                    self?.authUseCase.saveToken(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
                     self?.authUseCase.saveLoginType(loginType)
                 }
             }

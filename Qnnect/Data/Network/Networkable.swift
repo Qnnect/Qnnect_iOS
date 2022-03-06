@@ -20,9 +20,11 @@ extension Networkable {
     static func makeProvider() -> MoyaProvider<Target> {
         /// 로그 세팅
         let loggerPlugin = NetworkLoggerPlugin()
-
+        let accessTokenPlugin = AccessTokenPlugin { _ in
+            return KeyChain.read(key: Constants.accessTokenKey) ?? ""
+        }
       /// plugin객체를 주입하여 provider 객체 생성
-        return MoyaProvider<Target>(plugins: [loggerPlugin])
+        return MoyaProvider<Target>(plugins: [loggerPlugin, accessTokenPlugin])
     }
 
 }

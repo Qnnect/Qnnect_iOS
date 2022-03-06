@@ -133,10 +133,10 @@ final class HomeViewController: BaseViewController {
         let content = "친구와 함께 가장 가고싶은 외국 여행지는 어디인가요? 글자수가 여기서 넘치면 마침표를 넣습니다넣습니다넣습니다넣..."
         let content1 = "우리중에 가장 I같은 사람은 누구일까요~?????"
         let dummyQuestions = [
-            Question(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
-            Question(groupName: "INFP 5인방 모임", d_day: "D-14", content: content1),
-            Question(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
-            Question(groupName: "아아메 5인방 모임", d_day: "D-7", content: content)
+            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
+            Question_test(groupName: "INFP 5인방 모임", d_day: "D-14", content: content1),
+            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
+            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content)
         ]
         let dummyGroups = [
             Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),

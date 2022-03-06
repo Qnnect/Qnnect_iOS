@@ -13,7 +13,7 @@ protocol AuthUseCase: InputUseCase {
     func fetchIsFirstAccess() -> Bool
     func fetchToken() -> Token?
     func login(accessToken: String, loginType: LoginType) -> Observable<Result<UserLoginInfo,LoginError>>
-    func saveToken(token: Token)
+    func saveToken(access: String, refresh: String)
     func reissueToken(token: Token) -> Observable<Result<Token, Error>>
     func updateFirstAccess()
     func saveLoginType(_ type: LoginType)
@@ -38,8 +38,8 @@ final class DefaultAuthUseCase: AuthUseCase {
         return self.authRepository.login(accessToken: accessToken, type: loginType)
     }
     
-    func saveToken(token: Token) {
-        return self.authRepository.saveToken(token: token)
+    func saveToken(access: String, refresh: String) {
+        return self.authRepository.saveToken(access: access, refresh: refresh)
     }
     
     func reissueToken(token: Token) -> Observable<Result<Token, Error>> {
@@ -47,7 +47,7 @@ final class DefaultAuthUseCase: AuthUseCase {
             .do(onNext: {
                 [weak self] result in
                 guard case let .success(token) = result else { return }
-                self?.saveToken(token: token)
+                self?.saveToken(access: token.access, refresh: token.refresh)
             })
     }
     

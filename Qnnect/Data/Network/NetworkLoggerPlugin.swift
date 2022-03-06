@@ -50,7 +50,10 @@ struct NetworkLoggerPlugin: PluginType {
             onFail(error, target: target)
         }
     }
-
+    func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {
+        print("test process")
+        return result
+    }
     func onSuceed(_ response: Response, target: TargetType, isFromError: Bool) {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
