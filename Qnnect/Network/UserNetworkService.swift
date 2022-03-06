@@ -11,10 +11,10 @@ import Moya
 
 final class UserNetworkService: BaseNetworkService<UserAPI> {
         
-    func setProfile(request: SetProfileRequestDTO) -> Observable<Result<SetProfileResponseDTO,Error>>{
+    func setProfile(request: ProfileRequestDTO) -> Observable<Result<ProfileResponseDTO,Error>>{
         return self.request(.setProfile(request: request))
             .filter(statusCode: 200)
-            .map(SetProfileResponseDTO.self)
+            .map(ProfileResponseDTO.self)
             .map{ Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()

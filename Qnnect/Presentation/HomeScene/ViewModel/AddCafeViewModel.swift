@@ -12,25 +12,26 @@ import RxCocoa
 final class AddCafeViewModel: ViewModelType {
     
     struct Input {
-        let selectedCycle: Observable<Int>
+        let selectedCycle: Observable<QuestionCycle>
         let inputName: Observable<String>
         let selectedGroupType: Observable<GroupType>
-        let selectedDiaryColor: Observable<String>
+        let selectedDiaryColor: Observable<DiaryColorType>
         let didTapNextButton: Observable<Void>
     }
     
     struct Output {
-        let questionCycle: Driver<Int>
+        let questionCycle: Driver<QuestionCycle>
         let isValidName: Signal<Bool>
         let isCompleted: Signal<Bool>
         let showGroupScene: Signal<Void>
     }
     
     private weak var coordinator: HomeCoordinator?
-    private let addGroupUseCase: AddGroupUseCase
+    private let addGroupUseCase: AddCafeUseCase
+    
     init(
         coordinator:HomeCoordinator,
-        addGroupUseCase: AddGroupUseCase
+        addGroupUseCase: AddCafeUseCase
     ) {
         self.coordinator = coordinator
         self.addGroupUseCase = addGroupUseCase
@@ -51,20 +52,29 @@ final class AddCafeViewModel: ViewModelType {
             $0.0
         }
         
-        let showGroupScene = input.didTapNextButton
-            .do(onNext: self.showGroupScene)
+        let inputInfo = Observable.combineLatest(
+            input.inputName,
+            input.selectedGroupType,
+            input.selectedDiaryColor,
+            input.selectedCycle
+        )
+        
+        let createCafe = input.didTapNextButton
+            .withLatestFrom(inputInfo)
+            .flatMap(self.addGroupUseCase.createRoom)
+            .mapToVoid()
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showGroupScene()
+            }
         
         return Output(
-            questionCycle: questionCycle.asDriver(onErrorJustReturn: 0),
+            questionCycle: questionCycle.asDriver(onErrorDriveWith: .empty()),
             isValidName: isValidName.asSignal(onErrorJustReturn: false),
             isCompleted: isCompleted.asSignal(onErrorJustReturn: false),
-            showGroupScene: showGroupScene.asSignal(onErrorSignalWith: .empty())
+            showGroupScene: createCafe.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
 
-private extension AddCafeViewModel {
-    func showGroupScene() {
-        self.coordinator?.showGroupScene()
-    }
-}
+

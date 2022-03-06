@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum UserAPI {
-    case setProfile(request: SetProfileRequestDTO)
+    case setProfile(request: ProfileRequestDTO)
     case setEnableNotification(request: SetEnableNotificationRequestDTO)
     case fetchUser(Void)
 }

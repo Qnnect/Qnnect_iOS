@@ -8,8 +8,8 @@
 import Foundation
 
 struct Question {
-    let id: Int
-    let content: String
-    let questionType: QuestionType
+    let createAt: String
+    let daysLeft: Int
+    let qustion: String
     let questioner: String
 }

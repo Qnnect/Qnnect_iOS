@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct CafeCreateRequestDTO {
-    let diaryColor: String
+struct CafeCreateRequestDTO: Encodable {
+    let diaryColor: DiaryColorType
     let groupType: GroupType
     let questionCycle: QuestionCycle
     let title: String

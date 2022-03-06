@@ -176,9 +176,9 @@ final class AddCafeViewController: BottomSheetViewController {
             .disposed(by: self.disposeBag)
         
         let value = self.questionCycleSlider.slider.rx.methodInvoked(#selector(self.questionCycleSlider.slider.endTracking(_:with:)))
-            .map{ [weak self] _ -> Int in
-                guard let self = self else { return 0 }
-                return self.questionCycleSlider.slider.selectedIndex
+            .map{ [weak self] _ -> QuestionCycle in
+                guard let self = self else { return .every }
+                return self.questionCycleSlider.slider.selectedCycle
             }
         
         let input = AddCafeViewModel.Input(
@@ -196,21 +196,13 @@ final class AddCafeViewController: BottomSheetViewController {
                 },
             selectedDiaryColor: self.diaryColorCollectionView.rx.itemSelected
                 .do(onNext: self.changeDiaryColorCellState(_:))
-                .map(self.getSelectedDiaryColorString),
+                .map(self.getSelectedDiaryColor),
             didTapNextButton: self.nextButton.rx.tap
                 .mapToVoid()
         )
         
         
         let output = self.viewModel.transform(from: input)
-        
-        output.questionCycle
-            .drive(
-                onNext: {
-                    print($0)
-                }
-            )
-            .disposed(by: self.disposeBag)
         
         output.isValidName
             .emit(onNext: { print($0)})
@@ -254,9 +246,9 @@ private extension AddCafeViewController {
     /// 선택된 DiaryColorCell 의 색상 이름을 조회하는 함수
     /// - Parameter indexPath: 선택된 Cell의 IndexPath
     /// - Returns: 색상 이름
-    func getSelectedDiaryColorString(_ indexPath: IndexPath) -> String {
+    func getSelectedDiaryColor(_ indexPath: IndexPath) -> DiaryColorType {
         let cell = self.diaryColorCollectionView.cellForItem(at: indexPath) as! DiaryColorCell
-        return cell.type?.rawValue ?? DiaryColorType.brown.rawValue
+        return cell.type ?? .red
     }
     
     /// 모든 항목의 유효한 입력이 왼료됐는 지 에 따라 button 활성화 결정
