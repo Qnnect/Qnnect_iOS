@@ -31,6 +31,11 @@ final class CafeRoomViewController: BaseViewController {
             CafeToDayQuestionCell.self,
             forCellWithReuseIdentifier: CafeToDayQuestionCell.identifier
         )
+        $0.register(
+            TodayQuestionFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: TodayQuestionFooterView.identifier
+        )
         $0.backgroundColor = .p_ivory
     }
     
@@ -46,6 +51,16 @@ final class CafeRoomViewController: BaseViewController {
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
     
+    private var TodayQuestionCurPage = 0 {
+        didSet {
+            guard let view = self.mainCollectionView.supplementaryView(
+                forElementKind: UICollectionView.elementKindSectionFooter,
+                at: IndexPath(row: 0, section: 2)) as? TodayQuestionFooterView
+            else { return }
+            view.pageControl.currentPage = self.TodayQuestionCurPage
+            
+        }
+    }
     static func create(
         with viewModel: CafeRoomViewModel,
         _ cafeId: Int
@@ -129,9 +144,9 @@ private extension CafeRoomViewController {
             case 0:
                 return self.createGroupTitleLayout()
             case 1:
-                return self.createGroupDrinkCell()
+                return self.createGroupDrinkLayout()
             case 2:
-                return self.createToDayQuestionCell()
+                return self.createToDayQuestionLayout()
             default:
                 return nil
             }
@@ -155,7 +170,7 @@ private extension CafeRoomViewController {
         return section
     }
     
-    func createGroupDrinkCell() -> NSCollectionLayoutSection {
+    func createGroupDrinkLayout() -> NSCollectionLayoutSection {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -164,7 +179,7 @@ private extension CafeRoomViewController {
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(124.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-       
+        
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
@@ -173,11 +188,11 @@ private extension CafeRoomViewController {
                 elementKind: CafeDrinksSectionDecorationView.identifier
             )
         ]
-        section.contentInsets = .init(top: 26.0, leading: 20.0, bottom: 0, trailing: 20.0)
+        section.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         return section
     }
     
-    func createToDayQuestionCell() -> NSCollectionLayoutSection {
+    func createToDayQuestionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
@@ -186,14 +201,29 @@ private extension CafeRoomViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-//        section.boundarySupplementaryItems = [createSectionHeader(),createTodayQuestionSectionFooter()]
+        section.boundarySupplementaryItems = [self.createSectionFooter()]
         section.orthogonalScrollingBehavior = .groupPagingCentered
-        
+        section.visibleItemsInvalidationHandler = {
+            items, contentOffset, environment in
+            let point = contentOffset
+            let env = environment
+            self.TodayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
+        }
         //section.visibleItemsInvalidationHandler = self.visibleItemsInvalidationHandler
         section.contentInsets = .init(top: 12.0, leading: 0, bottom: 15.0, trailing: 0)
         
         
         return section
+    }
+    
+    private func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        //Section Footer 사이즈
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(6.0))
+        
+        //Section Footer layout
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
+        
+        return sectionFooter
     }
     
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
@@ -221,6 +251,17 @@ private extension CafeRoomViewController {
                 cell.update(with: question)
                 return cell
             }
+        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
+            if indexPath.section == 2 {
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionFooter,
+                    withReuseIdentifier: TodayQuestionFooterView.identifier,
+                    for: indexPath
+                ) as! TodayQuestionFooterView
+                view.pageControl.numberOfPages = dataSource.sectionModels[2].items.count
+                return view
+            }
+            return UICollectionReusableView()
         }
     }
 }
@@ -240,13 +281,13 @@ struct GroupRoomViewController_Priviews: PreviewProvider {
                         navigationController: UINavigationController()),
                     cafeUseCase: cafeUseCase
                 ),
-                 12
+                12
             )
             return vc
         }
-
+        
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-
+            
         }
         typealias UIViewControllerType =  UIViewController
     }
