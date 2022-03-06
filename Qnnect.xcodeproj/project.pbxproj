@@ -78,6 +78,11 @@
 		AEA14D2727D397E10009EEC6 /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2627D397E10009EEC6 /* BaseNetworkService.swift */; };
 		AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2827D39D320009EEC6 /* TokenService.swift */; };
 		AEA14D2B27D456680009EEC6 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2A27D456680009EEC6 /* KeyChain.swift */; };
+		AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2C27D463F80009EEC6 /* CafeCreateRequestDTO.swift */; };
+		AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D2F27D4648A0009EEC6 /* QuestionType.swift */; };
+		AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D3127D464A50009EEC6 /* QuestionCycle.swift */; };
+		AEA14D3427D466590009EEC6 /* DiaryColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D3327D466590009EEC6 /* DiaryColorType.swift */; };
+		AEA14D3627D466790009EEC6 /* GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D3527D466790009EEC6 /* GroupType.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -218,6 +223,11 @@
 		AEA14D2627D397E10009EEC6 /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
 		AEA14D2827D39D320009EEC6 /* TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
 		AEA14D2A27D456680009EEC6 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		AEA14D2C27D463F80009EEC6 /* CafeCreateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeCreateRequestDTO.swift; sourceTree = "<group>"; };
+		AEA14D2F27D4648A0009EEC6 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
+		AEA14D3127D464A50009EEC6 /* QuestionCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCycle.swift; sourceTree = "<group>"; };
+		AEA14D3327D466590009EEC6 /* DiaryColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorType.swift; sourceTree = "<group>"; };
+		AEA14D3527D466790009EEC6 /* GroupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupType.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -390,6 +400,7 @@
 		AE176A3227B24F610040A4C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AEA14D2E27D4646C0009EEC6 /* Enum */,
 				AE7F484027CE7DAB00954971 /* Error */,
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
@@ -398,7 +409,6 @@
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
 				AE7F483E27CE679300954971 /* Token.swift */,
 				AEA14D0527CFB7B10009EEC6 /* User.swift */,
-				AEA14D0F27D2879F0009EEC6 /* LoginType.swift */,
 				AEA14D1E27D33BBE0009EEC6 /* Question.swift */,
 			);
 			path = Model;
@@ -774,9 +784,22 @@
 			isa = PBXGroup;
 			children = (
 				AEA14D1A27D33A160009EEC6 /* CafeCreateResponseDTO.swift */,
+				AEA14D2C27D463F80009EEC6 /* CafeCreateRequestDTO.swift */,
 				AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */,
 			);
 			path = Cafe;
+			sourceTree = "<group>";
+		};
+		AEA14D2E27D4646C0009EEC6 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14D0F27D2879F0009EEC6 /* LoginType.swift */,
+				AEA14D2F27D4648A0009EEC6 /* QuestionType.swift */,
+				AEA14D3127D464A50009EEC6 /* QuestionCycle.swift */,
+				AEA14D3327D466590009EEC6 /* DiaryColorType.swift */,
+				AEA14D3527D466790009EEC6 /* GroupType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		AEA56AF827BF34580029A6CB /* View */ = {
@@ -1095,6 +1118,7 @@
 				AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */,
 				AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */,
 				AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */,
+				AEA14D3427D466590009EEC6 /* DiaryColorType.swift in Sources */,
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
@@ -1121,9 +1145,11 @@
 				AEA14D1627D323530009EEC6 /* GroupDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* SetProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
+				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
+				AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */,
 				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
@@ -1133,6 +1159,7 @@
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
+				AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */,
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AE717B6127C4C278008278D3 /* AddGroupUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
@@ -1213,6 +1240,7 @@
 				AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
 				AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */,
+				AEA14D3627D466790009EEC6 /* GroupType.swift in Sources */,
 				AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */,
 				AEEF362C27C3501200D0A127 /* EditProfileViewController.swift in Sources */,
 			);

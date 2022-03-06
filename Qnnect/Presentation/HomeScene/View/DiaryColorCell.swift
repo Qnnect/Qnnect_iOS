@@ -21,7 +21,7 @@ final class DiaryColorCell: UICollectionViewCell {
     
     var isChosen: Bool = false {
         didSet {
-            self.colorImageView.image = isChosen ? type?.selectedImage : type?.defaultImage
+            self.colorImageView.image = isChosen ? UIImage(named: type?.selectedImageName ?? "") : UIImage(named: type?.defaultImageName ?? "")
         }
     }
     
@@ -45,7 +45,7 @@ final class DiaryColorCell: UICollectionViewCell {
     
     func update(with type: DiaryColorType) {
         self.type = type
-        self.colorImageView.image = type.defaultImage
+        self.colorImageView.image = UIImage(named: type.defaultImageName)
     }
 
 }
