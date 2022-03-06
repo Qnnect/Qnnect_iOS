@@ -67,6 +67,9 @@ final class CustomCycleSlider: UISlider {
     
     var cycles: [QuestionCycle]?
     var selectedIndex = 0
+    var selectedCycle: QuestionCycle {
+        return self.cycles?[selectedIndex] ?? .every
+    }
     
     override func trackRect(forBounds bound: CGRect) -> CGRect {
         //Here, set track frame
@@ -74,6 +77,26 @@ final class CustomCycleSlider: UISlider {
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        self.adjustValue(value: self.value)
+    }
+    
+    @objc
+    private func sliderTapped(touch: UITouch) {
+        let point = touch.location(in: self)
+        let percentage = Float(point.x / self.bounds.width)
+        let delta = percentage * (self.maximumValue - self.minimumValue)
+        let newValue = self.minimumValue + delta
+        if newValue != self.value {
+            self.adjustValue(value: newValue)
+            sendActions(for: .valueChanged)
+        }
+    }
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        sliderTapped(touch: touch)
+        return true
+    }
+    
+    private func adjustValue(value: Float) {
         guard let cycles = cycles else {
             return
         }
@@ -82,7 +105,7 @@ final class CustomCycleSlider: UISlider {
         var start: Float = -1 * dis
         var end = dis
         for i in 0 ..< cycleCount {
-            if start ..< end ~= self.value {
+            if start ..< end ~= value {
                 print(start,end)
                 self.value = end - dis
                 selectedIndex = i

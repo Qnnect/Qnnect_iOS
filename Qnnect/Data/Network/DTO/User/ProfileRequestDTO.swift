@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SetProfileRequestDTO: Encodable {
+struct ProfileRequestDTO: Encodable {
     let profilePicture: Data
     let nickName: String
 }

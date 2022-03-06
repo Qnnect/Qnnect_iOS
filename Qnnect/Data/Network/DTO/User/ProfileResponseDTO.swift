@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SetProfileResponseDTO: Decodable {
+struct ProfileResponseDTO: Decodable {
     let profileImage: String
     let nickName: String
     let point: Int
