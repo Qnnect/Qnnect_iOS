@@ -12,8 +12,8 @@ import Then
 final class CafeToDayQuestionCell: UICollectionViewCell {
     static let identifier = "CafeToDayQuestionCell"
     
-    private let groupNameLabel = UILabel().then {
-        $0.font = .IM_Hyemin(.bold, size: 14.0)
+    private let createdDateLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 10.0)
         $0.textColor = .GRAY02
         $0.textAlignment = .center
     }
@@ -24,6 +24,12 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.BLACK_121212?.cgColor
         $0.layer.cornerRadius = 12.0
+    }
+    
+    private let titleLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 14.0)
+        $0.textColor = .BLACK_121212
+        $0.textAlignment = .center
     }
     
     private let questionLabel = UILabel().then {
@@ -43,9 +49,9 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        
         [
-            self.groupNameLabel,
+            self.createdDateLabel,
+            self.titleLabel,
             self.d_dayLabel,
             self.questionLabel
         ].forEach {
@@ -57,10 +63,14 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
         self.contentView.layer.cornerRadius = Constants.homeCellCornerRadius
         
+        self.createdDateLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(50.0)
+            make.leading.trailing.equalToSuperview().inset(16.0)
+        }
         
-        self.groupNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(26.0)
-            make.leading.trailing.equalToSuperview().inset(12.0)
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.createdDateLabel.snp.bottom).offset(4.0)
+            make.leading.trailing.equalToSuperview().inset(16.0)
         }
         
         self.d_dayLabel.snp.makeConstraints { make in
@@ -69,38 +79,23 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         }
         
         self.questionLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(31.0)
-            make.center.equalToSuperview()
-            make.bottom.equalToSuperview().inset(48.0)
+            make.leading.trailing.equalToSuperview().inset(76.0)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(36.0)
+            make.bottom.lessThanOrEqualToSuperview().inset(16.0)
         }
         
-        self.drawBottomShadow()
     }
     
-    func update(with question: Question_test) {
-        self.groupNameLabel.text = question.groupName
-        self.questionLabel.text = question.content
-        self.d_dayLabel.text = question.d_day
-    }
-    
-    private func drawBottomShadow() {
-        
-        let path = UIBezierPath(
-            roundedRect: CGRect(
-                x: self.contentView.bounds.minX,
-                y: self.contentView.bounds.minY,
-                width: self.contentView.bounds.width,
-                height: self.contentView.bounds.height + 4.0
-            ),
-            cornerRadius: Constants.homeCellCornerRadius
+    func update(with question: Question) {
+        self.createdDateLabel.text = question.createdAt
+        self.titleLabel.text = "\(question.questioner)의 질문"
+        let paragraphStyle = Constants.paragraphStyle
+        paragraphStyle.alignment = .center
+        self.questionLabel.attributedText = NSAttributedString(
+            string: question.qustion,
+            attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.lineWidth = path.lineWidth
-        shapeLayer.strokeColor = self.layer.borderColor
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        self.contentView.layer.addSublayer(shapeLayer)
-        
+        self.d_dayLabel.text = "D-\(question.daysLeft)"
     }
+    
 }

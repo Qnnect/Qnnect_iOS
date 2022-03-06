@@ -13,12 +13,13 @@ final class CafeDrinkCell: UICollectionViewCell {
     static let identifier = "CafeDrinkCell"
     
     private let drinkImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     private let userNameLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 10.0)
         $0.textColor = .GRAY01
+        $0.textAlignment = .center
     }
     
     override init(frame: CGRect) {
@@ -48,5 +49,10 @@ final class CafeDrinkCell: UICollectionViewCell {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.drinkImageView.snp.bottom).offset(10.0)
         }
+    }
+    
+    func update(with cafeUser: CafeUser) {
+        self.drinkImageView.image = cafeUser.userDrinkSelected != nil ? Constants.basicDrinkImage : Constants.notSelectDrinkImage
+        self.userNameLabel.text = cafeUser.userInfo.name
     }
 }

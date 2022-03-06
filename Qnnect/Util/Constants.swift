@@ -67,12 +67,20 @@ struct Constants {
     static let notificationIcon: UIImage? = UIImage(named: "notification")
     static let priceImage: UIImage? = UIImage(named: "price")
     static let groupPlusImage: UIImage? = UIImage(named: "group_plus")
+    static let notSelectDrinkImage: UIImage? = UIImage(named: "not_select_drink")?.withRenderingMode(.alwaysOriginal)
+    static let basicDrinkImage: UIImage? = UIImage(named: "basic_drink")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
     static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")?.withAlignmentRectInsets(.init(top: -12.0, left: -12.0, bottom: 0.0, right: 0))
     static let xmarkImage: UIImage? = UIImage(named: "X_mark")
     static let leftImageInset: UIEdgeInsets = .init(top: -12.0, left: -12.0, bottom: 0.0, right: 0)
+    
+    
+    static let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle().then {
+        $0.lineHeightMultiple = 1.17
+        $0.lineBreakStrategy = .hangulWordPriority
+    }
     
     // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {

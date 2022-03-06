@@ -12,7 +12,7 @@ import Then
 final class CafeTitleCell: UICollectionViewCell {
     static let identifier = "CafeTitleCell"
     
-    private let dateLabel = UILabel().then {
+    private let createdDateLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textColor = .GRAY03
     }
@@ -47,7 +47,7 @@ final class CafeTitleCell: UICollectionViewCell {
     private func configureUI() {
         
         [
-            self.dateLabel,
+            self.createdDateLabel,
             self.nameLabel,
             self.drinkImageView,
             self.drinkSelectButton
@@ -55,12 +55,12 @@ final class CafeTitleCell: UICollectionViewCell {
             self.contentView.addSubview($0)
         }
         
-        self.dateLabel.snp.makeConstraints { make in
+        self.createdDateLabel.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
         
         self.nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.dateLabel.snp.bottom)
+            make.top.equalTo(self.createdDateLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalTo(self.drinkImageView.snp.leading).inset(16.0)
         }
@@ -70,5 +70,10 @@ final class CafeTitleCell: UICollectionViewCell {
             make.trailing.equalToSuperview().inset(55.0)
             make.top.equalToSuperview().inset(20.0)
         }
+    }
+    
+    func update(with cafe: Cafe) {
+        self.nameLabel.text = cafe.title
+        self.createdDateLabel.text = cafe.createdAt
     }
 }

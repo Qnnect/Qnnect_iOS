@@ -36,7 +36,7 @@ extension UIColor {
     class var brownBorderColor: UIColor? { return UIColor(named: "brownBorderColor") }
     class var blackLabel: UIColor? { return UIColor(named: "blackLabel") }
     class var tagBorderColor: UIColor? { return UIColor(named: "tagBorder") }
-    class var ingredientCellBackground: UIColor? { return UIColor(named: "ingredientCellBackground") }
+    class var secondaryBackground: UIColor? { return UIColor(named: "secondaryBackground") }
     class var groupPink: UIColor? { return UIColor(named: "GroupPink") }
     class var addGroupCellBorder: UIColor? { return UIColor(named: "addGroupBorder") }
     class var profileImageBorder: UIColor? { return UIColor(named: "profileImageBorder") }
@@ -44,4 +44,5 @@ extension UIColor {
     class var myPageButtonBackgroud: UIColor? { return UIColor(named: "myPageButtonBackgroud") }
     class var shadowBackground: UIColor? { return UIColor(named: "shadowBackground") }
     class var drinkSelectButtonBackground: UIColor? { return UIColor(named: "drinkSelectButtonBackground") }
+    class var groupDrinksBorder: UIColor? { return UIColor(named: "GroupDrinksBorder") }
 }

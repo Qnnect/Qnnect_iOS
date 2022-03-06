@@ -30,7 +30,7 @@ final class IngredientCell: UICollectionViewCell {
     private let priceIcon = UIImageView(image: Constants.priceImage)
     
     private let priceView = UIView().then {
-        $0.backgroundColor = .ingredientCellBackground
+        $0.backgroundColor = .secondaryBackground
     }
     
     override init(frame: CGRect) {
@@ -60,7 +60,7 @@ final class IngredientCell: UICollectionViewCell {
             self.priceView.addSubview($0)
         }
         
-        self.contentView.backgroundColor = .ingredientCellBackground
+        self.contentView.backgroundColor = .secondaryBackground
         self.contentView.layer.cornerRadius = 16.0
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.brownBorderColor?.cgColor
