@@ -208,8 +208,16 @@ final class HomeViewController: BaseViewController {
                     let env = param[2] as! NSCollectionLayoutEnvironment
                     return Int(max(0, round(point.x / env.container.contentSize.width)))
                 },
-            viewWillAppear: self.rx.viewWillAppear.mapToVoid()
+            viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
+            didTapMyCafe: self.homeCollectionView.rx.modelSelected(HomeSectionItem.self)
+                .compactMap { item -> Group? in
+                    guard case let HomeSectionItem.mygroupSectionItem(group) = item else { return nil }
+                    return group
+                }
+                .mapToVoid()
         )
+        
+        
         
         let output = self.viewModel.transform(from: input)
         
@@ -219,6 +227,10 @@ final class HomeViewController: BaseViewController {
         
         output.curQuestionPage
             .drive(curQuestionPage)
+            .disposed(by: self.disposeBag)
+        
+        output.showCafeRoom
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }

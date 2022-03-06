@@ -15,11 +15,13 @@ final class HomeViewModel: ViewModelType {
         let didTapAddGroupButton: Observable<Void>
         let curQuestionPage: Observable<Int>
         let viewWillAppear: Observable<Void>
+        let didTapMyCafe: Observable<Void>
     }
     
     struct Output {
         let showAddGroupBottomSheet: Signal<Void>
         let curQuestionPage: Driver<Int>
+        let showCafeRoom: Signal<Void>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -34,10 +36,16 @@ final class HomeViewModel: ViewModelType {
                 self?.coordinator?.showAddGroupBottomSheet()
             }
         
-                
+        let showCafeRoom = input.didTapMyCafe
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showGroupScene(with: 12)
+            }
+        
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0)
+            curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0),
+            showCafeRoom: showCafeRoom.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
