@@ -65,7 +65,8 @@ final class AddCafeViewModel: ViewModelType {
             .mapToVoid()
             .do {
                 [weak self] _ in
-                self?.coordinator?.showGroupScene()
+                //TODO: 카페 id 변경 
+                self?.coordinator?.showGroupScene(with: 12)
             }
         
         return Output(

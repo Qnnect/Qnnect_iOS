@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 final class CafeToDayQuestionCell: UICollectionViewCell {
-    static let identifier = "GroupToDayQuestionCell"
+    static let identifier = "CafeToDayQuestionCell"
     
     private let groupNameLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)

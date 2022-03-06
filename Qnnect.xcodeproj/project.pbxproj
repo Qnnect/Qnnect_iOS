@@ -17,8 +17,8 @@
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
 		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
 		AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45938B27BD23D1009737B2 /* PointBar.swift */; };
-		AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */; };
-		AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */; };
+		AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */; };
+		AE538EDD27C4693C00670FAF /* CafeRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */; };
 		AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */; };
 		AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F527AEAE890081A0FA /* AppDelegate.swift */; };
 		AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59A5F727AEAE890081A0FA /* SceneDelegate.swift */; };
@@ -52,7 +52,7 @@
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
 		AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */; };
 		AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */; };
-		AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */; };
+		AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483B27CCCC4F00954971 /* CafeCoordinator.swift */; };
 		AE7F483F27CE679300954971 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F483E27CE679300954971 /* Token.swift */; };
 		AE7F484227CE7DB400954971 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7F484127CE7DB400954971 /* LoginError.swift */; };
 		AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */; };
@@ -69,9 +69,9 @@
 		AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */; };
 		AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D0F27D2879F0009EEC6 /* LoginType.swift */; };
 		AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */; };
-		AEA14D1427D320530009EEC6 /* GroupTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */; };
-		AEA14D1627D323530009EEC6 /* GroupDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */; };
-		AEA14D1827D326D40009EEC6 /* GroupToDayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */; };
+		AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1327D320530009EEC6 /* CafeTitleCell.swift */; };
+		AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1527D323530009EEC6 /* CafeDrinkCell.swift */; };
+		AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */; };
 		AEA14D1B27D33A160009EEC6 /* CafeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1A27D33A160009EEC6 /* CafeResponseDTO.swift */; };
 		AEA14D1D27D33A460009EEC6 /* CafeQuestionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */; };
 		AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D1E27D33BBE0009EEC6 /* Question.swift */; };
@@ -91,6 +91,7 @@
 		AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D4527D47E1E0009EEC6 /* CafeRepository.swift */; };
 		AEA14D4827D47E8D0009EEC6 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D4727D47E8D0009EEC6 /* Cafe.swift */; };
 		AEA14D4A27D48D020009EEC6 /* CafeCreateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D4927D48D020009EEC6 /* CafeCreateResponseDTO.swift */; };
+		AEA14D4C27D493C10009EEC6 /* CafeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */; };
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
@@ -168,8 +169,8 @@
 		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
 		AE45938B27BD23D1009737B2 /* PointBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBar.swift; sourceTree = "<group>"; };
-		AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomViewController.swift; sourceTree = "<group>"; };
-		AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomViewModel.swift; sourceTree = "<group>"; };
+		AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRoomViewController.swift; sourceTree = "<group>"; };
+		AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRoomViewModel.swift; sourceTree = "<group>"; };
 		AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCell.swift; sourceTree = "<group>"; };
 		AE59A5F227AEAE890081A0FA /* Qnnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qnnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE59A5F527AEAE890081A0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,7 +206,7 @@
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
 		AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewController.swift; sourceTree = "<group>"; };
 		AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBuyAlertViewModel.swift; sourceTree = "<group>"; };
-		AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCoordinator.swift; sourceTree = "<group>"; };
+		AE7F483B27CCCC4F00954971 /* CafeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeCoordinator.swift; sourceTree = "<group>"; };
 		AE7F483E27CE679300954971 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		AE7F484127CE7DB400954971 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		AEA14CF427CF01DD0009EEC6 /* ReissueRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueRequestDTO.swift; sourceTree = "<group>"; };
@@ -222,9 +223,9 @@
 		AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserResponseDTO.swift; sourceTree = "<group>"; };
 		AEA14D0F27D2879F0009EEC6 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTitleCell.swift; sourceTree = "<group>"; };
-		AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDrinkCell.swift; sourceTree = "<group>"; };
-		AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupToDayQuestionCell.swift; sourceTree = "<group>"; };
+		AEA14D1327D320530009EEC6 /* CafeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeTitleCell.swift; sourceTree = "<group>"; };
+		AEA14D1527D323530009EEC6 /* CafeDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDrinkCell.swift; sourceTree = "<group>"; };
+		AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeToDayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA14D1A27D33A160009EEC6 /* CafeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeResponseDTO.swift; sourceTree = "<group>"; };
 		AEA14D1C27D33A460009EEC6 /* CafeQuestionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeQuestionResponseDTO.swift; sourceTree = "<group>"; };
 		AEA14D1E27D33BBE0009EEC6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -244,6 +245,7 @@
 		AEA14D4527D47E1E0009EEC6 /* CafeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRepository.swift; sourceTree = "<group>"; };
 		AEA14D4727D47E8D0009EEC6 /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		AEA14D4927D48D020009EEC6 /* CafeCreateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeCreateResponseDTO.swift; sourceTree = "<group>"; };
+		AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeUseCase.swift; sourceTree = "<group>"; };
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
@@ -568,7 +570,7 @@
 		AE538ED627C4688C00670FAF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AE538EDC27C4693C00670FAF /* GroupRoomViewModel.swift */,
+				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -576,7 +578,7 @@
 		AE538ED727C4689100670FAF /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F483B27CCCC4F00954971 /* GroupCoordinator.swift */,
+				AE7F483B27CCCC4F00954971 /* CafeCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -584,7 +586,7 @@
 		AE538ED827C4689400670FAF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AE538EDA27C4690D00670FAF /* GroupRoomViewController.swift */,
+				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
 			);
 			path = ViewController;
@@ -593,9 +595,9 @@
 		AE538ED927C4689A00670FAF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA14D1327D320530009EEC6 /* GroupTitleCell.swift */,
-				AEA14D1527D323530009EEC6 /* GroupDrinkCell.swift */,
-				AEA14D1727D326D40009EEC6 /* GroupToDayQuestionCell.swift */,
+				AEA14D1327D320530009EEC6 /* CafeTitleCell.swift */,
+				AEA14D1527D323530009EEC6 /* CafeDrinkCell.swift */,
+				AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -750,6 +752,7 @@
 			isa = PBXGroup;
 			children = (
 				AE717B6027C4C278008278D3 /* AddCafeUseCase.swift */,
+				AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */,
 			);
 			path = Cafe;
 			sourceTree = "<group>";
@@ -1148,13 +1151,14 @@
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
+				AEA14D4C27D493C10009EEC6 /* CafeUseCase.swift in Sources */,
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
 				AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
-				AE538EDD27C4693C00670FAF /* GroupRoomViewModel.swift in Sources */,
+				AE538EDD27C4693C00670FAF /* CafeRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
 				AEA14D2B27D456680009EEC6 /* KeyChain.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
@@ -1166,7 +1170,7 @@
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
-				AEA14D1627D323530009EEC6 /* GroupDrinkCell.swift in Sources */,
+				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
@@ -1188,13 +1192,13 @@
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AE717B6127C4C278008278D3 /* AddCafeUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
-				AE538EDB27C4690D00670FAF /* GroupRoomViewController.swift in Sources */,
+				AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
-				AEA14D1427D320530009EEC6 /* GroupTitleCell.swift in Sources */,
+				AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
@@ -1236,7 +1240,7 @@
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
-				AE7F483C27CCCC4F00954971 /* GroupCoordinator.swift in Sources */,
+				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
@@ -1264,7 +1268,7 @@
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
-				AEA14D1827D326D40009EEC6 /* GroupToDayQuestionCell.swift in Sources */,
+				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,

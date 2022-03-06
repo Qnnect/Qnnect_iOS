@@ -22,20 +22,16 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        let viewModel = GroupRoomViewModel(
-            coordinator: self
-        )
-        let vc = CafeRoomViewController.create(with: viewModel)
-        self.navigationController.pushViewController(vc, animated: true)
-    }
+    func start() { }
     
     func start(with cafeId: Int) {
-        let viewModel = GroupRoomViewModel(
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
+        let viewModel = CafeRoomViewModel(
             coordinator: self,
-            
+            cafeUseCase: cafeUseCase
         )
-        let vc = CafeRoomViewController.create(with: viewModel)
+        let vc = CafeRoomViewController.create(with: viewModel,cafeId)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

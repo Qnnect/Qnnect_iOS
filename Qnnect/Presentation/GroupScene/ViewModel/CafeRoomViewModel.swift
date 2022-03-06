@@ -13,28 +13,38 @@ final class CafeRoomViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
-        //TODO: 수정 필요
-        let roomInfo: Driver<Void>
+        let roomInfo: Driver<Cafe>
     }
     
     private weak var coordinator: CafeCoordinator?
+    private let cafeUseCase: CafeUseCase
     
     init(
-        coordinator: CafeCoordinator
+        coordinator: CafeCoordinator,
+        cafeUseCase: CafeUseCase
     ) {
         self.coordinator = coordinator
+        self.cafeUseCase = cafeUseCase
     }
     
     func transform(from input: Input) -> Output {
         
-        let roomInfo = input.viewDidLoad
+        let roomInfo = input.viewWillAppear
+            .withLatestFrom(input.cafeId)
+            .flatMap(self.cafeUseCase.fetchCafe(forId:))
+            .compactMap { result -> Cafe? in
+                guard case let .success(cafe) = result else { return nil }
+                return cafe
+            }
             // .do(방 정보를 가져옴)
             // 만약 내가 선택한 음료가 없으면
-            .do(onNext: self.showSelectDrinkBottomSheet)
-                .delaySubscription(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
+//            .do(onNext: self.showSelectDrinkBottomSheet)
+//                .delaySubscription(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty())
         )

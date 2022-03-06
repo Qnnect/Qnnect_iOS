@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 final class CafeTitleCell: UICollectionViewCell {
-    static let identifier = "GroupTitleCell"
+    static let identifier = "CafeTitleCell"
     
     private let dateLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 12.0)

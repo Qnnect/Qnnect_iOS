@@ -18,4 +18,14 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchCafe(forId id: Int) -> Observable<Result<CafeResponseDTO,Error>> {
+        return self.request(.fetchCafe(id: id))
+            .filter(statusCode: 200)
+            .map(CafeResponseDTO.self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+        
+    }
 }

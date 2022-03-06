@@ -18,26 +18,31 @@ final class CafeRoomViewController: BaseViewController {
     ).then {
         $0.showsVerticalScrollIndicator = false
         $0.register(
-            GroupTitleCell.self,
-            forCellWithReuseIdentifier: GroupTitleCell.identifier
+            CafeTitleCell.self,
+            forCellWithReuseIdentifier: CafeTitleCell.identifier
         )
         $0.register(
-            GroupDrinkCell.self,
-            forCellWithReuseIdentifier: GroupDrinkCell.identifier
+            CafeDrinkCell.self,
+            forCellWithReuseIdentifier: CafeDrinkCell.identifier
         )
         $0.register(
-            GroupToDayQuestionCell.self,
-            forCellWithReuseIdentifier: GroupToDayQuestionCell.identifier
+            CafeToDayQuestionCell.self,
+            forCellWithReuseIdentifier: CafeToDayQuestionCell.identifier
         )
         
     }
     
     
-    private var viewModel: GroupRoomViewModel!
+    private var viewModel: CafeRoomViewModel!
+    private var cafeId: Int!
     
-    static func create(with viewModel: GroupRoomViewModel) -> CafeRoomViewController{
+    static func create(
+        with viewModel: CafeRoomViewModel,
+        _ cafeId: Int
+    ) -> CafeRoomViewController{
         let vc = CafeRoomViewController()
         vc.viewModel = viewModel
+        vc.cafeId = cafeId
         return vc
     }
     
@@ -57,14 +62,18 @@ final class CafeRoomViewController: BaseViewController {
     
     override func bind() {
         
-        let input = GroupRoomViewModel.Input(
-            viewDidLoad: Observable.just(Void())
+        let input = CafeRoomViewModel.Input(
+            viewDidLoad: Observable.just(Void()),
+            viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
+            cafeId: Observable.just(cafeId)
         )
         
         let output = self.viewModel.transform(from: input)
         
         output.roomInfo
-            .drive()
+            .drive( onNext: {
+                print($0)
+            })
             .disposed(by: self.disposeBag)
     }
 }
@@ -140,20 +149,20 @@ private extension CafeRoomViewController {
     }
 }
 
-import SwiftUI
-struct GroupRoomViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = CafeRoomViewController.create(with: GroupRoomViewModel(coordinator: DefaultGroupCoordinator(navigationController: UINavigationController())))
-            return vc
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
-    }
-}
+//import SwiftUI
+//struct GroupRoomViewController_Priviews: PreviewProvider {
+//    static var previews: some View {
+//        Contatiner().edgesIgnoringSafeArea(.all)
+//    }
+//    struct Contatiner: UIViewControllerRepresentable {
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            let vc = CafeRoomViewController.create(with: CafeRoomViewModel(coordinator: DefaultGroupCoordinator(navigationController: UINavigationController())))
+//            return vc
+//        }
+//
+//        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+//
+//        }
+//        typealias UIViewControllerType =  UIViewController
+//    }
+//}

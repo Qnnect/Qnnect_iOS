@@ -41,4 +41,17 @@ final class DefaultCafeRepository: CafeRepository {
                 }
             }
     }
+    
+    func fetchCafe(forId id: Int) -> Observable<Result<Cafe, Error>> {
+        return self.cafeNetworkService.fetchCafe(forId: id)
+            .map {
+                result -> Result<Cafe,Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

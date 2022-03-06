@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 final class CafeDrinkCell: UICollectionViewCell {
-    static let identifier = "GroupDrinkCell"
+    static let identifier = "CafeDrinkCell"
     
     private let drinkImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill

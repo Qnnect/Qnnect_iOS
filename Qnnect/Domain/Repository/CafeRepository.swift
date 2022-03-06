@@ -15,4 +15,6 @@ protocol CafeRepository: AnyObject {
         _ diaryColor: DiaryColorType,
         _ questionCycle: QuestionCycle
     )  -> Observable<Result<Int,Error>>
+    
+    func fetchCafe(forId id: Int) -> Observable<Result<Cafe,Error>>
 }
