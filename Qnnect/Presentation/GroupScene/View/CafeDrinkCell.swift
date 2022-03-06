@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class GroupDrinkCell: UICollectionViewCell {
+final class CafeDrinkCell: UICollectionViewCell {
     static let identifier = "GroupDrinkCell"
     
     private let drinkImageView = UIImageView().then {

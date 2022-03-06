@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class GroupRoomViewModel: ViewModelType {
+final class CafeRoomViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
@@ -20,10 +20,10 @@ final class GroupRoomViewModel: ViewModelType {
         let roomInfo: Driver<Void>
     }
     
-    private weak var coordinator: GroupCoordinator?
+    private weak var coordinator: CafeCoordinator?
     
     init(
-        coordinator: GroupCoordinator
+        coordinator: CafeCoordinator
     ) {
         self.coordinator = coordinator
     }
@@ -41,7 +41,7 @@ final class GroupRoomViewModel: ViewModelType {
     }
 }
 
-private extension GroupRoomViewModel {
+private extension CafeRoomViewModel {
     func showSelectDrinkBottomSheet() {
         self.coordinator?.showSelectDrinkBottomSheet()
     }

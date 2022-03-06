@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-protocol GroupCoordinator: Coordinator {
+protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet()
+    func start(with cafeId: Int)
 }
 
-final class DefaultGroupCoordinator: GroupCoordinator {
+final class DefaultGroupCoordinator: CafeCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
@@ -25,7 +26,16 @@ final class DefaultGroupCoordinator: GroupCoordinator {
         let viewModel = GroupRoomViewModel(
             coordinator: self
         )
-        let vc = GroupRoomViewController.create(with: viewModel)
+        let vc = CafeRoomViewController.create(with: viewModel)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func start(with cafeId: Int) {
+        let viewModel = GroupRoomViewModel(
+            coordinator: self,
+            
+        )
+        let vc = CafeRoomViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

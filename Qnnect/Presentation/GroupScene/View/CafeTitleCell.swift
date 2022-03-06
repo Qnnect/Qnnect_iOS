@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class GroupTitleCell: UICollectionViewCell {
+final class CafeTitleCell: UICollectionViewCell {
     static let identifier = "GroupTitleCell"
     
     private let dateLabel = UILabel().then {

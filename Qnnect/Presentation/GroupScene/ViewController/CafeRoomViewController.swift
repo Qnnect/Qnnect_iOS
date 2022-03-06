@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 
-final class GroupRoomViewController: BaseViewController {
+final class CafeRoomViewController: BaseViewController {
     
     private let mainCollectionView = UICollectionView(
         frame: .zero,
@@ -35,8 +35,8 @@ final class GroupRoomViewController: BaseViewController {
     
     private var viewModel: GroupRoomViewModel!
     
-    static func create(with viewModel: GroupRoomViewModel) -> GroupRoomViewController{
-        let vc = GroupRoomViewController()
+    static func create(with viewModel: GroupRoomViewModel) -> CafeRoomViewController{
+        let vc = CafeRoomViewController()
         vc.viewModel = viewModel
         return vc
     }
@@ -69,7 +69,7 @@ final class GroupRoomViewController: BaseViewController {
     }
 }
 
-private extension GroupRoomViewController {
+private extension CafeRoomViewController {
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { section, environment -> NSCollectionLayoutSection?
             in
@@ -147,7 +147,7 @@ struct GroupRoomViewController_Priviews: PreviewProvider {
     }
     struct Contatiner: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> UIViewController {
-            let vc = GroupRoomViewController.create(with: GroupRoomViewModel(coordinator: DefaultGroupCoordinator(navigationController: UINavigationController())))
+            let vc = CafeRoomViewController.create(with: GroupRoomViewModel(coordinator: DefaultGroupCoordinator(navigationController: UINavigationController())))
             return vc
         }
         
