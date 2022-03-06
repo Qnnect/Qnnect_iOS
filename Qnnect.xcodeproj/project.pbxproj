@@ -113,7 +113,7 @@
 		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
 		AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */; };
 		AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */; };
-		AEBC9EC127C5F44F0070399A /* TodayQuestionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */; };
+		AEBC9EC127C5F44F0070399A /* PageControlFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */; };
 		AEBC9EC327C604210070399A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC227C604210070399A /* SplashViewController.swift */; };
 		AEBC9ECA27C619FB0070399A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC927C619FB0070399A /* OnboardingViewController.swift */; };
 		AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ECB27C61A790070399A /* PageItemViewController.swift */; };
@@ -269,7 +269,7 @@
 		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
 		AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkViewController.swift; sourceTree = "<group>"; };
 		AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionFooterView.swift; sourceTree = "<group>"; };
+		AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlFooterView.swift; sourceTree = "<group>"; };
 		AEBC9EC227C604210070399A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AEBC9EC927C619FB0070399A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		AEBC9ECB27C61A790070399A /* PageItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PageItemViewController.swift; path = Qnnect/Presentation/OnBoardingScene/ViewController/PageItemViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -379,6 +379,7 @@
 				AEEF362F27C351BB00D0A127 /* EditProfileImageView.swift */,
 				AEEF363127C3579300D0A127 /* NameTextField.swift */,
 				AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */,
+				AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */,
 				AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */,
 			);
 			path = Common;
@@ -846,7 +847,6 @@
 				AE538EDE27C4928E00670FAF /* DiaryColorCell.swift */,
 				AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */,
 				AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */,
-				AEBC9EC027C5F44F0070399A /* TodayQuestionFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1211,7 +1211,7 @@
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AEA14D4827D47E8D0009EEC6 /* Cafe.swift in Sources */,
 				AEA14D4227D47CD70009EEC6 /* CafeNetworkService.swift in Sources */,
-				AEBC9EC127C5F44F0070399A /* TodayQuestionFooterView.swift in Sources */,
+				AEBC9EC127C5F44F0070399A /* PageControlFooterView.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,

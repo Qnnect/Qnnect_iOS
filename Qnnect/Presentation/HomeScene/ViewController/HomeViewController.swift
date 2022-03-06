@@ -37,9 +37,9 @@ final class HomeViewController: BaseViewController {
             withReuseIdentifier: HomeSectionFooterView.identifier
         )
         $0.register(
-            TodayQuestionFooterView.self,
+            PageControlFooterView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: TodayQuestionFooterView.identifier
+            withReuseIdentifier: PageControlFooterView.identifier
         )
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
@@ -173,7 +173,7 @@ final class HomeViewController: BaseViewController {
                     .disposed(by: self.disposeBag)
                 return footerView
             } else if indexPath.section == 1 {
-                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: TodayQuestionFooterView.identifier, for: indexPath) as? TodayQuestionFooterView else {
+                guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PageControlFooterView.identifier, for: indexPath) as? PageControlFooterView else {
                     fatalError("Could not dequeReusableView")
                 }
                 

@@ -32,9 +32,9 @@ final class CafeRoomViewController: BaseViewController {
             forCellWithReuseIdentifier: CafeToDayQuestionCell.identifier
         )
         $0.register(
-            TodayQuestionFooterView.self,
+            PageControlFooterView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: TodayQuestionFooterView.identifier
+            withReuseIdentifier: PageControlFooterView.identifier
         )
         $0.backgroundColor = .p_ivory
     }
@@ -51,16 +51,26 @@ final class CafeRoomViewController: BaseViewController {
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
     
-    private var TodayQuestionCurPage = 0 {
+    private var todayQuestionCurPage = 0 {
         didSet {
             guard let view = self.mainCollectionView.supplementaryView(
                 forElementKind: UICollectionView.elementKindSectionFooter,
-                at: IndexPath(row: 0, section: 2)) as? TodayQuestionFooterView
+                at: IndexPath(row: 0, section: 2)) as? PageControlFooterView
             else { return }
-            view.pageControl.currentPage = self.TodayQuestionCurPage
-            
+            view.pageControl.currentPage = self.todayQuestionCurPage
         }
     }
+    
+    private var groupDrinksCurPage = 0 {
+        didSet {
+            guard let view = self.mainCollectionView.supplementaryView(
+                forElementKind: UICollectionView.elementKindSectionFooter,
+                at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
+            else { return }
+            view.pageControl.currentPage = self.groupDrinksCurPage
+        }
+    }
+    
     static func create(
         with viewModel: CafeRoomViewModel,
         _ cafeId: Int
@@ -89,10 +99,10 @@ final class CafeRoomViewController: BaseViewController {
         }
         
         self.questionButton.snp.makeConstraints { make in
-            make.top.equalTo(self.mainCollectionView.snp.bottom).offset(14.0)
+            make.top.equalTo(self.mainCollectionView.snp.bottom).offset(5.0)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(11.0)
-            make.leading.trailing.equalToSuperview().inset(20.0)
             make.height.equalTo(36.0)
+            make.leading.trailing.equalToSuperview().inset(20.0)
         }
         
         let layout = self.createLayout()
@@ -165,7 +175,7 @@ private extension CafeRoomViewController {
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 26.0, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 26.0, leading: 0, bottom: 18.0, trailing: 0)
         
         return section
     }
@@ -174,20 +184,27 @@ private extension CafeRoomViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 24.0, leading: 15.0, bottom: 24.0, trailing: 15.0)
+        item.contentInsets = .init(top: 24.0, leading: 15.0, bottom: 0, trailing: 15.0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(124.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-        
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
         section.decorationItems = [
             NSCollectionLayoutDecorationItem.background(
                 elementKind: CafeDrinksSectionDecorationView.identifier
             )
         ]
+        
+        section.boundarySupplementaryItems = [self.createDrinksSectionFooter()]
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.visibleItemsInvalidationHandler = {
+            items, contentOffset, environment in
+            let point = contentOffset
+            let env = environment
+            self.todayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
+        }
         section.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         return section
     }
@@ -207,10 +224,9 @@ private extension CafeRoomViewController {
             items, contentOffset, environment in
             let point = contentOffset
             let env = environment
-            self.TodayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
+            self.todayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
         }
-        //section.visibleItemsInvalidationHandler = self.visibleItemsInvalidationHandler
-        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 15.0, trailing: 0)
+        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 8.0, trailing: 0)
         
         
         return section
@@ -221,11 +237,20 @@ private extension CafeRoomViewController {
         let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(6.0))
         
         //Section Footer layout
-        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
-        
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+      
         return sectionFooter
     }
     
+    private func createDrinksSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        //Section Footer 사이즈
+        let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(4.0))
+        
+        //Section Footer layout
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        sectionFooter.contentInsets = .init(top: 0, leading: 0, bottom: -20.0, trailing: 0)
+        return sectionFooter
+    }
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
         return RxCollectionViewSectionedReloadDataSource { dataSoruce, collectionView, indexPath, item in
             switch item {
@@ -255,10 +280,21 @@ private extension CafeRoomViewController {
             if indexPath.section == 2 {
                 let view = collectionView.dequeueReusableSupplementaryView(
                     ofKind: UICollectionView.elementKindSectionFooter,
-                    withReuseIdentifier: TodayQuestionFooterView.identifier,
+                    withReuseIdentifier: PageControlFooterView.identifier,
                     for: indexPath
-                ) as! TodayQuestionFooterView
+                ) as! PageControlFooterView
                 view.pageControl.numberOfPages = dataSource.sectionModels[2].items.count
+                return view
+            } else if indexPath.section == 1 {
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionFooter,
+                    withReuseIdentifier: PageControlFooterView.identifier,
+                    for: indexPath
+                ) as! PageControlFooterView
+                view.pageControl.numberOfPages =  dataSource.sectionModels[1].items.count  / 6 + 1
+                view.pageControl.subviews.forEach {
+                    $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+                    }
                 return view
             }
             return UICollectionReusableView()

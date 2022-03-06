@@ -20,6 +20,7 @@ final class CafeDrinkCell: UICollectionViewCell {
         $0.font = .IM_Hyemin(.bold, size: 10.0)
         $0.textColor = .GRAY01
         $0.textAlignment = .center
+        $0.sizeToFit()
     }
     
     override init(frame: CGRect) {

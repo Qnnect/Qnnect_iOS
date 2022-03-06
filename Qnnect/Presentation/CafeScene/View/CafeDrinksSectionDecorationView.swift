@@ -17,6 +17,7 @@ final class CafeDrinksSectionDecorationView: UICollectionReusableView {
         $0.layer.borderWidth = 1.0
         $0.backgroundColor = .secondaryBackground
         $0.layer.borderColor = UIColor.groupDrinksBorder?.cgColor
+        
     }
     
     override init(frame: CGRect) {
@@ -30,12 +31,17 @@ final class CafeDrinksSectionDecorationView: UICollectionReusableView {
     }
     
     private func configureUI() {
-      
-        self.addSubview(self.insetView)
+        [
+            self.insetView,
+        ].forEach {
+            self.addSubview($0)
+        }
         
         self.insetView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.bottom.equalToSuperview()
         }
+        
+      
     }
 }

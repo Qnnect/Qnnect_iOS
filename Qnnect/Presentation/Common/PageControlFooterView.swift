@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-final class TodayQuestionFooterView: UICollectionReusableView {
-    static let identifier = "TodayQuestionFooterView"
+final class PageControlFooterView: UICollectionReusableView {
+    static let identifier = "PageControlFooterView"
     
     private(set) var pageControl = UIPageControl().then {
         $0.pageIndicatorTintColor = .GRAY04

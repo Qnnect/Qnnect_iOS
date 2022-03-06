@@ -32,6 +32,7 @@ final class CafeTitleCell: UICollectionViewCell {
         $0.setTitle("음료 선택하기", for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
         $0.setTitleColor(.GRAY01, for: .normal)
+        $0.layer.cornerRadius = 17.0
     }
     
     override init(frame: CGRect) {
@@ -67,13 +68,20 @@ final class CafeTitleCell: UICollectionViewCell {
         
         self.drinkImageView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(17.0)
-            make.trailing.equalToSuperview().inset(55.0)
+            make.trailing.equalToSuperview().inset(75.0)
             make.top.equalToSuperview().inset(20.0)
+        }
+        
+        self.drinkSelectButton.snp.makeConstraints { make in
+            make.trailing.bottom.equalToSuperview()
+            make.height.equalTo(34.0)
+            make.width.equalTo(94.0)
         }
     }
     
     func update(with cafe: Cafe) {
         self.nameLabel.text = cafe.title
         self.createdDateLabel.text = cafe.createdAt
+        self.drinkImageView.image = Constants.basicDrinkImage
     }
 }
