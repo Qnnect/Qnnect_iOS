@@ -10,12 +10,12 @@ import Foundation
 struct CafeUserResponseDTO: Decodable {
     let drinkIngredientsFilledResponseList: [DrinkIngredientsFilledResponseDTO]
     let user: ProfileResponseDTO
-    let userDrinkSelected: String
+    let userDrinkSelected: String?
     
     func toDomain() -> CafeUser {
         return CafeUser(
             userInfo: self.user.toDomain(),
-            userDrinkSelected: self.userDrinkSelected
+            userDrinkSelected: self.userDrinkSelected 
         )
     }
 }

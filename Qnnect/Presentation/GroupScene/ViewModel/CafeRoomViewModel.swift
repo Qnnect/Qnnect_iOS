@@ -37,6 +37,7 @@ final class CafeRoomViewModel: ViewModelType {
         let roomInfo = input.viewWillAppear
             .withLatestFrom(input.cafeId)
             .flatMap(self.cafeUseCase.fetchCafe(forId:))
+            .debug()
             .compactMap { result -> Cafe? in
                 guard case let .success(cafe) = result else { return nil }
                 return cafe

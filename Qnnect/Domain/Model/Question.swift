@@ -8,7 +8,7 @@
 import Foundation
 
 struct Question {
-    let createAt: String
+    let createdAt: String
     let daysLeft: Int
     let qustion: String
     let questioner: String
