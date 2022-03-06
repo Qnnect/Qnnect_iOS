@@ -383,7 +383,7 @@
 		AE176A2F27B24F380040A4C3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				AE538ED527C4681E00670FAF /* GroupScene */,
+				AE538ED527C4681E00670FAF /* CafeScene */,
 				AECC134427BA494C006866FC /* MyPageScene */,
 				AECC134327BA4939006866FC /* StoreScene */,
 				AECC134227BA4930006866FC /* BookMarkScene */,
@@ -556,7 +556,7 @@
 			path = Secret;
 			sourceTree = "<group>";
 		};
-		AE538ED527C4681E00670FAF /* GroupScene */ = {
+		AE538ED527C4681E00670FAF /* CafeScene */ = {
 			isa = PBXGroup;
 			children = (
 				AE538ED927C4689A00670FAF /* View */,
@@ -564,7 +564,7 @@
 				AE538ED727C4689100670FAF /* Coordinator */,
 				AE538ED627C4688C00670FAF /* ViewModel */,
 			);
-			path = GroupScene;
+			path = CafeScene;
 			sourceTree = "<group>";
 		};
 		AE538ED627C4688C00670FAF /* ViewModel */ = {
