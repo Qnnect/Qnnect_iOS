@@ -48,6 +48,11 @@ final class CafeRoomViewController: BaseViewController {
         $0.layer.cornerRadius = 16.0
     }
     
+    private let navigationTitleView = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.textColor = .GRAY01
+    }
+    
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
     
@@ -111,6 +116,7 @@ final class CafeRoomViewController: BaseViewController {
             forDecorationViewOfKind: CafeDrinksSectionDecorationView.identifier
         )
         self.mainCollectionView.collectionViewLayout = layout
+        
     }
     
     override func bind() {
@@ -128,7 +134,8 @@ final class CafeRoomViewController: BaseViewController {
         output.roomInfo
             .do {
                 [weak self] cafe in
-                self?.navigationItem.title = cafe.title
+                self?.navigationTitleView.text = cafe.title
+                self?.navigationItem.titleView = self?.navigationTitleView
             }
             .map({ cafe -> [CafeRoomSectionModel] in
                 let cafeTitleSectionItem = CafeRoomSectionItem.titleSectionItem(cafe: cafe)
@@ -184,7 +191,7 @@ private extension CafeRoomViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 24.0, leading: 15.0, bottom: 0, trailing: 15.0)
+        item.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
         
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
