@@ -30,12 +30,7 @@ final class DrinkSelectViewController: BottomSheetViewController {
         )
     }
     
-    private let previousButton = UIButton().then {
-        $0.setTitle("이전", for: .normal)
-        $0.backgroundColor = .GRAY04
-        $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
-        $0.layer.cornerRadius = Constants.bottomButtonCornerRadius
-    }
+
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -44,11 +39,7 @@ final class DrinkSelectViewController: BottomSheetViewController {
         $0.layer.cornerRadius = Constants.bottomButtonCornerRadius
     }
     
-    private let bottomButtonStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 16.0
-        $0.distribution = .fillEqually
-    }
+ 
     static func create() -> DrinkSelectViewController {
         let vc = DrinkSelectViewController()
         return vc
@@ -59,17 +50,11 @@ final class DrinkSelectViewController: BottomSheetViewController {
     }
     
     override func configureUI() {
-        [
-            self.previousButton,
-            self.completionButton
-        ].forEach {
-            self.bottomButtonStackView.addArrangedSubview($0)
-        }
-        
+      
         [
             self.mainLabel,
             self.secondaryLabel,
-            self.bottomButtonStackView
+            self.completionButton
         ].forEach {
             self.bottomSheetView.addSubview($0)
         }
@@ -86,7 +71,7 @@ final class DrinkSelectViewController: BottomSheetViewController {
             make.leading.trailing.equalTo(self.mainLabel)
         }
         
-        self.bottomButtonStackView.snp.makeConstraints { make in
+        self.completionButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
             make.leading.trailing.equalToSuperview().inset(Constants.bottomSheetHorizontalMargin)
             make.height.equalTo(Constants.bottomButtonHeight)
