@@ -40,6 +40,10 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     func showSelectDrinkBottomSheet() {
         let vc = SelectDrinkViewController.create()
         vc.modalPresentationStyle = .overCurrentContext
+        
+        if let vc = self.navigationController.presentedViewController {
+            vc.dismiss(animated: false, completion: nil)
+        }
         self.navigationController.present(vc, animated: false, completion: nil)
     }
     

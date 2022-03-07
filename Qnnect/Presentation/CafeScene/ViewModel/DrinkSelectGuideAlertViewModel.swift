@@ -18,6 +18,7 @@ final class DrinkSelectGuideAlertViewModel: ViewModelType {
     
     struct Output {
         let dismiss: Signal<Void>
+        let showSelectDrinkBottomSheet: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -33,8 +34,16 @@ final class DrinkSelectGuideAlertViewModel: ViewModelType {
                 [weak self] _ in
                 self?.coordinator?.dismissAlert()
             }
+        
+        let showSelectDrinkBottomSheet = input.didTapDrinkSelectButton
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showSelectDrinkBottomSheet()
+            }
+        
         return Output(
-            dismiss: dismiss.asSignal(onErrorSignalWith: .empty())
+            dismiss: dismiss.asSignal(onErrorSignalWith: .empty()),
+            showSelectDrinkBottomSheet: showSelectDrinkBottomSheet.asSignal(onErrorSignalWith: .empty())
         )
     }
     

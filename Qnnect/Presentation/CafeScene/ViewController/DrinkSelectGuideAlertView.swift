@@ -132,5 +132,9 @@ final class DrinkSelectGuideAlertView: BaseViewController {
         output.dismiss
             .emit()
             .disposed(by: self.disposeBag)
+        
+        output.showSelectDrinkBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
