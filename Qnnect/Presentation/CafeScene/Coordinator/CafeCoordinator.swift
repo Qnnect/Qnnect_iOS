@@ -13,6 +13,7 @@ protocol CafeCoordinator: Coordinator {
     func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
     func showSettingBottomSheet()
+    func showInvitationScene()
     func dismissAlert()
 }
 
@@ -56,10 +57,20 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showSettingBottomSheet() {
-        let bottomSheet = SettingBottomSheet.create()
+        let viewModel = SettingBottomSheetViewModel(coordinator: self)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
+    
+    func showInvitationScene() {
+        let vc = CafeInvitationViewController.create()
+        if let vc = self.navigationController.presentedViewController as? SettingBottomSheet {
+            vc.hideBottomSheetAndGoBack()
+        }
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
     func dismissAlert() {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }

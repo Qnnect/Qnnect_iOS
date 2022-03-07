@@ -71,6 +71,7 @@ struct Constants {
     static let basicDrinkImage: UIImage? = UIImage(named: "basic_drink")?.withRenderingMode(.alwaysOriginal)
     static let navigationMenuImage: UIImage? = UIImage(named: "navi_menu")?.withRenderingMode(.alwaysOriginal)
     static let navigationRecipeImage: UIImage? = UIImage(named: "navi_recipe")?.withRenderingMode(.alwaysOriginal)
+    static let cafeinvitationDrinkImage: UIImage? = UIImage(named: "초대음료이미지")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

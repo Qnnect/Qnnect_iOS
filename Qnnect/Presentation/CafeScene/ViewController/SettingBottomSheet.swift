@@ -10,6 +10,26 @@ import SnapKit
 import Then
 import RxSwift
 
+enum SettingItemType: String,CaseIterable {
+    case invite
+    case cafeInfoModify
+    case drinkModify
+    case deleteCafe
+    
+    var title: String {
+        switch self {
+        case .invite:
+            return "친구 초대하기"
+        case .cafeInfoModify:
+            return "카페 제목/주기/색상 수정하기"
+        case .drinkModify:
+            return "음료 수정하기"
+        case .deleteCafe:
+            return "다이어리 삭제"
+        }
+    }
+}
+
 final class SettingBottomSheet: BottomSheetViewController {
     
     private let menuTableView = UITableView().then {
@@ -17,8 +37,10 @@ final class SettingBottomSheet: BottomSheetViewController {
         $0.backgroundColor = .p_ivory
     }
     
-    static func create() -> SettingBottomSheet {
+    private var viewModel: SettingBottomSheetViewModel!
+    static func create(with viewModel: SettingBottomSheetViewModel) -> SettingBottomSheet {
         let bottomSheet = SettingBottomSheet()
+        bottomSheet.viewModel = viewModel
         return bottomSheet
     }
     
@@ -42,14 +64,20 @@ final class SettingBottomSheet: BottomSheetViewController {
     override func bind() {
         
         Observable.just(
-            [
-                "친구 초대하기",
-                "카페 제목/주기/색상 수정하기",
-                "음료 수정하기",
-                "다어이리 삭제"
-            ]
+            SettingItemType.allCases
         ).bind(to: self.menuTableView.rx.items(cellIdentifier: SettingItemCell.identifier, cellType: SettingItemCell.self)) { index, element, cell in
-            cell.update(with: element)
+            cell.update(with: element.title)
         }.disposed(by: self.disposeBag)
+        
+        let input = SettingBottomSheetViewModel.Input(
+            didTapSettingItem: self.menuTableView.rx.modelSelected(SettingItemType.self)
+                .asObservable()
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showInvitationScene
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
