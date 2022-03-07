@@ -33,6 +33,8 @@ final class CafeTitleCell: UICollectionViewCell {
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
         $0.setTitleColor(.GRAY01, for: .normal)
         $0.layer.cornerRadius = 17.0
+        $0.layer.borderWidth = 1.0
+        $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
     }
     
     override init(frame: CGRect) {
