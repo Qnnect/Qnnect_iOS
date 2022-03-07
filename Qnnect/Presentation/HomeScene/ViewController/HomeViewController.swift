@@ -79,7 +79,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        print("test!!!!")
     }
     
     override func configureUI() {
@@ -188,7 +188,7 @@ final class HomeViewController: BaseViewController {
         let output = self.viewModel.transform(from: input)
         
         output.showAddGroupBottomSheet
-            .emit(onNext: self.hiddenTabBar)
+            .emit()
             .disposed(by: self.disposeBag)
         
         output.curQuestionPage
@@ -337,9 +337,9 @@ private extension HomeViewController {
         }
     }
     
-    func hiddenTabBar() {
-        self.tabBarController?.tabBar.isHidden = true
-    }
+//    func hiddenTabBar() {
+//        self.tabBarController?.tabBar.isHidden = true
+//    }
     
     func convertToSectionModel(_ homeInfo: HomeInfo) -> [HomeSectionModel] {
         let titleItem = HomeSectionItem.titleSectionItem(user: homeInfo.user)

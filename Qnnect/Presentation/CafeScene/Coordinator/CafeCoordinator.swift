@@ -41,7 +41,7 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         let vc = DrinkSelectViewController.create()
         vc.modalPresentationStyle = .overCurrentContext
         
-        if let vc = self.navigationController.presentedViewController {
+        if let vc = self.navigationController.presentedViewController as? DrinkSelectGuideAlertView {
             vc.dismiss(animated: false, completion: nil)
         }
         self.navigationController.present(vc, animated: false, completion: nil)

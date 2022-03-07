@@ -101,6 +101,10 @@ final class CafeRoomViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func configureUI() {
         
         [
@@ -144,7 +148,8 @@ final class CafeRoomViewController: BaseViewController {
             cafeId: Observable.just(self.cafeId),
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
-            isFirst: Observable.just(self.isFirst)
+            isFirst: Observable.just(self.isFirst),
+            viewDidAppear: self.rx.viewDidAppear.mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)

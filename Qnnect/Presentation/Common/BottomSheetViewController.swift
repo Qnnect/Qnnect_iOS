@@ -90,8 +90,11 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(self.view.frame.height - 121.0)
             }
+            self.presentingViewController?.tabBarController?.tabBar.isHidden = true
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }) { _ in
+            
+        }
     }
     
     // 바텀 시트 사라지는 애니메이션
@@ -104,6 +107,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         }) { _ in
             if self.presentingViewController != nil {
                 self.presentingViewController?.tabBarController?.tabBar.isHidden = false
+                self.presentingViewController!.view.setNeedsLayout()
                 self.dismiss(animated: false, completion: nil)
             }
         }

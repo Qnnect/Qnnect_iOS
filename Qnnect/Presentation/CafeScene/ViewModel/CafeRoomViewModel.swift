@@ -18,6 +18,7 @@ final class CafeRoomViewModel: ViewModelType {
         let didTapQuestionButton: Observable<Void>
         let didTapDrinkSelectButton: Observable<Void>
         let isFirst: Observable<Bool>
+        let viewDidAppear: Observable<Void>
     }
     
     struct Output {
@@ -48,12 +49,14 @@ final class CafeRoomViewModel: ViewModelType {
                 return cafe
             }
             .share()
-            // .do(방 정보를 가져옴)
-            // 만약 내가 선택한 음료가 없으면
-//            .do(onNext: self.showSelectDrinkBottomSheet)
-//                .delaySubscription(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
         
-        let showDrinkSelectBottomSheet = Observable.merge(input.didTapDrinkSelectButton, input.isFirst.filter{$0}.mapToVoid())
+        let showDrinkSelectBottomSheet = Observable.merge(
+            input.didTapDrinkSelectButton,
+            Observable.zip(
+                input.isFirst.filter{$0}.mapToVoid(),
+                input.viewDidAppear.delay(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
+            ).mapToVoid()
+            )
             .do {
                 [weak self] _ in
                 self?.coordinator?.showSelectDrinkBottomSheet()
