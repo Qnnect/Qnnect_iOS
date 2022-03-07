@@ -11,12 +11,12 @@ import RxDataSources
 enum HomeSectionModel {
     case titleSection(title: String, items: [HomeSectionItem])
     case todayQuestionSection(title: String, items: [HomeSectionItem])
-    case mygroupSection(title: String, items: [HomeSectionItem])
+    case myCafeSection(title: String, items: [HomeSectionItem])
 }
 enum HomeSectionItem {
     case titleSectionItem(user: User)
-    case todayQuestionSectionItem(question: Question_test)
-    case mygroupSectionItem(group: Group)
+    case todayQuestionSectionItem(question: ToDayQuestion)
+    case myCafeSectionItem(cafe: MyCafe)
 }
 
 extension HomeSectionModel: SectionModelType {
@@ -26,8 +26,8 @@ extension HomeSectionModel: SectionModelType {
             self = .titleSection(title: title, items: items)
         case .todayQuestionSection(title: let title, _):
             self = .todayQuestionSection(title: title, items: items)
-        case .mygroupSection(title: let title, _):
-            self = .mygroupSection(title: title, items: items)
+        case .myCafeSection(title: let title, _):
+            self = .myCafeSection(title: title, items: items)
         }
     }
     
@@ -39,7 +39,7 @@ extension HomeSectionModel: SectionModelType {
             return items
         case .todayQuestionSection(_, let items):
             return items
-        case .mygroupSection(title: _, items: let items):
+        case .myCafeSection(title: _, items: let items):
             return items
         }
     }
@@ -50,7 +50,7 @@ extension HomeSectionModel: SectionModelType {
             return title
         case .todayQuestionSection(let title, _):
             return title
-        case .mygroupSection(let title, _):
+        case .myCafeSection(let title, _):
             return title
         }
     }

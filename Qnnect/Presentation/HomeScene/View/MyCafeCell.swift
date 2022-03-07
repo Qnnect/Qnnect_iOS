@@ -70,9 +70,9 @@ final class MyCafeCell: UICollectionViewCell {
         }
     }
     
-    func update(with group: Group) {
-        self.groupNameLabel.text = group.name
-        self.createdDateLabel.text = group.createdDay
-        self.headCountLabel.text = "\(group.headCount)명"
+    func update(with cafe: MyCafe) {
+        self.groupNameLabel.text = cafe.title
+        self.createdDateLabel.text = cafe.createdAt
+        self.headCountLabel.text = "\(cafe.cafeUserNum)명"
     }
 }

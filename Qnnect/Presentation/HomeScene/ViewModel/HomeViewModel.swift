@@ -22,13 +22,20 @@ final class HomeViewModel: ViewModelType {
         let showAddGroupBottomSheet: Signal<Void>
         let curQuestionPage: Driver<Int>
         let showCafeRoom: Signal<Void>
+        let homeInfo: Driver<HomeInfo>
     }
     
     private weak var coordinator: HomeCoordinator?
+    private let homeUseCase: HomeUseCase
     
-    init(coordinator:HomeCoordinator) {
+    init(
+        coordinator:HomeCoordinator,
+        homeUseCase: HomeUseCase
+    ) {
         self.coordinator = coordinator
+        self.homeUseCase = homeUseCase
     }
+    
     func transform(from input: Input) -> Output {
         
         let showAddGroupBottomSheet = input.didTapAddGroupButton
@@ -42,10 +49,19 @@ final class HomeViewModel: ViewModelType {
                 self?.coordinator?.showGroupScene(with: 12)
             }
         
+        let homeInfo = input.viewWillAppear
+            .flatMap(self.homeUseCase.fetchHomeInfo)
+            .debug()
+            .compactMap { result -> HomeInfo? in
+                guard case let .success(homeInfo) = result else { return nil }
+                return homeInfo
+            }
+        
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
             curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0),
-            showCafeRoom: showCafeRoom.asSignal(onErrorSignalWith: .empty())
+            showCafeRoom: showCafeRoom.asSignal(onErrorSignalWith: .empty()),
+            homeInfo: homeInfo.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

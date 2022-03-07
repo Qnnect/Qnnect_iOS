@@ -77,10 +77,15 @@ final class TodayQuestionCell: UICollectionViewCell {
         self.drawBottomShadow()
     }
     
-    func update(with question: Question_test) {
-        self.groupNameLabel.text = question.groupName
-        self.questionLabel.text = question.content
-        self.d_dayLabel.text = question.d_day
+    func update(with question: ToDayQuestion) {
+        self.groupNameLabel.text = question.cafeTitle
+        let paragraphStyle = Constants.paragraphStyle
+        paragraphStyle.alignment = .center
+        self.questionLabel.attributedText = NSAttributedString(
+            string: question.content,
+            attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        )
+        self.d_dayLabel.text = "D-\(question.daysLeft)"
     }
     
     private func drawBottomShadow() {
@@ -105,23 +110,3 @@ final class TodayQuestionCell: UICollectionViewCell {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13.0, *)
-struct presentable: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) { }
-    func makeUIView(context: Context) -> some UIView {
-        let a = TodayQuestionCell()
-        a.update(with: Question_test(groupName: "INFP5인방", d_day: "D-7", content: "Dsfadsfasdfsdafasdfdasfsdakjfsdikfjasdfjsdffsdak;fjasdklfjasdklsd"))
-        return a
-    }
-}
-
-@available(iOS 13.0, *)
-struct TodayQuestionCell_Priview: PreviewProvider {
-    static var previews: some View {
-        presentable()
-            .previewLayout(.fixed(width: 333.0, height: 200.0))
-    }
-}
-#endif

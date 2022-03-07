@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
+		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
+		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
+		AE02D80227D5C6CF0019D955 /* HomeInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80127D5C6CF0019D955 /* HomeInfoResponseDTO.swift */; };
+		AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80327D5C94C0019D955 /* HomeInfo.swift */; };
+		AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80527D5CCF70019D955 /* HomeRepository.swift */; };
+		AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */; };
 		AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */; };
 		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
@@ -160,6 +167,13 @@
 /* Begin PBXFileReference section */
 		59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.debug.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.release.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.release.xcconfig"; sourceTree = "<group>"; };
+		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
+		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
+		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
+		AE02D80127D5C6CF0019D955 /* HomeInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfoResponseDTO.swift; sourceTree = "<group>"; };
+		AE02D80327D5C94C0019D955 /* HomeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
+		AE02D80527D5CCF70019D955 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeRepository.swift; sourceTree = "<group>"; };
 		AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeCell.swift; sourceTree = "<group>"; };
 		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
@@ -334,6 +348,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AE02D7F927D5C4990019D955 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AE02D80027D5C6C10019D955 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D80127D5C6CF0019D955 /* HomeInfoResponseDTO.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		AE0D336B27B4CC5A00C4B955 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +464,7 @@
 				AEA14D0527CFB7B10009EEC6 /* User.swift */,
 				AEA14D1E27D33BBE0009EEC6 /* Question.swift */,
 				AEA14D4727D47E8D0009EEC6 /* Cafe.swift */,
+				AE02D80327D5C94C0019D955 /* HomeInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -441,6 +472,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AE02D7F927D5C4990019D955 /* Home */,
 				AEA14D0B27CFB97D0009EEC6 /* User */,
 				AE717B5F27C4C260008278D3 /* Cafe */,
 				AE6FA49827BDFD6B00FA2154 /* Store */,
@@ -455,6 +487,7 @@
 				AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */,
 				AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */,
 				AEA14D4327D47E0E0009EEC6 /* DefaultCafeRespository.swift */,
+				AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -486,6 +519,7 @@
 				AEBC9ED827C62E9E0070399A /* AuthRepository.swift */,
 				AEA14D0327CFB6990009EEC6 /* UserRepository.swift */,
 				AEA14D4527D47E1E0009EEC6 /* CafeRepository.swift */,
+				AE02D80527D5CCF70019D955 /* HomeRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -857,6 +891,7 @@
 				AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */,
 				AEA14CFD27CF76220009EEC6 /* UserAPI.swift */,
 				AEA14D3927D476D30009EEC6 /* CafeAPI.swift */,
+				AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -864,6 +899,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AE02D80027D5C6C10019D955 /* Home */,
 				AEA14D1927D3396A0009EEC6 /* Cafe */,
 				AEA14CF827CF74880009EEC6 /* User */,
 				AEA14CF327CF01BA0009EEC6 /* Reissue */,
@@ -996,6 +1032,7 @@
 				AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */,
 				AEA14D2827D39D320009EEC6 /* TokenService.swift */,
 				AEA14D4127D47CD70009EEC6 /* CafeNetworkService.swift */,
+				AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1186,6 +1223,7 @@
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
 				AEA14D3A27D476D30009EEC6 /* CafeAPI.swift in Sources */,
 				AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */,
+				AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */,
 				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
@@ -1196,6 +1234,7 @@
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
 				AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */,
+				AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */,
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AE717B6127C4C278008278D3 /* AddCafeUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
@@ -1220,6 +1259,7 @@
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
+				AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */,
 				AEA14D3827D46A3A0009EEC6 /* CafeUserResponseDTO.swift in Sources */,
 				AEA14D1D27D33A460009EEC6 /* CafeQuestionResponseDTO.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
@@ -1233,6 +1273,7 @@
 				AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */,
 				AEBC9ECA27C619FB0070399A /* OnboardingViewController.swift in Sources */,
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
+				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
@@ -1255,6 +1296,7 @@
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */,
 				AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */,
+				AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */,
 				AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */,
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
@@ -1279,6 +1321,7 @@
 				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
+				AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
@@ -1287,6 +1330,7 @@
 				AEA14D3627D466790009EEC6 /* GroupType.swift in Sources */,
 				AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */,
 				AEEF362C27C3501200D0A127 /* EditProfileViewController.swift in Sources */,
+				AE02D80227D5C6CF0019D955 /* HomeInfoResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

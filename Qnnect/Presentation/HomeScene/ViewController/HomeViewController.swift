@@ -52,7 +52,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private let pointLabel = UILabel().then {
-        $0.text = "500P"
+        $0.text = "nil"
         $0.font = .BM_JUA(size: 18.0)
         $0.textColor = .BLACK_121212
     }
@@ -129,28 +129,6 @@ final class HomeViewController: BaseViewController {
     }
     
     override func bind() {
-        let dummyUser = User(name: "제제로", point: 500, profileImage: "")
-        let content = "친구와 함께 가장 가고싶은 외국 여행지는 어디인가요? 글자수가 여기서 넘치면 마침표를 넣습니다넣습니다넣습니다넣..."
-        let content1 = "우리중에 가장 I같은 사람은 누구일까요~?????"
-        let dummyQuestions = [
-            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
-            Question_test(groupName: "INFP 5인방 모임", d_day: "D-14", content: content1),
-            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content),
-            Question_test(groupName: "아아메 5인방 모임", d_day: "D-7", content: content)
-        ]
-        let dummyGroups = [
-            Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
-            Group(name: "INFP 5인방 모임", createdDay: "2022.2.12~", headCount: 5),
-            Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
-            Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
-            Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
-            Group(name: "아아메 5인방 모임", createdDay: "2022.1.22~", headCount: 5),
-            Group(name: "마지막", createdDay: "adfas",headCount: 2)
-        ]
-        
-        let user = Observable.just(dummyUser)
-        let questions = Observable.just(dummyQuestions)
-        let groups = Observable.just(dummyGroups)
         
         let didTapAddGroupButton = PublishSubject<Void>()
         let curQuestionPage = PublishSubject<Int>()
@@ -186,19 +164,7 @@ final class HomeViewController: BaseViewController {
             return UICollectionReusableView()
         }
         
-        Observable.combineLatest(user, questions, groups)
-            .map { user,questions,groups -> [HomeSectionModel]in
-                let titleItem = HomeSectionItem.titleSectionItem(user: user)
-                let questionItem = questions.map { HomeSectionItem.todayQuestionSectionItem(question: $0) }
-                let groupItem = groups.map { HomeSectionItem.mygroupSectionItem(group: $0)}
-                return [
-                    HomeSectionModel.titleSection(title: "", items: [titleItem]),
-                    HomeSectionModel.todayQuestionSection(title: "오늘의 질문", items: questionItem),
-                    HomeSectionModel.mygroupSection(title: "나의 카페", items: groupItem)
-                ]
-            }.bind(to: self.homeCollectionView.rx.items(dataSource: datasource))
-            .disposed(by: self.disposeBag)
-        
+
         let input = HomeViewModel.Input(
             didTapAddGroupButton: didTapAddGroupButton.asObservable(),
             curQuestionPage:   self.rx.methodInvoked(#selector( HomeViewController.visibleItemsInvalidationHandler))
@@ -210,9 +176,9 @@ final class HomeViewController: BaseViewController {
                 },
             viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
             didTapMyCafe: self.homeCollectionView.rx.modelSelected(HomeSectionItem.self)
-                .compactMap { item -> Group? in
-                    guard case let HomeSectionItem.mygroupSectionItem(group) = item else { return nil }
-                    return group
+                .compactMap { item -> MyCafe? in
+                    guard case let HomeSectionItem.myCafeSectionItem(cafe) = item else { return nil }
+                    return cafe
                 }
                 .mapToVoid()
         )
@@ -231,6 +197,15 @@ final class HomeViewController: BaseViewController {
         
         output.showCafeRoom
             .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.homeInfo
+            .do {
+                [weak self] homeInfo in
+                self?.pointLabel.text = "\(homeInfo.user.point)P"
+            }
+            .map(self.convertToSectionModel(_:))
+            .drive(self.homeCollectionView.rx.items(dataSource: datasource))
             .disposed(by: self.disposeBag)
     }
 }
@@ -350,13 +325,13 @@ private extension HomeViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayQuestionCell.identifier, for: indexPath) as! TodayQuestionCell
                 cell.update(with: question)
                 return cell
-            case.mygroupSectionItem(group: let group):
+            case.myCafeSectionItem(cafe: let cafe):
                 //TODO: 일단 테스트를 위한 코드 ... 꼭 바꾸자 이 로직
-                if group.name == "마지막" {
-                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddCafeCell.identifier, for: indexPath)
-                }
+//                if group.name == "마지막" {
+//                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddCafeCell.identifier, for: indexPath)
+//                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeCell.identifier, for: indexPath) as! MyCafeCell
-                cell.update(with: group)
+                cell.update(with: cafe)
                 return cell
             }
         }
@@ -365,27 +340,16 @@ private extension HomeViewController {
     func hiddenTabBar() {
         self.tabBarController?.tabBar.isHidden = true
     }
-}
-
-import SwiftUI
-struct HomeViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = HomeViewController.create(
-                with: HomeViewModel(
-                    coordinator: DefaultHomeCoordinator(navigationController: UINavigationController())
-                )) //보고 싶은 뷰컨 객체
-            return vc
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
+    
+    func convertToSectionModel(_ homeInfo: HomeInfo) -> [HomeSectionModel] {
+        let titleItem = HomeSectionItem.titleSectionItem(user: homeInfo.user)
+        let questionItem = homeInfo.questions.map { HomeSectionItem.todayQuestionSectionItem(question: $0) }
+        let groupItem = homeInfo.cafes.map { HomeSectionItem.myCafeSectionItem(cafe: $0)}
+        return [
+            HomeSectionModel.titleSection(title: "", items: [titleItem]),
+            HomeSectionModel.todayQuestionSection(title: "오늘의 질문", items: questionItem),
+            HomeSectionModel.myCafeSection(title: "나의 카페", items: groupItem)
+        ]
     }
 }
-
 

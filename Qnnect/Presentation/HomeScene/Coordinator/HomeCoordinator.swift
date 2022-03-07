@@ -22,7 +22,9 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     }
     
     func start() {
-        let viewModel = HomeViewModel(coordinator: self)
+        let homeRepository = DefaultHomeRepository(homeNetworkService: HomeNetworkService())
+        let homeUseCase = DefaultHomeUseCase(homeRepository: homeRepository)
+        let viewModel = HomeViewModel(coordinator: self, homeUseCase: homeUseCase)
         let vc = HomeViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
         self.navigationController.viewControllers.removeAll { $0 != vc }
