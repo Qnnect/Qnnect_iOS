@@ -15,7 +15,7 @@ final class HomeViewModel: ViewModelType {
         let didTapAddGroupButton: Observable<Void>
         let curQuestionPage: Observable<Int>
         let viewWillAppear: Observable<Void>
-        let didTapMyCafe: Observable<Void>
+        let didTapMyCafe: Observable<MyCafe>
     }
     
     struct Output {
@@ -45,9 +45,10 @@ final class HomeViewModel: ViewModelType {
         
         let showCafeRoom = input.didTapMyCafe
             .do {
-                [weak self] _ in
-                self?.coordinator?.showGroupScene(with: 12, false)
+                [weak self] myCafe in
+                self?.coordinator?.showGroupScene(with: myCafe.id, false)
             }
+            .mapToVoid()
         
         let homeInfo = input.viewWillAppear
             .flatMap(self.homeUseCase.fetchHomeInfo)

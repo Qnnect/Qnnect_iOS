@@ -180,7 +180,7 @@ final class HomeViewController: BaseViewController {
                     guard case let HomeSectionItem.myCafeSectionItem(cafe) = item else { return nil }
                     return cafe
                 }
-                .mapToVoid()
+                
         )
         
         
