@@ -136,7 +136,8 @@ final class CafeRoomViewController: BaseViewController {
         let input = CafeRoomViewModel.Input(
             viewDidLoad: Observable.just(Void()),
             viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
-            cafeId: Observable.just(cafeId)
+            cafeId: Observable.just(cafeId),
+            didTapQuestionButton: self.questionButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -161,6 +162,10 @@ final class CafeRoomViewController: BaseViewController {
                 ]
             })
             .drive(self.mainCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: self.disposeBag)
+        
+        output.showDrinkSelectGuideAlertView
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }

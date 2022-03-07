@@ -15,10 +15,12 @@ final class CafeRoomViewModel: ViewModelType {
         let viewDidLoad: Observable<Void>
         let viewWillAppear: Observable<Void>
         let cafeId: Observable<Int>
+        let didTapQuestionButton: Observable<Void>
     }
     
     struct Output {
         let roomInfo: Driver<Cafe>
+        let showDrinkSelectGuideAlertView: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -46,8 +48,16 @@ final class CafeRoomViewModel: ViewModelType {
             // 만약 내가 선택한 음료가 없으면
 //            .do(onNext: self.showSelectDrinkBottomSheet)
 //                .delaySubscription(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
+        
+        let showDrinkSelectGuideAlertView = input.didTapQuestionButton
+            //내가 선택한 음료가 없으면
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showDrinkSelectGuideAlertView(.question)
+            }
         return Output(
-            roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty())
+            roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
+            showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

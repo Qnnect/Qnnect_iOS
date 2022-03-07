@@ -34,6 +34,7 @@ extension UIColor {
     class var SECONDARY04: UIColor? { return UIColor(named: "SECONDARY04") }
     class var p_ivory: UIColor? { return UIColor(named: "p_ivory") }
     class var brownBorderColor: UIColor? { return UIColor(named: "brownBorderColor") }
+    ///18191F
     class var blackLabel: UIColor? { return UIColor(named: "blackLabel") }
     class var tagBorderColor: UIColor? { return UIColor(named: "tagBorder") }
     class var secondaryBackground: UIColor? { return UIColor(named: "secondaryBackground") }

@@ -14,6 +14,9 @@
 		AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80327D5C94C0019D955 /* HomeInfo.swift */; };
 		AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80527D5CCF70019D955 /* HomeRepository.swift */; };
 		AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */; };
+		AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */; };
+		AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */; };
+		AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */; };
 		AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */; };
 		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
@@ -174,6 +177,9 @@
 		AE02D80327D5C94C0019D955 /* HomeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInfo.swift; sourceTree = "<group>"; };
 		AE02D80527D5CCF70019D955 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeRepository.swift; sourceTree = "<group>"; };
+		AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectGuideAlertView.swift; sourceTree = "<group>"; };
+		AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectGuideAlertViewModel.swift; sourceTree = "<group>"; };
+		AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBehaviorType.swift; sourceTree = "<group>"; };
 		AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeCell.swift; sourceTree = "<group>"; };
 		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
@@ -610,6 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
+				AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */,
+				AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -627,6 +635,7 @@
 			children = (
 				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
+				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1094,6 +1103,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					123123,
+				);
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
@@ -1218,6 +1230,7 @@
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
+				AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
@@ -1239,6 +1252,7 @@
 				AE717B6127C4C278008278D3 /* AddCafeUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
 				AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */,
+				AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */,
@@ -1265,6 +1279,7 @@
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
+				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AEA14D4027D47B1A0009EEC6 /* CafeJoinRequestDTO.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,

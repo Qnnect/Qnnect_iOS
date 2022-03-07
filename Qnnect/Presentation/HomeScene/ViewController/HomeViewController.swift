@@ -202,7 +202,7 @@ final class HomeViewController: BaseViewController {
         output.homeInfo
             .do {
                 [weak self] homeInfo in
-                self?.pointLabel.text = "\(homeInfo.user.point)P"
+                self?.pointLabel.text = "\(homeInfo.user.point) P"
             }
             .map(self.convertToSectionModel(_:))
             .drive(self.homeCollectionView.rx.items(dataSource: datasource))

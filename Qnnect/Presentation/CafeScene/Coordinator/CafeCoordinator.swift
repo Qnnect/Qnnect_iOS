@@ -11,6 +11,8 @@ import UIKit
 protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet()
     func start(with cafeId: Int)
+    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
+    func dismissAlert()
 }
 
 final class DefaultGroupCoordinator: CafeCoordinator {
@@ -39,5 +41,16 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         let vc = SelectDrinkViewController.create()
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(vc, animated: false, completion: nil)
+    }
+    
+    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType) {
+        let viewModel = DrinkSelectGuideAlertViewModel(coordinator: self)
+        let alert = DrinkSelectGuideAlertView.create(with: viewModel, type)
+        alert.modalPresentationStyle = .overCurrentContext
+        self.navigationController.present(alert, animated: true, completion: nil)
+    }
+    
+    func dismissAlert() {
+        self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }
