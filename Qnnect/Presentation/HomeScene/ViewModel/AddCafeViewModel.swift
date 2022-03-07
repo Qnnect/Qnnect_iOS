@@ -62,12 +62,16 @@ final class AddCafeViewModel: ViewModelType {
         let createCafe = input.didTapNextButton
             .withLatestFrom(inputInfo)
             .flatMap(self.addGroupUseCase.createRoom)
-            .mapToVoid()
+            .compactMap({ result -> Int? in
+                guard case let .success(cafeId) = result else { return nil }
+                return cafeId
+            })
             .do {
-                [weak self] _ in
-                //TODO: 카페 id 변경 
-                self?.coordinator?.showGroupScene(with: 12)
+                [weak self] id in
+                self?.coordinator?.showGroupScene(with: id, true)
             }
+            .debug()
+            .mapToVoid()
         
         return Output(
             questionCycle: questionCycle.asDriver(onErrorDriveWith: .empty()),

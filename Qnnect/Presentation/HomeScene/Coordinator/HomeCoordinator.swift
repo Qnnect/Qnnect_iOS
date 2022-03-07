@@ -9,7 +9,7 @@ import UIKit
 
 protocol HomeCoordinator: Coordinator {
     func showAddGroupBottomSheet()
-    func showGroupScene(with cafeId: Int)
+    func showGroupScene(with cafeId: Int, _ isFirst: Bool)
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -42,11 +42,11 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         self.navigationController.present(vc, animated: false, completion: nil)
     }
     
-    func showGroupScene(with cafeId: Int) {
+    func showGroupScene(with cafeId: Int, _ isFirst: Bool = false) {
         let coordinator = DefaultGroupCoordinator(navigationController: self.navigationController)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
-        coordinator.start(with: cafeId)
+        coordinator.start(with: cafeId,isFirst)
     }
  
 }

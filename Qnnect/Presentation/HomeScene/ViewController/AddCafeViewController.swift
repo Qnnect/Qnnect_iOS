@@ -179,7 +179,7 @@ final class AddCafeViewController: BottomSheetViewController {
             .map{ [weak self] _ -> QuestionCycle in
                 guard let self = self else { return .every }
                 return self.questionCycleSlider.slider.selectedCycle
-            }
+            }.startWith(.every)
         
         let input = AddCafeViewModel.Input(
             selectedCycle: value,

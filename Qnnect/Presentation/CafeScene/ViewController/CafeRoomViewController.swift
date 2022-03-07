@@ -83,14 +83,17 @@ final class CafeRoomViewController: BaseViewController {
     
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
+    private var isFirst: Bool!
     
     static func create(
         with viewModel: CafeRoomViewModel,
-        _ cafeId: Int
+        _ cafeId: Int,
+        _ isFirst: Bool = false
     ) -> CafeRoomViewController{
         let vc = CafeRoomViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
+        vc.isFirst = isFirst
         return vc
     }
     
@@ -138,9 +141,10 @@ final class CafeRoomViewController: BaseViewController {
         let input = CafeRoomViewModel.Input(
             viewDidLoad: Observable.just(Void()),
             viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
-            cafeId: Observable.just(cafeId),
+            cafeId: Observable.just(self.cafeId),
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
-            didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable()
+            didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
+            isFirst: Observable.just(self.isFirst)
         )
         
         let output = self.viewModel.transform(from: input)
@@ -337,29 +341,3 @@ private extension CafeRoomViewController {
     }
 }
 
-import SwiftUI
-struct GroupRoomViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
-            let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
-            let vc = CafeRoomViewController.create(
-                with: CafeRoomViewModel(
-                    coordinator: DefaultGroupCoordinator(
-                        navigationController: UINavigationController()),
-                    cafeUseCase: cafeUseCase
-                ),
-                12
-            )
-            return vc
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
-    }
-}

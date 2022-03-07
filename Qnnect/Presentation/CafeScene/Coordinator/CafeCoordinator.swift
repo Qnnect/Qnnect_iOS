@@ -10,7 +10,7 @@ import UIKit
 
 protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet()
-    func start(with cafeId: Int)
+    func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
     func dismissAlert()
 }
@@ -26,14 +26,14 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     
     func start() { }
     
-    func start(with cafeId: Int) {
+    func start(with cafeId: Int, _ isFirst: Bool = false) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = CafeRoomViewModel(
             coordinator: self,
             cafeUseCase: cafeUseCase
         )
-        let vc = CafeRoomViewController.create(with: viewModel,cafeId)
+        let vc = CafeRoomViewController.create(with: viewModel,cafeId,isFirst)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

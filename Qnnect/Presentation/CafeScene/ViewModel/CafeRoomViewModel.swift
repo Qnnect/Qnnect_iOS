@@ -17,6 +17,7 @@ final class CafeRoomViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let didTapQuestionButton: Observable<Void>
         let didTapDrinkSelectButton: Observable<Void>
+        let isFirst: Observable<Bool>
     }
     
     struct Output {
@@ -51,7 +52,7 @@ final class CafeRoomViewModel: ViewModelType {
 //            .do(onNext: self.showSelectDrinkBottomSheet)
 //                .delaySubscription(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
         
-        let showDrinkSelectBottomSheet = input.didTapDrinkSelectButton
+        let showDrinkSelectBottomSheet = Observable.merge(input.didTapDrinkSelectButton, input.isFirst.filter{$0}.mapToVoid())
             .do {
                 [weak self] _ in
                 self?.coordinator?.showSelectDrinkBottomSheet()

@@ -46,7 +46,7 @@ final class HomeViewModel: ViewModelType {
         let showCafeRoom = input.didTapMyCafe
             .do {
                 [weak self] _ in
-                self?.coordinator?.showGroupScene(with: 12)
+                self?.coordinator?.showGroupScene(with: 12, false)
             }
         
         let homeInfo = input.viewWillAppear

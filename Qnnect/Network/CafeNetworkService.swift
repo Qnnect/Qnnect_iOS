@@ -10,10 +10,11 @@ import RxSwift
 
 final class CafeNetworkService: BaseNetworkService<CafeAPI> {
     
-    func createCafe(request: CafeCreateRequestDTO) -> Observable<Result<CafeCreateResponseDTO,Error>> {
+    func createCafe(request: CafeCreateRequestDTO) -> Observable<Result<Int,Error>> {
         return self.request(.createCafe(request: request))
             .filter(statusCode: 200)
-            .map(CafeCreateResponseDTO.self)
+            .map(Int.self)
+           // .map(CafeCreateResponseDTO.self)
             .map{ Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()
