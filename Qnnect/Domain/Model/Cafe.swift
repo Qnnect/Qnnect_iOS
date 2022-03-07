@@ -12,7 +12,8 @@ struct Cafe {
     let cafeUsers: [CafeUser]
     let code: String
     let createdAt: String
-    let organizer: User
+    let currentUser: CafeUser
+    let organizer: Bool
     let title:String
 }
 

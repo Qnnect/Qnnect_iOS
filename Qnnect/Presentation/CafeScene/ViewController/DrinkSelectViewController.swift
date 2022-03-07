@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class SelectDrinkViewController: BottomSheetViewController {
+final class DrinkSelectViewController: BottomSheetViewController {
     
     private let mainLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
@@ -36,8 +36,8 @@ final class SelectDrinkViewController: BottomSheetViewController {
         $0.spacing = 16.0
         $0.distribution = .fillEqually
     }
-    static func create() -> SelectDrinkViewController {
-        let vc = SelectDrinkViewController()
+    static func create() -> DrinkSelectViewController {
+        let vc = DrinkSelectViewController()
         return vc
     }
     

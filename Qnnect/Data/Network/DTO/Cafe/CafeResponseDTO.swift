@@ -12,7 +12,8 @@ struct CafeResponseDTO: Decodable {
     let cafeUserResponseList: [CafeUserResponseDTO]
     let code: String
     let createdAt: String
-    let organizer: ProfileResponseDTO
+    let currentUserResponse: CafeUserResponseDTO
+    let organizer: Bool
     let title: String
     
     func toDomain() -> Cafe {
@@ -21,7 +22,8 @@ struct CafeResponseDTO: Decodable {
             cafeUsers: self.cafeUserResponseList.map { $0.toDomain()},
             code: self.code,
             createdAt: self.createdAt,
-            organizer: self.organizer.toDomain(),
+            currentUser: self.currentUserResponse.toDomain(),
+            organizer: self.organizer,
             title: self.title
         )
     }
