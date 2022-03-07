@@ -35,6 +35,9 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
     }
+    
+    var topPadding: CGFloat = 0
+    
     override func viewDidLoad() {
         [
             self.dimmendView,
@@ -88,7 +91,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
     func showBottomSheet() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
-                make.height.equalTo(self.view.frame.height - 121.0)
+                make.height.equalTo(self.view.frame.height - self.topPadding)
             }
             self.presentingViewController?.tabBarController?.tabBar.isHidden = true
             self.view.layoutIfNeeded()

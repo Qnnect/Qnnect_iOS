@@ -149,7 +149,8 @@ final class CafeRoomViewController: BaseViewController {
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
             isFirst: Observable.just(self.isFirst),
-            viewDidAppear: self.rx.viewDidAppear.mapToVoid()
+            viewDidAppear: self.rx.viewDidAppear.mapToVoid(),
+            didTapNavigationMenu: self.navigationMenuButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -181,6 +182,10 @@ final class CafeRoomViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showDrinkSelectBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showSettingBottomSheet
             .emit()
             .disposed(by: self.disposeBag)
     }

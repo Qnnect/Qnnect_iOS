@@ -18,6 +18,8 @@
 		AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */; };
 		AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */; };
 		AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */; };
+		AE02D81227D621950019D955 /* SettingBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81127D621950019D955 /* SettingBottomSheet.swift */; };
+		AE02D81427D622560019D955 /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81327D622560019D955 /* SettingItemCell.swift */; };
 		AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */; };
 		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
@@ -182,6 +184,8 @@
 		AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectGuideAlertViewModel.swift; sourceTree = "<group>"; };
 		AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBehaviorType.swift; sourceTree = "<group>"; };
 		AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectViewModel.swift; sourceTree = "<group>"; };
+		AE02D81127D621950019D955 /* SettingBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBottomSheet.swift; sourceTree = "<group>"; };
+		AE02D81327D622560019D955 /* SettingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
 		AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeCell.swift; sourceTree = "<group>"; };
 		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
@@ -639,6 +643,7 @@
 				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */,
 				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
+				AE02D81127D621950019D955 /* SettingBottomSheet.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */,
 				AEA14D4D27D4B0EF0009EEC6 /* CafeSectionModel.swift */,
 				AEA14D4F27D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift */,
+				AE02D81327D622560019D955 /* SettingItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1214,6 +1220,7 @@
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
 				AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
+				AE02D81227D621950019D955 /* SettingBottomSheet.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
@@ -1286,6 +1293,7 @@
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AEA14D4027D47B1A0009EEC6 /* CafeJoinRequestDTO.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
+				AE02D81427D622560019D955 /* SettingItemCell.swift in Sources */,
 				AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */,
 				AEA14D0027CF76C70009EEC6 /* UserNetworkService.swift in Sources */,
 				AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */,

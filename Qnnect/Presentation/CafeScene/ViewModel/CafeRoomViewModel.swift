@@ -19,12 +19,14 @@ final class CafeRoomViewModel: ViewModelType {
         let didTapDrinkSelectButton: Observable<Void>
         let isFirst: Observable<Bool>
         let viewDidAppear: Observable<Void>
+        let didTapNavigationMenu: Observable<Void>
     }
     
     struct Output {
         let roomInfo: Driver<Cafe>
         let showDrinkSelectGuideAlertView: Signal<Void>
         let showDrinkSelectBottomSheet: Signal<Void>
+        let showSettingBottomSheet: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -73,10 +75,16 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let showSettingBottomSheet = input.didTapNavigationMenu
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showSettingBottomSheet()
+            }
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
             showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty()),
-            showDrinkSelectBottomSheet: showDrinkSelectBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showDrinkSelectBottomSheet: showDrinkSelectBottomSheet.asSignal(onErrorSignalWith: .empty()),
+            showSettingBottomSheet: showSettingBottomSheet.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

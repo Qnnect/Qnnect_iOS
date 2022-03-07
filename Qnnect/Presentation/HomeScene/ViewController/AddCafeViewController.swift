@@ -113,6 +113,8 @@ final class AddCafeViewController: BottomSheetViewController {
             self.bottomSheetView.addSubview($0)
         }
         
+        self.topPadding = 121.0
+        
         //self.view.backgroundColor = .black.withAlphaComponent(0.5)
         self.inputTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dismissButton.snp.bottom).offset(22.0)

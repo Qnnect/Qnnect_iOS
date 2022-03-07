@@ -59,6 +59,8 @@ final class DrinkSelectViewController: BottomSheetViewController {
             self.bottomSheetView.addSubview($0)
         }
         
+        self.topPadding = 121.0
+        
         self.titleLabel.text = "음료 선택"
         
         self.mainLabel.snp.makeConstraints { make in
