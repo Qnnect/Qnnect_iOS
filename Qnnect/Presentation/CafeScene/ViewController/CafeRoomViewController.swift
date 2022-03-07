@@ -159,7 +159,7 @@ final class CafeRoomViewController: BaseViewController {
             }
             .map({ cafe -> [CafeRoomSectionModel] in
                 let cafeTitleSectionItem = CafeRoomSectionItem.titleSectionItem(cafe: cafe)
-                let cafeDrinksSectionItems = cafe.cafeUsers.map { CafeRoomSectionItem.cafeDrinksSection(cafeUser: $0)}
+                let cafeDrinksSectionItems = cafe.cafeUsers.map { CafeRoomSectionItem.cafeDrinksSectionItem(cafeUser: $0)}
                 let cafeToDayQuestionSectionItems = cafe.questions.map{ CafeRoomSectionItem.todayQuestionSectionItem(question: $0)}
                 
                 return [
@@ -300,7 +300,7 @@ private extension CafeRoomViewController {
                     .bind(to: drinkSelectButtonObserver)
                     .disposed(by: self.disposeBag)
                 return cell
-            case .cafeDrinksSection(cafeUser: let cafeUser):
+            case .cafeDrinksSectionItem(cafeUser: let cafeUser):
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CafeDrinkCell.identifier,
                     for: indexPath
