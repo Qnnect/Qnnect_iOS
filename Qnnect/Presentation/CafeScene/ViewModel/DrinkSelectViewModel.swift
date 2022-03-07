@@ -6,3 +6,27 @@
 //
 
 import Foundation
+
+final class DrinkSelctViewModel: ViewModelType {
+    
+    struct Input {
+        
+    }
+    
+    struct Output {
+        
+    }
+    
+    private weak var coordinator: CafeCoordinator?
+    
+    init(
+        coordinator: CafeCoordinator
+    ) {
+        self.coordinator = coordinator
+    }
+    
+    func transform(from input: Input) -> Output {
+        return Output()
+    }
+}
+

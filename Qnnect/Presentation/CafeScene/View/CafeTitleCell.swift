@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class CafeTitleCell: UICollectionViewCell {
     static let identifier = "CafeTitleCell"
@@ -27,7 +28,7 @@ final class CafeTitleCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
     }
     
-    private let drinkSelectButton = UIButton().then {
+    private(set) var drinkSelectButton = UIButton().then {
         $0.backgroundColor = .drinkSelectButtonBackground
         $0.setTitle("음료 선택하기", for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
@@ -83,7 +84,20 @@ final class CafeTitleCell: UICollectionViewCell {
     
     func update(with cafe: Cafe) {
         self.nameLabel.text = cafe.title
-        self.createdDateLabel.text = cafe.createdAt
-        self.drinkImageView.image = Constants.basicDrinkImage
+        self.createdDateLabel.text = "\(cafe.createdAt)~"
+        self.setCurrentUserDrink(isSelected: cafe.currentUser.userDrinkSelected != nil)
+    }
+    
+}
+
+private extension CafeTitleCell {
+    func setCurrentUserDrink(isSelected: Bool) {
+        if isSelected {
+            self.drinkImageView.image = Constants.basicDrinkImage
+            self.drinkSelectButton.isHidden = true
+        } else {
+            self.drinkImageView.image = Constants.notSelectDrinkImage
+            self.drinkSelectButton.isHidden = false
+        }
     }
 }

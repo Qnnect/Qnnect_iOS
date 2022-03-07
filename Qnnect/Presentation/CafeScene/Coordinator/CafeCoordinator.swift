@@ -38,7 +38,7 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showSelectDrinkBottomSheet() {
-        let vc = SelectDrinkViewController.create()
+        let vc = DrinkSelectViewController.create()
         vc.modalPresentationStyle = .overCurrentContext
         
         if let vc = self.navigationController.presentedViewController {

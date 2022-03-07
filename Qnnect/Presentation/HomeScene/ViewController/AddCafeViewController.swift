@@ -14,8 +14,6 @@ import TTGTags
 
 final class AddCafeViewController: BottomSheetViewController {
     
-    
-    
     private let inputTitleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
@@ -164,6 +162,8 @@ final class AddCafeViewController: BottomSheetViewController {
             make.height.equalTo(Constants.bottomButtonHeight)
             make.top.equalTo(self.questionCycleSlider.snp.bottom).offset(69.0)
         }
+        
+        self.titleLabel.text = "카페 만들기"
     }
     
     override func bind() {

@@ -17,6 +17,19 @@ final class DrinkSelectViewController: BottomSheetViewController {
         $0.text = "완성할 음료를 선택해주세요"
     }
     
+    private let secondaryLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.textColor = .GRAY03
+        $0.numberOfLines = 2
+        let paragraphStyle = Constants.paragraphStyle
+        paragraphStyle.alignment = .left
+        $0.attributedText =
+        NSAttributedString(
+            string: "1인1음료를 선택하고 답변을 통해 얻은 \n 포인트로 나의 음료를 완성해보세요!",
+            attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        )
+    }
+    
     private let previousButton = UIButton().then {
         $0.setTitle("이전", for: .normal)
         $0.backgroundColor = .GRAY04
@@ -55,15 +68,22 @@ final class DrinkSelectViewController: BottomSheetViewController {
         
         [
             self.mainLabel,
+            self.secondaryLabel,
             self.bottomButtonStackView
         ].forEach {
             self.bottomSheetView.addSubview($0)
         }
         
+        self.titleLabel.text = "음료 선택"
         
         self.mainLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dismissButton.snp.bottom).offset(16.0)
             make.leading.trailing.equalToSuperview().inset(Constants.bottomSheetHorizontalMargin)
+        }
+        
+        self.secondaryLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.mainLabel.snp.bottom).offset(5.0)
+            make.leading.trailing.equalTo(self.mainLabel)
         }
         
         self.bottomButtonStackView.snp.makeConstraints { make in

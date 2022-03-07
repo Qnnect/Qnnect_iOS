@@ -133,16 +133,19 @@ final class CafeRoomViewController: BaseViewController {
     
     override func bind() {
         
+        let didTapDrinkSelectButton = PublishSubject<Void>()
+        
         let input = CafeRoomViewModel.Input(
             viewDidLoad: Observable.just(Void()),
             viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
             cafeId: Observable.just(cafeId),
-            didTapQuestionButton: self.questionButton.rx.tap.asObservable()
+            didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
+            didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
         
-        let dataSource = self.createDataSource()
+        let dataSource = self.createDataSource(drinkSelectButtonObserver: didTapDrinkSelectButton.asObserver())
         
         output.roomInfo
             .do {
@@ -165,6 +168,10 @@ final class CafeRoomViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showDrinkSelectGuideAlertView
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showDrinkSelectBottomSheet
             .emit()
             .disposed(by: self.disposeBag)
     }
@@ -276,7 +283,7 @@ private extension CafeRoomViewController {
         return sectionFooter
     }
     
-    func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
+    func createDataSource(drinkSelectButtonObserver: AnyObserver<Void>) -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
         return RxCollectionViewSectionedReloadDataSource { dataSoruce, collectionView, indexPath, item in
             switch item {
             case .titleSectionItem(cafe: let cafe):
@@ -285,6 +292,9 @@ private extension CafeRoomViewController {
                     for: indexPath
                 ) as! CafeTitleCell
                 cell.update(with: cafe)
+                cell.drinkSelectButton.rx.tap
+                    .bind(to: drinkSelectButtonObserver)
+                    .disposed(by: self.disposeBag)
                 return cell
             case .cafeDrinksSection(cafeUser: let cafeUser):
                 let cell = collectionView.dequeueReusableCell(

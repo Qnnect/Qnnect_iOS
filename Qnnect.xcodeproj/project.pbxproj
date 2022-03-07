@@ -17,6 +17,7 @@
 		AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */; };
 		AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */; };
 		AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */; };
+		AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */; };
 		AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */; };
 		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
@@ -121,7 +122,7 @@
 		AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */; };
 		AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */; };
 		AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */; };
-		AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */; };
+		AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */; };
 		AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */; };
 		AEBC9EC127C5F44F0070399A /* PageControlFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */; };
 		AEBC9EC327C604210070399A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EC227C604210070399A /* SplashViewController.swift */; };
@@ -180,6 +181,7 @@
 		AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectGuideAlertView.swift; sourceTree = "<group>"; };
 		AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectGuideAlertViewModel.swift; sourceTree = "<group>"; };
 		AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBehaviorType.swift; sourceTree = "<group>"; };
+		AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectViewModel.swift; sourceTree = "<group>"; };
 		AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeCell.swift; sourceTree = "<group>"; };
 		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
@@ -287,7 +289,7 @@
 		AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryColorCollectionView.swift; sourceTree = "<group>"; };
-		AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkViewController.swift; sourceTree = "<group>"; };
+		AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectViewController.swift; sourceTree = "<group>"; };
 		AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlFooterView.swift; sourceTree = "<group>"; };
 		AEBC9EC227C604210070399A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
 				AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */,
 				AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */,
+				AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -634,7 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
-				AEBC9EBC27C5C3710070399A /* SelectDrinkViewController.swift */,
+				AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */,
 				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
 			);
 			path = ViewController;
@@ -1303,6 +1306,7 @@
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
+				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AEA14D5027D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift in Sources */,
@@ -1338,7 +1342,7 @@
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
-				AEBC9EBD27C5C3710070399A /* SelectDrinkViewController.swift in Sources */,
+				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
 				AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */,
 				AEA14D4A27D48D020009EEC6 /* CafeCreateResponseDTO.swift in Sources */,
