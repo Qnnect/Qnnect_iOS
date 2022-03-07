@@ -47,6 +47,7 @@ final class CafeRoomViewModel: ViewModelType {
                 guard case let .success(cafe) = result else { return nil }
                 return cafe
             }
+            .share()
             // .do(방 정보를 가져옴)
             // 만약 내가 선택한 음료가 없으면
 //            .do(onNext: self.showSelectDrinkBottomSheet)
@@ -59,11 +60,16 @@ final class CafeRoomViewModel: ViewModelType {
             }
         
         let showDrinkSelectGuideAlertView = input.didTapQuestionButton
-            //내가 선택한 음료가 없으면
+            .withLatestFrom(roomInfo)
+            .map{ $0.currentUser}
+            .map(self.cafeUseCase.isDrinkSelected)
+            .filter{!$0}
             .do {
                 [weak self] _ in
                 self?.coordinator?.showDrinkSelectGuideAlertView(.question)
             }
+            .mapToVoid()
+        
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
             showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty()),

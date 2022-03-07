@@ -10,6 +10,7 @@ import RxSwift
 
 protocol CafeUseCase: AnyObject {
     func fetchCafe(forId id: Int) -> Observable<Result<Cafe,Error>>
+    func isDrinkSelected(_ cafeUser: CafeUser) -> Bool
 }
 
 final class DefaultCafeUseCase: CafeUseCase {
@@ -22,5 +23,9 @@ final class DefaultCafeUseCase: CafeUseCase {
     
     func fetchCafe(forId id: Int) -> Observable<Result<Cafe, Error>> {
         self.cafeRepository.fetchCafe(forId: id)
+    }
+    
+    func isDrinkSelected(_ cafeUser: CafeUser) -> Bool {
+        return cafeUser.userDrinkSelected != nil
     }
 }
