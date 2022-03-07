@@ -69,6 +69,8 @@ struct Constants {
     static let groupPlusImage: UIImage? = UIImage(named: "group_plus")
     static let notSelectDrinkImage: UIImage? = UIImage(named: "not_select_drink")?.withRenderingMode(.alwaysOriginal)
     static let basicDrinkImage: UIImage? = UIImage(named: "basic_drink")?.withRenderingMode(.alwaysOriginal)
+    static let navigationMenuImage: UIImage? = UIImage(named: "navi_menu")?.withRenderingMode(.alwaysOriginal)
+    static let navigationRecipeImage: UIImage? = UIImage(named: "navi_recipe")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

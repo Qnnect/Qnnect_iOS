@@ -53,8 +53,13 @@ final class CafeRoomViewController: BaseViewController {
         $0.textColor = .GRAY01
     }
     
-    private var viewModel: CafeRoomViewModel!
-    private var cafeId: Int!
+    private let navigationMenuButton = UIButton().then {
+        $0.setImage(Constants.navigationMenuImage, for: .normal)
+    }
+    
+    private let navigationRecipeButton = UIButton().then {
+        $0.setImage(Constants.navigationRecipeImage, for: .normal)
+    }
     
     private var todayQuestionCurPage = 0 {
         didSet {
@@ -75,6 +80,9 @@ final class CafeRoomViewController: BaseViewController {
             view.pageControl.currentPage = self.groupDrinksCurPage
         }
     }
+    
+    private var viewModel: CafeRoomViewModel!
+    private var cafeId: Int!
     
     static func create(
         with viewModel: CafeRoomViewModel,
@@ -117,6 +125,10 @@ final class CafeRoomViewController: BaseViewController {
         )
         self.mainCollectionView.collectionViewLayout = layout
         
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: self.navigationMenuButton),
+            UIBarButtonItem(customView: self.navigationRecipeButton)
+        ]
     }
     
     override func bind() {
@@ -258,6 +270,7 @@ private extension CafeRoomViewController {
         sectionFooter.contentInsets = .init(top: 0, leading: 0, bottom: -20.0, trailing: 0)
         return sectionFooter
     }
+    
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
         return RxCollectionViewSectionedReloadDataSource { dataSoruce, collectionView, indexPath, item in
             switch item {
