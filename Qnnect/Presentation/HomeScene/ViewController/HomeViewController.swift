@@ -119,9 +119,10 @@ final class HomeViewController: BaseViewController {
         }
         
         self.homeCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview().inset(Constants.HomeCollectionViewHorizontalMargin)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+//            make.top.equalTo(self.view.safeAreaLayoutGuide)
+//            make.leading.trailing.equalToSuperview().inset(Constants.HomeCollectionViewHorizontalMargin)
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         self.homeCollectionView.collectionViewLayout = self.createLayout()
@@ -233,13 +234,13 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.9))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10.0, leading: 5.0, bottom: 0, trailing: 5.0)
+        item.contentInsets = .init(top: 10.0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .estimated(60.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10.0, leading: 5.0, bottom: 10.0, trailing: 5.0)
+        section.contentInsets = .init(top: 10.0, leading: 0, bottom: 10.0, trailing: 0)
         
         return section
     }
@@ -248,7 +249,7 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
+        item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
@@ -257,7 +258,7 @@ private extension HomeViewController {
         section.boundarySupplementaryItems = [createSectionHeader(),createTodayQuestionSectionFooter()]
         section.orthogonalScrollingBehavior = .groupPagingCentered
         section.visibleItemsInvalidationHandler = self.visibleItemsInvalidationHandler
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 15.0, trailing: 15.0)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 15.0, trailing: 0)
         
         return section
     }
@@ -266,7 +267,7 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 9.0, bottom: 10, trailing: 9.0)
+        item.contentInsets = .init(top: 0, leading: 20.0, bottom: 10, trailing: 0)
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.45))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
@@ -274,7 +275,7 @@ private extension HomeViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [createSectionHeader(),createSectionFooter()]
-        section.contentInsets = .init(top: 0, leading: 5.0, bottom: 16.0, trailing: 5.0)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 16.0, trailing: 0)
         
         return section
     }
@@ -287,7 +288,7 @@ private extension HomeViewController {
         
         //Section Header layout
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-        
+        sectionHeader.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 0)
         return sectionHeader
     }
     
