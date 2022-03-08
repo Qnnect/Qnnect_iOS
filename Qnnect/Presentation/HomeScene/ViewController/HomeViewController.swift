@@ -119,9 +119,6 @@ final class HomeViewController: BaseViewController {
         }
         
         self.homeCollectionView.snp.makeConstraints { make in
-//            make.top.equalTo(self.view.safeAreaLayoutGuide)
-//            make.leading.trailing.equalToSuperview().inset(Constants.HomeCollectionViewHorizontalMargin)
-//            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.edges.equalToSuperview()
         }
         
@@ -334,18 +331,24 @@ private extension HomeViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeCell.identifier, for: indexPath) as! MyCafeCell
                 cell.update(with: cafe)
                 return cell
+            case .todayQuestionSectionEmptyItem:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayQuestionCell.identifier, for: indexPath) as! TodayQuestionCell
+                cell.emptyView.isHidden = false
+                return cell
             }
         }
     }
     
-//    func hiddenTabBar() {
-//        self.tabBarController?.tabBar.isHidden = true
-//    }
     
     func convertToSectionModel(_ homeInfo: HomeInfo) -> [HomeSectionModel] {
         let titleItem = HomeSectionItem.titleSectionItem(user: homeInfo.user)
-        let questionItem = homeInfo.questions.map { HomeSectionItem.todayQuestionSectionItem(question: $0) }
+        var questionItem = homeInfo.questions.map { HomeSectionItem.todayQuestionSectionItem(question: $0) }
         let groupItem = homeInfo.cafes.map { HomeSectionItem.myCafeSectionItem(cafe: $0)}
+        
+        if questionItem.isEmpty {
+            questionItem = [HomeSectionItem.todayQuestionSectionEmptyItem]
+        }
+        
         return [
             HomeSectionModel.titleSection(title: "", items: [titleItem]),
             HomeSectionModel.todayQuestionSection(title: "오늘의 질문", items: questionItem),

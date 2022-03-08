@@ -17,6 +17,7 @@ enum HomeSectionItem {
     case titleSectionItem(user: User)
     case todayQuestionSectionItem(question: ToDayQuestion)
     case myCafeSectionItem(cafe: MyCafe)
+    case todayQuestionSectionEmptyItem
 }
 
 extension HomeSectionModel: SectionModelType {

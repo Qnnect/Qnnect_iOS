@@ -32,6 +32,18 @@ final class TodayQuestionCell: UICollectionViewCell {
         $0.textColor = .BLACK_121212
     }
     
+    private(set) var emptyView = UIView().then {
+        $0.backgroundColor = .SECONDARY01
+        $0.layer.cornerRadius = Constants.homeCellCornerRadius
+        $0.isHidden = true
+    }
+    
+    private let emptyLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.textColor = .GRAY03
+        $0.text = "아직 질문이 없습니다."
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -45,12 +57,15 @@ final class TodayQuestionCell: UICollectionViewCell {
     private func configureUI() {
         
         [
+            self.emptyView,
             self.groupNameLabel,
             self.d_dayLabel,
             self.questionLabel
         ].forEach {
             self.contentView.addSubview($0)
         }
+        
+        self.emptyView.addSubview(self.emptyLabel)
         
         self.contentView.backgroundColor = .SECONDARY01
         self.contentView.layer.borderWidth = 1.0
@@ -72,6 +87,14 @@ final class TodayQuestionCell: UICollectionViewCell {
             make.leading.trailing.equalToSuperview().inset(31.0)
             make.center.equalToSuperview()
             make.bottom.equalToSuperview().inset(48.0)
+        }
+        
+        self.emptyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        self.emptyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
         self.drawBottomShadow()
