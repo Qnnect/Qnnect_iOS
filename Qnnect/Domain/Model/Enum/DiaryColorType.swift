@@ -23,7 +23,7 @@ enum DiaryColorType: String, CaseIterable, Codable {
         case  .yellow:
             return "diary_color_yellow"
         case  .iceblue:
-            return "diary_color_iceblue"
+            return "diary_color_blue"
         case  .brown:
             return "diary_color_brown"
         }
@@ -38,7 +38,7 @@ enum DiaryColorType: String, CaseIterable, Codable {
         case .yellow:
             return "diary_color_yellow_checked"
         case .iceblue:
-            return "diary_color_iceblue_checked"
+            return "diary_color_blue_checked"
         case .brown:
             return "diary_color_brown_checked"
         }

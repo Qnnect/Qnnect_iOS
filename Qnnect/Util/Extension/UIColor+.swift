@@ -46,4 +46,10 @@ extension UIColor {
     class var shadowBackground: UIColor? { return UIColor(named: "shadowBackground") }
     class var drinkSelectButtonBackground: UIColor? { return UIColor(named: "drinkSelectButtonBackground") }
     class var groupDrinksBorder: UIColor? { return UIColor(named: "GroupDrinksBorder") }
+    
+    class var diary_red: UIColor? { return UIColor(named: "diary_red")}
+    class var diary_blue: UIColor? { return UIColor(named: "diary_blue")}
+    class var diary_pink: UIColor? { return UIColor(named: "diary_pink")}
+    class var diary_yellow: UIColor? { return UIColor(named: "diary_yellow")}
+    class var diary_brown: UIColor? { return UIColor(named: "diary_brown")}
 }

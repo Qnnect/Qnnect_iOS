@@ -24,6 +24,7 @@ struct HomeInfoResponseDTO: Decodable {
 struct HomeInfoCafeResponseDTO: Decodable {
     let cafeUserNum: Int
     let createdAt: String
+    let diaryColor: DiaryColorType
     let id: Int
     let title: String
     
@@ -32,6 +33,7 @@ struct HomeInfoCafeResponseDTO: Decodable {
             cafeUserNum: self.cafeUserNum,
             createdAt: self.createdAt,
             id: self.id,
+            diaryColor: self.diaryColor,
             title: self.title
         )
     }

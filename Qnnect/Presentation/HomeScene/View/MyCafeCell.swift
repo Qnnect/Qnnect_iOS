@@ -49,7 +49,6 @@ final class MyCafeCell: UICollectionViewCell {
             self.contentView.addSubview($0)
         }
         
-        self.contentView.backgroundColor = .groupPink
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.brownBorderColor?.cgColor
         self.layer.cornerRadius = Constants.homeCellCornerRadius

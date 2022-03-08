@@ -17,6 +17,7 @@ struct MyCafe {
     let cafeUserNum: Int
     let createdAt: String
     let id: Int
+    let diaryColor: DiaryColorType
     let title: String
 }
 

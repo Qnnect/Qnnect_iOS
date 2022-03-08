@@ -23,6 +23,7 @@
 		AE02D81627D62C710019D955 /* CafeInvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */; };
 		AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81727D632E70019D955 /* SettingBottomSheetViewModel.swift */; };
 		AE02D81B27D729D60019D955 /* CafeQuestionEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81A27D729D60019D955 /* CafeQuestionEmptyCell.swift */; };
+		AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D81E27D749110019D955 /* DiaryColorType+.swift */; };
 		AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */; };
 		AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0B2BF527BC80AC00E164BC /* Term.swift */; };
 		AE0D336427B4B01600C4B955 /* APP.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336327B4B01600C4B955 /* APP.swift */; };
@@ -192,6 +193,7 @@
 		AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInvitationViewController.swift; sourceTree = "<group>"; };
 		AE02D81727D632E70019D955 /* SettingBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		AE02D81A27D729D60019D955 /* CafeQuestionEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeQuestionEmptyCell.swift; sourceTree = "<group>"; };
+		AE02D81E27D749110019D955 /* DiaryColorType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiaryColorType+.swift"; sourceTree = "<group>"; };
 		AE04FC5F27BF763F00229B96 /* AddCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeCell.swift; sourceTree = "<group>"; };
 		AE0B2BF527BC80AC00E164BC /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		AE0D336327B4B01600C4B955 /* APP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APP.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				AEBC9EBE27C5C3930070399A /* BottomSheetViewController.swift */,
 				AEBC9EC027C5F44F0070399A /* PageControlFooterView.swift */,
 				AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */,
+				AE02D81E27D749110019D955 /* DiaryColorType+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1346,6 +1349,7 @@
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
 				AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
+				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
