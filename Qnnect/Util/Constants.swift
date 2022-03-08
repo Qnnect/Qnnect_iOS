@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 struct Constants {
     private init() { }
@@ -72,6 +73,7 @@ struct Constants {
     static let navigationMenuImage: UIImage? = UIImage(named: "navi_menu")?.withRenderingMode(.alwaysOriginal)
     static let navigationRecipeImage: UIImage? = UIImage(named: "navi_recipe")?.withRenderingMode(.alwaysOriginal)
     static let cafeinvitationDrinkImage: UIImage? = UIImage(named: "초대음료이미지")?.withRenderingMode(.alwaysOriginal)
+    static let splashImage: UIImage? = UIImage(named: "splash")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

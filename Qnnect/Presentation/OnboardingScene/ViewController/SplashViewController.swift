@@ -13,10 +13,9 @@ import RxSwift
 
 final class SplashViewController: BaseViewController {
     
-    private let testLabel = UILabel().then {
-        $0.text = "Splash"
-        $0.font = .BM_JUA(size: 28.0)
-        $0.textColor = .GRAY01
+    private let mainImageView = UIImageView().then {
+        $0.image = Constants.splashImage
+        $0.contentMode = .scaleAspectFit
     }
     
     private var viewModel: SplashViewModel!
@@ -31,9 +30,9 @@ final class SplashViewController: BaseViewController {
     }
     
     override func configureUI() {
-        self.view.addSubview(testLabel)
+        self.view.addSubview(self.mainImageView)
         
-        self.testLabel.snp.makeConstraints { make in
+        self.mainImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().multipliedBy(0.7)
         }
