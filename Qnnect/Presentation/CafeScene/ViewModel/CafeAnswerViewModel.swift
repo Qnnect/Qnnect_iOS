@@ -12,11 +12,13 @@ import RxCocoa
 final class CafeAnswerViewModel: ViewModelType {
     
     struct Input {
-        
+        let didTapAnswerWritingCell: Observable<Void>
+        let question: Observable<Question>
+        let user: Observable<User>
     }
     
     struct Output {
-        
+        let showAnswerWritingScene: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -25,6 +27,17 @@ final class CafeAnswerViewModel: ViewModelType {
         self.coordinator = coordinator
     }
     func transform(from input: Input) -> Output {
-        return Output()
+        
+        let showAnswerWritingScene = input.didTapAnswerWritingCell
+            .withLatestFrom(Observable.combineLatest(input.question, input.user))
+            .do {
+                [weak self] question, user in
+                self?.coordinator?.showCafeAnswerWritingScene(question, user)
+            }
+            .mapToVoid()
+        
+        return Output(
+            showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty())
+        )
     }
 }

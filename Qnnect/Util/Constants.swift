@@ -80,6 +80,7 @@ struct Constants {
     static let onboardingImage3: UIImage? = UIImage(named: "onboarding3")?.withRenderingMode(.alwaysOriginal)
     static let onboardingImage4: UIImage? = UIImage(named: "onboarding4")?.withRenderingMode(.alwaysOriginal)
     static let commentIcon: UIImage? = UIImage(named: "comment")?.withRenderingMode(.alwaysOriginal)
+    static let attachingImageIcon: UIImage? = UIImage(named: "bottom_camera")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

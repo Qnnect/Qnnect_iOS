@@ -70,13 +70,28 @@ final class CafeAnswerViewController: BaseViewController {
         
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
+        
+        let input = CafeAnswerViewModel.Input(
+            didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
+                .map { $0.section == 1 }
+                .mapToVoid(),
+            question: Observable.just(question),
+            user: Observable.just(user)
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.showAnswerWritingScene
+            .emit()
+            .disposed(by: self.disposeBag)
+        
     }
 }
 
 extension CafeAnswerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 160.0
+            return 178.0
         }
         return 130.0
     }

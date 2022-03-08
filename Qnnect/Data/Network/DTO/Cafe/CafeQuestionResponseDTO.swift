@@ -17,7 +17,7 @@ struct CafeQuestionResponseDTO: Decodable {
         return Question(
             createdAt: self.createdAt,
             daysLeft: self.daysLeft,
-            qustion: self.question,
+            question: self.question,
             questioner: self.questioner
         )
     }

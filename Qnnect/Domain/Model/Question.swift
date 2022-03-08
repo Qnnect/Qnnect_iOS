@@ -10,6 +10,6 @@ import Foundation
 struct Question {
     let createdAt: String
     let daysLeft: Int
-    let qustion: String
+    let question: String
     let questioner: String
 }

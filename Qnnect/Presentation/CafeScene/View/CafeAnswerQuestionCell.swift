@@ -95,7 +95,7 @@ final class CafeAnswerQuestionCell: UITableViewCell {
         self.dateLabel.text = question.createdAt
         self.daysLeftLabel.text = "D-\(question.daysLeft)"
         self.questionerLabel.text = question.questioner
-        self.contentLabel.text = question.qustion
+        self.contentLabel.text = question.question
         
         self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
     }
