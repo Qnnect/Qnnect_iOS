@@ -14,7 +14,7 @@ protocol CafeCoordinator: Coordinator {
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
     func showSettingBottomSheet()
     func showInvitationScene()
-    func showCafeAnswerScene(_ question: Question)
+    func showCafeAnswerScene(_ question: Question, _ user: User)
     func dismissAlert()
 }
 
@@ -72,11 +72,12 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ question: Question) {
+    func showCafeAnswerScene(_ question: Question, _ user: User) {
         let viewModel = CafeAnswerViewModel(coordinator: self)
         let vc = CafeAnswerViewController.create(
             with: viewModel,
-            question
+            question,
+            user
         )
         self.navigationController.pushViewController(vc, animated: true)
     }

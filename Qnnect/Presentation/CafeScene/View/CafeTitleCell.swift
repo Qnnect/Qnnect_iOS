@@ -29,7 +29,7 @@ final class CafeTitleCell: UICollectionViewCell {
     }
     
     private(set) var drinkSelectButton = UIButton().then {
-        $0.backgroundColor = .drinkSelectButtonBackground
+        $0.backgroundColor = .ORANGE01
         $0.setTitle("음료 선택하기", for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 12.0)
         $0.setTitleColor(.GRAY01, for: .normal)

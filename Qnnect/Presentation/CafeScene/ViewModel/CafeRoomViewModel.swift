@@ -84,9 +84,12 @@ final class CafeRoomViewModel: ViewModelType {
             }
         
         let showQuestionAnswerScene = input.didTapQuestionCell
+            .withLatestFrom(roomInfo,resultSelector: { question, roomInfo in
+                return (question,roomInfo.currentUser.userInfo)
+            })
             .do {
-                [weak self] question in
-                self?.coordinator?.showCafeAnswerScene(question)
+                [weak self] question,user in
+                self?.coordinator?.showCafeAnswerScene(question,user)
             }
             .mapToVoid()
         

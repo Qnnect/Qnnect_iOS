@@ -8,23 +8,37 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxDataSources
 
 final class CafeAnswerViewController: BaseViewController {
     
     private let mainTableView = UITableView().then {
         $0.backgroundColor = .p_ivory
+        $0.separatorStyle = .none
+        $0.register(
+            CafeAnswerQuestionCell.self,
+            forCellReuseIdentifier: CafeAnswerQuestionCell.identifier
+        )
+        $0.register(
+            CafeAnswerWritingCell.self,
+            forCellReuseIdentifier: CafeAnswerWritingCell.identifier
+        )
     }
     
     private var question: Question!
+    private var user: User!
     private var viewModel: CafeAnswerViewModel!
     
     static func create(
         with viewModel: CafeAnswerViewModel,
-        _ question: Question
+        _ question: Question,
+        _ user: User
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
         vc.question = question
+        vc.user = user
         return vc
     }
     
@@ -34,9 +48,63 @@ final class CafeAnswerViewController: BaseViewController {
     
     override func configureUI() {
         
+        self.view.addSubview(self.mainTableView)
+        
+        self.mainTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
     }
     
     override func bind() {
+        Observable.zip(Observable.just(self.question),Observable.just(self.user))
+            .map { question,user -> [CafeAnswerSectionModel] in
+                let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question!)
+                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
+                return [
+                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
+                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
+                ]
+            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
+            .disposed(by: self.disposeBag)
         
+        self.mainTableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+    }
+}
+
+extension CafeAnswerViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 160.0
+        }
+        return 130.0
+    }
+    
+    
+}
+
+private extension CafeAnswerViewController {
+    func createDataSource() -> RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
+        return RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
+            datasource, tableView, indexPath, item in
+            
+            switch item {
+            case .questionSectionItem(question: let question):
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: CafeAnswerQuestionCell.identifier,
+                    for: indexPath
+                ) as! CafeAnswerQuestionCell
+                cell.update(with: question)
+                return cell
+            case .answerWritingSectionItem(user: let user):
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: CafeAnswerWritingCell.identifier,
+                    for: indexPath
+                ) as! CafeAnswerWritingCell
+                cell.update(with: user)
+                return cell
+            }
+        }
     }
 }
