@@ -10,6 +10,8 @@ import SnapKit
 import Then
 import RxSwift
 import RxDataSources
+import simd
+import Alamofire
 
 final class CafeRoomViewController: BaseViewController {
     
@@ -163,7 +165,15 @@ final class CafeRoomViewController: BaseViewController {
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
             isFirst: Observable.just(self.isFirst),
             viewDidAppear: self.rx.viewDidAppear.mapToVoid(),
-            didTapNavigationMenu: self.navigationMenuButton.rx.tap.asObservable()
+            didTapNavigationMenu: self.navigationMenuButton.rx.tap.asObservable(),
+            didTapQuestionCell: self.mainCollectionView.rx.modelSelected(CafeRoomSectionItem.self)
+                .compactMap {
+                    item -> Question? in
+                    guard case let CafeRoomSectionItem.todayQuestionSectionItem(question) = item else {
+                        return nil
+                    }
+                    return question
+                }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -202,6 +212,10 @@ final class CafeRoomViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showSettingBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showQuestionAnswerScene
             .emit()
             .disposed(by: self.disposeBag)
     }

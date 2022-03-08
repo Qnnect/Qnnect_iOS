@@ -27,7 +27,7 @@ extension HomeAPI: TargetType, AccessTokenAuthorizable {
     var method: Moya.Method {
         switch self {
         case .fetchHomeInfo:
-            return .patch
+            return .get
         }
     }
     
