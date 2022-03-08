@@ -26,8 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //splash
         self.appCoordinator.start()
         
-//        KeyChain.delete(key: Constants.accessTokenKey)
-//        KeyChain.delete(key: Constants.refreshTokenKey)
+        KeyChain.delete(key: Constants.accessTokenKey)
+        KeyChain.delete(key: Constants.refreshTokenKey)
+        UserDefaults.standard.removeObject(forKey: "isFirstAccess")
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
         UITabBar.appearance().tintColor = .p_brown
