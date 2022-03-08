@@ -73,5 +73,6 @@ final class MyCafeCell: UICollectionViewCell {
         self.groupNameLabel.text = cafe.title
         self.createdDateLabel.text = cafe.createdAt
         self.headCountLabel.text = "\(cafe.cafeUserNum)명"
+        self.contentView.backgroundColor = cafe.diaryColor.color
     }
 }
