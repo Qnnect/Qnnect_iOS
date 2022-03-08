@@ -19,8 +19,6 @@ extension DiaryColorType {
             return UIColor.diary_yellow
         case .iceblue:
             return UIColor.diary_blue
-        case .brown:
-            return UIColor.diary_brown
         }
     }
 }

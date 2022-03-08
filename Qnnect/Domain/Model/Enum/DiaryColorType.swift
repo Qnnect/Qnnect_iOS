@@ -12,7 +12,6 @@ enum DiaryColorType: String, CaseIterable, Codable {
     case pink
     case yellow
     case iceblue
-    case brown
     
     var defaultImageName: String {
         switch self {
@@ -24,11 +23,8 @@ enum DiaryColorType: String, CaseIterable, Codable {
             return "diary_color_yellow"
         case  .iceblue:
             return "diary_color_blue"
-        case  .brown:
-            return "diary_color_brown"
         }
     }
-    
     var selectedImageName: String {
         switch self {
         case .red:
@@ -39,8 +35,6 @@ enum DiaryColorType: String, CaseIterable, Codable {
             return "diary_color_yellow_checked"
         case .iceblue:
             return "diary_color_blue_checked"
-        case .brown:
-            return "diary_color_brown_checked"
         }
     }
 }
