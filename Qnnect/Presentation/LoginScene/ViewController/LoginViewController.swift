@@ -16,6 +16,10 @@ import CryptoKit
 //TODO: 소셜 로그인 후 서버로 부터 존재해 있는 유저인지 확인 후 회원가입,로그인 진행
 final class LoginViewController: BaseViewController {
     
+    private let loginBackgroundView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.image = Constants.loginPageImage
+    }
     private let kakaoButton = UIButton().then {
         $0.setImage(UIImage(named: "kakao_login_large_wide"), for: .normal)
     }
@@ -44,14 +48,16 @@ final class LoginViewController: BaseViewController {
     override func configureUI() {
         
         [
+            self.loginBackgroundView,
             self.kakaoButton,
             self.appleButton
         ].forEach {
             self.view.addSubview($0)
         }
-        
-        self.view.backgroundColor = .p_brown
-        
+                
+        self.loginBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         self.kakaoButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)

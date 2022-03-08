@@ -7,6 +7,54 @@
 
 import UIKit
 import RxSwift
+import SnapKit
+
+enum OnboardingSceneType: CaseIterable {
+    case question
+    case connection
+    case drink
+    case stamp
+    
+    var mainTitle: String {
+        switch self {
+        case .question:
+            return "나를 알아가는 질문"
+        case .connection:
+            return "가족/친구/커플간의\nQ&A 공유를 통한 소통"
+        case .drink:
+            return "나만의 음료 만들기"
+        case .stamp:
+            return "스탬프 - 내가 만든 음료 모아보기"
+        }
+    }
+    
+    var secondaryTitle: String {
+        switch self {
+        case .question:
+            return "큐넥트 지킴이 넥트가\n여러분에게 단 하나의 질문을 드려요\nQ&A를 통해 나를 알아가고 일상을 회고해보세요!"
+        case .connection:
+            return "Q&A를 가족/친구/커플끼리 공유하여 서로에\n대해 알아가고 소통할 수 있어요!\n기본 제공 질문 외에 카페 멤버에게 하고싶은 질문을 직접 추가할 수도 있어요\n(큐넥트에서 카페란, 다이어리 그룹을 의미해요️)"
+        case .drink:
+            return "답변을 달거나 질문을 추가할수록 쌓이는\n원두 포인트를 통해\n나만의 음료를 만들어보세요"
+        case .stamp:
+            return "음료를 완성할 때마다 스탬프가 음료로 채워져요\n스탬프를 멋지게 채워보세요!"
+        }
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .question:
+            return Constants.onboardingImage1
+        case .connection:
+            return Constants.onboardingImage2
+        case .drink:
+            return Constants.onboardingImage3
+        case .stamp:
+            return Constants.onboardingImage4
+        }
+    }
+    
+}
 
 final class OnboardingViewController: UIPageViewController{
     private var pages = [UIViewController]()
@@ -55,13 +103,13 @@ final class OnboardingViewController: UIPageViewController{
         
         self.pageControl.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
-            make.centerY.equalToSuperview().multipliedBy(1.5)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         self.startButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.bottomButtonHorizontalMargin)
             make.height.equalTo(0)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(24.0)
+            make.bottom.equalToSuperview().inset(58.0)
         }
         
         self.bind()
@@ -81,18 +129,13 @@ private extension OnboardingViewController {
             .disposed(by: self.disposeBag)
     }
     func makePageVC() {
-        let vc1 = PageItemViewController()
-        vc1.textLabel.text = "Test1"
-        let vc2 = PageItemViewController()
-        vc2.textLabel.text = "Test2"
-        let vc3 = PageItemViewController()
-        vc3.textLabel.text = "Test3"
+        OnboardingSceneType.allCases.forEach { type in
+            let vc = PageItemViewController.create(with: type)
+            pages.append(vc)
+        }
         
-        pages.append(vc1)
-        pages.append(vc2)
-        pages.append(vc3)
         
-        setViewControllers([vc1], direction: .forward, animated: true, completion: nil) //  시작 page item 지정
+        setViewControllers([pages.first ?? UIViewController()], direction: .forward, animated: true, completion: nil) //  시작 page item 지정
         
         self.pageControl.numberOfPages = pages.count
         self.pageControl.currentPage = startIndex
@@ -148,7 +191,7 @@ extension OnboardingViewController : UIPageViewControllerDataSource{
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         
         if currentIndex == startIndex {
-            return pages.last
+            return nil
         }else{
             return pages[currentIndex - 1]
         }
@@ -157,7 +200,7 @@ extension OnboardingViewController : UIPageViewControllerDataSource{
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         if currentIndex == pages.count - 1 {
-            return pages.first
+            return nil
         }else{
             return pages[currentIndex + 1]
         }

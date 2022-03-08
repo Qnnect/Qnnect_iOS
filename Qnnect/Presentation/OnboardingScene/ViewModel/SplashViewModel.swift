@@ -34,8 +34,10 @@ final class SplashViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let firstAccess = input.didEndSplash
+        let isFirstAccess = input.didEndSplash
             .map(self.authUseCase.fetchIsFirstAccess)
+            .share()
+        let firstAccess = isFirstAccess
             .filter{ $0 }
             .mapToVoid()
             .do(onNext: self.authUseCase.updateFirstAccess)
@@ -56,11 +58,11 @@ final class SplashViewModel: ViewModelType {
             }
             .mapToVoid()
             .do(onNext: self.showMain)
-    
-        let tokenNil = input.didEndSplash
-            .map(self.authUseCase.fetchToken)
-            .filter { $0 == nil }
-            .mapToVoid()
+                
+                let tokenNil = input.didEndSplash
+                .map(self.authUseCase.fetchToken)
+                .filter { $0 == nil }
+                .mapToVoid()
         
         let needToLogin = reissueToken
             .filter {
@@ -69,11 +71,13 @@ final class SplashViewModel: ViewModelType {
             }//TODO: 500에러로 변경
             .mapToVoid()
         
-        let showLogin = Observable.merge(tokenNil,needToLogin)
+        let showLogin = isFirstAccess
+            .filter{ !$0 }
+            .withLatestFrom(Observable.merge(tokenNil,needToLogin))
             .do {
                 [weak self] _ in
                 self?.coordinator?.showLogin()
-            }
+            }.mapToVoid()
         
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),

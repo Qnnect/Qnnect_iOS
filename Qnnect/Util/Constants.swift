@@ -74,6 +74,12 @@ struct Constants {
     static let navigationRecipeImage: UIImage? = UIImage(named: "navi_recipe")?.withRenderingMode(.alwaysOriginal)
     static let cafeinvitationDrinkImage: UIImage? = UIImage(named: "초대음료이미지")?.withRenderingMode(.alwaysOriginal)
     static let splashImage: UIImage? = UIImage(named: "splash")?.withRenderingMode(.alwaysOriginal)
+    static let loginPageImage: UIImage? = UIImage(named: "loginPage")?.withRenderingMode(.alwaysOriginal)
+    static let onboardingImage1: UIImage? = UIImage(named: "onboarding1")?.withRenderingMode(.alwaysOriginal)
+    static let onboardingImage2: UIImage? = UIImage(named: "onboarding2")?.withRenderingMode(.alwaysOriginal)
+    static let onboardingImage3: UIImage? = UIImage(named: "onboarding3")?.withRenderingMode(.alwaysOriginal)
+    static let onboardingImage4: UIImage? = UIImage(named: "onboarding4")?.withRenderingMode(.alwaysOriginal)
+    
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
