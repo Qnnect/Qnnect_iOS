@@ -36,6 +36,10 @@ final class CafeRoomViewController: BaseViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: PageControlFooterView.identifier
         )
+        $0.register(
+            CafeQuestionEmptyCell.self,
+            forCellWithReuseIdentifier: CafeQuestionEmptyCell.idendifier
+        )
         $0.backgroundColor = .p_ivory
     }
     
@@ -105,6 +109,13 @@ final class CafeRoomViewController: BaseViewController {
         super.viewWillAppear(animated)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.mainCollectionView.numberOfSections > 1 {
+            self.setDrinksEmptyView(self.mainCollectionView.numberOfItems(inSection: 1) == 0)
+        }
+    }
+    
     override func configureUI() {
         
         [
@@ -126,10 +137,12 @@ final class CafeRoomViewController: BaseViewController {
         }
         
         let layout = self.createLayout()
+        
         layout.register(
             CafeDrinksSectionDecorationView.self,
             forDecorationViewOfKind: CafeDrinksSectionDecorationView.identifier
         )
+        
         self.mainCollectionView.collectionViewLayout = layout
         
         self.navigationItem.rightBarButtonItems = [
@@ -166,8 +179,11 @@ final class CafeRoomViewController: BaseViewController {
             .map({ cafe -> [CafeRoomSectionModel] in
                 let cafeTitleSectionItem = CafeRoomSectionItem.titleSectionItem(cafe: cafe)
                 let cafeDrinksSectionItems = cafe.cafeUsers.map { CafeRoomSectionItem.cafeDrinksSectionItem(cafeUser: $0)}
-                let cafeToDayQuestionSectionItems = cafe.questions.map{ CafeRoomSectionItem.todayQuestionSectionItem(question: $0)}
+                var cafeToDayQuestionSectionItems = cafe.questions.map{ CafeRoomSectionItem.todayQuestionSectionItem(question: $0)}
                 
+                if cafeToDayQuestionSectionItems.isEmpty {
+                    cafeToDayQuestionSectionItems = [CafeRoomSectionItem.questionEmptySectionItem]
+                }
                 return [
                     CafeRoomSectionModel.titleSection(title: "", items: [cafeTitleSectionItem]),
                     CafeRoomSectionModel.cafeDrinksSection(title: "", items: cafeDrinksSectionItems),
@@ -283,7 +299,7 @@ private extension CafeRoomViewController {
         
         //Section Footer layout
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-      
+        
         return sectionFooter
     }
     
@@ -324,6 +340,12 @@ private extension CafeRoomViewController {
                 ) as! CafeToDayQuestionCell
                 cell.update(with: question)
                 return cell
+            case .questionEmptySectionItem:
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CafeQuestionEmptyCell.idendifier,
+                    for: indexPath
+                ) as! CafeQuestionEmptyCell
+                return cell
             }
         }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
             if indexPath.section == 2 {
@@ -332,6 +354,12 @@ private extension CafeRoomViewController {
                     withReuseIdentifier: PageControlFooterView.identifier,
                     for: indexPath
                 ) as! PageControlFooterView
+                if let item = dataSource.sectionModels[2].items.first {
+                    if case CafeRoomSectionItem.questionEmptySectionItem = item {
+                        view.pageControl.isHidden = true
+                        return view
+                   }
+                }
                 view.pageControl.numberOfPages = dataSource.sectionModels[2].items.count
                 return view
             } else if indexPath.section == 1 {
@@ -343,11 +371,26 @@ private extension CafeRoomViewController {
                 view.pageControl.numberOfPages =  dataSource.sectionModels[1].items.count  / 6 + 1
                 view.pageControl.subviews.forEach {
                     $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-                    }
+                }
                 return view
             }
             return UICollectionReusableView()
         }
     }
+    
+    func setDrinksEmptyView(_ isEmpty: Bool) {
+        guard let decoView = self.mainCollectionView.subviews.first(
+            where: {
+                $0 is CafeDrinksSectionDecorationView
+            }
+        ) as? CafeDrinksSectionDecorationView,
+              let footerView = mainCollectionView.supplementaryView(
+                forElementKind: UICollectionView.elementKindSectionFooter,
+                at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
+        else { return }
+        decoView.emptyLabel.isHidden = !isEmpty
+        footerView.pageControl.isHidden = isEmpty
+    }
+    
 }
 

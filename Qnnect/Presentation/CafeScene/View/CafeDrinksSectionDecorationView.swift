@@ -20,6 +20,13 @@ final class CafeDrinksSectionDecorationView: UICollectionReusableView {
         
     }
     
+    private(set) var emptyLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.textColor = .GRAY03
+        $0.text = "아직 참여한 인원이 없습니다."
+        $0.isHidden = true
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -33,6 +40,7 @@ final class CafeDrinksSectionDecorationView: UICollectionReusableView {
     private func configureUI() {
         [
             self.insetView,
+            self.emptyLabel
         ].forEach {
             self.addSubview($0)
         }
@@ -43,5 +51,8 @@ final class CafeDrinksSectionDecorationView: UICollectionReusableView {
         }
         
       
+        self.emptyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 }

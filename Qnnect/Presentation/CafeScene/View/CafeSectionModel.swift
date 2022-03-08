@@ -17,6 +17,7 @@ enum CafeRoomSectionItem {
     case titleSectionItem(cafe: Cafe)
     case cafeDrinksSectionItem(cafeUser: CafeUser)
     case todayQuestionSectionItem(question: Question)
+    case questionEmptySectionItem
 }
 
 extension CafeRoomSectionModel: SectionModelType {
