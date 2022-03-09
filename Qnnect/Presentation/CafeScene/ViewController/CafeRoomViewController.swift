@@ -57,6 +57,7 @@ final class CafeRoomViewController: BaseViewController {
     private let navigationTitleView = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
+        $0.sizeToFit()
     }
     
     private let navigationMenuButton = UIButton().then {
@@ -160,7 +161,10 @@ final class CafeRoomViewController: BaseViewController {
         
         let input = CafeRoomViewModel.Input(
             viewDidLoad: Observable.just(Void()),
-            viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
+            viewWillAppear: Observable.merge(
+                self.rx.viewWillAppear.mapToVoid(),
+                self.rx.methodInvoked(#selector(self.comebackCafeRoom)).mapToVoid()
+                                             ),
             cafeId: Observable.just(self.cafeId),
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
@@ -219,6 +223,10 @@ final class CafeRoomViewController: BaseViewController {
         output.showQuestionAnswerScene
             .emit()
             .disposed(by: self.disposeBag)
+    }
+    
+    @objc dynamic func comebackCafeRoom() {
+        print("comeback cafeRoom")
     }
 }
 
@@ -308,7 +316,7 @@ private extension CafeRoomViewController {
         return section
     }
     
-    private func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+    func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         //Section Footer 사이즈
         let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(6.0))
         
@@ -318,7 +326,7 @@ private extension CafeRoomViewController {
         return sectionFooter
     }
     
-    private func createDrinksSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+    func createDrinksSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         //Section Footer 사이즈
         let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(4.0))
         

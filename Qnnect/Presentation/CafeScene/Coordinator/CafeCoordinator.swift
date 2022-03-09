@@ -123,5 +123,8 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         } else {
             self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         }
+        if let vc = self.navigationController.viewControllers.first(where: { $0 is CafeRoomViewController}) as? CafeRoomViewController {
+            vc.comebackCafeRoom()
+        }
     }
 }
