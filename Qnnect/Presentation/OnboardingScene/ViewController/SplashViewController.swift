@@ -27,10 +27,14 @@ final class SplashViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
     override func configureUI() {
         self.view.addSubview(self.mainImageView)
+        
+        self.checkPermission(false)
         
         self.mainImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -69,3 +73,5 @@ final class SplashViewController: BaseViewController {
             .disposed(by: self.disposeBag)
     }
 }
+
+

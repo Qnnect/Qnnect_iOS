@@ -27,18 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // KAKAO
         KakaoSDK.initSDK(appKey: APP.KAKAO_NATIVE_APP_KEY)
     
-        PHPhotoLibrary.requestAuthorization( { status in
-                    switch status{
-                    case .authorized:
-                        print("Album: 권한 허용")
-                    case .denied:
-                        print("Album: 권한 거부")
-                    case .restricted, .notDetermined:
-                        print("Album: 선택하지 않음")
-                    default:
-                        break
-                    }
-        })
+
         
         //FCM 현재 등록 토큰 확인
         Messaging.messaging().token { token, error in

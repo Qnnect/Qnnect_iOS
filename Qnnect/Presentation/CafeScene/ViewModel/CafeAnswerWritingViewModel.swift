@@ -13,10 +13,12 @@ final class CafeAnswerWritingViewModel: ViewModelType {
     
     struct Input {
         let inputText: Observable<String>
+        let didTapAttachingImageButton: Observable<Void>
     }
     
     struct Output {
         let isInputCompleted: Driver<Bool>
+        let showImagePickerView: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -31,7 +33,8 @@ final class CafeAnswerWritingViewModel: ViewModelType {
             .map { $0.count >= 10 }
         
         return Output(
-            isInputCompleted: isInputCompleted.asDriver(onErrorJustReturn: false)
+            isInputCompleted: isInputCompleted.asDriver(onErrorJustReturn: false),
+            showImagePickerView: input.didTapAttachingImageButton.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

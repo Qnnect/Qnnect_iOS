@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import PhotosUI
 
 final class CafeAnswerWritingViewController: BaseViewController {
     
@@ -67,7 +68,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
         $0.setImage(Constants.attachingImageIcon, for: .normal)
     }
     
-    private lazy var bottomBar = UIToolbar().then {
+    private lazy var bottomBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100.0, height: 100.0)).then {
         $0.setItems([UIBarButtonItem(customView: self.attachingImageButton),UIBarButtonItem.flexibleSpace()], animated: true)
         $0.barTintColor = .p_ivory
     }
@@ -78,6 +79,23 @@ final class CafeAnswerWritingViewController: BaseViewController {
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.isEnabled = false
     }
+    
+    private let attachingImageCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewLayout()
+    ).then {
+        $0.backgroundColor = .p_ivory
+        $0.register(
+            AttachingImageCell.self,
+            forCellWithReuseIdentifier: AttachingImageCell.identifier
+        )
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = .init(width: 85, height: 85)
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+    }
+    
+    private var fetchedResult: PHFetchResult<PHAsset>?
     
     private var question: Question!
     private var user: User!
@@ -115,7 +133,8 @@ final class CafeAnswerWritingViewController: BaseViewController {
             self.writerProfileImageView,
             self.writerNameLabel,
             self.inputTextView,
-            self.bottomBar
+            self.bottomBar,
+            self.attachingImageCollectionView
         ].forEach {
             self.view.addSubview($0)
         }
@@ -185,6 +204,15 @@ final class CafeAnswerWritingViewController: BaseViewController {
             make.height.equalTo(50.0)
         }
         
+        self.attachingImageCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(self.inputTextView.snp.bottom).offset(15.0)
+            make.leading.equalTo(self.inputTextView)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(85.0)
+        }
+        
+        self.attachingImageCollectionView.dataSource = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
     
@@ -195,7 +223,8 @@ final class CafeAnswerWritingViewController: BaseViewController {
         
         let input = CafeAnswerWritingViewModel.Input(
             inputText: self.inputTextView.rx.text.orEmpty
-                .asObservable()
+                .asObservable(),
+            didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -203,6 +232,19 @@ final class CafeAnswerWritingViewController: BaseViewController {
         output.isInputCompleted
             .drive(onNext: self.setCompletionButton(_:))
             .disposed(by: self.disposeBag)
+        
+        output.showImagePickerView
+            .emit(onNext: {
+                [weak self] _ in
+                self?.checkPermission(selectiongLimit: 5, true)
+            }).disposed(by: self.disposeBag)
+    }
+    
+    override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let identifiers = results.map{ $0.assetIdentifier ?? ""}
+        self.fetchedResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        self.attachingImageCollectionView.reloadData()
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -229,6 +271,22 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
 
 }
 
+// MARK: - UICollectionView DataSource
+extension CafeAnswerWritingViewController : UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fetchedResult?.count ?? 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: AttachingImageCell.identifier, for: indexPath) as! AttachingImageCell
+        
+        if let asset = self.fetchedResult?[indexPath.row]{
+            cell.update(with: asset)
+        }
+        
+        return cell
+    }
+}
+
 private extension CafeAnswerWritingViewController {
     @objc func bottomBarMoveUp(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -251,4 +309,5 @@ private extension CafeAnswerWritingViewController {
             self.navigationCompletionButton.isEnabled = false
         }
     }
+    
 }
