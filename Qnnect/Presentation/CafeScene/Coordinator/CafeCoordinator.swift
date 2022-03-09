@@ -84,7 +84,12 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showCafeAnswerWritingScene(_ question: Question, _ user: User) {
-        let vc = CafeAnswerWritingViewController.create(with: question, user: user)
+        let viewModel = CafeAnswerWritingViewModel(coordinator: self)
+        let vc = CafeAnswerWritingViewController.create(
+            with: question,
+            user,
+            viewModel
+        )
         self.navigationController.pushViewController(vc, animated: true)
     }
     

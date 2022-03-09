@@ -46,6 +46,11 @@ final class CafeAnswerViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     override func configureUI() {
         
         self.view.addSubview(self.mainTableView)

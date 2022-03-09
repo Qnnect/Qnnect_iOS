@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class CafeAnswerWritingViewController: BaseViewController {
     
@@ -66,16 +68,30 @@ final class CafeAnswerWritingViewController: BaseViewController {
     }
     
     private lazy var bottomBar = UIToolbar().then {
-        $0.setItems([UIBarButtonItem(customView: self.attachingImageButton)], animated: true)
+        $0.setItems([UIBarButtonItem(customView: self.attachingImageButton),UIBarButtonItem.flexibleSpace()], animated: true)
+        $0.barTintColor = .p_ivory
+    }
+    
+    private let navigationCompletionButton = UIButton().then {
+        $0.setTitle("완료", for: .normal)
+        $0.setTitleColor(.GRAY04, for: .normal)
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.isEnabled = false
     }
     
     private var question: Question!
     private var user: User!
+    private var viewModel: CafeAnswerWritingViewModel!
     
-    static func create(with question: Question, user: User) -> CafeAnswerWritingViewController {
+    static func create(
+        with question: Question,
+        _ user: User,
+        _ viewModel: CafeAnswerWritingViewModel
+    ) -> CafeAnswerWritingViewController {
         let vc = CafeAnswerWritingViewController()
         vc.question = question
         vc.user = user
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -164,10 +180,29 @@ final class CafeAnswerWritingViewController: BaseViewController {
         
         inputTextView.delegate = self
         
+        self.bottomBar.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(50.0)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.navigationCompletionButton)
     }
     
     override func bind() {
         
+        let input = CafeAnswerWritingViewModel.Input(
+            inputText: self.inputTextView.rx.text.orEmpty
+                .asObservable()
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.isInputCompleted
+            .drive(onNext: self.setCompletionButton(_:))
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -192,4 +227,28 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
         return newLength <= 90
     }
 
+}
+
+private extension CafeAnswerWritingViewController {
+    @objc func bottomBarMoveUp(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.bottomBar.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            }
+            )
+        }
+    }
+    @objc func bottomBarMoveDown(_ notification: NSNotification) {
+        self.bottomBar.transform = .identity
+    }
+    
+    func setCompletionButton(_ isCompleted: Bool) {
+        if isCompleted {
+            self.navigationCompletionButton.setTitleColor(.GRAY01, for: .normal)
+            self.navigationCompletionButton.isEnabled = true
+        } else {
+            self.navigationCompletionButton.setTitleColor(.GRAY04, for: .normal)
+            self.navigationCompletionButton.isEnabled = false
+        }
+    }
 }
