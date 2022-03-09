@@ -78,10 +78,10 @@ final class CafeRoomViewModel: ViewModelType {
             .mapToVoid()
         
         let showSettingBottomSheet = input.didTapNavigationMenu
-            .withLatestFrom(roomInfo)
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] cafe in
-                self?.coordinator?.showSettingBottomSheet(cafe)
+                [weak self] cafeId in
+                self?.coordinator?.showSettingBottomSheet(cafeId)
             }
             .mapToVoid()
         

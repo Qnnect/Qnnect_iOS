@@ -37,16 +37,16 @@ final class SettingBottomSheet: BottomSheetViewController {
         $0.backgroundColor = .p_ivory
     }
     
-    private var cafe: Cafe!
+    private var cafeId: Int!
     private var viewModel: SettingBottomSheetViewModel!
     
     static func create(
         with viewModel: SettingBottomSheetViewModel,
-        _ cafe: Cafe
+        _ cafeId: Int
     ) -> SettingBottomSheet {
         let bottomSheet = SettingBottomSheet()
         bottomSheet.viewModel = viewModel
-        bottomSheet.cafe = cafe
+        bottomSheet.cafeId = cafeId
         return bottomSheet
     }
     
@@ -78,7 +78,7 @@ final class SettingBottomSheet: BottomSheetViewController {
         let input = SettingBottomSheetViewModel.Input(
             didTapSettingItem: self.menuTableView.rx.modelSelected(SettingItemType.self)
                 .asObservable(),
-            roomInfo: Observable.just(self.cafe)
+            cafeId: Observable.just(self.cafeId)
         )
         
         let output = self.viewModel.transform(from: input)

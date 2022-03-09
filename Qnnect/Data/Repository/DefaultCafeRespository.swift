@@ -46,4 +46,20 @@ final class DefaultCafeRepository: CafeRepository {
                 }
             }
     }
+    
+    func updateCafe(
+        forId id: Int,
+        with name: String,
+        _ groupType: GroupType,
+        _ diaryColor: DiaryColorType,
+        _ questionCycle: QuestionCycle
+    ) -> Observable<Void> {
+        let request = CafeUpdateRequestDTO(
+            diaryColor: diaryColor,
+            groupType: groupType,
+            questionCycle: questionCycle,
+            title: name
+        )
+        return self.cafeNetworkService.updateCafe(fotId: id, request: request)
+    }
 }

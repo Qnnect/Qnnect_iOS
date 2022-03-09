@@ -1,36 +1,36 @@
 //
-//  AddGroupViewModel.swift
+//  CafeModifyingViewModel.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/02/22.
+//  Created by 재영신 on 2022/03/09.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-final class AddCafeViewModel: ViewModelType {
-    
+final class CafeModifyingViewModel: ViewModelType {
     struct Input {
         let selectedCycle: Observable<QuestionCycle>
         let inputName: Observable<String>
         let selectedGroupType: Observable<GroupType>
         let selectedDiaryColor: Observable<DiaryColorType>
-        let didTapNextButton: Observable<Void>
+        let didTapCompletionButton: Observable<Void>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
         let questionCycle: Driver<QuestionCycle>
         let isValidName: Signal<Bool>
         let isCompleted: Signal<Bool>
-        let showGroupScene: Signal<Void>
+        let dismiss: Signal<Void>
     }
     
-    private weak var coordinator: HomeCoordinator?
+    private weak var coordinator: CafeCoordinator?
     private let cafeUseCase: CafeUseCase
     
     init(
-        coordinator:HomeCoordinator,
+        coordinator: CafeCoordinator,
         cafeUseCase: CafeUseCase
     ) {
         self.coordinator = coordinator
@@ -59,27 +59,21 @@ final class AddCafeViewModel: ViewModelType {
             input.selectedCycle
         )
         
-        let createCafe = input.didTapNextButton
-            .withLatestFrom(inputInfo)
-            .flatMap(self.cafeUseCase.createRoom)
-            .compactMap({ result -> Int? in
-                guard case let .success(cafeId) = result else { return nil }
-                return cafeId
-            })
+        let updateCafe = input.didTapCompletionButton
+            .withLatestFrom(Observable.combineLatest(input.cafeId, inputInfo))
+            .map { ($0.0, $0.1.0, $0.1.1, $0.1.2, $0.1.3)}
+            .flatMap(self.cafeUseCase.updateCafe)
             .do {
-                [weak self] id in
-                self?.coordinator?.showGroupScene(with: id, true)
+                [weak self] _ in
+                self?.coordinator?.dismiss()
             }
-            .debug()
             .mapToVoid()
         
         return Output(
             questionCycle: questionCycle.asDriver(onErrorDriveWith: .empty()),
             isValidName: isValidName.asSignal(onErrorJustReturn: false),
             isCompleted: isCompleted.asSignal(onErrorJustReturn: false),
-            showGroupScene: createCafe.asSignal(onErrorSignalWith: .empty())
+            dismiss: updateCafe.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
-
-

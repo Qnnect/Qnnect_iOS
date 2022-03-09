@@ -70,11 +70,12 @@
 		AE6FA4A127BE08F100FA2154 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA4A027BE08F100FA2154 /* Bookmark.swift */; };
 		AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */; };
 		AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */; };
-		AE717B6127C4C278008278D3 /* AddCafeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B6027C4C278008278D3 /* AddCafeUseCase.swift */; };
 		AE77C82527D887F700E8D0EC /* CafeAnswerWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */; };
 		AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */; };
 		AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */; };
 		AE77C82B27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82A27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift */; };
+		AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */; };
+		AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -254,11 +255,12 @@
 		AE6FA4A027BE08F100FA2154 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCycleSlider.swift; sourceTree = "<group>"; };
 		AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewModel.swift; sourceTree = "<group>"; };
-		AE717B6027C4C278008278D3 /* AddCafeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeUseCase.swift; sourceTree = "<group>"; };
 		AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeAnswerWritingViewModel.swift; sourceTree = "<group>"; };
 		AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachingImageCell.swift; sourceTree = "<group>"; };
 		AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewController.swift; sourceTree = "<group>"; };
 		AE77C82A27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInfoInputViewController.swift; sourceTree = "<group>"; };
+		AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewModel.swift; sourceTree = "<group>"; };
+		AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeUpdateRequestDTO.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				AE02D81727D632E70019D955 /* SettingBottomSheetViewModel.swift */,
 				AE02D82227D75CDB0019D955 /* CafeAnswerViewModel.swift */,
 				AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */,
+				AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -855,7 +858,6 @@
 		AE717B5F27C4C260008278D3 /* Cafe */ = {
 			isa = PBXGroup;
 			children = (
-				AE717B6027C4C278008278D3 /* AddCafeUseCase.swift */,
 				AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */,
 			);
 			path = Cafe;
@@ -915,6 +917,7 @@
 				AEA14D3727D46A3A0009EEC6 /* CafeUserResponseDTO.swift */,
 				AEA14D3F27D47B1A0009EEC6 /* CafeJoinRequestDTO.swift */,
 				AEA14D4927D48D020009EEC6 /* CafeCreateResponseDTO.swift */,
+				AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */,
 			);
 			path = Cafe;
 			sourceTree = "<group>";
@@ -1281,6 +1284,7 @@
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
+				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
@@ -1307,7 +1311,6 @@
 				AE02D82727D763F90019D955 /* CafeAnswerCell.swift in Sources */,
 				AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */,
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
-				AE717B6127C4C278008278D3 /* AddCafeUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
 				AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */,
 				AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */,
@@ -1353,6 +1356,7 @@
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
+				AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,

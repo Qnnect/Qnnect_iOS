@@ -32,10 +32,10 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     
     func showAddGroupBottomSheet() {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
-        let addGroupUseCase = DefaultAddCafeUseCase(cafeRepository: cafeRepository)
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = AddCafeViewModel(
             coordinator: self,
-            addGroupUseCase: addGroupUseCase
+            cafeUseCase: cafeUseCase
         )
         let vc = AddCafeViewController.create(with: viewModel)
         vc.modalPresentationStyle = .overCurrentContext

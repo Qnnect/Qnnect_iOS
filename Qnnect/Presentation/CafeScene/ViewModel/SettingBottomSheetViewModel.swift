@@ -13,7 +13,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
     
     struct Input {
         let didTapSettingItem: Observable<SettingItemType>
-        let roomInfo: Observable<Cafe>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
@@ -40,10 +40,10 @@ final class SettingBottomSheetViewModel: ViewModelType {
         
         let showCafeModifyingScene = input.didTapSettingItem
             .filter { $0 == .cafeInfoModify }
-            .withLatestFrom(input.roomInfo)
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] cafe in
-                self?.coordinator?.showCafeModifyingScene(cafe)
+                [weak self] cafeId in
+                self?.coordinator?.showCafeModifyingScene(cafeId)
             }
             .mapToVoid()
         

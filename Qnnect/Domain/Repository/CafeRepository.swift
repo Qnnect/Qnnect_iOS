@@ -17,4 +17,10 @@ protocol CafeRepository: AnyObject {
     )  -> Observable<Result<Int,Error>>
     
     func fetchCafe(forId id: Int) -> Observable<Result<Cafe,Error>>
+    func updateCafe(
+        forId id: Int,
+        with name: String,
+        _ groupType: GroupType,
+        _ diaryColor: DiaryColorType,
+        _ questionCycle: QuestionCycle) -> Observable<Void>
 }

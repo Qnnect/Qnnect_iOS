@@ -27,6 +27,12 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .map{ Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()
-        
+    }
+    
+    func updateCafe(fotId id: Int, request: CafeUpdateRequestDTO) -> Observable<Void> {
+        return self.request(.updateCafe(id: id, request: request))
+            .filter(statusCode: 200)
+            .asObservable()
+            .mapToVoid()
     }
 }

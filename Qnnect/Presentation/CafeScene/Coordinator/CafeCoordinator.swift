@@ -12,12 +12,13 @@ protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet()
     func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
-    func showSettingBottomSheet(_ cafe: Cafe)
+    func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
     func showCafeAnswerScene(_ question: Question, _ user: User)
     func showCafeAnswerWritingScene(_ question: Question, _ user: User)
-    func showCafeModifyingScene(_ cafe: Cafe)
+    func showCafeModifyingScene(_ cafeId: Int)
     func dismissAlert()
+    func dismiss()
 }
 
 final class DefaultGroupCoordinator: CafeCoordinator {
@@ -59,9 +60,9 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.present(alert, animated: true, completion: nil)
     }
     
-    func showSettingBottomSheet(_ cafe: Cafe) {
+    func showSettingBottomSheet(_ cafeId: Int) {
         let viewModel = SettingBottomSheetViewModel(coordinator: self)
-        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafe)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
@@ -94,8 +95,14 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeModifyingScene(_ cafe: Cafe) {
-        let vc = CafeModifyingViewController.create()
+    func showCafeModifyingScene(_ cafeId: Int) {
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
+        let viewModel = CafeModifyingViewModel(
+            coordinator: self,
+            cafeUseCase: cafeUseCase
+        )
+        let vc = CafeModifyingViewController.create(with: viewModel, cafeId)
         if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
             bottomSheet.hideBottomSheetAndGoBack {
                 [weak self] in
@@ -108,5 +115,13 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     
     func dismissAlert() {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
+            vc.hideBottomSheetAndGoBack(nil)
+        } else {
+            self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        }
     }
 }
