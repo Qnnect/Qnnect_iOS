@@ -10,8 +10,14 @@ import SnapKit
 import Then
 import Photos
 
+protocol AttachingImageCellDelegate: AnyObject {
+    func attachingImageCell(didTap cell: UICollectionViewCell)
+}
+
 final class AttachingImageCell: UICollectionViewCell {
+    
     static let identifier = "AttachingImageCell"
+    weak var delegate: AttachingImageCellDelegate?
     
     private let imageView = UIImageView().then {
         $0.contentMode = .scaleToFill
@@ -51,6 +57,8 @@ final class AttachingImageCell: UICollectionViewCell {
             make.centerX.equalTo(self.imageView.snp.trailing)
             make.centerY.equalTo(self.imageView.snp.top)
         }
+        
+        self.attachingCancleButton.addTarget(self, action: #selector(didTapAttachingCancleButton), for: .touchUpInside)
     }
     
     func update(with asset: PHAsset) {
@@ -62,5 +70,9 @@ final class AttachingImageCell: UICollectionViewCell {
         imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
             self.imageView.image = image
         }
+    }
+    
+    @objc func didTapAttachingCancleButton() {
+        delegate?.attachingImageCell(didTap: self)
     }
 }

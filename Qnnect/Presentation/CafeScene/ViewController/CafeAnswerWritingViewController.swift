@@ -93,9 +93,10 @@ final class CafeAnswerWritingViewController: BaseViewController {
         layout.itemSize = .init(width: 85, height: 85)
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
+        $0.showsHorizontalScrollIndicator = false
     }
     
-    private var fetchedResult: PHFetchResult<PHAsset>?
+    private var fetchedAssets: [PHAsset] = []
     
     private var question: Question!
     private var user: User!
@@ -242,7 +243,11 @@ final class CafeAnswerWritingViewController: BaseViewController {
     
     override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         let identifiers = results.map{ $0.assetIdentifier ?? ""}
-        self.fetchedResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        for i in 0 ..< result.count {
+            self.fetchedAssets.append(result[i])
+        }
+        print(fetchedAssets)
         self.attachingImageCollectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
@@ -274,14 +279,14 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
 // MARK: - UICollectionView DataSource
 extension CafeAnswerWritingViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResult?.count ?? 0
+        return fetchedAssets.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: AttachingImageCell.identifier, for: indexPath) as! AttachingImageCell
         
-        if let asset = self.fetchedResult?[indexPath.row]{
-            cell.update(with: asset)
-        }
+        let asset = self.fetchedAssets[indexPath.row]
+        cell.update(with: asset)
+        cell.delegate = self
         
         return cell
     }
@@ -310,4 +315,13 @@ private extension CafeAnswerWritingViewController {
         }
     }
     
+}
+
+extension CafeAnswerWritingViewController: AttachingImageCellDelegate {
+    func attachingImageCell(didTap cell: UICollectionViewCell) {
+        guard let indexPath = self.attachingImageCollectionView.indexPath(for: cell) else { return }
+        
+        self.fetchedAssets.remove(at: indexPath.row)
+        self.attachingImageCollectionView.deleteItems(at: [indexPath])
+    }
 }
