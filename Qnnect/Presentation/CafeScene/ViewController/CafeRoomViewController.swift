@@ -57,7 +57,8 @@ final class CafeRoomViewController: BaseViewController {
     private let navigationTitleView = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
-        $0.sizeToFit()
+        $0.textAlignment = .center
+        $0.frame = .init(x: 0, y: 0, width: 200.0, height: 0.0)
     }
     
     private let navigationMenuButton = UIButton().then {
@@ -163,8 +164,7 @@ final class CafeRoomViewController: BaseViewController {
             viewDidLoad: Observable.just(Void()),
             viewWillAppear: Observable.merge(
                 self.rx.viewWillAppear.mapToVoid(),
-                self.rx.methodInvoked(#selector(self.comebackCafeRoom)).mapToVoid()
-                                             ),
+                self.rx.methodInvoked(#selector(self.comebackCafeRoom)).mapToVoid()),
             cafeId: Observable.just(self.cafeId),
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
@@ -226,7 +226,6 @@ final class CafeRoomViewController: BaseViewController {
     }
     
     @objc dynamic func comebackCafeRoom() {
-        print("comeback cafeRoom")
     }
 }
 
