@@ -54,7 +54,7 @@ final class CafeAnswerWritingCell: UITableViewCell {
         
         self.writerProfileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(21.0)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(14.0)
             make.width.height.equalTo(27.0)
         }
         
@@ -64,7 +64,8 @@ final class CafeAnswerWritingCell: UITableViewCell {
         }
         
         self.mainLabel.snp.makeConstraints { make in
-                make.center.equalToSuperview()
+            make.center.equalToSuperview()
+            make.bottom.equalToSuperview().inset(14.0)
         }
     }
     
