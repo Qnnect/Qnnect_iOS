@@ -13,10 +13,12 @@ final class SettingBottomSheetViewModel: ViewModelType {
     
     struct Input {
         let didTapSettingItem: Observable<SettingItemType>
+        let roomInfo: Observable<Cafe>
     }
     
     struct Output {
         let showInvitationScene: Signal<Void>
+        let showCafeModifyingScene: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -36,8 +38,18 @@ final class SettingBottomSheetViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let showCafeModifyingScene = input.didTapSettingItem
+            .filter { $0 == .cafeInfoModify }
+            .withLatestFrom(input.roomInfo)
+            .do {
+                [weak self] cafe in
+                self?.coordinator?.showCafeModifyingScene(cafe)
+            }
+            .mapToVoid()
+        
         return Output(
-            showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty())
+            showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty()),
+            showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

@@ -74,7 +74,11 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         
         dismissButton.rx.tap
             .mapToVoid()
-            .subscribe(onNext: self.hideBottomSheetAndGoBack)
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.hideBottomSheetAndGoBack(nil)
+            }
+            )
             .disposed(by: self.disposeBag)
         
         self.setupGestureRecognizer()
@@ -101,7 +105,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
     }
     
     // 바텀 시트 사라지는 애니메이션
-    func hideBottomSheetAndGoBack() {
+    func hideBottomSheetAndGoBack(_ completion:(() -> Void)?) {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(0)
@@ -111,7 +115,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             if self.presentingViewController != nil {
                 self.presentingViewController?.tabBarController?.tabBar.isHidden = false
                 self.presentingViewController!.view.setNeedsLayout()
-                self.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: false, completion: completion)
             }
         }
     }
@@ -125,7 +129,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
     
     // UITapGestureRecognizer 연결 함수 부분
     @objc func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
-        hideBottomSheetAndGoBack()
+        hideBottomSheetAndGoBack(nil)
     }
 }
 

@@ -78,10 +78,12 @@ final class CafeRoomViewModel: ViewModelType {
             .mapToVoid()
         
         let showSettingBottomSheet = input.didTapNavigationMenu
+            .withLatestFrom(roomInfo)
             .do {
-                [weak self] _ in
-                self?.coordinator?.showSettingBottomSheet()
+                [weak self] cafe in
+                self?.coordinator?.showSettingBottomSheet(cafe)
             }
+            .mapToVoid()
         
         let showQuestionAnswerScene = input.didTapQuestionCell
             .withLatestFrom(roomInfo,resultSelector: { question, roomInfo in

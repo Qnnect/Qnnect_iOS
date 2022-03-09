@@ -12,10 +12,11 @@ protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet()
     func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
-    func showSettingBottomSheet()
+    func showSettingBottomSheet(_ cafe: Cafe)
     func showInvitationScene()
     func showCafeAnswerScene(_ question: Question, _ user: User)
     func showCafeAnswerWritingScene(_ question: Question, _ user: User)
+    func showCafeModifyingScene(_ cafe: Cafe)
     func dismissAlert()
 }
 
@@ -58,17 +59,17 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.present(alert, animated: true, completion: nil)
     }
     
-    func showSettingBottomSheet() {
+    func showSettingBottomSheet(_ cafe: Cafe) {
         let viewModel = SettingBottomSheetViewModel(coordinator: self)
-        let bottomSheet = SettingBottomSheet.create(with: viewModel)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafe)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
     
     func showInvitationScene() {
         let vc = CafeInvitationViewController.create()
-        if let vc = self.navigationController.presentedViewController as? SettingBottomSheet {
-            vc.hideBottomSheetAndGoBack()
+        if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
+            bottomSheet.hideBottomSheetAndGoBack(nil)
         }
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -91,6 +92,18 @@ final class DefaultGroupCoordinator: CafeCoordinator {
             viewModel
         )
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showCafeModifyingScene(_ cafe: Cafe) {
+        let vc = CafeModifyingViewController.create()
+        if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
+            bottomSheet.hideBottomSheetAndGoBack {
+                [weak self] in
+                vc.modalPresentationStyle = .overCurrentContext
+                self?.navigationController.present(vc, animated: false, completion: nil)
+            }
+        }
+       
     }
     
     func dismissAlert() {
