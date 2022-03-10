@@ -9,6 +9,6 @@ import Foundation
 import RxSwift
 
 protocol QuestionRepository: AnyObject {
-    func scrap(_ questionId: Int) -> Observable<Void>
-    func cancleScrap(_ questionId: Int) -> Observable<Void>
+    func scrap(_ questionId: Int) -> Observable<Result<Void,Error>>
+    func cancleScrap(_ questionId: Int) -> Observable<Result<Void,Error>>
 }

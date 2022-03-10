@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 
 protocol QuestionUseCase: AnyObject {
-    func scrap(_ questionId: Int) -> Observable<Void>
-    func cancleScrap(_ questionId: Int) -> Observable<Void>
+    func scrap(_ questionId: Int) -> Observable<Result<Void,Error>>
+    func cancleScrap(_ questionId: Int) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultQuestionUseCase: QuestionUseCase {
@@ -21,11 +21,11 @@ final class DefaultQuestionUseCase: QuestionUseCase {
         self.questionRepository = questionRepository
     }
     
-    func scrap(_ questionId: Int) -> Observable<Void> {
+    func scrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
         return self.questionRepository.scrap(questionId)
     }
     
-    func cancleScrap(_ questionId: Int) -> Observable<Void> {
+    func cancleScrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
         return self.questionRepository.cancleScrap(questionId)
     }
 }

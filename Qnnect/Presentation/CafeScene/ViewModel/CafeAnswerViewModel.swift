@@ -50,13 +50,21 @@ final class CafeAnswerViewModel: ViewModelType {
             .filter { $0 }
             .withLatestFrom(input.question.map{ $0.id })
             .flatMap(self.questionUseCase.scrap)
-            
+            .compactMap {
+                result -> Void? in
+                guard case .success(_) = result else { return nil }
+                return Void()
+            }
         
         let cancleScrap = input.didTapScrapButton
             .filter{ !$0 }
             .withLatestFrom(input.question.map{ $0.id })
             .flatMap(self.questionUseCase.cancleScrap)
-           
+            .compactMap {
+                 result -> Void? in
+                guard case .success(_) = result else { return nil }
+                return Void()
+            }
         
         return Output(
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),

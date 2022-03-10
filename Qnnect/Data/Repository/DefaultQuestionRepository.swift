@@ -18,13 +18,13 @@ final class DefaultQuestionRepository: QuestionRepository {
         self.scrapNetworkService = scrapNetworkService
     }
     
-    func scrap(_ questionId: Int) -> Observable<Void> {
+    func scrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
         let request = ScrapRequestDTO(cafeQuestionId: questionId)
         
         return self.scrapNetworkService.scrap(request: request)
     }
     
-    func cancleScrap(_ questionId: Int) -> Observable<Void> {
+    func cancleScrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
         let request = ScrapRequestDTO(cafeQuestionId: questionId)
         
         return self.scrapNetworkService.cancleScrap(request: request)
