@@ -26,6 +26,14 @@ final class CafeAnswerViewController: BaseViewController {
         )
     }
     
+    private let likeButton = UIButton().then {
+        $0.setImage(Constants.navigationHeartIcon, for: .normal)
+    }
+    
+    private let scrapButton = UIButton().then {
+        $0.setImage(Constants.navigationScrapIcon, for: .normal)
+    }
+    
     private var question: Question!
     private var user: User!
     private var viewModel: CafeAnswerViewModel!
@@ -59,6 +67,10 @@ final class CafeAnswerViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: self.scrapButton),
+            UIBarButtonItem(customView: self.likeButton)
+        ]
     }
     
     override func bind() {

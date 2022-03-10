@@ -82,6 +82,10 @@ struct Constants {
     static let commentIcon: UIImage? = UIImage(named: "comment")?.withRenderingMode(.alwaysOriginal)
     static let attachingImageIcon: UIImage? = UIImage(named: "bottom_camera")?.withRenderingMode(.alwaysOriginal)
     static let attacingCancleButtonIcon: UIImage? = UIImage(named: "attacingCancleButtonIcon")?.withRenderingMode(.alwaysOriginal)
+    static let navigationHeartIcon: UIImage? = UIImage(named: "navigation_heart")?.withRenderingMode(.alwaysOriginal)
+    static let navigationCheckedHeartIcon: UIImage? = UIImage(named: "navigation_heart_checked")?.withRenderingMode(.alwaysOriginal)
+    static let navigationScrapIcon: UIImage? = UIImage(named: "navigation_scrap")?.withRenderingMode(.alwaysOriginal)
+    static let navigationCheckedScrapIcon: UIImage? = UIImage(named: "navigation_scrap_checked")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
