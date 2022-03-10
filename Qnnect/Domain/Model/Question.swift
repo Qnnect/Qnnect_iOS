@@ -12,4 +12,5 @@ struct Question {
     let daysLeft: Int
     let question: String
     let questioner: String
+    let id: Int
 }

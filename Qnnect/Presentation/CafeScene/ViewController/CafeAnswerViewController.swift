@@ -93,7 +93,13 @@ final class CafeAnswerViewController: BaseViewController {
                 .map { $0.section == 1 }
                 .mapToVoid(),
             question: Observable.just(question),
-            user: Observable.just(user)
+            user: Observable.just(user),
+            didTapScrapButton: self.scrapButton.rx.tap.scan(
+                false,
+                accumulator: { lastState, newValue in !lastState }
+            ).do {
+                print("scrap",$0)
+            }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -102,6 +108,19 @@ final class CafeAnswerViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
         
+        output.scrap
+            .emit(onNext: {
+                [weak self] _ in
+                self?.scrapButton.setImage(Constants.navigationCheckedScrapIcon, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.cancleScrap
+            .emit(onNext: {
+                [weak self] _ in
+                self?.scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 

@@ -15,17 +15,27 @@ final class CafeAnswerViewModel: ViewModelType {
         let didTapAnswerWritingCell: Observable<Void>
         let question: Observable<Question>
         let user: Observable<User>
+        /// Bool: true: 스크랩하기 , false: 스크랩 취소하기
+        let didTapScrapButton: Observable<Bool>
     }
     
     struct Output {
         let showAnswerWritingScene: Signal<Void>
+        let scrap: Signal<Void>
+        let cancleScrap: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
+    private let questionUseCase: QuestionUseCase
     
-    init(coordinator: CafeCoordinator) {
+    init(
+        coordinator: CafeCoordinator,
+        questionUseCase: QuestionUseCase
+    ) {
         self.coordinator = coordinator
+        self.questionUseCase = questionUseCase
     }
+    
     func transform(from input: Input) -> Output {
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
@@ -36,8 +46,22 @@ final class CafeAnswerViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let scrap = input.didTapScrapButton
+            .filter { $0 }
+            .withLatestFrom(input.question.map{ $0.id })
+            .flatMap(self.questionUseCase.scrap)
+            
+        
+        let cancleScrap = input.didTapScrapButton
+            .filter{ !$0 }
+            .withLatestFrom(input.question.map{ $0.id })
+            .flatMap(self.questionUseCase.cancleScrap)
+           
+        
         return Output(
-            showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty())
+            showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
+            scrap: scrap.asSignal(onErrorSignalWith: .empty()),
+            cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

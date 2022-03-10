@@ -76,7 +76,9 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showCafeAnswerScene(_ question: Question, _ user: User) {
-        let viewModel = CafeAnswerViewModel(coordinator: self)
+        let questionRepository = DefaultQuestionRepository(scrapNetworkService: ScrapNetworkService())
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = CafeAnswerViewModel(coordinator: self,questionUseCase: questionUseCase)
         let vc = CafeAnswerViewController.create(
             with: viewModel,
             question,

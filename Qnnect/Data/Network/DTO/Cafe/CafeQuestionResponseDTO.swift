@@ -12,13 +12,15 @@ struct CafeQuestionResponseDTO: Decodable {
     let daysLeft: Int
     let question: String
     let questioner: String
+    let cafeQuestionId: Int
     
     func toDomain() -> Question {
         return Question(
             createdAt: self.createdAt,
             daysLeft: self.daysLeft,
             question: self.question,
-            questioner: self.questioner
+            questioner: self.questioner,
+            id:  self.cafeQuestionId
         )
     }
 }

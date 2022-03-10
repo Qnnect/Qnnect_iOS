@@ -76,6 +76,12 @@
 		AE77C82B27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82A27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift */; };
 		AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */; };
 		AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */; };
+		AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83027DA053E00E8D0EC /* ScrapAPI.swift */; };
+		AE77C83427DA057600E8D0EC /* ScrapRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83327DA057600E8D0EC /* ScrapRequestDTO.swift */; };
+		AE77C83627DA068700E8D0EC /* ScrapNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */; };
+		AE77C83827DA075C00E8D0EC /* QuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */; };
+		AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */; };
+		AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -261,6 +267,12 @@
 		AE77C82A27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInfoInputViewController.swift; sourceTree = "<group>"; };
 		AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewModel.swift; sourceTree = "<group>"; };
 		AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeUpdateRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C83027DA053E00E8D0EC /* ScrapAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapAPI.swift; sourceTree = "<group>"; };
+		AE77C83327DA057600E8D0EC /* ScrapRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapNetworkService.swift; sourceTree = "<group>"; };
+		AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRepository.swift; sourceTree = "<group>"; };
+		AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuestionRepository.swift; sourceTree = "<group>"; };
+		AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionUseCase.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -534,6 +546,7 @@
 				AEA14D0727CFB8030009EEC6 /* DefaultUserRepository.swift */,
 				AEA14D4327D47E0E0009EEC6 /* DefaultCafeRespository.swift */,
 				AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */,
+				AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -566,6 +579,7 @@
 				AEA14D0327CFB6990009EEC6 /* UserRepository.swift */,
 				AEA14D4527D47E1E0009EEC6 /* CafeRepository.swift */,
 				AE02D80527D5CCF70019D955 /* HomeRepository.swift */,
+				AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -859,8 +873,17 @@
 			isa = PBXGroup;
 			children = (
 				AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */,
+				AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */,
 			);
 			path = Cafe;
+			sourceTree = "<group>";
+		};
+		AE77C83227DA056C00E8D0EC /* Scrap */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C83327DA057600E8D0EC /* ScrapRequestDTO.swift */,
+			);
+			path = Scrap;
 			sourceTree = "<group>";
 		};
 		AE7F484027CE7DAB00954971 /* Error */ = {
@@ -958,6 +981,7 @@
 				AEA14CFD27CF76220009EEC6 /* UserAPI.swift */,
 				AEA14D3927D476D30009EEC6 /* CafeAPI.swift */,
 				AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */,
+				AE77C83027DA053E00E8D0EC /* ScrapAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -965,6 +989,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C83227DA056C00E8D0EC /* Scrap */,
 				AE02D80027D5C6C10019D955 /* Home */,
 				AEA14D1927D3396A0009EEC6 /* Cafe */,
 				AEA14CF827CF74880009EEC6 /* User */,
@@ -1099,6 +1124,7 @@
 				AEA14D2827D39D320009EEC6 /* TokenService.swift */,
 				AEA14D4127D47CD70009EEC6 /* CafeNetworkService.swift */,
 				AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */,
+				AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1331,6 +1357,7 @@
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AE02D82927D767B80019D955 /* CafeAnswerWritingCell.swift in Sources */,
+				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
@@ -1343,6 +1370,7 @@
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
+				AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */,
 				AEA14D4027D47B1A0009EEC6 /* CafeJoinRequestDTO.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
 				AE02D81427D622560019D955 /* SettingItemCell.swift in Sources */,
@@ -1353,6 +1381,7 @@
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
+				AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */,
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
@@ -1372,6 +1401,7 @@
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
+				AE77C83827DA075C00E8D0EC /* QuestionRepository.swift in Sources */,
 				AEA14D5027D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
@@ -1388,6 +1418,7 @@
 				AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */,
 				AEBC9EC327C604210070399A /* SplashViewController.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
+				AE77C83627DA068700E8D0EC /* ScrapNetworkService.swift in Sources */,
 				AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */,
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
 				AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */,
@@ -1402,6 +1433,7 @@
 				AEA14D2727D397E10009EEC6 /* BaseNetworkService.swift in Sources */,
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
+				AE77C83427DA057600E8D0EC /* ScrapRequestDTO.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
 				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
