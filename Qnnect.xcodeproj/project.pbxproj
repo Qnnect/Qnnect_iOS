@@ -83,6 +83,15 @@
 		AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */; };
 		AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */; };
 		AE77C83F27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83E27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift */; };
+		AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84027DB221A00E8D0EC /* DrinkAPI.swift */; };
+		AE77C84327DB234A00E8D0EC /* DrinkNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */; };
+		AE77C84627DB266500E8D0EC /* DrinkFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84527DB266500E8D0EC /* DrinkFetchResponseDTO.swift */; };
+		AE77C84827DB272000E8D0EC /* DrinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84727DB272000E8D0EC /* DrinkRepository.swift */; };
+		AE77C84A27DB274300E8D0EC /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84927DB274300E8D0EC /* Drink.swift */; };
+		AE77C84C27DB276B00E8D0EC /* DefaultDrinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84B27DB276B00E8D0EC /* DefaultDrinkRepository.swift */; };
+		AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */; };
+		AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */; };
+		AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -275,6 +284,15 @@
 		AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuestionRepository.swift; sourceTree = "<group>"; };
 		AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionUseCase.swift; sourceTree = "<group>"; };
 		AE77C83E27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeLeaveRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C84027DB221A00E8D0EC /* DrinkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkAPI.swift; sourceTree = "<group>"; };
+		AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkNetworkService.swift; sourceTree = "<group>"; };
+		AE77C84527DB266500E8D0EC /* DrinkFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AE77C84727DB272000E8D0EC /* DrinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkRepository.swift; sourceTree = "<group>"; };
+		AE77C84927DB274300E8D0EC /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		AE77C84B27DB276B00E8D0EC /* DefaultDrinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrinkRepository.swift; sourceTree = "<group>"; };
+		AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkUseCase.swift; sourceTree = "<group>"; };
+		AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectCell.swift; sourceTree = "<group>"; };
+		AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectSectionModel.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -525,6 +543,7 @@
 				AEA14D1E27D33BBE0009EEC6 /* Question.swift */,
 				AEA14D4727D47E8D0009EEC6 /* Cafe.swift */,
 				AE02D80327D5C94C0019D955 /* HomeInfo.swift */,
+				AE77C84927DB274300E8D0EC /* Drink.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -532,6 +551,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C84D27DB282900E8D0EC /* Drink */,
 				AE02D7F927D5C4990019D955 /* Home */,
 				AEA14D0B27CFB97D0009EEC6 /* User */,
 				AE717B5F27C4C260008278D3 /* Cafe */,
@@ -549,6 +569,7 @@
 				AEA14D4327D47E0E0009EEC6 /* DefaultCafeRespository.swift */,
 				AE02D80727D5CD1E0019D955 /* DefaultHomeRepository.swift */,
 				AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */,
+				AE77C84B27DB276B00E8D0EC /* DefaultDrinkRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -582,6 +603,7 @@
 				AEA14D4527D47E1E0009EEC6 /* CafeRepository.swift */,
 				AE02D80527D5CCF70019D955 /* HomeRepository.swift */,
 				AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */,
+				AE77C84727DB272000E8D0EC /* DrinkRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -721,6 +743,8 @@
 				AE02D82827D767B80019D955 /* CafeAnswerWritingCell.swift */,
 				AE02D82A27D76B160019D955 /* CafeAnswerSectionModel.swift */,
 				AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */,
+				AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */,
+				AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -888,6 +912,22 @@
 			path = Scrap;
 			sourceTree = "<group>";
 		};
+		AE77C84427DB265600E8D0EC /* Drink */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C84527DB266500E8D0EC /* DrinkFetchResponseDTO.swift */,
+			);
+			path = Drink;
+			sourceTree = "<group>";
+		};
+		AE77C84D27DB282900E8D0EC /* Drink */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */,
+			);
+			path = Drink;
+			sourceTree = "<group>";
+		};
 		AE7F484027CE7DAB00954971 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,6 +1025,7 @@
 				AEA14D3927D476D30009EEC6 /* CafeAPI.swift */,
 				AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */,
 				AE77C83027DA053E00E8D0EC /* ScrapAPI.swift */,
+				AE77C84027DB221A00E8D0EC /* DrinkAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -992,6 +1033,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C84427DB265600E8D0EC /* Drink */,
 				AE77C83227DA056C00E8D0EC /* Scrap */,
 				AE02D80027D5C6C10019D955 /* Home */,
 				AEA14D1927D3396A0009EEC6 /* Cafe */,
@@ -1128,6 +1170,7 @@
 				AEA14D4127D47CD70009EEC6 /* CafeNetworkService.swift */,
 				AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */,
 				AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */,
+				AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1319,6 +1362,7 @@
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
+				AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */,
 				AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
@@ -1329,6 +1373,7 @@
 				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AE02D82127D75C0D0019D955 /* CafeAnswerViewController.swift in Sources */,
 				AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */,
+				AE77C84827DB272000E8D0EC /* DrinkRepository.swift in Sources */,
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
@@ -1342,6 +1387,7 @@
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
 				AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */,
+				AE77C84327DB234A00E8D0EC /* DrinkNetworkService.swift in Sources */,
 				AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
@@ -1389,7 +1435,9 @@
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
 				AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */,
+				AE77C84C27DB276B00E8D0EC /* DefaultDrinkRepository.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
+				AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
@@ -1397,6 +1445,7 @@
 				AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */,
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
+				AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
@@ -1406,6 +1455,7 @@
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AE77C83827DA075C00E8D0EC /* QuestionRepository.swift in Sources */,
 				AEA14D5027D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift in Sources */,
+				AE77C84627DB266500E8D0EC /* DrinkFetchResponseDTO.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
@@ -1427,6 +1477,7 @@
 				AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */,
 				AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */,
 				AE77C83F27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift in Sources */,
+				AE77C84A27DB274300E8D0EC /* Drink.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
@@ -1438,6 +1489,7 @@
 				AEB8FD0127C666E3002BDBCD /* UserLoginInfo.swift in Sources */,
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AE77C83427DA057600E8D0EC /* ScrapRequestDTO.swift in Sources */,
+				AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
 				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,

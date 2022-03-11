@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxDataSources
 
 final class DrinkSelectViewController: BottomSheetViewController {
     
@@ -30,7 +32,22 @@ final class DrinkSelectViewController: BottomSheetViewController {
         )
     }
     
-
+    private let drinksCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewLayout()
+    ).then {
+        $0.backgroundColor = .p_ivory
+        $0.register(
+            DrinkSelectCell.self,
+            forCellWithReuseIdentifier: DrinkSelectCell.identifier
+        )
+        $0.register(
+            PageControlFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: PageControlFooterView.identifier
+        )
+        $0.showsHorizontalScrollIndicator = false
+    }
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -39,9 +56,22 @@ final class DrinkSelectViewController: BottomSheetViewController {
         $0.layer.cornerRadius = Constants.bottomButtonCornerRadius
     }
     
- 
-    static func create() -> DrinkSelectViewController {
+    private var drinksCurPage = 0 {
+        didSet {
+            pageControl.currentPage = drinksCurPage
+        }
+    }
+    
+    private let pageControl = UIPageControl().then {
+        $0.pageIndicatorTintColor = .GRAY04
+        $0.currentPageIndicatorTintColor = .p_brown
+    }
+    
+    private var viewModel: DrinkSelctViewModel!
+    
+    static func create(with viewModel: DrinkSelctViewModel) -> DrinkSelectViewController {
         let vc = DrinkSelectViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -49,12 +79,17 @@ final class DrinkSelectViewController: BottomSheetViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     override func configureUI() {
-      
+        
         [
             self.mainLabel,
             self.secondaryLabel,
-            self.completionButton
+            self.completionButton,
+            drinksCollectionView,
+            pageControl
         ].forEach {
             self.bottomSheetView.addSubview($0)
         }
@@ -73,14 +108,105 @@ final class DrinkSelectViewController: BottomSheetViewController {
             make.leading.trailing.equalTo(self.mainLabel)
         }
         
+        
+        drinksCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(secondaryLabel.snp.bottom)
+        }
+        
+        drinksCollectionView.collectionViewLayout = createLayout()
+        
+        pageControl.snp.makeConstraints { make in
+            make.top.equalTo(drinksCollectionView.snp.bottom).offset(13.0)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(completionButton.snp.top).offset(-15.0)
+        }
+    
         self.completionButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
+            make.bottom.equalToSuperview().inset(60.0)
             make.leading.trailing.equalToSuperview().inset(Constants.bottomSheetHorizontalMargin)
             make.height.equalTo(Constants.bottomButtonHeight)
         }
+        
     }
     
     override func bind() {
         
+        let input = DrinkSelctViewModel.Input(
+            viewDidLoad: Observable.just(())
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        let dataSource = self.createDataSource()
+        output.drinks
+            .map {
+                [weak self] drinks -> [DrinkSelectSectionModel] in
+                self?.pageControl.numberOfPages = drinks.count / 4 + 1
+                return [DrinkSelectSectionModel(items: drinks),]
+            }
+            .debug()
+            .drive(drinksCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: self.disposeBag)
+        
+        
     }
 }
+
+private extension DrinkSelectViewController {
+    func createLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout {
+            [weak self] section, environment -> NSCollectionLayoutSection? in
+            switch section {
+            case 0:
+                return self?.createDrinksSectionLayout()
+            default:
+                return nil
+            }
+        }
+    }
+    
+    func createDrinksSectionLayout() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        item.contentInsets = .init(top: 0, leading: 8.0, bottom: 0, trailing: 8.0)
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        
+        group.contentInsets = .init(top: 0, leading: 0, bottom: 16.0, trailing: 0)
+        
+        let nestedGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let nestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: nestedGroupSize,subitem: group,count: 2)
+        
+        nestedGroup.contentInsets = .init(top: 0, leading: 12.0, bottom: 0, trailing: 12.0)
+        //section
+        let section = NSCollectionLayoutSection(group: nestedGroup)
+        section.boundarySupplementaryItems = [createSectionFooter()]
+        section.visibleItemsInvalidationHandler = {
+            items, contentOffset, environment in
+            let point = contentOffset
+            let env = environment
+            self.drinksCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
+        }
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.contentInsets = .init(top: 16.0, leading: 0, bottom: 0, trailing: 0)
+        return section
+    }
+    
+    
+    func createDataSource() -> RxCollectionViewSectionedReloadDataSource<DrinkSelectSectionModel> {
+        return RxCollectionViewSectionedReloadDataSource<DrinkSelectSectionModel> { dataSource, collectionView, indexPath, item in
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DrinkSelectCell.identifier,
+                for: indexPath
+            ) as! DrinkSelectCell
+            cell.update(with: item)
+            return cell
+        }
+    }
+}
+
+

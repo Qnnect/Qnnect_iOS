@@ -45,9 +45,11 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showSelectDrinkBottomSheet() {
-        let vc = DrinkSelectViewController.create()
+        let drinkRepository = DefaultDrinkRepository(drinkNetworkService: DrinkNetworkService())
+        let drinkUseCase = DefaultDrinkUseCase(drinkRepository: drinkRepository)
+        let viewModel = DrinkSelctViewModel(coordinator: self, drinkUseCase: drinkUseCase)
+        let vc = DrinkSelectViewController.create(with: viewModel)
         vc.modalPresentationStyle = .overCurrentContext
-        
         if let vc = self.navigationController.presentedViewController as? DrinkSelectGuideAlertView {
             vc.dismiss(animated: false, completion: nil)
         }
