@@ -22,6 +22,12 @@ final class DrinkSelectCell: UICollectionViewCell {
         $0.sizeToFit()
     }
     
+    var isChecked: Bool = false {
+        didSet {
+            contentView.backgroundColor = isChecked ? .p_brown : .secondaryBackground
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()

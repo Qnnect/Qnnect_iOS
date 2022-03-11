@@ -19,4 +19,12 @@ final class DrinkNetworkService: BaseNetworkService<DrinkAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func selectDrink(_ cafeId: Int, _ request: DrinkSelectRequestDTO) -> Observable<Result<Void,Error>> {
+        return self.request(.selectDrink(cafeId: cafeId, request: request))
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

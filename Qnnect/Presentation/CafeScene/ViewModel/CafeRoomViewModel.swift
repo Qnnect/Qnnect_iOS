@@ -61,19 +61,22 @@ final class CafeRoomViewModel: ViewModelType {
                 input.viewDidAppear.delay(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
             ).mapToVoid()
             )
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] _ in
-                self?.coordinator?.showSelectDrinkBottomSheet()
+                [weak self] cafeId in
+                self?.coordinator?.showSelectDrinkBottomSheet(cafeId)
             }
+            .mapToVoid()
         
         let showDrinkSelectGuideAlertView = input.didTapQuestionButton
             .withLatestFrom(roomInfo)
             .map{ $0.currentUser}
             .map(self.cafeUseCase.isDrinkSelected)
             .filter{!$0}
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] _ in
-                self?.coordinator?.showDrinkSelectGuideAlertView(.question)
+                [weak self] cafeId in
+                self?.coordinator?.showDrinkSelectGuideAlertView(.question, cafeId)
             }
             .mapToVoid()
         
@@ -105,8 +108,4 @@ final class CafeRoomViewModel: ViewModelType {
     }
 }
 
-private extension CafeRoomViewModel {
-    func showSelectDrinkBottomSheet() {
-        self.coordinator?.showSelectDrinkBottomSheet()
-    }
-}
+

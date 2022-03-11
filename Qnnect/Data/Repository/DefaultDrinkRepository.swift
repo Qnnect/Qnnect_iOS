@@ -28,4 +28,10 @@ final class DefaultDrinkRepository: DrinkRepository {
                 }
             }
     }
+    
+    func selectDrink(_ cafeId: Int, _ drinkId: Int) -> Observable<Result<Void, Error>> {
+        let request = DrinkSelectRequestDTO(drinkId: drinkId)
+        
+        return drinkNetworkService.selectDrink(cafeId, request)
+    }
 }

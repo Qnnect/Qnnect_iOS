@@ -13,10 +13,14 @@ final class DrinkSelctViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let selectedDrink: Observable<Drink>
+        let didTapCompletionButton: Observable<Void>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
         let drinks: Driver<[Drink]>
+        let completion: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -40,8 +44,18 @@ final class DrinkSelctViewModel: ViewModelType {
                 return drinks
             }
         
+        let completion = input.didTapCompletionButton
+            .withLatestFrom(Observable.combineLatest(input.cafeId, input.selectedDrink.map {$0.id} ))
+            .flatMap(self.drinkUseCase.selectDrink)
+            .mapToVoid()
+            .do {
+                [weak self] _ in
+                self?.coordinator?.dismiss()
+            }
+        
         return Output(
-            drinks: fetchedDrinks.asDriver(onErrorJustReturn: [])
+            drinks: fetchedDrinks.asDriver(onErrorJustReturn: []),
+            completion: completion.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

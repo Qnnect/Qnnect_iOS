@@ -32,7 +32,7 @@ final class DrinkSelectViewController: BottomSheetViewController {
         )
     }
     
-    private let drinksCollectionView = UICollectionView(
+    private let drinksCollectionView = DrinkSelectCollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
     ).then {
@@ -68,10 +68,12 @@ final class DrinkSelectViewController: BottomSheetViewController {
     }
     
     private var viewModel: DrinkSelctViewModel!
+    private var cafeId: Int!
     
-    static func create(with viewModel: DrinkSelctViewModel) -> DrinkSelectViewController {
+    static func create(with viewModel: DrinkSelctViewModel, _ cafeId: Int) -> DrinkSelectViewController {
         let vc = DrinkSelectViewController()
         vc.viewModel = viewModel
+        vc.cafeId = cafeId
         return vc
     }
     
@@ -133,11 +135,17 @@ final class DrinkSelectViewController: BottomSheetViewController {
     override func bind() {
         
         let input = DrinkSelctViewModel.Input(
-            viewDidLoad: Observable.just(())
+            viewDidLoad: Observable.just(()),
+            selectedDrink: drinksCollectionView.rx.modelSelected(Drink.self)
+                .asObservable(),
+            didTapCompletionButton: self.completionButton.rx.tap
+                .asObservable(),
+            cafeId: Observable.just(cafeId)
         )
         
         let output = self.viewModel.transform(from: input)
         let dataSource = self.createDataSource()
+        
         output.drinks
             .map {
                 [weak self] drinks -> [DrinkSelectSectionModel] in
@@ -148,7 +156,15 @@ final class DrinkSelectViewController: BottomSheetViewController {
             .drive(drinksCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
+        output.completion
+            .emit()
+            .disposed(by: self.disposeBag)
         
+        drinksCollectionView.rx.itemSelected
+            .subscribe(onNext: {
+                [weak self] indexPath in
+                self?.changeDrinkSelectCellState(indexPath)
+            }).disposed(by: self.disposeBag)
     }
 }
 
@@ -206,6 +222,15 @@ private extension DrinkSelectViewController {
             return cell
         }
     }
+    
+    //선택된 DrinkSelect Cell 선택 상태 변경
+    func changeDrinkSelectCellState(_ indexPath: IndexPath) {
+        let cell = drinksCollectionView.cellForItem(at: indexPath) as! DrinkSelectCell
+        cell.isChecked.toggle()
+        drinksCollectionView.lastSelectedCell?.isChecked.toggle()
+        drinksCollectionView.lastSelectedCell = cell
+    }
+    
 }
 
 

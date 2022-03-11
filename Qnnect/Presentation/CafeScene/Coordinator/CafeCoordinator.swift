@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 protocol CafeCoordinator: Coordinator {
-    func showSelectDrinkBottomSheet()
+    func showSelectDrinkBottomSheet(_ cafeId: Int)
     func start(with cafeId: Int, _ isFirst: Bool)
-    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType)
+    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
     func showCafeAnswerScene(_ question: Question, _ user: User)
@@ -44,11 +44,11 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showSelectDrinkBottomSheet() {
+    func showSelectDrinkBottomSheet(_ cafeId: Int) {
         let drinkRepository = DefaultDrinkRepository(drinkNetworkService: DrinkNetworkService())
         let drinkUseCase = DefaultDrinkUseCase(drinkRepository: drinkRepository)
         let viewModel = DrinkSelctViewModel(coordinator: self, drinkUseCase: drinkUseCase)
-        let vc = DrinkSelectViewController.create(with: viewModel)
+        let vc = DrinkSelectViewController.create(with: viewModel, cafeId)
         vc.modalPresentationStyle = .overCurrentContext
         if let vc = self.navigationController.presentedViewController as? DrinkSelectGuideAlertView {
             vc.dismiss(animated: false, completion: nil)
@@ -56,9 +56,9 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.present(vc, animated: false, completion: nil)
     }
     
-    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType) {
+    func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int) {
         let viewModel = DrinkSelectGuideAlertViewModel(coordinator: self)
-        let alert = DrinkSelectGuideAlertView.create(with: viewModel, type)
+        let alert = DrinkSelectGuideAlertView.create(with: viewModel, type, cafeId)
         alert.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(alert, animated: true, completion: nil)
     }

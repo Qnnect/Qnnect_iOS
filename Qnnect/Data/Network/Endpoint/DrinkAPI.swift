@@ -10,6 +10,7 @@ import Moya
 
 enum DrinkAPI {
     case fetchDrinks
+    case selectDrink(cafeId: Int, request: DrinkSelectRequestDTO)
 }
 
 extension DrinkAPI: TargetType, AccessTokenAuthorizable {
@@ -21,6 +22,8 @@ extension DrinkAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .fetchDrinks:
             return "api/v1/drinks"
+        case .selectDrink(let cafeId, _):
+            return "api/v1/diaries/\(cafeId)/drinks"
         }
     }
     
@@ -28,6 +31,8 @@ extension DrinkAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .fetchDrinks:
             return .get
+        case .selectDrink(_, _):
+            return .post
         }
     }
     
@@ -35,6 +40,9 @@ extension DrinkAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .fetchDrinks:
             return .requestPlain
+        case .selectDrink(_, let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
     }
     

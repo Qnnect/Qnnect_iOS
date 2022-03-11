@@ -92,6 +92,8 @@
 		AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */; };
 		AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */; };
 		AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */; };
+		AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */; };
+		AE77C85927DB56C100E8D0EC /* DrinkSelectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85827DB56C100E8D0EC /* DrinkSelectRequestDTO.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -293,6 +295,8 @@
 		AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkUseCase.swift; sourceTree = "<group>"; };
 		AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectCell.swift; sourceTree = "<group>"; };
 		AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectSectionModel.swift; sourceTree = "<group>"; };
+		AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectCollectionView.swift; sourceTree = "<group>"; };
+		AE77C85827DB56C100E8D0EC /* DrinkSelectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectRequestDTO.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -731,20 +735,10 @@
 		AE538ED927C4689A00670FAF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEA14D1327D320530009EEC6 /* CafeTitleCell.swift */,
-				AEA14D1527D323530009EEC6 /* CafeDrinkCell.swift */,
-				AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */,
-				AEA14D4D27D4B0EF0009EEC6 /* CafeSectionModel.swift */,
+				AE77C85527DB521A00E8D0EC /* SectionModel */,
+				AE77C85427DB520900E8D0EC /* Cell */,
 				AEA14D4F27D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift */,
-				AE02D81327D622560019D955 /* SettingItemCell.swift */,
-				AE02D81A27D729D60019D955 /* CafeQuestionEmptyCell.swift */,
-				AE02D82427D760B60019D955 /* CafeAnswerQuestionCell.swift */,
-				AE02D82627D763F90019D955 /* CafeAnswerCell.swift */,
-				AE02D82827D767B80019D955 /* CafeAnswerWritingCell.swift */,
-				AE02D82A27D76B160019D955 /* CafeAnswerSectionModel.swift */,
-				AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */,
-				AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */,
-				AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */,
+				AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -916,6 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				AE77C84527DB266500E8D0EC /* DrinkFetchResponseDTO.swift */,
+				AE77C85827DB56C100E8D0EC /* DrinkSelectRequestDTO.swift */,
 			);
 			path = Drink;
 			sourceTree = "<group>";
@@ -926,6 +921,33 @@
 				AE77C84E27DB283000E8D0EC /* DrinkUseCase.swift */,
 			);
 			path = Drink;
+			sourceTree = "<group>";
+		};
+		AE77C85427DB520900E8D0EC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14D1327D320530009EEC6 /* CafeTitleCell.swift */,
+				AEA14D1527D323530009EEC6 /* CafeDrinkCell.swift */,
+				AEA14D1727D326D40009EEC6 /* CafeToDayQuestionCell.swift */,
+				AE02D81327D622560019D955 /* SettingItemCell.swift */,
+				AE02D81A27D729D60019D955 /* CafeQuestionEmptyCell.swift */,
+				AE02D82427D760B60019D955 /* CafeAnswerQuestionCell.swift */,
+				AE02D82627D763F90019D955 /* CafeAnswerCell.swift */,
+				AE02D82827D767B80019D955 /* CafeAnswerWritingCell.swift */,
+				AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */,
+				AE77C85027DB2AF400E8D0EC /* DrinkSelectCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AE77C85527DB521A00E8D0EC /* SectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				AEA14D4D27D4B0EF0009EEC6 /* CafeSectionModel.swift */,
+				AE02D82A27D76B160019D955 /* CafeAnswerSectionModel.swift */,
+				AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */,
+			);
+			path = SectionModel;
 			sourceTree = "<group>";
 		};
 		AE7F484027CE7DAB00954971 /* Error */ = {
@@ -1343,6 +1365,7 @@
 				AE02D81227D621950019D955 /* SettingBottomSheet.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
+				AE77C85927DB56C100E8D0EC /* DrinkSelectRequestDTO.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
 				AE538EDD27C4693C00670FAF /* CafeRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
@@ -1444,6 +1467,7 @@
 				AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */,
 				AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */,
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
+				AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
 				AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,

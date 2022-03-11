@@ -56,11 +56,17 @@ final class DrinkSelectGuideAlertView: BaseViewController {
     
     private var viewModel: DrinkSelectGuideAlertViewModel!
     private var type: UserBehaviorType!
+    private var cafeId: Int!
     
-    static func create(with viewModel: DrinkSelectGuideAlertViewModel, _ type: UserBehaviorType) -> DrinkSelectGuideAlertView {
+    static func create(
+        with viewModel: DrinkSelectGuideAlertViewModel,
+        _ type: UserBehaviorType,
+        _ cafeId: Int
+    ) -> DrinkSelectGuideAlertView {
         let view = DrinkSelectGuideAlertView()
         view.viewModel = viewModel
         view.type = type
+        view.cafeId = cafeId
         return view
     }
     
@@ -124,7 +130,8 @@ final class DrinkSelectGuideAlertView: BaseViewController {
         
         let input = DrinkSelectGuideAlertViewModel.Input(
             didTapCancleButton: self.cancleButton.rx.tap.asObservable(),
-            didTapDrinkSelectButton: self.goDrinkSelectButton.rx.tap.asObservable()
+            didTapDrinkSelectButton: self.goDrinkSelectButton.rx.tap.asObservable(),
+            cafeId: Observable.just(cafeId)
         )
         
         let output = self.viewModel.transform(from: input)

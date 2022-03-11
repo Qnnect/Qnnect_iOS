@@ -14,6 +14,7 @@ final class DrinkSelectGuideAlertViewModel: ViewModelType {
     struct Input {
         let didTapCancleButton: Observable<Void>
         let didTapDrinkSelectButton: Observable<Void>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
@@ -36,10 +37,12 @@ final class DrinkSelectGuideAlertViewModel: ViewModelType {
             }
         
         let showSelectDrinkBottomSheet = input.didTapDrinkSelectButton
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] _ in
-                self?.coordinator?.showSelectDrinkBottomSheet()
+                [weak self] cafeId in
+                self?.coordinator?.showSelectDrinkBottomSheet(cafeId)
             }
+            .mapToVoid()
         
         return Output(
             dismiss: dismiss.asSignal(onErrorSignalWith: .empty()),
