@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Moya
 import RxSwift
 
 final class CafeNetworkService: BaseNetworkService<CafeAPI> {
@@ -34,5 +35,13 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .filter(statusCode: 200)
             .asObservable()
             .mapToVoid()
+    }
+    
+    func leaveCafe(request: CafeLeaveRequestDTO) -> Observable<Result<Void,Error>> {
+        return self.request(.leaveCafe(reqeust: request))
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
     }
 }

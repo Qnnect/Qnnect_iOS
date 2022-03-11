@@ -14,7 +14,7 @@ enum SettingItemType: String,CaseIterable {
     case invite
     case cafeInfoModify
     case drinkModify
-    case deleteCafe
+    case leaveCafe
     
     var title: String {
         switch self {
@@ -24,8 +24,8 @@ enum SettingItemType: String,CaseIterable {
             return "카페 제목/주기/색상 수정하기"
         case .drinkModify:
             return "음료 수정하기"
-        case .deleteCafe:
-            return "다이어리 삭제"
+        case .leaveCafe:
+            return "카페 나가기"
         }
     }
 }
@@ -88,6 +88,10 @@ final class SettingBottomSheet: BottomSheetViewController {
             .disposed(by: self.disposeBag)
         
         output.showCafeModifyingScene
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.leaveCafe
             .emit()
             .disposed(by: self.disposeBag)
     }

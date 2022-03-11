@@ -82,6 +82,7 @@
 		AE77C83827DA075C00E8D0EC /* QuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */; };
 		AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */; };
 		AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */; };
+		AE77C83F27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C83E27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -273,6 +274,7 @@
 		AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRepository.swift; sourceTree = "<group>"; };
 		AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultQuestionRepository.swift; sourceTree = "<group>"; };
 		AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionUseCase.swift; sourceTree = "<group>"; };
+		AE77C83E27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeLeaveRequestDTO.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -941,6 +943,7 @@
 				AEA14D3F27D47B1A0009EEC6 /* CafeJoinRequestDTO.swift */,
 				AEA14D4927D48D020009EEC6 /* CafeCreateResponseDTO.swift */,
 				AE77C82E27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift */,
+				AE77C83E27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift */,
 			);
 			path = Cafe;
 			sourceTree = "<group>";
@@ -1423,6 +1426,7 @@
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
 				AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */,
 				AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */,
+				AE77C83F27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,

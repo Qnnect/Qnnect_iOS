@@ -19,6 +19,7 @@ protocol CafeCoordinator: Coordinator {
     func showCafeModifyingScene(_ cafeId: Int)
     func dismissAlert()
     func dismiss()
+    func leaveCafe()
 }
 
 final class DefaultGroupCoordinator: CafeCoordinator {
@@ -61,7 +62,9 @@ final class DefaultGroupCoordinator: CafeCoordinator {
     }
     
     func showSettingBottomSheet(_ cafeId: Int) {
-        let viewModel = SettingBottomSheetViewModel(coordinator: self)
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
+        let viewModel = SettingBottomSheetViewModel(coordinator: self,cafeUseCase: cafeUseCase)
         let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
@@ -127,6 +130,15 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         }
         if let vc = self.navigationController.viewControllers.first(where: { $0 is CafeRoomViewController}) as? CafeRoomViewController {
             vc.comebackCafeRoom()
+        }
+    }
+    
+    func leaveCafe() {
+        if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
+            vc.hideBottomSheetAndGoBack {
+                [weak self] in
+                self?.navigationController.popToRootViewController(animated: true)
+            }
         }
     }
 }

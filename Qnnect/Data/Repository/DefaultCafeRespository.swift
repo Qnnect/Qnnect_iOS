@@ -62,4 +62,9 @@ final class DefaultCafeRepository: CafeRepository {
         )
         return self.cafeNetworkService.updateCafe(fotId: id, request: request)
     }
+    
+    func leaveCafe(_ cafeId: Int) -> Observable<Result<Void, Error>> {
+        let request = CafeLeaveRequestDTO(cafeId: cafeId)
+        return self.cafeNetworkService.leaveCafe(request: request)
+    }
 }

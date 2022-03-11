@@ -23,4 +23,6 @@ protocol CafeRepository: AnyObject {
         _ groupType: GroupType,
         _ diaryColor: DiaryColorType,
         _ questionCycle: QuestionCycle) -> Observable<Void>
+    
+    func leaveCafe(_ cafeId: Int) -> Observable<Result<Void,Error>>
 }

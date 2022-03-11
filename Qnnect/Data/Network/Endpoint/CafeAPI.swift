@@ -13,6 +13,7 @@ enum CafeAPI {
     case fetchCafe(id: Int)
     case joinCafe(id: Int, request: CafeJoinRequestDTO)
     case updateCafe(id: Int, request: CafeUpdateRequestDTO)
+    case leaveCafe(reqeust: CafeLeaveRequestDTO)
 }
 
 extension CafeAPI: TargetType, AccessTokenAuthorizable {
@@ -30,6 +31,8 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/cafes/\(id)"
         case .updateCafe(let id, _):
             return "api/v1/cafes/\(id)"
+        case .leaveCafe(_):
+            return "api/v1/cafes/leaver"
         }
     }
     
@@ -41,7 +44,7 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return .get
         case .joinCafe(_, _):
             return .post
-        case .updateCafe(_,_):
+        case .updateCafe(_,_), .leaveCafe(_):
             return .patch
         }
     }
@@ -57,6 +60,9 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .updateCafe(_, let request):
             return .requestJSONEncodable(request)
+        case .leaveCafe(let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
     }
     

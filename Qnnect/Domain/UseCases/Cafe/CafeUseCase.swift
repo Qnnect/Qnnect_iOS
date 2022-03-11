@@ -31,6 +31,8 @@ protocol CafeUseCase: AnyObject {
         _ diaryColor: DiaryColorType,
         _ questionCycle: QuestionCycle
     ) -> Observable<Void>
+    
+    func leaveCafe(_ cafeId: Int) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultCafeUseCase: CafeUseCase {
@@ -85,5 +87,9 @@ final class DefaultCafeUseCase: CafeUseCase {
             diaryColor,
             questionCycle
         )
+    }
+    
+    func leaveCafe(_ cafeId: Int) -> Observable<Result<Void, Error>> {
+        return self.cafeRepository.leaveCafe(cafeId)
     }
 }

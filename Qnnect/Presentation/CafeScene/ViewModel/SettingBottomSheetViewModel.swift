@@ -19,12 +19,18 @@ final class SettingBottomSheetViewModel: ViewModelType {
     struct Output {
         let showInvitationScene: Signal<Void>
         let showCafeModifyingScene: Signal<Void>
+        let leaveCafe: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
+    private let cafeUseCase: CafeUseCase
     
-    init(coordinator: CafeCoordinator) {
+    init(
+        coordinator: CafeCoordinator,
+        cafeUseCase: CafeUseCase
+    ) {
         self.coordinator = coordinator
+        self.cafeUseCase = cafeUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -47,9 +53,20 @@ final class SettingBottomSheetViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let leaveCafe = input.didTapSettingItem
+            .filter { $0 == .leaveCafe}
+            .withLatestFrom(input.cafeId)
+            .flatMap(self.cafeUseCase.leaveCafe(_:))
+            .do {
+                [weak self] cafeId in
+                self?.coordinator?.leaveCafe()
+            }
+            .mapToVoid()
+        
         return Output(
             showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty()),
-            showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty())
+            showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty()),
+            leaveCafe: leaveCafe.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
