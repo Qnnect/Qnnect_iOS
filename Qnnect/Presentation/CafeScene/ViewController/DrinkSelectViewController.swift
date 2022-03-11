@@ -184,7 +184,6 @@ private extension DrinkSelectViewController {
         nestedGroup.contentInsets = .init(top: 0, leading: 12.0, bottom: 0, trailing: 12.0)
         //section
         let section = NSCollectionLayoutSection(group: nestedGroup)
-        section.boundarySupplementaryItems = [createSectionFooter()]
         section.visibleItemsInvalidationHandler = {
             items, contentOffset, environment in
             let point = contentOffset
