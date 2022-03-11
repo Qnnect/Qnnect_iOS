@@ -68,15 +68,20 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .mapToVoid()
         
-        let showDrinkSelectGuideAlertView = input.didTapQuestionButton
-            .withLatestFrom(roomInfo)
-            .map{ $0.currentUser}
-            .map(self.cafeUseCase.isDrinkSelected)
-            .filter{!$0}
-            .withLatestFrom(input.cafeId)
+        let showDrinkSelectGuideAlertView = Observable.merge(
+            input.didTapQuestionButton.map { _ in UserBehaviorType.question },
+            input.didTapQuestionCell.map { _ in UserBehaviorType.answer }
+        )
+            .withLatestFrom(roomInfo,resultSelector: { (type: $0, cafe: $1) })
+            .filter {
+                [weak self] in
+                self?.cafeUseCase.isDrinkSelected($0.cafe.currentUser) == false
+            }
+            .map{ $0.type}
+            .withLatestFrom(input.cafeId,resultSelector: { ($0, $1) } )
             .do {
-                [weak self] cafeId in
-                self?.coordinator?.showDrinkSelectGuideAlertView(.question, cafeId)
+                [weak self] type, cafeId in
+                self?.coordinator?.showDrinkSelectGuideAlertView(type, cafeId)
             }
             .mapToVoid()
         
