@@ -11,6 +11,9 @@ import Moya
 enum ScrapAPI {
     case scrap(request: ScrapRequestDTO)
     case cancleScrap(request: ScrapRequestDTO)
+    case fetchAllScrap(request: ScrapFetchRequestDTO)
+    case fetchScrap(cafeId: Int, request: ScrapFetchRequestDTO)
+    case fetchCafes
 }
 
 extension ScrapAPI: TargetType, AccessTokenAuthorizable {
@@ -22,6 +25,12 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .scrap(_), .cancleScrap(_):
             return "api/v1/users/scrap"
+        case .fetchAllScrap(_):
+            return "api/v1/users/scrap/all"
+        case .fetchScrap(let cafeId, _):
+            return "api/v1/users/scrap/\(cafeId)"
+        case .fetchCafes:
+            return "api/v1/scrap/cafes"
         }
     }
     
@@ -31,6 +40,8 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
             return .post
         case .cancleScrap(_):
             return .delete
+        case .fetchAllScrap(_), .fetchScrap(_, _), .fetchCafes:
+            return .get
         }
     }
     
@@ -39,6 +50,11 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
         case .scrap(let request), .cancleScrap(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .fetchAllScrap(let request), .fetchScrap(_, let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .fetchCafes:
+            return .requestPlain
         }
     }
     

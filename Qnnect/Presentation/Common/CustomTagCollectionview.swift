@@ -8,7 +8,7 @@
 import UIKit
 import TTGTags
 
-final class CustomTagCollectionView: TTGTextTagCollectionView {
+class CustomTagCollectionView: TTGTextTagCollectionView {
     
     private let style = TTGTextTagStyle().then {
         $0.backgroundColor = .p_ivory ?? .white

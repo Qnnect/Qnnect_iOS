@@ -27,4 +27,31 @@ final class ScrapNetworkService: BaseNetworkService<ScrapAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchAllScrap(request: ScrapFetchRequestDTO) -> Observable<Result<[ScrapFetchResponseDTO],Error>> {
+        return self.request(.fetchAllScrap(request: request))
+            .filter(statusCode: 200)
+            .map([ScrapFetchResponseDTO].self)
+            .map { Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func fetchScrap(_ cafeId: Int, _ request: ScrapFetchRequestDTO) -> Observable<Result<[ScrapFetchResponseDTO],Error>> {
+        return self.request(.fetchScrap(cafeId:cafeId, request: request))
+            .filter(statusCode: 200)
+            .map([ScrapFetchResponseDTO].self)
+            .map { Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func fetchCafes() -> Observable<Result<[CafesFetchResponseDTO],Error>> {
+        self.request(.fetchCafes)
+            .filter(statusCode: 200)
+            .map([CafesFetchResponseDTO].self)
+            .map { Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

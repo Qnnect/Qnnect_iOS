@@ -94,6 +94,12 @@
 		AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */; };
 		AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */; };
 		AE77C85927DB56C100E8D0EC /* DrinkSelectRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85827DB56C100E8D0EC /* DrinkSelectRequestDTO.swift */; };
+		AE77C85B27DB622900E8D0EC /* ScrapFetchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85A27DB622900E8D0EC /* ScrapFetchRequestDTO.swift */; };
+		AE77C85D27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85C27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift */; };
+		AE77C85F27DB64AC00E8D0EC /* ScrapedQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C85E27DB64AC00E8D0EC /* ScrapedQuestion.swift */; };
+		AE77C86227DB6C4E00E8D0EC /* CafeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C86127DB6C4E00E8D0EC /* CafeTag.swift */; };
+		AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C86327DB6C7300E8D0EC /* CafesFetchResponseDTO.swift */; };
+		AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C86527DB6FD000E8D0EC /* BookmarkTagCollectionView.swift */; };
 		AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */; };
 		AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */; };
 		AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */; };
@@ -144,7 +150,6 @@
 		AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFD27BF37E70029A6CB /* TitleCell.swift */; };
 		AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */; };
 		AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */; };
-		AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0527BF4E6B0029A6CB /* Question_test.swift */; };
 		AEA56B0827BF4E940029A6CB /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0727BF4E940029A6CB /* Group.swift */; };
 		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
 		AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */; };
@@ -297,6 +302,12 @@
 		AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectSectionModel.swift; sourceTree = "<group>"; };
 		AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectCollectionView.swift; sourceTree = "<group>"; };
 		AE77C85827DB56C100E8D0EC /* DrinkSelectRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C85A27DB622900E8D0EC /* ScrapFetchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapFetchRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C85C27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AE77C85E27DB64AC00E8D0EC /* ScrapedQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapedQuestion.swift; sourceTree = "<group>"; };
+		AE77C86127DB6C4E00E8D0EC /* CafeTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeTag.swift; sourceTree = "<group>"; };
+		AE77C86327DB6C7300E8D0EC /* CafesFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafesFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AE77C86527DB6FD000E8D0EC /* BookmarkTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkTagCollectionView.swift; sourceTree = "<group>"; };
 		AE7BAA4E27BA92C200EF2F46 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		AE7BAA5127BA9AA400EF2F46 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		AE7BAA5327BA9BC700EF2F46 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
@@ -347,7 +358,6 @@
 		AEA56AFD27BF37E70029A6CB /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AEA56AFF27BF37F60029A6CB /* TodayQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayQuestionCell.swift; sourceTree = "<group>"; };
 		AEA56B0127BF380B0029A6CB /* MyCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeCell.swift; sourceTree = "<group>"; };
-		AEA56B0527BF4E6B0029A6CB /* Question_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question_test.swift; sourceTree = "<group>"; };
 		AEA56B0727BF4E940029A6CB /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
@@ -539,7 +549,6 @@
 				AE7F484027CE7DAB00954971 /* Error */,
 				AE6FA48F27BDCA4800FA2154 /* Ingredient.swift */,
 				AE6FA4A027BE08F100FA2154 /* Bookmark.swift */,
-				AEA56B0527BF4E6B0029A6CB /* Question_test.swift */,
 				AEA56B0727BF4E940029A6CB /* Group.swift */,
 				AEB8FD0027C666E3002BDBCD /* UserLoginInfo.swift */,
 				AE7F483E27CE679300954971 /* Token.swift */,
@@ -548,6 +557,8 @@
 				AEA14D4727D47E8D0009EEC6 /* Cafe.swift */,
 				AE02D80327D5C94C0019D955 /* HomeInfo.swift */,
 				AE77C84927DB274300E8D0EC /* Drink.swift */,
+				AE77C85E27DB64AC00E8D0EC /* ScrapedQuestion.swift */,
+				AE77C86127DB6C4E00E8D0EC /* CafeTag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -555,6 +566,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C86027DB664B00E8D0EC /* Question */,
 				AE77C84D27DB282900E8D0EC /* Drink */,
 				AE02D7F927D5C4990019D955 /* Home */,
 				AEA14D0B27CFB97D0009EEC6 /* User */,
@@ -884,6 +896,7 @@
 		AE6FA49D27BE079200FA2154 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C86527DB6FD000E8D0EC /* BookmarkTagCollectionView.swift */,
 				AE6FA49E27BE07AC00FA2154 /* BookmarkCell.swift */,
 			);
 			path = View;
@@ -893,7 +906,6 @@
 			isa = PBXGroup;
 			children = (
 				AEA14D4B27D493C10009EEC6 /* CafeUseCase.swift */,
-				AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */,
 			);
 			path = Cafe;
 			sourceTree = "<group>";
@@ -902,6 +914,9 @@
 			isa = PBXGroup;
 			children = (
 				AE77C83327DA057600E8D0EC /* ScrapRequestDTO.swift */,
+				AE77C85A27DB622900E8D0EC /* ScrapFetchRequestDTO.swift */,
+				AE77C85C27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift */,
+				AE77C86327DB6C7300E8D0EC /* CafesFetchResponseDTO.swift */,
 			);
 			path = Scrap;
 			sourceTree = "<group>";
@@ -948,6 +963,14 @@
 				AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */,
 			);
 			path = SectionModel;
+			sourceTree = "<group>";
+		};
+		AE77C86027DB664B00E8D0EC /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C83C27DA07DE00E8D0EC /* QuestionUseCase.swift */,
+			);
+			path = Question;
 			sourceTree = "<group>";
 		};
 		AE7F484027CE7DAB00954971 /* Error */ = {
@@ -1353,6 +1376,7 @@
 				AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */,
 				AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */,
 				AEA14D3427D466590009EEC6 /* DiaryColorType.swift in Sources */,
+				AE77C85D27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift in Sources */,
 				AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */,
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
@@ -1377,6 +1401,7 @@
 				AEA14D1B27D33A160009EEC6 /* CafeResponseDTO.swift in Sources */,
 				AE02D82527D760B60019D955 /* CafeAnswerQuestionCell.swift in Sources */,
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
+				AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
@@ -1414,7 +1439,6 @@
 				AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
-				AEA56B0627BF4E6B0029A6CB /* Question_test.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */,
@@ -1442,6 +1466,7 @@
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
+				AE77C85F27DB64AC00E8D0EC /* ScrapedQuestion.swift in Sources */,
 				AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */,
 				AEA14D4027D47B1A0009EEC6 /* CafeJoinRequestDTO.swift in Sources */,
 				AE6964CF27BCDBBD00BF2A80 /* StoreCoordinator.swift in Sources */,
@@ -1455,6 +1480,7 @@
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */,
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
+				AE77C86227DB6C4E00E8D0EC /* CafeTag.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
 				AE6964D127BCDD7D00BF2A80 /* MyPageViewController.swift in Sources */,
 				AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */,
@@ -1487,6 +1513,7 @@
 				AE7F483827CC4CCC00954971 /* IngredientBuyAlertViewController.swift in Sources */,
 				AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */,
 				AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */,
+				AE77C85B27DB622900E8D0EC /* ScrapFetchRequestDTO.swift in Sources */,
 				AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */,
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
@@ -1522,6 +1549,7 @@
 				AE02D81B27D729D60019D955 /* CafeQuestionEmptyCell.swift in Sources */,
 				AE02D81627D62C710019D955 /* CafeInvitationViewController.swift in Sources */,
 				AE02D82B27D76B160019D955 /* CafeAnswerSectionModel.swift in Sources */,
+				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,

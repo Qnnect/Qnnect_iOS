@@ -23,16 +23,8 @@ final class BookmarkViewController: BaseViewController {
     
     private let headerView = UIView()
     
-    private let tagCollectionView = CustomTagCollectionView().then {
+    private let tagCollectionView = BookmarkTagCollectionView().then {
         $0.addWholeTag()
-        $0.update(with: [
-            "신사고 4인방",
-            "스윗 마이홈",
-            "아아메",
-            "CMC IOS",
-            "CMC 9기",
-            "CMC 등산회"
-        ])
     }
     
     private let bookmarkTableView = UITableView(frame: .zero, style: .grouped).then {
@@ -93,6 +85,19 @@ final class BookmarkViewController: BaseViewController {
             }.disposed(by: self.disposeBag)
         
         self.bookmarkTableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        let input = BookmarkViewModel.Input(
+            viewDidLoad: Observable.just(())
+        )
+        
+        let output = self.viewModel.transform(from: input)
+        
+        output.cafes
+            .drive(onNext: {
+                [weak self] cafes in
+                self?.tagCollectionView.update(with: cafes)
+            })
             .disposed(by: self.disposeBag)
     }
     
