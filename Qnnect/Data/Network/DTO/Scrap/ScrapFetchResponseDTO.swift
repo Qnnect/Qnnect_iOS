@@ -17,7 +17,7 @@ struct ScrapFetchResponseDTO: Decodable {
         return ScrapedQuestion(
             cafeQuestionId: self.cafeQuestionId,
             cafeTitle: self.cafeTitle,
-            createdAt: self.cafeTitle,
+            createdAt: self.createdAt,
             question: self.question
         )
     }

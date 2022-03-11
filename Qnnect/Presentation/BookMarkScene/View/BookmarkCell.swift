@@ -56,8 +56,8 @@ final class BookmarkCell: UITableViewCell {
         }
     }
     
-    func update(with bookmark: Bookmark) {
-        self.dateLabel.text = bookmark.date
-        self.titleLabel.text = "#\(bookmark.number) \(bookmark.title)"
+    func update(with question: ScrapedQuestion) {
+        self.dateLabel.text = question.createdAt
+        self.titleLabel.text = question.question
     }
 }

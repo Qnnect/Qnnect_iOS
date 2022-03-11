@@ -9,15 +9,24 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum ScrapFetchAction {
+    case load(questions: [ScrapedQuestion])
+    case loadMore(questions: [ScrapedQuestion])
+}
 final class BookmarkViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let didTapCafeTag: Observable<CafeTag>
+        /// Int: Page
+        let moreFetch: Observable<Int>
     }
     
     struct Output {
         let cafes: Driver<[CafeTag]>
-        //let scrapedQuestions: Driver<[ScrapedQuestion]>
+        let scrapedQuestions: Driver<[ScrapedQuestion]>
+        let newLoad: Signal<Void>
+        let canLoad: Signal<Bool>
     }
     
     private weak var coordinator: BookmarkCoordinator?
@@ -40,19 +49,81 @@ final class BookmarkViewModel: ViewModelType {
                 guard case let .success(cafes) = result else { return nil }
                 return cafes
             }
-//        let newScrapFetch = Observable.merge(input.viewDidLoad)
-//
-//        let scrapedQuestions = input.viewDidLoad
-//            .map { (page: 0,size: 10)}
-//            .flatMap(questionUseCase.fetchAllScrap)
-//            .compactMap {
-//                result -> [ScrapedQuestion]? in
-//                guard case let .success(questions) = result else { return nil }
-//                return questions
-//            }
-//
+        
+        let loadAll = Observable.merge(input.viewDidLoad, input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid())
+            .map { (page: 0,size: 20)}
+            .flatMap(questionUseCase.fetchAllScrap)
+            .compactMap {
+                result -> [ScrapedQuestion]? in
+                guard case let .success(questions) = result else { return nil }
+                return questions
+            }.map { ScrapFetchAction.load(questions: $0)}
+        
+        let loadOne = input.didTapCafeTag
+            .map { (cafeId: $0.cafeId, page: 0,size: 20)}
+            .flatMap(questionUseCase.fetchScrap)
+            .compactMap {
+                result -> [ScrapedQuestion]? in
+                guard case let .success(questions) = result else { return nil }
+                return questions
+            }.map { ScrapFetchAction.load(questions: $0)}
+        
+        let newLoad = Observable.merge(loadAll, loadOne)
+            .share()
+        
+        let loadMoreAll = input.moreFetch
+            .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
+            .filter{ $0.cafeId == 0 }
+            .map { (page: $0.page, size:20) }
+            .flatMap(questionUseCase.fetchAllScrap)
+            .compactMap {
+                result -> [ScrapedQuestion]? in
+                guard case let .success(questions) = result else { return nil }
+                return questions
+            }.map { ScrapFetchAction.loadMore(questions: $0)}
+        
+        let loadMoreOne = input.moreFetch
+            .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
+            .filter{ $0.cafeId != 0 }
+            .map { (cafeId: $0.cafeId, page: $0.page, size:20) }
+            .flatMap(questionUseCase.fetchScrap)
+            .compactMap {
+                result -> [ScrapedQuestion]? in
+                guard case let .success(questions) = result else { return nil }
+                return questions
+            }.map { ScrapFetchAction.loadMore(questions: $0)}
+        
+        let loadMore = Observable.merge(loadMoreAll, loadMoreOne)
+            .share()
+        
+        let load = Observable.merge(newLoad, loadMore)
+            .share()
+        
+        let scrapedQuestions = load
+            .scan(into: [ScrapedQuestion]()) { questions, action in
+                switch action {
+                case .load(let newQuestions):
+                    questions = newQuestions
+                case .loadMore(let newQuestions):
+                    questions += newQuestions
+                }
+            }
+        
+        let canLoad = loadMore
+            .compactMap {
+                action -> [ScrapedQuestion]? in
+                guard case let .loadMore(questions) = action else { return nil}
+                return questions
+            }
+            .map { $0.count == 20 }
+          
+        
+        
         return Output(
-            cafes: cafes.asDriver(onErrorJustReturn: [])
+            cafes: cafes.asDriver(onErrorJustReturn: []),
+            scrapedQuestions: scrapedQuestions.asDriver(onErrorJustReturn: []),
+            newLoad: newLoad.mapToVoid().asSignal(onErrorSignalWith: .empty()),
+            canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

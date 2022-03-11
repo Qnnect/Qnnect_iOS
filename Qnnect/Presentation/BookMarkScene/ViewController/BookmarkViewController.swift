@@ -23,9 +23,7 @@ final class BookmarkViewController: BaseViewController {
     
     private let headerView = UIView()
     
-    private let tagCollectionView = BookmarkTagCollectionView().then {
-        $0.addWholeTag()
-    }
+    private let tagCollectionView = BookmarkTagCollectionView()
     
     private let bookmarkTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
@@ -38,6 +36,8 @@ final class BookmarkViewController: BaseViewController {
         return vc
     }
     
+    private var curPage = 0
+    private var isFetched = true
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -54,7 +54,6 @@ final class BookmarkViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
         
-        self.tagCollectionView.updateTag(at: 0, selected: true)
         
         self.bookmarkTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(17.0)
@@ -71,34 +70,56 @@ final class BookmarkViewController: BaseViewController {
         }
         
     }
-    private let dummyData: [Bookmark] = [
-        Bookmark(number: 1, title: "함께 가장 가고싶은 여행지는 어디인가요?", date: "22.12.22"),
-        Bookmark(number: 2, title: "서로 해준 요리중에 가장 맛있었던 음식은 무엇인가...", date: "22.12.22"),
-        Bookmark(number: 3, title: "가장 받고싶은 칭찬은 무엇인가요?", date: "22.12.22"),
-        Bookmark(number: 4, title: "서로의 첫인상이 어땠나요?", date: "22.12.22")
-    ]
     
     override func bind() {
-        Observable.just(self.dummyData)
-            .bind(to: self.bookmarkTableView.rx.items(cellIdentifier: BookmarkCell.identifier, cellType: BookmarkCell.self)) { index, model, cell in
-                cell.update(with: model)
-            }.disposed(by: self.disposeBag)
-        
+   
         self.bookmarkTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
         let input = BookmarkViewModel.Input(
-            viewDidLoad: Observable.just(())
+            viewDidLoad: Observable.just(()),
+            didTapCafeTag: self.tagCollectionView.rx.methodInvoked(#selector(self.tagCollectionView.textTagCollectionView(_:didTap:at:)))
+                .map {
+                    [weak self] param -> CafeTag in
+                    let index = param[2] as! Int
+                    return self?.tagCollectionView.cafes?[index] ?? CafeTag(cafeId: 0, cafeTitle: "전체")
+                }.startWith(CafeTag(cafeId: 0, cafeTitle: "전체")),
+            moreFetch: self.rx.methodInvoked(#selector(fetchMore))
+                .map{ $0[0] as! Int}
         )
+        
         
         let output = self.viewModel.transform(from: input)
         
         output.cafes
-            .drive(onNext: {
+            .map { cafes -> [CafeTag] in
+                let newCafes = [CafeTag(cafeId: 0, cafeTitle: "전체")] + cafes
+                return newCafes
+            }.drive(onNext: {
                 [weak self] cafes in
                 self?.tagCollectionView.update(with: cafes)
-            })
-            .disposed(by: self.disposeBag)
+                self?.tagCollectionView.updateTag(at: 0, selected: true)
+            }).disposed(by: self.disposeBag)
+        
+        output.scrapedQuestions
+            .drive(self.bookmarkTableView.rx.items(cellIdentifier: BookmarkCell.identifier, cellType: BookmarkCell.self)) { index, model, cell in
+                cell.update(with: model)
+            }.disposed(by: self.disposeBag)
+        
+        output.newLoad
+            .debug()
+            .emit(onNext: {
+                [weak self] _ in
+                self?.curPage = 0
+            }).disposed(by: self.disposeBag)
+        
+        output.canLoad
+            .emit(onNext: {
+                [weak self] flag in
+                if flag {
+                    self?.isFetched = true
+                }
+            }).disposed(by: self.disposeBag)
     }
     
 }
@@ -118,6 +139,23 @@ extension BookmarkViewController: UITableViewDelegate {
     }
 }
 
+extension BookmarkViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == bookmarkTableView else { return }
+        
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.size.height {
+            if(isFetched){
+                isFetched = false
+                curPage += 1
+                fetchMore(curPage)
+            }
+        }
+    }
+    
+    @objc dynamic func fetchMore(_ page: Int) {
+        
+    }
+}
 
 import SwiftUI
 struct BookmarkViewController_Priviews: PreviewProvider {
