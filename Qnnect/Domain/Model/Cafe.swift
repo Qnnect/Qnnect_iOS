@@ -13,7 +13,6 @@ struct Cafe {
     let code: String
     let createdAt: String
     let currentUser: CafeUser
-    let organizer: Bool
     let diaryColor: DiaryColorType
     let title:String
 }

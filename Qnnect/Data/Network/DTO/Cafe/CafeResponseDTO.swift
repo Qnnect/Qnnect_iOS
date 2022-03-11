@@ -14,7 +14,6 @@ struct CafeResponseDTO: Decodable {
     let createdAt: String
     let currentUserResponse: CafeUserResponseDTO
     let diaryColor: DiaryColorType
-    let organizer: Bool
     let title: String
     
     func toDomain() -> Cafe {
@@ -24,7 +23,6 @@ struct CafeResponseDTO: Decodable {
             code: self.code,
             createdAt: self.createdAt,
             currentUser: self.currentUserResponse.toDomain(),
-            organizer: self.organizer,
             diaryColor: self.diaryColor,
             title: self.title
         )

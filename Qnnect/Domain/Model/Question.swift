@@ -13,4 +13,7 @@ struct Question {
     let question: String
     let questioner: String
     let id: Int
+    let liked: Bool
+    let scraped: Bool
+    let writer: Bool
 }
