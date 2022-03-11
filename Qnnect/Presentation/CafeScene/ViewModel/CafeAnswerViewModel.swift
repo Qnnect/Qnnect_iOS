@@ -68,7 +68,10 @@ final class CafeAnswerViewModel: ViewModelType {
         
         return Output(
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
-            scrap: scrap.asSignal(onErrorSignalWith: .empty()),
+            scrap: Observable.merge(
+                scrap,
+                input.question.filter { $0.scraped }.mapToVoid()
+            ).asSignal(onErrorSignalWith: .empty()),
             cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty())
         )
     }
