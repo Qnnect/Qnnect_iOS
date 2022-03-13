@@ -69,9 +69,9 @@ class CafeInfoInputViewController: BottomSheetViewController {
         $0.slider.minimumTrackTintColor = .p_brown
     }
     
-    private(set) var nextButton = UIButton().then {
+    private(set) var completionButton = UIButton().then {
         $0.isEnabled = false
-        $0.setTitle("다음", for: .normal)
+        $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
         $0.backgroundColor = .GRAY04
@@ -102,7 +102,7 @@ class CafeInfoInputViewController: BottomSheetViewController {
             self.diaryColorCollectionView,
             self.questionCycleLabel,
             self.questionCycleSlider,
-            self.nextButton
+            self.completionButton
         ].forEach {
             self.bottomSheetView.addSubview($0)
         }
@@ -153,7 +153,7 @@ class CafeInfoInputViewController: BottomSheetViewController {
             make.height.equalTo(55.0)
         }
         
-        self.nextButton.snp.makeConstraints { make in
+        self.completionButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.inputTitleLabel)
             make.height.equalTo(Constants.bottomButtonHeight)
             make.top.equalTo(self.questionCycleSlider.snp.bottom).offset(69.0)
@@ -205,8 +205,8 @@ extension CafeInfoInputViewController {
     /// 모든 항목의 유효한 입력이 왼료됐는 지 에 따라 button 활성화 결정
     /// - Parameter isCompleted: 모든 항목 유요한 항목 입력 했는 지 여부
     func setEnablementNextButton(_ isCompleted: Bool) {
-        self.nextButton.isEnabled = isCompleted
-        self.nextButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
+        self.completionButton.isEnabled = isCompleted
+        self.completionButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
     }
     
     func dismiss() {

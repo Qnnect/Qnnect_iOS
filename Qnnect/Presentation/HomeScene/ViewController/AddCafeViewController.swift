@@ -57,7 +57,7 @@ final class AddCafeViewController: CafeInfoInputViewController {
             selectedDiaryColor: self.diaryColorCollectionView.rx.itemSelected
                 .do(onNext: self.changeDiaryColorCellState(_:))
                 .map(self.getSelectedDiaryColor),
-            didTapNextButton: self.nextButton.rx.tap
+            didTapNextButton: self.completionButton.rx.tap
                 .mapToVoid()
         )
         

@@ -60,7 +60,7 @@ final class CafeModifyingViewController: CafeInfoInputViewController {
             selectedDiaryColor: self.diaryColorCollectionView.rx.itemSelected
                 .do(onNext: self.changeDiaryColorCellState(_:))
                 .map(self.getSelectedDiaryColor),
-            didTapCompletionButton: self.nextButton.rx.tap
+            didTapCompletionButton: self.completionButton.rx.tap
                 .mapToVoid(),
             cafeId: Observable.just(cafeId)
         )
