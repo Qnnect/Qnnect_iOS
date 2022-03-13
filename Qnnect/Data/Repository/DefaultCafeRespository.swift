@@ -67,4 +67,9 @@ final class DefaultCafeRepository: CafeRepository {
         let request = CafeLeaveRequestDTO(cafeId: cafeId)
         return self.cafeNetworkService.leaveCafe(request: request)
     }
+    
+    func createQuestion(_ cafeId: Int, _ content: String) -> Observable<Result<Void, Error>> {
+        let request = QuestionCreateRequestDTO(content: content)
+        return self.cafeNetworkService.createQuestion(cafeId: cafeId, request: request)
+    }
 }

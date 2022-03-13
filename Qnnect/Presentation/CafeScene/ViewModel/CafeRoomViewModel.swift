@@ -105,10 +105,12 @@ final class CafeRoomViewModel: ViewModelType {
             .mapToVoid()
         
         let showWriteQuestionScene = input.didTapQuestionButton
+            .withLatestFrom(input.cafeId)
             .do {
-                [weak self] _ in
-                self?.coordinator?.showWriteQuestionScene()
+                [weak self] cafeId in
+                self?.coordinator?.showWriteQuestionScene(cafeId)
             }
+            .mapToVoid()
         
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),

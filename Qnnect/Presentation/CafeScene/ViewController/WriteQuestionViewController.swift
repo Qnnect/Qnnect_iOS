@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 
 final class WriteQuestionViewController: BaseViewController {
@@ -62,8 +63,16 @@ final class WriteQuestionViewController: BaseViewController {
         $0.backgroundColor = .cardBackground
     }
     
-    static func create() -> WriteQuestionViewController {
+    private var viewModel: WriteQuestionViewModel!
+    private var cafeId: Int!
+    
+    static func create(
+        with viewModel: WriteQuestionViewModel,
+        _ cafeId: Int
+    ) -> WriteQuestionViewController {
         let vc = WriteQuestionViewController()
+        vc.viewModel = viewModel
+        vc.cafeId = cafeId
         return vc
     }
     
@@ -117,9 +126,32 @@ final class WriteQuestionViewController: BaseViewController {
     
     override func bind() {
         super.bind()
+        
+        let input = WriteQuestionViewModel.Input(
+            content: inputTextView.rx.text.orEmpty
+                .asObservable(),
+            didTapCompletionButton: completionButton.rx.tap.asObservable(),
+            cafeId: Observable.just(cafeId)
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.isCompleted
+            .drive(onNext: setCompletionButton(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.completion
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
+private extension WriteQuestionViewController {
+    func setCompletionButton(_ isCompleted: Bool) {
+        completionButton.isEnabled = isCompleted
+        isCompleted ? completionButton.setTitleColor(.ORANGE01, for: .normal) : completionButton.setTitleColor(.GRAY04, for: .normal)
+    }
+}
 
 extension WriteQuestionViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {

@@ -25,4 +25,5 @@ protocol CafeRepository: AnyObject {
         _ questionCycle: QuestionCycle) -> Observable<Void>
     
     func leaveCafe(_ cafeId: Int) -> Observable<Result<Void,Error>>
+    func createQuestion(_ cafeId: Int, _ content: String) -> Observable<Result<Void,Error>>
 }

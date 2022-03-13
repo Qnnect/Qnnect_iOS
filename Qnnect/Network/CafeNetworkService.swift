@@ -44,4 +44,12 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func createQuestion(cafeId: Int, request: QuestionCreateRequestDTO) -> Observable<Result<Void,Error>> {
+        return self.request(.createQuestion(id: cafeId, request: request))
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }
