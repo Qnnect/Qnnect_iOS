@@ -90,7 +90,7 @@ final class CafeAnswerViewController: BaseViewController {
         
         let input = CafeAnswerViewModel.Input(
             didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
-                .map { $0.section == 1 }
+                .filter { $0.section == 1 }
                 .mapToVoid(),
             question: Observable.just(question),
             user: Observable.just(user),

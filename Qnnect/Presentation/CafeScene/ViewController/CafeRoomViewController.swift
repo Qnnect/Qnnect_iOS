@@ -223,6 +223,10 @@ final class CafeRoomViewController: BaseViewController {
         output.showQuestionAnswerScene
             .emit()
             .disposed(by: self.disposeBag)
+        
+        output.showWriteQuestionScene
+            .emit()
+            .disposed(by: self.disposeBag)
     }
     
     @objc dynamic func comebackCafeRoom() {

@@ -62,7 +62,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
                 self?.coordinator?.leaveCafe()
             }
             .mapToVoid()
-        
+
         return Output(
             showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty()),
             showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty()),

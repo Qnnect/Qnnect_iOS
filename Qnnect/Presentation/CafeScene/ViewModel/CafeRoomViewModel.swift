@@ -29,6 +29,7 @@ final class CafeRoomViewModel: ViewModelType {
         let showDrinkSelectBottomSheet: Signal<Void>
         let showSettingBottomSheet: Signal<Void>
         let showQuestionAnswerScene: Signal<Void>
+        let showWriteQuestionScene: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -103,12 +104,19 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let showWriteQuestionScene = input.didTapQuestionButton
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showWriteQuestionScene()
+            }
+        
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
             showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty()),
             showDrinkSelectBottomSheet: showDrinkSelectBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showSettingBottomSheet: showSettingBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            showQuestionAnswerScene: showQuestionAnswerScene.asSignal(onErrorSignalWith: .empty())
+            showQuestionAnswerScene: showQuestionAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showWriteQuestionScene: showWriteQuestionScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
