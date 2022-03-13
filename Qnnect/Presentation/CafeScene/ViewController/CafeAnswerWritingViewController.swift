@@ -227,16 +227,16 @@ final class CafeAnswerWritingViewController: BaseViewController {
     
     override func bind() {
         
-      
         
         let input = CafeAnswerWritingViewModel.Input(
             inputText: self.inputTextView.rx.text.orEmpty
                 .asObservable(),
-            didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable()
+            didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
+            didTapCompletionButton: navigationCompletionButton.rx.tap
+                .withLatestFrom(Observable.just(getImages()))
         )
         
         let output = self.viewModel.transform(from: input)
-        
         output.isInputCompleted
             .drive(onNext: self.setCompletionButton(_:))
             .disposed(by: self.disposeBag)
@@ -321,13 +321,14 @@ private extension CafeAnswerWritingViewController {
         }
     }
     
-//    func getImages() -> [Data]{
-//        let imageDatas = [Data]()
-//        attachingImageCollectionView.visibleCells.forEach { cell in
-//            let imageCell = cell as! AttachingImageCell
-//            
-//        }
-//    }
+    func getImages() -> [Data?]{
+        var imageDatas = [Data?]()
+        attachingImageCollectionView.visibleCells.forEach { cell in
+            let imageCell = cell as! AttachingImageCell
+            imageDatas.append(imageCell.imageView.image?.pngData())
+        }
+        return imageDatas
+    }
 }
 
 extension CafeAnswerWritingViewController: AttachingImageCellDelegate {

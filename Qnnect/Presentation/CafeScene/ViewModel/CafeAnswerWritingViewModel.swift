@@ -14,6 +14,7 @@ final class CafeAnswerWritingViewModel: ViewModelType {
     struct Input {
         let inputText: Observable<String>
         let didTapAttachingImageButton: Observable<Void>
+        let didTapCompletionButton: Observable<[Data?]>
     }
     
     struct Output {

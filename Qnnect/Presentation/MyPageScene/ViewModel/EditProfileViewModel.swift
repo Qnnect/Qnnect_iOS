@@ -55,7 +55,8 @@ final class EditProfileViewModel: ViewModelType {
             input.profileImage,
             input.inputName,
             input.user
-        )
+        ).share()
+        
         
         let inputChanging = Observable.merge(
             input.inputName.skip(1)
@@ -65,21 +66,23 @@ final class EditProfileViewModel: ViewModelType {
                 }.mapToVoid(),
             input.profileImage.skip(1)
                 .mapToVoid()
-        ).withLatestFrom(userInfo)
+        )
         
         let updateProfile = input.didTapCompletionButton
-            .withLatestFrom(inputChanging)
+            .skip(until: inputChanging)
+            .withLatestFrom(userInfo)
             .map{($0.0 , $0.1)}
+
             .flatMap(self.userUseCase.setProfile)
-            .debug()
             .do {
                 [weak self] _ in
                 self?.coordinator?.pop()
             }
             .mapToVoid()
+            .share()
         
         let pop = input.didTapCompletionButton
-            .take(until: updateProfile)
+            .take(until: inputChanging)
             .do{
                 [weak self] _ in
                 self?.coordinator?.pop()

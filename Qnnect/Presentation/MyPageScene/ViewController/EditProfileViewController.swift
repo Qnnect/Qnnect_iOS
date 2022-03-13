@@ -157,15 +157,24 @@ final class EditProfileViewController: BaseViewController {
     }
     
     override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard results.count != 0 else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         let identifiers = results.map{ $0.assetIdentifier ?? ""}
         let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
         let imageManager = PHImageManager()
         let scale = UIScreen.main.scale
         let imageSize = CGSize(width: 108 * scale, height: 108 * scale)
         let options = PHImageRequestOptions()
-        options.deliveryMode = .highQualityFormat
+        options.deliveryMode = .opportunistic
+        options.resizeMode = .none
         imageManager.requestImage(for: result[0], targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
-            self.profileImageView.setImage(image: image)
+            if (info?[PHImageResultIsDegradedKey] as? Bool) == true{
+           }else{
+               //고화질
+               self.profileImageView.setImage(image: image)
+           }
         }
         self.dismiss(animated: true, completion: nil)
     }
