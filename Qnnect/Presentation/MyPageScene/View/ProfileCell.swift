@@ -13,7 +13,7 @@ final class ProfileCell: UITableViewCell {
     static let identifier = "ProfileCell"
     
     private let profileImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = Constants.myPageProfileImageHeight / 2.0
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.profileImageBorder?.cgColor
