@@ -85,7 +85,9 @@ final class CafeRoomViewController: BaseViewController {
                 forElementKind: UICollectionView.elementKindSectionFooter,
                 at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
             else { return }
+            
             view.pageControl.currentPage = self.groupDrinksCurPage
+            
         }
     }
     
@@ -290,7 +292,7 @@ private extension CafeRoomViewController {
             items, contentOffset, environment in
             let point = contentOffset
             let env = environment
-            self.todayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
+            self.groupDrinksCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
         }
         section.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         return section
@@ -373,7 +375,9 @@ private extension CafeRoomViewController {
                 ) as! CafeQuestionEmptyCell
                 return cell
             }
-        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
+        }configureSupplementaryView: {
+            [weak self] dataSource, collectionView, kind, indexPath in
+            guard let self = self else { return UICollectionReusableView() }
             if indexPath.section == 2 {
                 let view = collectionView.dequeueReusableSupplementaryView(
                     ofKind: UICollectionView.elementKindSectionFooter,
@@ -384,9 +388,12 @@ private extension CafeRoomViewController {
                     if case CafeRoomSectionItem.questionEmptySectionItem = item {
                         view.pageControl.isHidden = true
                         return view
-                   }
+                    }
                 }
+                let pageCount = dataSource.sectionModels[2].items.count
+                view.pageControl.numberOfPages = pageCount == 1 ? 0 : pageCount
                 view.pageControl.numberOfPages = dataSource.sectionModels[2].items.count
+                view.pageControl.currentPage = self.todayQuestionCurPage
                 return view
             } else if indexPath.section == 1 {
                 let view = collectionView.dequeueReusableSupplementaryView(
@@ -394,10 +401,13 @@ private extension CafeRoomViewController {
                     withReuseIdentifier: PageControlFooterView.identifier,
                     for: indexPath
                 ) as! PageControlFooterView
-                view.pageControl.numberOfPages =  dataSource.sectionModels[1].items.count  / 6 + 1
+                let pageCount = (dataSource.sectionModels[1].items.count  / 6 + 1)
+                view.pageControl.numberOfPages = pageCount == 1 ? 0 : pageCount
                 view.pageControl.subviews.forEach {
                     $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
                 }
+                view.pageControl.currentPage = self.groupDrinksCurPage
+           
                 return view
             }
             return UICollectionReusableView()

@@ -15,6 +15,7 @@ final class PageControlFooterView: UICollectionReusableView {
     private(set) var pageControl = UIPageControl().then {
         $0.pageIndicatorTintColor = .GRAY04
         $0.currentPageIndicatorTintColor = .p_brown
+        $0.hidesForSinglePage = true
     }
     
     override init(frame: CGRect) {

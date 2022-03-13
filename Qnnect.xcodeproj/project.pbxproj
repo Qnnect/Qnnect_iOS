@@ -159,6 +159,7 @@
 		AEA7265E27DDC93900F48CB8 /* WriteQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */; };
 		AEA7266027DDDFFF00F48CB8 /* WriteQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */; };
 		AEA7266227DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266127DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift */; };
+		AEA7266427DDF4A400F48CB8 /* UIPageControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266327DDF4A400F48CB8 /* UIPageControl+.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -372,6 +373,7 @@
 		AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewController.swift; sourceTree = "<group>"; };
 		AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteQuestionViewModel.swift; sourceTree = "<group>"; };
 		AEA7266127DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCraeteRequestDTO.swift; sourceTree = "<group>"; };
+		AEA7266327DDF4A400F48CB8 /* UIPageControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageControl+.swift"; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 				AECC131C27BA1266006866FC /* UIColor+.swift */,
 				AEBC9EB827C5B5BC0070399A /* UICollectionView+.swift */,
 				AEA7265B27DDB22400F48CB8 /* UITextField+.swift */,
+				AEA7266327DDF4A400F48CB8 /* UIPageControl+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1551,6 +1554,7 @@
 				AE77C84A27DB274300E8D0EC /* Drink.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
+				AEA7266427DDF4A400F48CB8 /* UIPageControl+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
