@@ -139,7 +139,7 @@ final class HomeViewController: BaseViewController {
                 guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HomeSectionFooterView.identifier, for: indexPath) as? HomeSectionFooterView else {
                     fatalError("Could not dequeReusableView")
                 }
-                footerView.addGroupButton.rx.tap
+                footerView.addCafeButton.rx.tap
                     .subscribe(didTapAddGroupButton.asObserver())
                     .disposed(by: self.disposeBag)
                 return footerView
