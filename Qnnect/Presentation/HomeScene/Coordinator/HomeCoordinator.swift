@@ -10,6 +10,7 @@ import UIKit
 protocol HomeCoordinator: Coordinator {
     func showAddGroupBottomSheet()
     func showGroupScene(with cafeId: Int, _ isFirst: Bool)
+    func showJoinCafeBottomSheet()
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -49,4 +50,9 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         coordinator.start(with: cafeId,isFirst)
     }
  
+    func showJoinCafeBottomSheet() {
+        let bottomSheet = JoinCafeBottomSheet.create()
+        bottomSheet.modalPresentationStyle = .overCurrentContext
+        navigationController.present(bottomSheet, animated: false, completion: nil)
+    }
 }

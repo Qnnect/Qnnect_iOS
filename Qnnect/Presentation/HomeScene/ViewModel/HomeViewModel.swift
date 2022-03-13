@@ -16,6 +16,7 @@ final class HomeViewModel: ViewModelType {
         let curQuestionPage: Observable<Int>
         let viewWillAppear: Observable<Void>
         let didTapMyCafe: Observable<MyCafe>
+        let didTapJoinCafeButton: Observable<Void>
     }
     
     struct Output {
@@ -23,6 +24,7 @@ final class HomeViewModel: ViewModelType {
         let curQuestionPage: Driver<Int>
         let showCafeRoom: Signal<Void>
         let homeInfo: Driver<HomeInfo>
+        let showJoinCafeBottomSheet: Signal<Void>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -58,11 +60,18 @@ final class HomeViewModel: ViewModelType {
                 return homeInfo
             }
         
+        let showJoinCafeBottomSheet = input.didTapJoinCafeButton
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showJoinCafeBottomSheet()
+            }
+        
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
             curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0),
             showCafeRoom: showCafeRoom.asSignal(onErrorSignalWith: .empty()),
-            homeInfo: homeInfo.asDriver(onErrorDriveWith: .empty())
+            homeInfo: homeInfo.asDriver(onErrorDriveWith: .empty()),
+            showJoinCafeBottomSheet: showJoinCafeBottomSheet.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

@@ -124,6 +124,7 @@ final class HomeViewController: BaseViewController {
     override func bind() {
         
         let didTapAddGroupButton = PublishSubject<Void>()
+        let didTapJoinCafebutton = PublishSubject<Void>()
         let curQuestionPage = PublishSubject<Int>()
         
         let datasource = self.createDataSource()
@@ -141,6 +142,9 @@ final class HomeViewController: BaseViewController {
                 }
                 footerView.addCafeButton.rx.tap
                     .subscribe(didTapAddGroupButton.asObserver())
+                    .disposed(by: self.disposeBag)
+                footerView.joinCafeButton.rx.tap
+                    .subscribe(didTapJoinCafebutton.asObserver())
                     .disposed(by: self.disposeBag)
                 return footerView
             } else if indexPath.section == 1 {
@@ -172,8 +176,8 @@ final class HomeViewController: BaseViewController {
                 .compactMap { item -> MyCafe? in
                     guard case let HomeSectionItem.myCafeSectionItem(cafe) = item else { return nil }
                     return cafe
-                }
-                
+                },
+            didTapJoinCafeButton: didTapJoinCafebutton.asObservable()
         )
         
         
@@ -199,6 +203,10 @@ final class HomeViewController: BaseViewController {
             }
             .map(self.convertToSectionModel(_:))
             .drive(self.homeCollectionView.rx.items(dataSource: datasource))
+            .disposed(by: self.disposeBag)
+        
+        output.showJoinCafeBottomSheet
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }

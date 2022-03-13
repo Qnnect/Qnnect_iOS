@@ -154,6 +154,7 @@
 		AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */; };
 		AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */; };
 		AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */; };
+		AEA7265A27DDAF3400F48CB8 /* JoinCafeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7265927DDAF3400F48CB8 /* JoinCafeBottomSheet.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -362,6 +363,7 @@
 		AEA56B0927BF51800029A6CB /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		AEA56B0B27BF639C0029A6CB /* BasePaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaddingLabel.swift; sourceTree = "<group>"; };
 		AEA56B0D27BF69FF0029A6CB /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
+		AEA7265927DDAF3400F48CB8 /* JoinCafeBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCafeBottomSheet.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1161,6 +1163,7 @@
 			children = (
 				AECC133B27BA41DD006866FC /* HomeViewController.swift */,
 				AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */,
+				AEA7265927DDAF3400F48CB8 /* JoinCafeBottomSheet.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1514,6 +1517,7 @@
 				AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */,
 				AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */,
 				AE77C85B27DB622900E8D0EC /* ScrapFetchRequestDTO.swift in Sources */,
+				AEA7265A27DDAF3400F48CB8 /* JoinCafeBottomSheet.swift in Sources */,
 				AE04FC6027BF763F00229B96 /* AddCafeCell.swift in Sources */,
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
