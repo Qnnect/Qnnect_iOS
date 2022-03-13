@@ -107,4 +107,6 @@ struct Constants {
     // MARK: - Key
     static let accessTokenKey: String = "accessToken"
     static let refreshTokenKey: String = "refreshToken"
+    
+    static let scrapFetchSize: Int = 10
 }
