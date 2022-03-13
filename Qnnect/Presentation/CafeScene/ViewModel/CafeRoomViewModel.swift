@@ -95,12 +95,12 @@ final class CafeRoomViewModel: ViewModelType {
             .mapToVoid()
         
         let showQuestionAnswerScene = input.didTapQuestionCell
-            .withLatestFrom(roomInfo,resultSelector: { question, roomInfo in
-                return (question,roomInfo.currentUser.userInfo)
+            .withLatestFrom(Observable.combineLatest(roomInfo,input.cafeId),resultSelector: {
+                return ($0, $1.0.currentUser.userInfo, $1.1)
             })
             .do {
-                [weak self] question,user in
-                self?.coordinator?.showCafeAnswerScene(question,user)
+                [weak self] question,user, cafeId in
+                self?.coordinator?.showCafeAnswerScene(question, user, cafeId)
             }
             .mapToVoid()
         

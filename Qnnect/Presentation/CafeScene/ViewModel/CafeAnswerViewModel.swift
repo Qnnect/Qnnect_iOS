@@ -17,6 +17,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let user: Observable<User>
         /// Bool: true: 스크랩하기 , false: 스크랩 취소하기
         let didTapScrapButton: Observable<Bool>
+        let cafeId: Observable<Int>
     }
     
     struct Output {
@@ -39,10 +40,10 @@ final class CafeAnswerViewModel: ViewModelType {
     func transform(from input: Input) -> Output {
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
-            .withLatestFrom(Observable.combineLatest(input.question, input.user))
+            .withLatestFrom(Observable.combineLatest(input.question, input.user, input.cafeId))
             .do {
-                [weak self] question, user in
-                self?.coordinator?.showCafeAnswerWritingScene(question, user)
+                [weak self] question, user, cafeId in
+                self?.coordinator?.showCafeAnswerWritingScene(question, user, cafeId)
             }
             .mapToVoid()
         

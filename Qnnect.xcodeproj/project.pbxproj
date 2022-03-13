@@ -164,6 +164,8 @@
 		AEA7266927DE448400F48CB8 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266827DE448400F48CB8 /* CommentRepository.swift */; };
 		AEA7266B27DE44C000F48CB8 /* DefaultCommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266A27DE44C000F48CB8 /* DefaultCommentRepository.swift */; };
 		AEA7266D27DE44EB00F48CB8 /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */; };
+		AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */; };
+		AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7267127DE58B100F48CB8 /* CommentNetworkService.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -382,6 +384,8 @@
 		AEA7266827DE448400F48CB8 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		AEA7266A27DE44C000F48CB8 /* DefaultCommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCommentRepository.swift; sourceTree = "<group>"; };
 		AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
+		AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateRequestDTO.swift; sourceTree = "<group>"; };
+		AEA7267127DE58B100F48CB8 /* CommentNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNetworkService.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1098,6 +1102,14 @@
 			path = Comment;
 			sourceTree = "<group>";
 		};
+		AEA7266E27DE54CD00F48CB8 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1115,6 +1127,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7266E27DE54CD00F48CB8 /* Comment */,
 				AE77C84427DB265600E8D0EC /* Drink */,
 				AE77C83227DA056C00E8D0EC /* Scrap */,
 				AE02D80027D5C6C10019D955 /* Home */,
@@ -1248,6 +1261,7 @@
 			isa = PBXGroup;
 			children = (
 				AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */,
+				AEA7267127DE58B100F48CB8 /* CommentNetworkService.swift */,
 				AEA14CFF27CF76C70009EEC6 /* UserNetworkService.swift */,
 				AEA14D2827D39D320009EEC6 /* TokenService.swift */,
 				AEA14D4127D47CD70009EEC6 /* CafeNetworkService.swift */,
@@ -1463,6 +1477,7 @@
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
+				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
@@ -1507,6 +1522,7 @@
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
+				AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */,
 				AE77C85F27DB64AC00E8D0EC /* ScrapedQuestion.swift in Sources */,
 				AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */,
 				AEA14D4027D47B1A0009EEC6 /* CafeJoinRequestDTO.swift in Sources */,

@@ -99,17 +99,20 @@ final class CafeAnswerWritingViewController: BaseViewController {
     private var fetchedAssets: [PHAsset] = []
     
     private var question: Question!
+    private var cafeId: Int!
     private var user: User!
     private var viewModel: CafeAnswerWritingViewModel!
     
     static func create(
         with question: Question,
         _ user: User,
+        _ cafeId: Int,
         _ viewModel: CafeAnswerWritingViewModel
     ) -> CafeAnswerWritingViewController {
         let vc = CafeAnswerWritingViewController()
         vc.question = question
         vc.user = user
+        vc.cafeId = cafeId
         vc.viewModel = viewModel
         return vc
     }
@@ -229,11 +232,13 @@ final class CafeAnswerWritingViewController: BaseViewController {
         
         
         let input = CafeAnswerWritingViewModel.Input(
-            inputText: self.inputTextView.rx.text.orEmpty
+            content: self.inputTextView.rx.text.orEmpty
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
-                .withLatestFrom(Observable.just(getImages()))
+                .withLatestFrom(Observable.just(getImages())),
+            cafeId: Observable.just(cafeId),
+            question: Observable.just(question)
         )
         
         let output = self.viewModel.transform(from: input)
@@ -246,6 +251,10 @@ final class CafeAnswerWritingViewController: BaseViewController {
                 [weak self] _ in
                 self?.checkPermission(selectiongLimit: 5, true)
             }).disposed(by: self.disposeBag)
+        
+        output.completion
+            .emit()
+            .disposed(by: self.disposeBag)
     }
     
     override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

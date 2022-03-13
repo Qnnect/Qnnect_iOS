@@ -9,9 +9,30 @@ import Foundation
 import RxSwift
 
 protocol CommentUseCase: AnyObject {
-    
+    func createComment(
+        _ cafeId: Int,
+        _ questionId: Int,
+        _ images: [Data?],
+        _ content: String
+    ) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultCommentUseCase: CommentUseCase {
     
+    private let commentRepository: CommentRepository
+    
+    init(commentRepository: CommentRepository) {
+        self.commentRepository = commentRepository
+    }
+    
+    func createComment(
+        _ cafeId: Int,
+        _ questionId: Int,
+        _ images: [Data?],
+        _ content: String
+    ) -> Observable<Result<Void,Error>> {
+        let images = images.compactMap{ $0 }
+        
+        return commentRepository.createComment(cafeId, questionId, images, content)
+    }
 }

@@ -6,4 +6,63 @@
 //
 
 import Foundation
-//"https://dev-qnnect-profile.s3.ap-northeast-2.amazonaws.com/f91a2640-cdcd-4ef6-bf2d-deda9979ef2b_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%86%B8.jpg"
+import Moya
+
+enum CommentAPI {
+    case createComment(cafeId: Int, questionId: Int, images: [Data], content: String)
+}
+
+extension CommentAPI: TargetType, AccessTokenAuthorizable {
+    var baseURL: URL {
+        APP.baseURL
+    }
+    
+    var path: String {
+        switch self {
+        case .createComment(let cafeId, let questionId, _, _):
+            return "api/v1/cafes/\(cafeId)/questions/\(questionId)/comments"
+        }
+    }
+    
+    var method: Moya.Method {
+        switch self {
+        case .createComment(_, _, _, _):
+            return .post
+        }
+    }
+    
+    var task: Task {
+        switch self {
+        case .createComment(_, _, let images, let content):
+            var formData: [Moya.MultipartFormData] = []
+            images.enumerated().forEach {
+                formData.append(Moya.MultipartFormData(
+                    provider: .data($0.element),
+                    name: "image\($0.offset)",
+                    fileName: "image\($0.offset)",
+                    mimeType: "image/png"
+                ))
+            }
+            formData.append(Moya.MultipartFormData(
+                provider: .data(content.data(using: .utf8)!),
+                name: "content",
+                fileName: "content",
+                mimeType: nil
+            ))
+            return .uploadMultipart(formData)
+        }
+    }
+    
+    var headers: [String : String]? {
+        switch self {
+        case .createComment(_, _, _, _):
+            return ["Content-Type": "multipart/form-data"]
+        default:
+            return nil
+        }
+    }
+    
+    var authorizationType: AuthorizationType? {
+        .bearer
+    }
+}

@@ -20,7 +20,7 @@ final class AttachingImageCell: UICollectionViewCell {
     weak var delegate: AttachingImageCellDelegate?
     
     private(set) var imageView = UIImageView().then {
-        $0.contentMode = .scaleToFill
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 12.0
         $0.clipsToBounds = true
     }

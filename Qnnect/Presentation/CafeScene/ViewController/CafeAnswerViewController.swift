@@ -37,15 +37,18 @@ final class CafeAnswerViewController: BaseViewController {
     private var question: Question!
     private var user: User!
     private var viewModel: CafeAnswerViewModel!
+    private var cafeId: Int!
     
     static func create(
         with viewModel: CafeAnswerViewModel,
         _ question: Question,
+        _ cafeId: Int,
         _ user: User
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
         vc.question = question
+        vc.cafeId = cafeId
         vc.user = user
         return vc
     }
@@ -99,7 +102,8 @@ final class CafeAnswerViewController: BaseViewController {
                 accumulator: { lastState, newValue in !lastState }
             ).do {
                 print("scrap",$0)
-            }
+            },
+            cafeId: Observable.just(cafeId)
         )
         
         let output = self.viewModel.transform(from: input)

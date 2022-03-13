@@ -9,5 +9,10 @@ import Foundation
 import RxSwift
 
 protocol CommentRepository: AnyObject {
-    
+    func createComment(
+        _ cafeId: Int,
+        _ questionId: Int,
+        _ images: [Data],
+        _ content: String
+    ) -> Observable<Result<Void,Error>>
 }

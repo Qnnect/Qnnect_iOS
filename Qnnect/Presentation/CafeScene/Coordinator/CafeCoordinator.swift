@@ -14,8 +14,8 @@ protocol CafeCoordinator: Coordinator {
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
-    func showCafeAnswerScene(_ question: Question, _ user: User)
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User)
+    func showCafeAnswerScene(_ question: Question, _ user: User, _ cafeId: Int)
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
     func dismissAlert()
@@ -81,23 +81,27 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ question: Question, _ user: User) {
+    func showCafeAnswerScene(_ question: Question, _ user: User, _ cafeId: Int) {
         let questionRepository = DefaultQuestionRepository(scrapNetworkService: ScrapNetworkService())
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = CafeAnswerViewModel(coordinator: self,questionUseCase: questionUseCase)
         let vc = CafeAnswerViewController.create(
             with: viewModel,
             question,
+            cafeId,
             user
         )
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User) {
-        let viewModel = CafeAnswerWritingViewModel(coordinator: self)
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int) {
+        let commentRepository = DefaultCommentRepository(commentNetworkService: CommentNetworkService())
+        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
+        let viewModel = CafeAnswerWritingViewModel(coordinator: self, commentUseCase: commentUseCase)
         let vc = CafeAnswerWritingViewController.create(
             with: question,
             user,
+            cafeId,
             viewModel
         )
         self.navigationController.pushViewController(vc, animated: true)
