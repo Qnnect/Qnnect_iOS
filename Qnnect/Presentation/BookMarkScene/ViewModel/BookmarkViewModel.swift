@@ -51,7 +51,7 @@ final class BookmarkViewModel: ViewModelType {
             }
         
         let loadAll = Observable.merge(input.viewDidLoad, input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid())
-            .map { (page: 0,size: 20)}
+            .map { (page: 0,size: 10)}
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
                 result -> [ScrapedQuestion]? in
@@ -60,7 +60,7 @@ final class BookmarkViewModel: ViewModelType {
             }.map { ScrapFetchAction.load(questions: $0)}
         
         let loadOne = input.didTapCafeTag
-            .map { (cafeId: $0.cafeId, page: 0,size: 20)}
+            .map { (cafeId: $0.cafeId, page: 0,size: 10)}
             .flatMap(questionUseCase.fetchScrap)
             .compactMap {
                 result -> [ScrapedQuestion]? in
@@ -74,7 +74,7 @@ final class BookmarkViewModel: ViewModelType {
         let loadMoreAll = input.moreFetch
             .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
             .filter{ $0.cafeId == 0 }
-            .map { (page: $0.page, size:20) }
+            .map { (page: $0.page, size: 10) }
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
                 result -> [ScrapedQuestion]? in
@@ -85,7 +85,7 @@ final class BookmarkViewModel: ViewModelType {
         let loadMoreOne = input.moreFetch
             .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
             .filter{ $0.cafeId != 0 }
-            .map { (cafeId: $0.cafeId, page: $0.page, size:20) }
+            .map { (cafeId: $0.cafeId, page: $0.page, size: 10) }
             .flatMap(questionUseCase.fetchScrap)
             .compactMap {
                 result -> [ScrapedQuestion]? in
@@ -115,7 +115,7 @@ final class BookmarkViewModel: ViewModelType {
                 guard case let .loadMore(questions) = action else { return nil}
                 return questions
             }
-            .map { $0.count == 20 }
+            .map { $0.count == 10 }
           
         
         
