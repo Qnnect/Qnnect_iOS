@@ -67,7 +67,7 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .createQuestion(_, let request):
-            return .requestJSONEncodable(request)
+            return .requestData(request.content.data(using: .utf8)!)
         }
     }
     

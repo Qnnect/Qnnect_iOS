@@ -8,7 +8,7 @@
 import Foundation
 
 struct FetchUserResponseDTO: Decodable {
-    let profileImage: String
+    let profileImage: String?
     let nickName: String
     let point: Int
     

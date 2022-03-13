@@ -181,10 +181,15 @@ final class CafeAnswerWritingViewController: BaseViewController {
             make.width.height.equalTo(27.0)
         }
         
-        self.writerProfileImageView.kf.setImage(
-            with: URL(string: self.user.profileImage),
-            placeholder: Constants.profileDefaultImage
-        )
+        if let url = user.profileImage {
+            self.writerProfileImageView.kf.setImage(
+                with: URL(string: url),
+                placeholder: Constants.profileDefaultImage
+            )
+        } else {
+            self.writerProfileImageView.image = Constants.profileDefaultImage
+        }
+        
         
         self.writerNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.writerProfileImageView.snp.trailing).offset(8.0)
@@ -222,6 +227,8 @@ final class CafeAnswerWritingViewController: BaseViewController {
     
     override func bind() {
         
+      
+        
         let input = CafeAnswerWritingViewModel.Input(
             inputText: self.inputTextView.rx.text.orEmpty
                 .asObservable(),
@@ -247,7 +254,6 @@ final class CafeAnswerWritingViewController: BaseViewController {
         for i in 0 ..< result.count {
             self.fetchedAssets.append(result[i])
         }
-        print(fetchedAssets)
         self.attachingImageCollectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
@@ -271,7 +277,7 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard let str = textView.text else { return true }
         let newLength = str.count + text.count - range.length
-        return newLength <= 90
+        return newLength <= 100
     }
 
 }
@@ -315,6 +321,13 @@ private extension CafeAnswerWritingViewController {
         }
     }
     
+//    func getImages() -> [Data]{
+//        let imageDatas = [Data]()
+//        attachingImageCollectionView.visibleCells.forEach { cell in
+//            let imageCell = cell as! AttachingImageCell
+//            
+//        }
+//    }
 }
 
 extension CafeAnswerWritingViewController: AttachingImageCellDelegate {

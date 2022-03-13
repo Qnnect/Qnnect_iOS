@@ -44,9 +44,11 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
     var task: Task {
         switch self {
         case .setProfile(let request):
-            let imageData = request.profilePicture
             let name = request.nickName.data(using: .utf8) ?? Data()
-            var formData: [Moya.MultipartFormData] = [Moya.MultipartFormData(provider: .data(imageData), name: "profilePicture", fileName: "profilePicture", mimeType: "image/png")]
+            var formData: [Moya.MultipartFormData] = []
+            if let imageData = request.profilePicture {
+                formData.append(Moya.MultipartFormData(provider: .data(imageData), name: "profilePicture", fileName: "profilePicture", mimeType: "image/png"))
+            }
             formData.append(Moya.MultipartFormData(provider: .data(name), name: "nickName"))
             return .uploadMultipart(formData)
         case .setEnableNotification(let request):

@@ -74,10 +74,14 @@ final class ProfileCell: UITableViewCell {
     
     func update(with user: User, _ loginType: LoginType) {
         self.nameLabel.text = user.name
-        self.profileImageView.kf.setImage(
-            with: URL(string:user.profileImage),
-            placeholder: Constants.profileDefaultImage
-        )
+        if let url = user.profileImage {
+            self.profileImageView.kf.setImage(
+                with: URL(string:url),
+                placeholder: Constants.profileDefaultImage
+            )
+        } else {
+            profileImageView.image = Constants.profileDefaultImage
+        }
         self.loginTypeLabel.text = loginType.title
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 struct ProfileResponseDTO: Decodable {
-    let profileImage: String
-    let nickName: String?
+    let profileImage: String?
+    let nickName: String
     let point: Int
     
     func toDomain() -> User {
-        return User(name: self.nickName ?? "", point: self.point, profileImage: self.profileImage)
+        return User(name: self.nickName, point: self.point, profileImage: self.profileImage)
     }
 }

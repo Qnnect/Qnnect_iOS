@@ -10,7 +10,7 @@ import RxSwift
 
 protocol UserUseCase: AnyObject {
     func setEnableNotification(isAgreedNoti: Bool) -> Observable<Void>
-    func setProfile(profileImage: Data, name: String) -> Observable<Result<User,Error>>
+    func setProfile(profileImage: Data?, name: String) -> Observable<Result<User,Error>>
     func fetchUser() -> Observable<Result<User,Error>>
     func isModifiedName(inputName: String, originalUser: User) -> Bool
     func fetchLoginType() -> LoginType
@@ -27,7 +27,7 @@ final class DefaultUserUseCase: UserUseCase {
     func setEnableNotification(isAgreedNoti: Bool) -> Observable<Void> {
         return self.userRepository.setEnableNotification(isAgreedNoti: isAgreedNoti)
     }
-    func setProfile(profileImage: Data, name: String) -> Observable<Result<User,Error>> {
+    func setProfile(profileImage: Data?, name: String) -> Observable<Result<User,Error>> {
         return self.userRepository.setProfile(profileImage: profileImage, name: name)
     }
 

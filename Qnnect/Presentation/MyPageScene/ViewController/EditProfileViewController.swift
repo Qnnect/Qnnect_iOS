@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import PhotosUI
 
 final class EditProfileViewController: BaseViewController {
     
@@ -39,7 +40,7 @@ final class EditProfileViewController: BaseViewController {
     private lazy var bottomSheet: UIAlertController = {
         let sheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
         let galleryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
-            self.present(self.imagePickController, animated: true, completion: nil)
+            self.checkPermission(true)
         }
         let defaultImageAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { _ in
             self.profileImageView.setImage(image: Constants.profileDefaultImage)
@@ -50,12 +51,6 @@ final class EditProfileViewController: BaseViewController {
         sheet.addAction(defaultImageAction)
         sheet.addAction(cancelAction)
         return sheet
-    }()
-    
-    private lazy var imagePickController: UIImagePickerController = {
-        let controller = UIImagePickerController()
-        controller.sourceType = .photoLibrary
-        return controller
     }()
     
     private var viewModel: EditProfileViewModel!
@@ -94,7 +89,13 @@ final class EditProfileViewController: BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide).inset(48.0)
         }
         
-        self.profileImageView.setImage(url: URL(string: self.user.profileImage))
+        if let url = user.profileImage {
+            self.profileImageView.setImage(url: URL(string: url))
+        } else {
+            self.profileImageView.setImage(image: Constants.profileDefaultImage)
+        }
+        
+        
         
         self.nameTextField.snp.makeConstraints { make in
             make.top.equalTo(self.profileImageView.snp.bottom).offset(24.0)
@@ -154,6 +155,20 @@ final class EditProfileViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
     }
+    
+    override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let identifiers = results.map{ $0.assetIdentifier ?? ""}
+        let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        let imageManager = PHImageManager()
+        let scale = UIScreen.main.scale
+        let imageSize = CGSize(width: 108 * scale, height: 108 * scale)
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        imageManager.requestImage(for: result[0], targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
+            self.profileImageView.setImage(image: image)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 private extension EditProfileViewController {
@@ -162,21 +177,6 @@ private extension EditProfileViewController {
     }
 }
 
-extension EditProfileViewController: UIImagePickerControllerDelegate&UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        var newImage: UIImage? = nil // update 할 이미지
-        
-        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            newImage = possibleImage // 수정된 이미지가 있을 경우
-        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            newImage = possibleImage // 원본 이미지가 있을 경우
-        }
-        
-        self.profileImageView.setImage(image: newImage) // 받아온 이미지를 update
-        picker.dismiss(animated: true, completion: nil) // picker를 닫아줌
-    }
-}
 
 // MARK: - 최대 글자 수 이상 입력 제한
 extension EditProfileViewController: UITextFieldDelegate {

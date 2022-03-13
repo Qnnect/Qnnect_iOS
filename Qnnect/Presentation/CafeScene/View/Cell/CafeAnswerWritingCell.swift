@@ -70,10 +70,14 @@ final class CafeAnswerWritingCell: UITableViewCell {
     }
     
     func update(with user: User) {
-        self.writerProfileImageView.kf.setImage(
-            with: URL(string: user.profileImage),
-            placeholder: Constants.profileDefaultImage
-        )
+        if let url = user.profileImage {
+            self.writerProfileImageView.kf.setImage(
+                with: URL(string: url),
+                placeholder: Constants.profileDefaultImage
+            )
+        } else {
+            writerProfileImageView.image = Constants.profileDefaultImage
+        }
         self.writerNameLabel.text = user.name
     }
 }

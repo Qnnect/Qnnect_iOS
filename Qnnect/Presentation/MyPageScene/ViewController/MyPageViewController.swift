@@ -92,6 +92,7 @@ final class MyPageViewController: BaseViewController {
                     MyPageSectionModel.itemListSection(title: "", items: myPageListSectionItem)
                 ]
             }
+            .debug()
             .bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
     }

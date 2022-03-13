@@ -17,6 +17,7 @@ final class EditProfileImageView: UIView {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = Constants.profileImageHeight / 2.0
         $0.clipsToBounds = true
+        $0.image = Constants.profileDefaultImage
     }
     
     private let cameraImageView = UIImageView(image: Constants.cameraImage)
@@ -62,9 +63,14 @@ final class EditProfileImageView: UIView {
         self.profileImageView.image = image
     }
     
-    var imageData: Observable<Data> {
+    var imageData: Observable<Data?> {
         return self.profileImageView.rx.observe(UIImage.self, "image")
-            .map{ $0?.pngData() }
-            .compactMap {$0 }
+            .map{ image -> Data? in
+                if image == Constants.profileDefaultImage {
+                    return nil
+                } else {
+                    return image?.pngData()
+                }
+            }
     }
 }

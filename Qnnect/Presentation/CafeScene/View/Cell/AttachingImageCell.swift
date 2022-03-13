@@ -19,7 +19,7 @@ final class AttachingImageCell: UICollectionViewCell {
     static let identifier = "AttachingImageCell"
     weak var delegate: AttachingImageCellDelegate?
     
-    private let imageView = UIImageView().then {
+    private(set) var imageView = UIImageView().then {
         $0.contentMode = .scaleToFill
         $0.layer.cornerRadius = 12.0
         $0.clipsToBounds = true

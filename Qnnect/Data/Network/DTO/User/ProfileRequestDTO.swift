@@ -8,6 +8,6 @@
 import Foundation
 
 struct ProfileRequestDTO: Encodable {
-    let profilePicture: Data
+    let profilePicture: Data?
     let nickName: String
 }

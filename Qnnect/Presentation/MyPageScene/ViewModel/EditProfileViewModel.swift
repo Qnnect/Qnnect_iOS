@@ -15,7 +15,7 @@ final class EditProfileViewModel: ViewModelType {
         let inputName: Observable<String>
         let didTapProfileImageView: Observable<Void>
         let didTapCompletionButton: Observable<Void>
-        let profileImage: Observable<Data>
+        let profileImage: Observable<Data?>
         let user: Observable<User>
     }
     

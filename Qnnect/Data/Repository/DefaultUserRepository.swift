@@ -27,7 +27,7 @@ final class DefaultUserRepositry: UserRepository {
     }
     
     
-    func setProfile(profileImage: Data, name: String) -> Observable<Result<User, Error>> {
+    func setProfile(profileImage: Data?, name: String) -> Observable<Result<User, Error>> {
         let request = ProfileRequestDTO(profilePicture: profileImage, nickName: name)
         return self.userNetworkService.setProfile(request: request)
             .map {

@@ -10,6 +10,7 @@ import Then
 import SnapKit
 import RxSwift
 import Kingfisher
+import PhotosUI
 
 final class SetProfileViewController: BaseViewController {
     
@@ -32,7 +33,7 @@ final class SetProfileViewController: BaseViewController {
         $0.isEnabled = false
         $0.layer.cornerRadius = 10.0
     }
-
+    
     private let nameTextField = NameTextField().then {
         $0.textField.placeholder = Constants.nameTextFieldPlaceHolderText
     }
@@ -44,16 +45,10 @@ final class SetProfileViewController: BaseViewController {
         
     }
     
-    private lazy var imagePickController: UIImagePickerController = {
-        let controller = UIImagePickerController()
-        controller.sourceType = .photoLibrary
-        return controller
-    }()
-    
     private lazy var bottomSheet: UIAlertController = {
         let sheet = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
         let galleryAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
-            self.present(self.imagePickController, animated: true, completion: nil)
+            self.checkPermission(true)
         }
         let defaultImageAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { _ in
             self.editProfileImageView.setImage(image: Constants.profileDefaultImage)
@@ -100,8 +95,6 @@ final class SetProfileViewController: BaseViewController {
         ].forEach {
             self.view.addSubview($0)
         }
-        
-        self.imagePickController.delegate = self
         
         self.nameTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.EditNameTextFieldHorizontalMargin)
@@ -151,19 +144,19 @@ final class SetProfileViewController: BaseViewController {
         
         //Rx+/UIBUtton+
         output.isValidName
-            .do(onNext: {
+            .do{
                 [weak self] isValid in
                 UIView.animate(withDuration: 0.5) {
                     self?.nameTextField.setCautionLabel(isValid)
                     self?.view.layoutIfNeeded()
                 }
-            })
+            }
             .drive(self.completionButton.rx.setEnabled)
             .disposed(by: self.disposeBag)
         
         //Rx+/UILabel+
         output.nameLength
-                .drive(self.nameTextField.nameLengthLabel.rx.nameLength)
+            .drive(self.nameTextField.nameLengthLabel.rx.nameLength)
             .disposed(by: self.disposeBag)
         
         output.completion
@@ -171,9 +164,10 @@ final class SetProfileViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.kakaoProfileImageURL
+            .debug()
             .drive(onNext:self.setProfileImageView)
             .disposed(by: self.disposeBag)
-                
+        
         self.editProfileImageView.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: {
@@ -182,6 +176,20 @@ final class SetProfileViewController: BaseViewController {
                 self.present(self.bottomSheet, animated: true, completion: nil)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let identifiers = results.map{ $0.assetIdentifier ?? ""}
+        let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        let imageManager = PHImageManager()
+        let scale = UIScreen.main.scale
+        let imageSize = CGSize(width: 108 * scale, height: 108 * scale)
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        imageManager.requestImage(for: result[0], targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
+            self.editProfileImageView.setImage(image: image)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -202,22 +210,6 @@ extension SetProfileViewController: UITextFieldDelegate {
         }
         guard textField.text!.count < max else { return false }
         return true
-    }
-}
-
-extension SetProfileViewController: UIImagePickerControllerDelegate&UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        var newImage: UIImage? = nil // update 할 이미지
-        
-        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            newImage = possibleImage // 수정된 이미지가 있을 경우
-        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            newImage = possibleImage // 원본 이미지가 있을 경우
-        }
-        
-        self.editProfileImageView.setImage(image: newImage) // 받아온 이미지를 update
-        picker.dismiss(animated: true, completion: nil) // picker를 닫아줌
     }
 }
 

@@ -18,7 +18,7 @@ final class SetProfileViewModel: ViewModelType {
         let viewDidLoad: Observable<Void>
         let token: Observable<Token>
         let isAgreedNoti: Observable<Bool>
-        let profileImageData: Observable<Data>
+        let profileImageData: Observable<Data?>
         let loginType: Observable<LoginType>
     }
     
@@ -67,7 +67,7 @@ final class SetProfileViewModel: ViewModelType {
         let settingEnableNotification = setting
             .map{ ($0.1) }
             .flatMap(self.userUseCase.setEnableNotification)
-            
+        
         let settingProfile = setting
             .map{ ($0.2, $0.3) }
             .flatMap(self.userUseCase.setProfile)
@@ -88,10 +88,14 @@ final class SetProfileViewModel: ViewModelType {
                 [weak self] _ in
                 self?.coordinator?.showMain()
             }
+            .debug()
         
         let kakaoProfileImageURL = input.viewDidLoad
-                .flatMap(self.authManager.getUserProfileImageInKakao)
-                
+            .withLatestFrom(input.loginType)
+            .filter { $0 == .kakao }
+            .mapToVoid()
+            .flatMap(self.authManager.getUserProfileImageInKakao)
+        
         return Output(
             nameLength: nameLength.asDriver(onErrorJustReturn: 0),
             isValidName: isValidName.asDriver(onErrorJustReturn: false),
