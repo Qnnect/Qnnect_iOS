@@ -41,6 +41,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
     private let contentLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .BLACK_121212
+        $0.numberOfLines = 0
     }
     
     private let writerProfileImageView = UIImageView().then {
