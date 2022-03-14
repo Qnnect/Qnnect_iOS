@@ -173,6 +173,7 @@
 		AEB5AABD27DEFF050096376B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABC27DEFF050096376B /* Comment.swift */; };
 		AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABE27DF1BD40096376B /* CommentViewController.swift */; };
 		AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */; };
+		AEB5AAC327DF1ECF0096376B /* CommentFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC227DF1ECF0096376B /* CommentFetchResponseDTO.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -400,6 +401,7 @@
 		AEB5AABC27DEFF050096376B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		AEB5AABE27DF1BD40096376B /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		AEB5AAC227DF1ECF0096376B /* CommentFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentFetchResponseDTO.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1124,6 +1126,7 @@
 			children = (
 				AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */,
 				AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */,
+				AEB5AAC227DF1ECF0096376B /* CommentFetchResponseDTO.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -1626,6 +1629,7 @@
 				AEA14D4627D47E1E0009EEC6 /* CafeRepository.swift in Sources */,
 				AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */,
 				AE77C83F27DAE80800E8D0EC /* CafeLeaveRequestDTO.swift in Sources */,
+				AEB5AAC327DF1ECF0096376B /* CommentFetchResponseDTO.swift in Sources */,
 				AE77C84A27DB274300E8D0EC /* Drink.swift in Sources */,
 				AEA7266B27DE44C000F48CB8 /* DefaultCommentRepository.swift in Sources */,
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,

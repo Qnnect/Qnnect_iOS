@@ -10,6 +10,7 @@ import Moya
 
 enum CommentAPI {
     case createComment(cafeId: Int, questionId: Int, images: [Data], content: String)
+    case fetchComment(commentId: Int)
 }
 
 extension CommentAPI: TargetType, AccessTokenAuthorizable {
@@ -21,6 +22,8 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(let cafeId, let questionId, _, _):
             return "api/v1/cafes/\(cafeId)/questions/\(questionId)/comments"
+        case .fetchComment(let commentId):
+            return "api/v1/comments/\(commentId)"
         }
     }
     
@@ -28,6 +31,8 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(_, _, _, _):
             return .post
+        case .fetchComment(_):
+            return .get
         }
     }
     
@@ -50,6 +55,8 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
                 mimeType: nil
             ))
             return .uploadMultipart(formData)
+        case .fetchComment(_):
+            return .requestPlain
         }
     }
     
@@ -57,7 +64,7 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(_, _, _, _):
             return ["Content-Type": "multipart/form-data"]
-        default:
+        case .fetchComment(_):
             return nil
         }
     }
