@@ -77,19 +77,17 @@ final class CafeAnswerViewController: BaseViewController {
     }
     
     override func bind() {
-        //        Observable.zip(Observable.just(self.question),Observable.just(self.user))
-        //            .map { question,user -> [CafeAnswerSectionModel] in
-        //                let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question!)
-        //                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
-        //                return [
-        //                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
-        //                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
-        //                ]
-        //            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
-        //            .disposed(by: self.disposeBag)
-        
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
+        
+        let dataSource = self.createDataSource()
+        
+        dataSource.animationConfiguration = .init(
+            insertAnimation: .left,
+            reloadAnimation: .none,
+            deleteAnimation: .automatic
+        )
+        dataSource.decideViewTransition = { (_, _, _)  in return RxDataSources.ViewTransition.reload }
         
         let input = CafeAnswerViewModel.Input(
             didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
@@ -141,7 +139,7 @@ final class CafeAnswerViewController: BaseViewController {
                     CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
                     CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
                 ]
-            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
+            }.bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
 
     }

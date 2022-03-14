@@ -39,14 +39,12 @@ extension CafeAnswerSectionItem: IdentifiableType, Equatable {
 
 extension CafeAnswerSectionModel: AnimatableSectionModelType {
     
-    var identity: String {
-        switch self {
-        case .questionSection(let title, _):
-            return title
-        case .answerWritingSection(let title, _):
-            return title
-        }
+    typealias Identity = String
+    
+    var identity: Identity {
+        return UUID().uuidString
     }
+    
     
     init(original: CafeAnswerSectionModel, items: [CafeAnswerSectionItem]) {
         switch original {
