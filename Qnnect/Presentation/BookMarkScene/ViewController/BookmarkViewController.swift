@@ -28,8 +28,12 @@ final class BookmarkViewController: BaseViewController {
     private let bookmarkTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
         $0.backgroundColor = .p_ivory
+        $0.showsVerticalScrollIndicator = false
     }
     
+    private let searchButton = UIButton().then {
+        $0.setImage(Constants.navigation_search, for: .normal)
+    }
     static func create(with viewModel: BookmarkViewModel) -> BookmarkViewController{
         let vc = BookmarkViewController()
         vc.viewModel = viewModel
@@ -38,10 +42,14 @@ final class BookmarkViewController: BaseViewController {
     
     private var curPage = 0
     private var isFetched = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     override func configureUI() {
         
         self.view.addSubview(self.bookmarkTableView)
@@ -51,12 +59,12 @@ final class BookmarkViewController: BaseViewController {
             Constants.navigationLeftPadding,
             UIBarButtonItem(customView: self.navigationTitleLabel)
         ]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
         
         
         self.bookmarkTableView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(17.0)
+            make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(8.0)
         }
@@ -65,7 +73,8 @@ final class BookmarkViewController: BaseViewController {
         self.headerView.addSubview(self.tagCollectionView)
         
         self.tagCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().inset(21.0)
             make.centerY.equalToSuperview()
         }
         

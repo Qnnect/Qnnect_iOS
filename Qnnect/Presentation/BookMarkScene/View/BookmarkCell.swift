@@ -12,6 +12,10 @@ import Then
 final class BookmarkCell: UITableViewCell {
     static let identifier: String = "BookmarkCell"
     
+    private let cafeNameLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.textColor = .secondaryBorder
+    }
     private let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .black
@@ -36,28 +40,35 @@ final class BookmarkCell: UITableViewCell {
     private func configureUI() {
         
         [
-            self.titleLabel,
-            self.dateLabel
+            cafeNameLabel,
+            titleLabel,
+            dateLabel
         ].forEach {
-            self.contentView.addSubview($0)
+            contentView.addSubview($0)
         }
         
-        self.contentView.backgroundColor = .p_ivory
+        contentView.backgroundColor = .p_ivory
         
-        self.titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.bottom.equalToSuperview().inset(25.0)
+        cafeNameLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(25.0)
+            make.top.equalToSuperview().inset(21.0)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(cafeNameLabel)
+            make.trailing.equalToSuperview().inset(19.0)
+            make.top.equalTo(cafeNameLabel.snp.bottom).offset(3.0)
         }
         
-        self.dateLabel.snp.makeConstraints { make in
+        dateLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
-            make.top.equalTo(self.titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalToSuperview()
         }
     }
     
     func update(with question: ScrapedQuestion) {
-        self.dateLabel.text = question.createdAt
-        self.titleLabel.text = question.question
+        dateLabel.text = question.createdAt
+        titleLabel.text = question.question
+        cafeNameLabel.text = question.cafeTitle
     }
 }
