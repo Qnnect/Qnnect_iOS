@@ -32,7 +32,8 @@ final class StoreSectionHeaderView: UICollectionReusableView {
         
         
         self.tagCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().inset(20.0)
             make.centerY.equalToSuperview()
         }
         

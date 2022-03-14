@@ -13,26 +13,58 @@ final class StoreViewModel: ViewModelType {
     
     struct Input {
         let didTapIngredient: Observable<Ingredient>
+        let viewDidLoad: Observable<Void>
+        let didTapIngredientTag: Observable<IngredientType>
+        let didTapWholeTag: Observable<Void>
     }
     
     struct Output{
         let showIngredientBuyAlert: Signal<Void>
+        let ingredients: Driver<[Ingredient]>
     }
     
     private weak var coordinator: StoreCoordinator?
+    private let storeUseCase: StoreUseCase
     
-    init(coordinator: StoreCoordinator) {
+    init(
+        coordinator: StoreCoordinator,
+        storeUseCase: StoreUseCase
+    ) {
         self.coordinator = coordinator
+        self.storeUseCase = storeUseCase
     }
+    
     func transform(from input: Input) -> Output {
         
         let showIngredientBuyAlert = input.didTapIngredient
             .debug()
-            .do(onNext: self.showIngredientBuyAlertView(with:))
+            .do {
+                [weak self] ingredient in
+                self?.showIngredientBuyAlertView(with: ingredient)
+            }
             .mapToVoid()
-    
+        
+        let fetchedAllIngredient = Observable.merge(
+            input.viewDidLoad,
+            input.didTapWholeTag
+        )
+            .flatMap(storeUseCase.fetchAllIngredient)
+            .debug()
+            .compactMap { result -> [Ingredient]? in
+                guard case let .success(ingredients) = result else { return nil }
+                return ingredients
+            }
+        
+        let fetchedIngredients = input.didTapIngredientTag
+            .flatMap(storeUseCase.fetchIngredients(_:))
+            .compactMap { result -> [Ingredient]? in
+                guard case let .success(ingredients) = result else { return nil }
+                return ingredients
+            }
+        
         return Output(
-            showIngredientBuyAlert: showIngredientBuyAlert.asSignal(onErrorSignalWith: .empty())
+            showIngredientBuyAlert: showIngredientBuyAlert.asSignal(onErrorSignalWith: .empty()),
+            ingredients: Observable.merge(fetchedAllIngredient,fetchedIngredients).asDriver(onErrorJustReturn: [])
         )
     }
 }

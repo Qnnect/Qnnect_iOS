@@ -174,6 +174,11 @@
 		AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABE27DF1BD40096376B /* CommentViewController.swift */; };
 		AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */; };
 		AEB5AAC327DF1ECF0096376B /* CommentFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC227DF1ECF0096376B /* CommentFetchResponseDTO.swift */; };
+		AEB5AAC627DF36AA0096376B /* IngredientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC527DF36AA0096376B /* IngredientAPI.swift */; };
+		AEB5AAC927DF37810096376B /* IngredientResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC827DF37810096376B /* IngredientResponseDTO.swift */; };
+		AEB5AACB27DF37FA0096376B /* StoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AACA27DF37FA0096376B /* StoreNetworkService.swift */; };
+		AEB5AACD27DF38D60096376B /* StoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AACC27DF38D60096376B /* StoreRepository.swift */; };
+		AEB5AACF27DF39320096376B /* DefaultStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AACE27DF39320096376B /* DefaultStoreRepository.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -402,6 +407,11 @@
 		AEB5AABE27DF1BD40096376B /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		AEB5AAC227DF1ECF0096376B /* CommentFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AEB5AAC527DF36AA0096376B /* IngredientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientAPI.swift; sourceTree = "<group>"; };
+		AEB5AAC827DF37810096376B /* IngredientResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientResponseDTO.swift; sourceTree = "<group>"; };
+		AEB5AACA27DF37FA0096376B /* StoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreNetworkService.swift; sourceTree = "<group>"; };
+		AEB5AACC27DF38D60096376B /* StoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepository.swift; sourceTree = "<group>"; };
+		AEB5AACE27DF39320096376B /* DefaultStoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStoreRepository.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -629,6 +639,7 @@
 				AE77C83927DA078400E8D0EC /* DefaultQuestionRepository.swift */,
 				AE77C84B27DB276B00E8D0EC /* DefaultDrinkRepository.swift */,
 				AEA7266A27DE44C000F48CB8 /* DefaultCommentRepository.swift */,
+				AEB5AACE27DF39320096376B /* DefaultStoreRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -664,6 +675,7 @@
 				AE77C83727DA075C00E8D0EC /* QuestionRepository.swift */,
 				AE77C84727DB272000E8D0EC /* DrinkRepository.swift */,
 				AEA7266827DE448400F48CB8 /* CommentRepository.swift */,
+				AEB5AACC27DF38D60096376B /* StoreRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1139,6 +1151,14 @@
 			path = Question;
 			sourceTree = "<group>";
 		};
+		AEB5AAC727DF376B0096376B /* Ingredient */ = {
+			isa = PBXGroup;
+			children = (
+				AEB5AAC827DF37810096376B /* IngredientResponseDTO.swift */,
+			);
+			path = Ingredient;
+			sourceTree = "<group>";
+		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1150,6 +1170,7 @@
 				AE77C84027DB221A00E8D0EC /* DrinkAPI.swift */,
 				AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */,
 				AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */,
+				AEB5AAC527DF36AA0096376B /* IngredientAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1157,6 +1178,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5AAC727DF376B0096376B /* Ingredient */,
 				AEB5AAB927DEFEE20096376B /* Question */,
 				AEA7266E27DE54CD00F48CB8 /* Comment */,
 				AE77C84427DB265600E8D0EC /* Drink */,
@@ -1300,6 +1322,7 @@
 				AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */,
 				AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */,
 				AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */,
+				AEB5AACA27DF37FA0096376B /* StoreNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1466,6 +1489,7 @@
 				AECC133527BA3DD0006866FC /* TermsViewController.swift in Sources */,
 				AE59A5F627AEAE890081A0FA /* AppDelegate.swift in Sources */,
 				AEB8FD0527C66F0E002BDBCD /* OnboardingViewModel.swift in Sources */,
+				AEB5AAC627DF36AA0096376B /* IngredientAPI.swift in Sources */,
 				AECC132A27BA24F7006866FC /* Constants.swift in Sources */,
 				AEA14D4C27D493C10009EEC6 /* CafeUseCase.swift in Sources */,
 				AEEF363027C351BB00D0A127 /* EditProfileImageView.swift in Sources */,
@@ -1493,6 +1517,7 @@
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
 				AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */,
+				AEB5AAC927DF37810096376B /* IngredientResponseDTO.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
@@ -1521,6 +1546,7 @@
 				AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */,
 				AE02D82727D763F90019D955 /* CafeAnswerCell.swift in Sources */,
 				AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */,
+				AEB5AACD27DF38D60096376B /* StoreRepository.swift in Sources */,
 				AEA14D0A27CFB9790009EEC6 /* UserUseCase.swift in Sources */,
 				AEA7265E27DDC93900F48CB8 /* WriteQuestionViewController.swift in Sources */,
 				AEBC9ED027C62A480070399A /* SplashCoordinator.swift in Sources */,
@@ -1549,6 +1575,7 @@
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
+				AEB5AACB27DF37FA0096376B /* StoreNetworkService.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
 				AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */,
 				AEA14D3827D46A3A0009EEC6 /* CafeUserResponseDTO.swift in Sources */,
@@ -1657,6 +1684,7 @@
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
+				AEB5AACF27DF39320096376B /* DefaultStoreRepository.swift in Sources */,
 				AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */,
 				AEA14D4A27D48D020009EEC6 /* CafeCreateResponseDTO.swift in Sources */,
 				AE02D82327D75CDB0019D955 /* CafeAnswerViewModel.swift in Sources */,

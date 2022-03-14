@@ -23,7 +23,9 @@ final class DefaultStoreCoordinator: StoreCoordinator {
         self.navigationController = navigationController
     }
     func start() {
-        let viewModel = StoreViewModel(coordinator: self)
+        let storeRepository = DefaultStoreRepository(storeNetworkService: StoreNetworkService())
+        let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
+        let viewModel = StoreViewModel(coordinator: self,storeUseCase: storeUseCase)
         let vc = StoreViewController.create(with: viewModel)
         self.navigationController.pushViewController(vc, animated: true)
     }

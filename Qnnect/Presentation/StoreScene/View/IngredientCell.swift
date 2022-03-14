@@ -69,6 +69,7 @@ final class IngredientCell: UICollectionViewCell {
         self.icon.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
+            make.height.equalTo(90.0)
         }
         
         self.title.snp.makeConstraints { make in
@@ -93,7 +94,7 @@ final class IngredientCell: UICollectionViewCell {
     }
     
     func update(with ingredient: Ingredient) {
-        self.icon.image = UIImage(named: "Chocolate")
+        self.icon.image = UIImage(named:ingredient.name)
         self.price.text = "\(ingredient.price)"
         self.title.text = ingredient.name
     }

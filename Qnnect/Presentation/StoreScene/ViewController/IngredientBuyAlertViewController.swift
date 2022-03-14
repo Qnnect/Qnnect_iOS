@@ -24,8 +24,6 @@ final class IngredientBuyAlertViewController: BaseViewController {
     private let buyInfoLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .blackLabel
-        $0.textAlignment = .center
-        $0.lineBreakMode = .byWordWrapping
         $0.numberOfLines = 3
     }
     
@@ -80,7 +78,7 @@ final class IngredientBuyAlertViewController: BaseViewController {
             make.bottom.equalTo(self.buyInfoLabel.snp.top).offset(-28.0)
         }
         
-        self.iconImageView.image = UIImage(named: "Chocolate")
+        self.iconImageView.image = UIImage(named: ingredient.name)
         
         self.buyInfoLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(93.0)
@@ -90,8 +88,9 @@ final class IngredientBuyAlertViewController: BaseViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.17
         paragraphStyle.lineBreakStrategy = .hangulWordPriority
+        paragraphStyle.alignment = .center
         self.buyInfoLabel.attributedText = NSAttributedString(
-            string: "\(self.ingredient.price)P \(self.ingredient.name)을 구매하시겠나여?",
+            string: "\(ingredient.price)P \(ingredient.name)를 구매하시겠나여?",
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
         
