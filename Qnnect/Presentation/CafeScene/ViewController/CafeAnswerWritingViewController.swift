@@ -161,7 +161,8 @@ final class CafeAnswerWritingViewController: BaseViewController {
             make.top.equalTo(self.dateLabel.snp.bottom).offset(1.0)
             make.centerX.equalToSuperview()
         }
-        self.questionerLabel.text = "\(self.question.questioner)의 질문"
+        
+        self.questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
         
         self.daysLeftLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16.0)

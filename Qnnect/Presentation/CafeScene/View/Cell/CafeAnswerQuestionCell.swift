@@ -121,8 +121,11 @@ final class CafeAnswerQuestionCell: UITableViewCell {
     func update(with question: Question) {
         self.dateLabel.text = question.createdAt
         self.daysLeftLabel.text = "D-\(question.daysLeft)"
-        self.questionerLabel.text = "\(question.questioner)의 질문"
-        self.contentLabel.text = question.question
+        self.questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
+        self.contentLabel.attributedText = NSAttributedString(
+            string: question.question,
+            attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
+        )
         self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
         setQuestionButtons(question.writer)
     }
