@@ -194,9 +194,12 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
             return
         }
         
+        if navigationController.viewControllers.contains(fromViewController) {
+           return
+        }
+
         // child coordinator 가 일을 끝냈다고 알림.
         if fromViewController is CafeAnswerViewController {
-            print(navigationController.viewControllers)
             if let presentedVC = navigationController.viewControllers.first {
                 presentedVC.tabBarController?.tabBar.isHidden = false
             }

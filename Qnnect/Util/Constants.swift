@@ -93,13 +93,17 @@ struct Constants {
     static let navigationScrapIcon: UIImage? = UIImage(named: "navigation_scrap")?.withRenderingMode(.alwaysOriginal)
     static let navigationCheckedScrapIcon: UIImage? = UIImage(named: "navigation_scrap_checked")?.withRenderingMode(.alwaysOriginal)
     static let commentEmptyImage: UIImage? = UIImage(named: "comment_empty")?.withRenderingMode(.alwaysOriginal)
+    static let reply_arrow_icon: UIImage? = UIImage(named: "reply_arrow")?.withRenderingMode(.alwaysOriginal)
+    static let more_icon: UIImage? = UIImage(named: "more_icon")
+    static let sendButtonImage: UIImage? = UIImage(named: "sendButtonImage")?.withRenderingMode(.alwaysOriginal)
+    
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
     static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")?.withAlignmentRectInsets(.init(top: -12.0, left: -12.0, bottom: 0.0, right: 0))
     static let xmarkImage: UIImage? = UIImage(named: "X_mark")
     static let leftImageInset: UIEdgeInsets = .init(top: -12.0, left: -12.0, bottom: 0.0, right: 0)
     static let navigation_search: UIImage? = UIImage(named: "navigation_search")
-    
+    static let navagation_more: UIImage? = UIImage(named: "navi_more")?.withRenderingMode(.alwaysOriginal)
     static let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle().then {
         $0.lineHeightMultiple = 1.17
         $0.lineBreakStrategy = .hangulWordPriority

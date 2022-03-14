@@ -85,7 +85,7 @@ final class CafeAnswerCell: UITableViewCell {
         }
         
         self.writerNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.writerProfileImageView.snp.trailing).offset(8.0)
+            make.leading.equalTo(self.writerProfileImageView.snp.trailing).offset(10.0)
             make.centerY.equalTo(self.writerProfileImageView)
         }
         
