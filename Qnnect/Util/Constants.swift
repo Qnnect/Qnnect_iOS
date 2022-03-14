@@ -14,10 +14,11 @@ struct Constants {
     
     // MARK: - Text
     static let nameTextFieldPlaceHolderText = "닉네임 (2~\(Constants.nameMaxLength)자 이하)"
-    static let nameInputCaution = "2-8글자 사이로 입력해주세요"
+    static let nameInputCaution = "닉네임은 2~8자 이하입니다"
     static let firstProfileSetSceneTitle = "환영합니다!\n님네임을 입력해주세요"
     static let TermsSceneTitle = "시작 전에\n약관에 동의해주세요"
     static let loginTypeText = "\(UserDefaults.standard.value(forKey: "loginType") ?? "알수없음")으로 로그인하셨어요!"
+    static let titleCaution = "제목은 2~10자 이하입니다"
     
     // MARK: - Layout
     static let nameMaxLength = 8

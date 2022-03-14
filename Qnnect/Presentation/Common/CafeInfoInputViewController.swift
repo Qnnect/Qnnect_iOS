@@ -26,6 +26,12 @@ class CafeInfoInputViewController: BottomSheetViewController {
         $0.placeholder = "10자 이내"
     }
     
+    private(set) var titleCautionLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
+        $0.textColor = .redLabel
+        $0.text = Constants.titleCaution
+    }
+    
     private(set) var groupTypeLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .GRAY01
@@ -96,6 +102,7 @@ class CafeInfoInputViewController: BottomSheetViewController {
 
             self.inputTitleLabel,
             self.inputTitleTextField,
+            titleCautionLabel,
             self.groupTypeLabel,
             self.groupTypeTagCollectionView,
             self.diaryColorLabel,
@@ -118,6 +125,12 @@ class CafeInfoInputViewController: BottomSheetViewController {
         self.inputTitleTextField.snp.makeConstraints { make in
             make.top.equalTo(self.inputTitleLabel.snp.bottom).offset(16.0)
             make.leading.trailing.equalTo(self.inputTitleLabel)
+        }
+        
+        titleCautionLabel.snp.makeConstraints { make in
+            make.leading.equalTo(inputTitleTextField)
+            make.top.equalTo(inputTitleTextField.snp.bottom).offset(11.0)
+            make.height.equalTo(0)
         }
         
         self.groupTypeLabel.snp.makeConstraints { make in
@@ -207,6 +220,22 @@ extension CafeInfoInputViewController {
     func setEnablementNextButton(_ isCompleted: Bool) {
         self.completionButton.isEnabled = isCompleted
         self.completionButton.backgroundColor = isCompleted ? .p_brown : .GRAY04
+    }
+    
+    func setCautionLabel(_ isVaild: Bool) {
+        UIView.animate(withDuration: 0.5) {
+            [weak self] in
+            if isVaild {
+                self?.titleCautionLabel.snp.updateConstraints { make in
+                    make.height.equalTo(0)
+                }
+            } else {
+                self?.titleCautionLabel.snp.updateConstraints { make in
+                    make.height.equalTo(18.0)
+                }
+            }
+            self?.view.layoutIfNeeded()
+        }
     }
     
     func dismiss() {

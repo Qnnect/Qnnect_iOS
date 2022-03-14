@@ -40,8 +40,8 @@ final class SetProfileViewController: BaseViewController {
     
     private let cautionLabel = UILabel().then {
         $0.text = Constants.nameInputCaution
-        $0.textColor = .red
-        $0.font = .IM_Hyemin(.regular, size: 14.0)
+        $0.textColor = .redLabel
+        $0.font = .IM_Hyemin(.regular, size: 12.0)
         
     }
     

@@ -47,6 +47,7 @@ extension UIColor {
     class var ORANGE01: UIColor? { return UIColor(named: "ORANGE01") }
     class var groupDrinksBorder: UIColor? { return UIColor(named: "GroupDrinksBorder") }
     class var cardBackground: UIColor? { return UIColor(named: "cardBackground") }
+    class var redLabel: UIColor? { return UIColor(named: "redLabel") }
     
     class var diary_red: UIColor? { return UIColor(named: "diary_red")}
     class var diary_blue: UIColor? { return UIColor(named: "diary_blue")}

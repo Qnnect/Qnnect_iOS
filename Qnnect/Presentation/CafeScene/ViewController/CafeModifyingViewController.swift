@@ -47,6 +47,7 @@ final class CafeModifyingViewController: CafeInfoInputViewController {
         let input = CafeModifyingViewModel.Input(
             selectedCycle: value,
             inputName: self.inputTitleTextField.rx.text.orEmpty
+                .skip(while: { ($0.count) == 0})
                 .asObservable(),
             selectedGroupType: self.groupTypeTagCollectionView.rx.tappedTagTitle
                 .map { title -> GroupType in
@@ -76,7 +77,7 @@ final class CafeModifyingViewController: CafeInfoInputViewController {
             .disposed(by: self.disposeBag)
         
         output.isValidName
-            .emit()
+            .emit(onNext: setCautionLabel(_:))
             .disposed(by: self.disposeBag)
     }
 }
