@@ -24,13 +24,15 @@ protocol CafeCoordinator: Coordinator {
     func leaveCafe()
 }
 
-final class DefaultCafeCoordinator: CafeCoordinator {
+final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        super.init()
+        navigationController.delegate = self
     }
     
     func start() { }
@@ -134,7 +136,7 @@ final class DefaultCafeCoordinator: CafeCoordinator {
                 self?.navigationController.present(vc, animated: false, completion: nil)
             }
         }
-       
+        
     }
     
     func showWriteQuestionScene(_ cafeId: Int) {
@@ -179,6 +181,24 @@ final class DefaultCafeCoordinator: CafeCoordinator {
             vc.hideBottomSheetAndGoBack {
                 [weak self] in
                 self?.navigationController.popToRootViewController(animated: true)
+            }
+        }
+    }
+    
+}
+
+extension DefaultCafeCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        // child coordinator 가 일을 끝냈다고 알림.
+        if fromViewController is CafeAnswerViewController {
+            print(navigationController.viewControllers)
+            if let presentedVC = navigationController.viewControllers.first {
+                presentedVC.tabBarController?.tabBar.isHidden = false
             }
         }
     }
