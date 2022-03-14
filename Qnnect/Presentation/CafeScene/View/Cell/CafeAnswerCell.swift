@@ -14,6 +14,8 @@ final class CafeAnswerCell: UITableViewCell {
     
     private let writerProfileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 13.5
+        $0.clipsToBounds = true
     }
     
     private let writerNameLabel = UILabel().then {
@@ -30,6 +32,7 @@ final class CafeAnswerCell: UITableViewCell {
     private let attachedImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 16.0
+        $0.clipsToBounds = true
     }
     
     private let commentImageView = UIImageView().then {
@@ -44,10 +47,18 @@ final class CafeAnswerCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: Constants.answerCellSpacing, right: 0))
     }
     
     private func configureUI() {
@@ -62,6 +73,10 @@ final class CafeAnswerCell: UITableViewCell {
         ].forEach {
             self.contentView.addSubview($0)
         }
+        
+        contentView.backgroundColor = .p_ivory
+        backgroundColor = .p_ivory
+        selectionStyle = .none
         
         self.writerProfileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(21.0)
@@ -83,6 +98,7 @@ final class CafeAnswerCell: UITableViewCell {
             make.leading.equalTo(self.contentLabel.snp.trailing).offset(12.0)
             make.width.height.equalTo(76.0)
             make.trailing.equalToSuperview().inset(20.0)
+            make.top.equalTo(contentLabel)
         }
         
         self.commentCountLabel.snp.makeConstraints { make in
@@ -92,8 +108,26 @@ final class CafeAnswerCell: UITableViewCell {
         
         self.commentImageView.snp.makeConstraints { make in
             make.trailing.equalTo(self.commentCountLabel.snp.leading).offset(-6.0)
-            make.top.equalTo(self.attachedImageView.snp.bottom).offset(11.0)
+            make.width.height.equalTo(14.0)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    func update(with comment: Comment) {
+        if let url = comment.writer.profileImage {
+            self.writerProfileImageView.kf.setImage(
+                with: URL(string: url),
+                placeholder: Constants.profileDefaultImage
+            )
+        } else {
+            writerProfileImageView.image = Constants.profileDefaultImage
+        }
+        self.writerNameLabel.text = comment.writer.name
+        contentLabel.text = comment.content
+        commentCountLabel.text = comment.replyCount != 0 ? "\(comment.replyCount)" : ""
+        attachedImageView.kf.setImage(
+            with: URL(string: comment.getImageURLs().first ?? ""),
+            placeholder: Constants.commentEmptyImage
+        )
     }
 }

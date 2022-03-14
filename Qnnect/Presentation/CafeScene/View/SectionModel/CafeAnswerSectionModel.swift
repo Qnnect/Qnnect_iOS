@@ -11,11 +11,13 @@ import RxDataSources
 enum CafeAnswerSectionModel {
     case questionSection(title: String, items: [CafeAnswerSectionItem])
     case answerWritingSection(title: String, items: [CafeAnswerSectionItem])
+    case answerSection(title: String, items: [CafeAnswerSectionItem])
 }
 
 enum CafeAnswerSectionItem {
     case questionSectionItem(question: Question)
     case answerWritingSectionItem(user: User)
+    case answerSectionItem(comment: Comment)
 }
 
 extension CafeAnswerSectionItem: IdentifiableType, Equatable {
@@ -52,6 +54,8 @@ extension CafeAnswerSectionModel: AnimatableSectionModelType {
             self = .questionSection(title: title, items: items)
         case .answerWritingSection(title: let title, _):
             self = .answerWritingSection(title: title, items: items)
+        case .answerSection(title: let title, _):
+            self = .answerSection(title: title, items: items)
         }
     }
     
@@ -63,7 +67,8 @@ extension CafeAnswerSectionModel: AnimatableSectionModelType {
             return items
         case .answerWritingSection(_, let items):
             return items
-            
+        case .answerSection(_, let items):
+            return items
         }
     }
 }

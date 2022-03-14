@@ -18,4 +18,14 @@ struct Comment {
     let imageUrl5: String?
     let writer: User
     let replyCount: Int
+    
+    func getImageURLs() -> [String] {
+        [
+            imageUrl1,
+            imageUrl2,
+            imageUrl3,
+            imageUrl4,
+            imageUrl5
+        ].compactMap { $0 }
+    }
 }

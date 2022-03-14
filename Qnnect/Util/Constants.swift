@@ -61,6 +61,11 @@ struct Constants {
     
     //bottom Sheet
     static let bottomSheetHorizontalMargin: CGFloat = 20.0
+    
+    //Cafe Answer
+    static let answerCellHeight: CGFloat = 130.0
+    static let answerCellSpacing: CGFloat = 17.0
+    
     // MARK: - Image
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
@@ -86,7 +91,7 @@ struct Constants {
     static let navigationCheckedHeartIcon: UIImage? = UIImage(named: "navigation_heart_checked")?.withRenderingMode(.alwaysOriginal)
     static let navigationScrapIcon: UIImage? = UIImage(named: "navigation_scrap")?.withRenderingMode(.alwaysOriginal)
     static let navigationCheckedScrapIcon: UIImage? = UIImage(named: "navigation_scrap_checked")?.withRenderingMode(.alwaysOriginal)
-    
+    static let commentEmptyImage: UIImage? = UIImage(named: "comment_empty")?.withRenderingMode(.alwaysOriginal)
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
     static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")?.withAlignmentRectInsets(.init(top: -12.0, left: -12.0, bottom: 0.0, right: 0))

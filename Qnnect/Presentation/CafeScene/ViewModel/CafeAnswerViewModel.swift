@@ -51,6 +51,7 @@ final class CafeAnswerViewModel: ViewModelType {
                 return (comments,question)
             }
             .share()
+            .debug()
         
         let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
             

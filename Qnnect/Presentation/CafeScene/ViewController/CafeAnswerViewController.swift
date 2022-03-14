@@ -24,6 +24,10 @@ final class CafeAnswerViewController: BaseViewController {
             CafeAnswerWritingCell.self,
             forCellReuseIdentifier: CafeAnswerWritingCell.identifier
         )
+        $0.register(
+            CafeAnswerCell.self,
+            forCellReuseIdentifier: CafeAnswerCell.identifier
+        )
     }
     
     private let likeButton = UIButton().then {
@@ -125,19 +129,20 @@ final class CafeAnswerViewController: BaseViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.comments
-            .drive(onNext: {
-                print("comments : \($0)")
-            })
-            .disposed(by: self.disposeBag)
         
-        Observable.combineLatest(output.question.asObservable(), Observable.just(user))
-            .map { question,user -> [CafeAnswerSectionModel] in
+        Observable.combineLatest(
+            output.question.asObservable(),
+            Observable.just(user),
+            output.comments.asObservable()
+        )
+            .map { question, user, comments -> [CafeAnswerSectionModel] in
                 let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question)
                 let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
+                let answerSectionItem = comments.map {CafeAnswerSectionItem.answerSectionItem(comment: $0)}
                 return [
                     CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
-                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
+                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem]),
+                    CafeAnswerSectionModel.answerSection(title: "", items: answerSectionItem)
                 ]
             }.bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
@@ -150,10 +155,8 @@ extension CafeAnswerViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             return 180.0
         }
-        return 130.0
+        return Constants.answerCellHeight + Constants.answerCellSpacing
     }
-    
-    
 }
 
 private extension CafeAnswerViewController {
@@ -175,6 +178,13 @@ private extension CafeAnswerViewController {
                     for: indexPath
                 ) as! CafeAnswerWritingCell
                 cell.update(with: user)
+                return cell
+            case .answerSectionItem(comment: let comment):
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: CafeAnswerCell.identifier,
+                    for: indexPath
+                ) as! CafeAnswerCell
+                cell.update(with: comment)
                 return cell
             }
         }
