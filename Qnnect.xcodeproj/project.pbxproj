@@ -185,6 +185,8 @@
 		AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAD727DF95650096376B /* CommentAttachImageCell.swift */; };
 		AEB5AADA27DF960E0096376B /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAD927DF960E0096376B /* ReplyCell.swift */; };
 		AEB5AADC27DF9D370096376B /* CommentSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADB27DF9D370096376B /* CommentSectionModel.swift */; };
+		AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADD27DFC0780096376B /* ReplyAPI.swift */; };
+		AEB5AAE027DFC14D0096376B /* ReplyNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -424,6 +426,8 @@
 		AEB5AAD727DF95650096376B /* CommentAttachImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAttachImageCell.swift; sourceTree = "<group>"; };
 		AEB5AAD927DF960E0096376B /* ReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		AEB5AADB27DF9D370096376B /* CommentSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionModel.swift; sourceTree = "<group>"; };
+		AEB5AADD27DFC0780096376B /* ReplyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAPI.swift; sourceTree = "<group>"; };
+		AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyNetworkService.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1196,6 +1200,7 @@
 				AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */,
 				AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */,
 				AEB5AAC527DF36AA0096376B /* IngredientAPI.swift */,
+				AEB5AADD27DFC0780096376B /* ReplyAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1349,6 +1354,7 @@
 				AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */,
 				AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */,
 				AEB5AACA27DF37FA0096376B /* StoreNetworkService.swift */,
+				AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1536,6 +1542,7 @@
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
 				AEA14D1B27D33A160009EEC6 /* CafeResponseDTO.swift in Sources */,
 				AE02D82527D760B60019D955 /* CafeAnswerQuestionCell.swift in Sources */,
+				AEB5AAE027DFC14D0096376B /* ReplyNetworkService.swift in Sources */,
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */,
 				AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */,
@@ -1710,6 +1717,7 @@
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */,
 				AE02D81B27D729D60019D955 /* CafeQuestionEmptyCell.swift in Sources */,
+				AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */,
 				AE02D81627D62C710019D955 /* CafeInvitationViewController.swift in Sources */,
 				AE02D82B27D76B160019D955 /* CafeAnswerSectionModel.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,

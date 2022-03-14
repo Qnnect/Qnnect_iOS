@@ -14,6 +14,8 @@ final class CommentViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>
         let commentId: Observable<Int>
+        /// string: inputText
+        let didTapSendButton: Observable<String>
     }
     
     struct Output {
@@ -33,8 +35,17 @@ final class CommentViewModel: ViewModelType {
     }
     
     func transform(from input: Input) -> Output {
+       
+        let createReply = input.didTapSendButton
+            .withLatestFrom(input.commentId,resultSelector: { ($1, $0) })
+            .flatMap(commentUseCase.createReply)
+            .compactMap {
+                result -> Void? in
+                guard case .success(_) = result else { return  nil }
+                return Void()
+            }
         
-        let fetchedCommentWithReplies = input.viewDidLoad
+        let fetchedCommentWithReplies = Observable.merge(input.viewDidLoad, createReply)
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.fetchComment)
             .compactMap({ result -> (comment: Comment, replies: [Reply])? in
@@ -42,6 +53,10 @@ final class CommentViewModel: ViewModelType {
                 return data
             })
             .share()
+        
+       
+        
+       
         
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),

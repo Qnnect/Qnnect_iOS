@@ -11,9 +11,13 @@ import RxSwift
 final class DefaultCommentRepository: CommentRepository {
     
     private let commentNetworkService: CommentNetworkService
-    
-    init(commentNetworkService: CommentNetworkService) {
+    private let replyNetworkService: ReplyNetworkService
+    init(
+        commentNetworkService: CommentNetworkService,
+        replyNetworkService: ReplyNetworkService
+    ) {
         self.commentNetworkService = commentNetworkService
+        self.replyNetworkService = replyNetworkService
     }
     
     func createComment(
@@ -36,5 +40,9 @@ final class DefaultCommentRepository: CommentRepository {
                     return .failure(error)
                 }
             }
+    }
+    
+    func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>> {
+        replyNetworkService.createReply(commentId, content)
     }
 }

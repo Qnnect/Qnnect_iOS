@@ -121,22 +121,16 @@ final class CommentViewController: BaseViewController {
         
         let input = CommentViewModel.Input(
             viewDidLoad: Observable.just(()),
-            commentId: Observable.just(commentId)
+            commentId: Observable.just(commentId),
+            didTapSendButton: sendButton.rx.tap
+                .withLatestFrom(inputTextView.rx.text.orEmpty)
+                .asObservable()
         )
         
         let output = viewModel.transform(from: input)
         
-        output.comment
-            .drive(onNext: {
-                print("comment",$0)
-            }).disposed(by: self.disposeBag)
-        
-        output.replies
-            .drive(onNext: {
-                print("replies",$0)
-            }).disposed(by: self.disposeBag)
-        
         let dataSource = createDataSource()
+        
         Observable.combineLatest(
             output.comment.asObservable(),
             output.replies.asObservable()

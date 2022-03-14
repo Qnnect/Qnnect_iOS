@@ -109,7 +109,10 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int) {
-        let commentRepository = DefaultCommentRepository(commentNetworkService: CommentNetworkService())
+        let commentRepository = DefaultCommentRepository(
+            commentNetworkService: CommentNetworkService(),
+            replyNetworkService: ReplyNetworkService()
+        )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
         let viewModel = CafeAnswerWritingViewModel(coordinator: self, commentUseCase: commentUseCase)
         let vc = CafeAnswerWritingViewController.create(
@@ -151,7 +154,10 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showCommentScene(_ commentId: Int) {
-        let commentRepository = DefaultCommentRepository(commentNetworkService: CommentNetworkService())
+        let commentRepository = DefaultCommentRepository(
+            commentNetworkService: CommentNetworkService(),
+            replyNetworkService: ReplyNetworkService()
+        )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
         let viewModel = CommentViewModel(coordinator: self, commentUseCase: commentUseCase)
         let vc = CommentViewController.create(
