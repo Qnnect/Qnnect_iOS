@@ -15,6 +15,8 @@ protocol CommentUseCase: AnyObject {
         _ images: [Data?],
         _ content: String
     ) -> Observable<Result<Void,Error>>
+    
+    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]),Error>>
 }
 
 final class DefaultCommentUseCase: CommentUseCase {
@@ -34,5 +36,9 @@ final class DefaultCommentUseCase: CommentUseCase {
         let images = images.compactMap{ $0 }
         
         return commentRepository.createComment(cafeId, questionId, images, content)
+    }
+    
+    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]), Error>> {
+        commentRepository.fetchComment(commentId)
     }
 }

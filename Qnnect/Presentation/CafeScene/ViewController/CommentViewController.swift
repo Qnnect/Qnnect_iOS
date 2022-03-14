@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class CommentViewController: BaseViewController {
     
@@ -34,5 +35,22 @@ final class CommentViewController: BaseViewController {
     
     override func bind() {
         super.bind()
+        
+        let input = CommentViewModel.Input(
+            viewDidLoad: Observable.just(()),
+            commentId: Observable.just(commentId)
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.comment
+            .drive(onNext: {
+                print("comment",$0)
+            }).disposed(by: self.disposeBag)
+        
+        output.replies
+            .drive(onNext: {
+                print("replies",$0)
+            }).disposed(by: self.disposeBag)
     }
 }

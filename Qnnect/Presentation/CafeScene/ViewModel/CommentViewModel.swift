@@ -12,11 +12,13 @@ import RxCocoa
 final class CommentViewModel: ViewModelType {
     
     struct Input {
-        
+        let viewDidLoad: Observable<Void>
+        let commentId: Observable<Int>
     }
     
     struct Output {
-        
+        let comment: Driver<Comment>
+        let replies: Driver<[Reply]>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -32,6 +34,18 @@ final class CommentViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        return Output()
+        let fetchedCommentWithReplies = input.viewDidLoad
+            .withLatestFrom(input.commentId)
+            .flatMap(commentUseCase.fetchComment)
+            .compactMap({ result -> (comment: Comment, replies: [Reply])? in
+                guard case let .success(data) = result else { return nil }
+                return data
+            })
+            .share()
+        
+        return Output(
+            comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),
+            replies: fetchedCommentWithReplies.map { $0.replies}.asDriver(onErrorJustReturn: [])
+        )
     }
 }

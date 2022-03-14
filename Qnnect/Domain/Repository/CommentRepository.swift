@@ -15,4 +15,6 @@ protocol CommentRepository: AnyObject {
         _ images: [Data],
         _ content: String
     ) -> Observable<Result<Void,Error>>
+    
+    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]),Error>>
 }
