@@ -34,21 +34,21 @@ final class CafeAnswerViewController: BaseViewController {
         $0.setImage(Constants.navigationScrapIcon, for: .normal)
     }
     
-    private var question: Question!
+    private var questionId: Int!
     private var user: User!
     private var viewModel: CafeAnswerViewModel!
     private var cafeId: Int!
     
     static func create(
         with viewModel: CafeAnswerViewModel,
-        _ question: Question,
+        _ questionId: Int,
         _ cafeId: Int,
         _ user: User
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
-        vc.question = question
         vc.cafeId = cafeId
+        vc.questionId = questionId
         vc.user = user
         return vc
     }
@@ -77,16 +77,16 @@ final class CafeAnswerViewController: BaseViewController {
     }
     
     override func bind() {
-        Observable.zip(Observable.just(self.question),Observable.just(self.user))
-            .map { question,user -> [CafeAnswerSectionModel] in
-                let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question!)
-                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
-                return [
-                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
-                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
-                ]
-            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
-            .disposed(by: self.disposeBag)
+        //        Observable.zip(Observable.just(self.question),Observable.just(self.user))
+        //            .map { question,user -> [CafeAnswerSectionModel] in
+        //                let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question!)
+        //                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
+        //                return [
+        //                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
+        //                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
+        //                ]
+        //            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
+        //            .disposed(by: self.disposeBag)
         
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
@@ -95,7 +95,6 @@ final class CafeAnswerViewController: BaseViewController {
             didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
                 .filter { $0.section == 1 }
                 .mapToVoid(),
-            question: Observable.just(question),
             user: Observable.just(user),
             didTapScrapButton: self.scrapButton.rx.tap.scan(
                 false,
@@ -103,7 +102,9 @@ final class CafeAnswerViewController: BaseViewController {
             ).do {
                 print("scrap",$0)
             },
-            cafeId: Observable.just(cafeId)
+            cafeId: Observable.just(cafeId),
+            questionId: Observable.just(questionId),
+            viewWillAppear: rx.viewWillAppear.mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -125,6 +126,24 @@ final class CafeAnswerViewController: BaseViewController {
                 self?.scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
             })
             .disposed(by: self.disposeBag)
+        
+        output.comments
+            .drive(onNext: {
+                print("comments : \($0)")
+            })
+            .disposed(by: self.disposeBag)
+        
+        Observable.combineLatest(output.question.asObservable(), Observable.just(user))
+            .map { question,user -> [CafeAnswerSectionModel] in
+                let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question)
+                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
+                return [
+                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
+                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem])
+                ]
+            }.bind(to: self.mainTableView.rx.items(dataSource: self.createDataSource()))
+            .disposed(by: self.disposeBag)
+
     }
 }
 

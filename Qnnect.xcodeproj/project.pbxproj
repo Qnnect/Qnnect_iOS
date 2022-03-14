@@ -166,6 +166,11 @@
 		AEA7266D27DE44EB00F48CB8 /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */; };
 		AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */; };
 		AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7267127DE58B100F48CB8 /* CommentNetworkService.swift */; };
+		AEB5AAB427DEFCF50096376B /* QuestionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */; };
+		AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */; };
+		AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */; };
+		AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABA27DEFEF20096376B /* QuestionFetchResponseDTO.swift */; };
+		AEB5AABD27DEFF050096376B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABC27DEFF050096376B /* Comment.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -386,6 +391,11 @@
 		AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
 		AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateRequestDTO.swift; sourceTree = "<group>"; };
 		AEA7267127DE58B100F48CB8 /* CommentNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNetworkService.swift; sourceTree = "<group>"; };
+		AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAPI.swift; sourceTree = "<group>"; };
+		AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionNetworkService.swift; sourceTree = "<group>"; };
+		AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponseDTO.swift; sourceTree = "<group>"; };
+		AEB5AABA27DEFEF20096376B /* QuestionFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AEB5AABC27DEFF050096376B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -583,6 +593,7 @@
 				AE77C84927DB274300E8D0EC /* Drink.swift */,
 				AE77C85E27DB64AC00E8D0EC /* ScrapedQuestion.swift */,
 				AE77C86127DB6C4E00E8D0EC /* CafeTag.swift */,
+				AEB5AABC27DEFF050096376B /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1106,8 +1117,17 @@
 			isa = PBXGroup;
 			children = (
 				AEA7266F27DE54DC00F48CB8 /* CommentCreateRequestDTO.swift */,
+				AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */,
 			);
 			path = Comment;
+			sourceTree = "<group>";
+		};
+		AEB5AAB927DEFEE20096376B /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				AEB5AABA27DEFEF20096376B /* QuestionFetchResponseDTO.swift */,
+			);
+			path = Question;
 			sourceTree = "<group>";
 		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
@@ -1120,6 +1140,7 @@
 				AE77C83027DA053E00E8D0EC /* ScrapAPI.swift */,
 				AE77C84027DB221A00E8D0EC /* DrinkAPI.swift */,
 				AEA7266C27DE44EB00F48CB8 /* CommentAPI.swift */,
+				AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1127,6 +1148,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5AAB927DEFEE20096376B /* Question */,
 				AEA7266E27DE54CD00F48CB8 /* Comment */,
 				AE77C84427DB265600E8D0EC /* Drink */,
 				AE77C83227DA056C00E8D0EC /* Scrap */,
@@ -1268,6 +1290,7 @@
 				AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */,
 				AE77C83527DA068700E8D0EC /* ScrapNetworkService.swift */,
 				AE77C84227DB234A00E8D0EC /* DrinkNetworkService.swift */,
+				AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1423,6 +1446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */,
+				AEB5AAB427DEFCF50096376B /* QuestionAPI.swift in Sources */,
 				AEA14CF727CF024E0009EEC6 /* ReissueResponseDTO.swift in Sources */,
 				AEA14D4E27D4B0EF0009EEC6 /* CafeSectionModel.swift in Sources */,
 				AEA14D0827CFB8030009EEC6 /* DefaultUserRepository.swift in Sources */,
@@ -1454,10 +1478,12 @@
 				AE02D82527D760B60019D955 /* CafeAnswerQuestionCell.swift in Sources */,
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */,
+				AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
+				AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
@@ -1509,6 +1535,7 @@
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AE02D82927D767B80019D955 /* CafeAnswerWritingCell.swift in Sources */,
 				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,
+				AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
@@ -1548,6 +1575,7 @@
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
+				AEB5AABD27DEFF050096376B /* Comment.swift in Sources */,
 				AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */,
 				AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */,
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,

@@ -100,7 +100,7 @@ final class CafeRoomViewModel: ViewModelType {
             })
             .do {
                 [weak self] question,user, cafeId in
-                self?.coordinator?.showCafeAnswerScene(question, user, cafeId)
+                self?.coordinator?.showCafeAnswerScene(question.id, user, cafeId)
             }
             .mapToVoid()
         

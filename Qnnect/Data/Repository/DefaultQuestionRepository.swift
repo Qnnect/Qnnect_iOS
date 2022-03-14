@@ -11,11 +11,14 @@ import RxSwift
 final class DefaultQuestionRepository: QuestionRepository {
     
     private let scrapNetworkService: ScrapNetworkService
+    private let questionNetworkService: QuestionNetworkService
     
     init(
-        scrapNetworkService: ScrapNetworkService
+        scrapNetworkService: ScrapNetworkService,
+        questionNetworkService: QuestionNetworkService
     ) {
         self.scrapNetworkService = scrapNetworkService
+        self.questionNetworkService = questionNetworkService
     }
     
     func scrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
@@ -67,6 +70,24 @@ final class DefaultQuestionRepository: QuestionRepository {
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.map{$0.toDomain()})
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchQuestion(_ questionId: Int) -> Observable<Result<(comments: [Comment], question: Question), Error>> {
+        questionNetworkService.fetchQuestion(questionId)
+            .map {
+                result -> Result<(comments: [Comment], question: Question),Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(
+                        (
+                            responseDTO.comments.map { $0.toDomain()},
+                            responseDTO.questionMainResponse.toDomain()
+                        )
+                    )
                 case .failure(let error):
                     return .failure(error)
                 }

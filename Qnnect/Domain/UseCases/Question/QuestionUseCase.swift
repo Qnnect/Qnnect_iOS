@@ -14,6 +14,7 @@ protocol QuestionUseCase: AnyObject {
     func fetchAllScrap(_ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
     func fetchScrap(_ cafeId: Int, _ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
     func fetchCafes() -> Observable<Result<[CafeTag],Error>>
+    func fetchQuestion(_ questionId: Int) -> Observable<Result<(comments: [Comment], question: Question), Error>>
 }
 
 final class DefaultQuestionUseCase: QuestionUseCase {
@@ -42,5 +43,9 @@ final class DefaultQuestionUseCase: QuestionUseCase {
     
     func fetchCafes() -> Observable<Result<[CafeTag], Error>> {
         questionRepository.fetchCafes()
+    }
+    
+    func fetchQuestion(_ questionId: Int) -> Observable<Result<(comments: [Comment], question: Question), Error>> {
+        questionRepository.fetchQuestion(questionId)
     }
 }

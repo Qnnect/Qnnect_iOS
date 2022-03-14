@@ -14,4 +14,5 @@ protocol QuestionRepository: AnyObject {
     func fetchAllScrap(_ page: Int, _ size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
     func fetchScrap(_ cafeId: Int, _ page: Int, _ size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
     func fetchCafes() -> Observable<Result<[CafeTag],Error>>
+    func fetchQuestion(_ questionId: Int) -> Observable<Result<(comments: [Comment], question: Question), Error>>
 }

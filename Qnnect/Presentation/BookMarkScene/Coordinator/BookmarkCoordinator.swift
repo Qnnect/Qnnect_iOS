@@ -22,7 +22,10 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
     }
     
     func start() {
-        let questionRepository = DefaultQuestionRepository(scrapNetworkService: ScrapNetworkService())
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService()
+        )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = BookmarkViewModel(coordinator: self,questionUseCase: questionUseCase)
         let vc = BookmarkViewController.create(with: viewModel)

@@ -13,17 +13,20 @@ final class CafeAnswerViewModel: ViewModelType {
     
     struct Input {
         let didTapAnswerWritingCell: Observable<Void>
-        let question: Observable<Question>
         let user: Observable<User>
         /// Bool: true: 스크랩하기 , false: 스크랩 취소하기
         let didTapScrapButton: Observable<Bool>
         let cafeId: Observable<Int>
+        let questionId: Observable<Int>
+        let viewWillAppear: Observable<Void>
     }
     
     struct Output {
         let showAnswerWritingScene: Signal<Void>
         let scrap: Signal<Void>
         let cancleScrap: Signal<Void>
+        let comments: Driver<[Comment]>
+        let question: Driver<Question>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -39,8 +42,21 @@ final class CafeAnswerViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
+        let fetchedQuestionWithComments = input.viewWillAppear
+            .withLatestFrom(input.questionId)
+            .flatMap(questionUseCase.fetchQuestion(_:))
+            .debug("fetchedQuestionwithComments", trimOutput: true)
+            .compactMap { result -> (comments: [Comment], question: Question)? in
+                guard case let .success((comments, question)) = result else { return nil }
+                return (comments,question)
+            }
+            .share()
+        
+        let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
+            
+        
         let showAnswerWritingScene = input.didTapAnswerWritingCell
-            .withLatestFrom(Observable.combineLatest(input.question, input.user, input.cafeId))
+            .withLatestFrom(Observable.combineLatest(fetchedQuestion, input.user, input.cafeId))
             .do {
                 [weak self] question, user, cafeId in
                 self?.coordinator?.showCafeAnswerWritingScene(question, user, cafeId)
@@ -49,7 +65,7 @@ final class CafeAnswerViewModel: ViewModelType {
         
         let scrap = input.didTapScrapButton
             .filter { $0 }
-            .withLatestFrom(input.question.map{ $0.id })
+            .withLatestFrom(fetchedQuestion.map{ $0.id })
             .flatMap(self.questionUseCase.scrap)
             .compactMap {
                 result -> Void? in
@@ -59,7 +75,7 @@ final class CafeAnswerViewModel: ViewModelType {
         
         let cancleScrap = input.didTapScrapButton
             .filter{ !$0 }
-            .withLatestFrom(input.question.map{ $0.id })
+            .withLatestFrom(fetchedQuestion.map{ $0.id })
             .flatMap(self.questionUseCase.cancleScrap)
             .compactMap {
                  result -> Void? in
@@ -71,9 +87,11 @@ final class CafeAnswerViewModel: ViewModelType {
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
             scrap: Observable.merge(
                 scrap,
-                input.question.filter { $0.scraped }.mapToVoid()
+                fetchedQuestion.filter { $0.scraped }.mapToVoid()
             ).asSignal(onErrorSignalWith: .empty()),
-            cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty())
+            cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty()),
+            comments: fetchedQuestionWithComments.map { $0.comments }.asDriver(onErrorJustReturn: []),
+            question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty())
         )
     }
 }
