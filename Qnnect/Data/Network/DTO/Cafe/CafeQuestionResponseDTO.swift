@@ -13,9 +13,7 @@ struct CafeQuestionResponseDTO: Decodable {
     let question: String
     let questioner: String
     let cafeQuestionId: Int
-    let scraped: Bool
     let writer: Bool
-    let liked: Bool
     
     func toDomain() -> Question {
         return Question(
@@ -23,9 +21,7 @@ struct CafeQuestionResponseDTO: Decodable {
             daysLeft: self.daysLeft,
             question: self.question,
             questioner: self.questioner,
-            id:  self.cafeQuestionId,
-            liked: self.liked,
-            scraped: self.scraped,
+            id: self.cafeQuestionId,
             writer: self.writer
         )
     }

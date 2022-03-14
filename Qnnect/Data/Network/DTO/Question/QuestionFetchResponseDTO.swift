@@ -10,4 +10,6 @@ import Foundation
 struct QuestionFetchResponseDTO: Decodable {
     let comments: [CommentResponseDTO]
     let questionMainResponse: CafeQuestionResponseDTO
+    let liked: Bool
+    let scraped: Bool
 }

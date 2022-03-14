@@ -51,9 +51,9 @@ final class CafeAnswerViewModel: ViewModelType {
             .withLatestFrom(input.questionId)
             .flatMap(questionUseCase.fetchQuestion(_:))
             .debug("fetchedQuestionwithComments", trimOutput: true)
-            .compactMap { result -> (comments: [Comment], question: Question)? in
-                guard case let .success((comments, question)) = result else { return nil }
-                return (comments,question)
+            .compactMap { result -> (comments: [Comment], question: Question, liked: Bool, scraped: Bool)? in
+                guard case let .success((comments, question, liked, scraped)) = result else { return nil }
+                return (comments, question, liked, scraped)
             }
             .share()
             .debug()
@@ -67,7 +67,8 @@ final class CafeAnswerViewModel: ViewModelType {
             }
         
         let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
-            
+        let liked = fetchedQuestionWithComments.map { $0.liked }
+        let scraped = fetchedQuestionWithComments.map { $0.scraped }
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
             .withLatestFrom(Observable.combineLatest(fetchedQuestion, user, input.cafeId))
@@ -107,7 +108,7 @@ final class CafeAnswerViewModel: ViewModelType {
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
             scrap: Observable.merge(
                 scrap,
-                fetchedQuestion.filter { $0.scraped }.mapToVoid()
+                scraped.filter{ $0 }.mapToVoid()
             ).asSignal(onErrorSignalWith: .empty()),
             cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty()),
             comments: fetchedQuestionWithComments.map { $0.comments }.asDriver(onErrorJustReturn: []),
