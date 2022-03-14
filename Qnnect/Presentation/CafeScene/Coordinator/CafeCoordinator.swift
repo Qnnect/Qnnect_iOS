@@ -18,6 +18,7 @@ protocol CafeCoordinator: Coordinator {
     func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
+    func showCommentScene(_ commentId: Int)
     func dismissAlert()
     func dismiss()
     func leaveCafe()
@@ -136,6 +137,17 @@ final class DefaultGroupCoordinator: CafeCoordinator {
             cafeUseCase: cafeUseCase
         )
         let vc = WriteQuestionViewController.create(with: viewModel, cafeId)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showCommentScene(_ commentId: Int) {
+        let commentRepository = DefaultCommentRepository(commentNetworkService: CommentNetworkService())
+        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
+        let viewModel = CommentViewModel(coordinator: self, commentUseCase: commentUseCase)
+        let vc = CommentViewController.create(
+            with: viewModel,
+            commentId
+        )
         self.navigationController.pushViewController(vc, animated: true)
     }
     

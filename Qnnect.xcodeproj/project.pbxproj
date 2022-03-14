@@ -171,6 +171,8 @@
 		AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */; };
 		AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABA27DEFEF20096376B /* QuestionFetchResponseDTO.swift */; };
 		AEB5AABD27DEFF050096376B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABC27DEFF050096376B /* Comment.swift */; };
+		AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AABE27DF1BD40096376B /* CommentViewController.swift */; };
+		AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -396,6 +398,8 @@
 		AEB5AAB727DEFDC80096376B /* CommentResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponseDTO.swift; sourceTree = "<group>"; };
 		AEB5AABA27DEFEF20096376B /* QuestionFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFetchResponseDTO.swift; sourceTree = "<group>"; };
 		AEB5AABC27DEFF050096376B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		AEB5AABE27DF1BD40096376B /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -758,6 +762,7 @@
 				AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */,
 				AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */,
 				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
+				AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -782,6 +787,7 @@
 				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
 				AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */,
 				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
+				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1508,6 +1514,7 @@
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
+				AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */,
 				AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */,
 				AE02D82727D763F90019D955 /* CafeAnswerCell.swift in Sources */,
 				AE02D80827D5CD1E0019D955 /* DefaultHomeRepository.swift in Sources */,
@@ -1585,6 +1592,7 @@
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
+				AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,

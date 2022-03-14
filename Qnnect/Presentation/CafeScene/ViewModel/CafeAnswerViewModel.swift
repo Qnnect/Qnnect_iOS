@@ -19,6 +19,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let questionId: Observable<Int>
         let viewWillAppear: Observable<Void>
+        let didTapAnswerCell: Observable<Comment>
     }
     
     struct Output {
@@ -27,6 +28,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let cancleScrap: Signal<Void>
         let comments: Driver<[Comment]>
         let question: Driver<Question>
+        let showCommentScene: Signal<Void>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -84,6 +86,12 @@ final class CafeAnswerViewModel: ViewModelType {
                 return Void()
             }
         
+        let showCommentScene = input.didTapAnswerCell
+            .do {
+                [weak self] comment in
+                self?.coordinator?.showCommentScene(comment.id)
+            }.mapToVoid()
+        
         return Output(
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
             scrap: Observable.merge(
@@ -92,7 +100,8 @@ final class CafeAnswerViewModel: ViewModelType {
             ).asSignal(onErrorSignalWith: .empty()),
             cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty()),
             comments: fetchedQuestionWithComments.map { $0.comments }.asDriver(onErrorJustReturn: []),
-            question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty())
+            question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty()),
+            showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

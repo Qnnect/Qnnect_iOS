@@ -81,6 +81,7 @@ final class CafeAnswerViewController: BaseViewController {
     }
     
     override func bind() {
+        
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
@@ -91,6 +92,7 @@ final class CafeAnswerViewController: BaseViewController {
             reloadAnimation: .none,
             deleteAnimation: .automatic
         )
+        
         dataSource.decideViewTransition = { (_, _, _)  in return RxDataSources.ViewTransition.reload }
         
         let input = CafeAnswerViewModel.Input(
@@ -106,7 +108,12 @@ final class CafeAnswerViewController: BaseViewController {
             },
             cafeId: Observable.just(cafeId),
             questionId: Observable.just(questionId),
-            viewWillAppear: rx.viewWillAppear.mapToVoid()
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
+            didTapAnswerCell: mainTableView.rx.modelSelected(CafeAnswerSectionItem.self)
+                .compactMap { item -> Comment? in
+                    guard case let CafeAnswerSectionItem.answerSectionItem(comment) = item else { return nil }
+                    return comment
+            }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -129,6 +136,9 @@ final class CafeAnswerViewController: BaseViewController {
             })
             .disposed(by: self.disposeBag)
         
+        output.showCommentScene
+            .emit()
+            .disposed(by: self.disposeBag)
         
         Observable.combineLatest(
             output.question.asObservable(),
