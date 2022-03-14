@@ -14,7 +14,7 @@ protocol CafeCoordinator: Coordinator {
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
-    func showCafeAnswerScene(_ questionId: Int, _ user: User, _ cafeId: Int)
+    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int)
     func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
@@ -24,7 +24,7 @@ protocol CafeCoordinator: Coordinator {
     func leaveCafe()
 }
 
-final class DefaultGroupCoordinator: CafeCoordinator {
+final class DefaultCafeCoordinator: CafeCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
@@ -82,18 +82,26 @@ final class DefaultGroupCoordinator: CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ questionId: Int, _ user: User, _ cafeId: Int) {
+    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int) {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
             questionNetworkService: QuestionNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
-        let viewModel = CafeAnswerViewModel(coordinator: self,questionUseCase: questionUseCase)
+        let userRepository = DefaultUserRepositry(
+            userNetworkService: UserNetworkService(),
+            localStorage: DefaultUserDefaultManager()
+        )
+        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
+        let viewModel = CafeAnswerViewModel(
+            coordinator: self,
+            questionUseCase: questionUseCase,
+            userUseCase: userUseCase
+        )
         let vc = CafeAnswerViewController.create(
             with: viewModel,
             questionId,
-            cafeId,
-            user
+            cafeId
         )
         self.navigationController.pushViewController(vc, animated: true)
     }

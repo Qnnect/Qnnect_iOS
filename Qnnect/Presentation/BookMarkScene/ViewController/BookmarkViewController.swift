@@ -94,7 +94,10 @@ final class BookmarkViewController: BaseViewController {
                     return self?.tagCollectionView.cafes?[index] ?? CafeTag(cafeId: 0, cafeTitle: "전체")
                 }.startWith(CafeTag(cafeId: 0, cafeTitle: "전체")),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
-                .map{ $0[0] as! Int}
+                .map{ $0[0] as! Int},
+            didTapQuestion: bookmarkTableView.rx.modelSelected(ScrapedQuestion.self)
+                .map { $0.cafeQuestionId }
+            
         )
         
         
@@ -129,6 +132,10 @@ final class BookmarkViewController: BaseViewController {
                     self?.isFetched = true
                 }
             }).disposed(by: self.disposeBag)
+        
+        output.showCafeAnswerScene
+            .emit()
+            .disposed(by: self.disposeBag)
     }
     
 }

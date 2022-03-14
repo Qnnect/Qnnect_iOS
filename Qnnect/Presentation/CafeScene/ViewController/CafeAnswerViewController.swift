@@ -39,21 +39,18 @@ final class CafeAnswerViewController: BaseViewController {
     }
     
     private var questionId: Int!
-    private var user: User!
     private var viewModel: CafeAnswerViewModel!
     private var cafeId: Int!
     
     static func create(
         with viewModel: CafeAnswerViewModel,
         _ questionId: Int,
-        _ cafeId: Int,
-        _ user: User
+        _ cafeId: Int
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
         vc.questionId = questionId
-        vc.user = user
         return vc
     }
     
@@ -99,7 +96,6 @@ final class CafeAnswerViewController: BaseViewController {
             didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
                 .filter { $0.section == 1 }
                 .mapToVoid(),
-            user: Observable.just(user),
             didTapScrapButton: self.scrapButton.rx.tap.scan(
                 false,
                 accumulator: { lastState, newValue in !lastState }
@@ -142,12 +138,12 @@ final class CafeAnswerViewController: BaseViewController {
         
         Observable.combineLatest(
             output.question.asObservable(),
-            Observable.just(user),
+            output.user.asObservable(),
             output.comments.asObservable()
         )
             .map { question, user, comments -> [CafeAnswerSectionModel] in
                 let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question)
-                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user!)
+                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user)
                 let answerSectionItem = comments.map {CafeAnswerSectionItem.answerSectionItem(comment: $0)}
                 return [
                     CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),

@@ -13,7 +13,6 @@ final class CafeAnswerViewModel: ViewModelType {
     
     struct Input {
         let didTapAnswerWritingCell: Observable<Void>
-        let user: Observable<User>
         /// Bool: true: 스크랩하기 , false: 스크랩 취소하기
         let didTapScrapButton: Observable<Bool>
         let cafeId: Observable<Int>
@@ -29,17 +28,21 @@ final class CafeAnswerViewModel: ViewModelType {
         let comments: Driver<[Comment]>
         let question: Driver<Question>
         let showCommentScene: Signal<Void>
+        let user: Driver<User>
     }
     
     private weak var coordinator: CafeCoordinator?
     private let questionUseCase: QuestionUseCase
+    private let userUseCase: UserUseCase
     
     init(
         coordinator: CafeCoordinator,
-        questionUseCase: QuestionUseCase
+        questionUseCase: QuestionUseCase,
+        userUseCase: UserUseCase
     ) {
         self.coordinator = coordinator
         self.questionUseCase = questionUseCase
+        self.userUseCase = userUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -55,11 +58,19 @@ final class CafeAnswerViewModel: ViewModelType {
             .share()
             .debug()
         
+        let user = input.viewWillAppear
+            .flatMap(userUseCase.fetchUser)
+            .compactMap{
+                result -> User? in
+                guard case let .success(user) = result else { return nil}
+                return user
+            }
+        
         let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
             
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
-            .withLatestFrom(Observable.combineLatest(fetchedQuestion, input.user, input.cafeId))
+            .withLatestFrom(Observable.combineLatest(fetchedQuestion, user, input.cafeId))
             .do {
                 [weak self] question, user, cafeId in
                 self?.coordinator?.showCafeAnswerWritingScene(question, user, cafeId)
@@ -101,7 +112,8 @@ final class CafeAnswerViewModel: ViewModelType {
             cancleScrap: cancleScrap.asSignal(onErrorSignalWith: .empty()),
             comments: fetchedQuestionWithComments.map { $0.comments }.asDriver(onErrorJustReturn: []),
             question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty()),
-            showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty())
+            showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty()),
+            user: user.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

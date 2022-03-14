@@ -20,6 +20,8 @@ final class BookmarkViewModel: ViewModelType {
         let didTapCafeTag: Observable<CafeTag>
         /// Int: Page
         let moreFetch: Observable<Int>
+        /// Int: questionId
+        let didTapQuestion: Observable<Int>
     }
     
     struct Output {
@@ -27,6 +29,7 @@ final class BookmarkViewModel: ViewModelType {
         let scrapedQuestions: Driver<[ScrapedQuestion]>
         let newLoad: Signal<Void>
         let canLoad: Signal<Bool>
+        let showCafeAnswerScene: Signal<Void>
     }
     
     private weak var coordinator: BookmarkCoordinator?
@@ -117,13 +120,20 @@ final class BookmarkViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
           
-        
+        let showCafeAnswerScene = input.didTapQuestion
+            .withLatestFrom(input.didTapCafeTag,resultSelector: { (questionId:$0, cafeTag: $1)})
+            .do {
+                [weak self] questionId, cafeTag in
+                self?.coordinator?.showCafeAnswerScene(questionId, cafeTag.cafeId)
+            }
+            .mapToVoid()
         
         return Output(
             cafes: cafes.asDriver(onErrorJustReturn: []),
             scrapedQuestions: scrapedQuestions.asDriver(onErrorJustReturn: []),
             newLoad: newLoad.mapToVoid().asSignal(onErrorSignalWith: .empty()),
-            canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
+            canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
+            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

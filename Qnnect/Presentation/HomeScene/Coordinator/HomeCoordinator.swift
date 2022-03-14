@@ -44,7 +44,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     }
     
     func showGroupScene(with cafeId: Int, _ isFirst: Bool = false) {
-        let coordinator = DefaultGroupCoordinator(navigationController: self.navigationController)
+        let coordinator = DefaultCafeCoordinator(navigationController: self.navigationController)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
         coordinator.start(with: cafeId,isFirst)
