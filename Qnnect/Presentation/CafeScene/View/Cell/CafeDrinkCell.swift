@@ -17,7 +17,7 @@ final class CafeDrinkCell: UICollectionViewCell {
     }
     
     private let userNameLabel = UILabel().then {
-        $0.font = .IM_Hyemin(.bold, size: 10.0)
+        $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textColor = .GRAY01
         $0.textAlignment = .center
         $0.sizeToFit()
