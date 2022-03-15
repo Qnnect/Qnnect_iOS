@@ -9,7 +9,18 @@ import Foundation
 
 struct QuestionFetchResponseDTO: Decodable {
     let comments: [CommentResponseDTO]
-    let questionMainResponse: CafeQuestionResponseDTO
+    let questionMainResponse: QuestionResponseDTO
+    let currentUserComment: CommentResponseDTO?
     let liked: Bool
     let scraped: Bool
+    
+    func toDomain() -> CafeQuestion {
+        CafeQuestion(
+            comments: comments.map { $0.toDomain()},
+            question: questionMainResponse.toDomain(),
+            currentUserComment: currentUserComment?.toDomain(),
+            liked: liked,
+            scraped: scraped
+        )
+    }
 }

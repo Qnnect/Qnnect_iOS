@@ -11,5 +11,6 @@ struct Reply {
     let content: String
     let createdAt: String
     let id: Int
-    let writer: User
+    let writerInfo: User
+    let writer: Bool
 }

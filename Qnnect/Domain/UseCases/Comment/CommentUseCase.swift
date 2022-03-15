@@ -15,7 +15,9 @@ protocol CommentUseCase: AnyObject {
         _ content: String
     ) -> Observable<Result<Void,Error>>
     
-    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]),Error>>
+    func fetchComment(_ commentId: Int) -> Observable<
+        Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
+    >
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
 }
 
@@ -37,7 +39,9 @@ final class DefaultCommentUseCase: CommentUseCase {
         return commentRepository.createComment(questionId, images, content)
     }
     
-    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]), Error>> {
+    func fetchComment(_ commentId: Int) -> Observable<
+        Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
+    > {
         commentRepository.fetchComment(commentId)
     }
     

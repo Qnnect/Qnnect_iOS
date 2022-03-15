@@ -76,24 +76,13 @@ final class DefaultQuestionRepository: QuestionRepository {
             }
     }
     
-    func fetchQuestion(_ questionId: Int) -> Observable<Result<(
-        comments: [Comment],
-        question: Question,
-        liked: Bool,
-        scraped: Bool),Error>> {
+    func fetchQuestion(_ questionId: Int) -> Observable<Result<CafeQuestion,Error>> {
         questionNetworkService.fetchQuestion(questionId)
             .map {
-                result -> Result<(comments: [Comment], question: Question, liked: Bool, scraped: Bool),Error> in
+                result -> Result<CafeQuestion,Error> in
                 switch result {
                 case .success(let responseDTO):
-                    return .success(
-                        (
-                            responseDTO.comments.map { $0.toDomain()},
-                            responseDTO.questionMainResponse.toDomain(),
-                            responseDTO.liked,
-                            responseDTO.scraped
-                        )
-                    )
+                    return .success(responseDTO.toDomain())
                 case .failure(let error):
                     return .failure(error)
                 }

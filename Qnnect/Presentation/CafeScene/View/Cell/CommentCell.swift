@@ -71,11 +71,11 @@ final class CommentCell: UICollectionViewCell {
     
     func update(with comment: Comment) {
         writerProfileImageView.kf.setImage(
-            with: URL(string: comment.writer.profileImage ?? ""),
+            with: URL(string: comment.writerInfo.profileImage ?? ""),
             placeholder: Constants.profileDefaultImage
         )
         
-        writerNameLabel.text = comment.writer.name
+        writerNameLabel.text = comment.writerInfo.name
         let paragraphStyle = Constants.paragraphStyle
         paragraphStyle.alignment = .left
         contentLabel.attributedText = NSAttributedString(

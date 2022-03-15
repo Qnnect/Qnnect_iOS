@@ -28,10 +28,12 @@ final class DefaultCommentRepository: CommentRepository {
         commentNetworkService.createComment(questionId, images, content)
     }
     
-    func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]), Error>> {
+    func fetchComment(_ commentId: Int) -> Observable<
+        Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
+    > {
         commentNetworkService.fetchComment(commentId)
             .map {
-                result -> Result<(comment: Comment, replies: [Reply]),Error> in
+                result -> Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error> in
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.toDomain())

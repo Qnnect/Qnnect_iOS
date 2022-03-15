@@ -8,7 +8,7 @@
 import Foundation
 
 struct CafeResponseDTO: Decodable {
-    let cafeQuestionResponseList: [CafeQuestionResponseDTO]
+    let cafeQuestionResponseList: [QuestionResponseDTO]
     let cafeUserResponseList: [CafeUserResponseDTO]
     let code: String
     let createdAt: String

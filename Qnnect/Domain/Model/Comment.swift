@@ -16,7 +16,7 @@ struct Comment {
     let imageUrl3: String?
     let imageUrl4: String?
     let imageUrl5: String?
-    let writer: User
+    let writerInfo: User
     let replyCount: Int
     
     func getImageURLs() -> [String] {

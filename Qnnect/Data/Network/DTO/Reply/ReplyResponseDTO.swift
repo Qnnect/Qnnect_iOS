@@ -11,9 +11,15 @@ struct ReplyResponseDTO: Decodable {
     let content: String
     let createdAt: String
     let replyId: Int
-    let writer: ProfileResponseDTO
-    
+    let writerInfo: ProfileResponseDTO
+    let writer: Bool
     func toDomain() -> Reply {
-        Reply(content: content, createdAt: createdAt, id: replyId, writer: writer.toDomain())
+        Reply(
+            content: content,
+            createdAt: createdAt,
+            id: replyId,
+            writerInfo: writerInfo.toDomain(),
+            writer: writer
+        )
     }
 }

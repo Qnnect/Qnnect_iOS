@@ -29,7 +29,7 @@ struct CommentResponseDTO: Decodable {
             imageUrl3: imageUrl3,
             imageUrl4: imageUrl4,
             imageUrl5: imageUrl5,
-            writer: profileResponse.toDomain(),
+            writerInfo: profileResponse.toDomain(),
             replyCount: replyCount
         )
     }

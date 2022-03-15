@@ -50,9 +50,9 @@ final class CafeAnswerViewModel: ViewModelType {
             .withLatestFrom(input.questionId)
             .flatMap(questionUseCase.fetchQuestion(_:))
             .debug("fetchedQuestionwithComments", trimOutput: true)
-            .compactMap { result -> (comments: [Comment], question: Question, liked: Bool, scraped: Bool)? in
-                guard case let .success((comments, question, liked, scraped)) = result else { return nil }
-                return (comments, question, liked, scraped)
+            .compactMap { result -> CafeQuestion? in
+                guard case let .success(cafeQuestion) = result else { return nil }
+                return cafeQuestion
             }
             .share()
             .debug()

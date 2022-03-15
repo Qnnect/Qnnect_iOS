@@ -122,11 +122,11 @@ final class ReplyCell: UICollectionViewCell {
     
     func update(with reply: Reply) {
         writerProfileImageView.kf.setImage(
-            with: URL(string: reply.writer.profileImage ?? ""),
+            with: URL(string: reply.writerInfo.profileImage ?? ""),
             placeholder: Constants.profileDefaultImage
         )
         
-        writerNameLabel.text = reply.writer.name
+        writerNameLabel.text = reply.writerInfo.name
         contentLabel.attributedText = NSAttributedString(
             string: reply.content,
             attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]

@@ -114,7 +114,7 @@ final class CafeAnswerCell: UITableViewCell {
     }
     
     func update(with comment: Comment) {
-        if let url = comment.writer.profileImage {
+        if let url = comment.writerInfo.profileImage {
             self.writerProfileImageView.kf.setImage(
                 with: URL(string: url),
                 placeholder: Constants.profileDefaultImage
@@ -122,7 +122,7 @@ final class CafeAnswerCell: UITableViewCell {
         } else {
             writerProfileImageView.image = Constants.profileDefaultImage
         }
-        self.writerNameLabel.text = comment.writer.name
+        self.writerNameLabel.text = comment.writerInfo.name
         contentLabel.text = comment.content
         commentCountLabel.text = comment.replyCount != 0 ? "\(comment.replyCount)" : ""
         attachedImageView.kf.setImage(

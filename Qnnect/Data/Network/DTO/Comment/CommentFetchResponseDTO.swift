@@ -17,9 +17,10 @@ struct CommentFetchResponseDTO: Decodable {
     let imageUrl4: String?
     let imageUrl5: String?
     let replies: [ReplyResponseDTO]
-    let writer: ProfileResponseDTO
+    let writerInfo: ProfileResponseDTO
+    let writer: Bool
     
-    func toDomain() -> (comment: Comment, replies: [Reply]) {
+    func toDomain() -> (comment: Comment, replies: [Reply], isWriter: Bool) {
         (
             Comment(
             id: commentId,
@@ -30,10 +31,11 @@ struct CommentFetchResponseDTO: Decodable {
             imageUrl3: imageUrl3,
             imageUrl4: imageUrl4,
             imageUrl5: imageUrl5,
-            writer: writer.toDomain(),
+            writerInfo: writerInfo.toDomain(),
             replyCount: replies.count
             ),
-            replies.map { $0.toDomain() }
+            replies.map { $0.toDomain() },
+            writer
         )
     }
 }
