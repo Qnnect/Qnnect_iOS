@@ -30,18 +30,13 @@ final class BookmarkViewModel: ViewModelType {
         let scrapedQuestions: Driver<[ScrapedQuestion]>
         let newLoad: Signal<Void>
         let canLoad: Signal<Bool>
-        let showCafeAnswerScene: Signal<Void>
+        let showCafeAnswerScene: Signal<Int>
         let showSearchScene: Signal<Void>
     }
     
-    private weak var coordinator: BookmarkCoordinator?
     private let questionUseCase: QuestionUseCase
     
-    init(
-        coordinator: BookmarkCoordinator,
-        questionUseCase: QuestionUseCase
-    ) {
-        self.coordinator = coordinator
+    init(questionUseCase: QuestionUseCase) {
         self.questionUseCase = questionUseCase
     }
     
@@ -123,17 +118,10 @@ final class BookmarkViewModel: ViewModelType {
             .map { $0.count == Constants.scrapFetchSize }
           
         let showCafeAnswerScene = input.didTapQuestion
-            .do {
-                [weak self] questionId in
-                self?.coordinator?.showCafeAnswerScene(questionId)
-            }
-            .mapToVoid()
+            
         
         let showSearchScene = input.didTapSearchButton
-            .do {
-                [weak self] _ in
-                self?.coordinator?.showBookMarkSearchScene()
-            }
+           
         
         return Output(
             cafes: cafes.asDriver(onErrorJustReturn: []),

@@ -54,10 +54,15 @@ final class StoreViewController: BaseViewController {
     }
     
     private var viewModel: StoreViewModel!
+    weak var coordinator: StoreCoordinator?
     
-    static func create(with viewModel: StoreViewModel) -> StoreViewController {
+    static func create(
+        with viewModel: StoreViewModel,
+        _ coordinator: StoreCoordinator
+    ) -> StoreViewController {
         let vc = StoreViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -149,10 +154,6 @@ final class StoreViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.showIngredientBuyAlert
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         output.ingredients
             .map {
                  ingredients -> [StoreSectionModel] in
@@ -161,7 +162,11 @@ final class StoreViewController: BaseViewController {
             }.drive(self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
-            
+        guard let coordinator = coordinator else { return}
+
+        output.showIngredientBuyAlert
+            .emit(onNext: coordinator.showIngredientBuyAlertView(with:))
+            .disposed(by: self.disposeBag)
     }
 }
 

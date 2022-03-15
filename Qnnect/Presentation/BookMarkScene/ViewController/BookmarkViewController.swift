@@ -13,8 +13,6 @@ import RxSwift
 
 final class BookmarkViewController: BaseViewController {
     
-    private var viewModel: BookmarkViewModel!
-    
     private let navigationTitleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 18.0)
         $0.textColor = .BLACK_121212
@@ -37,9 +35,17 @@ final class BookmarkViewController: BaseViewController {
     private let searchButton = UIButton().then {
         $0.setImage(Constants.navigation_search, for: .normal)
     }
-    static func create(with viewModel: BookmarkViewModel) -> BookmarkViewController{
+    
+    private var viewModel: BookmarkViewModel!
+    weak var coordinator: BookmarkCoordinator?
+    
+    static func create(
+        with viewModel: BookmarkViewModel,
+        _ coordinator: BookmarkCoordinator
+    ) -> BookmarkViewController{
         let vc = BookmarkViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -142,12 +148,14 @@ final class BookmarkViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+
         output.showCafeAnswerScene
-            .emit()
+            .emit(onNext: coordinator.showCafeAnswerScene(_:))
             .disposed(by: self.disposeBag)
         
         output.showSearchScene
-            .emit()
+            .emit(onNext: coordinator.showBookMarkSearchScene)
             .disposed(by: self.disposeBag)
     }
     

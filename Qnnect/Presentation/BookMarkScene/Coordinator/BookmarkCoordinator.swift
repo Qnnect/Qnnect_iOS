@@ -31,8 +31,8 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
             likeNetworkService: LikeNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
-        let viewModel = BookmarkViewModel(coordinator: self,questionUseCase: questionUseCase)
-        let vc = BookmarkViewController.create(with: viewModel)
+        let viewModel = BookmarkViewModel(questionUseCase: questionUseCase)
+        let vc = BookmarkViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
@@ -50,8 +50,8 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
             likeNetworkService: LikeNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
-        let viewModel = BookmarkSearchViewModel(coordinator: self, questionUseCase: questionUseCase)
-        let vc = BookmarkSearchViewController.create(with: viewModel)
+        let viewModel = BookmarkSearchViewModel(questionUseCase: questionUseCase)
+        let vc = BookmarkSearchViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
 }

@@ -41,15 +41,21 @@ final class IngredientBuyAlertViewController: BaseViewController {
     private var ingredient: Ingredient!
     
     private var viewModel: IngredientBuyAlertViewModel!
+    weak var coordinator: StoreCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    static func create(with ingredient: Ingredient,_ viewModel: IngredientBuyAlertViewModel) -> IngredientBuyAlertViewController {
+    static func create(
+        with ingredient: Ingredient,
+        _ viewModel: IngredientBuyAlertViewModel,
+        _ coordinator: StoreCoordinator
+    ) -> IngredientBuyAlertViewController {
         let vc = IngredientBuyAlertViewController()
         vc.ingredient = ingredient
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -118,16 +124,14 @@ final class IngredientBuyAlertViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
+        guard let coordinator = coordinator else { return }
+
         output.dismiss
-            .emit()
+            .emit(onNext: coordinator.dismissIngredientBuyAlertView)
             .disposed(by: self.disposeBag)
-        
-        output.success
-            .emit()
-            .disposed(by: self.disposeBag)
-        
+    
         output.error
-            .emit()
+            .emit(onNext: coordinator.showNotBuyAlertView)
             .disposed(by: self.disposeBag)
     }
 }

@@ -36,10 +36,15 @@ final class BookmarkSearchViewController: BaseViewController {
     private var isFetched = true
     
     private var viewModel: BookmarkSearchViewModel!
+    weak var coordinator: BookmarkCoordinator?
     
-    static func create(with viewModel: BookmarkSearchViewModel) -> BookmarkSearchViewController {
+    static func create(
+        with viewModel: BookmarkSearchViewModel,
+        _ coordinator: BookmarkCoordinator
+    ) -> BookmarkSearchViewController {
         let vc = BookmarkSearchViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -95,8 +100,10 @@ final class BookmarkSearchViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+
         output.showCafeAnswerScene
-            .emit()
+            .emit(onNext: coordinator.showCafeAnswerScene(_:))
             .disposed(by: self.disposeBag)
     }
 }

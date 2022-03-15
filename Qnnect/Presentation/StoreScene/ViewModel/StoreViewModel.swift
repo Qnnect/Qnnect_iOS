@@ -19,30 +19,20 @@ final class StoreViewModel: ViewModelType {
     }
     
     struct Output{
-        let showIngredientBuyAlert: Signal<Void>
+        let showIngredientBuyAlert: Signal<Ingredient>
         let ingredients: Driver<[Ingredient]>
     }
     
-    private weak var coordinator: StoreCoordinator?
     private let storeUseCase: StoreUseCase
     
-    init(
-        coordinator: StoreCoordinator,
-        storeUseCase: StoreUseCase
-    ) {
-        self.coordinator = coordinator
+    init(storeUseCase: StoreUseCase) {
         self.storeUseCase = storeUseCase
     }
     
     func transform(from input: Input) -> Output {
         
         let showIngredientBuyAlert = input.didTapIngredient
-            .debug()
-            .do {
-                [weak self] ingredient in
-                self?.showIngredientBuyAlertView(with: ingredient)
-            }
-            .mapToVoid()
+            
         
         let fetchedAllIngredient = Observable.merge(
             input.viewDidLoad,
@@ -69,9 +59,3 @@ final class StoreViewModel: ViewModelType {
     }
 }
 
-private extension StoreViewModel {
-    func showIngredientBuyAlertView(with ingredient: Ingredient)  {
-        guard let coordinator = self.coordinator else { return }
-        return coordinator.showIngredientBuyAlertView(with: ingredient)
-    }
-}

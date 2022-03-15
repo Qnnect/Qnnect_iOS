@@ -26,19 +26,16 @@ final class DefaultStoreCoordinator: StoreCoordinator {
     func start() {
         let storeRepository = DefaultStoreRepository(storeNetworkService: StoreNetworkService())
         let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
-        let viewModel = StoreViewModel(coordinator: self,storeUseCase: storeUseCase)
-        let vc = StoreViewController.create(with: viewModel)
+        let viewModel = StoreViewModel(storeUseCase: storeUseCase)
+        let vc = StoreViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
     func showIngredientBuyAlertView(with ingredient: Ingredient) {
         let storeRepository = DefaultStoreRepository(storeNetworkService: StoreNetworkService())
         let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
-        let viewModel = IngredientBuyAlertViewModel(
-            coordinator: self,
-            storeUseCase: storeUseCase
-        )
-        let vc = IngredientBuyAlertViewController.create(with: ingredient, viewModel)
+        let viewModel = IngredientBuyAlertViewModel(storeUseCase: storeUseCase)
+        let vc = IngredientBuyAlertViewController.create(with: ingredient, viewModel, self)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(vc, animated: true,completion: nil)
     }
