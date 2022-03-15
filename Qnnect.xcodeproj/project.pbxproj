@@ -187,6 +187,7 @@
 		AEB5AADC27DF9D370096376B /* CommentSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADB27DF9D370096376B /* CommentSectionModel.swift */; };
 		AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADD27DFC0780096376B /* ReplyAPI.swift */; };
 		AEB5AAE027DFC14D0096376B /* ReplyNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */; };
+		AEB5AAE227E043500096376B /* CommentDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -428,6 +429,7 @@
 		AEB5AADB27DF9D370096376B /* CommentSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionModel.swift; sourceTree = "<group>"; };
 		AEB5AADD27DFC0780096376B /* ReplyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAPI.swift; sourceTree = "<group>"; };
 		AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyNetworkService.swift; sourceTree = "<group>"; };
+		AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDateHeaderView.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 				AE77C85427DB520900E8D0EC /* Cell */,
 				AEA14D4F27D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift */,
 				AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */,
+				AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1554,6 +1557,7 @@
 				AEB5AAC927DF37810096376B /* IngredientResponseDTO.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
+				AEB5AAE227E043500096376B /* CommentDateHeaderView.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
 				AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */,

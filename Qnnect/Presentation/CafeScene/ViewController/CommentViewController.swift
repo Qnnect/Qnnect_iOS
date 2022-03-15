@@ -20,6 +20,11 @@ final class CommentViewController: BaseViewController {
         $0.register(CommentCell.self, forCellWithReuseIdentifier: CommentCell.identifier)
         $0.register(CommentAttachImageCell.self, forCellWithReuseIdentifier: CommentAttachImageCell.identifier)
         $0.register(ReplyCell.self, forCellWithReuseIdentifier: ReplyCell.identifier)
+        $0.register(
+            CommentDateHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: CommentDateHeaderView.identifier
+        )
         $0.backgroundColor = .p_ivory
     }
     
@@ -88,7 +93,6 @@ final class CommentViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         
-        mainCollectionView.collectionViewLayout = createLayout()
         
         bottomView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -135,33 +139,38 @@ final class CommentViewController: BaseViewController {
             output.comment.asObservable(),
             output.replies.asObservable()
         ).map {
-            comment, replies -> [CommentSectionModel] in
+            [weak self] comment, replies -> [CommentSectionModel] in
+            guard let self = self else { return [] }
+            var models = [CommentSectionModel]()
             let commentSectionItem = CommentSectionItem.commentSectionItem(comment: comment)
             let attachImageSectionItems = comment.getImageURLs().map { CommentSectionItem.attachImageSectionItem(imageURL: $0) }
             let replySectionItems = replies.map {  CommentSectionItem.replySectionItem(reply: $0) }
             
-            return [
-                CommentSectionModel.commentSection(title: "", items: [commentSectionItem]),
-                CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems),
-                CommentSectionModel.replySection(title: "", items: replySectionItems)
-            ]
+            models.append(CommentSectionModel.commentSection(title: "", items: [commentSectionItem]))
+            if comment.getImageURLs().count > 0 {
+                models.append( CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems))
+                self.mainCollectionView.setCollectionViewLayout(self.createLayout(true), animated: false)
+            } else {
+                self.mainCollectionView.setCollectionViewLayout(self.createLayout(false), animated: false)
+            }
+            models.append(CommentSectionModel.replySection(title: "", items: replySectionItems))
+            return models
         }.bind(to: mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
-        
     }
 }
 
 private extension CommentViewController {
-    func createLayout() -> UICollectionViewLayout {
+    func createLayout(_ isImageExisted: Bool) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout {
             [weak self] section, environment -> NSCollectionLayoutSection? in
             switch section {
             case 0:
                 return self?.createCommentSection()
             case 1:
-                return self?.createAttachImageSection()
+                return isImageExisted ? self?.createAttachImageSection() : self?.createReplySection()
             case 2:
-                return self?.createReplySection()
+                return isImageExisted ? self?.createReplySection() : nil
             default:
                 return nil
             }
@@ -189,13 +198,15 @@ private extension CommentViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(102.0))
+        let spacingRadio = 8.0 / UIScreen.main.bounds.width
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0/3.0 - spacingRadio ))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(12.0)
+        
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 19.0, leading: 24.0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 19.0, leading: 24.0, bottom: 16.0, trailing: 0)
         
         return section
     }
@@ -210,9 +221,18 @@ private extension CommentViewController {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 21.0, leading: 27.5, bottom: 0, trailing: 0)
+        section.boundarySupplementaryItems = [ createCommentDateHeader()]
+        section.contentInsets = .init(top: 20.0, leading: 27.5, bottom: 0, trailing: 0)
         section.interGroupSpacing = 12.0
         return section
+    }
+    
+    func createCommentDateHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(4.0))
+
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topTrailing)
+        sectionHeader.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20.0)
+        return sectionHeader
     }
     
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
@@ -241,6 +261,23 @@ private extension CommentViewController {
                 cell.update(with: reply)
                 return cell
             }
+        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
+            print(indexPath,kind)
+            guard kind == UICollectionView.elementKindSectionHeader else { return UICollectionReusableView() }
+            if dataSource.sectionModels.count - 1 == indexPath.section {
+                guard case let CommentSectionItem.commentSectionItem(comment) = dataSource.sectionModels[0].items[0] else {
+                    return UICollectionReusableView()
+                }
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: CommentDateHeaderView.identifier,
+                    for: indexPath
+                 ) as! CommentDateHeaderView
+                
+                view.update(with: comment.createdAt)
+                return view
+            }
+            return UICollectionReusableView()
         }
     }
 }
