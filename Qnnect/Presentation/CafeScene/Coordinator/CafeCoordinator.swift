@@ -19,6 +19,8 @@ protocol CafeCoordinator: Coordinator {
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
     func showCommentScene(_ commentId: Int)
+    func showCommentMoreMenuBottomSheet(_ commentId: Int)
+    func showReplyMoreMenuBottomSheet(_ replyId: Int)
     func dismissAlert()
     func dismiss()
     func leaveCafe()
@@ -164,6 +166,18 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
             commentId
         )
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showCommentMoreMenuBottomSheet(_ commentId: Int) {
+        let view = CommentMoreMenuBottomSheet.create()
+        view.modalPresentationStyle = .overCurrentContext
+        self.navigationController.present(view, animated: false, completion: nil)
+    }
+    
+    func showReplyMoreMenuBottomSheet(_ replyId: Int) {
+        let view = ReplyMoreMenuBottomSheet.create()
+        view.modalPresentationStyle = .overCurrentContext
+        self.navigationController.present(view, animated: false, completion: nil)
     }
     
     func dismissAlert() {

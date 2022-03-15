@@ -132,7 +132,13 @@ final class CommentViewController: BaseViewController {
                     self?.inputTextView.text = ""
                 }
                 .withLatestFrom(inputTextView.rx.text.orEmpty)
-                .asObservable()
+                .asObservable(),
+            didTapCommentMoreButton: rx.methodInvoked(#selector(didTapCommentMoreButton))
+                .mapToVoid(),
+            didTapReplyMoreButton: rx.methodInvoked(#selector(moreButton(didTap:_:)))
+                .map {
+                    return $0[1] as! Int
+                }
         )
         
         let output = viewModel.transform(from: input)
@@ -166,10 +172,19 @@ final class CommentViewController: BaseViewController {
         output.isWriter
             .drive(onNext: {
                 [weak self] isWriter in
+                guard let self = self else { return }
                 if isWriter {
-                    self?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.navagation_more, style: .plain, target: nil, action: nil)
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.navagation_more, style: .plain, target: self, action: #selector(self.didTapCommentMoreButton))
                 }
             }).disposed(by: self.disposeBag)
+        
+        output.showCommentMoreMenuBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showReplyMoreMenuBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -272,6 +287,7 @@ private extension CommentViewController {
                     for: indexPath
                 ) as! ReplyCell
                 cell.update(with: reply)
+                cell.delegate = self
                 return cell
             }
         }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
@@ -361,5 +377,15 @@ extension CommentViewController{
             }
             self?.view.layoutIfNeeded()
         }
+    }
+}
+
+private extension CommentViewController {
+    @objc dynamic func didTapCommentMoreButton() { }
+}
+
+extension CommentViewController: ReplyMoreButtonDelegate {
+    func moreButton(didTap cell: UICollectionViewCell, _ replyId: Int) {
+        print("test", replyId)
     }
 }

@@ -197,6 +197,8 @@
 		AEB5AAF127E0A7CE0096376B /* LikeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF027E0A7CE0096376B /* LikeRequestDTO.swift */; };
 		AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */; };
 		AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */; };
+		AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */; };
+		AEB5AAFA27E0E6770096376B /* ReplyMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -448,6 +450,8 @@
 		AEB5AAF027E0A7CE0096376B /* LikeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRequestDTO.swift; sourceTree = "<group>"; };
 		AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNetworkService.swift; sourceTree = "<group>"; };
 		AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UIImageView.swift"; sourceTree = "<group>"; };
+		AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
+		AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -840,6 +844,8 @@
 				AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */,
 				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
 				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
+				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
+				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1570,6 +1576,7 @@
 				AEB5AADA27DF960E0096376B /* ReplyCell.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
 				AE77C85927DB56C100E8D0EC /* DrinkSelectRequestDTO.swift in Sources */,
+				AEB5AAFA27E0E6770096376B /* ReplyMoreMenuBottomSheet.swift in Sources */,
 				AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */,
 				AE538EDD27C4693C00670FAF /* CafeRoomViewModel.swift in Sources */,
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
@@ -1709,6 +1716,7 @@
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
+				AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
 				AEB5AAD427DF44E20096376B /* Reply.swift in Sources */,
 				AE77C83827DA075C00E8D0EC /* QuestionRepository.swift in Sources */,

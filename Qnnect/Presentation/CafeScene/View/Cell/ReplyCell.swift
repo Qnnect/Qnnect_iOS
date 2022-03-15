@@ -8,9 +8,19 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+
+@objc
+protocol ReplyMoreButtonDelegate: AnyObject {
+    dynamic func moreButton(didTap cell: UICollectionViewCell, _ replyId: Int)
+}
 
 final class ReplyCell: UICollectionViewCell {
+    
     static let identifier = "ReplyCell"
+    
+    weak var delegate: ReplyMoreButtonDelegate?
+    private let disposeBag = DisposeBag()
     
     private let arrowImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -133,5 +143,12 @@ final class ReplyCell: UICollectionViewCell {
         )
         dateLabel.text = reply.createdAt
         moreButton.isHidden = !reply.writer
+        
+        moreButton.rx.tap
+            .subscribe(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.delegate?.moreButton(didTap: self, reply.id)
+            }).disposed(by: self.disposeBag)
     }
 }
