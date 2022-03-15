@@ -18,7 +18,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let questionId: Observable<Int>
         let viewWillAppear: Observable<Void>
         let didTapAnswerCell: Observable<Comment>
-        /// Bool: true: 좋아요하기 , false: 좋아요 취소하기
+        /// Bool: true: 좋아요 취소 , false: 좋아요 하기
         let didTapLikeButton: Observable<Bool>
     }
     

@@ -108,10 +108,10 @@ final class CafeAnswerViewController: BaseViewController {
                     return comment
                 },
             didTapLikeButton: likeButton.rx.tap.asObservable()
-                .withLatestFrom(likeButton.imageView!.rx.image.map{ $0 == Constants.navigationHeartIcon} )
+                .withLatestFrom(likeButton.imageView!.rx.image.map{ $0 != Constants.navigationHeartIcon} )
                 .do {
                     [weak self] in
-                    self?.setLikeButton($0)
+                    self?.setLikeButton(!$0)
                 }
         )
         
@@ -218,6 +218,10 @@ private extension CafeAnswerViewController {
         }
     }
     
+    
+    
+    /// 좋아요 버튼 설정
+    /// - Parameter isLiked: 현재 좋아요 상태
     func setLikeButton(_ isLiked: Bool) {
         isLiked ? likeButton.setImage(Constants.navigationCheckedHeartIcon, for: .normal) :
         likeButton.setImage(Constants.navigationHeartIcon, for: .normal)
