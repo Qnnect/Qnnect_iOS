@@ -28,6 +28,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let question: Driver<Question>
         let showCommentScene: Signal<Void>
         let user: Driver<User>
+        let currentUserComment: Driver<Comment?>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -68,6 +69,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
         let liked = fetchedQuestionWithComments.map { $0.liked }
         let scraped = fetchedQuestionWithComments.map { $0.scraped }
+        let currentUserComment = fetchedQuestionWithComments.map { $0.currentUserComment }
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
             .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))
@@ -113,7 +115,8 @@ final class CafeAnswerViewModel: ViewModelType {
             comments: fetchedQuestionWithComments.map { $0.comments }.asDriver(onErrorJustReturn: []),
             question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty()),
             showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty()),
-            user: user.asDriver(onErrorDriveWith: .empty())
+            user: user.asDriver(onErrorDriveWith: .empty()),
+            currentUserComment: currentUserComment.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

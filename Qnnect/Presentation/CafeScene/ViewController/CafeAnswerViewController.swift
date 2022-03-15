@@ -90,8 +90,13 @@ final class CafeAnswerViewController: BaseViewController {
         dataSource.decideViewTransition = { (_, _, _)  in return RxDataSources.ViewTransition.reload }
         
         let input = CafeAnswerViewModel.Input(
-            didTapAnswerWritingCell: self.mainTableView.rx.itemSelected
-                .filter { $0.section == 1 }
+            didTapAnswerWritingCell: self.mainTableView.rx.modelSelected(CafeAnswerSectionItem.self)
+                .filter {
+                    if case CafeAnswerSectionItem.answerWritingSectionItem(_) = $0 {
+                    return true
+                }
+                    return false
+                }
                 .mapToVoid(),
             didTapScrapButton: self.scrapButton.rx.tap.scan(
                 false,
@@ -105,7 +110,7 @@ final class CafeAnswerViewController: BaseViewController {
                 .compactMap { item -> Comment? in
                     guard case let CafeAnswerSectionItem.answerSectionItem(comment) = item else { return nil }
                     return comment
-            }
+                }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -135,20 +140,28 @@ final class CafeAnswerViewController: BaseViewController {
         Observable.combineLatest(
             output.question.asObservable(),
             output.user.asObservable(),
-            output.comments.asObservable()
+            output.comments.asObservable(),
+            output.currentUserComment.asObservable()
         )
-            .map { question, user, comments -> [CafeAnswerSectionModel] in
+            .map { question, user, comments, currentUserComment -> [CafeAnswerSectionModel] in
+                var models = [CafeAnswerSectionModel]()
                 let questionSectionItem = CafeAnswerSectionItem.questionSectionItem(question: question)
-                let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user)
-                let answerSectionItem = comments.map {CafeAnswerSectionItem.answerSectionItem(comment: $0)}
-                return [
-                    CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]),
-                    CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem]),
-                    CafeAnswerSectionModel.answerSection(title: "", items: answerSectionItem)
-                ]
+                models.append( CafeAnswerSectionModel.questionSection(title: "", items: [questionSectionItem]))
+                if currentUserComment == nil {
+                    let answerWritingSectionItem = CafeAnswerSectionItem.answerWritingSectionItem(user: user)
+                    models.append(CafeAnswerSectionModel.answerWritingSection(title: "", items: [answerWritingSectionItem]))
+                    let answerSectionItems = comments.map {CafeAnswerSectionItem.answerSectionItem(comment: $0)}
+                    models.append(CafeAnswerSectionModel.answerSection(title: "", items: answerSectionItems))
+                } else {
+                    let newComments = [currentUserComment!] + comments
+                    let answerSectionItem = newComments.map { CafeAnswerSectionItem.answerSectionItem(comment: $0)}
+                    models.append(CafeAnswerSectionModel.answerSection(title: "", items: answerSectionItem))
+                }
+                
+                return models
             }.bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
-
+        
     }
 }
 
