@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol BookmarkCoordinator: Coordinator {
-    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int)
+    func showCafeAnswerScene(_ questionId: Int)
     func showBookMarkSearchScene()
 }
 
@@ -35,7 +35,7 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int) {
+    func showCafeAnswerScene(_ questionId: Int) {
         let coordinator = DefaultCafeCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)

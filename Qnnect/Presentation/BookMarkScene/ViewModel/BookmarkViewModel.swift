@@ -123,10 +123,9 @@ final class BookmarkViewModel: ViewModelType {
             .map { $0.count == Constants.scrapFetchSize }
           
         let showCafeAnswerScene = input.didTapQuestion
-            .withLatestFrom(input.didTapCafeTag,resultSelector: { (questionId:$0, cafeTag: $1)})
             .do {
-                [weak self] questionId, cafeTag in
-                self?.coordinator?.showCafeAnswerScene(questionId, cafeTag.cafeId)
+                [weak self] questionId in
+                self?.coordinator?.showCafeAnswerScene(questionId)
             }
             .mapToVoid()
         

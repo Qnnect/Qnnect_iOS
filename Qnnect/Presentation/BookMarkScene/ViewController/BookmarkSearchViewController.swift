@@ -72,8 +72,8 @@ final class BookmarkSearchViewController: BaseViewController {
                 .asObservable(),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},
-            didTapQuestion: resultTableView.rx.itemSelected
-                .map { $0.row }
+            didTapQuestion: resultTableView.rx.modelSelected(ScrapedQuestion.self)
+                .map { $0.cafeQuestionId }
         )
 
         let output = viewModel.transform(from: input)
@@ -94,6 +94,10 @@ final class BookmarkSearchViewController: BaseViewController {
                     self?.isFetched = true
                 }
             }).disposed(by: self.disposeBag)
+        
+        output.showCafeAnswerScene
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
