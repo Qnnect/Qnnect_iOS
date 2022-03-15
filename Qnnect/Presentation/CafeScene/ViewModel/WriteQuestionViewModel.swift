@@ -22,14 +22,9 @@ final class WriteQuestionViewModel: ViewModelType {
         let completion: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
     private let cafeUseCase: CafeUseCase
     
-    init(
-        coordinator: CafeCoordinator,
-        cafeUseCase: CafeUseCase
-    ) {
-        self.coordinator = coordinator
+    init(cafeUseCase: CafeUseCase) {
         self.cafeUseCase = cafeUseCase
     }
     

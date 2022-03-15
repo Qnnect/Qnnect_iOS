@@ -13,8 +13,6 @@ import RxSwift
 
 final class MyPageViewController: BaseViewController {
     
-    private var viewModel: MyPageViewModel!
-    
     private let navigationTitleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 18.0)
         $0.textColor = .GRAY01
@@ -27,9 +25,17 @@ final class MyPageViewController: BaseViewController {
         $0.register(MyPageItemCell.self, forCellReuseIdentifier: MyPageItemCell.identifier)
         $0.separatorStyle = .none
     }
-    static func create(with viewModel: MyPageViewModel) -> MyPageViewController {
+    
+    private var viewModel: MyPageViewModel!
+    weak var coordinator: MyPageCoordinator?
+    
+    static func create(
+        with viewModel: MyPageViewModel,
+        _ coordinator: MyPageCoordinator
+    ) -> MyPageViewController {
         let vc = MyPageViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -75,10 +81,6 @@ final class MyPageViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.showEditProfileScene
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         let dataSource = self.createDataSource()
         Observable.combineLatest(output.user.asObservable(), items, output.loginType.asObservable())
             .map{ user, items, loginType -> [MyPageSectionModel] in
@@ -94,6 +96,12 @@ final class MyPageViewController: BaseViewController {
             }
             .debug()
             .bind(to: self.mainTableView.rx.items(dataSource: dataSource))
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.showEditProfileScene
+            .emit(onNext: coordinator.showEditProfileScene(user:))
             .disposed(by: self.disposeBag)
     }
 }
@@ -143,26 +151,5 @@ extension MyPageViewController: UITableViewDelegate {
     }
 }
 
-import SwiftUI
-struct MyPageViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let userRepository = DefaultUserRepositry(
-                userNetworkService: UserNetworkService(),
-                localStorage: DefaultUserDefaultManager()
-            )
-            let userUseCase = DefaultUserUseCase(userRepository: userRepository)
-            let vc = MyPageViewController.create(with: MyPageViewModel(coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()), userUseCase: userUseCase)) //보고 싶은 뷰컨 객체
-            return vc
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
-    }
-}
+
 

@@ -19,14 +19,9 @@ final class ReplyMoreMenuViewModel: ViewModelType {
         
     }
     
-    private weak var coordinator: CommentCoordinator?
     private let commentUseCase: CommentUseCase
     
-    init(
-        coordinator: CommentCoordinator,
-        commentUseCase: CommentUseCase
-    ) {
-        self.coordinator = coordinator
+    init(commentUseCase: CommentUseCase) {
         self.commentUseCase = commentUseCase
     }
     

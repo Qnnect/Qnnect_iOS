@@ -55,18 +55,21 @@ final class DrinkSelectGuideAlertView: BaseViewController {
     }
     
     private var viewModel: DrinkSelectGuideAlertViewModel!
+    weak var coordinator: CafeCoordinator?
     private var type: UserBehaviorType!
     private var cafeId: Int!
     
     static func create(
         with viewModel: DrinkSelectGuideAlertViewModel,
         _ type: UserBehaviorType,
-        _ cafeId: Int
+        _ cafeId: Int,
+        _ coordinator: CafeCoordinator
     ) -> DrinkSelectGuideAlertView {
         let view = DrinkSelectGuideAlertView()
         view.viewModel = viewModel
         view.type = type
         view.cafeId = cafeId
+        view.coordinator = coordinator
         return view
     }
     
@@ -136,12 +139,14 @@ final class DrinkSelectGuideAlertView: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
+        guard let coordinator = coordinator else { return }
+
         output.dismiss
-            .emit()
+            .emit(onNext: coordinator.dismissAlert)
             .disposed(by: self.disposeBag)
         
         output.showSelectDrinkBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showSelectDrinkBottomSheet(_:))
             .disposed(by: self.disposeBag)
     }
 }

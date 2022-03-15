@@ -32,8 +32,10 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
         $0.alignment = .leading
     }
     
-    static func create() -> ReplyMoreMenuBottomSheet {
+    weak var coordinator: CommentCoordinator?
+    static func create(with coordinator: CommentCoordinator) -> ReplyMoreMenuBottomSheet {
         let view = ReplyMoreMenuBottomSheet()
+        view.coordinator = coordinator
         return view
     }
     

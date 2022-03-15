@@ -39,14 +39,17 @@ final class SettingBottomSheet: BottomSheetViewController {
     
     private var cafeId: Int!
     private var viewModel: SettingBottomSheetViewModel!
+    weak var coordinator: CafeCoordinator?
     
     static func create(
         with viewModel: SettingBottomSheetViewModel,
-        _ cafeId: Int
+        _ cafeId: Int,
+        _ coordinator: CafeCoordinator
     ) -> SettingBottomSheet {
         let bottomSheet = SettingBottomSheet()
         bottomSheet.viewModel = viewModel
         bottomSheet.cafeId = cafeId
+        bottomSheet.coordinator = coordinator
         return bottomSheet
     }
     
@@ -83,16 +86,18 @@ final class SettingBottomSheet: BottomSheetViewController {
         
         let output = self.viewModel.transform(from: input)
         
+        guard let coordinator = coordinator else { return }
+
         output.showInvitationScene
-            .emit()
+            .emit(onNext: coordinator.showInvitationScene)
             .disposed(by: self.disposeBag)
         
         output.showCafeModifyingScene
-            .emit()
+            .emit(onNext: coordinator.showCafeModifyingScene(_:))
             .disposed(by: self.disposeBag)
         
         output.leaveCafe
-            .emit()
+            .emit(onNext: coordinator.leaveCafe)
             .disposed(by: self.disposeBag)
     }
 }

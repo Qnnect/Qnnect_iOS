@@ -57,14 +57,17 @@ final class CommentViewController: BaseViewController {
     
     private var viewModel: CommentViewModel!
     private var commentId: Int!
+    weak var coordinator: CommentCoordinator?
     
     static func create(
         with viewModel: CommentViewModel,
-        _ commentId: Int
+        _ commentId: Int,
+        _ coordinator: CommentCoordinator
     ) -> CommentViewController {
         let vc = CommentViewController()
         vc.viewModel = viewModel
         vc.commentId = commentId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -178,12 +181,14 @@ final class CommentViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+
         output.showCommentMoreMenuBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showCommentMoreMenuBottomSheet(_:))
             .disposed(by: self.disposeBag)
         
         output.showReplyMoreMenuBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showReplyMoreMenuBottomSheet(_:))
             .disposed(by: self.disposeBag)
     }
 }

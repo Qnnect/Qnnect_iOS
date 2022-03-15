@@ -28,8 +28,8 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             localStorage: DefaultUserDefaultManager()
         )
         let userUseCase = DefaultUserUseCase(userRepository: userRepository)
-        let viewModel = MyPageViewModel(coordinator: self,userUseCase: userUseCase)
-        let vc = MyPageViewController.create(with: viewModel)
+        let viewModel = MyPageViewModel(userUseCase: userUseCase)
+        let vc = MyPageViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
         
@@ -42,10 +42,9 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         let userUseCase = DefaultUserUseCase(userRepository: userRepository)
         let viewModel = EditProfileViewModel(
             authUseCase: authUseCase,
-            coordinator: self,
             userUseCase: userUseCase
         )
-        let vc = EditProfileViewController.create(with: viewModel,user)
+        let vc = EditProfileViewController.create(with: viewModel,user, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

@@ -24,14 +24,9 @@ final class CafeAnswerWritingViewModel: ViewModelType {
         let completion: Signal<Void>
     }
     
-    private weak var coordinator: QuestionCoordinator?
     private let commentUseCase: CommentUseCase
     
-    init(
-        coordinator: QuestionCoordinator,
-        commentUseCase: CommentUseCase
-    ) {
-        self.coordinator = coordinator
+    init(commentUseCase: CommentUseCase) {
         self.commentUseCase = commentUseCase
     }
     
@@ -39,7 +34,6 @@ final class CafeAnswerWritingViewModel: ViewModelType {
         
         let isInputCompleted = input.content
             .map { $0.count >= 10 }
-        
         
         let createComment = input.didTapCompletionButton
             .withLatestFrom(

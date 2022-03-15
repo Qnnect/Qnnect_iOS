@@ -23,28 +23,26 @@ final class CafeAnswerViewModel: ViewModelType {
     }
     
     struct Output {
-        let showAnswerWritingScene: Signal<Void>
+        let showAnswerWritingScene: Signal<(Question,User)>
         let scrap: Signal<Void>
         let cancleScrap: Signal<Void>
         let comments: Driver<[Comment]>
         let question: Driver<Question>
-        let showCommentScene: Signal<Void>
+        ///Int: CommentId
+        let showCommentScene: Signal<Int>
         let user: Driver<User>
         let currentUserComment: Driver<Comment?>
         let like: Signal<Void>
         let liked: Driver<Bool>
     }
     
-    private weak var coordinator: QuestionCoordinator?
     private let questionUseCase: QuestionUseCase
     private let userUseCase: UserUseCase
     
     init(
-        coordinator: QuestionCoordinator,
         questionUseCase: QuestionUseCase,
         userUseCase: UserUseCase
     ) {
-        self.coordinator = coordinator
         self.questionUseCase = questionUseCase
         self.userUseCase = userUseCase
     }
@@ -77,14 +75,11 @@ final class CafeAnswerViewModel: ViewModelType {
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
             .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))
-            .do {
-                [weak self] question, user in
-                self?.coordinator?.showCafeAnswerWritingScene(question, user)
-            }
-            .mapToVoid()
+        
         
         let scrapTrigger = input.didTapScrapButton
             .share()
+        
         let scrap = scrapTrigger
             .filter { $0 }
             .withLatestFrom(fetchedQuestion.map{ $0.id })
@@ -107,10 +102,7 @@ final class CafeAnswerViewModel: ViewModelType {
             
         
         let showCommentScene = input.didTapAnswerCell
-            .do {
-                [weak self] comment in
-                self?.coordinator?.showCommentScene(comment.id)
-            }.mapToVoid()
+            .map { $0.id }
         
         let like = input.didTapLikeButton
             .debug()

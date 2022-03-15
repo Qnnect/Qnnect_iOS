@@ -68,12 +68,18 @@ final class DrinkSelectViewController: BottomSheetViewController {
     }
     
     private var viewModel: DrinkSelctViewModel!
+    weak var coordinator: CafeCoordinator?
     private var cafeId: Int!
     
-    static func create(with viewModel: DrinkSelctViewModel, _ cafeId: Int) -> DrinkSelectViewController {
+    static func create(
+        with viewModel: DrinkSelctViewModel,
+        _ cafeId: Int,
+        _ coordinator: CafeCoordinator
+    ) -> DrinkSelectViewController {
         let vc = DrinkSelectViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -156,15 +162,17 @@ final class DrinkSelectViewController: BottomSheetViewController {
             .drive(drinksCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
-        output.completion
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         drinksCollectionView.rx.itemSelected
             .subscribe(onNext: {
                 [weak self] indexPath in
                 self?.changeDrinkSelectCellState(indexPath)
             }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.completion
+            .emit(onNext: coordinator.dismissDrinkSelectBottomSheet)
+            .disposed(by: self.disposeBag)
     }
 }
 

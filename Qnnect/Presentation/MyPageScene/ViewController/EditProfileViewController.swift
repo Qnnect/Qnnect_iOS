@@ -54,13 +54,18 @@ final class EditProfileViewController: BaseViewController {
     }()
     
     private var viewModel: EditProfileViewModel!
-    
+    weak var coordinator: MyPageCoordinator?
     private var user: User!
     
-    static func create(with viewModel: EditProfileViewModel, _ user: User) -> EditProfileViewController {
+    static func create(
+        with viewModel: EditProfileViewModel,
+        _ user: User,
+        _ coordinator: MyPageCoordinator
+    ) -> EditProfileViewController {
         let vc = EditProfileViewController()
         vc.viewModel = viewModel
         vc.user = user
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -147,12 +152,10 @@ final class EditProfileViewController: BaseViewController {
             .emit(onNext: self.showBottomSheet)
             .disposed(by: self.disposeBag)
         
-        output.completion
-            .emit()
-            .disposed(by: self.disposeBag)
-        
+        guard let coordinator = coordinator else { return }
+
         output.pop
-            .emit()
+            .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
     }
     
@@ -202,29 +205,3 @@ extension EditProfileViewController: UITextFieldDelegate {
     }
 }
 
-import SwiftUI
-struct EditProfileViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
-            let userRepository = DefaultUserRepositry(
-                userNetworkService: UserNetworkService(),
-                localStorage: DefaultUserDefaultManager()
-            )
-            let userUseCase = DefaultUserUseCase(userRepository: userRepository)
-            let vc = EditProfileViewController.create(with: EditProfileViewModel(
-                authUseCase: authUseCase,
-                coordinator: DefaultMyPageCoordinator(navigationController: UINavigationController()), userUseCase: userUseCase
-            ), User(name: "제제로", point: 500, profileImage: "")) //보고 싶은 뷰컨 객체
-            return vc
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
-    }
-}

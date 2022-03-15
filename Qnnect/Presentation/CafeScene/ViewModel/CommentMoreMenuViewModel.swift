@@ -22,14 +22,9 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let modify: Signal<Void>
     }
     
-    private weak var coordinator: CommentCoordinator?
     private let commentUseCase: CommentUseCase
     
-    init(
-        coordinator: CommentCoordinator,
-        commentUseCase: CommentUseCase
-    ) {
-        self.coordinator = coordinator
+    init(commentUseCase: CommentUseCase) {
         self.commentUseCase = commentUseCase
     }
     
@@ -42,10 +37,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
                 guard case .success(_) = result else { return nil }
                 return Void()
             }
-            .do {
-                [weak self] _ in
-                self?.coordinator?.dismissMoreMenu()
-            }
+
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),
             modify: .empty()

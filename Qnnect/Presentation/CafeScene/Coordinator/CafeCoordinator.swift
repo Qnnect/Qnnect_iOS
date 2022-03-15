@@ -38,19 +38,16 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func start(with cafeId: Int, _ isFirst: Bool = false) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
-        let viewModel = CafeRoomViewModel(
-            coordinator: self,
-            cafeUseCase: cafeUseCase
-        )
-        let vc = CafeRoomViewController.create(with: viewModel,cafeId,isFirst)
+        let viewModel = CafeRoomViewModel(cafeUseCase: cafeUseCase)
+        let vc = CafeRoomViewController.create(with: viewModel, cafeId, isFirst, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
     func showSelectDrinkBottomSheet(_ cafeId: Int) {
         let drinkRepository = DefaultDrinkRepository(drinkNetworkService: DrinkNetworkService())
         let drinkUseCase = DefaultDrinkUseCase(drinkRepository: drinkRepository)
-        let viewModel = DrinkSelctViewModel(coordinator: self, drinkUseCase: drinkUseCase)
-        let vc = DrinkSelectViewController.create(with: viewModel, cafeId)
+        let viewModel = DrinkSelctViewModel(drinkUseCase: drinkUseCase)
+        let vc = DrinkSelectViewController.create(with: viewModel, cafeId, self)
         vc.modalPresentationStyle = .overCurrentContext
         if let vc = self.navigationController.presentedViewController as? DrinkSelectGuideAlertView {
             vc.dismiss(animated: false, completion: nil)
@@ -59,8 +56,8 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int) {
-        let viewModel = DrinkSelectGuideAlertViewModel(coordinator: self)
-        let alert = DrinkSelectGuideAlertView.create(with: viewModel, type, cafeId)
+        let viewModel = DrinkSelectGuideAlertViewModel()
+        let alert = DrinkSelectGuideAlertView.create(with: viewModel, type, cafeId, self)
         alert.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(alert, animated: true, completion: nil)
     }
@@ -68,8 +65,8 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func showSettingBottomSheet(_ cafeId: Int) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
-        let viewModel = SettingBottomSheetViewModel(coordinator: self,cafeUseCase: cafeUseCase)
-        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId)
+        let viewModel = SettingBottomSheetViewModel(cafeUseCase: cafeUseCase)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId, self)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
@@ -92,11 +89,8 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func showCafeModifyingScene(_ cafeId: Int) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
-        let viewModel = CafeModifyingViewModel(
-            coordinator: self,
-            cafeUseCase: cafeUseCase
-        )
-        let vc = CafeModifyingViewController.create(with: viewModel, cafeId)
+        let viewModel = CafeModifyingViewModel(cafeUseCase: cafeUseCase)
+        let vc = CafeModifyingViewController.create(with: viewModel, cafeId, self)
         if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
             bottomSheet.hideBottomSheetAndGoBack {
                 [weak self] in
@@ -110,11 +104,8 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func showWriteQuestionScene(_ cafeId: Int) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
-        let viewModel = WriteQuestionViewModel(
-            coordinator: self,
-            cafeUseCase: cafeUseCase
-        )
-        let vc = WriteQuestionViewController.create(with: viewModel, cafeId)
+        let viewModel = WriteQuestionViewModel(cafeUseCase: cafeUseCase)
+        let vc = WriteQuestionViewController.create(with: viewModel, cafeId, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

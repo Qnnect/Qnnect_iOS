@@ -94,16 +94,19 @@ final class CafeRoomViewController: BaseViewController {
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
     private var isFirst: Bool!
+    weak var coordinator: CafeCoordinator?
     
     static func create(
         with viewModel: CafeRoomViewModel,
         _ cafeId: Int,
-        _ isFirst: Bool = false
+        _ isFirst: Bool = false,
+        _ coordinator: CafeCoordinator
     ) -> CafeRoomViewController{
         let vc = CafeRoomViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
         vc.isFirst = isFirst
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -210,24 +213,27 @@ final class CafeRoomViewController: BaseViewController {
             .drive(self.mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+        
+        
         output.showDrinkSelectGuideAlertView
-            .emit()
+            .emit(onNext: coordinator.showDrinkSelectGuideAlertView)
             .disposed(by: self.disposeBag)
         
         output.showDrinkSelectBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showSelectDrinkBottomSheet(_:))
             .disposed(by: self.disposeBag)
         
         output.showSettingBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showSettingBottomSheet(_:))
             .disposed(by: self.disposeBag)
         
         output.showQuestionAnswerScene
-            .emit()
+            .emit(onNext: coordinator.showCafeAnswerScene(_:))
             .disposed(by: self.disposeBag)
         
         output.showWriteQuestionScene
-            .emit()
+            .emit(onNext: coordinator.showWriteQuestionScene(_:))
             .disposed(by: self.disposeBag)
     }
     
@@ -407,7 +413,7 @@ private extension CafeRoomViewController {
                     $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
                 }
                 view.pageControl.currentPage = self.groupDrinksCurPage
-           
+                
                 return view
             }
             return UICollectionReusableView()

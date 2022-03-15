@@ -15,14 +15,17 @@ final class CafeModifyingViewController: CafeInfoInputViewController {
     
     private var cafeId: Int!
     private var viewModel: CafeModifyingViewModel!
+    weak var coordinator: CafeCoordinator?
     
     static func create(
         with viewModel: CafeModifyingViewModel,
-        _ cafeId: Int
+        _ cafeId: Int,
+        _ coordinator: CafeCoordinator
     ) -> CafeModifyingViewController {
         let vc = CafeModifyingViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -68,16 +71,19 @@ final class CafeModifyingViewController: CafeInfoInputViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.dismiss
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         output.isCompleted
             .emit(onNext: self.setEnablementNextButton(_:))
             .disposed(by: self.disposeBag)
         
         output.isValidName
             .emit(onNext: setCautionLabel(_:))
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        //TODO:
+        output.dismiss
+            .emit(onNext: coordinator.dismissDrinkSelectBottomSheet)
             .disposed(by: self.disposeBag)
     }
 }

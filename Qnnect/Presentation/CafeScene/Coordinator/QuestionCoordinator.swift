@@ -39,13 +39,13 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
         )
         let userUseCase = DefaultUserUseCase(userRepository: userRepository)
         let viewModel = CafeAnswerViewModel(
-            coordinator: self,
             questionUseCase: questionUseCase,
             userUseCase: userUseCase
         )
         let vc = CafeAnswerViewController.create(
             with: viewModel,
-            questionId
+            questionId,
+            self
         )
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -56,11 +56,12 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
             replyNetworkService: ReplyNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CafeAnswerWritingViewModel(coordinator: self, commentUseCase: commentUseCase)
+        let viewModel = CafeAnswerWritingViewModel(commentUseCase: commentUseCase)
         let vc = CafeAnswerWritingViewController.create(
             with: question,
             user,
-            viewModel
+            viewModel,
+            self
         )
         self.navigationController.pushViewController(vc, animated: true)
     }

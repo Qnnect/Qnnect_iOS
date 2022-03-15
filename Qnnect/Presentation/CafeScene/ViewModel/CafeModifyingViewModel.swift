@@ -26,14 +26,9 @@ final class CafeModifyingViewModel: ViewModelType {
         let dismiss: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
     private let cafeUseCase: CafeUseCase
     
-    init(
-        coordinator: CafeCoordinator,
-        cafeUseCase: CafeUseCase
-    ) {
-        self.coordinator = coordinator
+    init(cafeUseCase: CafeUseCase) {
         self.cafeUseCase = cafeUseCase
     }
     
@@ -63,10 +58,6 @@ final class CafeModifyingViewModel: ViewModelType {
             .withLatestFrom(Observable.combineLatest(input.cafeId, inputInfo))
             .map { ($0.0, $0.1.0, $0.1.1, $0.1.2, $0.1.3)}
             .flatMap(self.cafeUseCase.updateCafe)
-            .do {
-                [weak self] _ in
-                self?.coordinator?.dismissDrinkSelectBottomSheet()
-            }
             .mapToVoid()
         
         return Output(

@@ -23,14 +23,9 @@ final class DrinkSelctViewModel: ViewModelType {
         let completion: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
     private let drinkUseCase: DrinkUseCase
     
-    init(
-        coordinator: CafeCoordinator,
-        drinkUseCase: DrinkUseCase
-    ) {
-        self.coordinator = coordinator
+    init(drinkUseCase: DrinkUseCase) {
         self.drinkUseCase = drinkUseCase
     }
     
@@ -48,10 +43,6 @@ final class DrinkSelctViewModel: ViewModelType {
             .withLatestFrom(Observable.combineLatest(input.cafeId, input.selectedDrink.map {$0.id} ))
             .flatMap(self.drinkUseCase.selectDrink)
             .mapToVoid()
-            .do {
-                [weak self] _ in
-                self?.coordinator?.dismissDrinkSelectBottomSheet()
-            }
         
         return Output(
             drinks: fetchedDrinks.asDriver(onErrorJustReturn: []),

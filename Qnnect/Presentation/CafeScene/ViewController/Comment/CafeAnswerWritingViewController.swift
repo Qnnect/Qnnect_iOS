@@ -103,16 +103,19 @@ final class CafeAnswerWritingViewController: BaseViewController {
     private var cafeId: Int!
     private var user: User!
     private var viewModel: CafeAnswerWritingViewModel!
+    weak var coordinator: QuestionCoordinator?
     
     static func create(
         with question: Question,
         _ user: User,
-        _ viewModel: CafeAnswerWritingViewModel
+        _ viewModel: CafeAnswerWritingViewModel,
+        _ coordinator: QuestionCoordinator
     ) -> CafeAnswerWritingViewController {
         let vc = CafeAnswerWritingViewController()
         vc.question = question
         vc.user = user
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -251,6 +254,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
                 self?.checkPermission(selectiongLimit: 5, true)
             }).disposed(by: self.disposeBag)
         
+        //TODO: 화면전환
         output.completion
             .emit()
             .disposed(by: self.disposeBag)

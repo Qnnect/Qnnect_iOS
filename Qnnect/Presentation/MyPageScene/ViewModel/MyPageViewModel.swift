@@ -20,19 +20,14 @@ final class MyPageViewModel: ViewModelType {
     }
     
     struct Output {
-        let showEditProfileScene: Signal<Void>
+        let showEditProfileScene: Signal<User>
         let user: Driver<User>
         let loginType: Driver<LoginType>
     }
     
-    private weak var coordinator: MyPageCoordinator?
     private let userUseCase: UserUseCase
     
-    init(
-        coordinator: MyPageCoordinator,
-        userUseCase: UserUseCase
-    ) {
-        self.coordinator = coordinator
+    init(userUseCase: UserUseCase) {
         self.userUseCase = userUseCase
     }
     
@@ -44,14 +39,11 @@ final class MyPageViewModel: ViewModelType {
                 guard case let .success(user) = result else { return nil }
                 return user
             }
+            .share()
         
         let showEditProfileScene = input.didTapProfileCell
             .withLatestFrom(fetchedUser)
-            .do{
-                [weak self] user in
-                self?.coordinator?.showEditProfileScene(user: user)
-            }
-            .mapToVoid()
+            
         
         let loginType = input.viewDidLoad
             .map(self.userUseCase.fetchLoginType)

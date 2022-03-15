@@ -25,19 +25,16 @@ final class CommentViewModel: ViewModelType {
         let comment: Driver<Comment>
         let replies: Driver<[Reply]>
         let isWriter: Driver<Bool>
-        let showCommentMoreMenuBottomSheet: Signal<Void>
-        let showReplyMoreMenuBottomSheet: Signal<Void>
+        /// Int: CommentId
+        let showCommentMoreMenuBottomSheet: Signal<Int>
+        /// Int: ReplyId
+        let showReplyMoreMenuBottomSheet: Signal<Int>
     }
     
-    private weak var coordinator: CommentCoordinator?
     private let commentUseCase: CommentUseCase
     
-    init(
-        coordinator: CommentCoordinator,
-        commentUseCase: CommentUseCase
-    ) {
+    init(commentUseCase: CommentUseCase) {
         self.commentUseCase = commentUseCase
-        self.coordinator = coordinator
     }
     
     func transform(from input: Input) -> Output {
@@ -62,16 +59,10 @@ final class CommentViewModel: ViewModelType {
         
         let showCommentMoreMenuBottomSheet = input.didTapCommentMoreButton
             .withLatestFrom(input.commentId)
-            .do {
-                [weak self] commentId in
-                self?.coordinator?.showCommentMoreMenuBottomSheet(commentId)
-            }.mapToVoid()
+           
         
         let showReplyMoreMenuBottomSheet = input.didTapReplyMoreButton
-            .do {
-                [weak self] replyId in
-                self?.coordinator?.showReplyMoreMenuBottomSheet(replyId)
-            }.mapToVoid()
+            
        
         
        

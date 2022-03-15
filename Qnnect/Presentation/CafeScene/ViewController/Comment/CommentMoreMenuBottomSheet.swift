@@ -36,14 +36,17 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
     
     private var commentId: Int!
     private var viewModel: CommentMoreMenuViewModel!
+    weak var coordinator: CommentCoordinator?
     
     static func create(
         with commentId: Int,
-        _ viewModel: CommentMoreMenuViewModel
+        _ viewModel: CommentMoreMenuViewModel,
+        _ coordinator: CommentCoordinator
     ) -> CommentMoreMenuBottomSheet {
         let view = CommentMoreMenuBottomSheet()
         view.commentId = commentId
         view.viewModel = viewModel
+        view.coordinator = coordinator
         return view
     }
     
@@ -82,8 +85,10 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         
         let output = viewModel.transform(from: input)
         
+        guard let coordinator = coordinator else { return}
+
         output.delete
-            .emit()
+            .emit(onNext: coordinator.dismissMoreMenu)
             .disposed(by: self.disposeBag)
         
         output.modify

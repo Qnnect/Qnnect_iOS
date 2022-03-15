@@ -23,21 +23,17 @@ final class EditProfileViewModel: ViewModelType {
         let isVaildName: Signal<Bool>
         let nameLength: Driver<Int>
         let showBottomSheet: Signal<Void>
-        let completion: Signal<Void>
         let pop: Signal<Void>
     }
     
     private let authUseCase: AuthUseCase
     private let userUseCase: UserUseCase
-    private weak var coordinator: MyPageCoordinator?
     
     init(
         authUseCase: AuthUseCase,
-        coordinator: MyPageCoordinator,
         userUseCase: UserUseCase
     ) {
         self.authUseCase = authUseCase
-        self.coordinator = coordinator
         self.userUseCase = userUseCase
     }
     
@@ -72,27 +68,18 @@ final class EditProfileViewModel: ViewModelType {
             .skip(until: inputChanging)
             .withLatestFrom(userInfo)
             .map{($0.0 , $0.1)}
-
             .flatMap(self.userUseCase.setProfile)
-            .do {
-                [weak self] _ in
-                self?.coordinator?.pop()
-            }
             .mapToVoid()
             .share()
         
-        let pop = input.didTapCompletionButton
-            .take(until: inputChanging)
-            .do{
-                [weak self] _ in
-                self?.coordinator?.pop()
-            }
+        let pop = Observable.merge(input.didTapCompletionButton
+            .take(until: inputChanging),updateProfile)
+            
         
         return Output(
             isVaildName: isValidName.asSignal(onErrorJustReturn: false),
             nameLength: nameLength.asDriver(onErrorDriveWith: .empty()),
             showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty()),
-            completion: updateProfile.asSignal(onErrorSignalWith: .empty()),
             pop: pop.asSignal(onErrorSignalWith: .empty())
         )
     }

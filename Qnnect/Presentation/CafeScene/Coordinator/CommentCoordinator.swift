@@ -32,10 +32,11 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
             replyNetworkService: ReplyNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CommentViewModel(coordinator: self, commentUseCase: commentUseCase)
+        let viewModel = CommentViewModel(commentUseCase: commentUseCase)
         let vc = CommentViewController.create(
             with: viewModel,
-            commentId
+            commentId,
+            self
         )
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -46,14 +47,14 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
             replyNetworkService: ReplyNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CommentMoreMenuViewModel(coordinator: self, commentUseCase: commentUseCase)
-        let view = CommentMoreMenuBottomSheet.create(with: commentId, viewModel)
+        let viewModel = CommentMoreMenuViewModel(commentUseCase: commentUseCase)
+        let view = CommentMoreMenuBottomSheet.create(with: commentId, viewModel, self)
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
     func showReplyMoreMenuBottomSheet(_ replyId: Int) {
-        let view = ReplyMoreMenuBottomSheet.create()
+        let view = ReplyMoreMenuBottomSheet.create(with: self)
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }

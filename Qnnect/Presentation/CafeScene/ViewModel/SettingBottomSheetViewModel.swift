@@ -18,49 +18,31 @@ final class SettingBottomSheetViewModel: ViewModelType {
     
     struct Output {
         let showInvitationScene: Signal<Void>
-        let showCafeModifyingScene: Signal<Void>
+        ///Int: CafeId
+        let showCafeModifyingScene: Signal<Int>
         let leaveCafe: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
     private let cafeUseCase: CafeUseCase
     
-    init(
-        coordinator: CafeCoordinator,
-        cafeUseCase: CafeUseCase
-    ) {
-        self.coordinator = coordinator
+    init(cafeUseCase: CafeUseCase) {
         self.cafeUseCase = cafeUseCase
     }
     
     func transform(from input: Input) -> Output {
         
         let showInvitationScene = input.didTapSettingItem
-            .do {
-                [weak self] type in
-                if type == .invite {
-                    self?.coordinator?.showInvitationScene()
-                }
-            }
+            .filter { $0 == .invite}
             .mapToVoid()
         
         let showCafeModifyingScene = input.didTapSettingItem
             .filter { $0 == .cafeInfoModify }
             .withLatestFrom(input.cafeId)
-            .do {
-                [weak self] cafeId in
-                self?.coordinator?.showCafeModifyingScene(cafeId)
-            }
-            .mapToVoid()
         
         let leaveCafe = input.didTapSettingItem
             .filter { $0 == .leaveCafe}
             .withLatestFrom(input.cafeId)
             .flatMap(self.cafeUseCase.leaveCafe(_:))
-            .do {
-                [weak self] cafeId in
-                self?.coordinator?.leaveCafe()
-            }
             .mapToVoid()
 
         return Output(

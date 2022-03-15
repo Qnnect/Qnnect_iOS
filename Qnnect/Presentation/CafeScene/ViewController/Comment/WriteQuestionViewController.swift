@@ -65,14 +65,17 @@ final class WriteQuestionViewController: BaseViewController {
     
     private var viewModel: WriteQuestionViewModel!
     private var cafeId: Int!
+    weak var coordinator: CafeCoordinator?
     
     static func create(
         with viewModel: WriteQuestionViewModel,
-        _ cafeId: Int
+        _ cafeId: Int,
+        _ coordinator: CafeCoordinator
     ) -> WriteQuestionViewController {
         let vc = WriteQuestionViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -140,6 +143,7 @@ final class WriteQuestionViewController: BaseViewController {
             .drive(onNext: setCompletionButton(_:))
             .disposed(by: self.disposeBag)
         
+        //TODO: 화면전환
         output.completion
             .emit()
             .disposed(by: self.disposeBag)

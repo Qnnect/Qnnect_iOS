@@ -40,14 +40,17 @@ final class CafeAnswerViewController: BaseViewController {
     
     private var questionId: Int!
     private var viewModel: CafeAnswerViewModel!
+    weak var coordinator: QuestionCoordinator?
     
     static func create(
         with viewModel: CafeAnswerViewModel,
-        _ questionId: Int
+        _ questionId: Int,
+        _ coordinator: QuestionCoordinator
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
         vc.questionId = questionId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -118,10 +121,6 @@ final class CafeAnswerViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.showAnswerWritingScene
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         output.scrap
             .emit(onNext: {
                 [weak self] _ in
@@ -134,10 +133,6 @@ final class CafeAnswerViewController: BaseViewController {
                 [weak self] _ in
                 self?.scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
             })
-            .disposed(by: self.disposeBag)
-        
-        output.showCommentScene
-            .emit()
             .disposed(by: self.disposeBag)
         
         Observable.combineLatest(
@@ -174,6 +169,16 @@ final class CafeAnswerViewController: BaseViewController {
         
         output.like
             .emit()
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.showAnswerWritingScene
+            .emit(onNext: coordinator.showCafeAnswerWritingScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showCommentScene
+            .emit(onNext: coordinator.showCommentScene(_:))
             .disposed(by: self.disposeBag)
     }
 }

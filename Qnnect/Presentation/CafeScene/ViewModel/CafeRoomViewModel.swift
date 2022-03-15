@@ -25,21 +25,23 @@ final class CafeRoomViewModel: ViewModelType {
     
     struct Output {
         let roomInfo: Driver<Cafe>
-        let showDrinkSelectGuideAlertView: Signal<Void>
-        let showDrinkSelectBottomSheet: Signal<Void>
-        let showSettingBottomSheet: Signal<Void>
-        let showQuestionAnswerScene: Signal<Void>
-        let showWriteQuestionScene: Signal<Void>
+        ///Int: CafeId
+        let showDrinkSelectGuideAlertView: Signal<(UserBehaviorType, Int)>
+        ///Int: CafeId
+        let showDrinkSelectBottomSheet: Signal<Int>
+        ///Int: CafeId
+        let showSettingBottomSheet: Signal<Int>
+        ///Int: QuestionId
+        let showQuestionAnswerScene: Signal<Int>
+        ///Int: CafeId
+        let showWriteQuestionScene: Signal<Int>
     }
     
-    private weak var coordinator: CafeCoordinator?
     private let cafeUseCase: CafeUseCase
     
     init(
-        coordinator: CafeCoordinator,
         cafeUseCase: CafeUseCase
     ) {
-        self.coordinator = coordinator
         self.cafeUseCase = cafeUseCase
     }
     
@@ -63,11 +65,7 @@ final class CafeRoomViewModel: ViewModelType {
             ).mapToVoid()
             )
             .withLatestFrom(input.cafeId)
-            .do {
-                [weak self] cafeId in
-                self?.coordinator?.showSelectDrinkBottomSheet(cafeId)
-            }
-            .mapToVoid()
+            
         
         let showDrinkSelectGuideAlertView = Observable.merge(
             input.didTapQuestionButton.map { _ in UserBehaviorType.question },
@@ -80,34 +78,18 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .map{ $0.type}
             .withLatestFrom(input.cafeId,resultSelector: { ($0, $1) } )
-            .do {
-                [weak self] type, cafeId in
-                self?.coordinator?.showDrinkSelectGuideAlertView(type, cafeId)
-            }
-            .mapToVoid()
+           
         
         let showSettingBottomSheet = input.didTapNavigationMenu
             .withLatestFrom(input.cafeId)
-            .do {
-                [weak self] cafeId in
-                self?.coordinator?.showSettingBottomSheet(cafeId)
-            }
-            .mapToVoid()
+            
         
         let showQuestionAnswerScene = input.didTapQuestionCell
-            .do {
-                [weak self] question in
-                self?.coordinator?.showCafeAnswerScene(question.id)
-            }
-            .mapToVoid()
+            .map { $0.id }
         
         let showWriteQuestionScene = input.didTapQuestionButton
             .withLatestFrom(input.cafeId)
-            .do {
-                [weak self] cafeId in
-                self?.coordinator?.showWriteQuestionScene(cafeId)
-            }
-            .mapToVoid()
+         
         
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
