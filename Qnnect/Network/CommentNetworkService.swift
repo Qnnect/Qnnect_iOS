@@ -12,12 +12,11 @@ import Moya
 final class CommentNetworkService: BaseNetworkService<CommentAPI> {
     
     func createComment(
-        _ cafeId: Int,
         _ questionId: Int,
         _ images: [Data],
         _ content: String
     ) -> Observable<Result<Void,Error>> {
-        request(.createComment(cafeId: cafeId, questionId: questionId, images: images, content: content))
+        request(.createComment(questionId: questionId, images: images, content: content))
             .filter(statusCodes: 200...300)
             .map { _ in Result.success(())}
             .catch{ .just(Result.failure($0))}

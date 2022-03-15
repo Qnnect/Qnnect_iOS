@@ -21,12 +21,11 @@ final class DefaultCommentRepository: CommentRepository {
     }
     
     func createComment(
-        _ cafeId: Int,
         _ questionId: Int,
         _ images: [Data],
         _ content: String
     ) -> Observable<Result<Void,Error>> {
-        commentNetworkService.createComment(cafeId, questionId, images, content)
+        commentNetworkService.createComment(questionId, images, content)
     }
     
     func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]), Error>> {

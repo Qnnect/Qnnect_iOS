@@ -107,13 +107,11 @@ final class CafeAnswerWritingViewController: BaseViewController {
     static func create(
         with question: Question,
         _ user: User,
-        _ cafeId: Int,
         _ viewModel: CafeAnswerWritingViewModel
     ) -> CafeAnswerWritingViewController {
         let vc = CafeAnswerWritingViewController()
         vc.question = question
         vc.user = user
-        vc.cafeId = cafeId
         vc.viewModel = viewModel
         return vc
     }
@@ -239,7 +237,6 @@ final class CafeAnswerWritingViewController: BaseViewController {
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
                 .withLatestFrom(Observable.just(getImages())),
-            cafeId: Observable.just(cafeId),
             question: Observable.just(question)
         )
         

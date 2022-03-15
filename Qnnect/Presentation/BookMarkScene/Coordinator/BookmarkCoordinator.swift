@@ -39,7 +39,7 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
         let coordinator = DefaultCafeCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
-        coordinator.showCafeAnswerScene(questionId, cafeId)
+        coordinator.showCafeAnswerScene(questionId)
     }
     
     func showBookMarkSearchScene() {

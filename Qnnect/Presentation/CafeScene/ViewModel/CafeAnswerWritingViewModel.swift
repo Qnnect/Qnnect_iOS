@@ -15,7 +15,6 @@ final class CafeAnswerWritingViewModel: ViewModelType {
         let content: Observable<String>
         let didTapAttachingImageButton: Observable<Void>
         let didTapCompletionButton: Observable<[Data?]>
-        let cafeId: Observable<Int>
         let question: Observable<Question>
     }
     
@@ -45,10 +44,10 @@ final class CafeAnswerWritingViewModel: ViewModelType {
         let createComment = input.didTapCompletionButton
             .withLatestFrom(
                 Observable.combineLatest(
-                    input.cafeId,
                     input.question.map { $0.id },
-                    input.question.map { $0.question}),
-                resultSelector: { ($1.0, $1.1, $0, $1.2) })
+                    input.question.map { $0.question}
+                ),
+                resultSelector: { ($1.0, $0, $1.1) })
             .flatMap(commentUseCase.createComment)
             .compactMap{
                 result -> Void? in

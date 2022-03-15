@@ -40,16 +40,13 @@ final class CafeAnswerViewController: BaseViewController {
     
     private var questionId: Int!
     private var viewModel: CafeAnswerViewModel!
-    private var cafeId: Int!
     
     static func create(
         with viewModel: CafeAnswerViewModel,
-        _ questionId: Int,
-        _ cafeId: Int
+        _ questionId: Int
     ) -> CafeAnswerViewController {
         let vc = CafeAnswerViewController()
         vc.viewModel = viewModel
-        vc.cafeId = cafeId
         vc.questionId = questionId
         return vc
     }
@@ -102,7 +99,6 @@ final class CafeAnswerViewController: BaseViewController {
             ).do {
                 print("scrap",$0)
             },
-            cafeId: Observable.just(cafeId),
             questionId: Observable.just(questionId),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapAnswerCell: mainTableView.rx.modelSelected(CafeAnswerSectionItem.self)

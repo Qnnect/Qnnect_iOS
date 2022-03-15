@@ -15,7 +15,6 @@ final class CafeAnswerViewModel: ViewModelType {
         let didTapAnswerWritingCell: Observable<Void>
         /// Bool: true: 스크랩하기 , false: 스크랩 취소하기
         let didTapScrapButton: Observable<Bool>
-        let cafeId: Observable<Int>
         let questionId: Observable<Int>
         let viewWillAppear: Observable<Void>
         let didTapAnswerCell: Observable<Comment>
@@ -71,10 +70,10 @@ final class CafeAnswerViewModel: ViewModelType {
         let scraped = fetchedQuestionWithComments.map { $0.scraped }
         
         let showAnswerWritingScene = input.didTapAnswerWritingCell
-            .withLatestFrom(Observable.combineLatest(fetchedQuestion, user, input.cafeId))
+            .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))
             .do {
-                [weak self] question, user, cafeId in
-                self?.coordinator?.showCafeAnswerWritingScene(question, user, cafeId)
+                [weak self] question, user in
+                self?.coordinator?.showCafeAnswerWritingScene(question, user)
             }
             .mapToVoid()
         

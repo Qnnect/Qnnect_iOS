@@ -10,7 +10,6 @@ import RxSwift
 
 protocol CommentUseCase: AnyObject {
     func createComment(
-        _ cafeId: Int,
         _ questionId: Int,
         _ images: [Data?],
         _ content: String
@@ -29,14 +28,13 @@ final class DefaultCommentUseCase: CommentUseCase {
     }
     
     func createComment(
-        _ cafeId: Int,
         _ questionId: Int,
         _ images: [Data?],
         _ content: String
     ) -> Observable<Result<Void,Error>> {
         let images = images.compactMap{ $0 }
         
-        return commentRepository.createComment(cafeId, questionId, images, content)
+        return commentRepository.createComment(questionId, images, content)
     }
     
     func fetchComment(_ commentId: Int) -> Observable<Result<(comment: Comment, replies: [Reply]), Error>> {

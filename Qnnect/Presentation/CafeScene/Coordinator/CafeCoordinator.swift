@@ -14,8 +14,8 @@ protocol CafeCoordinator: Coordinator {
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
-    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int)
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int)
+    func showCafeAnswerScene(_ questionId: Int)
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
     func showCommentScene(_ commentId: Int)
@@ -84,7 +84,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int) {
+    func showCafeAnswerScene(_ questionId: Int) {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
             questionNetworkService: QuestionNetworkService()
@@ -102,13 +102,12 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         )
         let vc = CafeAnswerViewController.create(
             with: viewModel,
-            questionId,
-            cafeId
+            questionId
         )
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ cafeId: Int) {
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService()
@@ -118,7 +117,6 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         let vc = CafeAnswerWritingViewController.create(
             with: question,
             user,
-            cafeId,
             viewModel
         )
         self.navigationController.pushViewController(vc, animated: true)
