@@ -96,6 +96,7 @@ struct Constants {
     static let reply_arrow_icon: UIImage? = UIImage(named: "reply_arrow")?.withRenderingMode(.alwaysOriginal)
     static let more_icon: UIImage? = UIImage(named: "more_icon")
     static let sendButtonImage: UIImage? = UIImage(named: "sendButtonImage")?.withRenderingMode(.alwaysOriginal)
+    static let answer_writing_icon: UIImage? = UIImage(named: "answer_writing_icon")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
     static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")

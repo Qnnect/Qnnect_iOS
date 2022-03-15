@@ -27,7 +27,11 @@ final class CafeAnswerWritingCell: UITableViewCell {
     private let mainLabel = UILabel().then {
         $0.text = "질문에 답해보세요!"
         $0.font = .IM_Hyemin(.bold, size: 14.0)
-        $0.textColor = .GRAY04
+        $0.textColor = .p_brown
+    }
+    
+    private let mainIcon = UIImageView().then {
+        $0.image = Constants.answer_writing_icon
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,7 +49,8 @@ final class CafeAnswerWritingCell: UITableViewCell {
         [
             self.writerProfileImageView,
             self.writerNameLabel,
-            self.mainLabel
+            self.mainLabel,
+            mainIcon
         ].forEach {
             self.contentView.addSubview($0)
         }
@@ -66,6 +71,11 @@ final class CafeAnswerWritingCell: UITableViewCell {
         self.mainLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.bottom.equalToSuperview().inset(14.0)
+        }
+        
+        mainIcon.snp.makeConstraints { make in
+            make.trailing.equalTo(mainLabel.snp.leading).offset(-6.0)
+            make.centerY.equalTo(mainLabel)
         }
     }
     
