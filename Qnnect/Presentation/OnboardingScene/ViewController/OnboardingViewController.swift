@@ -77,15 +77,19 @@ final class OnboardingViewController: UIPageViewController{
     }
     
     private var viewModel: OnboardingViewModel!
-    
+    weak var coordinator: SplashCoordinator?
     private let disposeBag = DisposeBag()
     
-    static func create(with viewModel: OnboardingViewModel) -> OnboardingViewController {
+    static func create(
+        with viewModel: OnboardingViewModel,
+        _ coordinator: SplashCoordinator
+    ) -> OnboardingViewController {
         let vc = OnboardingViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal,
             options: nil
         )
+        vc.coordinator = coordinator
         vc.viewModel = viewModel
         return vc
     }
@@ -125,7 +129,10 @@ private extension OnboardingViewController {
         let output = self.viewModel.transform(from: input)
         
         output.showLoingScene
-            .emit()
+            .emit(onNext: {
+                [weak self] _ in
+                self?.coordinator?.showLogin()
+            })
             .disposed(by: self.disposeBag)
     }
     func makePageVC() {

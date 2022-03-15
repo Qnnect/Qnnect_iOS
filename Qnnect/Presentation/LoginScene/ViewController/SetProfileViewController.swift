@@ -62,6 +62,7 @@ final class SetProfileViewController: BaseViewController {
     }()
     
     private var viewModel: SetProfileViewModel!
+    weak var coordinator: AuthCoordinator?
     private var token: Token!
     private var isAgreedNoti: Bool!
     private var loginType: LoginType!
@@ -70,13 +71,15 @@ final class SetProfileViewController: BaseViewController {
         with viewModel: SetProfileViewModel,
         _ token: Token,
         _ isAgreedNoti: Bool,
-        _ loginType: LoginType
+        _ loginType: LoginType,
+        _ coordinator: AuthCoordinator
     ) -> SetProfileViewController {
         let vc = SetProfileViewController()
         vc.viewModel = viewModel
         vc.token = token
         vc.isAgreedNoti = isAgreedNoti
         vc.loginType = loginType
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -159,10 +162,6 @@ final class SetProfileViewController: BaseViewController {
             .drive(self.nameTextField.nameLengthLabel.rx.nameLength)
             .disposed(by: self.disposeBag)
         
-        output.completion
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         output.kakaoProfileImageURL
             .debug()
             .drive(onNext:self.setProfileImageView)
@@ -175,6 +174,12 @@ final class SetProfileViewController: BaseViewController {
                 guard let self = self else { return }
                 self.present(self.bottomSheet, animated: true, completion: nil)
             })
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.completion
+            .emit(onNext: coordinator.showMain)
             .disposed(by: self.disposeBag)
     }
     

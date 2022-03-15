@@ -18,10 +18,16 @@ final class SplashViewController: BaseViewController {
         $0.contentMode = .scaleAspectFit
     }
     
+    weak var coordinator: SplashCoordinator?
     private var viewModel: SplashViewModel!
-    static func create(with viewModel: SplashViewModel) -> SplashViewController {
+    
+    static func create(
+        with viewModel: SplashViewModel,
+        _ coordinator: SplashCoordinator
+    ) -> SplashViewController {
         let vc = SplashViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -56,19 +62,22 @@ final class SplashViewController: BaseViewController {
         
         output.showLogin
             .emit(onNext: {
-                print("show Login")
+               [weak self] _ in
+                self?.coordinator?.showLogin()
             })
             .disposed(by: self.disposeBag)
         
         output.showMain
             .emit(onNext: {
-                print("show Main")
+                [weak self] _ in
+                self?.coordinator?.showMain()
             })
             .disposed(by: self.disposeBag)
         
         output.showOnboarding
             .emit(onNext: {
-                print("show Onboarding")
+                [weak self] _ in
+                self?.coordinator?.showOnboarding()
             })
             .disposed(by: self.disposeBag)
     }

@@ -15,9 +15,6 @@ import RxAppState
 
 final class HomeViewController: BaseViewController {
     
-    private var viewModel: HomeViewModel!
-    
-    
     private let homeCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
@@ -67,8 +64,15 @@ final class HomeViewController: BaseViewController {
         environment: NSCollectionLayoutEnvironment
     ) { }
     
-    static func create(with viewModel: HomeViewModel) -> HomeViewController {
+    private var viewModel: HomeViewModel!
+    weak var coordinator: HomeCoordinator?
+    
+    static func create(
+        with viewModel: HomeViewModel,
+        _ coordinator: HomeCoordinator
+    ) -> HomeViewController {
         let vc = HomeViewController()
+        vc.coordinator = coordinator
         vc.viewModel = viewModel
         return vc
     }
@@ -189,16 +193,9 @@ final class HomeViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.showAddGroupBottomSheet
-            .emit()
-            .disposed(by: self.disposeBag)
-        
+                
         output.curQuestionPage
             .drive(curQuestionPage)
-            .disposed(by: self.disposeBag)
-        
-        output.showCafeRoom
-            .emit()
             .disposed(by: self.disposeBag)
         
         output.homeInfo
@@ -210,12 +207,22 @@ final class HomeViewController: BaseViewController {
             .drive(self.homeCollectionView.rx.items(dataSource: datasource))
             .disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+
+        output.showCafeRoom
+            .emit(onNext: coordinator.showGroupScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showAddGroupBottomSheet
+            .emit(onNext: coordinator.showAddGroupBottomSheet)
+            .disposed(by: self.disposeBag)
+
         output.showJoinCafeBottomSheet
-            .emit()
+            .emit(onNext: coordinator.showJoinCafeBottomSheet)
             .disposed(by: self.disposeBag)
         
         output.showCafeAnswerScene
-            .emit()
+            .emit(onNext: coordinator.showCafeAnswerScene(_:))
             .disposed(by: self.disposeBag)
     }
 }

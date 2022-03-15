@@ -35,11 +35,9 @@ final class SetProfileViewModel: ViewModelType {
     var authManager: SocialLoginManager!
     
     init(
-        coordinator: AuthCoordinator,
         authUseCase: AuthUseCase,
         userUseCase: UserUseCase
     ) {
-        self.coordinator = coordinator
         self.authUseCase = authUseCase
         self.userUseCase = userUseCase
     }
@@ -84,11 +82,6 @@ final class SetProfileViewModel: ViewModelType {
                 self?.authUseCase.saveLoginType(loginType)
             }
             .mapToVoid()
-            .do {
-                [weak self] _ in
-                self?.coordinator?.showMain()
-            }
-            .debug()
         
         let kakaoProfileImageURL = input.viewDidLoad
             .withLatestFrom(input.loginType)

@@ -20,7 +20,7 @@ final class TermsViewModel: ViewModelType {
     }
     
     struct Output {
-        let start: Signal<Void>
+        let start: Signal<(token: Token, isAgreedNoti: Bool, loginType: LoginType)>
         let isCompletedAgreement: Signal<Bool> //필수 항목들 체크 완료 했는 지
         let isAllAgreement: Signal<Bool> // 항목들을 전부 체크 완료 했는 지
         let isCheckedAllAgreement: Signal<Bool> // 전체 동의 버튼 체크했는 지
@@ -28,11 +28,7 @@ final class TermsViewModel: ViewModelType {
     
     private weak var coordinator: AuthCoordinator?
     private let authUseCase: AuthUseCase
-    init(
-        coordinator: AuthCoordinator,
-        authUseCase: AuthUseCase
-    ) {
-        self.coordinator = coordinator
+    init( authUseCase: AuthUseCase) {
         self.authUseCase = authUseCase
     }
     
@@ -45,12 +41,7 @@ final class TermsViewModel: ViewModelType {
         
         let start = input.didTapAgreementButton
             .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti, input.loginType))
-            .do {
-                [weak self] token, isAgreedNoti, loginType in
-                self?.coordinator?.showSetProfileScene(token: token, isAgreedNoti: isAgreedNoti, loginType: loginType)
-            }
-            .mapToVoid()
-            
+            .map { (token: $0, isAgreedNoti: $1, loginType: $2) }
             
         let isCompletedAgreement = input.checkeditem
             .map(self.authUseCase.isEssentialItemChecked)
@@ -59,7 +50,7 @@ final class TermsViewModel: ViewModelType {
             .map(self.authUseCase.isAllAgreement(_:))
             
         return Output(
-            start: start.asSignal(onErrorJustReturn: ()),
+            start: start.asSignal(onErrorSignalWith: .empty()),
             isCompletedAgreement: isCompletedAgreement.asSignal(onErrorJustReturn: false),
             isAllAgreement: isAllAgreement.asSignal(onErrorJustReturn: false),
             isCheckedAllAgreement: input.didCheckAllAgreement.asSignal(onErrorJustReturn: false)

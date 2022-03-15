@@ -28,6 +28,7 @@ final class LoginViewController: BaseViewController {
     private let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .white)
     
     private var viewModel: LoginViewModel!
+    weak var coordinator: AuthCoordinator?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,9 +40,13 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
     }
         
-    static func create(with viewModel: LoginViewModel) -> LoginViewController {
+    static func create(
+        with viewModel: LoginViewModel,
+        _ coordinator: AuthCoordinator
+    ) -> LoginViewController {
         let vc = LoginViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -81,10 +86,14 @@ final class LoginViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.showNextScene
-            .emit()
+        guard let coordinator = coordinator else { return }
+        output.showHomeScene
+            .emit(onNext: coordinator.showMain)
             .disposed(by: self.disposeBag)
         
+        output.showTermsScene
+            .emit(onNext: coordinator.showTermsVC)
+            .disposed(by: self.disposeBag)
     }
     
 }

@@ -20,23 +20,17 @@ final class OnboardingViewModel: ViewModelType {
         let showLoingScene: Signal<Void>
     }
     
-    private weak var coordinator: SplashCoordinator?
     
-    init(coordinator: SplashCoordinator) {
-        self.coordinator = coordinator
+    init() {
+        
     }
     
     func transform(from input: Input) -> Output {
-        let showLoingScene = input.didTapStartButton
-            .do(onNext: self.showLoginScene)
         
+        let showLoingScene = input.didTapStartButton
+            
         return Output(showLoingScene: showLoingScene.asSignal(onErrorSignalWith: .empty()))
     }
 }
 
-private extension OnboardingViewModel {
-    func showLoginScene() {
-        self.coordinator?.showLogin()
-    }
-}
 

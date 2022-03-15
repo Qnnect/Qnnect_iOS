@@ -17,18 +17,14 @@ final class LoginViewModel: ViewModelType {
     }
     
     struct Output {
-        let showNextScene: Signal<Void>
+        let showTermsScene: Signal<(token: Token, loginType: LoginType)>
+        let showHomeScene: Signal<Void>
     }
     
     var socialLoginManager: SocialLoginManager!
-    private weak var coordinator: AuthCoordinator?
     private let authUseCase: AuthUseCase
     
-    init(
-        coordinator: AuthCoordinator,
-        authUseCase: AuthUseCase
-    ) {
-        self.coordinator = coordinator
+    init(authUseCase: AuthUseCase) {
         self.authUseCase = authUseCase
     }
     
@@ -56,12 +52,23 @@ final class LoginViewModel: ViewModelType {
                     self?.authUseCase.saveLoginType(loginType)
                 }
             }
-            .do(onNext: self.showNextScene)
-            .mapToVoid()
-                
-                
+            .share()
+        
+        let showTermsScene = isSuccess.filter(isNeedToSetting)
+            .map {
+                userLoginInfo, type -> (token: Token, loginType: LoginType) in
+                let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
+                return (token, type)
+            }
+        
+        let showHomeScene = isSuccess.filter{
+            [weak self] in
+            self?.isNeedToSetting($0, $1) == false
+        }.mapToVoid()
+        
         return Output(
-            showNextScene: isSuccess.asSignal(onErrorSignalWith: .empty())
+            showTermsScene: showTermsScene.asSignal(onErrorSignalWith: .empty()),
+            showHomeScene: showHomeScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
@@ -75,17 +82,8 @@ private extension LoginViewModel {
         return self.authUseCase.login(accessToken: accessToken, loginType: .apple)
     }
     
-    func showNextScene(_ userLoginInfo: UserLoginInfo, _ loginType: LoginType) {
-        let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
-        (userLoginInfo.isNewMember || !userLoginInfo.userSettingDone) ? self.showTermsScene(token: token, loginType: loginType) : self.showHomeScene()
-    }
-    
-    func showHomeScene() {
-        self.coordinator?.showMain()
-    }
-    
-    func showTermsScene(token: Token, loginType: LoginType) {
-        self.coordinator?.showTermsVC(token: token, loginType: loginType)
+    func isNeedToSetting(_ userLoginInfo: UserLoginInfo, _ loginType: LoginType) -> Bool {
+        return (userLoginInfo.isNewMember || !userLoginInfo.userSettingDone)
     }
     
     func convertToUserLoginInfo(_ result: Result<UserLoginInfo, LoginError>) -> UserLoginInfo? {

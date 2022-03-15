@@ -23,17 +23,12 @@ final class AddCafeViewModel: ViewModelType {
         let questionCycle: Driver<QuestionCycle>
         let isValidName: Signal<Bool>
         let isCompleted: Signal<Bool>
-        let showGroupScene: Signal<Void>
+        let showGroupScene: Signal<(Int, Bool)>
     }
     
-    private weak var coordinator: HomeCoordinator?
     private let cafeUseCase: CafeUseCase
     
-    init(
-        coordinator:HomeCoordinator,
-        cafeUseCase: CafeUseCase
-    ) {
-        self.coordinator = coordinator
+    init(cafeUseCase: CafeUseCase) {
         self.cafeUseCase = cafeUseCase
     }
     
@@ -66,12 +61,8 @@ final class AddCafeViewModel: ViewModelType {
                 guard case let .success(cafeId) = result else { return nil }
                 return cafeId
             })
-            .do {
-                [weak self] id in
-                self?.coordinator?.showGroupScene(with: id, true)
-            }
-            .debug()
-            .mapToVoid()
+            .map { ($0, true)}
+            
         
         return Output(
             questionCycle: questionCycle.asDriver(onErrorDriveWith: .empty()),

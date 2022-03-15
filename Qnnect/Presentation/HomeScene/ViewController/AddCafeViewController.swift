@@ -15,10 +15,15 @@ import TTGTags
 final class AddCafeViewController: CafeInfoInputViewController {
     
     private var viewModel: AddCafeViewModel!
+    weak var coordinator: HomeCoordinator?
     
-    static func create(with viewModel: AddCafeViewModel) -> AddCafeViewController {
+    static func create(
+        with viewModel: AddCafeViewModel,
+        _ coordinator: HomeCoordinator
+    ) -> AddCafeViewController {
         let vc = AddCafeViewController()
         vc.viewModel = viewModel
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -73,8 +78,10 @@ final class AddCafeViewController: CafeInfoInputViewController {
             .emit(onNext: self.setEnablementNextButton(_:))
             .disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return }
+
         output.showGroupScene
-            .emit(onNext: self.dismiss)
+            .emit(onNext: coordinator.showGroupScene)
             .disposed(by: self.disposeBag)
     }
     

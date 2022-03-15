@@ -57,15 +57,22 @@ final class TermsViewController: BaseViewController {
         }
         
     }
+    weak var coordinator: AuthCoordinator?
     private var viewModel: TermsViewModel!
     private var token: Token!
     private var loginType: LoginType!
     
-    static func create(with viewModel: TermsViewModel, _ token: Token, _ loginType: LoginType) -> TermsViewController {
+    static func create(
+        with viewModel: TermsViewModel,
+        _ token: Token,
+        _ loginType: LoginType,
+        _ coordinator: AuthCoordinator
+    ) -> TermsViewController {
         let vc = TermsViewController()
         vc.viewModel = viewModel
         vc.token = token
         vc.loginType = loginType
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -177,10 +184,6 @@ final class TermsViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-        output.start
-            .emit()
-            .disposed(by: self.disposeBag)
-        
         output.isCompletedAgreement
             .emit(onNext: self.setAgreementButton(_:))
             .disposed(by: self.disposeBag)
@@ -191,6 +194,12 @@ final class TermsViewController: BaseViewController {
         
         output.isCheckedAllAgreement
             .emit(onNext: self.sendActionCheckBoxes(_:))
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.start
+            .emit(onNext: coordinator.showSetProfileScene)
             .disposed(by: self.disposeBag)
     }
 }

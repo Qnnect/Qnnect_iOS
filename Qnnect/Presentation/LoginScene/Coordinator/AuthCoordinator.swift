@@ -29,11 +29,8 @@ final class DefaultAuthCoordinator: AuthCoordinator {
             authNetworkService: AuthNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
-        let viewModel = LoginViewModel(
-            coordinator: self,
-            authUseCase: useCase
-        )
-        let vc = LoginViewController.create(with: viewModel)
+        let viewModel = LoginViewModel(authUseCase: useCase)
+        let vc = LoginViewController.create(with: viewModel,self)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.socialLoginManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
@@ -48,11 +45,10 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         )
         let userUseCase = DefaultUserUseCase(userRepository: userRepository)
         let viewModel = SetProfileViewModel(
-            coordinator: self,
             authUseCase: authUseCase,
             userUseCase: userUseCase
         )
-        let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti, loginType)
+        let vc = SetProfileViewController.create(with: viewModel, token, isAgreedNoti, loginType,self)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.authManager = socialLoginManager
         self.navigationController.pushViewController(vc, animated: true)
@@ -60,11 +56,8 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     
     func showTermsVC(token: Token, loginType: LoginType) {
         let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
-        let viewModel = TermsViewModel(
-            coordinator: self,
-            authUseCase: authUseCase
-        )
-        let vc = TermsViewController.create(with: viewModel,token,loginType)
+        let viewModel = TermsViewModel(authUseCase: authUseCase)
+        let vc = TermsViewController.create(with: viewModel,token,loginType,self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

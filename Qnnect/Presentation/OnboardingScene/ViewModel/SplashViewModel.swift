@@ -21,14 +21,11 @@ final class SplashViewModel: ViewModelType {
         let showMain: Signal<Void>
     }
     
-    private weak var coordinator: SplashCoordinator?
     private let authUseCase: AuthUseCase
     
     init(
-        coordinator: SplashCoordinator,
         authUseCase: AuthUseCase
     ) {
-        self.coordinator = coordinator
         self.authUseCase = authUseCase
     }
     
@@ -40,10 +37,11 @@ final class SplashViewModel: ViewModelType {
         let firstAccess = isFirstAccess
             .filter{ $0 }
             .mapToVoid()
-            .do(onNext: self.authUseCase.updateFirstAccess)
-            .do(onNext: self.showOnboardingScene) { error in
-                print("first Aceess error !!! : \(error)")
+            .do{
+                [weak self] _ in
+                self?.authUseCase.updateFirstAccess()
             }
+        
         
         let reissueToken = input.didEndSplash
             .map(self.authUseCase.fetchToken)
@@ -57,12 +55,11 @@ final class SplashViewModel: ViewModelType {
                 return true
             }
             .mapToVoid()
-            .do(onNext: self.showMain)
-                
-                let tokenNil = input.didEndSplash
-                .map(self.authUseCase.fetchToken)
-                .filter { $0 == nil }
-                .mapToVoid()
+        
+        let tokenNil = input.didEndSplash
+            .map(self.authUseCase.fetchToken)
+            .filter { $0 == nil }
+            .mapToVoid()
         
         let needToLogin = reissueToken
             .filter {
@@ -74,10 +71,7 @@ final class SplashViewModel: ViewModelType {
         let showLogin = isFirstAccess
             .filter{ !$0 }
             .withLatestFrom(Observable.merge(tokenNil,needToLogin))
-            .do {
-                [weak self] _ in
-                self?.coordinator?.showLogin()
-            }.mapToVoid()
+            .mapToVoid()
         
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),
@@ -90,13 +84,6 @@ final class SplashViewModel: ViewModelType {
 
 
 private extension SplashViewModel {
-    func showOnboardingScene() {
-        self.coordinator?.showOnboarding()
-    }
-    
-    func showMain() {
-        self.coordinator?.showMain()
-    }
     
     func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
         return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)

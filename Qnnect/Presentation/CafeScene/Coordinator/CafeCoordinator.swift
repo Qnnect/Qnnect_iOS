@@ -146,7 +146,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
 }
 
 extension DefaultCafeCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         // 이동 전 ViewController
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return
@@ -157,8 +157,9 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
         }
 
         // child coordinator 가 일을 끝냈다고 알림.
-        if fromViewController is CafeAnswerViewController {
-            if let presentedVC = navigationController.viewControllers.first {
+        if let vc = fromViewController as? CafeAnswerViewController {
+            
+            if let presentedVC = navigationController.viewControllers.last {
                 presentedVC.tabBarController?.tabBar.isHidden = false
             }
         }

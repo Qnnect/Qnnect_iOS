@@ -27,18 +27,14 @@ final class DefaultSplashCoordinator: SplashCoordinator {
             authNetworkService: AuthNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
-        let viewModel = SplashViewModel(
-            coordinator: self,
-            authUseCase: useCase
-        )
-        let vc = SplashViewController.create(with: viewModel)
+        let viewModel = SplashViewModel(authUseCase: useCase)
+        let vc = SplashViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     
     func showOnboarding() {
-        print("showOnboarding call!!")
-        let viewModel = OnboardingViewModel(coordinator: self)
-        let vc = OnboardingViewController.create(with: viewModel)
+        let viewModel = OnboardingViewModel()
+        let vc = OnboardingViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

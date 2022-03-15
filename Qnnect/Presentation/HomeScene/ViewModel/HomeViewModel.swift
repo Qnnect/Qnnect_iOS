@@ -23,36 +23,27 @@ final class HomeViewModel: ViewModelType {
     struct Output {
         let showAddGroupBottomSheet: Signal<Void>
         let curQuestionPage: Driver<Int>
-        let showCafeRoom: Signal<Void>
+        let showCafeRoom: Signal<(Int, Bool)>
         let homeInfo: Driver<HomeInfo>
         let showJoinCafeBottomSheet: Signal<Void>
-        let showCafeAnswerScene: Signal<Void>
+        let showCafeAnswerScene: Signal<Int>
     }
     
     private weak var coordinator: HomeCoordinator?
     private let homeUseCase: HomeUseCase
     
-    init(
-        coordinator:HomeCoordinator,
-        homeUseCase: HomeUseCase
-    ) {
-        self.coordinator = coordinator
+    init(homeUseCase: HomeUseCase) {
         self.homeUseCase = homeUseCase
     }
     
     func transform(from input: Input) -> Output {
         
         let showAddGroupBottomSheet = input.didTapAddGroupButton
-            .do{ [weak self] _ in
-                self?.coordinator?.showAddGroupBottomSheet()
-            }
+ 
         
         let showCafeRoom = input.didTapMyCafe
-            .do {
-                [weak self] myCafe in
-                self?.coordinator?.showGroupScene(with: myCafe.id, false)
-            }
-            .mapToVoid()
+            .map {($0.id,false)}
+
         
         let homeInfo = input.viewWillAppear
             .flatMap(self.homeUseCase.fetchHomeInfo)
@@ -63,16 +54,10 @@ final class HomeViewModel: ViewModelType {
             }
         
         let showJoinCafeBottomSheet = input.didTapJoinCafeButton
-            .do {
-                [weak self] _ in
-                self?.coordinator?.showJoinCafeBottomSheet()
-            }
+
         
         let showCafeAnswerScene = input.didTapTodayQuestion
-            .do {
-                [weak self] question in
-                self?.coordinator?.showCafeAnswerScene(question.cafeQuestionId)
-            }.mapToVoid()
+            .map {$0.cafeQuestionId}
         
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
