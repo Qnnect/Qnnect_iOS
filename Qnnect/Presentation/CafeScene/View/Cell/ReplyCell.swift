@@ -132,5 +132,6 @@ final class ReplyCell: UICollectionViewCell {
             attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
         )
         dateLabel.text = reply.createdAt
+        moreButton.isHidden = !reply.writer
     }
 }

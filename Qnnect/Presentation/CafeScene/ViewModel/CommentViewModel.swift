@@ -21,6 +21,7 @@ final class CommentViewModel: ViewModelType {
     struct Output {
         let comment: Driver<Comment>
         let replies: Driver<[Reply]>
+        let isWriter: Driver<Bool>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -60,7 +61,8 @@ final class CommentViewModel: ViewModelType {
         
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),
-            replies: fetchedCommentWithReplies.map { $0.replies}.asDriver(onErrorJustReturn: [])
+            replies: fetchedCommentWithReplies.map { $0.replies}.asDriver(onErrorJustReturn: []),
+            isWriter: fetchedCommentWithReplies.map { $0.isWriter }.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

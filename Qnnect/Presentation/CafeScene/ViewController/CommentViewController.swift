@@ -115,7 +115,7 @@ final class CommentViewController: BaseViewController {
             make.centerY.equalTo(inputTextView)
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.navagation_more, style: .plain, target: nil, action: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
@@ -142,7 +142,8 @@ final class CommentViewController: BaseViewController {
         Observable.combineLatest(
             output.comment.asObservable(),
             output.replies.asObservable()
-        ).map {
+        )
+            .map {
             [weak self] comment, replies -> [CommentSectionModel] in
             guard let self = self else { return [] }
             var models = [CommentSectionModel]()
@@ -161,6 +162,14 @@ final class CommentViewController: BaseViewController {
             return models
         }.bind(to: mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
+        
+        output.isWriter
+            .drive(onNext: {
+                [weak self] isWriter in
+                if isWriter {
+                    self?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.navagation_more, style: .plain, target: nil, action: nil)
+                }
+            }).disposed(by: self.disposeBag)
     }
 }
 

@@ -14,6 +14,8 @@ final class TitleCell: UICollectionViewCell {
     
     private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.layer.cornerRadius = 25.0
+        $0.clipsToBounds = true
     }
     
     private let titleLabel = UILabel().then {
@@ -53,7 +55,10 @@ final class TitleCell: UICollectionViewCell {
     }
     
     func update(with user: User) {
-        self.profileImageView.image = Constants.profileDefaultImage
+        self.profileImageView.kf.setImage(
+            with: URL(string: user.profileImage ?? ""),
+            placeholder: Constants.profileDefaultImage
+        )
         self.titleLabel.text = "\(user.name) 님의 다이어리"
     }
 }
