@@ -15,15 +15,10 @@ protocol CafeCoordinator: Coordinator {
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
     func showCafeAnswerScene(_ questionId: Int)
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
-    func showCommentScene(_ commentId: Int)
-    func showCommentMoreMenuBottomSheet(_ commentId: Int)
-    func showReplyMoreMenuBottomSheet(_ replyId: Int)
     func dismissAlert()
     func dismissDrinkSelectBottomSheet()
-    func dismissMoreMenu()
     func leaveCafe()
 }
 
@@ -88,42 +83,10 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showCafeAnswerScene(_ questionId: Int) {
-        let questionRepository = DefaultQuestionRepository(
-            scrapNetworkService: ScrapNetworkService(),
-            questionNetworkService: QuestionNetworkService(),
-            likeNetworkService: LikeNetworkService()
-        )
-        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
-        let userRepository = DefaultUserRepositry(
-            userNetworkService: UserNetworkService(),
-            localStorage: DefaultUserDefaultManager()
-        )
-        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
-        let viewModel = CafeAnswerViewModel(
-            coordinator: self,
-            questionUseCase: questionUseCase,
-            userUseCase: userUseCase
-        )
-        let vc = CafeAnswerViewController.create(
-            with: viewModel,
-            questionId
-        )
-        self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User) {
-        let commentRepository = DefaultCommentRepository(
-            commentNetworkService: CommentNetworkService(),
-            replyNetworkService: ReplyNetworkService()
-        )
-        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CafeAnswerWritingViewModel(coordinator: self, commentUseCase: commentUseCase)
-        let vc = CafeAnswerWritingViewController.create(
-            with: question,
-            user,
-            viewModel
-        )
-        self.navigationController.pushViewController(vc, animated: true)
+        let coordinator = DefaultQuestionCoordinator(navigationController: navigationController)
+        coordinator.showCafeAnswerScene(questionId)
+        coordinator.parentCoordinator = self
+        self.childCoordinators.append(coordinator)
     }
     
     func showCafeModifyingScene(_ cafeId: Int) {
@@ -155,38 +118,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCommentScene(_ commentId: Int) {
-        let commentRepository = DefaultCommentRepository(
-            commentNetworkService: CommentNetworkService(),
-            replyNetworkService: ReplyNetworkService()
-        )
-        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CommentViewModel(coordinator: self, commentUseCase: commentUseCase)
-        let vc = CommentViewController.create(
-            with: viewModel,
-            commentId
-        )
-        self.navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func showCommentMoreMenuBottomSheet(_ commentId: Int) {
-        let commentRepository = DefaultCommentRepository(
-            commentNetworkService: CommentNetworkService(),
-            replyNetworkService: ReplyNetworkService()
-        )
-        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CommentMoreMenuViewModel(coordinator: self, commentUseCase: commentUseCase)
-        let view = CommentMoreMenuBottomSheet.create(with: commentId, viewModel)
-        view.modalPresentationStyle = .overCurrentContext
-        self.navigationController.present(view, animated: false, completion: nil)
-    }
-    
-    func showReplyMoreMenuBottomSheet(_ replyId: Int) {
-        let view = ReplyMoreMenuBottomSheet.create()
-        view.modalPresentationStyle = .overCurrentContext
-        self.navigationController.present(view, animated: false, completion: nil)
-    }
-    
+   
     func dismissAlert() {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
@@ -199,15 +131,6 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         }
         if let vc = self.navigationController.viewControllers.last as? CafeRoomViewController {
             vc.comebackCafeRoom()
-        }
-    }
-    
-    func dismissMoreMenu() {
-        if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
-            vc.hideBottomSheetAndGoBack {
-                [weak self] in
-                self?.navigationController.popViewController(animated: true)
-            }
         }
     }
     

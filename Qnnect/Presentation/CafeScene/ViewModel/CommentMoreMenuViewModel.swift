@@ -22,11 +22,11 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let modify: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
+    private weak var coordinator: CommentCoordinator?
     private let commentUseCase: CommentUseCase
     
     init(
-        coordinator: CafeCoordinator,
+        coordinator: CommentCoordinator,
         commentUseCase: CommentUseCase
     ) {
         self.coordinator = coordinator

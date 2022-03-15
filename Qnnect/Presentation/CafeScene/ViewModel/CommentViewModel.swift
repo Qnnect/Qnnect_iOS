@@ -29,11 +29,11 @@ final class CommentViewModel: ViewModelType {
         let showReplyMoreMenuBottomSheet: Signal<Void>
     }
     
-    private weak var coordinator: CafeCoordinator?
+    private weak var coordinator: CommentCoordinator?
     private let commentUseCase: CommentUseCase
     
     init(
-        coordinator: CafeCoordinator,
+        coordinator: CommentCoordinator,
         commentUseCase: CommentUseCase
     ) {
         self.commentUseCase = commentUseCase

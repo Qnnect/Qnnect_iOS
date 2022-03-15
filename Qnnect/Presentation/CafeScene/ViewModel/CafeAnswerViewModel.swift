@@ -35,12 +35,12 @@ final class CafeAnswerViewModel: ViewModelType {
         let liked: Driver<Bool>
     }
     
-    private weak var coordinator: CafeCoordinator?
+    private weak var coordinator: QuestionCoordinator?
     private let questionUseCase: QuestionUseCase
     private let userUseCase: UserUseCase
     
     init(
-        coordinator: CafeCoordinator,
+        coordinator: QuestionCoordinator,
         questionUseCase: QuestionUseCase,
         userUseCase: UserUseCase
     ) {

@@ -200,6 +200,9 @@
 		AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */; };
 		AEB5AAFA27E0E6770096376B /* ReplyMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */; };
 		AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */; };
+		AEB5AAFE27E0F4A10096376B /* ReplyMoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */; };
+		AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */; };
+		AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -454,6 +457,9 @@
 		AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
 		AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
 		AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMoreMenuViewModel.swift; sourceTree = "<group>"; };
+		AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMoreMenuViewModel.swift; sourceTree = "<group>"; };
+		AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
+		AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCoordinator.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -822,6 +828,7 @@
 				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
 				AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */,
 				AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */,
+				AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -830,6 +837,8 @@
 			isa = PBXGroup;
 			children = (
 				AE7F483B27CCCC4F00954971 /* CafeCoordinator.swift */,
+				AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */,
+				AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -837,18 +846,13 @@
 		AE538ED827C4689400670FAF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5AB0827E0F58E0096376B /* Comment */,
 				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */,
 				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
 				AE02D81127D621950019D955 /* SettingBottomSheet.swift */,
 				AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */,
-				AE02D82027D75C0D0019D955 /* CafeAnswerViewController.swift */,
-				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
 				AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */,
-				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
-				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
-				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
-				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1231,6 +1235,19 @@
 			path = Like;
 			sourceTree = "<group>";
 		};
+		AEB5AB0827E0F58E0096376B /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D82027D75C0D0019D955 /* CafeAnswerViewController.swift */,
+				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
+				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
+				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
+				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
+				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1588,6 +1605,7 @@
 				AEB5AAE627E062EA0096376B /* BookmarkSearchViewModel.swift in Sources */,
 				AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */,
 				AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */,
+				AEB5AAFE27E0F4A10096376B /* ReplyMoreMenuViewModel.swift in Sources */,
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
 				AEA14D1B27D33A160009EEC6 /* CafeResponseDTO.swift in Sources */,
 				AE02D82527D760B60019D955 /* CafeAnswerQuestionCell.swift in Sources */,
@@ -1699,6 +1717,7 @@
 				AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */,
 				AE77C84C27DB276B00E8D0EC /* DefaultDrinkRepository.swift in Sources */,
 				AEA7266227DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift in Sources */,
+				AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
@@ -1716,6 +1735,7 @@
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
 				AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */,
+				AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */,
