@@ -98,20 +98,23 @@ final class CafeAnswerViewController: BaseViewController {
                     return false
                 }
                 .mapToVoid(),
-            didTapScrapButton: self.scrapButton.rx.tap.scan(
-                false,
-                accumulator: { lastState, newValue in !lastState }
-            ).do {
-                print("scrap",$0)
-            },
+            didTapScrapButton: self.scrapButton.rx.tap.asObservable()
+                .withLatestFrom(scrapButton.imageView!.rx.image.map { $0 == Constants.navigationScrapIcon }),
             questionId: Observable.just(questionId),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapAnswerCell: mainTableView.rx.modelSelected(CafeAnswerSectionItem.self)
                 .compactMap { item -> Comment? in
                     guard case let CafeAnswerSectionItem.answerSectionItem(comment) = item else { return nil }
                     return comment
+                },
+            didTapLikeButton: likeButton.rx.tap.asObservable()
+                .withLatestFrom(likeButton.imageView!.rx.image.map{ $0 == Constants.navigationHeartIcon} )
+                .do {
+                    [weak self] in
+                    self?.setLikeButton($0)
                 }
         )
+        
         
         let output = self.viewModel.transform(from: input)
         
@@ -162,6 +165,16 @@ final class CafeAnswerViewController: BaseViewController {
             }.bind(to: self.mainTableView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
+        output.liked
+            .drive(onNext: {
+                [weak self] in
+                $0 ? self?.likeButton.setImage(Constants.navigationCheckedHeartIcon, for: .normal) :
+                self?.likeButton.setImage(Constants.navigationHeartIcon, for: .normal)
+            }).disposed(by: self.disposeBag)
+        
+        output.like
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -203,5 +216,15 @@ private extension CafeAnswerViewController {
                 return cell
             }
         }
+    }
+    
+    func setLikeButton(_ isLiked: Bool) {
+        isLiked ? likeButton.setImage(Constants.navigationCheckedHeartIcon, for: .normal) :
+        likeButton.setImage(Constants.navigationHeartIcon, for: .normal)
+    }
+    
+    func setScrapButton(_ isScraped: Bool) {
+        isScraped ? scrapButton.setImage(Constants.navigationScrapIcon, for: .normal) :
+        scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
     }
 }

@@ -12,13 +12,16 @@ final class DefaultQuestionRepository: QuestionRepository {
     
     private let scrapNetworkService: ScrapNetworkService
     private let questionNetworkService: QuestionNetworkService
+    private let likeNetworkService: LikeNetworkService
     
     init(
         scrapNetworkService: ScrapNetworkService,
-        questionNetworkService: QuestionNetworkService
+        questionNetworkService: QuestionNetworkService,
+        likeNetworkService: LikeNetworkService
     ) {
         self.scrapNetworkService = scrapNetworkService
         self.questionNetworkService = questionNetworkService
+        self.likeNetworkService = likeNetworkService
     }
     
     func scrap(_ questionId: Int) -> Observable<Result<Void,Error>> {
@@ -101,5 +104,10 @@ final class DefaultQuestionRepository: QuestionRepository {
                     return .failure(error)
                 }
             }
+    }
+    
+    func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void, Error>> {
+        let request = LikeRequestDTO(isUserLiked: isUserLiked)
+        return likeNetworkService.like(questionId, request)
     }
 }

@@ -18,6 +18,8 @@ final class CafeAnswerViewModel: ViewModelType {
         let questionId: Observable<Int>
         let viewWillAppear: Observable<Void>
         let didTapAnswerCell: Observable<Comment>
+        /// Bool: true: 좋아요하기 , false: 좋아요 취소하기
+        let didTapLikeButton: Observable<Bool>
     }
     
     struct Output {
@@ -29,6 +31,8 @@ final class CafeAnswerViewModel: ViewModelType {
         let showCommentScene: Signal<Void>
         let user: Driver<User>
         let currentUserComment: Driver<Comment?>
+        let like: Signal<Void>
+        let liked: Driver<Bool>
     }
     
     private weak var coordinator: CafeCoordinator?
@@ -79,7 +83,9 @@ final class CafeAnswerViewModel: ViewModelType {
             }
             .mapToVoid()
         
-        let scrap = input.didTapScrapButton
+        let scrapTrigger = input.didTapScrapButton
+            .share()
+        let scrap = scrapTrigger
             .filter { $0 }
             .withLatestFrom(fetchedQuestion.map{ $0.id })
             .flatMap(self.questionUseCase.scrap)
@@ -89,7 +95,7 @@ final class CafeAnswerViewModel: ViewModelType {
                 return Void()
             }
         
-        let cancleScrap = input.didTapScrapButton
+        let cancleScrap = scrapTrigger
             .filter{ !$0 }
             .withLatestFrom(fetchedQuestion.map{ $0.id })
             .flatMap(self.questionUseCase.cancleScrap)
@@ -98,12 +104,23 @@ final class CafeAnswerViewModel: ViewModelType {
                 guard case .success(_) = result else { return nil }
                 return Void()
             }
+            
         
         let showCommentScene = input.didTapAnswerCell
             .do {
                 [weak self] comment in
                 self?.coordinator?.showCommentScene(comment.id)
             }.mapToVoid()
+        
+        let like = input.didTapLikeButton
+            .debug()
+            .withLatestFrom(input.questionId, resultSelector: { ($1, $0)})
+            .flatMap(self.questionUseCase.like)
+            .debug()
+            .compactMap { result -> Void? in
+                guard case .success(_) = result else { return nil }
+                return Void()
+            }
         
         return Output(
             showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
@@ -116,7 +133,9 @@ final class CafeAnswerViewModel: ViewModelType {
             question: fetchedQuestionWithComments.map { $0.question }.asDriver(onErrorDriveWith: .empty()),
             showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty()),
             user: user.asDriver(onErrorDriveWith: .empty()),
-            currentUserComment: currentUserComment.asDriver(onErrorDriveWith: .empty())
+            currentUserComment: currentUserComment.asDriver(onErrorDriveWith: .empty()),
+            like: like.asSignal(onErrorSignalWith: .empty()),
+            liked: liked.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

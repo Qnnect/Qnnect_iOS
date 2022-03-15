@@ -87,7 +87,8 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func showCafeAnswerScene(_ questionId: Int) {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
-            questionNetworkService: QuestionNetworkService()
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let userRepository = DefaultUserRepositry(

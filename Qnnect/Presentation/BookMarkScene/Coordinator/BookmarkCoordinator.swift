@@ -27,7 +27,8 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
     func start() {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
-            questionNetworkService: QuestionNetworkService()
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = BookmarkViewModel(coordinator: self,questionUseCase: questionUseCase)
@@ -45,7 +46,8 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
     func showBookMarkSearchScene() {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
-            questionNetworkService: QuestionNetworkService()
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
         )
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = BookmarkSearchViewModel(coordinator: self, questionUseCase: questionUseCase)

@@ -16,4 +16,5 @@ protocol QuestionRepository: AnyObject {
     func fetchCafes() -> Observable<Result<[CafeTag],Error>>
     func fetchQuestion(_ questionId: Int) -> Observable<Result<CafeQuestion,Error>>
     func searchScrap(_ page:Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion],Error>>
+    func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void,Error>>
 }

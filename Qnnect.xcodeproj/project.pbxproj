@@ -193,6 +193,10 @@
 		AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */; };
 		AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */; };
 		AEB5AAEC27E09ACF0096376B /* CafeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAEB27E09ACE0096376B /* CafeQuestion.swift */; };
+		AEB5AAEE27E0A71B0096376B /* LikeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAED27E0A71B0096376B /* LikeAPI.swift */; };
+		AEB5AAF127E0A7CE0096376B /* LikeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF027E0A7CE0096376B /* LikeRequestDTO.swift */; };
+		AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */; };
+		AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -440,6 +444,10 @@
 		AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapSearchRequestDTO.swift; sourceTree = "<group>"; };
 		AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotBuyAlertViewController.swift; sourceTree = "<group>"; };
 		AEB5AAEB27E09ACE0096376B /* CafeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeQuestion.swift; sourceTree = "<group>"; };
+		AEB5AAED27E0A71B0096376B /* LikeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAPI.swift; sourceTree = "<group>"; };
+		AEB5AAF027E0A7CE0096376B /* LikeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRequestDTO.swift; sourceTree = "<group>"; };
+		AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNetworkService.swift; sourceTree = "<group>"; };
+		AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UIImageView.swift"; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1206,6 +1214,14 @@
 			path = Reply;
 			sourceTree = "<group>";
 		};
+		AEB5AAEF27E0A7C60096376B /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				AEB5AAF027E0A7CE0096376B /* LikeRequestDTO.swift */,
+			);
+			path = Like;
+			sourceTree = "<group>";
+		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1219,6 +1235,7 @@
 				AEB5AAB327DEFCF50096376B /* QuestionAPI.swift */,
 				AEB5AAC527DF36AA0096376B /* IngredientAPI.swift */,
 				AEB5AADD27DFC0780096376B /* ReplyAPI.swift */,
+				AEB5AAED27E0A71B0096376B /* LikeAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1226,6 +1243,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5AAEF27E0A7C60096376B /* Like */,
 				AEB5AAD027DF44840096376B /* Reply */,
 				AEB5AAC727DF376B0096376B /* Ingredient */,
 				AEB5AAB927DEFEE20096376B /* Question */,
@@ -1275,6 +1293,7 @@
 				AECC133027BA341B006866FC /* Rx+UIButton.swift */,
 				AECC133227BA35DA006866FC /* Rx+UILabel.swift */,
 				AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */,
+				AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */,
 			);
 			path = "Rx+";
 			sourceTree = "<group>";
@@ -1373,6 +1392,7 @@
 				AEB5AAB527DEFD8C0096376B /* QuestionNetworkService.swift */,
 				AEB5AACA27DF37FA0096376B /* StoreNetworkService.swift */,
 				AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */,
+				AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1577,6 +1597,7 @@
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
 				AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */,
+				AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */,
 				AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
@@ -1616,6 +1637,7 @@
 				AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */,
 				AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
+				AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
@@ -1633,6 +1655,7 @@
 				AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
+				AEB5AAF127E0A7CE0096376B /* LikeRequestDTO.swift in Sources */,
 				AEA14D1027D2879F0009EEC6 /* LoginType.swift in Sources */,
 				AEB5AACB27DF37FA0096376B /* StoreNetworkService.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
@@ -1726,6 +1749,7 @@
 				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
 				AEA7266427DDF4A400F48CB8 /* UIPageControl+.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
+				AEB5AAEE27E0A71B0096376B /* LikeAPI.swift in Sources */,
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
