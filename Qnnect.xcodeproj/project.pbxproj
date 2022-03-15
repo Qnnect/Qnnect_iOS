@@ -203,6 +203,7 @@
 		AEB5AAFE27E0F4A10096376B /* ReplyMoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */; };
 		AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */; };
 		AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */; };
+		AEB5AB0E27E111890096376B /* DeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0D27E111890096376B /* DeleteAlertView.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -460,6 +461,7 @@
 		AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMoreMenuViewModel.swift; sourceTree = "<group>"; };
 		AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
 		AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCoordinator.swift; sourceTree = "<group>"; };
+		AEB5AB0D27E111890096376B /* DeleteAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertView.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				AEA14D1127D28C3C0009EEC6 /* TabBarController.swift */,
 				AE02D81E27D749110019D955 /* DiaryColorType+.swift */,
 				AE77C82A27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift */,
+				AEB5AB0D27E111890096376B /* DeleteAlertView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1717,6 +1720,7 @@
 				AE77C82D27D8B81100E8D0EC /* CafeModifyingViewModel.swift in Sources */,
 				AE77C84C27DB276B00E8D0EC /* DefaultDrinkRepository.swift in Sources */,
 				AEA7266227DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift in Sources */,
+				AEB5AB0E27E111890096376B /* DeleteAlertView.swift in Sources */,
 				AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */,

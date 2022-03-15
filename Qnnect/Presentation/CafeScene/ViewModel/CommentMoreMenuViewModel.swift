@@ -15,11 +15,13 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let commentId: Observable<Int>
         let didTapDeleteButton: Observable<Void>
         let didTapModifyButton: Observable<Void>
+        let didTapDeleteAlertOkButton: Observable<Void>
     }
     
     struct Output {
         let delete: Signal<Void>
         let modify: Signal<Void>
+        let showDeleteAlertView: Signal<Void>
     }
     
     private let commentUseCase: CommentUseCase
@@ -30,7 +32,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let delete = input.didTapDeleteButton
+        let delete = input.didTapDeleteAlertOkButton
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.deleteComment(_:))
             .compactMap { result -> Void? in
@@ -38,9 +40,12 @@ final class CommentMoreMenuViewModel: ViewModelType {
                 return Void()
             }
 
+        let showDeleteAlertview = input.didTapDeleteButton
+            
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),
-            modify: .empty()
+            modify: .empty(),
+            showDeleteAlertView: showDeleteAlertview.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

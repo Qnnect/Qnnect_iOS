@@ -34,6 +34,10 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         $0.alignment = .leading
     }
     
+    private let deleteAlertView = DeleteAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
     private var commentId: Int!
     private var viewModel: CommentMoreMenuViewModel!
     weak var coordinator: CommentCoordinator?
@@ -80,10 +84,18 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         let input = CommentMoreMenuViewModel.Input(
             commentId: Observable.just(commentId),
             didTapDeleteButton: deleteButton.rx.tap.asObservable(),
-            didTapModifyButton: modifyButton.rx.tap.asObservable()
+            didTapModifyButton: modifyButton.rx.tap.asObservable(),
+            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
         )
         
         let output = viewModel.transform(from: input)
+        
+        output.showDeleteAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.deleteAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return}
 
@@ -94,5 +106,6 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         output.modify
             .emit()
             .disposed(by: self.disposeBag)
+        
     }
 }
