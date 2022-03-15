@@ -22,7 +22,6 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         super.init()
-        navigationController.delegate = self
     }
     
     func start() { }
@@ -69,22 +68,5 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     }
 }
 
-extension DefaultCommentCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        // 이동 전 ViewController
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
-            return
-        }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-           return
-        }
 
-        // child coordinator 가 일을 끝냈다고 알림.
-        if fromViewController is CafeAnswerViewController {
-            if let presentedVC = navigationController.viewControllers.first {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
-        }
-    }
 }

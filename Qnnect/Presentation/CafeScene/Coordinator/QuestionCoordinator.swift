@@ -86,10 +86,8 @@ extension DefaultQuestionCoordinator: UINavigationControllerDelegate {
         }
 
         // child coordinator 가 일을 끝냈다고 알림.
-        if fromViewController is CafeAnswerViewController {
-            if let presentedVC = navigationController.viewControllers.first {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
+        if let vc = fromViewController as? CommentViewController {
+            childDidFinish(vc.coordinator)
         }
     }
 }
