@@ -99,4 +99,18 @@ final class DefaultQuestionRepository: QuestionRepository {
                 }
             }
     }
+    
+    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion], Error>> {
+        let request = ScrapSearchRequestDTO(page: page, size: size, searchWord: searchWord)
+        return scrapNetworkService.searchScrap(request: request)
+            .map {
+                result -> Result<[ScrapedQuestion],Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.map{$0.toDomain()})
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

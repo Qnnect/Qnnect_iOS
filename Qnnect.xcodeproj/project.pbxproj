@@ -188,6 +188,9 @@
 		AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADD27DFC0780096376B /* ReplyAPI.swift */; };
 		AEB5AAE027DFC14D0096376B /* ReplyNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */; };
 		AEB5AAE227E043500096376B /* CommentDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */; };
+		AEB5AAE427E062B80096376B /* BookmarkSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE327E062B80096376B /* BookmarkSearchViewController.swift */; };
+		AEB5AAE627E062EA0096376B /* BookmarkSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE527E062EA0096376B /* BookmarkSearchViewModel.swift */; };
+		AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -430,6 +433,9 @@
 		AEB5AADD27DFC0780096376B /* ReplyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAPI.swift; sourceTree = "<group>"; };
 		AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyNetworkService.swift; sourceTree = "<group>"; };
 		AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDateHeaderView.swift; sourceTree = "<group>"; };
+		AEB5AAE327E062B80096376B /* BookmarkSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchViewController.swift; sourceTree = "<group>"; };
+		AEB5AAE527E062EA0096376B /* BookmarkSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchViewModel.swift; sourceTree = "<group>"; };
+		AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapSearchRequestDTO.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -885,6 +891,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */,
+				AEB5AAE327E062B80096376B /* BookmarkSearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -893,6 +900,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */,
+				AEB5AAE527E062EA0096376B /* BookmarkSearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -999,6 +1007,7 @@
 				AE77C85A27DB622900E8D0EC /* ScrapFetchRequestDTO.swift */,
 				AE77C85C27DB63B200E8D0EC /* ScrapFetchResponseDTO.swift */,
 				AE77C86327DB6C7300E8D0EC /* CafesFetchResponseDTO.swift */,
+				AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */,
 			);
 			path = Scrap;
 			sourceTree = "<group>";
@@ -1540,6 +1549,7 @@
 				AE6964D527BCDDF300BF2A80 /* MyPageCoordinator.swift in Sources */,
 				AEA14D2B27D456680009EEC6 /* KeyChain.swift in Sources */,
 				AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */,
+				AEB5AAE627E062EA0096376B /* BookmarkSearchViewModel.swift in Sources */,
 				AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */,
 				AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */,
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
@@ -1600,12 +1610,14 @@
 				AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
+				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AEA14D4827D47E8D0009EEC6 /* Cafe.swift in Sources */,
 				AEA14D4227D47CD70009EEC6 /* CafeNetworkService.swift in Sources */,
 				AEBC9EC127C5F44F0070399A /* PageControlFooterView.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
 				AE6FA49027BDCA4800FA2154 /* Ingredient.swift in Sources */,
+				AEB5AAE427E062B80096376B /* BookmarkSearchViewController.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
 				AEA7265C27DDB22400F48CB8 /* UITextField+.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,

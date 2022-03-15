@@ -11,6 +11,7 @@ import UIKit
 
 protocol BookmarkCoordinator: Coordinator {
     func showCafeAnswerScene(_ questionId: Int, _ cafeId: Int)
+    func showBookMarkSearchScene()
 }
 
 final class DefaultBookmarkCoordinator: BookmarkCoordinator {
@@ -39,5 +40,16 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
         coordinator.showCafeAnswerScene(questionId, cafeId)
+    }
+    
+    func showBookMarkSearchScene() {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = BookmarkSearchViewModel(coordinator: self, questionUseCase: questionUseCase)
+        let vc = BookmarkSearchViewController.create(with: viewModel)
+        self.navigationController.pushViewController(vc, animated: true)
     }
 }

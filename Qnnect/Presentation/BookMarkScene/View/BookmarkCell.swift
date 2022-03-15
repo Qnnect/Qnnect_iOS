@@ -50,17 +50,19 @@ final class BookmarkCell: UITableViewCell {
         contentView.backgroundColor = .p_ivory
         
         cafeNameLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(25.0)
+            make.leading.trailing.equalToSuperview().inset(25.0)
             make.top.equalToSuperview().inset(21.0)
         }
+        cafeNameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(cafeNameLabel)
-            make.trailing.equalToSuperview().inset(19.0)
+            make.leading.trailing.equalTo(cafeNameLabel)
             make.top.equalTo(cafeNameLabel.snp.bottom).offset(3.0)
         }
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         dateLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(22.0)
             make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalToSuperview()
         }

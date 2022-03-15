@@ -102,7 +102,7 @@ struct Constants {
     static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")?.withAlignmentRectInsets(.init(top: -12.0, left: -12.0, bottom: 0.0, right: 0))
     static let xmarkImage: UIImage? = UIImage(named: "X_mark")
     static let leftImageInset: UIEdgeInsets = .init(top: -12.0, left: -12.0, bottom: 0.0, right: 0)
-    static let navigation_search: UIImage? = UIImage(named: "navigation_search")
+    static let navigation_search: UIImage? = UIImage(named: "navigation_search")?.withRenderingMode(.alwaysOriginal)
     static let navagation_more: UIImage? = UIImage(named: "navi_more")?.withRenderingMode(.alwaysOriginal)
     static let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle().then {
         $0.lineHeightMultiple = 1.17

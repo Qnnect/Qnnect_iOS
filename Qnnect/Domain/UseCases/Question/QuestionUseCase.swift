@@ -19,6 +19,7 @@ protocol QuestionUseCase: AnyObject {
         question: Question,
         liked: Bool,
         scraped: Bool),Error>>
+    func searchScrap(_ page:Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion],Error>>
 }
 
 final class DefaultQuestionUseCase: QuestionUseCase {
@@ -55,5 +56,9 @@ final class DefaultQuestionUseCase: QuestionUseCase {
         liked: Bool,
         scraped: Bool),Error>> {
         questionRepository.fetchQuestion(questionId)
+    }
+    
+    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion], Error>> {
+        questionRepository.searchScrap(page, size, searchWord)
     }
 }

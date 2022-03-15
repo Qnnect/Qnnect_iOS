@@ -14,6 +14,7 @@ enum ScrapAPI {
     case fetchAllScrap(request: ScrapFetchRequestDTO)
     case fetchScrap(cafeId: Int, request: ScrapFetchRequestDTO)
     case fetchCafes
+    case searchScrap(request: ScrapSearchRequestDTO)
 }
 
 extension ScrapAPI: TargetType, AccessTokenAuthorizable {
@@ -31,6 +32,8 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/users/scrap/\(cafeId)"
         case .fetchCafes:
             return "api/v1/scrap/cafes"
+        case .searchScrap(_):
+            return "api/v1/users/scrap/"
         }
     }
     
@@ -40,7 +43,7 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
             return .post
         case .cancleScrap(_):
             return .delete
-        case .fetchAllScrap(_), .fetchScrap(_, _), .fetchCafes:
+        case .fetchAllScrap(_), .fetchScrap(_, _), .fetchCafes, .searchScrap(_):
             return .get
         }
     }
@@ -55,6 +58,9 @@ extension ScrapAPI: TargetType, AccessTokenAuthorizable {
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .fetchCafes:
             return .requestPlain
+        case .searchScrap(let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
     }
     

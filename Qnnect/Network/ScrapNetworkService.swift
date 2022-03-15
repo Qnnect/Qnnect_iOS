@@ -12,12 +12,12 @@ import RxSwift
 final class ScrapNetworkService: BaseNetworkService<ScrapAPI> {
     
     func scrap(request: ScrapRequestDTO) -> Observable<Result<Void,Error>> {
-        return self.request(.scrap(request: request))
+        self.request(.scrap(request: request))
             .filter(statusCode: 200)
             .map { _ in Result.success(())}
             .catch{ .just(Result.failure($0))}
             .asObservable()
-            
+        
     }
     
     func cancleScrap(request: ScrapRequestDTO) -> Observable<Result<Void,Error>> {
@@ -50,6 +50,15 @@ final class ScrapNetworkService: BaseNetworkService<ScrapAPI> {
         self.request(.fetchCafes)
             .filter(statusCode: 200)
             .map([CafesFetchResponseDTO].self)
+            .map { Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func searchScrap(request: ScrapSearchRequestDTO) -> Observable<Result<[ScrapFetchResponseDTO],Error>> {
+        self.request(.searchScrap(request: request))
+            .filter(statusCode: 200)
+            .map([ScrapFetchResponseDTO].self)
             .map { Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()

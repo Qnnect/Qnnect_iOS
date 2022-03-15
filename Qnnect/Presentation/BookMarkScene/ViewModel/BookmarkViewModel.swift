@@ -22,6 +22,7 @@ final class BookmarkViewModel: ViewModelType {
         let moreFetch: Observable<Int>
         /// Int: questionId
         let didTapQuestion: Observable<Int>
+        let didTapSearchButton: Observable<Void>
     }
     
     struct Output {
@@ -30,6 +31,7 @@ final class BookmarkViewModel: ViewModelType {
         let newLoad: Signal<Void>
         let canLoad: Signal<Bool>
         let showCafeAnswerScene: Signal<Void>
+        let showSearchScene: Signal<Void>
     }
     
     private weak var coordinator: BookmarkCoordinator?
@@ -53,7 +55,7 @@ final class BookmarkViewModel: ViewModelType {
                 return cafes
             }
         
-        let loadAll = Observable.merge(input.viewDidLoad, input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid())
+        let loadAll = input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid()
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
@@ -128,12 +130,19 @@ final class BookmarkViewModel: ViewModelType {
             }
             .mapToVoid()
         
+        let showSearchScene = input.didTapSearchButton
+            .do {
+                [weak self] _ in
+                self?.coordinator?.showBookMarkSearchScene()
+            }
+        
         return Output(
             cafes: cafes.asDriver(onErrorJustReturn: []),
             scrapedQuestions: scrapedQuestions.asDriver(onErrorJustReturn: []),
             newLoad: newLoad.mapToVoid().asSignal(onErrorSignalWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty())
+            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showSearchScene: showSearchScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

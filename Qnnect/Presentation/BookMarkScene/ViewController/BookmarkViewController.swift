@@ -29,6 +29,9 @@ final class BookmarkViewController: BaseViewController {
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
         $0.backgroundColor = .p_ivory
         $0.showsVerticalScrollIndicator = false
+        $0.separatorInsetReference = .fromCellEdges
+        $0.separatorInset = .init(top: 0, left: 23.0, bottom: 0, right: 23.0)
+        $0.estimatedRowHeight = UITableView.automaticDimension
     }
     
     private let searchButton = UIButton().then {
@@ -60,7 +63,12 @@ final class BookmarkViewController: BaseViewController {
             UIBarButtonItem(customView: self.navigationTitleLabel)
         ]
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.navigation_search,
+            style: .plain,
+            target: self,
+            action: #selector(didTapSearchButton)
+        )
         
         
         self.bookmarkTableView.snp.makeConstraints { make in
@@ -96,8 +104,9 @@ final class BookmarkViewController: BaseViewController {
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},
             didTapQuestion: bookmarkTableView.rx.modelSelected(ScrapedQuestion.self)
-                .map { $0.cafeQuestionId }
-            
+                .map { $0.cafeQuestionId },
+            didTapSearchButton: rx.methodInvoked(#selector(didTapSearchButton))
+                .mapToVoid()
         )
         
         
@@ -134,6 +143,10 @@ final class BookmarkViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         output.showCafeAnswerScene
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showSearchScene
             .emit()
             .disposed(by: self.disposeBag)
     }
@@ -173,20 +186,7 @@ extension BookmarkViewController {
     }
 }
 
-import SwiftUI
-struct BookmarkViewController_Priviews: PreviewProvider {
-    static var previews: some View {
-        Contatiner().edgesIgnoringSafeArea(.all)
-    }
-    struct Contatiner: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let vc = BookmarkViewController() //보고 싶은 뷰컨 객체
-            return UINavigationController(rootViewController: vc)
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
-        typealias UIViewControllerType =  UIViewController
+private extension BookmarkViewController {
+    @objc dynamic func didTapSearchButton() {
     }
 }

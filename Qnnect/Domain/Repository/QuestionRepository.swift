@@ -19,4 +19,5 @@ protocol QuestionRepository: AnyObject {
         question: Question,
         liked: Bool,
         scraped: Bool),Error>>
+    func searchScrap(_ page:Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion],Error>>
 }
