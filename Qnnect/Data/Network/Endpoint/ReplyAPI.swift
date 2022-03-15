@@ -39,7 +39,10 @@ extension ReplyAPI: TargetType, AccessTokenAuthorizable {
     }
     
     var headers: [String : String]? {
-        nil
+        switch self {
+        case .createReply(_, _):
+            return ["Content-Type": "text/plain"]
+        }
     }
     
     var authorizationType: AuthorizationType? {
