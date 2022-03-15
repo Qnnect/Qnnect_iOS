@@ -127,6 +127,10 @@ final class CommentViewController: BaseViewController {
             viewDidLoad: Observable.just(()),
             commentId: Observable.just(commentId),
             didTapSendButton: sendButton.rx.tap
+                .do {
+                    [weak self] _ in
+                    self?.inputTextView.text = ""
+                }
                 .withLatestFrom(inputTextView.rx.text.orEmpty)
                 .asObservable()
         )
