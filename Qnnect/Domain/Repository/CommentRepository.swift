@@ -19,4 +19,5 @@ protocol CommentRepository: AnyObject {
         Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
     >
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
+    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>>
 }

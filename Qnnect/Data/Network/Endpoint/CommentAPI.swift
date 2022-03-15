@@ -11,6 +11,7 @@ import Moya
 enum CommentAPI {
     case createComment(questionId: Int, images: [Data], content: String)
     case fetchComment(commentId: Int)
+    case deleteComment(commentId: Int)
 }
 
 extension CommentAPI: TargetType, AccessTokenAuthorizable {
@@ -22,7 +23,7 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(let questionId, _, _):
             return "api/v1/questions/\(questionId)/comments"
-        case .fetchComment(let commentId):
+        case .fetchComment(let commentId), .deleteComment(let commentId):
             return "api/v1/comments/\(commentId)"
         }
     }
@@ -33,6 +34,8 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
             return .post
         case .fetchComment(_):
             return .get
+        case .deleteComment(_):
+            return .delete
         }
     }
     
@@ -55,8 +58,9 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
                 mimeType: nil
             ))
             return .uploadMultipart(formData)
-        case .fetchComment(_):
+        case .fetchComment(_), .deleteComment(_):
             return .requestPlain
+            
         }
     }
     
@@ -64,7 +68,7 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(_, _, _):
             return ["Content-Type": "multipart/form-data"]
-        case .fetchComment(_):
+        case .fetchComment(_), .deleteComment(_):
             return nil
         }
     }

@@ -46,4 +46,8 @@ final class DefaultCommentRepository: CommentRepository {
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>> {
         replyNetworkService.createReply(commentId, content)
     }
+    
+    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
+        commentNetworkService.deleteComment(commentId)
+    }
 }

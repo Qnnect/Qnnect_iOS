@@ -31,4 +31,12 @@ final class CommentNetworkService: BaseNetworkService<CommentAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
+        request(.deleteComment(commentId: commentId))
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

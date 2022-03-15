@@ -169,7 +169,13 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showCommentMoreMenuBottomSheet(_ commentId: Int) {
-        let view = CommentMoreMenuBottomSheet.create()
+        let commentRepository = DefaultCommentRepository(
+            commentNetworkService: CommentNetworkService(),
+            replyNetworkService: ReplyNetworkService()
+        )
+        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
+        let viewModel = CommentMoreMenuViewModel(coordinator: self, commentUseCase: commentUseCase)
+        let view = CommentMoreMenuBottomSheet.create(with: commentId, viewModel)
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }

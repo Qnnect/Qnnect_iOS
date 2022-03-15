@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 class CommentMoreMenuBottomSheet: BottomSheetViewController {
     
@@ -32,8 +34,16 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         $0.alignment = .leading
     }
     
-    static func create() -> CommentMoreMenuBottomSheet {
+    private var commentId: Int!
+    private var viewModel: CommentMoreMenuViewModel!
+    
+    static func create(
+        with commentId: Int,
+        _ viewModel: CommentMoreMenuViewModel
+    ) -> CommentMoreMenuBottomSheet {
         let view = CommentMoreMenuBottomSheet()
+        view.commentId = commentId
+        view.viewModel = viewModel
         return view
     }
     
@@ -59,5 +69,25 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.bottom.equalToSuperview().inset(44.0)
         }
+    }
+    
+    override func bind() {
+        super.bind()
+        
+        let input = CommentMoreMenuViewModel.Input(
+            commentId: Observable.just(commentId),
+            didTapDeleteButton: deleteButton.rx.tap.asObservable(),
+            didTapModifyButton: modifyButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.delete
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.modify
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }

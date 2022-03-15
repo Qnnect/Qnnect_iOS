@@ -199,6 +199,7 @@
 		AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */; };
 		AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */; };
 		AEB5AAFA27E0E6770096376B /* ReplyMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */; };
+		AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -452,6 +453,7 @@
 		AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UIImageView.swift"; sourceTree = "<group>"; };
 		AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
 		AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
+		AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMoreMenuViewModel.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 				AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */,
 				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
 				AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */,
+				AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1715,6 +1718,7 @@
 				AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
+				AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */,
 				AE6FA49327BDCAE400FA2154 /* IngredientCell.swift in Sources */,
