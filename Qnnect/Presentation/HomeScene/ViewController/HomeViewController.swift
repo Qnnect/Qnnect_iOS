@@ -177,7 +177,12 @@ final class HomeViewController: BaseViewController {
                     guard case let HomeSectionItem.myCafeSectionItem(cafe) = item else { return nil }
                     return cafe
                 },
-            didTapJoinCafeButton: didTapJoinCafebutton.asObservable()
+            didTapJoinCafeButton: didTapJoinCafebutton.asObservable(),
+            didTapTodayQuestion: homeCollectionView.rx.modelSelected(HomeSectionItem.self)
+                .compactMap({ item -> ToDayQuestion? in
+                    guard case let HomeSectionItem.todayQuestionSectionItem(question) = item else { return nil }
+                    return question
+                })
         )
         
         
@@ -206,6 +211,10 @@ final class HomeViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showJoinCafeBottomSheet
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showCafeAnswerScene
             .emit()
             .disposed(by: self.disposeBag)
     }

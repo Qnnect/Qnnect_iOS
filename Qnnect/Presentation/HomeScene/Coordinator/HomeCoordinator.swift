@@ -11,6 +11,7 @@ protocol HomeCoordinator: Coordinator {
     func showAddGroupBottomSheet()
     func showGroupScene(with cafeId: Int, _ isFirst: Bool)
     func showJoinCafeBottomSheet()
+    func showCafeAnswerScene(_ questionId: Int)
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -54,5 +55,12 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         let bottomSheet = JoinCafeBottomSheet.create()
         bottomSheet.modalPresentationStyle = .overCurrentContext
         navigationController.present(bottomSheet, animated: false, completion: nil)
+    }
+    
+    func showCafeAnswerScene(_ questionId: Int) {
+        let coordinator = DefaultCafeCoordinator(navigationController: self.navigationController)
+        coordinator.parentCoordinator = self
+        self.childCoordinators.append(coordinator)
+        coordinator.showCafeAnswerScene(questionId)
     }
 }
