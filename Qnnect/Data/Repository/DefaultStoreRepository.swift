@@ -41,4 +41,8 @@ final class DefaultStoreRepository: StoreRepository {
                 }
             }
     }
+    
+    func buyIngredient(_ ingredientId: Int) -> Observable<Result<Void,Error>> {
+        storeNetworkService.buyIngredients(ingredientId)
+    }
 }

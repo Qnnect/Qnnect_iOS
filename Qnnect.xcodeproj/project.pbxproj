@@ -191,6 +191,7 @@
 		AEB5AAE427E062B80096376B /* BookmarkSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE327E062B80096376B /* BookmarkSearchViewController.swift */; };
 		AEB5AAE627E062EA0096376B /* BookmarkSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE527E062EA0096376B /* BookmarkSearchViewModel.swift */; };
 		AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */; };
+		AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -436,6 +437,7 @@
 		AEB5AAE327E062B80096376B /* BookmarkSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchViewController.swift; sourceTree = "<group>"; };
 		AEB5AAE527E062EA0096376B /* BookmarkSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkSearchViewModel.swift; sourceTree = "<group>"; };
 		AEB5AAE727E06BEB0096376B /* ScrapSearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapSearchRequestDTO.swift; sourceTree = "<group>"; };
+		AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotBuyAlertViewController.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -918,6 +920,7 @@
 			children = (
 				AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */,
 				AE6964CA27BCDB2800BF2A80 /* StoreViewController.swift */,
+				AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1687,6 +1690,7 @@
 				AEA7266D27DE44EB00F48CB8 /* CommentAPI.swift in Sources */,
 				AE77C84627DB266500E8D0EC /* DrinkFetchResponseDTO.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
+				AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE77C82B27D8AAFF00E8D0EC /* CafeInfoInputViewController.swift in Sources */,

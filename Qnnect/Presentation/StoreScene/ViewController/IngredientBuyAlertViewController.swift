@@ -121,6 +121,14 @@ final class IngredientBuyAlertViewController: BaseViewController {
         output.dismiss
             .emit()
             .disposed(by: self.disposeBag)
+        
+        output.success
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.error
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }
 

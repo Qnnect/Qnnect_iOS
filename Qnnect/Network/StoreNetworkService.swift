@@ -28,4 +28,12 @@ final class StoreNetworkService: BaseNetworkService<IngredientAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func buyIngredients(_ ingredientId: Int) -> Observable<Result<Void,Error>> {
+        request(.buyIngredient(ingredientsId: ingredientId))
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

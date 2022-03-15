@@ -10,6 +10,7 @@ import RxSwift
 
 protocol StoreCoordinator: Coordinator {
     func showIngredientBuyAlertView(with ingredient: Ingredient)
+    func showNotBuyAlertView()
     func dismissIngredientBuyAlertView()
 }
 
@@ -31,14 +32,27 @@ final class DefaultStoreCoordinator: StoreCoordinator {
     }
     
     func showIngredientBuyAlertView(with ingredient: Ingredient) {
+        let storeRepository = DefaultStoreRepository(storeNetworkService: StoreNetworkService())
+        let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
         let viewModel = IngredientBuyAlertViewModel(
-            coordinator: self
+            coordinator: self,
+            storeUseCase: storeUseCase
         )
         let vc = IngredientBuyAlertViewController.create(with: ingredient, viewModel)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(vc, animated: true,completion: nil)
     }
     
+    func showNotBuyAlertView() {
+        let notBuyAlertview = NotBuyAlertViewController.create()
+        if let view = self.navigationController.presentedViewController as? IngredientBuyAlertViewController {
+            view.dismiss(animated: false) {
+                [weak self] in
+                notBuyAlertview.modalPresentationStyle = .overCurrentContext
+                self?.navigationController.present(notBuyAlertview, animated: true, completion: nil)
+            }
+        }
+    }
     func dismissIngredientBuyAlertView() {
         if let vc =  self.navigationController.presentedViewController as? IngredientBuyAlertViewController {
             vc.dismiss(animated: true, completion: nil)

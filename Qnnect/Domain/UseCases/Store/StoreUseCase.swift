@@ -11,6 +11,7 @@ import RxSwift
 protocol StoreUseCase: AnyObject {
     func fetchAllIngredient() -> Observable<Result<[Ingredient],Error>>
     func fetchIngredients(_ type: IngredientType) -> Observable<Result<[Ingredient],Error>>
+    func buyIngredient(_ ingredientId: Int) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultStoreUseCase: StoreUseCase {
@@ -27,5 +28,9 @@ final class DefaultStoreUseCase: StoreUseCase {
     
     func fetchIngredients(_ type: IngredientType) -> Observable<Result<[Ingredient], Error>> {
         storeRepository.fetchIngredients(type)
+    }
+    
+    func buyIngredient(_ ingredientId: Int) -> Observable<Result<Void,Error>> {
+        storeRepository.buyIngredient(ingredientId)
     }
 }
