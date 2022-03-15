@@ -50,7 +50,7 @@ final class DrinkSelctViewModel: ViewModelType {
             .mapToVoid()
             .do {
                 [weak self] _ in
-                self?.coordinator?.dismiss()
+                self?.coordinator?.dismissDrinkSelectBottomSheet()
             }
         
         return Output(

@@ -45,7 +45,7 @@ final class CafeAnswerWritingViewModel: ViewModelType {
             .withLatestFrom(
                 Observable.combineLatest(
                     input.question.map { $0.id },
-                    input.question.map { $0.question}
+                    input.content
                 ),
                 resultSelector: { ($1.0, $0, $1.1) })
             .flatMap(commentUseCase.createComment)

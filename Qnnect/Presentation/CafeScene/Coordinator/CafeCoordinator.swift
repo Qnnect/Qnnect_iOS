@@ -22,7 +22,8 @@ protocol CafeCoordinator: Coordinator {
     func showCommentMoreMenuBottomSheet(_ commentId: Int)
     func showReplyMoreMenuBottomSheet(_ replyId: Int)
     func dismissAlert()
-    func dismiss()
+    func dismissDrinkSelectBottomSheet()
+    func dismissMoreMenu()
     func leaveCafe()
 }
 
@@ -190,14 +191,23 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
-    func dismiss() {
+    func dismissDrinkSelectBottomSheet() {
         if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
             vc.hideBottomSheetAndGoBack(nil)
         } else {
             self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         }
-        if let vc = self.navigationController.viewControllers.first(where: { $0 is CafeRoomViewController}) as? CafeRoomViewController {
+        if let vc = self.navigationController.viewControllers.last as? CafeRoomViewController {
             vc.comebackCafeRoom()
+        }
+    }
+    
+    func dismissMoreMenu() {
+        if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
+            vc.hideBottomSheetAndGoBack {
+                [weak self] in
+                self?.navigationController.popViewController(animated: true)
+            }
         }
     }
     

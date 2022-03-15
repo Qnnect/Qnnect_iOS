@@ -65,7 +65,7 @@ final class CafeModifyingViewModel: ViewModelType {
             .flatMap(self.cafeUseCase.updateCafe)
             .do {
                 [weak self] _ in
-                self?.coordinator?.dismiss()
+                self?.coordinator?.dismissDrinkSelectBottomSheet()
             }
             .mapToVoid()
         

@@ -44,7 +44,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
             }
             .do {
                 [weak self] _ in
-                self?.coordinator?.dismiss()
+                self?.coordinator?.dismissMoreMenu()
             }
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),
