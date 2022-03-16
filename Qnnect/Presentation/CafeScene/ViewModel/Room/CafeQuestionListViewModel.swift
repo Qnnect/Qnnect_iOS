@@ -13,7 +13,7 @@ import RxCocoa
 final class CafeQuestionListViewModel: ViewModelType {
     
     struct Input {
-        let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let cafeId: Observable<Int>
         let moreFetch: Observable<Int>
         let didTapQuestionCell: Observable<QuestionShortInfo>
@@ -37,7 +37,7 @@ final class CafeQuestionListViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let load = input.viewDidLoad
+        let load = input.viewWillAppear
             .withLatestFrom(input.cafeId)
             .map { (cafeId: $0, page: 0, size: Constants.scrapFetchSize) }
             .flatMap(questionUseCase.fetchCafeQuestions)

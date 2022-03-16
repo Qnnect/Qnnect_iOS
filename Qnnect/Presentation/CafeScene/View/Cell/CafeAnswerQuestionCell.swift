@@ -9,8 +9,20 @@ import UIKit
 import SnapKit
 import Then
 
+
+
+@objc
+protocol QuestionCellButtonDelegate: AnyObject {
+    dynamic func questionCellButton(didTap kind: String)
+}
+
 final class CafeAnswerQuestionCell: UITableViewCell {
+    
     static let identifier = "CafeAnswerQuestionCell"
+    
+    // MARK: - Kind
+    static let modify = "Modify"
+    static let delete = "Delete"
     
     private let dateLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 10.0)
@@ -50,9 +62,11 @@ final class CafeAnswerQuestionCell: UITableViewCell {
     
     private let deleteButton = UIButton().then {
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 10.0)
-        $0.setTitle("수정", for: .normal)
+        $0.setTitle("삭제", for: .normal)
         $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
     }
+    
+    weak var delegate: QuestionCellButtonDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,22 +115,26 @@ final class CafeAnswerQuestionCell: UITableViewCell {
         }
         
         self.contentLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.leading.top.greaterThanOrEqualToSuperview().offset(8.0)
-            make.trailing.bottom.lessThanOrEqualToSuperview().offset(8.0)
-            
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(1.2)
+            make.leading.greaterThanOrEqualToSuperview().inset(8.0)
+            make.top.greaterThanOrEqualTo(questionerLabel.snp.bottom).offset(8.0)
+            make.trailing.bottom.lessThanOrEqualToSuperview().inset(8.0)
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(18.75)
-            make.bottom.equalToSuperview().inset(11.0)
+            make.trailing.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(3.0)
         }
+        deleteButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)
         
         modifyButton.snp.makeConstraints { make in
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-13.0)
+            make.trailing.equalTo(deleteButton.snp.leading).inset(5.0)
             make.bottom.equalTo(deleteButton)
         }
+        modifyButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)
     }
+    
     
     func update(with question: Question) {
         self.dateLabel.text = question.createdAt
@@ -131,7 +149,15 @@ final class CafeAnswerQuestionCell: UITableViewCell {
     }
     
     private func setQuestionButtons(_ isWriter: Bool) {
-        self.deleteButton.isHidden = !isWriter
-        self.modifyButton.isHidden = !isWriter
+        self.deleteButton.isHidden = isWriter
+        self.modifyButton.isHidden = isWriter
+    }
+    
+    @objc func didTapButton(sender: UIButton) {
+        if sender == modifyButton {
+            delegate?.questionCellButton(didTap: CafeAnswerQuestionCell.modify)
+        } else {
+            delegate?.questionCellButton(didTap: CafeAnswerQuestionCell.delete)
+        }
     }
 }

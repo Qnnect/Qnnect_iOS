@@ -11,6 +11,8 @@ protocol QuestionCoordinator: Coordinator {
     func showCafeAnswerScene(_ questionId: Int)
     func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ comment: Comment?)
     func showCommentScene(_ commentId: Int, _ question: Question)
+    func showModifyQuestionScene(_  question: Question)
+    func pop()
 }
 
 extension QuestionCoordinator {
@@ -68,6 +70,26 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
         coordinator.showCommentScene(commentId, question)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
+    }
+    
+    func showModifyQuestionScene(_ question: Question) {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = ModifyQuestionViewModel(questionUseCase: questionUseCase)
+        let vc = ModifyQuestionViewController.create(
+            with: viewModel,
+            self,
+            question
+        )
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func pop() {
+        navigationController.popViewController(animated: true)
     }
 }
 

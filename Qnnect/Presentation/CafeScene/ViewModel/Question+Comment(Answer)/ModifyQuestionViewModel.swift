@@ -18,7 +18,7 @@ final class ModifyQuestionViewModel: ViewModelType {
     }
     
     struct Output {
-        let isEmpty: Driver<Bool>
+        let isCompleted: Driver<Bool>
         let completion: Signal<Void>
     }
     
@@ -30,8 +30,8 @@ final class ModifyQuestionViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let isEmpty = input.content
-            .map { $0.count == 0 }
+        let isCompleted = input.content
+            .map { $0.count >= 10 }
         
         let isContentEqualed = Observable.combineLatest(
             input.content,
@@ -63,7 +63,7 @@ final class ModifyQuestionViewModel: ViewModelType {
         )
         
         return Output(
-            isEmpty: isEmpty.asDriver(onErrorDriveWith: .empty()),
+            isCompleted: isCompleted.asDriver(onErrorDriveWith: .empty()),
             completion: completion.asSignal(onErrorSignalWith: .empty())
         )
     }

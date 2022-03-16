@@ -38,6 +38,10 @@ final class CafeAnswerViewController: BaseViewController {
         $0.setImage(Constants.navigationScrapIcon, for: .normal)
     }
     
+    private let deleteAlertView = DeleteAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
     private var questionId: Int!
     private var viewModel: CafeAnswerViewModel!
     weak var coordinator: QuestionCoordinator?
@@ -115,7 +119,16 @@ final class CafeAnswerViewController: BaseViewController {
                 .do {
                     [weak self] in
                     self?.setLikeButton(!$0)
-                }
+                },
+            didTapModifyButton: rx.methodInvoked(#selector(questionCellButton(didTap:)))
+                .compactMap{ $0[0] as? String}
+                .filter { $0 == CafeAnswerQuestionCell.modify }
+                .mapToVoid(),
+            didTapDeleteButton: rx.methodInvoked(#selector(questionCellButton(didTap:)))
+                .compactMap{ $0[0] as? String }
+                .filter { $0 == CafeAnswerQuestionCell.delete }
+                .mapToVoid(),
+            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
         )
         
         
@@ -171,6 +184,13 @@ final class CafeAnswerViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
         
+        output.showDeleteAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.deleteAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
 
         output.showAnswerWritingScene
@@ -179,6 +199,14 @@ final class CafeAnswerViewController: BaseViewController {
         
         output.showCommentScene
             .emit(onNext: coordinator.showCommentScene)
+            .disposed(by: self.disposeBag)
+        
+        output.delete
+            .emit(onNext: coordinator.pop)
+            .disposed(by: self.disposeBag)
+        
+        output.showModeifyQuestionScene
+            .emit(onNext: coordinator.showModifyQuestionScene(_:))
             .disposed(by: self.disposeBag)
     }
 }
@@ -204,6 +232,7 @@ private extension CafeAnswerViewController {
                     for: indexPath
                 ) as! CafeAnswerQuestionCell
                 cell.update(with: question)
+                cell.delegate = self
                 return cell
             case .answerWritingSectionItem(user: let user):
                 let cell = tableView.dequeueReusableCell(
@@ -223,8 +252,6 @@ private extension CafeAnswerViewController {
         }
     }
     
-    
-    
     /// 좋아요 버튼 설정
     /// - Parameter isLiked: 현재 좋아요 상태
     func setLikeButton(_ isLiked: Bool) {
@@ -236,4 +263,8 @@ private extension CafeAnswerViewController {
         isScraped ? scrapButton.setImage(Constants.navigationScrapIcon, for: .normal) :
         scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
     }
+}
+
+extension CafeAnswerViewController: QuestionCellButtonDelegate {
+    func questionCellButton(didTap kind: String) { }
 }

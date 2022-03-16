@@ -78,7 +78,7 @@ final class CafeQuestionListViewController: BaseViewController {
         super.bind()
         
         let input = CafeQuestionListViewModel.Input(
-            viewDidLoad: Observable.just(()),
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
             cafeId: Observable.just(cafeId),
             moreFetch: rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},

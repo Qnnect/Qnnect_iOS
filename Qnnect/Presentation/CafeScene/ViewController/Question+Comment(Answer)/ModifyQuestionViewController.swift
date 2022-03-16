@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class ModifyQuestionViewController: BaseViewController {
     
@@ -76,10 +77,45 @@ final class ModifyQuestionViewController: BaseViewController {
             make.trailing.bottom.lessThanOrEqualToSuperview().inset(16.0)
         }
         contentTextView.text = question.content
+        
+        navigationItem.titleView = navigationTitleLabel
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completionButton)
     }
     
     override func bind() {
         super.bind()
+        
+        let input = ModifyQuestionViewModel.Input(
+            question: Observable.just(question),
+            didTapCompletionButton: completionButton.rx.tap.asObservable(),
+            content: contentTextView.rx.text.orEmpty.asObservable()
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.isCompleted
+            .drive(onNext: setCompletionButton(_:))
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.completion
+            .emit(onNext: coordinator.pop)
+            .disposed(by: self.disposeBag)
+        
     }
     
 }
+
+private extension ModifyQuestionViewController {
+    func setCompletionButton(_ isCompleted: Bool) {
+        if isCompleted {
+            completionButton.setTitleColor(.ORANGE01, for: .normal)
+            completionButton.isEnabled = true
+        } else {
+            completionButton.setTitleColor(.GRAY04, for: .normal)
+            completionButton.isEnabled = false
+        }
+    }
+}
+
