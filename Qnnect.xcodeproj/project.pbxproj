@@ -820,18 +820,12 @@
 		AE538ED627C4688C00670FAF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
-				AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */,
-				AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */,
-				AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */,
-				AE02D81727D632E70019D955 /* SettingBottomSheetViewModel.swift */,
-				AE02D82227D75CDB0019D955 /* CafeAnswerViewModel.swift */,
-				AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */,
-				AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */,
-				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
-				AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */,
-				AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */,
-				AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */,
+				AEB5AB1827E1B67D0096376B /* Common */,
+				AEB5AB1727E1B66C0096376B /* Comment+Reply */,
+				AEB5AB1627E1B66A0096376B /* Question+Comment(Answer) */,
+				AEB5AB1527E1B6680096376B /* Alert */,
+				AEB5AB1427E1B6570096376B /* BottomSheet */,
+				AEB5AB1327E1B6400096376B /* Room */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -849,13 +843,11 @@
 		AE538ED827C4689400670FAF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AEB5AB0827E0F58E0096376B /* Comment */,
-				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
-				AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */,
-				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
-				AE02D81127D621950019D955 /* SettingBottomSheet.swift */,
-				AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */,
-				AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */,
+				AEB5AB1227E1B6260096376B /* Room */,
+				AEB5AB1127E1B6040096376B /* BottomSheet */,
+				AEB5AB1027E1B5FD0096376B /* Alert */,
+				AEB5AB0F27E1B5DB0096376B /* Question+Comment(Answer) */,
+				AEB5AB0827E0F58E0096376B /* Comment+Reply */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1238,17 +1230,105 @@
 			path = Like;
 			sourceTree = "<group>";
 		};
-		AEB5AB0827E0F58E0096376B /* Comment */ = {
+		AEB5AB0827E0F58E0096376B /* Comment+Reply */ = {
 			isa = PBXGroup;
 			children = (
-				AE02D82027D75C0D0019D955 /* CafeAnswerViewController.swift */,
-				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
-				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
 				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
 				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
 				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
 			);
-			path = Comment;
+			path = "Comment+Reply";
+			sourceTree = "<group>";
+		};
+		AEB5AB0F27E1B5DB0096376B /* Question+Comment(Answer) */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D82027D75C0D0019D955 /* CafeAnswerViewController.swift */,
+				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
+			);
+			path = "Question+Comment(Answer)";
+			sourceTree = "<group>";
+		};
+		AEB5AB1027E1B5FD0096376B /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AEB5AB1127E1B6040096376B /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				AEBC9EBC27C5C3710070399A /* DrinkSelectViewController.swift */,
+				AE02D81127D621950019D955 /* SettingBottomSheet.swift */,
+				AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		AEB5AB1227E1B6260096376B /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
+				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
+				AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		AEB5AB1327E1B6400096376B /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
+				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		AEB5AB1427E1B6570096376B /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C82C27D8B81100E8D0EC /* CafeModifyingViewModel.swift */,
+				AE02D80F27D5EB980019D955 /* DrinkSelectViewModel.swift */,
+				AE02D81727D632E70019D955 /* SettingBottomSheetViewModel.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		AEB5AB1527E1B6680096376B /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AEB5AB1627E1B66A0096376B /* Question+Comment(Answer) */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D82227D75CDB0019D955 /* CafeAnswerViewModel.swift */,
+				AE77C82427D887F700E8D0EC /* CafeAnswerWritingViewModel.swift */,
+			);
+			path = "Question+Comment(Answer)";
+			sourceTree = "<group>";
+		};
+		AEB5AB1727E1B66C0096376B /* Comment+Reply */ = {
+			isa = PBXGroup;
+			children = (
+				AEB5AAC027DF1C4F0096376B /* CommentViewModel.swift */,
+				AEB5AAFB27E0EE7D0096376B /* CommentMoreMenuViewModel.swift */,
+				AEB5AAFD27E0F4A10096376B /* ReplyMoreMenuViewModel.swift */,
+			);
+			path = "Comment+Reply";
+			sourceTree = "<group>";
+		};
+		AEB5AB1827E1B67D0096376B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AE02D80D27D5E1D30019D955 /* UserBehaviorType.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		AEB8FCF327C65C45002BDBCD /* Endpoint */ = {
