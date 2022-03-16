@@ -29,7 +29,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let comments: Driver<[Comment]>
         let question: Driver<Question>
         ///Int: CommentId
-        let showCommentScene: Signal<Int>
+        let showCommentScene: Signal<(Int,Question)>
         let user: Driver<User>
         let currentUserComment: Driver<Comment?>
         let like: Signal<Void>
@@ -103,6 +103,7 @@ final class CafeAnswerViewModel: ViewModelType {
         
         let showCommentScene = input.didTapAnswerCell
             .map { $0.id }
+            .withLatestFrom(fetchedQuestionWithComments.map { $0.question }, resultSelector: { ($0, $1)})
         
         let like = input.didTapLikeButton
             .debug()

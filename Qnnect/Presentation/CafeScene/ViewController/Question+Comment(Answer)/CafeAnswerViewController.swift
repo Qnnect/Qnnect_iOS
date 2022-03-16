@@ -178,7 +178,7 @@ final class CafeAnswerViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showCommentScene
-            .emit(onNext: coordinator.showCommentScene(_:))
+            .emit(onNext: coordinator.showCommentScene)
             .disposed(by: self.disposeBag)
     }
 }

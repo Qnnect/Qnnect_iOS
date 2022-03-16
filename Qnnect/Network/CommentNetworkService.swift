@@ -39,4 +39,12 @@ final class CommentNetworkService: BaseNetworkService<CommentAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func modifyComment(_ commentId: Int, _ images: [Data], _ content: String) -> Observable<Result<Void,Error>> {
+        request(.modifyComment(commentId: commentId, images: images, content: content))
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

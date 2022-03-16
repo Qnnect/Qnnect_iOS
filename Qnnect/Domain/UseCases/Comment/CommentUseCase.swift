@@ -19,6 +19,7 @@ protocol CommentUseCase: AnyObject {
         Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
     >
     func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>>
+    func modifyComment(_ commentId: Int, _ images: [Data?], _ content: String) -> Observable<Result<Void,Error>>
     
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
     func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void, Error>>
@@ -51,6 +52,12 @@ final class DefaultCommentUseCase: CommentUseCase {
 
     func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
         commentRepository.deleteComment(commentId)
+    }
+    
+    func modifyComment(_ commentId: Int, _ images: [Data?], _ content: String) -> Observable<Result<Void,Error>> {
+        let images = images.compactMap{ $0 }
+        
+        return commentRepository.modifyComment(commentId, images, content)
     }
     
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void, Error>> {

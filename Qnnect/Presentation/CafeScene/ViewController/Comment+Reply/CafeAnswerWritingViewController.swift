@@ -81,6 +81,11 @@ final class CafeAnswerWritingViewController: BaseViewController {
         $0.isEnabled = false
     }
     
+    private let navigationTitleLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.textColor = .GRAY01
+    }
+    
     private let attachingImageCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewLayout()
@@ -100,24 +105,29 @@ final class CafeAnswerWritingViewController: BaseViewController {
     private var fetchedAssets: [PHAsset] = []
     
     private var question: Question!
-    private var cafeId: Int!
-    private var user: User!
+    //private var cafeId: Int!
+    private var user: User?
     private var viewModel: CafeAnswerWritingViewModel!
-    weak var coordinator: QuestionCoordinator?
+    weak var coordinator: WriteCommentCoordinator?
+    private var comment: Comment?
     
     static func create(
         with question: Question,
-        _ user: User,
+        _ user: User?,
         _ viewModel: CafeAnswerWritingViewModel,
-        _ coordinator: QuestionCoordinator
+        _ coordinator: WriteCommentCoordinator,
+        _ comment: Comment? = nil
     ) -> CafeAnswerWritingViewController {
         let vc = CafeAnswerWritingViewController()
         vc.question = question
         vc.user = user
         vc.viewModel = viewModel
         vc.coordinator = coordinator
+        vc.comment = comment
         return vc
     }
+    
+    private var imageDatas = [(PHAsset?,String?)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,22 +197,14 @@ final class CafeAnswerWritingViewController: BaseViewController {
             make.width.height.equalTo(27.0)
         }
         
-        if let url = user.profileImage {
-            self.writerProfileImageView.kf.setImage(
-                with: URL(string: url),
-                placeholder: Constants.profileDefaultImage
-            )
-        } else {
-            self.writerProfileImageView.image = Constants.profileDefaultImage
-        }
+
         
         
         self.writerNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.writerProfileImageView.snp.trailing).offset(8.0)
             make.centerY.equalTo(self.writerProfileImageView)
         }
-        
-        self.writerNameLabel.text = self.user.name
+
         
         self.inputTextView.snp.makeConstraints { make in
             make.top.equalTo(self.writerProfileImageView.snp.bottom).offset(8.0)
@@ -225,10 +227,14 @@ final class CafeAnswerWritingViewController: BaseViewController {
         
         self.attachingImageCollectionView.dataSource = self
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.navigationCompletionButton)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.navigationCompletionButton)
+        navigationItem.titleView = navigationTitleLabel
+        
+        setScene(by: comment == nil ? WriteCommentType.create : WriteCommentType.modify )
     }
     
     override func bind() {
@@ -239,11 +245,16 @@ final class CafeAnswerWritingViewController: BaseViewController {
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
-                .withLatestFrom(Observable.just(getImages())),
-            question: Observable.just(question)
+                .map(getImages),
+            question: Observable.just(question),
+            type: Observable.just(
+                comment == nil ? WriteCommentType.create : WriteCommentType.modify
+            ),
+            comment: Observable.just(comment)
         )
         
         let output = self.viewModel.transform(from: input)
+        
         output.isInputCompleted
             .drive(onNext: self.setCompletionButton(_:))
             .disposed(by: self.disposeBag)
@@ -251,22 +262,32 @@ final class CafeAnswerWritingViewController: BaseViewController {
         output.showImagePickerView
             .emit(onNext: {
                 [weak self] _ in
-                self?.checkPermission(selectiongLimit: 5, true)
+                let selectionLimit = 5 - (self?.attachingImageCollectionView.numberOfItems(inSection: 0) ?? 5)
+                if selectionLimit > 0 {
+                    self?.checkPermission(selectionLimit: selectionLimit, true)
+                }
             }).disposed(by: self.disposeBag)
+        
         
         //TODO: 화면전환
         output.completion
             .emit()
             .disposed(by: self.disposeBag)
+        
+        //Modify 화면 일 경우
+        guard let comment = comment else { return }
+        imageDatas = comment.getImageURLs().map { (nil,$0)}
+        
     }
     
     override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         let identifiers = results.map{ $0.assetIdentifier ?? ""}
         let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+       
         for i in 0 ..< result.count {
-            self.fetchedAssets.append(result[i])
+            imageDatas.append((result[i],nil))
         }
-        self.attachingImageCollectionView.reloadData()
+        attachingImageCollectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -291,21 +312,26 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
         let newLength = str.count + text.count - range.length
         return newLength <= 100
     }
-
+    
 }
 
 // MARK: - UICollectionView DataSource
 extension CafeAnswerWritingViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedAssets.count
+        return imageDatas.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: AttachingImageCell.identifier, for: indexPath) as! AttachingImageCell
+
+        //let asset = self.fetchedAssets[indexPath.row]
+        if let asset = imageDatas[indexPath.row].0 {
+            cell.update(with: asset)
+        } else if let url = imageDatas[indexPath.row].1 {
+            cell.update(with: url)
+        }
         
-        let asset = self.fetchedAssets[indexPath.row]
-        cell.update(with: asset)
         cell.delegate = self
-        
+
         return cell
     }
 }
@@ -319,6 +345,7 @@ private extension CafeAnswerWritingViewController {
             )
         }
     }
+    
     @objc func bottomBarMoveDown(_ notification: NSNotification) {
         self.bottomBar.transform = .identity
     }
@@ -334,12 +361,45 @@ private extension CafeAnswerWritingViewController {
     }
     
     func getImages() -> [Data?]{
-        var imageDatas = [Data?]()
-        attachingImageCollectionView.visibleCells.forEach { cell in
-            let imageCell = cell as! AttachingImageCell
-            imageDatas.append(imageCell.imageView.image?.pngData())
+        var datas = [Data?]()
+            
+        for i in 0 ..< imageDatas.count{
+            let cell = attachingImageCollectionView.cellForItem(at: IndexPath(item: i, section: 0)) as! AttachingImageCell
+            datas.append(cell.imageView.image?.pngData())
         }
-        return imageDatas
+       
+        return datas
+    }
+    
+    func setScene(by type: WriteCommentType) {
+        switch type {
+        case .create:
+            guard let user = user else { return }
+            navigationTitleLabel.text = "답변 쓰기"
+            if let url = user.profileImage {
+                self.writerProfileImageView.kf.setImage(
+                    with: URL(string: url),
+                    placeholder: Constants.profileDefaultImage
+                )
+            } else {
+                self.writerProfileImageView.image = Constants.profileDefaultImage
+            }
+            self.writerNameLabel.text = user.name
+        case .modify:
+            guard let comment = comment else { return }
+            navigationTitleLabel.text = "답변 수정"
+            if let url = comment.writerInfo.profileImage {
+                self.writerProfileImageView.kf.setImage(
+                    with: URL(string: url),
+                    placeholder: Constants.profileDefaultImage
+                )
+            } else {
+                self.writerProfileImageView.image = Constants.profileDefaultImage
+            }
+            self.writerNameLabel.text = comment.writerInfo.name
+            inputTextView.text = comment.content
+            inputTextView.textColor = .BLACK_121212
+        }
     }
 }
 
@@ -347,7 +407,7 @@ extension CafeAnswerWritingViewController: AttachingImageCellDelegate {
     func attachingImageCell(didTap cell: UICollectionViewCell) {
         guard let indexPath = self.attachingImageCollectionView.indexPath(for: cell) else { return }
         
-        self.fetchedAssets.remove(at: indexPath.row)
+        imageDatas.remove(at: indexPath.row)
         self.attachingImageCollectionView.deleteItems(at: [indexPath])
     }
 }

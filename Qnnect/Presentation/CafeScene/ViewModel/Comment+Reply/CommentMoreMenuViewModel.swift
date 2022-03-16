@@ -12,7 +12,8 @@ import RxCocoa
 final class CommentMoreMenuViewModel: ViewModelType {
     
     struct Input {
-        let commentId: Observable<Int>
+        let comment: Observable<Comment>
+        let question: Observable<Question>
         let didTapDeleteButton: Observable<Void>
         let didTapModifyButton: Observable<Void>
         let didTapDeleteAlertOkButton: Observable<Void>
@@ -22,6 +23,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let delete: Signal<Void>
         let modify: Signal<Void>
         let showDeleteAlertView: Signal<Void>
+        let showWriteCommentScene: Signal<(Question,Comment)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -33,7 +35,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
     func transform(from input: Input) -> Output {
         
         let delete = input.didTapDeleteAlertOkButton
-            .withLatestFrom(input.commentId)
+            .withLatestFrom(input.comment.map { $0.id} )
             .flatMap(commentUseCase.deleteComment(_:))
             .compactMap { result -> Void? in
                 guard case .success(_) = result else { return nil }
@@ -42,10 +44,19 @@ final class CommentMoreMenuViewModel: ViewModelType {
 
         let showDeleteAlertview = input.didTapDeleteButton
             
+        let showWriteCommentScene = input.didTapModifyButton
+            .withLatestFrom(
+                Observable.combineLatest(
+                    input.question,
+                    input.comment
+                )
+            )
+            
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),
             modify: .empty(),
-            showDeleteAlertView: showDeleteAlertview.asSignal(onErrorSignalWith: .empty())
+            showDeleteAlertView: showDeleteAlertview.asSignal(onErrorSignalWith: .empty()),
+            showWriteCommentScene: showWriteCommentScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

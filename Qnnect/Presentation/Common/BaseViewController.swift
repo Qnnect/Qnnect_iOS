@@ -48,11 +48,11 @@ class BaseViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func checkPermission(selectiongLimit: Int = 1, _ isShowGallery: Bool){
+    func checkPermission(selectionLimit: Int = 1, _ isShowGallery: Bool){
         if PHPhotoLibrary.authorizationStatus() == .authorized || PHPhotoLibrary.authorizationStatus() == .limited{ // authorized -> 사용자가 명시적으로 권한 부여 , limited -> 사용자가 이 앱에 제한된 권한을 승인 (선택한 몇개 만 사용 하겠다)
             if isShowGallery {
                 DispatchQueue.main.async {
-                    self.showGallery(selectiongLimit)
+                    self.showGallery(selectionLimit)
                 }
             }
         }else if PHPhotoLibrary.authorizationStatus() == .denied{ //승인 거절 했을 경우

@@ -12,6 +12,7 @@ enum CommentAPI {
     case createComment(questionId: Int, images: [Data], content: String)
     case fetchComment(commentId: Int)
     case deleteComment(commentId: Int)
+    case modifyComment(commentId: Int, images: [Data], content: String)
 }
 
 extension CommentAPI: TargetType, AccessTokenAuthorizable {
@@ -23,8 +24,9 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .createComment(let questionId, _, _):
             return "api/v1/questions/\(questionId)/comments"
-        case .fetchComment(let commentId), .deleteComment(let commentId):
+        case .fetchComment(let commentId), .deleteComment(let commentId), .modifyComment(let commentId,_, _):
             return "api/v1/comments/\(commentId)"
+        
         }
     }
     
@@ -36,18 +38,20 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
             return .get
         case .deleteComment(_):
             return .delete
+        case .modifyComment(_, _, _):
+            return .patch
         }
     }
     
     var task: Task {
         switch self {
-        case .createComment(_, let images, let content):
+        case .createComment(_, let images, let content), .modifyComment(_, let images, let content):
             var formData: [Moya.MultipartFormData] = []
             images.enumerated().forEach {
                 formData.append(Moya.MultipartFormData(
                     provider: .data($0.element),
-                    name: "image\($0.offset)",
-                    fileName: "image\($0.offset)",
+                    name: "image\($0.offset+1)",
+                    fileName: "image\(Int(Date().timeIntervalSince1970))",
                     mimeType: "image/png"
                 ))
             }
@@ -66,7 +70,7 @@ extension CommentAPI: TargetType, AccessTokenAuthorizable {
     
     var headers: [String : String]? {
         switch self {
-        case .createComment(_, _, _):
+        case .createComment(_, _, _), .modifyComment(_, _, _):
             return ["Content-Type": "multipart/form-data"]
         case .fetchComment(_), .deleteComment(_):
             return nil

@@ -8,13 +8,20 @@
 import UIKit
 
 protocol CommentCoordinator: Coordinator {
-    func showCommentScene(_ commentId: Int)
-    func showCommentMoreMenuBottomSheet(_ commentId: Int)
+    func showCommentScene(_ commentId: Int, _ question: Question)
+    func showCommentMoreMenuBottomSheet(_ question: Question, _ comment: Comment)
     func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment)
     func dismissCommentMoreMenu()
     func dismissReplyMoreMenu()
     func pop()
+}
+
+extension CommentCoordinator {
+    func showCafeAnswerWritingScene(_ question: Question, _ comment: Comment) {
+        showCafeAnswerWritingScene(question, nil, comment)
+    }
 }
 
 final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
@@ -28,7 +35,7 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     }
     
     func start() { }
-    func showCommentScene(_ commentId: Int) {
+    func showCommentScene(_ commentId: Int, _ question: Question) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService()
@@ -38,19 +45,25 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         let vc = CommentViewController.create(
             with: viewModel,
             commentId,
-            self
+            self,
+            question
         )
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCommentMoreMenuBottomSheet(_ commentId: Int) {
+    func showCommentMoreMenuBottomSheet(_ question: Question, _ comment: Comment) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
         let viewModel = CommentMoreMenuViewModel(commentUseCase: commentUseCase)
-        let view = CommentMoreMenuBottomSheet.create(with: commentId, viewModel, self)
+        let view = CommentMoreMenuBottomSheet.create(
+            with: comment,
+            viewModel,
+            self,
+            question
+        )
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }
@@ -87,6 +100,13 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         )
         dismissReplyMoreMenu()
         self.navigationController.pushViewController(view, animated: true)
+    }
+    
+    func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment) {
+        let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
+        coordinator.start(question, user, comment)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
     }
     
     func dismissCommentMoreMenu() {

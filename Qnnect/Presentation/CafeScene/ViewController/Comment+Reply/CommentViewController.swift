@@ -54,16 +54,19 @@ final class CommentViewController: BaseViewController {
     private var viewModel: CommentViewModel!
     private var commentId: Int!
     weak var coordinator: CommentCoordinator?
+    private var question: Question!
     
     static func create(
         with viewModel: CommentViewModel,
         _ commentId: Int,
-        _ coordinator: CommentCoordinator
+        _ coordinator: CommentCoordinator,
+        _ question: Question
     ) -> CommentViewController {
         let vc = CommentViewController()
         vc.viewModel = viewModel
         vc.commentId = commentId
         vc.coordinator = coordinator
+        vc.question = question
         return vc
     }
     
@@ -130,6 +133,7 @@ final class CommentViewController: BaseViewController {
         let input = CommentViewModel.Input(
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             commentId: Observable.just(commentId),
+            question: Observable.just(question),
             didTapSendButton: sendButton.rx.tap
                 .do {
                     [weak self] _ in
@@ -186,7 +190,7 @@ final class CommentViewController: BaseViewController {
         guard let coordinator = coordinator else { return }
 
         output.showCommentMoreMenuBottomSheet
-            .emit(onNext: coordinator.showCommentMoreMenuBottomSheet(_:))
+            .emit(onNext: coordinator.showCommentMoreMenuBottomSheet)
             .disposed(by: self.disposeBag)
         
         output.showReplyMoreMenuBottomSheet

@@ -219,6 +219,7 @@
 		AEB5AB3427E206FE0096376B /* CafeQuestionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB3327E206FE0096376B /* CafeQuestionResponseDTO.swift */; };
 		AEB5AB3627E212D00096376B /* SearchCafeQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB3527E212D00096376B /* SearchCafeQuestionViewController.swift */; };
 		AEB5AB3827E213560096376B /* SearchCafeQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB3727E213560096376B /* SearchCafeQuestionViewModel.swift */; };
+		AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB3927E22FAC0096376B /* WriteCommentCoordinator.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -492,6 +493,7 @@
 		AEB5AB3327E206FE0096376B /* CafeQuestionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeQuestionResponseDTO.swift; sourceTree = "<group>"; };
 		AEB5AB3527E212D00096376B /* SearchCafeQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCafeQuestionViewController.swift; sourceTree = "<group>"; };
 		AEB5AB3727E213560096376B /* SearchCafeQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCafeQuestionViewModel.swift; sourceTree = "<group>"; };
+		AEB5AB3927E22FAC0096376B /* WriteCommentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentCoordinator.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				AE7F483B27CCCC4F00954971 /* CafeCoordinator.swift */,
 				AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */,
 				AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */,
+				AEB5AB3927E22FAC0096376B /* WriteCommentCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1264,6 +1267,7 @@
 		AEB5AB0827E0F58E0096376B /* Comment+Reply */ = {
 			isa = PBXGroup;
 			children = (
+				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
 				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
 				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
 				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
@@ -1276,7 +1280,6 @@
 			isa = PBXGroup;
 			children = (
 				AE02D82027D75C0D0019D955 /* CafeAnswerViewController.swift */,
-				AE02D82C27D792C10019D955 /* CafeAnswerWritingViewController.swift */,
 				AEB5AB2127E1E9800096376B /* ModifyQuestionViewController.swift */,
 			);
 			path = "Question+Comment(Answer)";
@@ -1911,6 +1914,7 @@
 				AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */,
 				AE02D81627D62C710019D955 /* CafeInvitationViewController.swift in Sources */,
 				AE02D82B27D76B160019D955 /* CafeAnswerSectionModel.swift in Sources */,
+				AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,

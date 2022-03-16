@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Photos
+import Kingfisher
 
 protocol AttachingImageCellDelegate: AnyObject {
     func attachingImageCell(didTap cell: UICollectionViewCell)
@@ -64,12 +65,20 @@ final class AttachingImageCell: UICollectionViewCell {
     func update(with asset: PHAsset) {
         let imageManager = PHImageManager()
         let scale = UIScreen.main.scale
-        let imageSize = CGSize(width: 74 * scale, height: 74 * scale)
+        let imageSize = CGSize(width: 300 * scale , height: 300 * scale)
         let options = PHImageRequestOptions()
         options.deliveryMode = .opportunistic
-        imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
-            self.imageView.image = image
+        imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options) {
+            [weak self] image, info in
+            self?.imageView.image = image
         }
+    }
+    
+    func update(with url: String) {
+        imageView.kf.setImage(
+            with: URL(string: url)!,
+            placeholder: Constants.commentEmptyImage
+        )
     }
     
     @objc func didTapAttachingCancleButton() {

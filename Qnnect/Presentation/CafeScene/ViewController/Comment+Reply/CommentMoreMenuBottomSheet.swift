@@ -38,19 +38,22 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         $0.modalPresentationStyle = .overCurrentContext
     }
     
-    private var commentId: Int!
+    private var comment: Comment!
+    private var question: Question!
     private var viewModel: CommentMoreMenuViewModel!
     weak var coordinator: CommentCoordinator?
     
     static func create(
-        with commentId: Int,
+        with comment: Comment,
         _ viewModel: CommentMoreMenuViewModel,
-        _ coordinator: CommentCoordinator
+        _ coordinator: CommentCoordinator,
+        _ question : Question
     ) -> CommentMoreMenuBottomSheet {
         let view = CommentMoreMenuBottomSheet()
-        view.commentId = commentId
+        view.comment = comment
         view.viewModel = viewModel
         view.coordinator = coordinator
+        view.question = question
         return view
     }
     
@@ -82,7 +85,8 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         super.bind()
         
         let input = CommentMoreMenuViewModel.Input(
-            commentId: Observable.just(commentId),
+            comment: Observable.just(comment),
+            question: Observable.just(question),
             didTapDeleteButton: deleteButton.rx.tap.asObservable(),
             didTapModifyButton: modifyButton.rx.tap.asObservable(),
             didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
@@ -105,6 +109,10 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         
         output.modify
             .emit()
+            .disposed(by: self.disposeBag)
+        
+        output.showWriteCommentScene
+            .emit(onNext: coordinator.showCafeAnswerWritingScene)
             .disposed(by: self.disposeBag)
         
     }

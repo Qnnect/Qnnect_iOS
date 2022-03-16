@@ -14,6 +14,7 @@ final class CommentViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Void>
         let commentId: Observable<Int>
+        let question: Observable<Question>
         /// string: inputText
         let didTapSendButton: Observable<String>
         let didTapCommentMoreButton: Observable<Void>
@@ -26,7 +27,7 @@ final class CommentViewModel: ViewModelType {
         let replies: Driver<[Reply]>
         let isWriter: Driver<Bool>
         /// Int: CommentId
-        let showCommentMoreMenuBottomSheet: Signal<Int>
+        let showCommentMoreMenuBottomSheet: Signal<(question: Question, comment: Comment)>
         let showReplyMoreMenuBottomSheet: Signal<(commentId: Int, reply: Reply)>
     }
     
@@ -57,7 +58,13 @@ final class CommentViewModel: ViewModelType {
             .share()
         
         let showCommentMoreMenuBottomSheet = input.didTapCommentMoreButton
-            .withLatestFrom(input.commentId)
+            .withLatestFrom(
+                Observable.combineLatest(
+                    input.question,
+                    fetchedCommentWithReplies.map { $0.comment },
+                    resultSelector: { (question: $0, comment: $1)}
+                )
+            )
            
         
         let showReplyMoreMenuBottomSheet = input.didTapReplyMoreButton
