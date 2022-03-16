@@ -9,6 +9,7 @@ import UIKit
 
 protocol WriteCommentCoordinator: Coordinator {
     func start(_ question: Question, _ user: User?, _ comment: Comment?)
+    func pop()
 }
 
 final class DefaultWriteCommentCoordinator: WriteCommentCoordinator {
@@ -37,6 +38,10 @@ final class DefaultWriteCommentCoordinator: WriteCommentCoordinator {
             comment
         )
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func pop() {
+        navigationController.popViewController(animated: true)
     }
 }
 

@@ -104,6 +104,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         guard let coordinator = coordinator else { return}
 
         output.delete
+            .map { CommentMoreMenuItem.delete }
             .emit(onNext: coordinator.dismissCommentMoreMenu)
             .disposed(by: self.disposeBag)
         

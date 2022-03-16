@@ -273,11 +273,15 @@ final class CafeAnswerWritingViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         
+        guard let coordinator = coordinator else { return }
+
         //TODO: 화면전환
         output.completion
-            .emit(onNext: {
+            .do {
+                _ in
                 LoadingIndicator.hideLoading()
-            })
+            }
+            .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
         
         //Modify 화면 일 경우

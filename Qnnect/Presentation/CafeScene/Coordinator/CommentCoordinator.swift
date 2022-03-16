@@ -7,13 +7,14 @@
 
 import UIKit
 
+
 protocol CommentCoordinator: Coordinator {
     func showCommentScene(_ commentId: Int, _ question: Question)
     func showCommentMoreMenuBottomSheet(_ question: Question, _ comment: Comment)
     func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
     func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment)
-    func dismissCommentMoreMenu()
+    func dismissCommentMoreMenu(_ type: CommentMoreMenuItem)
     func dismissReplyMoreMenu()
     func pop()
 }
@@ -103,17 +104,20 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     }
     
     func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment) {
+        dismissCommentMoreMenu(.modify)
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
         coordinator.start(question, user, comment)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }
     
-    func dismissCommentMoreMenu() {
+    func dismissCommentMoreMenu(_ type: CommentMoreMenuItem) {
         if let vc = self.navigationController.presentedViewController as? CommentMoreMenuBottomSheet {
             vc.hideBottomSheetAndGoBack {
                 [weak self] in
-                self?.navigationController.popViewController(animated: true)
+                if type == .delete {
+                    self?.navigationController.popViewController(animated: true)
+                }
             }
         }
     }

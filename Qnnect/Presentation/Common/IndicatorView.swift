@@ -21,11 +21,12 @@ class LoadingIndicator {
                 loadingIndicatorView = existedView
             } else {
                 loadingIndicatorView = NVActivityIndicatorView(
-                    frame: CGRect(x: 162, y: 100, width: 50, height: 50),
+                    frame: window.frame,
                     type: .lineSpinFadeLoader,
                     color: .black,
-                    padding: 0
+                    padding: 100
                 )
+                
                 window.addSubview(loadingIndicatorView)
             }
 

@@ -27,7 +27,8 @@ class BaseViewController: UIViewController {
         let backBarButton = UIBarButtonItem()
         backBarButton.title = ""
         self.navigationItem.backBarButtonItem = backBarButton
-
+        
+        hideKeyboard()
         self.configureUI()
         self.bind()
     }
@@ -40,8 +41,19 @@ class BaseViewController: UIViewController {
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTap(sender:)))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true) // todo...
+        }
+        sender.cancelsTouchesInView = false
     }
     
     @objc func pop() {

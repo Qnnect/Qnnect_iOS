@@ -9,6 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum CommentMoreMenuItem {
+    case delete
+    case modify
+}
+
 final class CommentMoreMenuViewModel: ViewModelType {
     
     struct Input {
