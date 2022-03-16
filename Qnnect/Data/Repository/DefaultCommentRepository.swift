@@ -42,12 +42,20 @@ final class DefaultCommentRepository: CommentRepository {
                 }
             }
     }
+
+    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
+        commentNetworkService.deleteComment(commentId)
+    }
     
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>> {
         replyNetworkService.createReply(commentId, content)
     }
+
+    func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void, Error>> {
+        replyNetworkService.deleteReply(commentId, replyId)
+    }
     
-    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
-        commentNetworkService.deleteComment(commentId)
+    func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>> {
+        replyNetworkService.modifyReply(commentId, replyId, content)
     }
 }

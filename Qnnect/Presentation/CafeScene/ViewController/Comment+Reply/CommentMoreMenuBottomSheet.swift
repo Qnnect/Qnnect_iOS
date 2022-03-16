@@ -100,7 +100,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         guard let coordinator = coordinator else { return}
 
         output.delete
-            .emit(onNext: coordinator.dismissMoreMenu)
+            .emit(onNext: coordinator.dismissCommentMoreMenu)
             .disposed(by: self.disposeBag)
         
         output.modify

@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 class ReplyMoreMenuBottomSheet: BottomSheetViewController {
     
@@ -32,10 +33,26 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
         $0.alignment = .leading
     }
     
+    private let deleteAlertView = DeleteAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
+    private var viewModel: ReplyMoreMenuViewModel!
     weak var coordinator: CommentCoordinator?
-    static func create(with coordinator: CommentCoordinator) -> ReplyMoreMenuBottomSheet {
+    private var replyId: Int!
+    private var commentId: Int!
+    
+    static func create(
+        with viewModel: ReplyMoreMenuViewModel,
+        _ coordinator: CommentCoordinator,
+        replyId: Int,
+        commentId: Int
+    ) -> ReplyMoreMenuBottomSheet {
         let view = ReplyMoreMenuBottomSheet()
+        view.viewModel = viewModel
         view.coordinator = coordinator
+        view.replyId = replyId
+        view.commentId = commentId
         return view
     }
     
@@ -61,5 +78,36 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.bottom.equalToSuperview().inset(44.0)
         }
+    }
+    
+    override func bind() {
+        super.bind()
+        
+        let input = ReplyMoreMenuViewModel.Input(
+            replyId: Observable.just(replyId),
+            commentId: Observable.just(commentId),
+            didTapModifyButton: modifyButton.rx.tap.asObservable(),
+            didTapDeleteButton: deleteButton.rx.tap.asObservable(),
+            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.showDeleteAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.deleteAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return}
+
+        output.delete
+            .emit(onNext: coordinator.dismissReplyMoreMenu)
+            .disposed(by: self.disposeBag)
+        
+        output.modify
+            .emit()
+            .disposed(by: self.disposeBag)
     }
 }

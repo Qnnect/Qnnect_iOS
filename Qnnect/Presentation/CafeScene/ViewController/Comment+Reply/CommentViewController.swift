@@ -28,10 +28,6 @@ final class CommentViewController: BaseViewController {
         $0.backgroundColor = .p_ivory
     }
     
-    //    private let moreButton = UIButton().then {
-    //        $0.setImage(Constants.navagation_more, for: .normal)
-    //    }
-    
     private let bottomView = UIView().then {
         $0.backgroundColor = .p_ivory
         $0.layer.shadowColor = UIColor.black.withAlphaComponent(0.08).cgColor
@@ -69,6 +65,11 @@ final class CommentViewController: BaseViewController {
         vc.commentId = commentId
         vc.coordinator = coordinator
         return vc
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("viewWillAppear!!!!!!!")
     }
     
     override func viewDidLoad() {
@@ -127,7 +128,7 @@ final class CommentViewController: BaseViewController {
         super.bind()
         
         let input = CommentViewModel.Input(
-            viewDidLoad: Observable.just(()),
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
             commentId: Observable.just(commentId),
             didTapSendButton: sendButton.rx.tap
                 .do {
@@ -188,7 +189,7 @@ final class CommentViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showReplyMoreMenuBottomSheet
-            .emit(onNext: coordinator.showReplyMoreMenuBottomSheet(_:))
+            .emit(onNext: coordinator.showReplyMoreMenuBottomSheet)
             .disposed(by: self.disposeBag)
     }
 }

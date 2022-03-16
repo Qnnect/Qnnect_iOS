@@ -12,7 +12,7 @@ import RxCocoa
 final class CommentViewModel: ViewModelType {
     
     struct Input {
-        let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let commentId: Observable<Int>
         /// string: inputText
         let didTapSendButton: Observable<String>
@@ -27,8 +27,8 @@ final class CommentViewModel: ViewModelType {
         let isWriter: Driver<Bool>
         /// Int: CommentId
         let showCommentMoreMenuBottomSheet: Signal<Int>
-        /// Int: ReplyId
-        let showReplyMoreMenuBottomSheet: Signal<Int>
+        /// Int: ReplyId, CommentId
+        let showReplyMoreMenuBottomSheet: Signal<(replyId: Int, commentId: Int)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -48,7 +48,7 @@ final class CommentViewModel: ViewModelType {
                 return Void()
             }
         
-        let fetchedCommentWithReplies = Observable.merge(input.viewDidLoad, createReply)
+        let fetchedCommentWithReplies = Observable.merge(input.viewWillAppear, createReply)
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.fetchComment)
             .compactMap({ result -> (comment: Comment, replies: [Reply], isWriter: Bool)? in
@@ -62,10 +62,7 @@ final class CommentViewModel: ViewModelType {
            
         
         let showReplyMoreMenuBottomSheet = input.didTapReplyMoreButton
-            
-       
-        
-       
+            .withLatestFrom(input.commentId,resultSelector: { (replyId: $0,commentId: $1) })
         
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),

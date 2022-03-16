@@ -61,6 +61,8 @@ final class ReplyCell: UICollectionViewCell {
         $0.layer.borderColor = UIColor.reply_border?.cgColor
     }
     
+    private var reply: Reply?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -69,6 +71,11 @@ final class ReplyCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reply = nil
     }
     
     private func configureUI() {
@@ -131,6 +138,7 @@ final class ReplyCell: UICollectionViewCell {
     }
     
     func update(with reply: Reply) {
+        self.reply = reply
         writerProfileImageView.kf.setImage(
             with: URL(string: reply.writerInfo.profileImage ?? ""),
             placeholder: Constants.profileDefaultImage
@@ -147,8 +155,9 @@ final class ReplyCell: UICollectionViewCell {
         moreButton.rx.tap
             .subscribe(onNext: {
                 [weak self] _ in
-                guard let self = self else { return }
-                self.delegate?.moreButton(didTap: self, reply.id)
+                guard let self = self, let id = self.reply?.id else { return }
+                self.delegate?.moreButton(didTap: self, id)
             }).disposed(by: self.disposeBag)
     }
+    
 }

@@ -86,6 +86,14 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         self.view.backgroundColor = .black.withAlphaComponent(0.5)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let navigationVC = presentingViewController as? UINavigationController {
+            navigationVC.viewControllers.last?.viewWillAppear(true)
+        } else {
+            presentingViewController?.viewWillAppear(true)
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showBottomSheet()
@@ -113,8 +121,8 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.view.layoutIfNeeded()
         }) { _ in
             if self.presentingViewController != nil {
-                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
-                self.presentingViewController!.view.setNeedsLayout()
+//                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
+//                self.presentingViewController!.view.setNeedsLayout()
                 self.dismiss(animated: false, completion: completion)
             }
         }

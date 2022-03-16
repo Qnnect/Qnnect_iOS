@@ -9,17 +9,20 @@ import Foundation
 import RxSwift
 
 protocol CommentUseCase: AnyObject {
+    
     func createComment(
         _ questionId: Int,
         _ images: [Data?],
         _ content: String
     ) -> Observable<Result<Void,Error>>
-    
     func fetchComment(_ commentId: Int) -> Observable<
         Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
     >
-    func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
     func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>>
+    
+    func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
+    func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void, Error>>
+    func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>>
 }
 
 final class DefaultCommentUseCase: CommentUseCase {
@@ -45,12 +48,21 @@ final class DefaultCommentUseCase: CommentUseCase {
     > {
         commentRepository.fetchComment(commentId)
     }
+
+    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
+        commentRepository.deleteComment(commentId)
+    }
     
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void, Error>> {
         commentRepository.createReply(commentId, content)
     }
+
     
-    func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {
-        commentRepository.deleteComment(commentId)
+    func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void, Error>> {
+        commentRepository.deleteReply(commentId, replyId)
+    }
+    
+    func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>> {
+        commentRepository.modifyReply(commentId, replyId, content)
     }
 }

@@ -10,8 +10,9 @@ import UIKit
 protocol CommentCoordinator: Coordinator {
     func showCommentScene(_ commentId: Int)
     func showCommentMoreMenuBottomSheet(_ commentId: Int)
-    func showReplyMoreMenuBottomSheet(_ replyId: Int)
-    func dismissMoreMenu()
+    func showReplyMoreMenuBottomSheet(replyId: Int, commentId: Int)
+    func dismissCommentMoreMenu()
+    func dismissReplyMoreMenu()
 }
 
 final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
@@ -52,18 +53,36 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
-    func showReplyMoreMenuBottomSheet(_ replyId: Int) {
-        let view = ReplyMoreMenuBottomSheet.create(with: self)
+    func showReplyMoreMenuBottomSheet(replyId: Int, commentId: Int) {
+        let commentRepository = DefaultCommentRepository(
+            commentNetworkService: CommentNetworkService(),
+            replyNetworkService: ReplyNetworkService()
+        )
+        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
+        let viewModel = ReplyMoreMenuViewModel(commentUseCase: commentUseCase)
+        let view = ReplyMoreMenuBottomSheet.create(
+            with: viewModel,
+            self,
+            replyId: replyId,
+            commentId: commentId
+        )
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
-    func dismissMoreMenu() {
-        if let vc = self.navigationController.presentedViewController as? BottomSheetViewController {
+    func dismissCommentMoreMenu() {
+        if let vc = self.navigationController.presentedViewController as? CommentMoreMenuBottomSheet {
             vc.hideBottomSheetAndGoBack {
                 [weak self] in
                 self?.navigationController.popViewController(animated: true)
             }
+        }
+    }
+    
+    func dismissReplyMoreMenu() {
+        if let vc = self.navigationController.presentedViewController as? ReplyMoreMenuBottomSheet {
+            print("dismissReplyMoreMeni")
+            vc.hideBottomSheetAndGoBack(nil)
         }
     }
 }
