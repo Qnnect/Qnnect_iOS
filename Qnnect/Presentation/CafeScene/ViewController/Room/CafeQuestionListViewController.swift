@@ -81,7 +81,9 @@ final class CafeQuestionListViewController: BaseViewController {
             viewDidLoad: Observable.just(()),
             cafeId: Observable.just(cafeId),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
-                .map{ $0[0] as! Int}
+                .map{ $0[0] as! Int},
+            didTapQuestionCell: questionListTableView.rx.modelSelected(QuestionShortInfo.self)
+                .asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -99,8 +101,13 @@ final class CafeQuestionListViewController: BaseViewController {
                 [weak self] canLoad in
                 self?.isFetched = canLoad
             }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.showCafeAnswerScene
+            .emit(onNext: coordinator.showCafeAnswerScene(_:))
+            .disposed(by: self.disposeBag)
     }
-    
 }
 
 extension CafeQuestionListViewController: UITableViewDelegate {

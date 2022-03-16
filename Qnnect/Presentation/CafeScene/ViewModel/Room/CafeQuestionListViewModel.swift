@@ -16,11 +16,14 @@ final class CafeQuestionListViewModel: ViewModelType {
         let viewDidLoad: Observable<Void>
         let cafeId: Observable<Int>
         let moreFetch: Observable<Int>
+        let didTapQuestionCell: Observable<QuestionShortInfo>
     }
     
     struct Output {
         let questions: Driver<[QuestionShortInfo]>
         let canLoad: Signal<Bool>
+        ///Int: CafeQuestionId
+        let showCafeAnswerScene: Signal<Int>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -71,9 +74,14 @@ final class CafeQuestionListViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
         
+        let showCafeAnswerScene = input.didTapQuestionCell
+            .map { $0.cafeQuestionId }
+            
+        
         return Output(
             questions: fetchedQuestions.asDriver(onErrorDriveWith: .empty()),
-            canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
+            canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
+            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
