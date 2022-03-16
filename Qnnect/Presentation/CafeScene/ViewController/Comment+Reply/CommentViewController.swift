@@ -164,9 +164,10 @@ final class CommentViewController: BaseViewController {
             models.append(CommentSectionModel.commentSection(title: "", items: [commentSectionItem]))
             if comment.getImageURLs().count > 0 {
                 models.append( CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems))
-                self.mainCollectionView.setCollectionViewLayout(self.createLayout(true), animated: false)
+                let isSingleImage: Bool = (comment.getImageURLs().count == 1)
+                self.mainCollectionView.setCollectionViewLayout(self.createLayout(true, isSingleImage), animated: false)
             } else {
-                self.mainCollectionView.setCollectionViewLayout(self.createLayout(false), animated: false)
+                self.mainCollectionView.setCollectionViewLayout(self.createLayout(false, false), animated: false)
             }
             models.append(CommentSectionModel.replySection(title: "", items: replySectionItems))
             return models
@@ -195,14 +196,16 @@ final class CommentViewController: BaseViewController {
 }
 
 private extension CommentViewController {
-    func createLayout(_ isImageExisted: Bool) -> UICollectionViewLayout {
+    func createLayout(_ isImageExisted: Bool, _ isSingleImage: Bool) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout {
             [weak self] section, environment -> NSCollectionLayoutSection? in
             switch section {
             case 0:
                 return self?.createCommentSection()
             case 1:
-                return isImageExisted ? self?.createAttachImageSection() : self?.createReplySection()
+                return isImageExisted ? (
+                    isSingleImage ? self?.createSingleAttachImageSection(): self?.createAttachImageSection()
+                ) : self?.createReplySection()
             case 2:
                 return isImageExisted ? self?.createReplySection() : nil
             default:
@@ -240,7 +243,24 @@ private extension CommentViewController {
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 19.0, leading: 24.0, bottom: 16.0, trailing: 0)
+        section.contentInsets = .init(top: 20.0, leading: 20.0, bottom: 16.0, trailing: 0)
+        
+        return section
+    }
+    
+    func createSingleAttachImageSection() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        //group
+       
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.53))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 20.0, leading: 20.0, bottom: 10.0, trailing: 20.0)
         
         return section
     }
