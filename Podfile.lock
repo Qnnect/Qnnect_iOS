@@ -84,6 +84,9 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (2.0.0)
   - RxAlamofire (6.1.1):
     - RxAlamofire/Core (= 6.1.1)
@@ -150,6 +153,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Kingfisher (~> 7.0)
   - Moya/RxSwift (~> 15.0)
+  - NVActivityIndicatorView
   - RxAppState
   - RxCocoa (= 6.5.0)
   - RxDataSources (~> 5.0)
@@ -182,6 +186,7 @@ SPEC REPOS:
     - Kingfisher
     - Moya
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - RxAlamofire
     - RxAppState
@@ -222,6 +227,7 @@ SPEC CHECKSUMS:
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxAppState: 9c34f951d4ff8b9034f84016fe766202365bceb2
@@ -241,6 +247,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: 166b9356407fdf978154a3c81ecff57027c09cc1
+PODFILE CHECKSUM: 7885d3654f680ac2a39a2999d52546e132529977
 
 COCOAPODS: 1.11.2

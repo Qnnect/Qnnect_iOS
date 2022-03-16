@@ -18,4 +18,5 @@ target 'Qnnect' do
   pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxAppState'
   pod "TTGTagCollectionView"
+  pod 'NVActivityIndicatorView'
 end
