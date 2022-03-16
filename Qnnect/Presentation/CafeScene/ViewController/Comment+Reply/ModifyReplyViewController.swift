@@ -40,19 +40,19 @@ final class ModifyReplyViewController: BaseViewController {
     private var viewModel: ModifyReplyViewModel!
     weak var coordinator: CommentCoordinator?
     private var commentId: Int!
-    private var replyId: Int!
+    private var reply: Reply!
     
     static func create(
         with viewModel: ModifyReplyViewModel,
         _ coordinator: CommentCoordinator,
-        commentId: Int,
-        replyId: Int
+        _ reply: Reply,g
+        _ commentId: Int
     ) -> ModifyReplyViewController {
         let vc = ModifyReplyViewController()
         vc.viewModel = viewModel
         vc.coordinator = coordinator
         vc.commentId = commentId
-        vc.replyId = replyId
+        vc.reply = reply
         return vc
     }
     

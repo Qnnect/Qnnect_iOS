@@ -12,6 +12,7 @@ import RxCocoa
 final class ModifyReplyViewModel: ViewModelType {
     
     struct Input {
+        let viewDidLoad: Observable<Void>
         
     }
     

@@ -27,8 +27,7 @@ final class CommentViewModel: ViewModelType {
         let isWriter: Driver<Bool>
         /// Int: CommentId
         let showCommentMoreMenuBottomSheet: Signal<Int>
-        /// Int: ReplyId, CommentId
-        let showReplyMoreMenuBottomSheet: Signal<(replyId: Int, commentId: Int)>
+        let showReplyMoreMenuBottomSheet: Signal<(commentId: Int, reply: Reply)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -62,7 +61,12 @@ final class CommentViewModel: ViewModelType {
            
         
         let showReplyMoreMenuBottomSheet = input.didTapReplyMoreButton
-            .withLatestFrom(input.commentId,resultSelector: { (replyId: $0,commentId: $1) })
+            .withLatestFrom(fetchedCommentWithReplies.map { $0.replies }, resultSelector: {(id: $0, replies: $1)})
+            .compactMap {
+                id, replies in
+                return replies.first(where: { $0.id == id })
+            }
+            .withLatestFrom(input.commentId,resultSelector: { (commentId: $1, reply: $0) })
         
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),

@@ -1237,9 +1237,9 @@
 		AEB5AB0827E0F58E0096376B /* Comment+Reply */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
 				AEB5AAF727E0E48E0096376B /* CommentMoreMenuBottomSheet.swift */,
 				AEB5AAF927E0E6770096376B /* ReplyMoreMenuBottomSheet.swift */,
-				AEB5AABE27DF1BD40096376B /* CommentViewController.swift */,
 				AEB5AB1D27E1D4600096376B /* ModifyReplyViewController.swift */,
 			);
 			path = "Comment+Reply";

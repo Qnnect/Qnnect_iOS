@@ -12,7 +12,7 @@ import RxCocoa
 final class ReplyMoreMenuViewModel: ViewModelType {
     
     struct Input {
-        let replyId: Observable<Int>
+        let reply: Observable<Reply>
         let commentId: Observable<Int>
         let didTapModifyButton: Observable<Void>
         let didTapDeleteButton: Observable<Void>
@@ -22,7 +22,7 @@ final class ReplyMoreMenuViewModel: ViewModelType {
     struct Output {
         let delete: Signal<Void>
         let showDeleteAlertView: Signal<Void>
-        let showModifyReplyScene: Signal<(commentId:Int, replyId: Int)>
+        let showModifyReplyScene: Signal<(commentId:Int, reply: Reply)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -35,7 +35,7 @@ final class ReplyMoreMenuViewModel: ViewModelType {
         
         let showDeleteAlertView = input.didTapDeleteButton
         
-        let ids = Observable.combineLatest(input.commentId, input.replyId,
+        let ids = Observable.combineLatest(input.commentId, input.reply.map { $0.id} ,
                                            resultSelector: { (commentId: $0, replyId: $1)})
         
         let delete = input.didTapDeleteAlertOkButton
@@ -47,7 +47,9 @@ final class ReplyMoreMenuViewModel: ViewModelType {
             }
         
         let showModifyReplyScene = input.didTapModifyButton
-            .withLatestFrom(ids)
+            .withLatestFrom(
+                Observable.combineLatest(input.commentId, input.reply,resultSelector: { (commentId: $0, reply: $1)})
+            )
             
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),

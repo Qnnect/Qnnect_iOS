@@ -10,8 +10,8 @@ import UIKit
 protocol CommentCoordinator: Coordinator {
     func showCommentScene(_ commentId: Int)
     func showCommentMoreMenuBottomSheet(_ commentId: Int)
-    func showReplyMoreMenuBottomSheet(replyId: Int, commentId: Int)
-    func showModifyReplyScene(replyId: Int, commentId: Int)
+    func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
+    func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
     func dismissCommentMoreMenu()
     func dismissReplyMoreMenu()
 }
@@ -54,7 +54,7 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
-    func showReplyMoreMenuBottomSheet(replyId: Int, commentId: Int) {
+    func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService()
@@ -64,14 +64,14 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         let view = ReplyMoreMenuBottomSheet.create(
             with: viewModel,
             self,
-            replyId: replyId,
-            commentId: commentId
+            reply,
+            commentId
         )
         view.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
-    func showModifyReplyScene(replyId: Int, commentId: Int) {
+    func showModifyReplyScene(_ commentId: Int,_ reply: Reply) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService()
@@ -81,8 +81,8 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         let view = ModifyReplyViewController.create(
             with: viewModel,
             self,
-            commentId: commentId,
-            replyId: replyId
+            reply,
+            commentId
         )
         dismissReplyMoreMenu()
         self.navigationController.pushViewController(view, animated: true)

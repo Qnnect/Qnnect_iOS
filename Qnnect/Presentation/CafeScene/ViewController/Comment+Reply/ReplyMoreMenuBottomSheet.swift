@@ -39,19 +39,19 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
     
     private var viewModel: ReplyMoreMenuViewModel!
     weak var coordinator: CommentCoordinator?
-    private var replyId: Int!
+    private var reply: Reply!
     private var commentId: Int!
     
     static func create(
         with viewModel: ReplyMoreMenuViewModel,
         _ coordinator: CommentCoordinator,
-        replyId: Int,
-        commentId: Int
+        _ reply: Reply,
+        _ commentId: Int
     ) -> ReplyMoreMenuBottomSheet {
         let view = ReplyMoreMenuBottomSheet()
         view.viewModel = viewModel
         view.coordinator = coordinator
-        view.replyId = replyId
+        view.reply = reply
         view.commentId = commentId
         return view
     }
@@ -84,7 +84,7 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
         super.bind()
         
         let input = ReplyMoreMenuViewModel.Input(
-            replyId: Observable.just(replyId),
+            reply: Observable.just(reply),
             commentId: Observable.just(commentId),
             didTapModifyButton: modifyButton.rx.tap.asObservable(),
             didTapDeleteButton: deleteButton.rx.tap.asObservable(),
@@ -108,7 +108,6 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
 
         
         output.showModifyReplyScene
-            .map { (replyId: $1, commentId: $0)}
             .emit(onNext: coordinator.showModifyReplyScene)
             .disposed(by: self.disposeBag)
     }
