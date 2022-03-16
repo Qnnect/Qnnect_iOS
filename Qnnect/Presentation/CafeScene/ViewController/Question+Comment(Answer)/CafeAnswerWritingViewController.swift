@@ -177,7 +177,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
             make.trailing.bottom.lessThanOrEqualToSuperview().offset(8.0)
         }
         self.contentLabel.attributedText = NSAttributedString(
-            string: self.question.question,
+            string: self.question.content,
             attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
         )
         

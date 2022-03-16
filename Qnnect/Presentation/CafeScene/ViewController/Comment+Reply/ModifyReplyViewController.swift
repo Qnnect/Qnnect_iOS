@@ -88,7 +88,6 @@ final class ModifyReplyViewController: BaseViewController {
         super.bind()
         
         let input = ModifyReplyViewModel.Input(
-            viewDidLoad: Observable.just(()),
             reply: Observable.just(reply),
             commentId: Observable.just(commentId),
             didTapCompletionButton: completionButton.rx.tap

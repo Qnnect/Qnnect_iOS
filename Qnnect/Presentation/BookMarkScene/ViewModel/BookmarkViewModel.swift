@@ -9,9 +9,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum ScrapFetchAction {
-    case load(questions: [ScrapedQuestion])
-    case loadMore(questions: [ScrapedQuestion])
+enum QuestionsFetchAction {
+    case load(questions: [QuestionShortInfo])
+    case loadMore(questions: [QuestionShortInfo])
 }
 final class BookmarkViewModel: ViewModelType {
     
@@ -27,7 +27,7 @@ final class BookmarkViewModel: ViewModelType {
     
     struct Output {
         let cafes: Driver<[CafeTag]>
-        let scrapedQuestions: Driver<[ScrapedQuestion]>
+        let scrapedQuestions: Driver<[QuestionShortInfo]>
         let newLoad: Signal<Void>
         let canLoad: Signal<Bool>
         let showCafeAnswerScene: Signal<Int>
@@ -54,19 +54,19 @@ final class BookmarkViewModel: ViewModelType {
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
-                result -> [ScrapedQuestion]? in
+                result -> [QuestionShortInfo]? in
                 guard case let .success(questions) = result else { return nil }
                 return questions
-            }.map { ScrapFetchAction.load(questions: $0)}
+            }.map { QuestionsFetchAction.load(questions: $0)}
         
         let loadOne = input.didTapCafeTag
             .map { (cafeId: $0.cafeId, page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchScrap)
             .compactMap {
-                result -> [ScrapedQuestion]? in
+                result -> [QuestionShortInfo]? in
                 guard case let .success(questions) = result else { return nil }
                 return questions
-            }.map { ScrapFetchAction.load(questions: $0)}
+            }.map { QuestionsFetchAction.load(questions: $0)}
         
         let newLoad = Observable.merge(loadAll, loadOne)
             .share()
@@ -77,10 +77,10 @@ final class BookmarkViewModel: ViewModelType {
             .map { (page: $0.page, size: Constants.scrapFetchSize) }
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
-                result -> [ScrapedQuestion]? in
+                result -> [QuestionShortInfo]? in
                 guard case let .success(questions) = result else { return nil }
                 return questions
-            }.map { ScrapFetchAction.loadMore(questions: $0)}
+            }.map { QuestionsFetchAction.loadMore(questions: $0)}
         
         let loadMoreOne = input.moreFetch
             .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
@@ -88,10 +88,10 @@ final class BookmarkViewModel: ViewModelType {
             .map { (cafeId: $0.cafeId, page: $0.page, size: Constants.scrapFetchSize) }
             .flatMap(questionUseCase.fetchScrap)
             .compactMap {
-                result -> [ScrapedQuestion]? in
+                result -> [QuestionShortInfo]? in
                 guard case let .success(questions) = result else { return nil }
                 return questions
-            }.map { ScrapFetchAction.loadMore(questions: $0)}
+            }.map { QuestionsFetchAction.loadMore(questions: $0)}
         
         let loadMore = Observable.merge(loadMoreAll, loadMoreOne)
             .share()
@@ -100,7 +100,7 @@ final class BookmarkViewModel: ViewModelType {
             .share()
         
         let scrapedQuestions = load
-            .scan(into: [ScrapedQuestion]()) { questions, action in
+            .scan(into: [QuestionShortInfo]()) { questions, action in
                 switch action {
                 case .load(let newQuestions):
                     questions = newQuestions
@@ -111,7 +111,7 @@ final class BookmarkViewModel: ViewModelType {
         
         let canLoad = loadMore
             .compactMap {
-                action -> [ScrapedQuestion]? in
+                action -> [QuestionShortInfo]? in
                 guard case let .loadMore(questions) = action else { return nil}
                 return questions
             }

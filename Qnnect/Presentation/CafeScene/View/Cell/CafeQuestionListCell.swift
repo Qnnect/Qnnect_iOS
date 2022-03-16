@@ -1,21 +1,17 @@
 //
-//  bookmarkCell.swift
+//  CafeQuestionListCell.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/02/17.
+//  Created by 재영신 on 2022/03/16.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-final class BookmarkCell: UITableViewCell {
-    static let identifier: String = "BookmarkCell"
+final class CafeQuestionListCell: UITableViewCell {
+    static let identifier = "CafeQuestionListCell"
     
-    private let cafeNameLabel = UILabel().then {
-        $0.font = .IM_Hyemin(.bold, size: 12.0)
-        $0.textColor = .secondaryBorder
-    }
     private let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .black
@@ -29,18 +25,17 @@ final class BookmarkCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.configureUI()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.configureUI()
+        configureUI()
     }
     
     private func configureUI() {
         
         [
-            cafeNameLabel,
             titleLabel,
             dateLabel
         ].forEach {
@@ -49,28 +44,21 @@ final class BookmarkCell: UITableViewCell {
         
         contentView.backgroundColor = .p_ivory
         
-        cafeNameLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(25.0)
-            make.top.equalToSuperview().inset(21.0)
-        }
-        cafeNameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        
         titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(cafeNameLabel)
-            make.top.equalTo(cafeNameLabel.snp.bottom).offset(3.0)
+            make.leading.equalToSuperview().inset(20.0)
+            make.trailing.equalToSuperview().inset(52.0)
+            make.top.equalToSuperview().inset(25.0)
+            make.bottom.equalToSuperview().inset(28.0)
         }
-        titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         dateLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(22.0)
-            make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20.0)
         }
     }
     
     func update(with question: QuestionShortInfo) {
-        dateLabel.text = question.createdAt
         titleLabel.text = question.content
-        cafeNameLabel.text = question.cafeTitle
+        dateLabel.text = question.createdAt
     }
 }

@@ -109,7 +109,7 @@ final class BookmarkViewController: BaseViewController {
                 }.startWith(CafeTag(cafeId: 0, cafeTitle: "전체")),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},
-            didTapQuestion: bookmarkTableView.rx.modelSelected(ScrapedQuestion.self)
+            didTapQuestion: bookmarkTableView.rx.modelSelected(QuestionShortInfo.self)
                 .map { $0.cafeQuestionId },
             didTapSearchButton: rx.methodInvoked(#selector(didTapSearchButton))
                 .mapToVoid()

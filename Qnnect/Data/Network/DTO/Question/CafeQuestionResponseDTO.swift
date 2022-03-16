@@ -1,13 +1,13 @@
 //
-//  ScrapFetchResponseDTO.swift
+//  CafeQuestionResponseDTO.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/03/11.
+//  Created by 재영신 on 2022/03/16.
 //
 
 import Foundation
 
-struct ScrapFetchResponseDTO: Decodable {
+struct CafeQuestionResponseDTO: Decodable {
     let cafeQuestionId: Int
     let cafeTitle: String
     let createdAt: String

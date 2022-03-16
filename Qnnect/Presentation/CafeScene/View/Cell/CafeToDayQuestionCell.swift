@@ -92,7 +92,7 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         let paragraphStyle = Constants.paragraphStyle
         paragraphStyle.alignment = .center
         self.questionLabel.attributedText = NSAttributedString(
-            string: question.question,
+            string: question.content,
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
         self.d_dayLabel.text = "D-\(question.daysLeft)"

@@ -1,5 +1,5 @@
 //
-//  ModifyReplyViewModel.swift
+//  ModifyQuestionViewModel.swift
 //  Qnnect
 //
 //  Created by 재영신 on 2022/03/16.
@@ -9,11 +9,10 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ModifyReplyViewModel: ViewModelType {
+final class ModifyQuestionViewModel: ViewModelType {
     
     struct Input {
-        let reply: Observable<Reply>
-        let commentId: Observable<Int>
+        let question: Observable<Question>
         let didTapCompletionButton: Observable<Void>
         let content: Observable<String>
     }
@@ -23,10 +22,10 @@ final class ModifyReplyViewModel: ViewModelType {
         let completion: Signal<Void>
     }
     
-    private let commentUseCase: CommentUseCase
+    private let questionUseCase: QuestionUseCase
     
-    init(commentUseCase: CommentUseCase) {
-        self.commentUseCase = commentUseCase
+    init(questionUseCase: QuestionUseCase) {
+        self.questionUseCase = questionUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -36,7 +35,7 @@ final class ModifyReplyViewModel: ViewModelType {
         
         let isContentEqualed = Observable.combineLatest(
             input.content,
-            input.reply.map { $0.content}
+            input.question.map { $0.content }
         ).map{ $0 == $1 }
         
         let modifing = input.didTapCompletionButton
@@ -44,13 +43,12 @@ final class ModifyReplyViewModel: ViewModelType {
             .filter { !$0 }
             .withLatestFrom(
                 Observable.combineLatest(
-                    input.commentId,
-                    input.reply.map{$0.id},
+                    input.question.map{ $0.id },
                     input.content,
                     resultSelector: {
-                        (commentId: $0, replyId: $1, content: $2)
+                        (questionId: $0, content: $1)
                     })
-            ).flatMap(commentUseCase.modifyReply)
+            ).flatMap(questionUseCase.modifyQuestion)
             .compactMap { result -> Void? in
                 guard case .success(_) = result else { return nil }
                 return Void()

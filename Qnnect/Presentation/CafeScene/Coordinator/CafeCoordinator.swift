@@ -18,6 +18,7 @@ protocol CafeCoordinator: Coordinator {
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
     func showQuestionCompletionAlertView()
+    func showCafeQuestionListScene(_ cafeId: Int)
     func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType)
     func dismissAlert()
     func dismissDrinkSelectBottomSheet()
@@ -116,6 +117,22 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         let view = QuestionCompletionAlertView.create(with: viewModel, self)
         view.modalPresentationStyle = .overCurrentContext
         navigationController.present(view, animated: true, completion: nil)
+    }
+    
+    func showCafeQuestionListScene(_ cafeId: Int) {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = CafeQuestionListViewModel(questionUseCase: questionUseCase)
+        let vc = CafeQuestionListViewController.create(
+            with: viewModel,
+            self,
+            cafeId
+        )
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType) {

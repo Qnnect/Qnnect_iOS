@@ -77,7 +77,7 @@ final class BookmarkSearchViewController: BaseViewController {
                 .asObservable(),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},
-            didTapQuestion: resultTableView.rx.modelSelected(ScrapedQuestion.self)
+            didTapQuestion: resultTableView.rx.modelSelected(QuestionShortInfo.self)
                 .map { $0.cafeQuestionId }
         )
 

@@ -10,7 +10,7 @@ import Foundation
 struct Question {
     let createdAt: String
     let daysLeft: Int
-    let question: String
+    let content: String
     let questioner: String
     let id: Int
     let writer: Bool

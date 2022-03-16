@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ScrapedQuestion {
+struct QuestionShortInfo {
     let cafeQuestionId: Int
     let cafeTitle: String
     let createdAt: String
-    let question: String
+    let content: String
 }

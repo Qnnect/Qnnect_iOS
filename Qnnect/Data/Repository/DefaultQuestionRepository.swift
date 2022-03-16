@@ -36,12 +36,12 @@ final class DefaultQuestionRepository: QuestionRepository {
         return self.scrapNetworkService.cancleScrap(request: request)
     }
     
-    func fetchAllScrap(_ page: Int, _ size: Int) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func fetchAllScrap(_ page: Int, _ size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
         let request = ScrapFetchRequestDTO(page: page, size: size)
         
         return scrapNetworkService.fetchAllScrap(request: request)
             .map {
-                result -> Result<[ScrapedQuestion],Error> in
+                result -> Result<[QuestionShortInfo],Error> in
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.map{$0.toDomain()})
@@ -51,12 +51,12 @@ final class DefaultQuestionRepository: QuestionRepository {
             }
     }
     
-    func fetchScrap(_ cafeId: Int, _ page: Int, _ size: Int) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func fetchScrap(_ cafeId: Int, _ page: Int, _ size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
         let request = ScrapFetchRequestDTO(page: page, size: size)
         
         return scrapNetworkService.fetchScrap(cafeId, request)
             .map {
-                result -> Result<[ScrapedQuestion],Error> in
+                result -> Result<[QuestionShortInfo],Error> in
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.map{$0.toDomain()})
@@ -92,11 +92,11 @@ final class DefaultQuestionRepository: QuestionRepository {
             }
     }
     
-    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo], Error>> {
         let request = ScrapSearchRequestDTO(page: page, size: size, searchWord: searchWord)
         return scrapNetworkService.searchScrap(request: request)
             .map {
-                result -> Result<[ScrapedQuestion],Error> in
+                result -> Result<[QuestionShortInfo],Error> in
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.map{$0.toDomain()})
@@ -109,5 +109,40 @@ final class DefaultQuestionRepository: QuestionRepository {
     func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void, Error>> {
         let request = LikeRequestDTO(isUserLiked: isUserLiked)
         return likeNetworkService.like(questionId, request)
+    }
+    
+    func modifyQuestion(_ questionId: Int, _ content: String) -> Observable<Result<Void,Error>> {
+        questionNetworkService.modifyQuestion(questionId, content)
+    }
+    
+    func deleteQuestion(_ questionId: Int) -> Observable<Result<Void,Error>> {
+        questionNetworkService.deleteQuestion(questionId)
+    }
+    
+    func fetchCafeQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>> {
+        let request = CafeQuestionsFetchRequestDTO(page: page, size: size)
+        return questionNetworkService.fetchCafeQuestions(cafeId, request)
+            .map {
+                result -> Result<[QuestionShortInfo],Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>> {
+        let request = CafeQuestionSearchRequestDTO(page: page, size: size, searchWord: searchWord)
+        return questionNetworkService.searchCafeQuestion(cafeId, request)
+            .map {
+                result -> Result<[QuestionShortInfo],Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
     }
 }

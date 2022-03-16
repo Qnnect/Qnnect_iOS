@@ -11,12 +11,16 @@ import RxSwift
 protocol QuestionUseCase: AnyObject {
     func scrap(_ questionId: Int) -> Observable<Result<Void,Error>>
     func cancleScrap(_ questionId: Int) -> Observable<Result<Void,Error>>
-    func fetchAllScrap(_ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
-    func fetchScrap(_ cafeId: Int, _ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion],Error>>
+    func fetchAllScrap(_ page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
+    func fetchScrap(_ cafeId: Int, _ page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
     func fetchCafes() -> Observable<Result<[CafeTag],Error>>
+    func searchScrap(_ page:Int, _ size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>>
     func fetchQuestion(_ questionId: Int) -> Observable<Result<CafeQuestion,Error>>
-    func searchScrap(_ page:Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion],Error>>
+    func modifyQuestion(_ questionId: Int, _ content: String) -> Observable<Result<Void,Error>>
+    func deleteQuestion(_ questionId: Int) -> Observable<Result<Void,Error>>
     func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void,Error>>
+    func fetchCafeQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
+    func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>>
 }
 
 final class DefaultQuestionUseCase: QuestionUseCase {
@@ -35,11 +39,11 @@ final class DefaultQuestionUseCase: QuestionUseCase {
         return self.questionRepository.cancleScrap(questionId)
     }
     
-    func fetchAllScrap(_ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func fetchAllScrap(_ page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
         questionRepository.fetchAllScrap(page, size)
     }
     
-    func fetchScrap(_ cafeId: Int, _ page: Int, size: Int) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func fetchScrap(_ cafeId: Int, _ page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
         questionRepository.fetchScrap(cafeId, page, size)
     }
     
@@ -51,11 +55,27 @@ final class DefaultQuestionUseCase: QuestionUseCase {
         questionRepository.fetchQuestion(questionId)
     }
     
-    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[ScrapedQuestion], Error>> {
+    func searchScrap(_ page: Int, _ size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo], Error>> {
         questionRepository.searchScrap(page, size, searchWord)
     }
     
     func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void, Error>> {
         questionRepository.like(questionId, isUserLiked)
+    }
+    
+    func modifyQuestion(_ questionId: Int, _ content: String) -> Observable<Result<Void,Error>> {
+        questionRepository.modifyQuestion(questionId, content)
+    }
+    
+    func deleteQuestion(_ questionId: Int) -> Observable<Result<Void,Error>> {
+        questionRepository.deleteQuestion(questionId)
+    }
+    
+    func fetchCafeQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>> {
+        questionRepository.fetchCafeQuestions(cafeId: cafeId, page: page, size: size)
+    }
+    
+    func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>> {
+        questionRepository.searchCafeQuestion(cafeId: cafeId, page: page, size: size, searchWord)
     }
 }

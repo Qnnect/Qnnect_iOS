@@ -123,7 +123,7 @@ final class CafeAnswerQuestionCell: UITableViewCell {
         self.daysLeftLabel.text = "D-\(question.daysLeft)"
         self.questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
         self.contentLabel.attributedText = NSAttributedString(
-            string: question.question,
+            string: question.content,
             attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
         )
         self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01

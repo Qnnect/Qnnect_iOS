@@ -1,25 +1,25 @@
 //
-//  BookmarkSearchViewModel.swift
+//  CafeQuestionListViewModel.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/03/15.
+//  Created by 재영신 on 2022/03/16.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-final class BookmarkSearchViewModel: ViewModelType {
+
+final class CafeQuestionListViewModel: ViewModelType {
     
     struct Input {
-        let searchWord: Observable<String>
+        let viewDidLoad: Observable<Void>
+        let cafeId: Observable<Int>
         let moreFetch: Observable<Int>
-        let didTapQuestion: Observable<Int>
     }
     
     struct Output {
-        let searchResult: Driver<[QuestionShortInfo]>
-        let showCafeAnswerScene: Signal<Int>
+        let questions: Driver<[QuestionShortInfo]>
         let canLoad: Signal<Bool>
     }
     
@@ -31,30 +31,29 @@ final class BookmarkSearchViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let load = input.searchWord
-            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
-            .distinctUntilChanged()
-            .map { (page: 0,size: 10, searchWord: $0) }
-            .flatMap(questionUseCase.searchScrap)
+        let load = input.viewDidLoad
+            .withLatestFrom(input.cafeId)
+            .map { (cafeId: $0, page: 0, size: Constants.scrapFetchSize) }
+            .flatMap(questionUseCase.fetchCafeQuestions)
             .compactMap {
                 result -> [QuestionShortInfo]? in
-                guard case let .success(questions) = result else { return nil}
+                guard case let .success(questions) = result else { return nil }
                 return questions
-            }
-            .map { QuestionsFetchAction.load(questions: $0)}
+            }.map { QuestionsFetchAction.load(questions: $0)}
         
         let loadMore = input.moreFetch
-            .withLatestFrom(input.searchWord,resultSelector: { ($0,$1)})
-            .map { (page: $0, size: 10, searchWord: $1)}
-            .flatMap(questionUseCase.searchScrap)
+            .withLatestFrom(
+                input.cafeId,
+                resultSelector: {(cafeId: $1, page: $0, size: Constants.scrapFetchSize)})
+            .flatMap(questionUseCase.fetchCafeQuestions)
             .compactMap {
                 result -> [QuestionShortInfo]? in
-                guard case let .success(questions) = result else { return nil}
+                guard case let .success(questions) = result else { return nil }
                 return questions
             }
             .map { QuestionsFetchAction.loadMore(questions: $0)}
         
-        let searchResult = Observable.merge(load,loadMore)
+        let fetchedQuestions = Observable.merge(load, loadMore)
             .scan(into: [QuestionShortInfo]()) { questions, action in
                 switch action {
                 case .load(let newQuestions):
@@ -72,12 +71,8 @@ final class BookmarkSearchViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
         
-        let showCafeAnswerScene = input.didTapQuestion
-            
-        
         return Output(
-            searchResult: searchResult.asDriver(onErrorJustReturn: []),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            questions: fetchedQuestions.asDriver(onErrorDriveWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
         )
     }

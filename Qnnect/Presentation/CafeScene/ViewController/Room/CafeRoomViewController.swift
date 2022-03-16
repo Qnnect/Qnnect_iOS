@@ -65,7 +65,7 @@ final class CafeRoomViewController: BaseViewController {
         $0.setImage(Constants.navigationMenuImage, for: .normal)
     }
     
-    private let navigationRecipeButton = UIButton().then {
+    private let navigationQuestionListButton = UIButton().then {
         $0.setImage(Constants.navigationRecipeImage, for: .normal)
     }
     
@@ -157,7 +157,7 @@ final class CafeRoomViewController: BaseViewController {
         
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(customView: self.navigationMenuButton),
-            UIBarButtonItem(customView: self.navigationRecipeButton)
+            UIBarButtonItem(customView: self.navigationQuestionListButton)
         ]
     }
     
@@ -183,7 +183,8 @@ final class CafeRoomViewController: BaseViewController {
                         return nil
                     }
                     return question
-                }
+                },
+            didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -234,6 +235,10 @@ final class CafeRoomViewController: BaseViewController {
         
         output.showWriteQuestionScene
             .emit(onNext: coordinator.showWriteQuestionScene(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.showCafeQuestionListScene
+            .emit(onNext: coordinator.showCafeQuestionListScene(_:))
             .disposed(by: self.disposeBag)
     }
     
