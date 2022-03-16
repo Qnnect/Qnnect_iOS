@@ -21,8 +21,8 @@ final class ReplyMoreMenuViewModel: ViewModelType {
     
     struct Output {
         let delete: Signal<Void>
-        let modify: Signal<Void>
         let showDeleteAlertView: Signal<Void>
+        let showModifyReplyScene: Signal<(commentId:Int, replyId: Int)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -46,10 +46,13 @@ final class ReplyMoreMenuViewModel: ViewModelType {
                 return Void()
             }
         
+        let showModifyReplyScene = input.didTapModifyButton
+            .withLatestFrom(ids)
+            
         return Output(
             delete: delete.asSignal(onErrorSignalWith: .empty()),
-            modify: .empty(),
-            showDeleteAlertView: showDeleteAlertView.asSignal(onErrorSignalWith: .empty())
+            showDeleteAlertView: showDeleteAlertView.asSignal(onErrorSignalWith: .empty()),
+            showModifyReplyScene: showModifyReplyScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

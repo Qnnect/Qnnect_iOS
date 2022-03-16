@@ -105,9 +105,11 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
         output.delete
             .emit(onNext: coordinator.dismissReplyMoreMenu)
             .disposed(by: self.disposeBag)
+
         
-        output.modify
-            .emit()
+        output.showModifyReplyScene
+            .map { (replyId: $1, commentId: $0)}
+            .emit(onNext: coordinator.showModifyReplyScene)
             .disposed(by: self.disposeBag)
     }
 }

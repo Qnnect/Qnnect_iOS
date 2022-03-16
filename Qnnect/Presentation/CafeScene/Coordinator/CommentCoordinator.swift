@@ -11,6 +11,7 @@ protocol CommentCoordinator: Coordinator {
     func showCommentScene(_ commentId: Int)
     func showCommentMoreMenuBottomSheet(_ commentId: Int)
     func showReplyMoreMenuBottomSheet(replyId: Int, commentId: Int)
+    func showModifyReplyScene(replyId: Int, commentId: Int)
     func dismissCommentMoreMenu()
     func dismissReplyMoreMenu()
 }
@@ -70,6 +71,23 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         self.navigationController.present(view, animated: false, completion: nil)
     }
     
+    func showModifyReplyScene(replyId: Int, commentId: Int) {
+        let commentRepository = DefaultCommentRepository(
+            commentNetworkService: CommentNetworkService(),
+            replyNetworkService: ReplyNetworkService()
+        )
+        let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
+        let viewModel = ModifyReplyViewModel(commentUseCase: commentUseCase)
+        let view = ModifyReplyViewController.create(
+            with: viewModel,
+            self,
+            commentId: commentId,
+            replyId: replyId
+        )
+        dismissReplyMoreMenu()
+        self.navigationController.pushViewController(view, animated: true)
+    }
+    
     func dismissCommentMoreMenu() {
         if let vc = self.navigationController.presentedViewController as? CommentMoreMenuBottomSheet {
             vc.hideBottomSheetAndGoBack {
@@ -81,7 +99,6 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     
     func dismissReplyMoreMenu() {
         if let vc = self.navigationController.presentedViewController as? ReplyMoreMenuBottomSheet {
-            print("dismissReplyMoreMeni")
             vc.hideBottomSheetAndGoBack(nil)
         }
     }
