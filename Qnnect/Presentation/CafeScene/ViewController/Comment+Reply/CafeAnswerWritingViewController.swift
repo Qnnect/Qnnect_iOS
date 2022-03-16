@@ -245,6 +245,10 @@ final class CafeAnswerWritingViewController: BaseViewController {
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
+                .do{
+                    _ in
+                    LoadingIndicator.showLoading()
+                }
                 .map(getImages),
             question: Observable.just(question),
             type: Observable.just(
@@ -271,7 +275,9 @@ final class CafeAnswerWritingViewController: BaseViewController {
         
         //TODO: 화면전환
         output.completion
-            .emit()
+            .emit(onNext: {
+                LoadingIndicator.hideLoading()
+            })
             .disposed(by: self.disposeBag)
         
         //Modify 화면 일 경우
