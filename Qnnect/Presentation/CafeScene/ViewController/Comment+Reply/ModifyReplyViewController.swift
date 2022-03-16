@@ -8,13 +8,14 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class ModifyReplyViewController: BaseViewController {
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
         $0.isEnabled = false
-        $0.setTitleColor(.GRAY04, for: .normal)
+        $0.setTitleColor(.ORANGE01, for: .normal)
     }
     
     private let contentTextView = UITextView().then {
@@ -75,6 +76,7 @@ final class ModifyReplyViewController: BaseViewController {
         contentTextView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(14.0)
         }
+        contentTextView.text = reply.content
         
         navigationItem.titleView = navigationTitleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: completionButton)
@@ -84,5 +86,40 @@ final class ModifyReplyViewController: BaseViewController {
     
     override func bind() {
         super.bind()
+        
+        let input = ModifyReplyViewModel.Input(
+            viewDidLoad: Observable.just(()),
+            reply: Observable.just(reply),
+            commentId: Observable.just(commentId),
+            didTapCompletionButton: completionButton.rx.tap
+                .asObservable(),
+            content: contentTextView.rx.text.orEmpty
+                .asObservable()
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.isEmpty
+            .drive(onNext: setCompletionButton(_:))
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.completion
+            .emit(onNext: coordinator.pop)
+            .disposed(by: self.disposeBag)
+        
+    }
+}
+
+private extension ModifyReplyViewController {
+    func setCompletionButton(_ isEmpty: Bool) {
+        if !isEmpty {
+            completionButton.setTitleColor(.ORANGE01, for: .normal)
+            completionButton.isEnabled = true
+        } else {
+            completionButton.setTitleColor(.GRAY04, for: .normal)
+            completionButton.isEnabled = false
+        }
     }
 }

@@ -325,7 +325,7 @@ private extension CafeAnswerWritingViewController {
     
     func setCompletionButton(_ isCompleted: Bool) {
         if isCompleted {
-            self.navigationCompletionButton.setTitleColor(.GRAY01, for: .normal)
+            self.navigationCompletionButton.setTitleColor(.ORANGE01, for: .normal)
             self.navigationCompletionButton.isEnabled = true
         } else {
             self.navigationCompletionButton.setTitleColor(.GRAY04, for: .normal)

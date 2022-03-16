@@ -14,6 +14,7 @@ protocol CommentCoordinator: Coordinator {
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
     func dismissCommentMoreMenu()
     func dismissReplyMoreMenu()
+    func pop()
 }
 
 final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
@@ -101,6 +102,10 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         if let vc = self.navigationController.presentedViewController as? ReplyMoreMenuBottomSheet {
             vc.hideBottomSheetAndGoBack(nil)
         }
+    }
+    
+    func pop() {
+        navigationController.popViewController(animated: true)
     }
 }
 
