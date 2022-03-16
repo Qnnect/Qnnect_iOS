@@ -45,7 +45,7 @@ final class ModifyReplyViewController: BaseViewController {
     static func create(
         with viewModel: ModifyReplyViewModel,
         _ coordinator: CommentCoordinator,
-        _ reply: Reply,g
+        _ reply: Reply,
         _ commentId: Int
     ) -> ModifyReplyViewController {
         let vc = ModifyReplyViewController()

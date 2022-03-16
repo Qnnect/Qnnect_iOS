@@ -132,7 +132,7 @@ final class ReplyCell: UICollectionViewCell {
         
         dateLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(12.0)
-            make.top.equalTo(contentLabel.snp.bottom).offset(3.0)
+            make.top.equalTo(contentLabel.snp.bottom).offset(3.0).priority(.low)
             make.bottom.equalToSuperview().inset(9.0)
         }
     }
