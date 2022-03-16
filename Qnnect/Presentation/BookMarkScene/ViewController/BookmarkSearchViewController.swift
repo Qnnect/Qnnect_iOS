@@ -16,7 +16,6 @@ final class BookmarkSearchViewController: BaseViewController {
     private let searchBar = UISearchBar().then {
         $0.placeholder = "질문리스트에서 검색"
         $0.searchTextField.font = .IM_Hyemin(.bold, size: 14.0)
-    
     }
     
     private let resultTableView = UITableView(frame: .zero, style: .grouped).then {

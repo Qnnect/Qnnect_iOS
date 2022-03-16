@@ -1,5 +1,5 @@
 //
-//  CafeQuestionListViewModel.swift
+//  SearchCafeQuestionViewModel.swift
 //  Qnnect
 //
 //  Created by 재영신 on 2022/03/16.
@@ -9,24 +9,19 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
-final class CafeQuestionListViewModel: ViewModelType {
+final class SearchCafeQuestionViewModel: ViewModelType {
     
     struct Input {
-        let viewDidLoad: Observable<Void>
         let cafeId: Observable<Int>
+        let searchWord: Observable<String>
         let moreFetch: Observable<Int>
         let didTapQuestionCell: Observable<QuestionShortInfo>
-        let didTapSearchButton: Observable<Void>
     }
     
     struct Output {
-        let questions: Driver<[QuestionShortInfo]>
-        let canLoad: Signal<Bool>
-        ///Int: CafeQuestionId
+        let searchResult: Driver<[QuestionShortInfo]>
         let showCafeAnswerScene: Signal<Int>
-        ///Int: CafeId
-        let showSearchCafeQuestionScene: Signal<Int>
+        let canLoad: Signal<Bool>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -37,29 +32,37 @@ final class CafeQuestionListViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let load = input.viewDidLoad
-            .withLatestFrom(input.cafeId)
-            .map { (cafeId: $0, page: 0, size: Constants.scrapFetchSize) }
-            .flatMap(questionUseCase.fetchCafeQuestions)
+        let load = input.searchWord
+            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .withLatestFrom(input.cafeId, resultSelector: { (searchWork: $0, cafeId: $1)})
+            .map { (cafeId: $1, page: 0,size: Constants.scrapFetchSize, searchWord: $0) }
+            .flatMap(questionUseCase.searchCafeQuestion)
             .compactMap {
                 result -> [QuestionShortInfo]? in
-                guard case let .success(questions) = result else { return nil }
+                guard case let .success(questions) = result else { return nil}
                 return questions
-            }.map { QuestionsFetchAction.load(questions: $0)}
+            }
+            .map { QuestionsFetchAction.load(questions: $0)}
         
         let loadMore = input.moreFetch
             .withLatestFrom(
-                input.cafeId,
-                resultSelector: {(cafeId: $1, page: $0, size: Constants.scrapFetchSize)})
-            .flatMap(questionUseCase.fetchCafeQuestions)
+                Observable.combineLatest(
+                    input.cafeId,
+                    input.searchWord,
+                    resultSelector: { (cafeId: $0, searchWord: $1) }
+                ),resultSelector: { (cafeId: $1.cafeId, page:$0 , searchWork: $1.searchWord)}
+            )
+            .map { (cafeId:$0, page: $1, size: 10, searchWord: $2)}
+            .flatMap(questionUseCase.searchCafeQuestion)
             .compactMap {
                 result -> [QuestionShortInfo]? in
-                guard case let .success(questions) = result else { return nil }
+                guard case let .success(questions) = result else { return nil}
                 return questions
             }
             .map { QuestionsFetchAction.loadMore(questions: $0)}
         
-        let fetchedQuestions = Observable.merge(load, loadMore)
+        let searchResult = Observable.merge(load,loadMore)
             .scan(into: [QuestionShortInfo]()) { questions, action in
                 switch action {
                 case .load(let newQuestions):
@@ -79,15 +82,11 @@ final class CafeQuestionListViewModel: ViewModelType {
         
         let showCafeAnswerScene = input.didTapQuestionCell
             .map { $0.cafeQuestionId }
-            
-        let showSearchCafeQuestionScene = input.didTapSearchButton
-            .withLatestFrom(input.cafeId)
         
         return Output(
-            questions: fetchedQuestions.asDriver(onErrorDriveWith: .empty()),
-            canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
+            searchResult: searchResult.asDriver(onErrorDriveWith: .empty()),
             showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
-            showSearchCafeQuestionScene: showSearchCafeQuestionScene.asSignal(onErrorSignalWith: .empty())
+            canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
