@@ -17,6 +17,8 @@ protocol CafeCoordinator: Coordinator {
     func showCafeAnswerScene(_ questionId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
+    func showQuestionCompletionAlertView()
+    func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType)
     func dismissAlert()
     func dismissDrinkSelectBottomSheet()
     func leaveCafe()
@@ -109,6 +111,28 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
+    func showQuestionCompletionAlertView() {
+        let viewModel = QuestionCompletionAlertViewModel()
+        let view = QuestionCompletionAlertView.create(with: viewModel, self)
+        view.modalPresentationStyle = .overCurrentContext
+        navigationController.present(view, animated: true, completion: nil)
+    }
+    
+    func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType) {
+        if let view = self.navigationController.presentedViewController as? QuestionCompletionAlertView {
+            view.dismiss(animated: true, completion: {
+                [weak self] in
+                switch type {
+                case .goCafe:
+                    self?.navigationController.popViewController(animated: true)
+                case .goMyQuestion:
+                    self?.navigationController.popToRootViewController(animated: false)
+                    //TODO: 내가 보낸질문으로 이동으로 바까야 함
+                    self?.navigationController.tabBarController?.selectedIndex = 3
+                }
+            })
+        }
+    }
    
     func dismissAlert() {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)

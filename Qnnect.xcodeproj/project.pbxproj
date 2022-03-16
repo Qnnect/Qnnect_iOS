@@ -204,6 +204,8 @@
 		AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */; };
 		AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */; };
 		AEB5AB0E27E111890096376B /* DeleteAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB0D27E111890096376B /* DeleteAlertView.swift */; };
+		AEB5AB1A27E1B8130096376B /* QuestionCompletionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB1927E1B8130096376B /* QuestionCompletionAlertView.swift */; };
+		AEB5AB1C27E1B9630096376B /* QuestionCompletionAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5AB1B27E1B9630096376B /* QuestionCompletionAlertViewModel.swift */; };
 		AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */; };
 		AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */; };
 		AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8FCF927C65CB4002BDBCD /* Networkable.swift */; };
@@ -462,6 +464,8 @@
 		AEB5AB0927E0F6060096376B /* QuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCoordinator.swift; sourceTree = "<group>"; };
 		AEB5AB0B27E0F8B50096376B /* CommentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCoordinator.swift; sourceTree = "<group>"; };
 		AEB5AB0D27E111890096376B /* DeleteAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertView.swift; sourceTree = "<group>"; };
+		AEB5AB1927E1B8130096376B /* QuestionCompletionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCompletionAlertView.swift; sourceTree = "<group>"; };
+		AEB5AB1B27E1B9630096376B /* QuestionCompletionAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCompletionAlertViewModel.swift; sourceTree = "<group>"; };
 		AEB8FCEC27C64E69002BDBCD /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		AEB8FCEF27C6575A002BDBCD /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		AEB8FCF927C65CB4002BDBCD /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
@@ -1253,6 +1257,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02D80927D5DA430019D955 /* DrinkSelectGuideAlertView.swift */,
+				AEB5AB1927E1B8130096376B /* QuestionCompletionAlertView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1270,8 +1275,8 @@
 		AEB5AB1227E1B6260096376B /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AEA7265D27DDC93900F48CB8 /* WriteQuestionViewController.swift */,
+				AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */,
 				AE02D81527D62C710019D955 /* CafeInvitationViewController.swift */,
 			);
 			path = Room;
@@ -1280,8 +1285,8 @@
 		AEB5AB1327E1B6400096376B /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
 				AEA7265F27DDDFFF00F48CB8 /* WriteQuestionViewModel.swift */,
+				AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1300,6 +1305,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02D80B27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift */,
+				AEB5AB1B27E1B9630096376B /* QuestionCompletionAlertViewModel.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1700,6 +1706,7 @@
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,
+				AEB5AB1A27E1B8130096376B /* QuestionCompletionAlertView.swift in Sources */,
 				AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */,
 				AEB5AAC927DF37810096376B /* IngredientResponseDTO.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
@@ -1726,6 +1733,7 @@
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
+				AEB5AB1C27E1B9630096376B /* QuestionCompletionAlertViewModel.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
 				AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */,

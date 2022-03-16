@@ -143,9 +143,10 @@ final class WriteQuestionViewController: BaseViewController {
             .drive(onNext: setCompletionButton(_:))
             .disposed(by: self.disposeBag)
         
-        //TODO: 화면전환
+        guard let coordinator = coordinator else { return }
+
         output.completion
-            .emit()
+            .emit(onNext: coordinator.showQuestionCompletionAlertView)
             .disposed(by: self.disposeBag)
     }
 }
