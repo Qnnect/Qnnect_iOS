@@ -13,7 +13,7 @@ enum StoreSectionModel {
 }
 
 enum StoreSectionItem {
-    case IngredientSectionItem(Ingredient: Ingredient)
+    case IngredientSectionItem(ingredient: Ingredient)
 }
 
 extension StoreSectionModel: SectionModelType {

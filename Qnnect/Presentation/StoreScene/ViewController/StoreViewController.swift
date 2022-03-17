@@ -38,10 +38,6 @@ final class StoreViewController: BaseViewController {
         $0.textColor = .BLACK_121212
     }
     
-    private let rightBarButtonView = UIImageView(image: Constants.store_navigation_bar_icon).then {
-        $0.contentMode = .scaleAspectFill
-    }
-    
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         $0.backgroundColor = .p_ivory
         $0.showsVerticalScrollIndicator = false
@@ -95,8 +91,13 @@ final class StoreViewController: BaseViewController {
                 Constants.navigationLeftPadding,
                 UIBarButtonItem(customView: self.navigationTitleView)
             ]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.rightBarButtonView)
-        self.navigationItem.rightBarButtonItem?.tintColor = .BLACK_121212
+       
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.store_navigation_bar_icon,
+            style: .plain,
+            target: self,
+            action: #selector(didTapStorageButton)
+        )
 
         
         self.ingredientCollectionView.snp.makeConstraints { make in
@@ -142,14 +143,15 @@ final class StoreViewController: BaseViewController {
             didTapIngredient: self.ingredientCollectionView.rx.modelSelected(StoreSectionItem.self)
                 .map{ item -> Ingredient in
                     switch item {
-                    case .IngredientSectionItem(Ingredient: let ingredient):
+                    case .IngredientSectionItem(ingredient: let ingredient):
                         return ingredient
                     }
                 }
                 .asObservable(),
             viewDidLoad: Observable.just(()),
             didTapIngredientTag: selectedTag.asObservable(),
-            didTapWholeTag: selectedWholeTag.asObservable()
+            didTapWholeTag: selectedWholeTag.asObservable(),
+            didTapStorageButton: rx.methodInvoked(#selector(didTapStorageButton)).mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -157,7 +159,7 @@ final class StoreViewController: BaseViewController {
         output.ingredients
             .map {
                  ingredients -> [StoreSectionModel] in
-                let items = ingredients.map { StoreSectionItem.IngredientSectionItem(Ingredient: $0)}
+                let items = ingredients.map { StoreSectionItem.IngredientSectionItem(ingredient: $0)}
                 return [StoreSectionModel.IngredientSection(title: "", items: items)]
             }.drive(self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
@@ -167,6 +169,10 @@ final class StoreViewController: BaseViewController {
         output.showIngredientBuyAlert
             .emit(onNext: coordinator.showIngredientBuyAlertView(with:))
             .disposed(by: self.disposeBag)
+        
+        output.showIngredientStorageScene
+            .emit(onNext: coordinator.showIngredientStorageScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -174,12 +180,14 @@ private extension StoreViewController {
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<StoreSectionModel> {
         return RxCollectionViewSectionedReloadDataSource { dataSource, collectionView, indexPath, item in
             switch item {
-            case .IngredientSectionItem(Ingredient: let ingredient):
+            case .IngredientSectionItem(ingredient: let ingredient):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCell.identifier, for: indexPath) as! IngredientCell
                 cell.update(with: ingredient)
                 return cell
             }
         }
     }
+    
+    @objc dynamic func didTapStorageButton() { }
 }
 

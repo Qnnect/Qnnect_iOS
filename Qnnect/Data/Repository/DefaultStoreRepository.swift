@@ -45,4 +45,30 @@ final class DefaultStoreRepository: StoreRepository {
     func buyIngredient(_ ingredientId: Int) -> Observable<Result<Void,Error>> {
         storeNetworkService.buyIngredients(ingredientId)
     }
+    
+    func fetchAllMeIngredient() -> Observable<Result<[MyIngredient], Error>> {
+        storeNetworkService.fetchAllMeIngredient()
+            .map {
+                result -> Result<[MyIngredient],Error> in
+                switch result {
+                case .success(let responseDTOs):
+                    return .success(responseDTOs.map{ $0.toDomain()} )
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
+    
+    func fetchMeIngredients(_ type: IngredientType) -> Observable<Result<[MyIngredient], Error>> {
+        storeNetworkService.fetchMeIngredients(type)
+            .map {
+                result -> Result<[MyIngredient],Error> in
+                switch result {
+                case .success(let responseDTOs):
+                    return .success(responseDTOs.map{ $0.toDomain()} )
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

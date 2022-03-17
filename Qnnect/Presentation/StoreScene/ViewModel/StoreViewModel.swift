@@ -16,11 +16,13 @@ final class StoreViewModel: ViewModelType {
         let viewDidLoad: Observable<Void>
         let didTapIngredientTag: Observable<IngredientType>
         let didTapWholeTag: Observable<Void>
+        let didTapStorageButton: Observable<Void>
     }
     
     struct Output{
         let showIngredientBuyAlert: Signal<Ingredient>
         let ingredients: Driver<[Ingredient]>
+        let showIngredientStorageScene: Signal<Void>
     }
     
     private let storeUseCase: StoreUseCase
@@ -54,7 +56,8 @@ final class StoreViewModel: ViewModelType {
         
         return Output(
             showIngredientBuyAlert: showIngredientBuyAlert.asSignal(onErrorSignalWith: .empty()),
-            ingredients: Observable.merge(fetchedAllIngredient,fetchedIngredients).asDriver(onErrorJustReturn: [])
+            ingredients: Observable.merge(fetchedAllIngredient,fetchedIngredients).asDriver(onErrorJustReturn: []),
+            showIngredientStorageScene: input.didTapStorageButton.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

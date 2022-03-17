@@ -99,7 +99,7 @@ struct Constants {
     static let answer_writing_icon: UIImage? = UIImage(named: "answer_writing_icon")?.withRenderingMode(.alwaysOriginal)
     
     //navigation Bar
-    static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")
+    static let store_navigation_bar_icon: UIImage? = UIImage(named:"store_navigation_bar_icon")?.withRenderingMode(.alwaysOriginal)
     static let backBarButtonImage: UIImage? = UIImage(named:"backBarButtonImage")?.withAlignmentRectInsets(.init(top: -12.0, left: -12.0, bottom: 0.0, right: 0))
     static let xmarkImage: UIImage? = UIImage(named: "X_mark")
     static let leftImageInset: UIEdgeInsets = .init(top: -12.0, left: -12.0, bottom: 0.0, right: 0)

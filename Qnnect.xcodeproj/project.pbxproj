@@ -35,6 +35,9 @@
 		AE02408327E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408227E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift */; };
 		AE02408527E3A19700017F77 /* RecipeIngredientResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408427E3A19700017F77 /* RecipeIngredientResponseDTO.swift */; };
 		AE02408727E3A1D200017F77 /* RecipeIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408627E3A1D200017F77 /* RecipeIngredient.swift */; };
+		AE02408927E3B5E400017F77 /* IngredientStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408827E3B5E400017F77 /* IngredientStorageViewController.swift */; };
+		AE02408B27E3B66300017F77 /* IngredientStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */; };
+		AE02409027E3BF7C00017F77 /* StorageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -335,6 +338,9 @@
 		AE02408227E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDrinkRecipeResponseDTO.swift; sourceTree = "<group>"; };
 		AE02408427E3A19700017F77 /* RecipeIngredientResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientResponseDTO.swift; sourceTree = "<group>"; };
 		AE02408627E3A1D200017F77 /* RecipeIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredient.swift; sourceTree = "<group>"; };
+		AE02408827E3B5E400017F77 /* IngredientStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageViewController.swift; sourceTree = "<group>"; };
+		AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageViewModel.swift; sourceTree = "<group>"; };
+		AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSectionModel.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -650,8 +656,8 @@
 		AE02405527E331C600017F77 /* OurCafe */ = {
 			isa = PBXGroup;
 			children = (
-				AE02405627E331D100017F77 /* OurCafeViewModel.swift */,
 				AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */,
+				AE02405627E331D100017F77 /* OurCafeViewModel.swift */,
 				AE02408027E39D0400017F77 /* RecipeViewModel.swift */,
 			);
 			path = OurCafe;
@@ -1087,6 +1093,7 @@
 			isa = PBXGroup;
 			children = (
 				AE7F483727CC4CCC00954971 /* IngredientBuyAlertViewController.swift */,
+				AE02408827E3B5E400017F77 /* IngredientStorageViewController.swift */,
 				AE6964CA27BCDB2800BF2A80 /* StoreViewController.swift */,
 				AEB5AAE927E090F90096376B /* NotBuyAlertViewController.swift */,
 			);
@@ -1096,6 +1103,7 @@
 		AE6964BC27BCD8F600BF2A80 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */,
 				AE6964CC27BCDB9000BF2A80 /* StoreViewModel.swift */,
 				AE7F483927CC5D3A00954971 /* IngredientBuyAlertViewModel.swift */,
 			);
@@ -1142,6 +1150,7 @@
 				AE6FA49227BDCAE400FA2154 /* IngredientCell.swift */,
 				AEEF363527C3785700D0A127 /* StoreSectionModel.swift */,
 				AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */,
+				AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1976,6 +1985,7 @@
 				AEB5AB1E27E1D4600096376B /* ModifyReplyViewController.swift in Sources */,
 				AEA7266227DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift in Sources */,
 				AEB5AB0E27E111890096376B /* DeleteAlertView.swift in Sources */,
+				AE02409027E3BF7C00017F77 /* StorageSectionModel.swift in Sources */,
 				AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AEB5AB3627E212D00096376B /* SearchCafeQuestionViewController.swift in Sources */,
@@ -2030,6 +2040,7 @@
 				AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */,
 				AE7BAA5427BA9BC700EF2F46 /* TabbarItem.swift in Sources */,
 				AECC132C27BA25A9006866FC /* SetProfileViewModel.swift in Sources */,
+				AE02408B27E3B66300017F77 /* IngredientStorageViewModel.swift in Sources */,
 				AEA14D0427CFB6990009EEC6 /* UserRepository.swift in Sources */,
 				AEA14CF527CF01DD0009EEC6 /* ReissueRequestDTO.swift in Sources */,
 				AEB5AB2627E1F1EF0096376B /* CafeQuestionListViewController.swift in Sources */,
@@ -2052,6 +2063,7 @@
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEB5AAEE27E0A71B0096376B /* LikeAPI.swift in Sources */,
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
+				AE02408927E3B5E400017F77 /* IngredientStorageViewController.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */,

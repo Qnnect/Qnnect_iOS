@@ -36,4 +36,22 @@ final class StoreNetworkService: BaseNetworkService<IngredientAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchAllMeIngredient() -> Observable<Result<[MyIngredientResponseDTO],Error>> {
+        request(.fetchAllMeIngredient)
+            .filter(statusCode: 200)
+            .map([MyIngredientResponseDTO].self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func fetchMeIngredients(_ type: IngredientType) -> Observable<Result<[MyIngredientResponseDTO],Error>> {
+        request(.fetchMeIngredients(type: type))
+            .filter(statusCode: 200)
+            .map([MyIngredientResponseDTO].self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

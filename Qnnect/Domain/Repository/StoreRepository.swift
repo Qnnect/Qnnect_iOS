@@ -12,4 +12,6 @@ protocol StoreRepository: AnyObject {
     func fetchAllIngredient() -> Observable<Result<[Ingredient],Error>>
     func fetchIngredients(_ type: IngredientType) -> Observable<Result<[Ingredient],Error>>
     func buyIngredient(_ ingredientId: Int) -> Observable<Result<Void,Error>>
+    func fetchAllMeIngredient() -> Observable<Result<[MyIngredient],Error>>
+    func fetchMeIngredients(_ type: IngredientType) -> Observable<Result<[MyIngredient],Error>>
 }
