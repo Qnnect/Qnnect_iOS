@@ -99,6 +99,7 @@ final class OurCafeViewController: BaseViewController {
     private let insertIngredientButton = UIButton().then {
         $0.setTitle("재료 넣기", for: .normal)
         $0.setTitleColor(.BLACK_121212, for: .normal)
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.backgroundColor = .p_ivory
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
