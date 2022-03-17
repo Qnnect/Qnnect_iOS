@@ -39,6 +39,9 @@
 		AE02408B27E3B66300017F77 /* IngredientStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */; };
 		AE02409027E3BF7C00017F77 /* StorageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */; };
 		AE02409427E3C56F00017F77 /* StorageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409327E3C56F00017F77 /* StorageCoordinator.swift */; };
+		AE02409627E3D0BA00017F77 /* WrongStepAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */; };
+		AE02409827E3D56400017F77 /* RightStepAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */; };
+		AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -343,6 +346,9 @@
 		AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageViewModel.swift; sourceTree = "<group>"; };
 		AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSectionModel.swift; sourceTree = "<group>"; };
 		AE02409327E3C56F00017F77 /* StorageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCoordinator.swift; sourceTree = "<group>"; };
+		AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongStepAlertView.swift; sourceTree = "<group>"; };
+		AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewController.swift; sourceTree = "<group>"; };
+		AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewModel.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -639,6 +645,7 @@
 		AE02404927E31E7500017F77 /* OutCafe */ = {
 			isa = PBXGroup;
 			children = (
+				AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */,
 				AE02404A27E31F7300017F77 /* OurCafeViewController.swift */,
 				AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */,
 				AE02407E27E39B5B00017F77 /* RecipeViewController.swift */,
@@ -661,6 +668,7 @@
 				AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */,
 				AE02405627E331D100017F77 /* OurCafeViewModel.swift */,
 				AE02408027E39D0400017F77 /* RecipeViewModel.swift */,
+				AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -1017,6 +1025,7 @@
 				AEA14D4F27D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift */,
 				AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */,
 				AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */,
+				AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1898,6 +1907,7 @@
 				AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
 				AEB5AB1C27E1B9630096376B /* QuestionCompletionAlertViewModel.swift in Sources */,
+				AE02409627E3D0BA00017F77 /* WrongStepAlertView.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
 				AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */,
@@ -1944,6 +1954,7 @@
 				AEB5AB2827E1F32A0096376B /* CafeQuestionListCell.swift in Sources */,
 				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,
 				AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */,
+				AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,
 				AE02405027E329F500017F77 /* OurCafeUserCell.swift in Sources */,
@@ -1960,6 +1971,7 @@
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
+				AE02409827E3D56400017F77 /* RightStepAlertViewController.swift in Sources */,
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */,

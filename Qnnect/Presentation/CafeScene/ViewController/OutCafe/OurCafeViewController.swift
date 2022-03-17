@@ -218,7 +218,8 @@ final class OurCafeViewController: BaseViewController {
             cafeUserId: Observable.just(cafeUserId),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
-                .map { $0.cafeUserId},
+                .asObservable()
+                ,
             didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable(),
             didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
         )
@@ -260,11 +261,13 @@ final class OurCafeViewController: BaseViewController {
                 })
             }).disposed(by: self.disposeBag)
         
-        output.iscurrentUser
+        output.isCurrentUser
             .drive(onNext: {
-                [weak self] isCurrentUser in
+                [weak self] isCurrentUser, name in
                 self?.insertIngredientButton.isHidden = !isCurrentUser
+                self?.titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
             }).disposed(by: self.disposeBag)
+        
         
         guard let coordinator = coordinator else { return }
 
@@ -275,6 +278,7 @@ final class OurCafeViewController: BaseViewController {
         output.showStoreScene
             .emit(onNext: coordinator.showStoreScene)
             .disposed(by: self.disposeBag)
+        
     }
 }
 

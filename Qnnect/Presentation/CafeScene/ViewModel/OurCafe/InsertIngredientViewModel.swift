@@ -17,6 +17,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let didTapRecipeButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
         let didTapFullViewButton: Observable<Void>
+        let didTapIngredientCell: Observable<MyIngredient>
     }
     
     struct Output {
@@ -27,6 +28,8 @@ final class InsertIngredientViewModel: ViewModelType {
         let showRecipeScene: Signal<(cafeId: Int, userDrinkSelectedId: Int)>
         let showStoreScene: Signal<Void>
         let showIngredientStorageScene: Signal<Void>
+        let showWrongStepAlertView: Signal<Void>
+        let showRightStepAlertView: Signal<(ingredient: MyIngredient,userDrinkSelectedId: Int)>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -69,6 +72,26 @@ final class InsertIngredientViewModel: ViewModelType {
                 )
             )
         
+        let showRightStepAlertView = input.didTapIngredientCell
+            .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
+            .filter(ourCafeUseCase.isRightIngredientBuy)
+            .map { $0.ingredient }
+            .withLatestFrom(myCafeDrinkWithIngredients.map{ $0.cafeDrink.userDrinkSelectedId },
+                            resultSelector: { (ingredient: $0, userDrinkSelectedId: $1)})
+        
+        let showWrongStepAlertView = input.didTapIngredientCell
+            .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
+            .filter{
+                [weak self] in
+                self?.ourCafeUseCase.isRightIngredientBuy($0, curStep: $1) == false
+            }
+            .mapToVoid()
+        
+        
+        
+          
+            
+        
         return Output(
             ingredients: myCafeDrinkWithIngredients.map { $0.ingredients}.asDriver(onErrorJustReturn: []) ,
             cafeDrink: myCafeDrinkWithIngredients.map { $0.cafeDrink}.asDriver(onErrorDriveWith: .empty()),
@@ -76,7 +99,9 @@ final class InsertIngredientViewModel: ViewModelType {
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showRecipeScene: showRecipeScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
-            showIngredientStorageScene: input.didTapFullViewButton.asSignal(onErrorSignalWith: .empty())
+            showIngredientStorageScene: input.didTapFullViewButton.asSignal(onErrorSignalWith: .empty()),
+            showWrongStepAlertView: showWrongStepAlertView.asSignal(onErrorSignalWith: .empty()),
+            showRightStepAlertView: showRightStepAlertView.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

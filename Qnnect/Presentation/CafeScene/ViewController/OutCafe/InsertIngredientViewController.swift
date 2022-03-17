@@ -70,10 +70,15 @@ final class InsertIngredientViewController: BaseViewController {
     private let emptyLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textColor = .p_brown
+        $0.numberOfLines = 2
         $0.attributedText = NSAttributedString(
             string: "재료가 없습니다\n상점에서 재료를 구매하세요",
             attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
         )
+    }
+    
+    private lazy var wrongStepAlertView = WrongStepAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
     }
     
     weak var coordinator: OurCafeCoordinator?
@@ -110,7 +115,8 @@ final class InsertIngredientViewController: BaseViewController {
             stepLabelStackView,
             ingredientStorageLabel,
             fullViewButton,
-            ingredientCollectionView
+            ingredientCollectionView,
+            emptyView
         ].forEach {
             view.addSubview($0)
         }
@@ -169,6 +175,12 @@ final class InsertIngredientViewController: BaseViewController {
             make.center.equalToSuperview()
         }
         
+        emptyView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20.0)
+            make.bottom.equalToSuperview().inset(57.0)
+            make.top.equalTo(ingredientStorageLabel.snp.bottom).offset(15.0)
+        }
+        
         navigationItem.titleView = navigationTitleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Constants.navi_store,
@@ -196,18 +208,23 @@ final class InsertIngredientViewController: BaseViewController {
             cafeId: Observable.just(cafeId),
             didTapRecipeButton: viewRecipeButton.rx.tap.asObservable(),
             didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid(),
-            didTapFullViewButton: fullViewButton.rx.tap.asObservable()
+            didTapFullViewButton: fullViewButton.rx.tap.asObservable(),
+            didTapIngredientCell: ingredientCollectionView.rx.modelSelected(MyIngredient.self)
+                .asObservable()
         )
         
         let output = viewModel.transform(from: input)
         
+       
         output.ingredients
             .do {
                 [weak self] ingredients in
                 if ingredients.isEmpty {
-                    self?.ingredientCollectionView.backgroundView = self?.emptyView
+                    self?.ingredientCollectionView.isHidden = true
+                    self?.emptyView.isHidden = false
                 } else {
-                    self?.ingredientCollectionView.backgroundView = nil
+                    self?.ingredientCollectionView.isHidden = false
+                    self?.emptyView.isHidden = true
                 }
             }
             .drive(ingredientCollectionView.rx.items(
@@ -252,6 +269,17 @@ final class InsertIngredientViewController: BaseViewController {
         
         output.showIngredientStorageScene
             .emit(onNext: coordinator.showIngredientStorageScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showWrongStepAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.navigationController?.present(self.wrongStepAlertView, animated: true)
+            }).disposed(by: self.disposeBag)
+        
+        output.showRightStepAlertView
+            .emit(onNext: coordinator.showRightStepAlertView)
             .disposed(by: self.disposeBag)
     }
 }
@@ -302,4 +330,5 @@ private extension InsertIngredientViewController {
     }
     
     @objc dynamic func didTapStoreButton() { }
+    
 }

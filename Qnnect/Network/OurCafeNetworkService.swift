@@ -37,4 +37,12 @@ final class OurCafeNetworkService: BaseNetworkService<OurCafeAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {
+        request(.insertIngredient(userDrinkSelectedId: userDrinkSelectedId, ingredientsId: ingredientsId))
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

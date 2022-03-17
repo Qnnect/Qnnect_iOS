@@ -15,15 +15,14 @@ final class OurCafeViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let cafeUserId: Observable<Int>
         let viewWillAppear: Observable<Void>
-        /// Int: CafeUserId
-        let didTapOurCafeUserCell: Observable<Int>
+        let didTapOurCafeUserCell: Observable<OurCafeUser>
         let didTapInsertIngredientButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
     }
     
     struct Output {
         let userInfos: Driver<[OurCafeUser]>
-        let iscurrentUser: Driver<Bool>
+        let isCurrentUser: Driver<(Bool, String)>
         let curStep: Driver<DrinkStep>
         let drinkState: Driver<[(target: Int, filled: Int)]>
         ///Int: CafeId
@@ -49,6 +48,7 @@ final class OurCafeViewModel: ViewModelType {
                     )
                 ),
             input.didTapOurCafeUserCell
+                .map { $0.cafeUserId }
                 .withLatestFrom(input.cafeId, resultSelector: {(cafeId: $1, cafeUserId: $0)})
                 .share()
             )
@@ -78,7 +78,12 @@ final class OurCafeViewModel: ViewModelType {
         
         return Output(
             userInfos: ourCafe.map { $0.cafeUsers}.asDriver(onErrorJustReturn: []),
-            iscurrentUser: ourCafe.map { $0.currentUser }.asDriver(onErrorDriveWith: .empty()),
+            isCurrentUser: ourCafe.map { $0.currentUser }
+                                            .withLatestFrom(
+                                                input.didTapOurCafeUserCell.map {$0.nickName}
+                                                ,resultSelector: { ($0,$1)}
+                                                )
+                                            .asDriver(onErrorDriveWith: .empty()),
             curStep: curStep.asDriver(onErrorJustReturn: .ice),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),

@@ -13,6 +13,8 @@ protocol OurCafeUseCase: AnyObject {
     func getCurStep(_ drink: CafeDrink) -> DrinkStep
     func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
     func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>>
+    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> Bool
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultOurCafeUseCase: OurCafeUseCase {
@@ -48,4 +50,28 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
         return DrinkStep.ice
     }
     
+    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> Bool {
+        switch ingredient.type {
+        case .ice_base:
+            if ingredient.name == "얼음" , curStep == .ice {
+                return true
+            }
+            if ingredient.name != "얼음" , curStep == .base {
+                return true
+            }
+        case .main:
+            if curStep == .main {
+                return true
+            }
+        case .topping:
+            if curStep == .topping {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {
+        ourCafeRepository.insertIngredient(userDrinkSelectedId, ingredientsId)
+    }
 }

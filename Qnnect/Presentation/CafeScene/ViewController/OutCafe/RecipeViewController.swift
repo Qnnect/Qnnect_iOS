@@ -170,7 +170,7 @@ final class RecipeViewController: BaseViewController {
                         paragraphStyle.lineHeightMultiple = 1.23
                         paragraphStyle.alignment = .center
                         $0.attributedText = NSAttributedString(
-                            string: "\(ingredient.name)\nx\(ingredients.count)",
+                            string: "\(ingredient.name)\nx\(ingredient.count)",
                             attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle]
                         )
                     }
