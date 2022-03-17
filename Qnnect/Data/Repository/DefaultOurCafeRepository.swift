@@ -41,4 +41,18 @@ final class DefaultOurCafeRepository: OurCafeRepository {
                 }
             }
     }
+    
+    func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>> {
+        let request = RecipeFetchRequestDTO(cafeId: cafeId)
+        return ourCafeNetworkService.fetchRecipe(userDrinkSelectedId, request)
+            .map {
+                result -> Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

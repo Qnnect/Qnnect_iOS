@@ -10,6 +10,7 @@ import UIKit
 protocol OurCafeCoordinator: Coordinator {
     func start(cafeId: Int, cafeUserId: Int)
     func showInsertIngredientScene(_ cafeId: Int)
+    func showRecipeScene(cafeId: Int, userDrinkSelectedId: Int)
 }
 
 final class DefaultOurCafeCoordinator: OurCafeCoordinator {
@@ -45,6 +46,19 @@ final class DefaultOurCafeCoordinator: OurCafeCoordinator {
             with: viewModel,
             self,
             cafeId
+        )
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showRecipeScene(cafeId: Int, userDrinkSelectedId: Int) {
+        let ourCafeRepository = DefaultOurCafeRepository(ourCafeNetworkService: OurCafeNetworkService())
+        let ourCafeUseCase = DefaultOurCafeUseCase(ourCafeRepository: ourCafeRepository)
+        let viewModel = RecipeViewModel(ourCafeUseCase: ourCafeUseCase)
+        let vc = RecipeViewController.create(
+            with: viewModel,
+            self,
+            cafeId: cafeId,
+            userDrinkSelectedId: userDrinkSelectedId
         )
         navigationController.pushViewController(vc, animated: true)
     }

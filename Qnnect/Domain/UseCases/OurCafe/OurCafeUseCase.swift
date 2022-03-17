@@ -12,6 +12,7 @@ protocol OurCafeUseCase: AnyObject {
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe, Error>>
     func getCurStep(_ drink: CafeDrink) -> DrinkStep
     func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
+    func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>>
 }
 
 final class DefaultOurCafeUseCase: OurCafeUseCase {
@@ -30,6 +31,10 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
         ourCafeRepository.fetchMyCafeDrink(cafeId)
     }
     
+    func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>> {
+        ourCafeRepository.fetchRecipe(userDrinkSelectedId, cafeId)
+    }
+    
     func getCurStep(_ drink: CafeDrink) -> DrinkStep  {
         if drink.topping == drink.toppingFilled {
             return DrinkStep.completed
@@ -42,4 +47,5 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
         }
         return DrinkStep.ice
     }
+    
 }

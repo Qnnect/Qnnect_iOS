@@ -88,7 +88,7 @@ final class OurCafeViewController: BaseViewController {
     }
     
     private let progressBar = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.image = Constants.drinkProgressBar_step_0
     }
     

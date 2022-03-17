@@ -20,7 +20,7 @@ final class InsertIngredientViewController: BaseViewController {
     }
     
     private let progressBar = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
     }
     
     private let stepLabelStackView = UIStackView().then {
@@ -88,6 +88,7 @@ final class InsertIngredientViewController: BaseViewController {
         let vc = InsertIngredientViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -97,14 +98,6 @@ final class InsertIngredientViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        let cellWidth = UIScreen.main.bounds.width / 2.0 - (16.0 * 2)
-//        let layout = UICollectionViewFlowLayout()
-//        layout.estimatedItemSize = CGSize(width: cellWidth, height: cellWidth)
-//        layout.scrollDirection = .horizontal
-//        ingredientCollectionView.collectionViewLayout = layout
-        
-
     }
     
     override func configureUI() {
@@ -125,7 +118,7 @@ final class InsertIngredientViewController: BaseViewController {
         emptyView.addSubview(emptyLabel)
         
         viewRecipeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(27.0)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(27.0)
             make.trailing.equalToSuperview().inset(21.0)
             make.width.equalTo(100.0)
             make.height.equalTo(36.0)
@@ -133,7 +126,7 @@ final class InsertIngredientViewController: BaseViewController {
         
         drinkImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(130.0)
-            make.centerY.equalToSuperview().multipliedBy(0.48)
+            make.centerY.equalToSuperview().multipliedBy(0.68)
         }
         
         progressBar.snp.makeConstraints { make in
@@ -195,7 +188,8 @@ final class InsertIngredientViewController: BaseViewController {
         
         let input = InsertIngredientViewModel.Input(
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
-            cafeId: Observable.just(cafeId)
+            cafeId: Observable.just(cafeId),
+            didTapRecipeButton: viewRecipeButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -238,6 +232,12 @@ final class InsertIngredientViewController: BaseViewController {
                                 """
                 })
             }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.showRecipeScene
+            .emit(onNext: coordinator.showRecipeScene)
+            .disposed(by: self.disposeBag)
         
     }
 }

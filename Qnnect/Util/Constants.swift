@@ -115,7 +115,7 @@ struct Constants {
     static let drinkProgressBar_step_1: UIImage? = UIImage(named: "drinkProgressBar_step_1")
     static let drinkProgressBar_step_2: UIImage? = UIImage(named: "drinkProgressBar_step_2")
     static let drinkProgressBar_step_3: UIImage? = UIImage(named: "drinkProgressBar_step_3")
-    
+    static let drinkRecipeProgressBar: UIImage? = UIImage(named: "drinkRecipeProgressBar")
     // MARK: -  Drinks
     static let emptyDrink: UIImage? = UIImage(named: "emptyDrink")
     //딸기라떼

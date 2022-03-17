@@ -30,6 +30,11 @@
 		AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407827E383C500017F77 /* IngredientStorageCell.swift */; };
 		AE02407B27E3872900017F77 /* MyIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407A27E3872900017F77 /* MyIngredient.swift */; };
 		AE02407D27E3888C00017F77 /* MyIngredientResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */; };
+		AE02407F27E39B5B00017F77 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407E27E39B5B00017F77 /* RecipeViewController.swift */; };
+		AE02408127E39D0400017F77 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408027E39D0400017F77 /* RecipeViewModel.swift */; };
+		AE02408327E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408227E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift */; };
+		AE02408527E3A19700017F77 /* RecipeIngredientResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408427E3A19700017F77 /* RecipeIngredientResponseDTO.swift */; };
+		AE02408727E3A1D200017F77 /* RecipeIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408627E3A1D200017F77 /* RecipeIngredient.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -325,6 +330,11 @@
 		AE02407827E383C500017F77 /* IngredientStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageCell.swift; sourceTree = "<group>"; };
 		AE02407A27E3872900017F77 /* MyIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIngredient.swift; sourceTree = "<group>"; };
 		AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIngredientResponseDTO.swift; sourceTree = "<group>"; };
+		AE02407E27E39B5B00017F77 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		AE02408027E39D0400017F77 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
+		AE02408227E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDrinkRecipeResponseDTO.swift; sourceTree = "<group>"; };
+		AE02408427E3A19700017F77 /* RecipeIngredientResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientResponseDTO.swift; sourceTree = "<group>"; };
+		AE02408627E3A1D200017F77 /* RecipeIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredient.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -623,6 +633,7 @@
 			children = (
 				AE02404A27E31F7300017F77 /* OurCafeViewController.swift */,
 				AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */,
+				AE02407E27E39B5B00017F77 /* RecipeViewController.swift */,
 			);
 			path = OutCafe;
 			sourceTree = "<group>";
@@ -641,6 +652,7 @@
 			children = (
 				AE02405627E331D100017F77 /* OurCafeViewModel.swift */,
 				AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */,
+				AE02408027E39D0400017F77 /* RecipeViewModel.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -652,6 +664,7 @@
 				AE02405C27E3387D00017F77 /* OurCafeUserResponseDTO.swift */,
 				AE02406527E33D7A00017F77 /* RecipeFetchRequestDTO.swift */,
 				AE02407627E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift */,
+				AE02408227E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -795,6 +808,7 @@
 				AE02405E27E339B300017F77 /* CafeDrink.swift */,
 				AE02406027E33A8C00017F77 /* OurCafe.swift */,
 				AE02407A27E3872900017F77 /* MyIngredient.swift */,
+				AE02408627E3A1D200017F77 /* RecipeIngredient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1352,6 +1366,7 @@
 			children = (
 				AEB5AAC827DF37810096376B /* IngredientResponseDTO.swift */,
 				AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */,
+				AE02408427E3A19700017F77 /* RecipeIngredientResponseDTO.swift */,
 			);
 			path = Ingredient;
 			sourceTree = "<group>";
@@ -1843,10 +1858,12 @@
 				AEB5AB2A27E1F9690096376B /* CafeQuestionListViewModel.swift in Sources */,
 				AEEF362A27C326BD00D0A127 /* MyPageItemCell.swift in Sources */,
 				AEB5AB2427E1EA030096376B /* ModifyQuestionViewModel.swift in Sources */,
+				AE02408527E3A19700017F77 /* RecipeIngredientResponseDTO.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
 				AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */,
 				AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */,
 				AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */,
+				AE02408727E3A1D200017F77 /* RecipeIngredient.swift in Sources */,
 				AEA56B0227BF380B0029A6CB /* MyCafeCell.swift in Sources */,
 				AEB8FCED27C64E69002BDBCD /* AuthAPI.swift in Sources */,
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
@@ -1893,6 +1910,8 @@
 				AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */,
 				AE02405427E3316200017F77 /* OurCafeCoordinator.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
+				AE02407F27E39B5B00017F77 /* RecipeViewController.swift in Sources */,
+				AE02408327E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift in Sources */,
 				AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
@@ -1947,6 +1966,7 @@
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */,
+				AE02408127E39D0400017F77 /* RecipeViewModel.swift in Sources */,
 				AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */,
 				AE77C86227DB6C4E00E8D0EC /* CafeTag.swift in Sources */,
 				AE6964CB27BCDB2800BF2A80 /* StoreViewController.swift in Sources */,
