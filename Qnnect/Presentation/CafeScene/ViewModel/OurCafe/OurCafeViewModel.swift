@@ -15,6 +15,8 @@ final class OurCafeViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let cafeUserId: Observable<Int>
         let viewWillAppear: Observable<Void>
+        /// Int: CafeUserId
+        let didTapOurCafeUserCell: Observable<Int>
     }
     
     struct Output {
@@ -32,19 +34,25 @@ final class OurCafeViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let ourCafe = input.viewWillAppear
-            .withLatestFrom(
-                Observable.combineLatest(
-                    input.cafeId,
-                    input.cafeUserId,
-                    resultSelector: {(cafeId: $0, cafeUserId: $1)}
-                )
+        let ourCafe = Observable.merge(
+            input.viewWillAppear
+                .withLatestFrom(
+                    Observable.combineLatest(
+                        input.cafeId,
+                        input.cafeUserId,
+                        resultSelector: {(cafeId: $0, cafeUserId: $1)}
+                    )
+                ),
+            input.didTapOurCafeUserCell
+                .withLatestFrom(input.cafeId, resultSelector: {(cafeId: $1, cafeUserId: $0)})
+                .share()
             )
             .flatMap(ourCafeUseCase.fetchOurCafe)
             .compactMap { result -> OurCafe? in
                 guard case let .success(ourCafe) = result else { return nil }
                 return ourCafe
             }.share()
+        
         
         let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .map(ourCafeUseCase.getCurStep(_:))

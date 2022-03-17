@@ -23,6 +23,7 @@
 		AE02406A27E33FF900017F77 /* OurCafeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02406927E33FF900017F77 /* OurCafeRepository.swift */; };
 		AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */; };
 		AE02406F27E3408F00017F77 /* OurCafeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02406E27E3408F00017F77 /* OurCafeUseCase.swift */; };
+		AE02407127E369EC00017F77 /* Rx+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407027E369EC00017F77 /* Rx+UICollectionView.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -311,6 +312,7 @@
 		AE02406927E33FF900017F77 /* OurCafeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCafeRepository.swift; sourceTree = "<group>"; };
 		AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOurCafeRepository.swift; sourceTree = "<group>"; };
 		AE02406E27E3408F00017F77 /* OurCafeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCafeUseCase.swift; sourceTree = "<group>"; };
+		AE02407027E369EC00017F77 /* Rx+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UICollectionView.swift"; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -1509,6 +1511,7 @@
 				AECC133227BA35DA006866FC /* Rx+UILabel.swift */,
 				AE6FA49627BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift */,
 				AEB5AAF427E0B14B0096376B /* Rx+UIImageView.swift */,
+				AE02407027E369EC00017F77 /* Rx+UICollectionView.swift */,
 			);
 			path = "Rx+";
 			sourceTree = "<group>";
@@ -1884,6 +1887,7 @@
 				AEA7265C27DDB22400F48CB8 /* UITextField+.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AE02405F27E339B300017F77 /* CafeDrink.swift in Sources */,
+				AE02407127E369EC00017F77 /* Rx+UICollectionView.swift in Sources */,
 				AE02D82927D767B80019D955 /* CafeAnswerWritingCell.swift in Sources */,
 				AEB5AB2827E1F32A0096376B /* CafeQuestionListCell.swift in Sources */,
 				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,

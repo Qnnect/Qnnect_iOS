@@ -36,11 +36,6 @@ final class OurCafeUserCell: UICollectionViewCell {
         configureUI()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-    }
-    
     private func configureUI() {
         
         [
@@ -70,5 +65,10 @@ final class OurCafeUserCell: UICollectionViewCell {
                 self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height / 2.0
             }
         nameLabel.text = user.nickName
+    }
+    
+    func setSelectionStyle(_ isChecked: Bool) {
+        contentView.layer.borderColor = isChecked ? UIColor.black.cgColor : UIColor.clear.cgColor
+        contentView.layer.borderWidth = isChecked ? 1.0 : 0.0
     }
 }

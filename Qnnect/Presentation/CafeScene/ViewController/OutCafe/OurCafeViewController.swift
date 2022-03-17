@@ -171,18 +171,18 @@ final class OurCafeViewController: BaseViewController {
         }
         
         drinkImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(80.0)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(progressBar.snp.top).offset(-30.0)
+            make.leading.trailing.equalToSuperview().inset(130.0)
         }
         
         progressBar.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(50.0)
-            make.top.equalTo(drinkImageView.snp.bottom).offset(36.0)
+            make.bottom.equalTo(stepLabelStackView.snp.top).offset(-8.0)
         }
         
         stepLabelStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(progressBar)
-            make.top.equalTo(progressBar.snp.bottom).offset(8.0)
+            make.bottom.equalTo(insertIngredientButton.snp.top).offset(-78.0)
         }
         
         insertIngredientButton.snp.makeConstraints { make in
@@ -210,7 +210,9 @@ final class OurCafeViewController: BaseViewController {
         let input = OurCafeViewModel.Input(
             cafeId: Observable.just(cafeId),
             cafeUserId: Observable.just(cafeUserId),
-            viewWillAppear: rx.viewWillAppear.mapToVoid()
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
+            didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
+                .map { $0.cafeUserId}
         )
         
         let output = viewModel.transform(from: input)
@@ -226,6 +228,7 @@ final class OurCafeViewController: BaseViewController {
             cell.update(with: model)
         }.disposed(by: self.disposeBag)
         
+
         output.curStep
             .debug()
             .drive(onNext: {
@@ -249,6 +252,11 @@ final class OurCafeViewController: BaseViewController {
                 })
             }).disposed(by: self.disposeBag)
         
+        output.iscurrentUser
+            .drive(onNext: {
+                [weak self] isCurrentUser in
+                self?.insertIngredientButton.isHidden = !isCurrentUser
+            }).disposed(by: self.disposeBag)
     }
 }
 

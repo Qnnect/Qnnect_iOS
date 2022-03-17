@@ -75,7 +75,10 @@ final class CafeRoomViewController: BaseViewController {
                 forElementKind: UICollectionView.elementKindSectionFooter,
                 at: IndexPath(row: 0, section: 2)) as? PageControlFooterView
             else { return }
-            view.pageControl.currentPage = self.todayQuestionCurPage
+          
+            if view.pageControl.numberOfPages > 0 {
+                view.pageControl.currentPage = self.todayQuestionCurPage
+            }
         }
     }
     
@@ -86,8 +89,9 @@ final class CafeRoomViewController: BaseViewController {
                 at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
             else { return }
             
-            view.pageControl.currentPage = self.groupDrinksCurPage
-            
+            if view.pageControl.numberOfPages > 0 {
+                view.pageControl.currentPage = self.todayQuestionCurPage
+            }
         }
     }
     
