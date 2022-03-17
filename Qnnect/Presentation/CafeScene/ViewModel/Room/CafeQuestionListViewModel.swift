@@ -24,7 +24,7 @@ final class CafeQuestionListViewModel: ViewModelType {
         let questions: Driver<[QuestionShortInfo]>
         let canLoad: Signal<Bool>
         ///Int: CafeQuestionId
-        let showCafeAnswerScene: Signal<Int>
+        let showCafeQuestionScene: Signal<Int>
         ///Int: CafeId
         let showSearchCafeQuestionScene: Signal<Int>
     }
@@ -77,7 +77,7 @@ final class CafeQuestionListViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
         
-        let showCafeAnswerScene = input.didTapQuestionCell
+        let showCafeQuestionScene = input.didTapQuestionCell
             .map { $0.cafeQuestionId }
             
         let showSearchCafeQuestionScene = input.didTapSearchButton
@@ -86,7 +86,7 @@ final class CafeQuestionListViewModel: ViewModelType {
         return Output(
             questions: fetchedQuestions.asDriver(onErrorDriveWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showSearchCafeQuestionScene: showSearchCafeQuestionScene.asSignal(onErrorSignalWith: .empty())
         )
     }

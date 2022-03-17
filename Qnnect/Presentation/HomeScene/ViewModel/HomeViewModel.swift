@@ -26,7 +26,8 @@ final class HomeViewModel: ViewModelType {
         let showCafeRoom: Signal<(Int, Bool)>
         let homeInfo: Driver<HomeInfo>
         let showJoinCafeBottomSheet: Signal<Void>
-        let showCafeAnswerScene: Signal<Int>
+        ///Int: QuestionId
+        let showCafeQuestionScene: Signal<Int>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -56,7 +57,7 @@ final class HomeViewModel: ViewModelType {
         let showJoinCafeBottomSheet = input.didTapJoinCafeButton
 
         
-        let showCafeAnswerScene = input.didTapTodayQuestion
+        let showCafeQuestionScene = input.didTapTodayQuestion
             .map {$0.cafeQuestionId}
         
         return Output(
@@ -65,7 +66,7 @@ final class HomeViewModel: ViewModelType {
             showCafeRoom: showCafeRoom.asSignal(onErrorSignalWith: .empty()),
             homeInfo: homeInfo.asDriver(onErrorDriveWith: .empty()),
             showJoinCafeBottomSheet: showJoinCafeBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty())
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

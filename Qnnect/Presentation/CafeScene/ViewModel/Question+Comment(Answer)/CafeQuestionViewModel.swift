@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class CafeAnswerViewModel: ViewModelType {
+final class CafeQuestionViewModel: ViewModelType {
     
     struct Input {
         let didTapAnswerWritingCell: Observable<Void>
@@ -26,7 +26,7 @@ final class CafeAnswerViewModel: ViewModelType {
     }
     
     struct Output {
-        let showAnswerWritingScene: Signal<(Question,User)>
+        let showWriteCommentScene: Signal<(Question,User)>
         let scrap: Signal<Void>
         let cancleScrap: Signal<Void>
         let comments: Driver<[Comment]>
@@ -79,7 +79,7 @@ final class CafeAnswerViewModel: ViewModelType {
         let scraped = fetchedQuestionWithComments.map { $0.scraped }
         let currentUserComment = fetchedQuestionWithComments.map { $0.currentUserComment }
         
-        let showAnswerWritingScene = input.didTapAnswerWritingCell
+        let showWriteCommentScene = input.didTapAnswerWritingCell
             .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))
         
         
@@ -133,7 +133,7 @@ final class CafeAnswerViewModel: ViewModelType {
             .withLatestFrom(fetchedQuestionWithComments.map { $0.question} )
         
         return Output(
-            showAnswerWritingScene: showAnswerWritingScene.asSignal(onErrorSignalWith: .empty()),
+            showWriteCommentScene: showWriteCommentScene.asSignal(onErrorSignalWith: .empty()),
             scrap: Observable.merge(
                 scrap,
                 scraped.filter{ $0 }.mapToVoid()

@@ -33,7 +33,7 @@ final class CafeRoomViewModel: ViewModelType {
         ///Int: CafeId
         let showSettingBottomSheet: Signal<Int>
         ///Int: QuestionId
-        let showQuestionAnswerScene: Signal<Int>
+        let showCafeQuestionScene: Signal<Int>
         ///Int: CafeId
         let showWriteQuestionScene: Signal<Int>
         ///Int: CafeId
@@ -87,7 +87,7 @@ final class CafeRoomViewModel: ViewModelType {
             .withLatestFrom(input.cafeId)
             
         
-        let showQuestionAnswerScene = input.didTapQuestionCell
+        let showCafeQuestionScene = input.didTapQuestionCell
             .map { $0.id }
         
         let showWriteQuestionScene = input.didTapQuestionButton
@@ -101,7 +101,7 @@ final class CafeRoomViewModel: ViewModelType {
             showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty()),
             showDrinkSelectBottomSheet: showDrinkSelectBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showSettingBottomSheet: showSettingBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            showQuestionAnswerScene: showQuestionAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showWriteQuestionScene: showWriteQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionListScene: showCafeQuestionListScene.asSignal(onErrorSignalWith: .empty())
         )

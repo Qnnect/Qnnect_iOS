@@ -14,7 +14,7 @@ enum WriteCommentType {
     case modify
 }
 
-final class CafeAnswerWritingViewModel: ViewModelType {
+final class WriteCommentViewModel: ViewModelType {
     
     struct Input {
         let content: Observable<String>

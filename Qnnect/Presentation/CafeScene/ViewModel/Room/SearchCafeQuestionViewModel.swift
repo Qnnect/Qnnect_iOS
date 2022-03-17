@@ -20,7 +20,8 @@ final class SearchCafeQuestionViewModel: ViewModelType {
     
     struct Output {
         let searchResult: Driver<[QuestionShortInfo]>
-        let showCafeAnswerScene: Signal<Int>
+        ///Int: QuestionId
+        let showCafeQuestionScene: Signal<Int>
         let canLoad: Signal<Bool>
     }
     
@@ -80,12 +81,12 @@ final class SearchCafeQuestionViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
         
-        let showCafeAnswerScene = input.didTapQuestionCell
+        let showCafeQuestionScene = input.didTapQuestionCell
             .map { $0.cafeQuestionId }
         
         return Output(
             searchResult: searchResult.asDriver(onErrorDriveWith: .empty()),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
         )
     }

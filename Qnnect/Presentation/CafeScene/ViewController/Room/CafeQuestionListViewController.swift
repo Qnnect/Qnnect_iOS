@@ -105,8 +105,8 @@ final class CafeQuestionListViewController: BaseViewController {
         
         guard let coordinator = coordinator else { return }
         
-        output.showCafeAnswerScene
-            .emit(onNext: coordinator.showCafeAnswerScene(_:))
+        output.showCafeQuestionScene
+            .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
         
         output.showSearchCafeQuestionScene

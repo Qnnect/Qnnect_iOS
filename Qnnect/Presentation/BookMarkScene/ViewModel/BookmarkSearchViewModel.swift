@@ -19,7 +19,8 @@ final class BookmarkSearchViewModel: ViewModelType {
     
     struct Output {
         let searchResult: Driver<[QuestionShortInfo]>
-        let showCafeAnswerScene: Signal<Int>
+        ///Int: QuestionId
+        let showCafeQuestionScene: Signal<Int>
         let canLoad: Signal<Bool>
     }
     
@@ -72,12 +73,12 @@ final class BookmarkSearchViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
         
-        let showCafeAnswerScene = input.didTapQuestion
+        let showCafeQuestionScene = input.didTapQuestion
             
         
         return Output(
             searchResult: searchResult.asDriver(onErrorJustReturn: []),
-            showCafeAnswerScene: showCafeAnswerScene.asSignal(onErrorSignalWith: .empty()),
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
         )
     }

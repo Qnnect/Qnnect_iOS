@@ -13,15 +13,15 @@ protocol CommentCoordinator: Coordinator {
     func showCommentMoreMenuBottomSheet(_ question: Question, _ comment: Comment)
     func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment)
+    func showWriteCommentScene(_ question: Question, _ user: User?, _ comment: Comment)
     func dismissCommentMoreMenu(_ type: CommentMoreMenuItem)
     func dismissReplyMoreMenu()
     func pop()
 }
 
 extension CommentCoordinator {
-    func showCafeAnswerWritingScene(_ question: Question, _ comment: Comment) {
-        showCafeAnswerWritingScene(question, nil, comment)
+    func showWriteCommentScene(_ question: Question, _ comment: Comment) {
+        showWriteCommentScene(question, nil, comment)
     }
 }
 
@@ -103,7 +103,7 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         self.navigationController.pushViewController(view, animated: true)
     }
     
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User?, _ comment: Comment) {
+    func showWriteCommentScene(_ question: Question, _ user: User?, _ comment: Comment) {
         dismissCommentMoreMenu(.modify)
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
         coordinator.start(question, user, comment)

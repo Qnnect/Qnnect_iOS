@@ -226,8 +226,8 @@ final class HomeViewController: BaseViewController {
             .emit(onNext: coordinator.showJoinCafeBottomSheet)
             .disposed(by: self.disposeBag)
         
-        output.showCafeAnswerScene
-            .emit(onNext: coordinator.showCafeAnswerScene(_:))
+        output.showCafeQuestionScene
+            .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
     }
 }

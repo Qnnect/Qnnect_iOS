@@ -8,16 +8,16 @@
 import UIKit
 
 protocol QuestionCoordinator: Coordinator {
-    func showCafeAnswerScene(_ questionId: Int)
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ comment: Comment?)
+    func showCafeQuestionScene(_ questionId: Int)
+    func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?)
     func showCommentScene(_ commentId: Int, _ question: Question)
     func showModifyQuestionScene(_  question: Question)
     func pop()
 }
 
 extension QuestionCoordinator {
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User) {
-        showCafeAnswerWritingScene(question, user, nil)
+    func showWriteCommentScene(_ question: Question, _ user: User) {
+        showWriteCommentScene(question, user, nil)
     }
 }
 
@@ -34,7 +34,7 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
     
     func start() { }
     
-    func showCafeAnswerScene(_ questionId: Int) {
+    func showCafeQuestionScene(_ questionId: Int) {
         let questionRepository = DefaultQuestionRepository(
             scrapNetworkService: ScrapNetworkService(),
             questionNetworkService: QuestionNetworkService(),
@@ -46,11 +46,11 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
             localStorage: DefaultUserDefaultManager()
         )
         let userUseCase = DefaultUserUseCase(userRepository: userRepository)
-        let viewModel = CafeAnswerViewModel(
+        let viewModel = CafeQuestionViewModel(
             questionUseCase: questionUseCase,
             userUseCase: userUseCase
         )
-        let vc = CafeAnswerViewController.create(
+        let vc = CafeQuestionViewController.create(
             with: viewModel,
             questionId,
             self
@@ -58,7 +58,7 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerWritingScene(_ question: Question, _ user: User, _ comment: Comment?) {
+    func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?) {
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
         coordinator.start(question, user, comment)
         coordinator.parentCoordinator = self
@@ -109,7 +109,7 @@ extension DefaultQuestionCoordinator: UINavigationControllerDelegate {
             childDidFinish(vc.coordinator)
         }
         
-        if let vc = fromViewController as? CafeAnswerWritingViewController {
+        if let vc = fromViewController as? WriteCommentViewController {
             childDidFinish(vc.coordinator)
         }
     }

@@ -29,8 +29,8 @@ final class DefaultWriteCommentCoordinator: WriteCommentCoordinator {
             replyNetworkService: ReplyNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
-        let viewModel = CafeAnswerWritingViewModel(commentUseCase: commentUseCase)
-        let vc = CafeAnswerWritingViewController.create(
+        let viewModel = WriteCommentViewModel(commentUseCase: commentUseCase)
+        let vc = WriteCommentViewController.create(
             with: question,
             user,
             viewModel,

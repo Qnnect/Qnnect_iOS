@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxDataSources
 
-final class CafeAnswerViewController: BaseViewController {
+final class CafeQuestionViewController: BaseViewController {
     
     private let mainTableView = UITableView().then {
         $0.backgroundColor = .p_ivory
@@ -43,15 +43,15 @@ final class CafeAnswerViewController: BaseViewController {
     }
     
     private var questionId: Int!
-    private var viewModel: CafeAnswerViewModel!
+    private var viewModel: CafeQuestionViewModel!
     weak var coordinator: QuestionCoordinator?
     
     static func create(
-        with viewModel: CafeAnswerViewModel,
+        with viewModel: CafeQuestionViewModel,
         _ questionId: Int,
         _ coordinator: QuestionCoordinator
-    ) -> CafeAnswerViewController {
-        let vc = CafeAnswerViewController()
+    ) -> CafeQuestionViewController {
+        let vc = CafeQuestionViewController()
         vc.viewModel = viewModel
         vc.questionId = questionId
         vc.coordinator = coordinator
@@ -96,7 +96,7 @@ final class CafeAnswerViewController: BaseViewController {
         
         dataSource.decideViewTransition = { (_, _, _)  in return RxDataSources.ViewTransition.reload }
         
-        let input = CafeAnswerViewModel.Input(
+        let input = CafeQuestionViewModel.Input(
             didTapAnswerWritingCell: self.mainTableView.rx.modelSelected(CafeAnswerSectionItem.self)
                 .filter {
                     if case CafeAnswerSectionItem.answerWritingSectionItem(_) = $0 {
@@ -193,8 +193,8 @@ final class CafeAnswerViewController: BaseViewController {
         
         guard let coordinator = coordinator else { return }
 
-        output.showAnswerWritingScene
-            .emit(onNext: coordinator.showCafeAnswerWritingScene)
+        output.showWriteCommentScene
+            .emit(onNext: coordinator.showWriteCommentScene)
             .disposed(by: self.disposeBag)
         
         output.showCommentScene
@@ -211,7 +211,7 @@ final class CafeAnswerViewController: BaseViewController {
     }
 }
 
-extension CafeAnswerViewController: UITableViewDelegate {
+extension CafeQuestionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 180.0
@@ -220,7 +220,7 @@ extension CafeAnswerViewController: UITableViewDelegate {
     }
 }
 
-private extension CafeAnswerViewController {
+private extension CafeQuestionViewController {
     func createDataSource() -> RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
         return RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
             datasource, tableView, indexPath, item in
@@ -265,6 +265,6 @@ private extension CafeAnswerViewController {
     }
 }
 
-extension CafeAnswerViewController: QuestionCellButtonDelegate {
+extension CafeQuestionViewController: QuestionCellButtonDelegate {
     func questionCellButton(didTap kind: String) { }
 }

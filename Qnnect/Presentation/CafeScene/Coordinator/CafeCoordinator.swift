@@ -14,7 +14,7 @@ protocol CafeCoordinator: Coordinator {
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafeId: Int)
     func showInvitationScene()
-    func showCafeAnswerScene(_ questionId: Int)
+    func showCafeQuestionScene(_ questionId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
     func showQuestionCompletionAlertView()
@@ -83,9 +83,9 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showCafeAnswerScene(_ questionId: Int) {
+    func showCafeQuestionScene(_ questionId: Int) {
         let coordinator = DefaultQuestionCoordinator(navigationController: navigationController)
-        coordinator.showCafeAnswerScene(questionId)
+        coordinator.showCafeQuestionScene(questionId)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
     }
@@ -206,7 +206,7 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
         }
 
         // child coordinator 가 일을 끝냈다고 알림.
-        if let vc = fromViewController as? CafeAnswerViewController {
+        if let vc = fromViewController as? CafeQuestionViewController {
             childDidFinish(vc.coordinator)
             if let presentedVC = navigationController.viewControllers.last {
                 presentedVC.tabBarController?.tabBar.isHidden = false

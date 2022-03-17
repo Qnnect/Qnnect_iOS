@@ -149,8 +149,8 @@ final class CafeAnswerQuestionCell: UITableViewCell {
     }
     
     private func setQuestionButtons(_ isWriter: Bool) {
-        self.deleteButton.isHidden = isWriter
-        self.modifyButton.isHidden = isWriter
+        self.deleteButton.isHidden = !isWriter
+        self.modifyButton.isHidden = !isWriter
     }
     
     @objc func didTapButton(sender: UIButton) {

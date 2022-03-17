@@ -113,7 +113,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
             .disposed(by: self.disposeBag)
         
         output.showWriteCommentScene
-            .emit(onNext: coordinator.showCafeAnswerWritingScene)
+            .emit(onNext: coordinator.showWriteCommentScene)
             .disposed(by: self.disposeBag)
         
     }

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import PhotosUI
 
-final class CafeAnswerWritingViewController: BaseViewController {
+final class WriteCommentViewController: BaseViewController {
     
     private let questionView = UIView().then {
         $0.layer.cornerRadius = 16.0
@@ -107,18 +107,18 @@ final class CafeAnswerWritingViewController: BaseViewController {
     private var question: Question!
     //private var cafeId: Int!
     private var user: User?
-    private var viewModel: CafeAnswerWritingViewModel!
+    private var viewModel: WriteCommentViewModel!
     weak var coordinator: WriteCommentCoordinator?
     private var comment: Comment?
     
     static func create(
         with question: Question,
         _ user: User?,
-        _ viewModel: CafeAnswerWritingViewModel,
+        _ viewModel: WriteCommentViewModel,
         _ coordinator: WriteCommentCoordinator,
         _ comment: Comment? = nil
-    ) -> CafeAnswerWritingViewController {
-        let vc = CafeAnswerWritingViewController()
+    ) -> WriteCommentViewController {
+        let vc = WriteCommentViewController()
         vc.question = question
         vc.user = user
         vc.viewModel = viewModel
@@ -240,7 +240,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
     override func bind() {
         
         
-        let input = CafeAnswerWritingViewModel.Input(
+        let input = WriteCommentViewModel.Input(
             content: self.inputTextView.rx.text.orEmpty
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
@@ -302,7 +302,7 @@ final class CafeAnswerWritingViewController: BaseViewController {
     }
 }
 
-extension CafeAnswerWritingViewController: UITextViewDelegate {
+extension WriteCommentViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .GRAY04 {
             textView.text = nil
@@ -326,7 +326,7 @@ extension CafeAnswerWritingViewController: UITextViewDelegate {
 }
 
 // MARK: - UICollectionView DataSource
-extension CafeAnswerWritingViewController : UICollectionViewDataSource{
+extension WriteCommentViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageDatas.count
     }
@@ -346,7 +346,7 @@ extension CafeAnswerWritingViewController : UICollectionViewDataSource{
     }
 }
 
-private extension CafeAnswerWritingViewController {
+private extension WriteCommentViewController {
     @objc func bottomBarMoveUp(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
@@ -413,7 +413,7 @@ private extension CafeAnswerWritingViewController {
     }
 }
 
-extension CafeAnswerWritingViewController: AttachingImageCellDelegate {
+extension WriteCommentViewController: AttachingImageCellDelegate {
     func attachingImageCell(didTap cell: UICollectionViewCell) {
         guard let indexPath = self.attachingImageCollectionView.indexPath(for: cell) else { return }
         
