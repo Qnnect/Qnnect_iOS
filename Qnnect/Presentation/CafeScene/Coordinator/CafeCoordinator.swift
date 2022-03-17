@@ -20,6 +20,7 @@ protocol CafeCoordinator: Coordinator {
     func showQuestionCompletionAlertView()
     func showCafeQuestionListScene(_ cafeId: Int)
     func showSearchCafeQuestionScene(_ cafeId: Int)
+    func showOurCafeScene(cafeId:Int, cafeUserId: Int)
     func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType)
     func dismissAlert()
     func dismissDrinkSelectBottomSheet()
@@ -152,6 +153,13 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func showOurCafeScene(cafeId: Int, cafeUserId: Int) {
+        let coordinator = DefaultOurCafeCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start(cafeId: cafeId, cafeUserId: cafeUserId)
+    }
+    
     func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType) {
         if let view = self.navigationController.presentedViewController as? QuestionCompletionAlertView {
             view.dismiss(animated: true, completion: {
@@ -207,6 +215,13 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
 
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? CafeQuestionViewController {
+            childDidFinish(vc.coordinator)
+            if let presentedVC = navigationController.viewControllers.last {
+                presentedVC.tabBarController?.tabBar.isHidden = false
+            }
+        }
+        
+        if let vc = fromViewController as? OurCafeViewController {
             childDidFinish(vc.coordinator)
             if let presentedVC = navigationController.viewControllers.last {
                 presentedVC.tabBarController?.tabBar.isHidden = false

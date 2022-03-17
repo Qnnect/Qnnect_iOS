@@ -184,7 +184,10 @@ final class CafeRoomViewController: BaseViewController {
                     }
                     return question
                 },
-            didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable()
+            didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable(),
+            didTapDrinkSection: mainCollectionView.rx.itemSelected
+                .filter { $0.section == 1 }
+                .mapToVoid()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -239,6 +242,10 @@ final class CafeRoomViewController: BaseViewController {
         
         output.showCafeQuestionListScene
             .emit(onNext: coordinator.showCafeQuestionListScene(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.showOurCafeScene
+            .emit(onNext: coordinator.showOurCafeScene)
             .disposed(by: self.disposeBag)
     }
     

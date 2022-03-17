@@ -22,6 +22,10 @@ struct CafeUserResponseDTO: Decodable {
 
 struct DrinkIngredientsFilledResponseDTO: Decodable {
     let ingredientName: String
+    
+    func toDomain() -> String {
+        ingredientName
+    }
 }
 
 

@@ -22,6 +22,7 @@ final class CafeRoomViewModel: ViewModelType {
         let didTapNavigationMenu: Observable<Void>
         let didTapQuestionCell: Observable<Question>
         let didTapQuestionListButton: Observable<Void>
+        let didTapDrinkSection: Observable<Void>
     }
     
     struct Output {
@@ -38,6 +39,7 @@ final class CafeRoomViewModel: ViewModelType {
         let showWriteQuestionScene: Signal<Int>
         ///Int: CafeId
         let showCafeQuestionListScene: Signal<Int>
+        let showOurCafeScene: Signal<(cafeId: Int, cafeUserId: Int)>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -96,6 +98,10 @@ final class CafeRoomViewModel: ViewModelType {
         let showCafeQuestionListScene = input.didTapQuestionListButton
             .withLatestFrom(input.cafeId)
         
+        let showOurCafeScene = input.didTapDrinkSection
+            .withLatestFrom(roomInfo)
+            .map { (cafeId: $0.cafeId, cafeUserId: $0.cafeUserId) }
+        
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
             showDrinkSelectGuideAlertView: showDrinkSelectGuideAlertView.asSignal(onErrorSignalWith: .empty()),
@@ -103,7 +109,8 @@ final class CafeRoomViewModel: ViewModelType {
             showSettingBottomSheet: showSettingBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showWriteQuestionScene: showWriteQuestionScene.asSignal(onErrorSignalWith: .empty()),
-            showCafeQuestionListScene: showCafeQuestionListScene.asSignal(onErrorSignalWith: .empty())
+            showCafeQuestionListScene: showCafeQuestionListScene.asSignal(onErrorSignalWith: .empty()),
+            showOurCafeScene: showOurCafeScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

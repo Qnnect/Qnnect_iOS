@@ -8,6 +8,8 @@
 import Foundation
 
 struct CafeResponseDTO: Decodable {
+    let cafeId: Int
+    let cafeUserId: Int
     let cafeQuestionResponseList: [QuestionResponseDTO]
     let cafeUserResponseList: [CafeUserResponseDTO]
     let code: String
@@ -24,7 +26,9 @@ struct CafeResponseDTO: Decodable {
             createdAt: self.createdAt,
             currentUser: self.currentUserResponse.toDomain(),
             diaryColor: self.diaryColor,
-            title: self.title
+            title: self.title,
+            cafeId: cafeId,
+            cafeUserId: cafeUserId
         )
     }
 }

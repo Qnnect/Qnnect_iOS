@@ -110,6 +110,20 @@ struct Constants {
         $0.lineBreakStrategy = .hangulWordPriority
     }
     
+    //DrinkProgressBar
+    static let drinkProgressBar_step_0: UIImage? = UIImage(named: "drinkProgressBar_step_0")
+    static let drinkProgressBar_step_1: UIImage? = UIImage(named: "drinkProgressBar_step_1")
+    static let drinkProgressBar_step_2: UIImage? = UIImage(named: "drinkProgressBar_step_2")
+    static let drinkProgressBar_step_3: UIImage? = UIImage(named: "drinkProgressBar_step_3")
+    
+    // MARK: -  Drinks
+    static let emptyDrink: UIImage? = UIImage(named: "emptyDrink")
+    //딸기라떼
+    static let strawberryLatte_step_0: UIImage? = UIImage(named: "딸기라떼_step_0")
+    static let strawberryLatte_step_1: UIImage? = UIImage(named: "딸기라떼_step_1")
+    static let strawberryLatte_step_2: UIImage? = UIImage(named: "딸기라떼_step_2")
+    static let strawberryLatte_step_3: UIImage? = UIImage(named: "딸기라떼_step_3")
+    
     // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
         $0.width = 18.0

@@ -11,6 +11,7 @@ import RxSwift
 protocol DrinkUseCase: AnyObject {
     func fetchDrinks() -> Observable<Result<[Drink],Error>>
     func selectDrink(_ cafeId: Int, _ drinkId: Int) -> Observable<Result<Void,Error>>
+    
 }
 
 final class DefaultDrinkUseCase: DrinkUseCase {

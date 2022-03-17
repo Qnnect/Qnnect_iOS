@@ -15,6 +15,8 @@ struct Cafe {
     let currentUser: CafeUser
     let diaryColor: DiaryColorType
     let title:String
+    let cafeId: Int
+    let cafeUserId: Int
 }
 
 struct CafeUser {

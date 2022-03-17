@@ -168,7 +168,7 @@ final class EditProfileViewController: BaseViewController {
         let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
         let imageManager = PHImageManager()
         let scale = UIScreen.main.scale
-        let imageSize = CGSize(width: 108 * scale, height: 108 * scale)
+        let imageSize = CGSize(width: 300 * scale, height: 300 * scale)
         let options = PHImageRequestOptions()
         options.deliveryMode = .opportunistic
         options.resizeMode = .none
