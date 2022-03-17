@@ -192,6 +192,12 @@ final class OurCafeViewController: BaseViewController {
         }
         
         navigationItem.titleView = navigationTitleLabel
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.navi_store,
+            style: .plain,
+            target: self,
+            action: #selector(didTapStoreButton)
+        )
     }
     
     override func bind() {
@@ -213,7 +219,8 @@ final class OurCafeViewController: BaseViewController {
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
                 .map { $0.cafeUserId},
-            didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable()
+            didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable(),
+            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
         )
         
         let output = viewModel.transform(from: input)
@@ -264,6 +271,10 @@ final class OurCafeViewController: BaseViewController {
         output.showInsertIngredientScene
             .emit(onNext: coordinator.showInsertIngredientScene(_:))
             .disposed(by: self.disposeBag)
+        
+        output.showStoreScene
+            .emit(onNext: coordinator.showStoreScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -313,4 +324,6 @@ private extension OurCafeViewController {
             label.textColor = index == curStep.rawValue ? .ORANGE01 : .BLACK_121212
         }
     }
+    
+    @objc dynamic func didTapStoreButton() { }
 }

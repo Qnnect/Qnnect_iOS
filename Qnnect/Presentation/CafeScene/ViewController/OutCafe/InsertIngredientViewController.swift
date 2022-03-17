@@ -170,7 +170,12 @@ final class InsertIngredientViewController: BaseViewController {
         }
         
         navigationItem.titleView = navigationTitleLabel
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.navi_store,
+            style: .plain,
+            target: self,
+            action: #selector(didTapStoreButton)
+        )
     }
     
     override func bind() {
@@ -189,7 +194,8 @@ final class InsertIngredientViewController: BaseViewController {
         let input = InsertIngredientViewModel.Input(
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             cafeId: Observable.just(cafeId),
-            didTapRecipeButton: viewRecipeButton.rx.tap.asObservable()
+            didTapRecipeButton: viewRecipeButton.rx.tap.asObservable(),
+            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
         )
         
         let output = viewModel.transform(from: input)
@@ -239,6 +245,9 @@ final class InsertIngredientViewController: BaseViewController {
             .emit(onNext: coordinator.showRecipeScene)
             .disposed(by: self.disposeBag)
         
+        output.showStoreScene
+            .emit(onNext: coordinator.showStoreScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -286,4 +295,6 @@ private extension InsertIngredientViewController {
         
         return section
     }
+    
+    @objc dynamic func didTapStoreButton() { }
 }

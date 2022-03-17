@@ -11,9 +11,10 @@ protocol OurCafeCoordinator: Coordinator {
     func start(cafeId: Int, cafeUserId: Int)
     func showInsertIngredientScene(_ cafeId: Int)
     func showRecipeScene(cafeId: Int, userDrinkSelectedId: Int)
+    func showStoreScene()
 }
 
-final class DefaultOurCafeCoordinator: OurCafeCoordinator {
+final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
@@ -61,5 +62,31 @@ final class DefaultOurCafeCoordinator: OurCafeCoordinator {
             userDrinkSelectedId: userDrinkSelectedId
         )
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showStoreScene() {
+        let coordinator = DefaultStoreCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+}
+
+extension DefaultOurCafeCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+           return
+        }
+
+        // child coordinator 가 일을 끝냈다고 알림.
+        if let vc = fromViewController as? StoreViewController {
+            childDidFinish(vc.coordinator)
+        }
+      
     }
 }

@@ -38,6 +38,8 @@ final class StoreViewController: BaseViewController {
         $0.textColor = .BLACK_121212
     }
     
+    private let navigationTitleLabel = NavigationTitleLabel(title: "상점")
+    
     private let ingredientCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         $0.backgroundColor = .p_ivory
         $0.showsVerticalScrollIndicator = false
@@ -85,12 +87,15 @@ final class StoreViewController: BaseViewController {
         
         self.view.backgroundColor = .p_ivory
         
-        
-        self.navigationItem.leftBarButtonItems =
-            [
-                Constants.navigationLeftPadding,
-                UIBarButtonItem(customView: self.navigationTitleView)
-            ]
+        if navigationController?.viewControllers.count == 1 {
+            self.navigationItem.leftBarButtonItems =
+                [
+                    Constants.navigationLeftPadding,
+                    UIBarButtonItem(customView: self.navigationTitleView)
+                ]
+        } else  {
+            self.navigationItem.titleView = navigationTitleLabel
+        }
        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Constants.store_navigation_bar_icon,

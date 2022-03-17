@@ -127,6 +127,12 @@ final class RecipeViewController: BaseViewController {
             make.leading.trailing.equalTo(stepLabelStackView)
         }
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.navi_store,
+            style: .plain,
+            target: self,
+            action: #selector(didTapStoreButton)
+        )
     }
     
     override func bind() {
@@ -135,7 +141,8 @@ final class RecipeViewController: BaseViewController {
         let input = RecipeViewModel.Input(
             viewDidLoad: Observable.just(()),
             cafeId: Observable.just(cafeId),
-            userDrinkSelectedId: Observable.just(userDrinkSelectedId)
+            userDrinkSelectedId: Observable.just(userDrinkSelectedId),
+            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
         )
         
         let output = viewModel.transform(from: input)
@@ -172,10 +179,14 @@ final class RecipeViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
-     
-        
+        guard let coordinator = coordinator else { return }
+
+        output.showStoreScene
+            .emit(onNext: coordinator.showStoreScene)
+            .disposed(by: self.disposeBag)
     }
     
+    @objc dynamic func didTapStoreButton() { }
 }
 
 

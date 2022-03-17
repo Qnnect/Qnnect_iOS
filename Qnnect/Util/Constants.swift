@@ -109,6 +109,7 @@ struct Constants {
         $0.lineHeightMultiple = 1.17
         $0.lineBreakStrategy = .hangulWordPriority
     }
+    static let navi_store: UIImage? = UIImage(named: "navi_store")?.withRenderingMode(.alwaysOriginal)
     
     //DrinkProgressBar
     static let drinkProgressBar_step_0: UIImage? = UIImage(named: "drinkProgressBar_step_0")
