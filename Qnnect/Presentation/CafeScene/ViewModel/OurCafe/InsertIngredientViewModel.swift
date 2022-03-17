@@ -16,6 +16,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let didTapRecipeButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
+        let didTapFullViewButton: Observable<Void>
     }
     
     struct Output {
@@ -25,6 +26,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let drinkState: Driver<[(target: Int, filled: Int)]>
         let showRecipeScene: Signal<(cafeId: Int, userDrinkSelectedId: Int)>
         let showStoreScene: Signal<Void>
+        let showIngredientStorageScene: Signal<Void>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -73,7 +75,8 @@ final class InsertIngredientViewModel: ViewModelType {
             curStep: curStep.asDriver(onErrorJustReturn: .ice),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showRecipeScene: showRecipeScene.asSignal(onErrorSignalWith: .empty()),
-            showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty())
+            showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
+            showIngredientStorageScene: input.didTapFullViewButton.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

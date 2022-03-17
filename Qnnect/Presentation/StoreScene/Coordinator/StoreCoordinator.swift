@@ -15,7 +15,7 @@ protocol StoreCoordinator: Coordinator {
     func dismissIngredientBuyAlertView()
 }
 
-final class DefaultStoreCoordinator: StoreCoordinator {
+final class DefaultStoreCoordinator: NSObject, StoreCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -53,15 +53,33 @@ final class DefaultStoreCoordinator: StoreCoordinator {
     }
     
     func showIngredientStorageScene() {
-        let storeRepository = DefaultStoreRepository(storeNetworkService: StoreNetworkService())
-        let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
-        let viewModel = IngredientStorageViewModel(storeUseCase: storeUseCase)
-        let vc = IngredientStorageViewController.create(with: viewModel, self)
-        navigationController.pushViewController(vc, animated: true)
+        let coordianator = DefaultStorageCoordinator(navigationController: navigationController)
+        coordianator.parentCoordinator = self
+        childCoordinators.append(coordianator)
+        coordianator.start()
     }
     func dismissIngredientBuyAlertView() {
         if let vc =  self.navigationController.presentedViewController as? IngredientBuyAlertViewController {
             vc.dismiss(animated: true, completion: nil)
         }
+    }
+}
+
+extension DefaultStoreCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+           return
+        }
+
+        // child coordinator 가 일을 끝냈다고 알림.
+        if let vc = fromViewController as? IngredientStorageViewController {
+            childDidFinish(vc.coordinator)
+        }
+      
     }
 }

@@ -38,6 +38,7 @@
 		AE02408927E3B5E400017F77 /* IngredientStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408827E3B5E400017F77 /* IngredientStorageViewController.swift */; };
 		AE02408B27E3B66300017F77 /* IngredientStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */; };
 		AE02409027E3BF7C00017F77 /* StorageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */; };
+		AE02409427E3C56F00017F77 /* StorageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409327E3C56F00017F77 /* StorageCoordinator.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -341,6 +342,7 @@
 		AE02408827E3B5E400017F77 /* IngredientStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageViewController.swift; sourceTree = "<group>"; };
 		AE02408A27E3B66300017F77 /* IngredientStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageViewModel.swift; sourceTree = "<group>"; };
 		AE02408F27E3BF7C00017F77 /* StorageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSectionModel.swift; sourceTree = "<group>"; };
+		AE02409327E3C56F00017F77 /* StorageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCoordinator.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -1114,6 +1116,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6964CE27BCDBBD00BF2A80 /* StoreCoordinator.swift */,
+				AE02409327E3C56F00017F77 /* StorageCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1854,6 +1857,7 @@
 				AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AE02404B27E31F7300017F77 /* OurCafeViewController.swift in Sources */,
+				AE02409427E3C56F00017F77 /* StorageCoordinator.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
 				AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */,

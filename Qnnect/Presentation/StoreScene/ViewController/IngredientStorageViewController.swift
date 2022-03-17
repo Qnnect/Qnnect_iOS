@@ -31,11 +31,11 @@ final class IngredientStorageViewController: BaseViewController {
     }
     
     private var viewModel: IngredientStorageViewModel!
-    weak var coordinator: StoreCoordinator?
+    weak var coordinator: StorageCoordinator?
     
     static func create(
         with viewModel: IngredientStorageViewModel,
-        _ coordinator: StoreCoordinator
+        _ coordinator: StorageCoordinator
     ) -> IngredientStorageViewController {
         let vc = IngredientStorageViewController()
         vc.viewModel = viewModel
@@ -67,6 +67,8 @@ final class IngredientStorageViewController: BaseViewController {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
+        
+        navigationItem.titleView = navigationTitleLabel
     }
     
     override func bind() {

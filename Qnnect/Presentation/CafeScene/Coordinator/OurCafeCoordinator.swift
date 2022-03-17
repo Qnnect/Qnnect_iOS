@@ -11,6 +11,7 @@ protocol OurCafeCoordinator: Coordinator {
     func start(cafeId: Int, cafeUserId: Int)
     func showInsertIngredientScene(_ cafeId: Int)
     func showRecipeScene(cafeId: Int, userDrinkSelectedId: Int)
+    func showIngredientStorageScene()
     func showStoreScene()
 }
 
@@ -70,6 +71,13 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
+    func showIngredientStorageScene() {
+        let coordinator = DefaultStorageCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }
 
 extension DefaultOurCafeCoordinator: UINavigationControllerDelegate {
@@ -87,6 +95,8 @@ extension DefaultOurCafeCoordinator: UINavigationControllerDelegate {
         if let vc = fromViewController as? StoreViewController {
             childDidFinish(vc.coordinator)
         }
-      
+        if let vc = fromViewController as? IngredientStorageViewController {
+            childDidFinish(vc.coordinator)
+        }
     }
 }

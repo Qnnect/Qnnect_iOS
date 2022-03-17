@@ -195,7 +195,8 @@ final class InsertIngredientViewController: BaseViewController {
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             cafeId: Observable.just(cafeId),
             didTapRecipeButton: viewRecipeButton.rx.tap.asObservable(),
-            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
+            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid(),
+            didTapFullViewButton: fullViewButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -247,6 +248,10 @@ final class InsertIngredientViewController: BaseViewController {
         
         output.showStoreScene
             .emit(onNext: coordinator.showStoreScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showIngredientStorageScene
+            .emit(onNext: coordinator.showIngredientStorageScene)
             .disposed(by: self.disposeBag)
     }
 }
