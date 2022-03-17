@@ -11,6 +11,7 @@ import RxSwift
 protocol OurCafeUseCase: AnyObject {
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe, Error>>
     func getCurStep(_ drink: CafeDrink) -> DrinkStep
+    func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
 }
 
 final class DefaultOurCafeUseCase: OurCafeUseCase {
@@ -23,6 +24,10 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
     
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe, Error>> {
         ourCafeRepository.fetchOurCafe(cafeId: cafeId, cafeUserId: cafeUserId)
+    }
+    
+    func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>> {
+        ourCafeRepository.fetchMyCafeDrink(cafeId)
     }
     
     func getCurStep(_ drink: CafeDrink) -> DrinkStep  {

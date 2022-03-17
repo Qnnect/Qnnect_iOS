@@ -9,6 +9,7 @@ import UIKit
 
 protocol OurCafeCoordinator: Coordinator {
     func start(cafeId: Int, cafeUserId: Int)
+    func showInsertIngredientScene(_ cafeId: Int)
 }
 
 final class DefaultOurCafeCoordinator: OurCafeCoordinator {
@@ -34,5 +35,17 @@ final class DefaultOurCafeCoordinator: OurCafeCoordinator {
         )
         navigationController.pushViewController(vc, animated: true)
         navigationController.tabBarController?.tabBar.isHidden = true
+    }
+    
+    func showInsertIngredientScene(_ cafeId: Int) {
+        let ourCafeRepository = DefaultOurCafeRepository(ourCafeNetworkService: OurCafeNetworkService())
+        let ourCafeUseCase = DefaultOurCafeUseCase(ourCafeRepository: ourCafeRepository)
+        let viewModel = InsertIngredientViewModel(ourCafeUseCase: ourCafeUseCase)
+        let vc = InsertIngredientViewController.create(
+            with: viewModel,
+            self,
+            cafeId
+        )
+        navigationController.pushViewController(vc, animated: true)
     }
 }

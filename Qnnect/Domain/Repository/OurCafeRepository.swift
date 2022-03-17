@@ -9,5 +9,6 @@ import Foundation
 import RxSwift
 
 protocol OurCafeRepository: AnyObject {
-    func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe,Error>> 
+    func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe,Error>>
+    func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]),Error>>
 }

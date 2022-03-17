@@ -212,7 +212,8 @@ final class OurCafeViewController: BaseViewController {
             cafeUserId: Observable.just(cafeUserId),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
-                .map { $0.cafeUserId}
+                .map { $0.cafeUserId},
+            didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -257,6 +258,12 @@ final class OurCafeViewController: BaseViewController {
                 [weak self] isCurrentUser in
                 self?.insertIngredientButton.isHidden = !isCurrentUser
             }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.showInsertIngredientScene
+            .emit(onNext: coordinator.showInsertIngredientScene(_:))
+            .disposed(by: self.disposeBag)
     }
 }
 

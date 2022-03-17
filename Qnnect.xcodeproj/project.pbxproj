@@ -24,6 +24,12 @@
 		AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */; };
 		AE02406F27E3408F00017F77 /* OurCafeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02406E27E3408F00017F77 /* OurCafeUseCase.swift */; };
 		AE02407127E369EC00017F77 /* Rx+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407027E369EC00017F77 /* Rx+UICollectionView.swift */; };
+		AE02407327E37A7B00017F77 /* InsertIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */; };
+		AE02407527E37C9C00017F77 /* InsertIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */; };
+		AE02407727E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407627E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift */; };
+		AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407827E383C500017F77 /* IngredientStorageCell.swift */; };
+		AE02407B27E3872900017F77 /* MyIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407A27E3872900017F77 /* MyIngredient.swift */; };
+		AE02407D27E3888C00017F77 /* MyIngredientResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -313,6 +319,12 @@
 		AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOurCafeRepository.swift; sourceTree = "<group>"; };
 		AE02406E27E3408F00017F77 /* OurCafeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCafeUseCase.swift; sourceTree = "<group>"; };
 		AE02407027E369EC00017F77 /* Rx+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+UICollectionView.swift"; sourceTree = "<group>"; };
+		AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertIngredientViewController.swift; sourceTree = "<group>"; };
+		AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertIngredientViewModel.swift; sourceTree = "<group>"; };
+		AE02407627E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeDrinkFetchResponseDTO.swift; sourceTree = "<group>"; };
+		AE02407827E383C500017F77 /* IngredientStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStorageCell.swift; sourceTree = "<group>"; };
+		AE02407A27E3872900017F77 /* MyIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIngredient.swift; sourceTree = "<group>"; };
+		AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIngredientResponseDTO.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -610,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02404A27E31F7300017F77 /* OurCafeViewController.swift */,
+				AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */,
 			);
 			path = OutCafe;
 			sourceTree = "<group>";
@@ -618,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02404F27E329F500017F77 /* OurCafeUserCell.swift */,
+				AE02407827E383C500017F77 /* IngredientStorageCell.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -626,6 +640,7 @@
 			isa = PBXGroup;
 			children = (
 				AE02405627E331D100017F77 /* OurCafeViewModel.swift */,
+				AE02407427E37C9C00017F77 /* InsertIngredientViewModel.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -636,6 +651,7 @@
 				AE02405A27E3384200017F77 /* OurCafeFetchResponseDTO.swift */,
 				AE02405C27E3387D00017F77 /* OurCafeUserResponseDTO.swift */,
 				AE02406527E33D7A00017F77 /* RecipeFetchRequestDTO.swift */,
+				AE02407627E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift */,
 			);
 			path = OurCafe;
 			sourceTree = "<group>";
@@ -778,6 +794,7 @@
 				AE02405127E32CAB00017F77 /* OurCafeUser.swift */,
 				AE02405E27E339B300017F77 /* CafeDrink.swift */,
 				AE02406027E33A8C00017F77 /* OurCafe.swift */,
+				AE02407A27E3872900017F77 /* MyIngredient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1334,6 +1351,7 @@
 			isa = PBXGroup;
 			children = (
 				AEB5AAC827DF37810096376B /* IngredientResponseDTO.swift */,
+				AE02407C27E3888C00017F77 /* MyIngredientResponseDTO.swift */,
 			);
 			path = Ingredient;
 			sourceTree = "<group>";
@@ -1834,6 +1852,7 @@
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
 				AEA14D3A27D476D30009EEC6 /* CafeAPI.swift in Sources */,
 				AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */,
+				AE02407B27E3872900017F77 /* MyIngredient.swift in Sources */,
 				AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */,
 				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AE02D82127D75C0D0019D955 /* CafeQuestionViewController.swift in Sources */,
@@ -1842,6 +1861,7 @@
 				AEBC9EBF27C5C3930070399A /* BottomSheetViewController.swift in Sources */,
 				AE02406A27E33FF900017F77 /* OurCafeRepository.swift in Sources */,
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
+				AE02407727E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
@@ -1911,6 +1931,7 @@
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */,
+				AE02407D27E3888C00017F77 /* MyIngredientResponseDTO.swift in Sources */,
 				AE77C85F27DB64AC00E8D0EC /* QuestionShortInfo.swift in Sources */,
 				AEB5AB3027E205CE0096376B /* CafeQuestionsResponseDTO.swift in Sources */,
 				AE77C83D27DA07DE00E8D0EC /* QuestionUseCase.swift in Sources */,
@@ -1921,6 +1942,7 @@
 				AEA14D0027CF76C70009EEC6 /* UserNetworkService.swift in Sources */,
 				AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */,
 				AEBC9ECA27C619FB0070399A /* OnboardingViewController.swift in Sources */,
+				AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */,
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
@@ -1944,6 +1966,7 @@
 				AEB5AAD627DF929B0096376B /* CommentCell.swift in Sources */,
 				AEB5AABD27DEFF050096376B /* Comment.swift in Sources */,
 				AE7F483A27CC5D3A00954971 /* IngredientBuyAlertViewModel.swift in Sources */,
+				AE02407527E37C9C00017F77 /* InsertIngredientViewModel.swift in Sources */,
 				AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */,
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
 				AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */,
@@ -1953,6 +1976,7 @@
 				AE02406F27E3408F00017F77 /* OurCafeUseCase.swift in Sources */,
 				AE02406327E33C7800017F77 /* OurCafeAPI.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
+				AE02407327E37A7B00017F77 /* InsertIngredientViewController.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
 				AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */,
 				AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */,
