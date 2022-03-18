@@ -30,6 +30,8 @@ final class OurCafeUserCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             nameLabel.textColor = isSelected ? .black : .GRAY03
+            profileImageView.layer.borderWidth = isSelected ? 1.0 : 0.0
+            profileImageView.layer.borderColor = isSelected ? UIColor.black.cgColor : nil
         }
     }
     

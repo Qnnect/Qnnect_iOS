@@ -298,7 +298,7 @@ private extension CafeRoomViewController {
         item.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(100.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -425,6 +425,7 @@ private extension CafeRoomViewController {
                 ) as! PageControlFooterView
                 let pageCount = (dataSource.sectionModels[1].items.count  / 6 + 1)
                 view.pageControl.numberOfPages = pageCount == 1 ? 0 : pageCount
+                view.pageControl.isEnabled = false
                 view.pageControl.subviews.forEach {
                     $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
                 }

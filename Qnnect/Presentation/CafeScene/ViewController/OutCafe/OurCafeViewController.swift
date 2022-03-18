@@ -233,8 +233,6 @@ final class OurCafeViewController: BaseViewController {
         
         userCollectionView.rx.methodInvoked(#selector(userCollectionView.reloadData))
             .skip(1)
-            .withLatestFrom(output.userInfos)
-            .filter { $0.count > 0 }
             .subscribe(onNext: {
                 [weak self] _ in
                 self?.userCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)

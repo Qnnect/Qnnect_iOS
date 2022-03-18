@@ -14,12 +14,14 @@ final class SettingBottomSheetViewModel: ViewModelType {
     struct Input {
         let didTapSettingItem: Observable<SettingItemType>
         let cafeId: Observable<Int>
+        let didTapLeaveAlertOkButton: Observable<Void>
     }
     
     struct Output {
         let showInvitationScene: Signal<Void>
         ///Int: CafeId
         let showCafeModifyingScene: Signal<Int>
+        let showLeaveCafeAlertView: Signal<Void>
         let leaveCafe: Signal<Void>
     }
     
@@ -39,8 +41,11 @@ final class SettingBottomSheetViewModel: ViewModelType {
             .filter { $0 == .cafeInfoModify }
             .withLatestFrom(input.cafeId)
         
-        let leaveCafe = input.didTapSettingItem
+        let showLeaveCafeAlertView = input.didTapSettingItem
             .filter { $0 == .leaveCafe}
+            .mapToVoid()
+        
+        let leaveCafe = input.didTapLeaveAlertOkButton
             .withLatestFrom(input.cafeId)
             .flatMap(self.cafeUseCase.leaveCafe(_:))
             .mapToVoid()
@@ -48,6 +53,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
         return Output(
             showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty()),
             showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty()),
+            showLeaveCafeAlertView: showLeaveCafeAlertView.asSignal(onErrorSignalWith: .empty()),
             leaveCafe: leaveCafe.asSignal(onErrorSignalWith: .empty())
         )
     }

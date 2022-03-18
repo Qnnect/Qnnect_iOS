@@ -74,7 +74,7 @@ final class TodayQuestionCell: UICollectionViewCell {
         
         
         self.groupNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(26.0)
+            make.top.equalToSuperview().inset(32.0)
             make.leading.trailing.equalToSuperview().inset(12.0)
         }
         

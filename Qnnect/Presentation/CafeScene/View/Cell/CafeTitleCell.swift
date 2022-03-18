@@ -64,7 +64,7 @@ final class CafeTitleCell: UICollectionViewCell {
         }
         
         self.nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.createdDateLabel.snp.bottom)
+            make.top.equalTo(self.createdDateLabel.snp.bottom).offset(5.0)
             make.leading.equalToSuperview()
             make.trailing.equalTo(self.drinkImageView.snp.leading).inset(16.0)
         }

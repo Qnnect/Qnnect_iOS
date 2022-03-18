@@ -37,6 +37,7 @@ final class SettingBottomSheet: BottomSheetViewController {
         $0.backgroundColor = .p_ivory
     }
     
+    private let leaveCafeAlertView = LeaveCafeAlertView()
     private var cafeId: Int!
     private var viewModel: SettingBottomSheetViewModel!
     weak var coordinator: CafeCoordinator?
@@ -81,7 +82,8 @@ final class SettingBottomSheet: BottomSheetViewController {
         let input = SettingBottomSheetViewModel.Input(
             didTapSettingItem: self.menuTableView.rx.modelSelected(SettingItemType.self)
                 .asObservable(),
-            cafeId: Observable.just(self.cafeId)
+            cafeId: Observable.just(self.cafeId),
+            didTapLeaveAlertOkButton: leaveCafeAlertView.okButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input)
@@ -97,7 +99,18 @@ final class SettingBottomSheet: BottomSheetViewController {
             .disposed(by: self.disposeBag)
         
         output.leaveCafe
+            .do {
+                [weak self] _ in
+                self?.leaveCafeAlertView.dismiss(animated: false, completion: nil)
+            }
             .emit(onNext: coordinator.leaveCafe)
             .disposed(by: self.disposeBag)
+        
+        output.showLeaveCafeAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.navigationController?.present(self.leaveCafeAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
 }

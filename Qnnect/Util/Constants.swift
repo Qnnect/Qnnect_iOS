@@ -64,7 +64,7 @@ struct Constants {
     static let bottomSheetHorizontalMargin: CGFloat = 20.0
     
     //Cafe Answer
-    static let answerCellHeight: CGFloat = 130.0
+    static let answerCellHeight: CGFloat = 135.0
     static let answerCellSpacing: CGFloat = 17.0
     
     // MARK: - Image

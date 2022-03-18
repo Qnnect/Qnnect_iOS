@@ -129,7 +129,7 @@ final class CafeAnswerQuestionCell: UITableViewCell {
         deleteButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)
         
         modifyButton.snp.makeConstraints { make in
-            make.trailing.equalTo(deleteButton.snp.leading).inset(5.0)
+            make.trailing.equalTo(deleteButton.snp.leading).inset(10.0)
             make.bottom.equalTo(deleteButton)
         }
         modifyButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)

@@ -204,6 +204,7 @@ final class HomeViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.homeInfo
+            .debug()
             .do {
                 [weak self] homeInfo in
                 self?.pointLabel.text = "\(homeInfo.user.point) P"
@@ -328,7 +329,7 @@ private extension HomeViewController {
         let layoutSectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(6.0))
         
         //Section Footer layout
-        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
         
         return sectionFooter
     }

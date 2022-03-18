@@ -109,7 +109,8 @@ final class CafeAnswerCell: UITableViewCell {
         self.commentImageView.snp.makeConstraints { make in
             make.trailing.equalTo(self.commentCountLabel.snp.leading).offset(-6.0)
             make.width.height.equalTo(14.0)
-            make.bottom.equalToSuperview()
+            make.top.equalTo(contentLabel.snp.bottom).offset(8.0)
+            
         }
     }
     
@@ -125,9 +126,12 @@ final class CafeAnswerCell: UITableViewCell {
         self.writerNameLabel.text = comment.writerInfo.name
         contentLabel.text = comment.content
         commentCountLabel.text = comment.replyCount != 0 ? "\(comment.replyCount)" : ""
-        attachedImageView.kf.setImage(
-            with: URL(string: comment.getImageURLs().first ?? ""),
-            placeholder: Constants.commentEmptyImage
-        )
+        
+        if let url = comment.getImageURLs().first {
+            attachedImageView.kf.setImage(
+                with: URL(string: url),
+                placeholder: Constants.commentEmptyImage
+            )
+        }
     }
 }

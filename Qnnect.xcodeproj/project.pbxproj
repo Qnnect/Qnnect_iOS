@@ -43,6 +43,7 @@
 		AE02409827E3D56400017F77 /* RightStepAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */; };
 		AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */; };
 		AE02409C27E43DD300017F77 /* UserSelectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409B27E43DD300017F77 /* UserSelectSectionModel.swift */; };
+		AE02409E27E461AE00017F77 /* LeaveCafeAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409D27E461AE00017F77 /* LeaveCafeAlertView.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -351,6 +352,7 @@
 		AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewController.swift; sourceTree = "<group>"; };
 		AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewModel.swift; sourceTree = "<group>"; };
 		AE02409B27E43DD300017F77 /* UserSelectSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectSectionModel.swift; sourceTree = "<group>"; };
+		AE02409D27E461AE00017F77 /* LeaveCafeAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCafeAlertView.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -1445,6 +1447,7 @@
 				AEB5AB1927E1B8130096376B /* QuestionCompletionAlertView.swift */,
 				AEB5AB2527E1F1EF0096376B /* CafeQuestionListViewController.swift */,
 				AEB5AB3527E212D00096376B /* SearchCafeQuestionViewController.swift */,
+				AE02409D27E461AE00017F77 /* LeaveCafeAlertView.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1905,6 +1908,7 @@
 				AE59A5F827AEAE890081A0FA /* SceneDelegate.swift in Sources */,
 				AE02407727E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
+				AE02409E27E461AE00017F77 /* LeaveCafeAlertView.swift in Sources */,
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */,

@@ -48,11 +48,27 @@ final class QuestionCycleSlider: UIView {
             label.font = .IM_Hyemin(.bold, size: 14.0)
             label.textColor = .GRAY01
             
+            
             self.addSubview(label)
-            label.snp.makeConstraints { make in
-                make.top.equalTo(self.slider.snp.bottom).offset(5.0)
-                make.centerX.equalTo(x)
+            
+            if $0.offset != 0 , $0.offset != (count - 1) {
+                label.snp.makeConstraints { make in
+                    make.top.equalTo(self.slider.snp.bottom).offset(5.0)
+                    make.centerX.equalTo(x)
+                }
+            } else if $0.offset == 0 {
+                label.snp.makeConstraints { make in
+                    make.top.equalTo(self.slider.snp.bottom).offset(5.0)
+                    make.leading.equalTo(x)
+                }
+            } else if $0.offset == (count - 1) {
+                print("DFdsfsd",$0.offset, x)
+                label.snp.makeConstraints { make in
+                    make.top.equalTo(self.slider.snp.bottom).offset(5.0)
+                    make.centerX.equalTo(x - 10.0)
+                }
             }
+           
         }
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
