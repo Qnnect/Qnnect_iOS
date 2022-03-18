@@ -57,10 +57,10 @@ final class TodayQuestionCell: UICollectionViewCell {
     private func configureUI() {
         
         [
-            self.emptyView,
             self.groupNameLabel,
             self.d_dayLabel,
-            self.questionLabel
+            self.questionLabel,
+            self.emptyView
         ].forEach {
             self.contentView.addSubview($0)
         }
