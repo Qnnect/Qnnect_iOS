@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 enum DrinkStep: Int, CaseIterable {
     case ice = 0
@@ -125,6 +126,8 @@ final class OurCafeViewController: BaseViewController {
         return vc
     }
     
+    private let radio =  ((48.0 / 5.0) - 28.0) / UIScreen.main.bounds.width
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -162,7 +165,8 @@ final class OurCafeViewController: BaseViewController {
         userCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(90.0)
+            make.height.equalTo((UIScreen.main.bounds.width / 5.0) + 32.0 + 26.0)
+            
         }
         userCollectionView.collectionViewLayout = createLayout()
         
@@ -204,19 +208,10 @@ final class OurCafeViewController: BaseViewController {
     override func bind() {
         super.bind()
         
-        userCollectionView.rx.methodInvoked(#selector(userCollectionView.reloadData))
-            .subscribe(onNext: {
-                [weak self] _ in
-                guard let self = self else { return }
-                let height = self.userCollectionView.collectionViewLayout.collectionViewContentSize.height
-                self.userCollectionView.snp.updateConstraints { make in
-                    make.height.equalTo(height)
-                }
-            }).disposed(by: self.disposeBag)
-        
         let input = OurCafeViewModel.Input(
             cafeId: Observable.just(cafeId),
             cafeUserId: Observable.just(cafeUserId),
+            viewDidLoad: Observable.just(()),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
                 .asObservable()
@@ -229,16 +224,22 @@ final class OurCafeViewController: BaseViewController {
         
         output.userInfos
             .debug()
-            .drive(userCollectionView.rx.items(
-                cellIdentifier: OurCafeUserCell.identifier,
-                cellType: OurCafeUserCell.self
-            )
-            )
-        { index, model, cell in
-            cell.update(with: model)
-        }.disposed(by: self.disposeBag)
+            .map {
+                userInfos -> [UserSelectSectionModel] in
+                return [ UserSelectSectionModel.init(items: userInfos) ]
+            }
+            .drive(userCollectionView.rx.items(dataSource: createDataSource()))
+            .disposed(by: self.disposeBag)
         
-
+        userCollectionView.rx.methodInvoked(#selector(userCollectionView.reloadData))
+            .skip(1)
+            .withLatestFrom(output.userInfos)
+            .filter { $0.count > 0 }
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.userCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
+            }).disposed(by: self.disposeBag)
+        
         output.curStep
             .debug()
             .drive(onNext: {
@@ -301,9 +302,7 @@ private extension OurCafeViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         //item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
-        
-        let radio =  ((48.0 / 5.0) - 28.0) / UIScreen.main.bounds.width
-        
+         
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.2 - radio))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
@@ -316,6 +315,18 @@ private extension OurCafeViewController {
         section.contentInsets = .init(top: 26.0, leading: 0, bottom: 0, trailing: 0)
         
         return section
+    }
+    
+    func createDataSource() -> RxCollectionViewSectionedReloadDataSource<UserSelectSectionModel> {
+        return  RxCollectionViewSectionedReloadDataSource<UserSelectSectionModel> {
+            dataSource, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: OurCafeUserCell.identifier,
+                for: indexPath
+            ) as? OurCafeUserCell else { return UICollectionViewCell() }
+            cell.update(with: item)
+            return cell
+        }
     }
 }
 
@@ -331,4 +342,20 @@ private extension OurCafeViewController {
     }
     
     @objc dynamic func didTapStoreButton() { }
+}
+
+
+extension OurCafeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: OurCafeUserCell.identifier,
+            for: indexPath
+        ) as? OurCafeUserCell else { return }
+        if indexPath.item == 0 {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        } else {
+            cell.isSelected = false
+        }
+    }
 }

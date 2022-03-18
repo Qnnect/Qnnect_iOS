@@ -14,6 +14,7 @@ final class OurCafeViewModel: ViewModelType {
     struct Input {
         let cafeId: Observable<Int>
         let cafeUserId: Observable<Int>
+        let viewDidLoad: Observable<Void>
         let viewWillAppear: Observable<Void>
         let didTapOurCafeUserCell: Observable<OurCafeUser>
         let didTapInsertIngredientButton: Observable<Void>
@@ -38,8 +39,21 @@ final class OurCafeViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let ourCafe = Observable.merge(
+        let firstLoad = input.viewDidLoad.withLatestFrom(
+            Observable.combineLatest(
+                input.cafeId,
+                input.cafeUserId,
+                resultSelector: {(cafeId: $0, cafeUserId: $1)}
+            )
+        ).flatMap(ourCafeUseCase.fetchOurCafe)
+            .compactMap { result -> OurCafe? in
+                guard case let .success(ourCafe) = result else { return nil }
+                return ourCafe
+            }.share()
+        
+        let load = Observable.merge(
             input.viewWillAppear
+                .skip(1)
                 .withLatestFrom(
                     Observable.combineLatest(
                         input.cafeId,
@@ -51,13 +65,15 @@ final class OurCafeViewModel: ViewModelType {
                 .map { $0.cafeUserId }
                 .withLatestFrom(input.cafeId, resultSelector: {(cafeId: $1, cafeUserId: $0)})
                 .share()
-            )
+        )
             .flatMap(ourCafeUseCase.fetchOurCafe)
             .compactMap { result -> OurCafe? in
                 guard case let .success(ourCafe) = result else { return nil }
                 return ourCafe
             }.share()
         
+        
+        let ourCafe = Observable.merge(load, firstLoad)
         
         let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .map(ourCafeUseCase.getCurStep(_:))
@@ -77,13 +93,23 @@ final class OurCafeViewModel: ViewModelType {
             .withLatestFrom(input.cafeId)
         
         return Output(
-            userInfos: ourCafe.map { $0.cafeUsers}.asDriver(onErrorJustReturn: []),
+            userInfos: firstLoad.map { $0.cafeUsers }
+                .withLatestFrom(input.cafeUserId, resultSelector: { ($0, $1) })
+                .map {
+                    (users, userId) in
+                    var newUsers = users
+                    let index = users.firstIndex(where: { user in user.cafeUserId == userId })
+                    let myUser = newUsers.remove(at: Int(index!))
+                    newUsers = [myUser] + newUsers
+                    return newUsers
+                }
+                .asDriver(onErrorDriveWith: .empty()),
             isCurrentUser: ourCafe.map { $0.currentUser }
-                                            .withLatestFrom(
-                                                input.didTapOurCafeUserCell.map {$0.nickName}
-                                                ,resultSelector: { ($0,$1)}
-                                                )
-                                            .asDriver(onErrorDriveWith: .empty()),
+                .withLatestFrom(
+                    input.didTapOurCafeUserCell.map {$0.nickName}
+                    ,resultSelector: { ($0,$1)}
+                )
+                .asDriver(onErrorDriveWith: .empty()),
             curStep: curStep.asDriver(onErrorJustReturn: .ice),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),

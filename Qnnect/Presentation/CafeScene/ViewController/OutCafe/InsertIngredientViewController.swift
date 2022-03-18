@@ -16,7 +16,7 @@ final class InsertIngredientViewController: BaseViewController {
     private let navigationTitleLabel = NavigationTitleLabel(title: "재료넣기")
     
     private let drinkImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     private let progressBar = UIImageView().then {

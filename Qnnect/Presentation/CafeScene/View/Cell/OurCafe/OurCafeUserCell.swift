@@ -17,13 +17,20 @@ final class OurCafeUserCell: UICollectionViewCell {
     private(set) var profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 26.0
     }
     
     private let nameLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 12.0)
-        $0.textColor = .black
+        $0.textColor = .GRAY03
         $0.textAlignment = .center
         $0.sizeToFit()
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            nameLabel.textColor = isSelected ? .black : .GRAY03
+        }
     }
     
     override init(frame: CGRect) {
@@ -36,6 +43,7 @@ final class OurCafeUserCell: UICollectionViewCell {
         configureUI()
     }
     
+
     private func configureUI() {
         
         [
@@ -61,9 +69,9 @@ final class OurCafeUserCell: UICollectionViewCell {
     func update(with user: OurCafeUser) {
         profileImageView.kf.setImage(
             with: URL(string: user.profileImage),
-            placeholder: Constants.profileDefaultImage) { _ in
-                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height / 2.0
-            }
+            placeholder: Constants.profileDefaultImage
+        )
+        
         nameLabel.text = user.nickName
     }
     

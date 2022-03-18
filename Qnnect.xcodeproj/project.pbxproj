@@ -42,6 +42,7 @@
 		AE02409627E3D0BA00017F77 /* WrongStepAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */; };
 		AE02409827E3D56400017F77 /* RightStepAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */; };
 		AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */; };
+		AE02409C27E43DD300017F77 /* UserSelectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02409B27E43DD300017F77 /* UserSelectSectionModel.swift */; };
 		AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */; };
 		AE02D7FD27D5C58F0019D955 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */; };
 		AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */; };
@@ -349,6 +350,7 @@
 		AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongStepAlertView.swift; sourceTree = "<group>"; };
 		AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewController.swift; sourceTree = "<group>"; };
 		AE02409927E3D9F100017F77 /* RightStepAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightStepAlertViewModel.swift; sourceTree = "<group>"; };
+		AE02409B27E43DD300017F77 /* UserSelectSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectSectionModel.swift; sourceTree = "<group>"; };
 		AE02D7FA27D5C4A00019D955 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		AE02D7FC27D5C58F0019D955 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		AE02D7FE27D5C6950019D955 /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
@@ -1250,6 +1252,7 @@
 				AE02D82A27D76B160019D955 /* CafeAnswerSectionModel.swift */,
 				AE77C85227DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift */,
 				AEB5AADB27DF9D370096376B /* CommentSectionModel.swift */,
+				AE02409B27E43DD300017F77 /* UserSelectSectionModel.swift */,
 			);
 			path = SectionModel;
 			sourceTree = "<group>";
@@ -2041,6 +2044,7 @@
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AEB5AB3827E213560096376B /* SearchCafeQuestionViewModel.swift in Sources */,
 				AE02404D27E31FDB00017F77 /* NavigationTitleLabel.swift in Sources */,
+				AE02409C27E43DD300017F77 /* UserSelectSectionModel.swift in Sources */,
 				AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
