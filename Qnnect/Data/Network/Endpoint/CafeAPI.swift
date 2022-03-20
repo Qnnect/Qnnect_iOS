@@ -11,7 +11,7 @@ import Moya
 enum CafeAPI {
     case createCafe(request: CafeCreateRequestDTO)
     case fetchCafe(id: Int)
-    case joinCafe(id: Int, request: CafeJoinRequestDTO)
+    case joinCafe(request: CafeJoinRequestDTO)
     case updateCafe(id: Int, request: CafeUpdateRequestDTO)
     case leaveCafe(reqeust: CafeLeaveRequestDTO)
     case createQuestion(id: Int, request: QuestionCreateRequestDTO)
@@ -28,8 +28,8 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/cafes"
         case .fetchCafe(let id):
             return "api/v1/cafes/\(id)"
-        case .joinCafe(let id, _):
-            return "api/v1/cafes/\(id)"
+        case .joinCafe(_):
+            return "api/v1/cafes/join"
         case .updateCafe(let id, _):
             return "api/v1/cafes/\(id)"
         case .leaveCafe(_):
@@ -45,7 +45,7 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return .post
         case .fetchCafe(_):
             return .get
-        case .joinCafe(_, _), .createQuestion(_, _):
+        case .joinCafe(_), .createQuestion(_, _):
             return .post
         case .updateCafe(_,_), .leaveCafe(_):
             return .patch
@@ -58,7 +58,7 @@ extension CafeAPI: TargetType, AccessTokenAuthorizable {
             return .requestJSONEncodable(request)
         case .fetchCafe(_):
             return .requestPlain
-        case .joinCafe(_, let request):
+        case .joinCafe(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .updateCafe(_, let request):

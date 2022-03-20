@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class JoinCafeBottomSheet: BottomSheetViewController {
     
@@ -31,8 +33,16 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
         $0.layer.borderColor = UIColor.BLACK_121212?.cgColor
     }
     
-    static func create() -> JoinCafeBottomSheet {
+    private var viewModel: JoinCafeBottomSheetViewModel!
+    weak var coordinator: HomeCoordinator?
+    
+    static func create(
+        with viewModel: JoinCafeBottomSheetViewModel,
+        _ coordinator: HomeCoordinator
+    ) -> JoinCafeBottomSheet {
         let bottomSheet = JoinCafeBottomSheet()
+        bottomSheet.viewModel = viewModel
+        bottomSheet.coordinator = coordinator
         return bottomSheet
     }
     
@@ -75,10 +85,42 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
             make.top.equalTo(inputTextField.snp.bottom).offset(67.0)
             
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bottomBarMoveDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func bind() {
         super.bind()
+        
+        let input = JoinCafeBottomSheetViewModel.Input(
+            cafeCode: inputTextField.rx.text.orEmpty.asObservable(),
+            didTapCompletionButton: completionButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.showCafeRoomScene
+            .emit(onNext: coordinator.showGroupScene)
+            .disposed(by: self.disposeBag)
     }
     
+}
+
+extension JoinCafeBottomSheet {
+    @objc func bottomBarMoveUp(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.1, animations: {
+                self.bottomSheetView.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+            }
+            )
+        }
+    }
+    
+    @objc func bottomBarMoveDown(_ notification: NSNotification) {
+        self.bottomSheetView.transform = .identity
+    }
 }

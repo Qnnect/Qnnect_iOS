@@ -52,4 +52,13 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func joinCafe(request: CafeJoinRequestDTO) -> Observable<Result<CafeResponseDTO,Error>> {
+        return self.request(.joinCafe(request: request))
+            .filter(statusCode: 200)
+            .map(CafeResponseDTO.self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

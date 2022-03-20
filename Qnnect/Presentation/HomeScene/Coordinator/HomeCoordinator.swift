@@ -59,7 +59,13 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
     }
     
     func showJoinCafeBottomSheet() {
-        let bottomSheet = JoinCafeBottomSheet.create()
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
+        let viewModel = JoinCafeBottomSheetViewModel(cafeUseCase: cafeUseCase)
+        let bottomSheet = JoinCafeBottomSheet.create(
+            with: viewModel,
+            self
+        )
         bottomSheet.modalPresentationStyle = .overCurrentContext
         navigationController.present(bottomSheet, animated: false, completion: nil)
     }

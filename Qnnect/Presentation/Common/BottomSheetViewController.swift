@@ -118,6 +118,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.bottomSheetView.snp.updateConstraints { make in
                 make.height.equalTo(0)
             }
+            self.view.endEditing(true)
             self.view.layoutIfNeeded()
         }) { _ in
             if self.presentingViewController != nil {
