@@ -14,6 +14,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
     struct Input {
         let didTapSettingItem: Observable<SettingItemType>
         let cafeId: Observable<Int>
+        let isDrinkEmpty: Observable<Bool>
         let didTapLeaveAlertOkButton: Observable<Void>
     }
     
@@ -22,6 +23,9 @@ final class SettingBottomSheetViewModel: ViewModelType {
         ///Int: CafeId
         let showCafeModifyingScene: Signal<Int>
         let showLeaveCafeAlertView: Signal<Void>
+        ///Int: CafeId
+        let showSelectDrinkScene: Signal<Int>
+        let showNotModifyDrinkAlertView: Signal<Void>
         let leaveCafe: Signal<Void>
     }
     
@@ -50,11 +54,25 @@ final class SettingBottomSheetViewModel: ViewModelType {
             .withLatestFrom(input.cafeId)
             .flatMap(self.cafeUseCase.leaveCafe(_:))
             .mapToVoid()
-
+        
+        let showSelectDrinkScene = input.didTapSettingItem
+            .filter{ $0 == .drinkModify }
+            .withLatestFrom(input.isDrinkEmpty)
+            .filter{ $0 }
+            .withLatestFrom(input.cafeId)
+        
+        let showNotModifyDrinkAlertView = input.didTapSettingItem
+            .filter{ $0 == .drinkModify }
+            .withLatestFrom(input.isDrinkEmpty)
+            .filter{ !$0 }
+            .mapToVoid()
+        
         return Output(
             showInvitationScene: showInvitationScene.asSignal(onErrorSignalWith: .empty()),
             showCafeModifyingScene: showCafeModifyingScene.asSignal(onErrorSignalWith: .empty()),
             showLeaveCafeAlertView: showLeaveCafeAlertView.asSignal(onErrorSignalWith: .empty()),
+            showSelectDrinkScene: showSelectDrinkScene.asSignal(onErrorSignalWith: .empty()),
+            showNotModifyDrinkAlertView: showNotModifyDrinkAlertView.asSignal(onErrorSignalWith: .empty()),
             leaveCafe: leaveCafe.asSignal(onErrorSignalWith: .empty())
         )
     }

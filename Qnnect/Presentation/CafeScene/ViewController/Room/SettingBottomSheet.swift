@@ -41,19 +41,27 @@ final class SettingBottomSheet: BottomSheetViewController {
     private let leaveCafeAlertView = LeaveCafeAlertView().then {
         $0.modalPresentationStyle = .overCurrentContext
     }
+    
+    private let notModifyDrinkAlertView = NotModifyDrinkAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
     private var cafeId: Int!
     private var viewModel: SettingBottomSheetViewModel!
     weak var coordinator: CafeCoordinator?
+    private var isDrinkEmpty: Bool!
     
     static func create(
         with viewModel: SettingBottomSheetViewModel,
         _ cafeId: Int,
-        _ coordinator: CafeCoordinator
+        _ coordinator: CafeCoordinator,
+        _ isDrinkEmpty: Bool
     ) -> SettingBottomSheet {
         let bottomSheet = SettingBottomSheet()
         bottomSheet.viewModel = viewModel
         bottomSheet.cafeId = cafeId
         bottomSheet.coordinator = coordinator
+        bottomSheet.isDrinkEmpty = isDrinkEmpty
         return bottomSheet
     }
     
@@ -86,9 +94,10 @@ final class SettingBottomSheet: BottomSheetViewController {
             didTapSettingItem: self.menuTableView.rx.modelSelected(SettingItemType.self)
                 .asObservable(),
             cafeId: Observable.just(self.cafeId),
+            isDrinkEmpty: Observable.just(isDrinkEmpty),
             didTapLeaveAlertOkButton: leaveCafeAlertView.okButton.rx.tap.asObservable()
         )
-        
+    
         let output = self.viewModel.transform(from: input)
         
         guard let coordinator = coordinator else { return }
@@ -115,5 +124,16 @@ final class SettingBottomSheet: BottomSheetViewController {
                 guard let self = self else { return }
                 self.present(self.leaveCafeAlertView, animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
+        
+        output.showNotModifyDrinkAlertView
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.notModifyDrinkAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
+        
+        output.showSelectDrinkScene
+            .emit(onNext: coordinator.showSelectDrinkBottomSheet(_:))
+            .disposed(by: self.disposeBag)
     }
 }

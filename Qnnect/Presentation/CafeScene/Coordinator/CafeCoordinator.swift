@@ -12,7 +12,7 @@ protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet(_ cafeId: Int)
     func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
-    func showSettingBottomSheet(_ cafeId: Int)
+    func showSettingBottomSheet(_ cafeId: Int, _ isDrinkEmpty: Bool)
     func showInvitationScene()
     func showCafeQuestionScene(_ questionId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
@@ -49,10 +49,22 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showSelectDrinkBottomSheet(_ cafeId: Int) {
-        let coordinator = DefaultSelectDrinkCoordinator(navigationController: navigationController)
-        coordinator.parentCoordinator = self
-        childCoordinators.append(coordinator)
-        coordinator.start(cafeId)
+        if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
+            bottomSheet.hideBottomSheetAndGoBack {
+                [weak self] in
+                guard let self = self else { return }
+                let coordinator = DefaultSelectDrinkCoordinator(navigationController: self.navigationController)
+                coordinator.parentCoordinator = self
+                self.childCoordinators.append(coordinator)
+                coordinator.start(cafeId)
+            }
+        } else {
+            let coordinator = DefaultSelectDrinkCoordinator(navigationController: navigationController)
+            coordinator.parentCoordinator = self
+            childCoordinators.append(coordinator)
+            coordinator.start(cafeId)
+            
+        }
     }
     
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int) {
@@ -62,11 +74,11 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.present(alert, animated: true, completion: nil)
     }
     
-    func showSettingBottomSheet(_ cafeId: Int) {
+    func showSettingBottomSheet(_ cafeId: Int, _ isDrinkEmpty: Bool) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = SettingBottomSheetViewModel(cafeUseCase: cafeUseCase)
-        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId, self)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId, self, isDrinkEmpty)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
@@ -170,7 +182,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
             })
         }
     }
-   
+    
     func dismissAlert() {
         self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
@@ -205,9 +217,9 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
         }
         
         if navigationController.viewControllers.contains(fromViewController) {
-           return
+            return
         }
-
+        
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? CafeQuestionViewController {
             childDidFinish(vc.coordinator)

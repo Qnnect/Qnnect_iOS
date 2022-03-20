@@ -233,7 +233,7 @@ final class CafeRoomViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showSettingBottomSheet
-            .emit(onNext: coordinator.showSettingBottomSheet(_:))
+            .emit(onNext: coordinator.showSettingBottomSheet)
             .disposed(by: self.disposeBag)
         
         output.showCafeQuestionScene

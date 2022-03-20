@@ -14,8 +14,9 @@ struct CafeUserResponseDTO: Decodable {
     
     func toDomain() -> CafeUser {
         return CafeUser(
+            filledIngredients: drinkIngredientsFilledResponseList.map { $0.toDomain() },
             userInfo: self.user.toDomain(),
-            userDrinkSelected: self.userDrinkSelected 
+            userDrinkSelected: self.userDrinkSelected
         )
     }
 }
