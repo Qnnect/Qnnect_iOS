@@ -78,5 +78,18 @@ extension DefaultBookmarkCoordinator: UINavigationControllerDelegate {
             }
         }
         
+        if let vc = fromViewController as? CommentViewController {
+            childDidFinish(vc.coordinator)
+            if let presentedVC = navigationController.viewControllers.last {
+                presentedVC.tabBarController?.tabBar.isHidden = false
+            }
+        }
+        
+        if let vc = fromViewController as? WriteCommentViewController {
+            childDidFinish(vc.coordinator)
+            if let presentedVC = navigationController.viewControllers.last {
+                presentedVC.tabBarController?.tabBar.isHidden = false
+            }
+        }
     }
 }
