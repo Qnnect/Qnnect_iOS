@@ -78,11 +78,14 @@ final class OnboardingViewController: UIPageViewController{
     
     private var viewModel: OnboardingViewModel!
     weak var coordinator: SplashCoordinator?
+    private var inviteCode: String?
+    
     private let disposeBag = DisposeBag()
     
     static func create(
         with viewModel: OnboardingViewModel,
-        _ coordinator: SplashCoordinator
+        _ coordinator: SplashCoordinator,
+        _ inviteCode: String?
     ) -> OnboardingViewController {
         let vc = OnboardingViewController(
             transitionStyle: .scroll,
@@ -91,6 +94,7 @@ final class OnboardingViewController: UIPageViewController{
         )
         vc.coordinator = coordinator
         vc.viewModel = viewModel
+        vc.inviteCode = inviteCode
         return vc
     }
     override func viewDidLoad() {
@@ -124,16 +128,25 @@ private extension OnboardingViewController {
     
     func bind() {
         
-        let input = OnboardingViewModel.Input(didTapStartButton: self.startButton.rx.tap.mapToVoid())
+        let input = OnboardingViewModel.Input(
+            didTapStartButton: self.startButton.rx.tap.mapToVoid(),
+            inviteCode: Observable.just(inviteCode).compactMap{ $0 }
+        )
         
         let output = self.viewModel.transform(from: input)
         
+        guard let coordinator = coordinator else { return }
         output.showLoingScene
             .emit(onNext: {
                 [weak self] _ in
                 self?.coordinator?.showLogin()
             })
             .disposed(by: self.disposeBag)
+        
+        output.inviteFlowLoginScene
+            .emit(onNext: coordinator.showLogin(_:))
+            .disposed(by: self.disposeBag)
+        
     }
     func makePageVC() {
         OnboardingSceneType.allCases.forEach { type in

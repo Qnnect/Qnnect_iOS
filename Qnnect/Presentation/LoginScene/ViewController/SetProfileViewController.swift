@@ -66,13 +66,15 @@ final class SetProfileViewController: BaseViewController {
     private var token: Token!
     private var isAgreedNoti: Bool!
     private var loginType: LoginType!
+    private var inviteCode: String?
     
     static func create(
         with viewModel: SetProfileViewModel,
         _ token: Token,
         _ isAgreedNoti: Bool,
         _ loginType: LoginType,
-        _ coordinator: AuthCoordinator
+        _ coordinator: AuthCoordinator,
+        _ inviteCode: String?
     ) -> SetProfileViewController {
         let vc = SetProfileViewController()
         vc.viewModel = viewModel
@@ -80,6 +82,7 @@ final class SetProfileViewController: BaseViewController {
         vc.isAgreedNoti = isAgreedNoti
         vc.loginType = loginType
         vc.coordinator = coordinator
+        vc.inviteCode = inviteCode
         return vc
     }
     
@@ -139,7 +142,8 @@ final class SetProfileViewController: BaseViewController {
             token: Observable.just(self.token),
             isAgreedNoti: Observable.just(self.isAgreedNoti),
             profileImageData: self.editProfileImageView.imageData,
-            loginType: Observable.just(self.loginType)
+            loginType: Observable.just(self.loginType),
+            inviteCode: Observable.just(inviteCode).compactMap{ $0 }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -180,6 +184,10 @@ final class SetProfileViewController: BaseViewController {
         
         output.completion
             .emit(onNext: coordinator.showMain)
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFlowMainScene
+            .emit(onNext: coordinator.showMain(inviteCode:))
             .disposed(by: self.disposeBag)
     }
     

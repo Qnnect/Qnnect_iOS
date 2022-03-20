@@ -21,6 +21,7 @@ final class InviteCafeViewModel: ViewModelType {
     
     struct Output {
         let invite: Signal<LinkResult>
+        let copy: Signal<String>
     }
     
     
@@ -38,6 +39,13 @@ final class InviteCafeViewModel: ViewModelType {
                 )
             }
         
-        return Output(invite: invite.asSignal(onErrorSignalWith: .empty()))
+        let copy = input.didTapCodeCopyButton
+            .withLatestFrom(input.cafe.map { $0.code } )
+            
+        
+        return Output(
+            invite: invite.asSignal(onErrorSignalWith: .empty()),
+            copy: copy.asSignal(onErrorSignalWith: .empty())
+        )
     }
 }

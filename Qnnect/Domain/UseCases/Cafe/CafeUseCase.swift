@@ -35,7 +35,7 @@ protocol CafeUseCase: AnyObject {
     func leaveCafe(_ cafeId: Int) -> Observable<Result<Void,Error>>
     func createQuestion(_ cafeId:Int, _ content: String) -> Observable<Result<Void,Error>>
     ///Int: CafeId
-    func joinCafe(_ cafeCode: String) -> Observable<Result<Int,Error>>
+    func joinCafe(_ cafeCode: String) -> Observable<Result<Int,JoinCafeError>>
 }
 
 final class DefaultCafeUseCase: CafeUseCase {
@@ -100,7 +100,7 @@ final class DefaultCafeUseCase: CafeUseCase {
         cafeRepository.createQuestion(cafeId, content)
     }
     
-    func joinCafe(_ cafeCode: String) -> Observable<Result<Int, Error>> {
+    func joinCafe(_ cafeCode: String) -> Observable<Result<Int, JoinCafeError>> {
         cafeRepository.joinCafe(cafeCode: cafeCode)
             .map {
                 switch $0 {

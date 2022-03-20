@@ -13,12 +13,16 @@ final class SplashViewModel: ViewModelType {
     
     struct Input {
         let didEndSplash: Observable<Void>
+        let inviteCode: Observable<String>
     }
     
     struct Output {
         let showOnboarding: Signal<Void>
         let showLogin: Signal<Void>
         let showMain: Signal<Void>
+        let inviteFloswOnboarding: Signal<String>
+        let inviteFlowShowLogin: Signal<String>
+        let inviteFlowAutoLogin: Signal<String>
     }
     
     private let authUseCase: AuthUseCase
@@ -34,7 +38,9 @@ final class SplashViewModel: ViewModelType {
         let isFirstAccess = input.didEndSplash
             .map(self.authUseCase.fetchIsFirstAccess)
             .share()
+        
         let firstAccess = isFirstAccess
+            .take(until: input.inviteCode)
             .filter{ $0 }
             .mapToVoid()
             .do{
@@ -43,6 +49,16 @@ final class SplashViewModel: ViewModelType {
             }
         
         
+        let inviteFlowFirstAccess = isFirstAccess
+            .filter { $0 }
+            .mapToVoid()
+            .withLatestFrom(input.inviteCode)
+            .do {
+                [weak self] _ in
+                self?.authUseCase.updateFirstAccess()
+            }
+    
+        
         let reissueToken = input.didEndSplash
             .map(self.authUseCase.fetchToken)
             .compactMap{ $0 } // nil 삭제
@@ -50,11 +66,19 @@ final class SplashViewModel: ViewModelType {
             .share()
         
         let autoLogin = reissueToken
+            .take(until: input.inviteCode)
             .filter {
                 guard case .success(_) = $0 else { return false }
                 return true
             }
             .mapToVoid()
+        
+        let inviteFlowAutoLogin = reissueToken
+            .filter {
+                guard case .success(_) = $0 else { return false }
+                return true
+            }.withLatestFrom(input.inviteCode)
+        
         
         let tokenNil = input.didEndSplash
             .map(self.authUseCase.fetchToken)
@@ -69,14 +93,23 @@ final class SplashViewModel: ViewModelType {
             .mapToVoid()
         
         let showLogin = isFirstAccess
+            .take(until: input.inviteCode)
             .filter{ !$0 }
             .withLatestFrom(Observable.merge(tokenNil,needToLogin))
             .mapToVoid()
         
+        let inviteFlowShowLogin = isFirstAccess
+            .filter{ !$0 }
+            .withLatestFrom(Observable.merge(tokenNil,needToLogin))
+            .withLatestFrom(input.inviteCode)
+        
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),
             showLogin: showLogin.asSignal(onErrorSignalWith: .empty()),
-            showMain: autoLogin.asSignal(onErrorSignalWith: .empty())
+            showMain: autoLogin.asSignal(onErrorSignalWith: .empty()),
+            inviteFloswOnboarding: inviteFlowFirstAccess.asSignal(onErrorSignalWith: .empty()),
+            inviteFlowShowLogin: inviteFlowShowLogin.asSignal(onErrorSignalWith: .empty()),
+            inviteFlowAutoLogin: inviteFlowAutoLogin.asSignal(onErrorSignalWith: .empty())
         )
     }
     

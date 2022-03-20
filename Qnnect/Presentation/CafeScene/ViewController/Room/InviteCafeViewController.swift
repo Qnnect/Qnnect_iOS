@@ -225,5 +225,12 @@ final class InviteCafeViewController: BaseViewController {
                 result in
                 UIApplication.shared.open(result.url, options: [:], completionHandler: nil)
             }).disposed(by: self.disposeBag)
+        
+        output.copy
+            .emit(onNext:{
+                [weak self] code in
+                UIPasteboard.general.string = code
+                self?.view.makeToast("카페 코드가 복사 됐습니다!", duration: 3.0, position: .bottom)
+            }).disposed(by: self.disposeBag)
     }
 }

@@ -32,6 +32,13 @@ final class AppCoordinator: Coordinator {
         coordinator.start()
     }
     
+    func startInviteFlow(_ inviteCode: String) {
+        let coordinator = DefaultSplashCoordinator(navigationController: self.navigationController)
+        self.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start(inviteCode: inviteCode)
+    }
+    
     /// rootViewController 시작 메소드
     /// - Parameter isLogin: 로그인 유무(자동로그인)
     func start(isLogin: Bool) {

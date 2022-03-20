@@ -20,12 +20,14 @@ final class SetProfileViewModel: ViewModelType {
         let isAgreedNoti: Observable<Bool>
         let profileImageData: Observable<Data?>
         let loginType: Observable<LoginType>
+        let inviteCode: Observable<String>
     }
     
     struct Output {
         let nameLength: Driver<Int>
         let isValidName: Driver<Bool>
         let completion: Signal<Void>
+        let inviteFlowMainScene: Signal<String>
         let kakaoProfileImageURL: Driver<URL?>
     }
     
@@ -76,6 +78,7 @@ final class SetProfileViewModel: ViewModelType {
             }
         
         let completion = Observable.zip(settingEnableNotification, settingProfile)
+            .take(until: input.inviteCode)
             .withLatestFrom(input.loginType)
             .do {
                 [weak self] loginType in
@@ -89,10 +92,19 @@ final class SetProfileViewModel: ViewModelType {
             .mapToVoid()
             .flatMap(self.authManager.getUserProfileImageInKakao)
         
+        let inviteFlowMainScene = Observable.zip(settingEnableNotification, settingProfile)
+            .withLatestFrom(input.loginType)
+            .do {
+                [weak self] loginType in
+                self?.authUseCase.saveLoginType(loginType)
+            }
+            .withLatestFrom(input.inviteCode)
+        
         return Output(
             nameLength: nameLength.asDriver(onErrorJustReturn: 0),
             isValidName: isValidName.asDriver(onErrorJustReturn: false),
             completion: completion.asSignal(onErrorJustReturn: ()),
+            inviteFlowMainScene: inviteFlowMainScene.asSignal(onErrorSignalWith: .empty()),
             kakaoProfileImageURL: kakaoProfileImageURL.asDriver(onErrorJustReturn: nil)
         )
     }

@@ -17,6 +17,7 @@ final class TermsViewModel: ViewModelType {
         let checkeditem: Observable<(personal: Bool, service: Bool, pushNoti: Bool)>
         let token: Observable<Token>
         let loginType: Observable<LoginType>
+        let inviteCode: Observable<String>
     }
     
     struct Output {
@@ -24,6 +25,7 @@ final class TermsViewModel: ViewModelType {
         let isCompletedAgreement: Signal<Bool> //필수 항목들 체크 완료 했는 지
         let isAllAgreement: Signal<Bool> // 항목들을 전부 체크 완료 했는 지
         let isCheckedAllAgreement: Signal<Bool> // 전체 동의 버튼 체크했는 지
+        let inviteFlowNextScene: Signal<(Token, Bool, LoginType, String)>
     }
     
     private weak var coordinator: AuthCoordinator?
@@ -40,6 +42,7 @@ final class TermsViewModel: ViewModelType {
             }
         
         let start = input.didTapAgreementButton
+            .take(until: input.inviteCode)
             .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti, input.loginType))
             .map { (token: $0, isAgreedNoti: $1, loginType: $2) }
             
@@ -49,11 +52,17 @@ final class TermsViewModel: ViewModelType {
         let isAllAgreement = input.checkeditem
             .map(self.authUseCase.isAllAgreement(_:))
             
+        let inviteFlowNextscene = input.didTapAgreementButton
+            .take(until: input.inviteCode)
+            .withLatestFrom(Observable.combineLatest(input.token, isAgreedNoti, input.loginType,input.inviteCode))
+            .map { ($0, $1, $2, $3) }
+        
         return Output(
             start: start.asSignal(onErrorSignalWith: .empty()),
             isCompletedAgreement: isCompletedAgreement.asSignal(onErrorJustReturn: false),
             isAllAgreement: isAllAgreement.asSignal(onErrorJustReturn: false),
-            isCheckedAllAgreement: input.didCheckAllAgreement.asSignal(onErrorJustReturn: false)
+            isCheckedAllAgreement: input.didCheckAllAgreement.asSignal(onErrorJustReturn: false),
+            inviteFlowNextScene: inviteFlowNextscene.asSignal(onErrorSignalWith: .empty())
             )
         
           

@@ -20,14 +20,17 @@ final class SplashViewController: BaseViewController {
     
     weak var coordinator: SplashCoordinator?
     private var viewModel: SplashViewModel!
+    private var inviteCode: String?
     
     static func create(
         with viewModel: SplashViewModel,
-        _ coordinator: SplashCoordinator
+        _ coordinator: SplashCoordinator,
+        _ inviteCode: String?
     ) -> SplashViewController {
         let vc = SplashViewController()
         vc.viewModel = viewModel
         vc.coordinator = coordinator
+        vc.inviteCode = inviteCode
         return vc
     }
     
@@ -56,8 +59,14 @@ final class SplashViewController: BaseViewController {
             print("abc")
         }
         
-        let input = SplashViewModel.Input(didEndSplash: didEndSplash.asObservable())
+        let input = SplashViewModel.Input(
+            didEndSplash: didEndSplash.asObservable(),
+            inviteCode: Observable.just(inviteCode)
+                .compactMap{ $0 }
+        )
         
+        guard let coordinator = coordinator else { return }
+
         let output = self.viewModel.transform(from: input)
         
         output.showLogin
@@ -79,6 +88,26 @@ final class SplashViewController: BaseViewController {
                 [weak self] _ in
                 self?.coordinator?.showOnboarding()
             })
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFlowShowLogin
+            .do {
+                [weak self] _ in
+                NSLog("showLogin", [])
+            }
+            .emit(onNext: coordinator.showLogin(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFloswOnboarding
+            .do {
+                [weak self] _ in
+                NSLog("showOnboarding", [])
+            }
+            .emit(onNext: coordinator.showOnboarding(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFlowAutoLogin
+            .emit(onNext: coordinator.showMain(_:))
             .disposed(by: self.disposeBag)
     }
 }

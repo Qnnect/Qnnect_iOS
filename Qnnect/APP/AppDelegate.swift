@@ -103,9 +103,4 @@ extension AppDelegate: MessagingDelegate {
 }
 
 
-extension AppDelegate {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("open Url !!! \(url)")
-        return true
-    }
-}
+

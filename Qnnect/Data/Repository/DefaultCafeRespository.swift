@@ -73,11 +73,11 @@ final class DefaultCafeRepository: CafeRepository {
         return self.cafeNetworkService.createQuestion(cafeId: cafeId, request: request)
     }
     
-    func joinCafe(cafeCode: String) -> Observable<Result<Cafe, Error>> {
+    func joinCafe(cafeCode: String) -> Observable<Result<Cafe, JoinCafeError>> {
         let request = CafeJoinRequestDTO(cafeCode: cafeCode)
         return self.cafeNetworkService.joinCafe(request: request)
             .map {
-                result -> Result<Cafe,Error> in
+                result -> Result<Cafe,JoinCafeError> in
                 switch result {
                 case .success(let responseDTO):
                     return .success(responseDTO.toDomain())

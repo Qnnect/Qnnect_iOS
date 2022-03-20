@@ -14,11 +14,14 @@ final class LoginViewModel: ViewModelType {
     struct Input {
         let didTapKakaoButton: Observable<Void>
         let didTapAppleButton: Observable<Void>
+        let inviteCode: Observable<String>
     }
     
     struct Output {
         let showTermsScene: Signal<(token: Token, loginType: LoginType)>
         let showHomeScene: Signal<Void>
+        let inviteFlowTermScene: Signal<(Token, LoginType, String)>
+        let inviteFlowHomeScene: Signal<String>
     }
     
     var socialLoginManager: SocialLoginManager!
@@ -61,14 +64,32 @@ final class LoginViewModel: ViewModelType {
                 return (token, type)
             }
         
-        let showHomeScene = isSuccess.filter{
+        let inviteFlowTermsScene = isSuccess.filter(isNeedToSetting)
+            .map {
+                userLoginInfo, type -> (token: Token, loginType: LoginType) in
+                let token = Token(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
+                return (token, type)
+            }
+            .withLatestFrom(input.inviteCode , resultSelector: { ($0.0, $0.1, $1) })
+        
+        let showHomeScene = isSuccess
+            .take(until: input.inviteCode)
+            .filter{
             [weak self] in
             self?.isNeedToSetting($0, $1) == false
         }.mapToVoid()
         
+        let inviteFlowHomeScene = isSuccess
+            .filter{
+            [weak self] in
+            self?.isNeedToSetting($0, $1) == false
+            }.withLatestFrom(input.inviteCode)
+        
         return Output(
             showTermsScene: showTermsScene.asSignal(onErrorSignalWith: .empty()),
-            showHomeScene: showHomeScene.asSignal(onErrorSignalWith: .empty())
+            showHomeScene: showHomeScene.asSignal(onErrorSignalWith: .empty()),
+            inviteFlowTermScene: inviteFlowTermsScene.asSignal(onErrorSignalWith: .empty()),
+            inviteFlowHomeScene: inviteFlowHomeScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

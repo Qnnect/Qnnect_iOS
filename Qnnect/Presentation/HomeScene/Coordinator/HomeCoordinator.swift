@@ -12,6 +12,7 @@ protocol HomeCoordinator: Coordinator {
     func showGroupScene(with cafeId: Int, _ isFirst: Bool)
     func showJoinCafeBottomSheet()
     func showCafeQuestionScene(_ questionId: Int)
+    func startInviteFlow(_ inviteCafeCode: String?)
 }
 
 final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
@@ -28,10 +29,30 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
     }
     
     func start() {
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let homeRepository = DefaultHomeRepository(homeNetworkService: HomeNetworkService())
         let homeUseCase = DefaultHomeUseCase(homeRepository: homeRepository)
-        let viewModel = HomeViewModel(homeUseCase: homeUseCase)
+        let viewModel = HomeViewModel(
+            homeUseCase: homeUseCase,
+            cafeUseCase: cafeUseCase
+        )
         let vc = HomeViewController.create(with: viewModel, self)
+        self.navigationController.pushViewController(vc, animated: true)
+        self.navigationController.viewControllers.removeAll { $0 != vc }
+        navigationController.delegate = self
+    }
+    
+    func startInviteFlow(_ inviteCafeCode: String?) {
+        let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
+        let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
+        let homeRepository = DefaultHomeRepository(homeNetworkService: HomeNetworkService())
+        let homeUseCase = DefaultHomeUseCase(homeRepository: homeRepository)
+        let viewModel = HomeViewModel(
+            homeUseCase: homeUseCase,
+            cafeUseCase: cafeUseCase
+        )
+        let vc = HomeViewController.create(with: viewModel, self, inviteCafeCode)
         self.navigationController.pushViewController(vc, animated: true)
         self.navigationController.viewControllers.removeAll { $0 != vc }
         navigationController.delegate = self

@@ -29,6 +29,7 @@ final class LoginViewController: BaseViewController {
     
     private var viewModel: LoginViewModel!
     weak var coordinator: AuthCoordinator?
+    private var inviteCode: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,11 +43,13 @@ final class LoginViewController: BaseViewController {
         
     static func create(
         with viewModel: LoginViewModel,
-        _ coordinator: AuthCoordinator
+        _ coordinator: AuthCoordinator,
+        _ inviteCode: String?
     ) -> LoginViewController {
         let vc = LoginViewController()
         vc.viewModel = viewModel
         vc.coordinator = coordinator
+        vc.inviteCode = inviteCode
         return vc
     }
     
@@ -81,7 +84,8 @@ final class LoginViewController: BaseViewController {
     override func bind() {
         let input = LoginViewModel.Input(
             didTapKakaoButton: self.kakaoButton.rx.tap.mapToVoid(),
-            didTapAppleButton: self.appleButton.rx.tap.mapToVoid()
+            didTapAppleButton: self.appleButton.rx.tap.mapToVoid(),
+            inviteCode: Observable.just(inviteCode).compactMap { $0 }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -94,6 +98,15 @@ final class LoginViewController: BaseViewController {
         output.showTermsScene
             .emit(onNext: coordinator.showTermsVC)
             .disposed(by: self.disposeBag)
+        
+        output.inviteFlowTermScene
+            .emit(onNext: coordinator.showTermsVC)
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFlowHomeScene
+            .emit(onNext: coordinator.showMain(inviteCode:))
+            .disposed(by: self.disposeBag
+            )
     }
     
 }

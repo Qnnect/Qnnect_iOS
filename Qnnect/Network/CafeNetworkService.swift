@@ -9,6 +9,11 @@ import Foundation
 import Moya
 import RxSwift
 
+enum JoinCafeError: Int, Error {
+    case alreadyIn = 500
+    case defaultError
+}
+
 final class CafeNetworkService: BaseNetworkService<CafeAPI> {
     
     func createCafe(request: CafeCreateRequestDTO) -> Observable<Result<Int,Error>> {
@@ -53,12 +58,14 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
             .asObservable()
     }
     
-    func joinCafe(request: CafeJoinRequestDTO) -> Observable<Result<CafeResponseDTO,Error>> {
+    func joinCafe(request: CafeJoinRequestDTO) -> Observable<Result<CafeResponseDTO,JoinCafeError>> {
         return self.request(.joinCafe(request: request))
             .filter(statusCode: 200)
             .map(CafeResponseDTO.self)
             .map{ Result.success($0)}
-            .catch{ .just(Result.failure($0))}
+            .catch{ .just(Result.failure(
+                JoinCafeError(rawValue:($0 as? MoyaError)?.response?.statusCode ?? -1) ?? .defaultError
+            ))}
             .asObservable()
     }
 }

@@ -68,19 +68,25 @@ final class HomeViewController: BaseViewController {
     private var viewModel: HomeViewModel!
     weak var coordinator: HomeCoordinator?
     
+    // invite Kakao CafeCode (DeepLink)
+    private var inviteCafeCode: String?
+    
     static func create(
         with viewModel: HomeViewModel,
-        _ coordinator: HomeCoordinator
+        _ coordinator: HomeCoordinator,
+        _ inviteCafeCode: String? = nil
     ) -> HomeViewController {
         let vc = HomeViewController()
         vc.coordinator = coordinator
         vc.viewModel = viewModel
+        vc.inviteCafeCode = inviteCafeCode
         return vc
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tabBarController?.tabBar.isHidden = false
+        inviteCafeCode = nil
     }
     
     override func viewDidLoad() {
@@ -200,7 +206,9 @@ final class HomeViewController: BaseViewController {
                 .compactMap({ item -> ToDayQuestion? in
                     guard case let HomeSectionItem.todayQuestionSectionItem(question) = item else { return nil }
                     return question
-                })
+                }),
+            inviteCafeCode: Observable.just(inviteCafeCode)
+                .compactMap{ $0 }
         )
         
         
@@ -244,6 +252,12 @@ final class HomeViewController: BaseViewController {
         output.showCafeQuestionScene
             .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
+        
+        output.alreadyInRoom
+            .emit(onNext: {
+                [weak self] error in
+                self?.view.makeToast("카페에 이미 들어가있습니다")
+            }).disposed(by: self.disposeBag)
     }
 }
 

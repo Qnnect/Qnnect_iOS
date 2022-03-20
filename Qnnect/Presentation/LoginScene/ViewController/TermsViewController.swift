@@ -61,18 +61,21 @@ final class TermsViewController: BaseViewController {
     private var viewModel: TermsViewModel!
     private var token: Token!
     private var loginType: LoginType!
+    private var inviteCode: String?
     
     static func create(
         with viewModel: TermsViewModel,
         _ token: Token,
         _ loginType: LoginType,
-        _ coordinator: AuthCoordinator
+        _ coordinator: AuthCoordinator,
+        _ inviteCode: String?
     ) -> TermsViewController {
         let vc = TermsViewController()
         vc.viewModel = viewModel
         vc.token = token
         vc.loginType = loginType
         vc.coordinator = coordinator
+        vc.inviteCode = inviteCode
         return vc
     }
     
@@ -179,7 +182,8 @@ final class TermsViewController: BaseViewController {
                 },
             checkeditem: items,
             token: Observable.just(self.token),
-            loginType: Observable.just(self.loginType)
+            loginType: Observable.just(self.loginType),
+            inviteCode: Observable.just(inviteCode).compactMap { $0 }
         )
         
         let output = self.viewModel.transform(from: input)
@@ -199,6 +203,10 @@ final class TermsViewController: BaseViewController {
         guard let coordinator = coordinator else { return }
         
         output.start
+            .emit(onNext: coordinator.showSetProfileScene)
+            .disposed(by: self.disposeBag)
+        
+        output.inviteFlowNextScene
             .emit(onNext: coordinator.showSetProfileScene)
             .disposed(by: self.disposeBag)
     }
