@@ -32,7 +32,7 @@ final class CafeRoomViewModel: ViewModelType {
         ///Int: CafeId
         let showDrinkSelectBottomSheet: Signal<Int>
         ///Int: CafeId
-        let showSettingBottomSheet: Signal<(cafeId:Int, isDrinkEmpty: Bool)>
+        let showSettingBottomSheet: Signal<Cafe>
         ///Int: QuestionId
         let showCafeQuestionScene: Signal<Int>
         ///Int: CafeId
@@ -83,19 +83,9 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .map{ $0.type}
             .withLatestFrom(input.cafeId,resultSelector: { ($0, $1) } )
-           
-        
-        let isDrinkEmpty = roomInfo
-            .map {$0.currentUser.filledIngredients.count == 0}
-            
         
         let showSettingBottomSheet = input.didTapNavigationMenu
-            .withLatestFrom(
-                Observable.combineLatest(
-                    input.cafeId,
-                    isDrinkEmpty,
-                    resultSelector: {(cafeId: $0, isDrinkEmpty: $1)}
-                ))
+            .withLatestFrom(roomInfo)
             
         
         let showCafeQuestionScene = input.didTapQuestionCell

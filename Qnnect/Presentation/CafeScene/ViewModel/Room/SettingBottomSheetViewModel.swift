@@ -13,13 +13,12 @@ final class SettingBottomSheetViewModel: ViewModelType {
     
     struct Input {
         let didTapSettingItem: Observable<SettingItemType>
-        let cafeId: Observable<Int>
-        let isDrinkEmpty: Observable<Bool>
+        let cafe: Observable<Cafe>
         let didTapLeaveAlertOkButton: Observable<Void>
     }
     
     struct Output {
-        let showInvitationScene: Signal<Void>
+        let showInvitationScene: Signal<Cafe>
         ///Int: CafeId
         let showCafeModifyingScene: Signal<Int>
         let showLeaveCafeAlertView: Signal<Void>
@@ -37,13 +36,17 @@ final class SettingBottomSheetViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
+        let cafeId = input.cafe.map { $0.cafeId }
+        
+        let isDrinkEmpty = input.cafe.map{ $0.currentUser.filledIngredients.isEmpty }
+    
         let showInvitationScene = input.didTapSettingItem
             .filter { $0 == .invite}
-            .mapToVoid()
+            .withLatestFrom(input.cafe)
         
         let showCafeModifyingScene = input.didTapSettingItem
             .filter { $0 == .cafeInfoModify }
-            .withLatestFrom(input.cafeId)
+            .withLatestFrom(cafeId)
         
         let showLeaveCafeAlertView = input.didTapSettingItem
             .filter { $0 == .leaveCafe}
@@ -51,19 +54,19 @@ final class SettingBottomSheetViewModel: ViewModelType {
             .mapToVoid()
         
         let leaveCafe = input.didTapLeaveAlertOkButton
-            .withLatestFrom(input.cafeId)
+            .withLatestFrom(cafeId)
             .flatMap(self.cafeUseCase.leaveCafe(_:))
             .mapToVoid()
         
         let showSelectDrinkScene = input.didTapSettingItem
             .filter{ $0 == .drinkModify }
-            .withLatestFrom(input.isDrinkEmpty)
+            .withLatestFrom(isDrinkEmpty)
             .filter{ $0 }
-            .withLatestFrom(input.cafeId)
+            .withLatestFrom(cafeId)
         
         let showNotModifyDrinkAlertView = input.didTapSettingItem
             .filter{ $0 == .drinkModify }
-            .withLatestFrom(input.isDrinkEmpty)
+            .withLatestFrom(isDrinkEmpty)
             .filter{ !$0 }
             .mapToVoid()
         

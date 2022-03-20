@@ -46,22 +46,20 @@ final class SettingBottomSheet: BottomSheetViewController {
         $0.modalPresentationStyle = .overCurrentContext
     }
     
-    private var cafeId: Int!
+    private var cafe: Cafe!
     private var viewModel: SettingBottomSheetViewModel!
     weak var coordinator: CafeCoordinator?
-    private var isDrinkEmpty: Bool!
+   
     
     static func create(
         with viewModel: SettingBottomSheetViewModel,
-        _ cafeId: Int,
-        _ coordinator: CafeCoordinator,
-        _ isDrinkEmpty: Bool
+        _ cafe: Cafe,
+        _ coordinator: CafeCoordinator
     ) -> SettingBottomSheet {
         let bottomSheet = SettingBottomSheet()
         bottomSheet.viewModel = viewModel
-        bottomSheet.cafeId = cafeId
+        bottomSheet.cafe = cafe
         bottomSheet.coordinator = coordinator
-        bottomSheet.isDrinkEmpty = isDrinkEmpty
         return bottomSheet
     }
     
@@ -93,8 +91,7 @@ final class SettingBottomSheet: BottomSheetViewController {
         let input = SettingBottomSheetViewModel.Input(
             didTapSettingItem: self.menuTableView.rx.modelSelected(SettingItemType.self)
                 .asObservable(),
-            cafeId: Observable.just(self.cafeId),
-            isDrinkEmpty: Observable.just(isDrinkEmpty),
+            cafe: Observable.just(cafe),
             didTapLeaveAlertOkButton: leaveCafeAlertView.okButton.rx.tap.asObservable()
         )
     

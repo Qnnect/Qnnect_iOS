@@ -12,8 +12,8 @@ protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet(_ cafeId: Int)
     func start(with cafeId: Int, _ isFirst: Bool)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
-    func showSettingBottomSheet(_ cafeId: Int, _ isDrinkEmpty: Bool)
-    func showInvitationScene()
+    func showSettingBottomSheet(_ cafe: Cafe)
+    func showInvitationScene(_ cafe: Cafe)
     func showCafeQuestionScene(_ questionId: Int)
     func showCafeModifyingScene(_ cafeId: Int)
     func showWriteQuestionScene(_ cafeId: Int)
@@ -74,17 +74,22 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         self.navigationController.present(alert, animated: true, completion: nil)
     }
     
-    func showSettingBottomSheet(_ cafeId: Int, _ isDrinkEmpty: Bool) {
+    func showSettingBottomSheet(_ cafe: Cafe) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = SettingBottomSheetViewModel(cafeUseCase: cafeUseCase)
-        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafeId, self, isDrinkEmpty)
+        let bottomSheet = SettingBottomSheet.create(with: viewModel,cafe, self)
         bottomSheet.modalPresentationStyle = .overCurrentContext
         self.navigationController.present(bottomSheet, animated: false,completion: nil)
     }
     
-    func showInvitationScene() {
-        let vc = CafeInvitationViewController.create()
+    func showInvitationScene(_ cafe: Cafe) {
+        let viewModel = InviteCafeViewModel()
+        let vc = InviteCafeViewController.create(
+            with: viewModel,
+            cafe,
+            self
+        )
         if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
             bottomSheet.hideBottomSheetAndGoBack(nil)
         }

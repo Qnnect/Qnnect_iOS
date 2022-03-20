@@ -19,4 +19,5 @@ target 'Qnnect' do
   pod 'RxAppState'
   pod "TTGTagCollectionView"
   pod 'NVActivityIndicatorView'
+  pod 'Toast-Swift', '~> 5.0.1'
 end

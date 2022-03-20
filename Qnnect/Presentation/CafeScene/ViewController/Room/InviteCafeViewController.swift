@@ -8,8 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxKakaoSDKLink
+import KakaoSDKLink
 
-final class CafeInvitationViewController: BaseViewController {
+final class InviteCafeViewController: BaseViewController {
     
     private let mainLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
@@ -94,8 +97,19 @@ final class CafeInvitationViewController: BaseViewController {
         $0.spacing = 17.0
     }
     
-    static func create() -> CafeInvitationViewController{
-        let vc = CafeInvitationViewController()
+    private var viewModel: InviteCafeViewModel!
+    private var cafe: Cafe!
+    weak var coordinator: CafeCoordinator?
+    
+    static func create(
+        with viewModel: InviteCafeViewModel,
+        _ cafe: Cafe,
+        _ coordinator: CafeCoordinator
+    ) -> InviteCafeViewController{
+        let vc = InviteCafeViewController()
+        vc.viewModel = viewModel
+        vc.cafe = cafe
+        vc.coordinator = coordinator
         return vc
     }
     
@@ -198,5 +212,18 @@ final class CafeInvitationViewController: BaseViewController {
     
     override func bind() {
         
+        let input = InviteCafeViewModel.Input(
+            cafe: Observable.just(cafe),
+            didTapCodeCopyButton: invitaionLinkCopyButton.rx.tap.asObservable(),
+            didTapKakaoInvitationButton: kakaoInvitationButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.invite
+            .emit(onNext: {
+                result in
+                UIApplication.shared.open(result.url, options: [:], completionHandler: nil)
+            }).disposed(by: self.disposeBag)
     }
 }

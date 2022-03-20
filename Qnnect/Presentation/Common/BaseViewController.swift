@@ -54,6 +54,7 @@ class BaseViewController: UIViewController {
             view.endEditing(true) // todo...
         }
         sender.cancelsTouchesInView = false
+        
     }
     
     @objc func pop() {
