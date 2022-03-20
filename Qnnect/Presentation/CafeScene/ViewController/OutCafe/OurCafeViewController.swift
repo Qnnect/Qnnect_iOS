@@ -56,11 +56,11 @@ enum DrinkStep: Int, CaseIterable {
         case .base:
             return Constants.drinkIceStepImage
         case .main:
-            return Constants.strawberryLatte_step_1
-        case .topping:
             return Constants.strawberryLatte_step_2
-        case .completed:
+        case .topping:
             return Constants.strawberryLatte_step_3
+        case .completed:
+            return Constants.strawberryLatte_step_4
         }
     }
     
@@ -123,6 +123,7 @@ final class OurCafeViewController: BaseViewController {
     }
     
     /// 자신이 음료를 선택하지 않았을 경우 나오는 버튼
+    /// 자신이 음료를 완성을 때 나오는 버튼 , 음료 고르기 -> 새 음료 고르기
     private let selectDrinkButton = UIButton().then {
         $0.setTitle("음료 고르기", for: .normal)
         $0.setTitleColor(.BLACK_121212, for: .normal)
@@ -133,6 +134,20 @@ final class OurCafeViewController: BaseViewController {
         $0.layer.cornerRadius = 10.0
         $0.isHidden = true
     }
+    
+    /// 음료완성 됐을 때 나오는 라벨
+    private let completionLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.textColor = .BLACK_121212
+        $0.text = "xxxx 완성"
+        $0.textAlignment = .center
+    }
+    
+    private let completionImageView = UIImageView().then {
+        $0.image = Constants.completionCelebrateImage
+        $0.contentMode = .scaleAspectFit
+    }
+    
     
     private var viewModel: OurCafeViewModel!
     weak var coordinator: OurCafeCoordinator?
@@ -174,7 +189,9 @@ final class OurCafeViewController: BaseViewController {
             insertIngredientButton,
             stepLabelStackView,
             notSelectLabel,
-            selectDrinkButton
+            selectDrinkButton,
+            completionLabel,
+            completionImageView
         ].forEach {
             view.addSubview($0)
         }
@@ -232,6 +249,17 @@ final class OurCafeViewController: BaseViewController {
         
         selectDrinkButton.snp.makeConstraints { make in
             make.edges.equalTo(insertIngredientButton)
+        }
+        
+        completionLabel.snp.makeConstraints { make in
+            make.top.equalTo(drinkImageView.snp.bottom).offset(30.0)
+            make.leading.trailing.equalToSuperview().inset(36.0)
+        }
+        
+        completionImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(120.0)
+            make.top.greaterThanOrEqualTo(completionLabel.snp.bottom).offset(8.0).priority(.low)
+            make.bottom.equalTo(selectDrinkButton.snp.top)
         }
         
         
@@ -306,8 +334,12 @@ final class OurCafeViewController: BaseViewController {
                 })
             }).disposed(by: self.disposeBag)
         
-        output.isUserDrinkFetched
-            .emit(onNext: setBottomLayout(_:))
+        Observable.zip(
+            output.isUserDrinkFetched.asObservable(),
+            output.isDrinkCompleted.asObservable()
+        )
+            .asSignal(onErrorSignalWith: .empty())
+            .emit(onNext: setBottomLayout)
             .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
@@ -382,27 +414,57 @@ private extension OurCafeViewController {
     
     @objc dynamic func didTapStoreButton() { }
     
-    func setBottomLayout(_ isUserDrinkFetched: Bool) {
+    
+    func setBottomLayout(_ isUserDrinkFetched: Bool, _ isCompleted: Bool) {
         if !isUserDrinkFetched {
             insertIngredientButton.isHidden = true
             progressBar.isHidden = true
             stepLabelStackView.isHidden = true
             drinkImageView.image = Constants.drinkEmptyImage
             notSelectLabel.isHidden = false
+            completionLabel.isHidden = true
+            completionImageView.isHidden = true
             
             if let indexPath = userCollectionView.indexPathsForSelectedItems?.first, indexPath.row == 0 {
+                selectDrinkButton.setTitle("음료 고르기", for: .normal)
                 selectDrinkButton.isHidden = false
+            } else {
+                selectDrinkButton.isHidden = true
             }
+            
         } else {
-            progressBar.isHidden = false
-            stepLabelStackView.isHidden = false
             notSelectLabel.isHidden = true
-            selectDrinkButton.isHidden = true
+            if isCompleted {
+                progressBar.isHidden = true
+                stepLabelStackView.isHidden = true
+                insertIngredientButton.isHidden = true
+                completionLabel.isHidden = false
+                completionImageView.isHidden = false
+                
+                if let indexPath = userCollectionView.indexPathsForSelectedItems?.first, indexPath.row == 0 {
+                    selectDrinkButton.setTitle("새 음료 고르기", for: .normal)
+                    selectDrinkButton.isHidden = false
+                } else {
+                    selectDrinkButton.isHidden = true
+                }
+                
+            } else {
+                progressBar.isHidden = false
+                stepLabelStackView.isHidden = false
+                selectDrinkButton.isHidden = true
+                completionLabel.isHidden = true
+                completionImageView.isHidden = true
+                
+                if let indexPath = userCollectionView.indexPathsForSelectedItems?.first, indexPath.row == 0 {
+                    insertIngredientButton.isHidden = false
+                } else {
+                    insertIngredientButton.isHidden = true
+                }
+            }
         }
     }
     
     func setTitleLabel(_ isCurrentUser: Bool, _ name: String) {
-        insertIngredientButton.isHidden = !isCurrentUser
         titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
     }
 

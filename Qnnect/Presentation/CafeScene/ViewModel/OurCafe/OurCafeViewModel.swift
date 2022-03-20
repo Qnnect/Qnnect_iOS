@@ -30,6 +30,7 @@ final class OurCafeViewModel: ViewModelType {
         let showInsertIngredientScene: Signal<Int>
         let showStoreScene: Signal<Void>
         let isUserDrinkFetched: Signal<Bool>
+        let isDrinkCompleted: Signal<Bool>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -82,14 +83,29 @@ final class OurCafeViewModel: ViewModelType {
                 return ourCafe
             }
         
+        let isDrinkCompleted = fetchedResult
+            .map {
+                [weak self] result -> Bool in
+                if case let .success(cafe) = result {
+                    if let curStep = self?.ourCafeUseCase.getCurStep(cafe.selectedUserDrinkInfo),
+                       curStep == .completed {
+                        return true
+                    }
+                }
+                return false
+            }
+        
         let isUserDrinkFetched = fetchedResult
             .map {
                 result -> Bool in
                 if case .success(_) = result {
-                return true
-            } else {
-                return false
-            }}
+                    return true
+                } else {
+                    return false
+                }
+            }
+        
+        
         
         let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .map(ourCafeUseCase.getCurStep(_:))
@@ -131,7 +147,8 @@ final class OurCafeViewModel: ViewModelType {
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
-            isUserDrinkFetched: isUserDrinkFetched.asSignal(onErrorSignalWith: .empty())
+            isUserDrinkFetched: isUserDrinkFetched.asSignal(onErrorSignalWith: .empty()),
+            isDrinkCompleted: isDrinkCompleted.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
