@@ -49,15 +49,10 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showSelectDrinkBottomSheet(_ cafeId: Int) {
-        let drinkRepository = DefaultDrinkRepository(drinkNetworkService: DrinkNetworkService())
-        let drinkUseCase = DefaultDrinkUseCase(drinkRepository: drinkRepository)
-        let viewModel = DrinkSelctViewModel(drinkUseCase: drinkUseCase)
-        let vc = DrinkSelectViewController.create(with: viewModel, cafeId, self)
-        vc.modalPresentationStyle = .overCurrentContext
-        if let vc = self.navigationController.presentedViewController as? DrinkSelectGuideAlertView {
-            vc.dismiss(animated: false, completion: nil)
-        }
-        self.navigationController.present(vc, animated: false, completion: nil)
+        let coordinator = DefaultSelectDrinkCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start(cafeId)
     }
     
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int) {

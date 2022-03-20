@@ -14,6 +14,7 @@ protocol OurCafeCoordinator: Coordinator {
     func showIngredientStorageScene()
     func showRightStepAlertView(_ ingredient: MyIngredient, _ userDrinkSelectedId: Int)
     func showStoreScene()
+    func showDrinkSelectBottomSheet(_ cafeId: Int)
     func dismiss()
 }
 
@@ -88,6 +89,13 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         let vc = RightStepAlertViewController.create(with: viewModel, self, ingredient, userDrinkSelectedId)
         vc.modalPresentationStyle = .overCurrentContext
         navigationController.present(vc, animated: true, completion: nil)
+    }
+    
+    func showDrinkSelectBottomSheet(_ cafeId: Int) {
+        let coordinator = DefaultSelectDrinkCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start(cafeId)
     }
     
     func dismiss() {

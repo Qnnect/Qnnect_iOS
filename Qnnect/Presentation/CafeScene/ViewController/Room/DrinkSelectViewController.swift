@@ -68,13 +68,13 @@ final class DrinkSelectViewController: BottomSheetViewController {
     }
     
     private var viewModel: DrinkSelctViewModel!
-    weak var coordinator: CafeCoordinator?
+    weak var coordinator: SelectDrinkCoordinator?
     private var cafeId: Int!
     
     static func create(
         with viewModel: DrinkSelctViewModel,
         _ cafeId: Int,
-        _ coordinator: CafeCoordinator
+        _ coordinator: SelectDrinkCoordinator
     ) -> DrinkSelectViewController {
         let vc = DrinkSelectViewController()
         vc.viewModel = viewModel
