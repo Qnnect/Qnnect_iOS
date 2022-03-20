@@ -19,6 +19,7 @@ final class OurCafeViewModel: ViewModelType {
         let didTapOurCafeUserCell: Observable<OurCafeUser>
         let didTapInsertIngredientButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
+        let didTapSelectDrinkButton: Observable<Void>
     }
     
     struct Output {
@@ -31,6 +32,8 @@ final class OurCafeViewModel: ViewModelType {
         let showStoreScene: Signal<Void>
         let isUserDrinkFetched: Signal<Bool>
         let isDrinkCompleted: Signal<Bool>
+        /// Int: CafeId
+        let showSelectDrinkScene: Signal<Int>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -124,6 +127,9 @@ final class OurCafeViewModel: ViewModelType {
         let showInsertIngredientScene = input.didTapInsertIngredientButton
             .withLatestFrom(input.cafeId)
         
+        let showSelectDrinkScene = input.didTapSelectDrinkButton
+            .withLatestFrom(input.cafeId)
+        
         return Output(
             userInfos: firstLoadUserInfos
                 .withLatestFrom(input.cafeUserId, resultSelector: { ($0, $1) })
@@ -148,7 +154,8 @@ final class OurCafeViewModel: ViewModelType {
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
             isUserDrinkFetched: isUserDrinkFetched.asSignal(onErrorSignalWith: .empty()),
-            isDrinkCompleted: isDrinkCompleted.asSignal(onErrorSignalWith: .empty())
+            isDrinkCompleted: isDrinkCompleted.asSignal(onErrorSignalWith: .empty()),
+            showSelectDrinkScene: showSelectDrinkScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

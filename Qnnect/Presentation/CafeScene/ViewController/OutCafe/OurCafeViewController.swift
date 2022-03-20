@@ -299,7 +299,8 @@ final class OurCafeViewController: BaseViewController {
                 .asObservable()
             ,
             didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable(),
-            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
+            didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid(),
+            didTapSelectDrinkButton: selectDrinkButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -363,6 +364,10 @@ final class OurCafeViewController: BaseViewController {
         
         output.showStoreScene
             .emit(onNext: coordinator.showStoreScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showSelectDrinkScene
+            .emit(onNext: coordinator.showDrinkSelectBottomSheet(_:))
             .disposed(by: self.disposeBag)
         
     }
