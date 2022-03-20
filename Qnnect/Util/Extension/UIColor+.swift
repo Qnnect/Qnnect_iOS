@@ -20,7 +20,7 @@ extension UIColor {
     class var GRAY05: UIColor? { return UIColor(named: "GRAY05") }
     class var GREEN01: UIColor? { return UIColor(named: "GREEN01") }
     class var GREEN02: UIColor? { return UIColor(named: "GREEN02") }
-    class var PINK01: UIColor? { return UIColor(named: "PINK02") }
+    class var PINK01: UIColor? { return UIColor(named: "PINK01") }
     class var PINK02: UIColor? { return UIColor(named: "PINK02") }
     class var p_brown: UIColor? { return UIColor(named: "p_brown") }
     class var PRIMARY02: UIColor? { return UIColor(named: "PRIMARY02") }

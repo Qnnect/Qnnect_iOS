@@ -141,14 +141,14 @@ final class InsertIngredientViewController: BaseViewController {
         }
         
         stepLabelStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(progressBar)
+            make.leading.trailing.equalToSuperview().inset(45.0)
             make.top.equalTo(progressBar.snp.bottom).offset(8.0)
         }
         var steps = DrinkStep.allCases
         steps.removeLast()
         steps.forEach { step in
             let label = UILabel().then {
-                $0.font = .IM_Hyemin(.bold, size: 14.0)
+                $0.font = .BM_JUA(size: 14.0)
                 $0.textAlignment = .center
                 $0.numberOfLines = 2
             }

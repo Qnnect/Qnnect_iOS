@@ -24,7 +24,8 @@ final class DrinkSelectCell: UICollectionViewCell {
     
     var isChecked: Bool = false {
         didSet {
-            contentView.backgroundColor = isChecked ? .p_brown : .secondaryBackground
+            contentView.layer.borderColor = isChecked ? UIColor.p_brown?.cgColor : UIColor.secondaryBackground?.cgColor
+            contentView.layer.borderWidth = isChecked ? 2.5 : 0.0
         }
     }
     

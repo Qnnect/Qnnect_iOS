@@ -17,7 +17,7 @@ final class OurCafeUserCell: UICollectionViewCell {
     private(set) var profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 26.0
+        $0.layer.cornerRadius = 30.6
     }
     
     private let nameLabel = UILabel().then {
@@ -31,7 +31,7 @@ final class OurCafeUserCell: UICollectionViewCell {
         didSet {
             nameLabel.textColor = isSelected ? .black : .GRAY03
             profileImageView.layer.borderWidth = isSelected ? 1.0 : 0.0
-            profileImageView.layer.borderColor = isSelected ? UIColor.black.cgColor : nil
+            profileImageView.layer.borderColor = isSelected ? UIColor.p_brown?.cgColor : nil
         }
     }
     
@@ -71,14 +71,9 @@ final class OurCafeUserCell: UICollectionViewCell {
     func update(with user: OurCafeUser) {
         profileImageView.kf.setImage(
             with: URL(string: user.profileImage),
-            placeholder: Constants.profileDefaultImage
-        )
+            placeholder: Constants.profileDefaultImage)
         
         nameLabel.text = user.nickName
     }
     
-    func setSelectionStyle(_ isChecked: Bool) {
-        contentView.layer.borderColor = isChecked ? UIColor.black.cgColor : UIColor.clear.cgColor
-        contentView.layer.borderWidth = isChecked ? 1.0 : 0.0
-    }
 }

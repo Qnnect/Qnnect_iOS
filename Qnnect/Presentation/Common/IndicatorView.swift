@@ -21,10 +21,10 @@ class LoadingIndicator {
                 loadingIndicatorView = existedView
             } else {
                 loadingIndicatorView = NVActivityIndicatorView(
-                    frame: window.frame,
+                    frame: .init(x: UIScreen.main.bounds.width / 2.0,
+                                 y: UIScreen.main.bounds.width / 2.0, width: 50.0, height: 50.0),
                     type: .lineSpinFadeLoader,
-                    color: .black,
-                    padding: 100
+                    color: .black
                 )
                 
                 window.addSubview(loadingIndicatorView)

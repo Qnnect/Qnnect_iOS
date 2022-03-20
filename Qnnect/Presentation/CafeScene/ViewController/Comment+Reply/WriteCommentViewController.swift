@@ -128,6 +128,7 @@ final class WriteCommentViewController: BaseViewController {
     }
     
     private var imageDatas = [(PHAsset?,String?)]()
+    private var images = [Double: UIImage?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,15 +198,11 @@ final class WriteCommentViewController: BaseViewController {
             make.width.height.equalTo(27.0)
         }
         
-
-        
-        
         self.writerNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.writerProfileImageView.snp.trailing).offset(8.0)
             make.centerY.equalTo(self.writerProfileImageView)
         }
 
-        
         self.inputTextView.snp.makeConstraints { make in
             make.top.equalTo(self.writerProfileImageView.snp.bottom).offset(8.0)
             make.leading.trailing.equalToSuperview().inset(20.0)
@@ -245,10 +242,6 @@ final class WriteCommentViewController: BaseViewController {
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
-                .do{
-                    _ in
-                    LoadingIndicator.showLoading()
-                }
                 .map(getImages),
             question: Observable.just(question),
             type: Observable.just(
@@ -335,9 +328,15 @@ extension WriteCommentViewController : UICollectionViewDataSource{
 
         //let asset = self.fetchedAssets[indexPath.row]
         if let asset = imageDatas[indexPath.row].0 {
-            cell.update(with: asset)
+            cell.update(with: asset) {
+                [weak self] image in
+                self?.images[Date().timeIntervalSince1970] = image
+            }
         } else if let url = imageDatas[indexPath.row].1 {
-            cell.update(with: url)
+            cell.update(with: url) {
+                [weak self] image in
+                self?.images[Date().timeIntervalSince1970] = image
+            }
         }
         
         cell.delegate = self
@@ -370,15 +369,8 @@ private extension WriteCommentViewController {
         }
     }
     
-    func getImages() -> [Data?]{
-        var datas = [Data?]()
-            
-        for i in 0 ..< imageDatas.count{
-            let cell = attachingImageCollectionView.cellForItem(at: IndexPath(item: i, section: 0)) as! AttachingImageCell
-            datas.append(cell.imageView.image?.pngData())
-        }
-       
-        return datas
+    func getImages() -> [Data?] {
+        return images.sorted(by: { $0.key < $1.key }).map { $0.value?.pngData() }
     }
     
     func setScene(by type: WriteCommentType) {
@@ -418,6 +410,9 @@ extension WriteCommentViewController: AttachingImageCellDelegate {
         guard let indexPath = self.attachingImageCollectionView.indexPath(for: cell) else { return }
         
         imageDatas.remove(at: indexPath.row)
+        var sortedImages = images.sorted(by: { $0.key < $1.key })
+        sortedImages.remove(at: indexPath.row)
+        images = Dictionary(uniqueKeysWithValues: sortedImages)
         self.attachingImageCollectionView.deleteItems(at: [indexPath])
     }
 }

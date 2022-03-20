@@ -61,6 +61,12 @@ final class CafeAnswerCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: Constants.answerCellSpacing, right: 0))
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        attachedImageView.image = nil
+    }
+    
     private func configureUI() {
         
         [
@@ -109,8 +115,7 @@ final class CafeAnswerCell: UITableViewCell {
         self.commentImageView.snp.makeConstraints { make in
             make.trailing.equalTo(self.commentCountLabel.snp.leading).offset(-6.0)
             make.width.height.equalTo(14.0)
-            make.top.equalTo(contentLabel.snp.bottom).offset(8.0)
-            
+            make.top.equalTo(attachedImageView.snp.bottom).offset(8.0)
         }
     }
     
@@ -132,6 +137,19 @@ final class CafeAnswerCell: UITableViewCell {
                 with: URL(string: url),
                 placeholder: Constants.commentEmptyImage
             )
+            
+            self.commentImageView.snp.remakeConstraints { make in
+                make.trailing.equalTo(self.commentCountLabel.snp.leading).offset(-6.0)
+                make.width.height.equalTo(14.0)
+                make.top.equalTo(attachedImageView.snp.bottom).offset(8.0)
+            }
+        } else {
+            self.commentImageView.snp.remakeConstraints { make in
+                make.trailing.equalTo(self.commentCountLabel.snp.leading).offset(-6.0)
+                make.width.height.equalTo(14.0)
+                make.top.equalTo(contentLabel.snp.bottom).offset(8.0)
+            }
+
         }
     }
 }

@@ -23,7 +23,7 @@ struct CafeResponseDTO: Decodable {
             questions: self.cafeQuestionResponseList.map { $0.toDomain() },
             cafeUsers: self.cafeUserResponseList.map { $0.toDomain()},
             code: self.code,
-            createdAt: self.createdAt,
+            createdAt: self.createdAt.replacingOccurrences(of: "-", with: "."),
             currentUser: self.currentUserResponse.toDomain(),
             diaryColor: self.diaryColor,
             title: self.title,

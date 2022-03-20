@@ -23,7 +23,7 @@ struct CommentResponseDTO: Decodable {
         Comment(
             id: commentId,
             content: content,
-            createdAt: createdAt,
+            createdAt: createdAt.replacingOccurrences(of: "-", with: "."),
             imageUrl1: imageUrl1,
             imageUrl2: imageUrl2,
             imageUrl3: imageUrl3,

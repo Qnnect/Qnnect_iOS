@@ -43,6 +43,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
         
         let showLeaveCafeAlertView = input.didTapSettingItem
             .filter { $0 == .leaveCafe}
+            .debug()
             .mapToVoid()
         
         let leaveCafe = input.didTapLeaveAlertOkButton

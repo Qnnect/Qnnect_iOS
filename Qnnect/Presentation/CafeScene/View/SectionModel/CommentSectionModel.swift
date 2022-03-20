@@ -12,11 +12,13 @@ enum CommentSectionModel {
     case commentSection(title: String, items: [CommentSectionItem])
     case attachImageSection(title: String, items: [CommentSectionItem])
     case replySection(title: String, items: [CommentSectionItem])
+    case createAtSection(title: String, items: [CommentSectionItem])
 }
 enum CommentSectionItem {
     case commentSectionItem(comment: Comment)
     case attachImageSectionItem(imageURL: String)
     case replySectionItem(reply: Reply)
+    case createAtSectionItem(date: String)
 }
 
 extension CommentSectionModel: SectionModelType {
@@ -29,6 +31,8 @@ extension CommentSectionModel: SectionModelType {
             self = .attachImageSection(title: title, items: items)
         case .replySection(title: let title, _):
             self = .replySection(title: title, items: items)
+        case .createAtSection(title: let title, _):
+            self = .createAtSection(title: title, items: items)
         }
     }
     
@@ -41,6 +45,8 @@ extension CommentSectionModel: SectionModelType {
         case .attachImageSection(_, let items):
             return items
         case .replySection(_, let items):
+            return items
+        case .createAtSection(_, items: let items):
             return items
         }
     }

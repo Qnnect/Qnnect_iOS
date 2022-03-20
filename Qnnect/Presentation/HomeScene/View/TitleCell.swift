@@ -13,7 +13,7 @@ final class TitleCell: UICollectionViewCell {
     static let identifier = "TitleCell"
     
     private let profileImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 25.0
         $0.clipsToBounds = true
     }

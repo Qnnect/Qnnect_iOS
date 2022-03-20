@@ -15,6 +15,7 @@ final class LeaveCafeAlertView: BaseViewController {
     private let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .blackLabel
+        $0.text = "카페에서 나가시겠습니까?"
     }
     
     

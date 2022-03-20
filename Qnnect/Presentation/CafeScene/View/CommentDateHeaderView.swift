@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-final class CommentDateHeaderView: UICollectionReusableView {
-    static let identifier = "CommentDateHeaderView"
+final class CommentDateCell: UICollectionViewCell {
+    static let identifier = "CommentDateCell"
     
     private let dateLabel = UILabel().then {
         $0.font = .Roboto(.regular, size: 12.0)
@@ -34,7 +34,6 @@ final class CommentDateHeaderView: UICollectionReusableView {
             make.trailing.equalToSuperview()
             make.top.bottom.equalToSuperview()
         }
-
     }
     
     func update(with date: String) {

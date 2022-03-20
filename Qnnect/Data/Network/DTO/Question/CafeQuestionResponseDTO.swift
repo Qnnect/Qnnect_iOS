@@ -17,7 +17,7 @@ struct CafeQuestionResponseDTO: Decodable {
         return QuestionShortInfo(
             cafeQuestionId: self.cafeQuestionId,
             cafeTitle: self.cafeTitle,
-            createdAt: self.createdAt,
+            createdAt: self.createdAt.replacingOccurrences(of: "-", with: "."),
             content: self.question
         )
     }

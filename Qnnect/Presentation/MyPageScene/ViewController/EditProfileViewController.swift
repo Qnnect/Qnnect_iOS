@@ -168,16 +168,16 @@ final class EditProfileViewController: BaseViewController {
         let result = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
         let imageManager = PHImageManager()
         let scale = UIScreen.main.scale
-        let imageSize = CGSize(width: 300 * scale, height: 300 * scale)
+        let imageSize = CGSize(width: 200 * scale, height: 200 * scale)
         let options = PHImageRequestOptions()
         options.deliveryMode = .opportunistic
         options.resizeMode = .none
         imageManager.requestImage(for: result[0], targetSize: imageSize, contentMode: .aspectFill, options: options) { image, info in
-            if (info?[PHImageResultIsDegradedKey] as? Bool) == true{
-           }else{
-               //고화질
+//            if (info?[PHImageResultIsDegradedKey] as? Bool) == true{
+//           }else{
+//               //고화질
                self.profileImageView.setImage(image: image)
-           }
+          // }
         }
         self.dismiss(animated: true, completion: nil)
     }

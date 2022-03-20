@@ -31,7 +31,7 @@ struct HomeInfoCafeResponseDTO: Decodable {
     func toDomain() -> MyCafe {
         return MyCafe(
             cafeUserNum: self.cafeUserNum,
-            createdAt: self.createdAt,
+            createdAt: self.createdAt.replacingOccurrences(of: "-", with: "."),
             id: self.id,
             diaryColor: self.diaryColor,
             title: self.title

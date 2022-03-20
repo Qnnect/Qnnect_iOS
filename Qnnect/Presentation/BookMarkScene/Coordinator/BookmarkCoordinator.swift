@@ -14,7 +14,7 @@ protocol BookmarkCoordinator: Coordinator {
     func showBookMarkSearchScene()
 }
 
-final class DefaultBookmarkCoordinator: BookmarkCoordinator {
+final class DefaultBookmarkCoordinator: NSObject, BookmarkCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -22,6 +22,7 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        super.init()
     }
     
     func start() {
@@ -53,5 +54,29 @@ final class DefaultBookmarkCoordinator: BookmarkCoordinator {
         let viewModel = BookmarkSearchViewModel(questionUseCase: questionUseCase)
         let vc = BookmarkSearchViewController.create(with: viewModel, self)
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension DefaultBookmarkCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+           return
+        }
+
+        // child coordinator 가 일을 끝냈다고 알림.
+        if let vc = fromViewController as? CafeQuestionViewController {
+            childDidFinish(vc.coordinator)
+            print("TEst!@#!@#")
+            if let presentedVC = navigationController.viewControllers.last {
+                presentedVC.tabBarController?.tabBar.isHidden = false
+            }
+        }
+        
     }
 }

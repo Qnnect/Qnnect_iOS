@@ -17,7 +17,7 @@ struct QuestionResponseDTO: Decodable {
     
     func toDomain() -> Question {
         return Question(
-            createdAt: self.createdAt,
+            createdAt: self.createdAt.replacingOccurrences(of: "-", with: "."),
             daysLeft: self.daysLeft,
             content: self.question,
             questioner: self.questioner,

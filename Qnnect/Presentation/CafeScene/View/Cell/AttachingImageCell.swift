@@ -62,7 +62,7 @@ final class AttachingImageCell: UICollectionViewCell {
         self.attachingCancleButton.addTarget(self, action: #selector(didTapAttachingCancleButton), for: .touchUpInside)
     }
     
-    func update(with asset: PHAsset) {
+    func update(with asset: PHAsset, imageLoadCompletion: @escaping (UIImage?) -> Void) {
         let imageManager = PHImageManager()
         let scale = UIScreen.main.scale
         let imageSize = CGSize(width: 300 * scale , height: 300 * scale)
@@ -70,15 +70,22 @@ final class AttachingImageCell: UICollectionViewCell {
         options.deliveryMode = .opportunistic
         imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options) {
             [weak self] image, info in
-            self?.imageView.image = image
+            if (info?[PHImageResultIsDegradedKey] as? Bool) == true{
+            }else{
+                //고화질
+                self?.imageView.image = image
+                imageLoadCompletion(image)
+            }
         }
     }
     
-    func update(with url: String) {
+    func update(with url: String, imageLoadCompletion: @escaping (UIImage?) -> Void) {
         imageView.kf.setImage(
             with: URL(string: url)!,
-            placeholder: Constants.commentEmptyImage
-        )
+            placeholder: Constants.commentEmptyImage) {
+                [weak self] result in
+                imageLoadCompletion(self?.imageView.image)
+            }
     }
     
     @objc func didTapAttachingCancleButton() {

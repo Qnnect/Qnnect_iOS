@@ -20,11 +20,7 @@ final class CommentViewController: BaseViewController {
         $0.register(CommentCell.self, forCellWithReuseIdentifier: CommentCell.identifier)
         $0.register(CommentAttachImageCell.self, forCellWithReuseIdentifier: CommentAttachImageCell.identifier)
         $0.register(ReplyCell.self, forCellWithReuseIdentifier: ReplyCell.identifier)
-        $0.register(
-            CommentDateHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: CommentDateHeaderView.identifier
-        )
+        $0.register(CommentDateCell.self, forCellWithReuseIdentifier: CommentDateCell.identifier)
         $0.backgroundColor = .p_ivory
     }
     
@@ -68,11 +64,6 @@ final class CommentViewController: BaseViewController {
         vc.coordinator = coordinator
         vc.question = question
         return vc
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        print("viewWillAppear!!!!!!!")
     }
     
     override func viewDidLoad() {
@@ -153,30 +144,42 @@ final class CommentViewController: BaseViewController {
         
         let dataSource = createDataSource()
         
-        Observable.combineLatest(
+        Observable.zip(
             output.comment.asObservable(),
             output.replies.asObservable()
         )
+            .debug()
             .map {
-            [weak self] comment, replies -> [CommentSectionModel] in
-            guard let self = self else { return [] }
-            var models = [CommentSectionModel]()
-            let commentSectionItem = CommentSectionItem.commentSectionItem(comment: comment)
-            let attachImageSectionItems = comment.getImageURLs().map { CommentSectionItem.attachImageSectionItem(imageURL: $0) }
-            let replySectionItems = replies.map {  CommentSectionItem.replySectionItem(reply: $0) }
-            
-            models.append(CommentSectionModel.commentSection(title: "", items: [commentSectionItem]))
-            if comment.getImageURLs().count > 0 {
-                models.append( CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems))
-                let isSingleImage: Bool = (comment.getImageURLs().count == 1)
-                self.mainCollectionView.setCollectionViewLayout(self.createLayout(true, isSingleImage), animated: false)
-            } else {
-                self.mainCollectionView.setCollectionViewLayout(self.createLayout(false, false), animated: false)
+                [weak self] comment, replies -> [CommentSectionModel] in
+                guard let self = self else { return [] }
+                var models = [CommentSectionModel]()
+                let commentSectionItem = CommentSectionItem.commentSectionItem(comment: comment)
+                let commentDateSectionItem = CommentSectionItem.createAtSectionItem(date: comment.createdAt)
+                let replySectionItems = replies.map {  CommentSectionItem.replySectionItem(reply: $0) }
+                
+                models.append(CommentSectionModel.commentSection(title: "", items: [commentSectionItem]))
+                if comment.getImageURLs().count > 0 {
+                    let attachImageSectionItems = comment.getImageURLs().map { CommentSectionItem.attachImageSectionItem(imageURL: $0) }
+                    models.append( CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems))
+                    if comment.getImageURLs().count == 1 {
+                        print("set CollectionView SingleImage")
+                        self.mainCollectionView.collectionViewLayout = self.createSingleImageLayout()
+                    } else {
+                        print("set CollectionView normal")
+                        self.mainCollectionView.collectionViewLayout = self.createLayout()
+                    }
+                } else {
+                    print("set CollectionView empytyImage")
+                    self.mainCollectionView.collectionViewLayout = self.createEmptyImageLayout()
+                }
+                models.append(CommentSectionModel.createAtSection(title: "", items: [commentDateSectionItem]))
+                models.append(CommentSectionModel.replySection(title: "", items: replySectionItems))
+                print("models !!! \(models)")
+                return models
             }
-            models.append(CommentSectionModel.replySection(title: "", items: replySectionItems))
-            return models
-        }.bind(to: mainCollectionView.rx.items(dataSource: dataSource))
+            .bind(to: mainCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
+        
         
         output.isWriter
             .drive(onNext: {
@@ -188,7 +191,7 @@ final class CommentViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
-
+        
         output.showCommentMoreMenuBottomSheet
             .emit(onNext: coordinator.showCommentMoreMenuBottomSheet)
             .disposed(by: self.disposeBag)
@@ -200,23 +203,58 @@ final class CommentViewController: BaseViewController {
 }
 
 private extension CommentViewController {
-    func createLayout(_ isImageExisted: Bool, _ isSingleImage: Bool) -> UICollectionViewLayout {
+    func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout {
             [weak self] section, environment -> NSCollectionLayoutSection? in
             switch section {
             case 0:
                 return self?.createCommentSection()
             case 1:
-                return isImageExisted ? (
-                    isSingleImage ? self?.createSingleAttachImageSection(): self?.createAttachImageSection()
-                ) : self?.createReplySection()
+                return self?.createAttachImageSection()
             case 2:
-                return isImageExisted ? self?.createReplySection() : nil
+                return self?.createCommentDateSection()
+            case 3:
+                return self?.createReplySection()
             default:
                 return nil
             }
         }
     }
+    
+    func createEmptyImageLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout {
+            [weak self] section, environment -> NSCollectionLayoutSection? in
+            switch section {
+            case 0:
+                return self?.createCommentSection()
+            case 1:
+                return self?.createCommentDateSection()
+            case 2:
+                return self?.createReplySection()
+            default:
+                return nil
+            }
+        }
+    }
+    
+    func createSingleImageLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout {
+            [weak self] section, environment -> NSCollectionLayoutSection? in
+            switch section {
+            case 0:
+                return self?.createCommentSection()
+            case 1:
+                return self?.createSingleAttachImageSection()
+            case 2:
+                return self?.createCommentDateSection()
+            case 3:
+                return self?.createReplySection()
+            default:
+                return nil
+            }
+        }
+    }
+    
     
     func createCommentSection() -> NSCollectionLayoutSection {
         //item
@@ -243,11 +281,11 @@ private extension CommentViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0/3.0 - spacingRadio ))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(12.0)
-        
+        group.contentInsets = .init(top: 0, leading: 12.0, bottom: 0, trailing: 0)
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 20.0, leading: 20.0, bottom: 16.0, trailing: 0)
+        section.contentInsets = .init(top: 20.0, leading: 8.0, bottom: 16.0, trailing: 0)
         
         return section
     }
@@ -258,7 +296,7 @@ private extension CommentViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         //group
-       
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.53))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -279,23 +317,28 @@ private extension CommentViewController {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [ createCommentDateHeader()]
         section.contentInsets = .init(top: 20.0, leading: 27.5, bottom: 0, trailing: 0)
         section.interGroupSpacing = 12.0
         return section
     }
     
-    func createCommentDateHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(4.0))
-
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topTrailing)
-        sectionHeader.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20.0)
-        return sectionHeader
+    func createCommentDateSection() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .estimated(6.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        return section
     }
     
     func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
         return RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
             dataSource, collectionView, indexPath, item in
+            print(dataSource.sectionModels)
             switch item {
             case .commentSectionItem(comment: let comment):
                 let cell = collectionView.dequeueReusableCell(
@@ -319,24 +362,14 @@ private extension CommentViewController {
                 cell.update(with: reply)
                 cell.delegate = self
                 return cell
-            }
-        }configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
-            print(indexPath,kind)
-            guard kind == UICollectionView.elementKindSectionHeader else { return UICollectionReusableView() }
-            if dataSource.sectionModels.count - 1 == indexPath.section {
-                guard case let CommentSectionItem.commentSectionItem(comment) = dataSource.sectionModels[0].items[0] else {
-                    return UICollectionReusableView()
-                }
-                let view = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: CommentDateHeaderView.identifier,
+            case .createAtSectionItem(date: let date):
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CommentDateCell.identifier,
                     for: indexPath
-                 ) as! CommentDateHeaderView
-                
-                view.update(with: comment.createdAt)
-                return view
+                ) as! CommentDateCell
+                cell.update(with: date)
+                return cell
             }
-            return UICollectionReusableView()
         }
     }
 }

@@ -148,7 +148,7 @@ final class CafeQuestionViewController: BaseViewController {
             })
             .disposed(by: self.disposeBag)
         
-        Observable.combineLatest(
+        Observable.zip(
             output.question.asObservable(),
             output.user.asObservable(),
             output.comments.asObservable(),

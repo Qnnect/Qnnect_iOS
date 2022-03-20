@@ -35,9 +35,12 @@ final class SettingBottomSheet: BottomSheetViewController {
     private let menuTableView = UITableView().then {
         $0.register(SettingItemCell.self, forCellReuseIdentifier: SettingItemCell.identifier)
         $0.backgroundColor = .p_ivory
+        $0.separatorStyle = .none
     }
     
-    private let leaveCafeAlertView = LeaveCafeAlertView()
+    private let leaveCafeAlertView = LeaveCafeAlertView().then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
     private var cafeId: Int!
     private var viewModel: SettingBottomSheetViewModel!
     weak var coordinator: CafeCoordinator?
@@ -110,7 +113,7 @@ final class SettingBottomSheet: BottomSheetViewController {
             .emit(onNext: {
                 [weak self] _ in
                 guard let self = self else { return }
-                self.navigationController?.present(self.leaveCafeAlertView, animated: true, completion: nil)
+                self.present(self.leaveCafeAlertView, animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
     }
 }
