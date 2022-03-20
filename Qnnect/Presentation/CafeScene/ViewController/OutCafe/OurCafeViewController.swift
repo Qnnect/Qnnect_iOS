@@ -52,9 +52,9 @@ enum DrinkStep: Int, CaseIterable {
     var drinkImage: UIImage? {
         switch self {
         case .ice:
-            return Constants.emptyDrink
+            return Constants.drinkEmptyImage
         case .base:
-            return Constants.strawberryLatte_step_0
+            return Constants.drinkIceStepImage
         case .main:
             return Constants.strawberryLatte_step_1
         case .topping:
@@ -63,6 +63,7 @@ enum DrinkStep: Int, CaseIterable {
             return Constants.strawberryLatte_step_3
         }
     }
+    
 }
 
 final class OurCafeViewController: BaseViewController {
@@ -107,6 +108,32 @@ final class OurCafeViewController: BaseViewController {
         $0.layer.cornerRadius = 10.0
     }
     
+    // 음료를 선택하지 않은 유저 일 경우 보이는 라벨
+    private let notSelectLabel = UILabel().then {
+        $0.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.textColor = .BLACK_121212
+        $0.isHidden = true
+        $0.numberOfLines = 2
+        let paragraphStyle = Constants.paragraphStyle
+        paragraphStyle.alignment = .center
+        $0.attributedText = NSMutableAttributedString(
+            string: "지민님은 아직\n음료를 고르지 않았어요.",
+            attributes: [NSMutableAttributedString.Key.paragraphStyle: paragraphStyle]
+        )
+    }
+    
+    /// 자신이 음료를 선택하지 않았을 경우 나오는 버튼
+    private let selectDrinkButton = UIButton().then {
+        $0.setTitle("음료 고르기", for: .normal)
+        $0.setTitleColor(.BLACK_121212, for: .normal)
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.backgroundColor = .p_ivory
+        $0.layer.borderWidth = 1.0
+        $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
+        $0.layer.cornerRadius = 10.0
+        $0.isHidden = true
+    }
+    
     private var viewModel: OurCafeViewModel!
     weak var coordinator: OurCafeCoordinator?
     private var cafeId: Int!
@@ -145,7 +172,9 @@ final class OurCafeViewController: BaseViewController {
             drinkImageView,
             progressBar,
             insertIngredientButton,
-            stepLabelStackView
+            stepLabelStackView,
+            notSelectLabel,
+            selectDrinkButton
         ].forEach {
             view.addSubview($0)
         }
@@ -196,6 +225,16 @@ final class OurCafeViewController: BaseViewController {
             make.bottom.equalToSuperview().inset(60.0)
         }
         
+        notSelectLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(211.0)
+            make.centerX.equalToSuperview()
+        }
+        
+        selectDrinkButton.snp.makeConstraints { make in
+            make.edges.equalTo(insertIngredientButton)
+        }
+        
+        
         navigationItem.titleView = navigationTitleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Constants.navi_store,
@@ -214,6 +253,11 @@ final class OurCafeViewController: BaseViewController {
             viewDidLoad: Observable.just(()),
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapOurCafeUserCell: userCollectionView.rx.modelSelected(OurCafeUser.self)
+                .do {
+                    [weak self] user in
+                    guard let self = self else { return }
+                    user.cafeUserId == self.cafeUserId ? self.setTitleLabel(true, user.nickName) : self.setTitleLabel(false, user.nickName)
+                }
                 .asObservable()
                 ,
             didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable(),
@@ -262,18 +306,9 @@ final class OurCafeViewController: BaseViewController {
                 })
             }).disposed(by: self.disposeBag)
         
-        output.isCurrentUser
-            .drive(onNext: {
-                [weak self] isCurrentUser, name in
-                self?.insertIngredientButton.isHidden = !isCurrentUser
-                self?.titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
-            }).disposed(by: self.disposeBag)
-        
-        output.error
-            .emit(onNext: {
-                [weak self] _ in
-                
-            }).disposed(by: self.disposeBag)
+        output.isUserDrinkFetched
+            .emit(onNext: setBottomLayout(_:))
+            .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
 
@@ -346,6 +381,31 @@ private extension OurCafeViewController {
     }
     
     @objc dynamic func didTapStoreButton() { }
+    
+    func setBottomLayout(_ isUserDrinkFetched: Bool) {
+        if !isUserDrinkFetched {
+            insertIngredientButton.isHidden = true
+            progressBar.isHidden = true
+            stepLabelStackView.isHidden = true
+            drinkImageView.image = Constants.drinkEmptyImage
+            notSelectLabel.isHidden = false
+            
+            if let indexPath = userCollectionView.indexPathsForSelectedItems?.first, indexPath.row == 0 {
+                selectDrinkButton.isHidden = false
+            }
+        } else {
+            progressBar.isHidden = false
+            stepLabelStackView.isHidden = false
+            notSelectLabel.isHidden = true
+            selectDrinkButton.isHidden = true
+        }
+    }
+    
+    func setTitleLabel(_ isCurrentUser: Bool, _ name: String) {
+        insertIngredientButton.isHidden = !isCurrentUser
+        titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
+    }
+
 }
 
 

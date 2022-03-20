@@ -29,7 +29,7 @@ final class OurCafeViewModel: ViewModelType {
         ///Int: CafeId
         let showInsertIngredientScene: Signal<Int>
         let showStoreScene: Signal<Void>
-        let error: Signal<Void>
+        let isUserDrinkFetched: Signal<Bool>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -82,11 +82,14 @@ final class OurCafeViewModel: ViewModelType {
                 return ourCafe
             }
         
-        let error = fetchedResult
-            .compactMap { result -> Error? in
-                guard case let .failure(error) = result else { return nil }
-                return error
-            }.mapToVoid()
+        let isUserDrinkFetched = fetchedResult
+            .map {
+                result -> Bool in
+                if case .success(_) = result {
+                return true
+            } else {
+                return false
+            }}
         
         let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .map(ourCafeUseCase.getCurStep(_:))
@@ -128,7 +131,7 @@ final class OurCafeViewModel: ViewModelType {
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
-            error: error.asSignal(onErrorSignalWith: .empty())
+            isUserDrinkFetched: isUserDrinkFetched.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
