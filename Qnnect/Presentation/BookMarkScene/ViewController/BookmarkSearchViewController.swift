@@ -83,6 +83,14 @@ final class BookmarkSearchViewController: BaseViewController {
         let output = viewModel.transform(from: input)
         
         output.searchResult
+            .do {
+                [weak self] questions in
+                if questions.isEmpty {
+                    self?.resultTableView.setEmptyView(message: "앗 검색결과가 없어요.")
+                } else {
+                    self?.resultTableView.reset()
+                }
+            }
             .drive(resultTableView.rx.items(
                 cellIdentifier: BookmarkCell.identifier,
                 cellType: BookmarkCell.self

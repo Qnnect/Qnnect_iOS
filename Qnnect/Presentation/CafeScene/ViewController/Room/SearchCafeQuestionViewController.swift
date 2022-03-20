@@ -84,6 +84,14 @@ final class SearchCafeQuestionViewController: BaseViewController {
         let output = viewModel.transform(from: input)
         
         output.searchResult
+            .do {
+                [weak self] questions in
+                if questions.isEmpty {
+                    self?.questionListTableView.setEmptyView(message: "앗 검색결과가 없어요.")
+                } else {
+                    self?.questionListTableView.reset()
+                }
+            }
             .drive(questionListTableView.rx.items(
                 cellIdentifier: CafeQuestionListCell.identifier,
                 cellType: CafeQuestionListCell.self

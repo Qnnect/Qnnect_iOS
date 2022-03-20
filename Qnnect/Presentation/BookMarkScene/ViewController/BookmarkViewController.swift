@@ -133,6 +133,14 @@ final class BookmarkViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         output.scrapedQuestions
+            .do {
+                [weak self] questions in
+                if questions.isEmpty {
+                    self?.bookmarkTableView.setEmptyView(message: "아직 북마크한 질문이 없어요.")
+                } else {
+                    self?.bookmarkTableView.reset()
+                }
+            }
             .drive(self.bookmarkTableView.rx.items(cellIdentifier: BookmarkCell.identifier, cellType: BookmarkCell.self)) { index, model, cell in
                 cell.update(with: model)
             }.disposed(by: self.disposeBag)

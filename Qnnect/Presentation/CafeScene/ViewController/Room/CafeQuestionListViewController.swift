@@ -90,6 +90,14 @@ final class CafeQuestionListViewController: BaseViewController {
         let output = viewModel.transform(from: input)
         
         output.questions
+            .do {
+                [weak self] questions in
+                if questions.isEmpty {
+                    self?.questionListTableView.setEmptyView(message: "아직 질문이 없어요.")
+                } else {
+                    self?.questionListTableView.reset()
+                }
+            }
             .drive(questionListTableView.rx.items(
                 cellIdentifier: CafeQuestionListCell.identifier,
                 cellType: CafeQuestionListCell.self

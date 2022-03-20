@@ -267,7 +267,7 @@ final class OurCafeViewController: BaseViewController {
         
         completionImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(120.0)
-            make.top.greaterThanOrEqualTo(completionLabel.snp.bottom).offset(8.0).priority(.low)
+            make.top.equalTo(completionLabel.snp.bottom).offset(8.0)
             make.bottom.equalTo(selectDrinkButton.snp.top)
         }
         
@@ -352,6 +352,7 @@ final class OurCafeViewController: BaseViewController {
             output.isUserDrinkFetched.asObservable(),
             output.isDrinkCompleted.asObservable()
         )
+            .debug()
             .asSignal(onErrorSignalWith: .empty())
             .emit(onNext: setBottomLayout)
             .disposed(by: self.disposeBag)
