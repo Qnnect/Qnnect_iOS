@@ -12,6 +12,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+/// 현재 넣어야 되는 단계
 enum DrinkStep: Int, CaseIterable {
     case ice = 0
     case base = 1
@@ -56,9 +58,9 @@ enum DrinkStep: Int, CaseIterable {
         case .base:
             return Constants.drinkIceStepImage
         case .main:
-            return Constants.strawberryLatte_step_2
+            return Constants.strawberryLatte_step_1
         case .topping:
-            return Constants.strawberryLatte_step_3
+            return Constants.strawberryLatte_step_2
         case .completed:
             return Constants.strawberryLatte_step_4
         }
@@ -122,6 +124,12 @@ final class OurCafeViewController: BaseViewController {
         )
     }
     
+    private lazy var paragraphStyle: NSMutableParagraphStyle = {
+        let style = Constants.paragraphStyle
+        style.alignment = .center
+        return style
+    }()
+    
     /// 자신이 음료를 선택하지 않았을 경우 나오는 버튼
     /// 자신이 음료를 완성을 때 나오는 버튼 , 음료 고르기 -> 새 음료 고르기
     private let selectDrinkButton = UIButton().then {
@@ -169,6 +177,7 @@ final class OurCafeViewController: BaseViewController {
     }
     
     private let radio =  ((48.0 / 5.0) - 28.0) / UIScreen.main.bounds.width
+    private var lastSelectedUser: OurCafeUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,7 +215,7 @@ final class OurCafeViewController: BaseViewController {
             }
             stepLabelStackView.addArrangedSubview(label)
         }
-
+        
         
         userCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -285,9 +294,10 @@ final class OurCafeViewController: BaseViewController {
                     [weak self] user in
                     guard let self = self else { return }
                     user.cafeUserId == self.cafeUserId ? self.setTitleLabel(true, user.nickName) : self.setTitleLabel(false, user.nickName)
+                    self.lastSelectedUser = user
                 }
                 .asObservable()
-                ,
+            ,
             didTapInsertIngredientButton: insertIngredientButton.rx.tap.asObservable(),
             didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid()
         )
@@ -296,6 +306,10 @@ final class OurCafeViewController: BaseViewController {
         
         output.userInfos
             .debug()
+            .do {
+                [weak self] userInfos in
+                self?.lastSelectedUser = userInfos.first
+            }
             .map {
                 userInfos -> [UserSelectSectionModel] in
                 return [ UserSelectSectionModel.init(items: userInfos) ]
@@ -308,7 +322,6 @@ final class OurCafeViewController: BaseViewController {
             .subscribe(onNext: {
                 [weak self] _ in
                 self?.userCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
-                
             }).disposed(by: self.disposeBag)
         
         output.curStep
@@ -343,7 +356,7 @@ final class OurCafeViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
-
+        
         output.showInsertIngredientScene
             .emit(onNext: coordinator.showInsertIngredientScene(_:))
             .disposed(by: self.disposeBag)
@@ -373,7 +386,7 @@ private extension OurCafeViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         //item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
-         
+        
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.2 - radio))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
@@ -425,9 +438,15 @@ private extension OurCafeViewController {
             completionLabel.isHidden = true
             completionImageView.isHidden = true
             
-            if let indexPath = userCollectionView.indexPathsForSelectedItems?.first, indexPath.row == 0 {
-                selectDrinkButton.setTitle("음료 고르기", for: .normal)
-                selectDrinkButton.isHidden = false
+            if let indexPath = userCollectionView.indexPathsForSelectedItems?.first {
+                if indexPath.row == 0 {
+                    selectDrinkButton.setTitle("음료 고르기", for: .normal)
+                    selectDrinkButton.isHidden = false
+                }
+                notSelectLabel.attributedText = NSMutableAttributedString(
+                    string: "\(lastSelectedUser?.nickName ?? "넥트")님은 아직\n음료를 고르지 않았어요.",
+                    attributes: [NSMutableAttributedString.Key.paragraphStyle: paragraphStyle]
+                )
             } else {
                 selectDrinkButton.isHidden = true
             }
@@ -438,6 +457,7 @@ private extension OurCafeViewController {
                 progressBar.isHidden = true
                 stepLabelStackView.isHidden = true
                 insertIngredientButton.isHidden = true
+                
                 completionLabel.isHidden = false
                 completionImageView.isHidden = false
                 
@@ -447,7 +467,6 @@ private extension OurCafeViewController {
                 } else {
                     selectDrinkButton.isHidden = true
                 }
-                
             } else {
                 progressBar.isHidden = false
                 stepLabelStackView.isHidden = false
@@ -467,7 +486,7 @@ private extension OurCafeViewController {
     func setTitleLabel(_ isCurrentUser: Bool, _ name: String) {
         titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
     }
-
+    
 }
 
 
