@@ -29,6 +29,7 @@ final class OurCafeViewModel: ViewModelType {
         ///Int: CafeId
         let showInsertIngredientScene: Signal<Int>
         let showStoreScene: Signal<Void>
+        let error: Signal<Void>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -46,10 +47,13 @@ final class OurCafeViewModel: ViewModelType {
                 resultSelector: {(cafeId: $0, cafeUserId: $1)}
             )
         ).flatMap(ourCafeUseCase.fetchOurCafe)
+            .share()
+        
+        let firstLoadUserInfos = firstLoad
             .compactMap { result -> OurCafe? in
-                guard case let .success(ourCafe) = result else { return nil }
-                return ourCafe
-            }.share()
+                guard case let .success(cafe) = result else { return nil }
+                return cafe
+            }.map { $0.cafeUsers }
         
         let load = Observable.merge(
             input.viewWillAppear
@@ -67,13 +71,22 @@ final class OurCafeViewModel: ViewModelType {
                 .share()
         )
             .flatMap(ourCafeUseCase.fetchOurCafe)
+            .share()
+        
+        
+        let fetchedResult = Observable.merge(load, firstLoad)
+        
+        let ourCafe = fetchedResult
             .compactMap { result -> OurCafe? in
                 guard case let .success(ourCafe) = result else { return nil }
                 return ourCafe
-            }.share()
+            }
         
-        
-        let ourCafe = Observable.merge(load, firstLoad)
+        let error = fetchedResult
+            .compactMap { result -> Error? in
+                guard case let .failure(error) = result else { return nil }
+                return error
+            }.mapToVoid()
         
         let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .map(ourCafeUseCase.getCurStep(_:))
@@ -93,9 +106,10 @@ final class OurCafeViewModel: ViewModelType {
             .withLatestFrom(input.cafeId)
         
         return Output(
-            userInfos: firstLoad.map { $0.cafeUsers }
+            userInfos: firstLoadUserInfos
                 .withLatestFrom(input.cafeUserId, resultSelector: { ($0, $1) })
                 .map {
+                    // MARK: -  현재 유저가 맨 처음으로 오게 수정하는 로직
                     (users, userId) in
                     var newUsers = users
                     let index = users.firstIndex(where: { user in user.cafeUserId == userId })
@@ -113,7 +127,8 @@ final class OurCafeViewModel: ViewModelType {
             curStep: curStep.asDriver(onErrorJustReturn: .ice),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),
-            showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty())
+            showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
+            error: error.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

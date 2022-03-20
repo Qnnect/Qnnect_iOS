@@ -269,6 +269,11 @@ final class OurCafeViewController: BaseViewController {
                 self?.titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
             }).disposed(by: self.disposeBag)
         
+        output.error
+            .emit(onNext: {
+                [weak self] _ in
+                
+            }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
 

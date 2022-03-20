@@ -118,12 +118,37 @@ struct Constants {
     static let drinkProgressBar_step_3: UIImage? = UIImage(named: "drinkProgressBar_step_3")
     static let drinkRecipeProgressBar: UIImage? = UIImage(named: "drinkRecipeProgressBar")
     // MARK: -  Drinks
-    static let emptyDrink: UIImage? = UIImage(named: "emptyDrink")
+    static let drinkEmptyImage: UIImage? = UIImage(named: "drink_empty")
+    static let drinkIceStepImage: UIImage? = UIImage(named: "drink_ice_common")
     //딸기라떼
-    static let strawberryLatte_step_0: UIImage? = UIImage(named: "딸기라떼_step_0")
     static let strawberryLatte_step_1: UIImage? = UIImage(named: "딸기라떼_step_1")
     static let strawberryLatte_step_2: UIImage? = UIImage(named: "딸기라떼_step_2")
     static let strawberryLatte_step_3: UIImage? = UIImage(named: "딸기라떼_step_3")
+    static let strawberryLatte_step_4: UIImage? = UIImage(named: "딸기라떼_step_4")
+    
+    // 레몬 에이드
+    static let lemonade_step_1: UIImage? = UIImage(named: "레몬에이드_step_1")
+    static let lemonade_step_2: UIImage? = UIImage(named: "레몬에이드_step_2")
+    static let lemonade_step_3: UIImage? = UIImage(named: "레몬에이드_step_3")
+    static let lemonade_step_4: UIImage? = UIImage(named: "레몬에이드_step_4")
+    
+    // 민트초코
+    static let mintChoco_step_1: UIImage? = UIImage(named: "민트초코_step_1")
+    static let mintChoco_step_2: UIImage? = UIImage(named: "민트초코_step_2")
+    static let mintChoco_step_3: UIImage? = UIImage(named: "민트초코_step_3")
+    static let mintChoco_step_4: UIImage? = UIImage(named: "민트초코_step_4")
+    
+    // 썸머라떼
+    static let summerLatte_step_1: UIImage? = UIImage(named: "썸머라떼_step_1")
+    static let summerLatte_step_2: UIImage? = UIImage(named: "썸머라떼_step_2")
+    static let summerLatte_step_3: UIImage? = UIImage(named: "썸머라떼_step_3")
+    static let summerLatte_step_4: UIImage? = UIImage(named: "썸머라떼_step_4")
+    
+    // 초코 라뗴
+    static let chocoLatte_step_1: UIImage? = UIImage(named: "초코라떼_step_1")
+    static let chocoLatte_step_2: UIImage? = UIImage(named: "초코라떼_step_2")
+    static let chocoLatte_step_3: UIImage? = UIImage(named: "초코라떼_step_3")
+    static let chocoLatte_step_4: UIImage? = UIImage(named: "초코라떼_step_4")
     
     // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {
