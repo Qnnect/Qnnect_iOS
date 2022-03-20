@@ -18,6 +18,7 @@ enum HomeSectionItem {
     case todayQuestionSectionItem(question: ToDayQuestion)
     case myCafeSectionItem(cafe: MyCafe)
     case todayQuestionSectionEmptyItem
+    case MyCafeEmptySectionItem
 }
 
 extension HomeSectionModel: SectionModelType {
@@ -29,6 +30,7 @@ extension HomeSectionModel: SectionModelType {
             self = .todayQuestionSection(title: title, items: items)
         case .myCafeSection(title: let title, _):
             self = .myCafeSection(title: title, items: items)
+        
         }
     }
     
@@ -42,6 +44,7 @@ extension HomeSectionModel: SectionModelType {
             return items
         case .myCafeSection(title: _, items: let items):
             return items
+    
         }
     }
     
@@ -53,6 +56,7 @@ extension HomeSectionModel: SectionModelType {
             return title
         case .myCafeSection(let title, _):
             return title
+      
         }
     }
 }

@@ -38,6 +38,7 @@ final class HomeViewController: BaseViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
             withReuseIdentifier: PageControlFooterView.identifier
         )
+        $0.register(MyCafeEmptyCell.self, forCellWithReuseIdentifier: MyCafeEmptyCell.identifier)
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .p_ivory
@@ -138,6 +139,7 @@ final class HomeViewController: BaseViewController {
         
         let datasource = self.createDataSource()
         datasource.configureSupplementaryView = { datasource, collectionView, kind, indexPath in
+            print(indexPath)
             if kind == UICollectionView.elementKindSectionHeader {
                 guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeSectionHeaderView.identifier, for: indexPath) as? HomeSectionHeaderView else  {
                     fatalError("Could not dequeReusableView")
@@ -172,7 +174,10 @@ final class HomeViewController: BaseViewController {
         
 
         let input = HomeViewModel.Input(
-            didTapAddGroupButton: didTapAddGroupButton.asObservable(),
+            didTapAddGroupButton: Observable.merge(
+                didTapAddGroupButton.asObservable(),
+                rx.methodInvoked(#selector(didTapEmptyCellAddCafeButton)).mapToVoid()
+                ),
             curQuestionPage:   self.rx.methodInvoked(#selector( HomeViewController.visibleItemsInvalidationHandler))
                 .map{
                     param -> Int in
@@ -186,14 +191,17 @@ final class HomeViewController: BaseViewController {
                     guard case let HomeSectionItem.myCafeSectionItem(cafe) = item else { return nil }
                     return cafe
                 },
-            didTapJoinCafeButton: didTapJoinCafebutton.asObservable(),
+            didTapJoinCafeButton: Observable.merge(
+                didTapJoinCafebutton.asObservable(),
+                rx.methodInvoked(#selector(didTapEmptyCellJoinCafeButton))
+                    .mapToVoid()
+                ),
             didTapTodayQuestion: homeCollectionView.rx.modelSelected(HomeSectionItem.self)
                 .compactMap({ item -> ToDayQuestion? in
                     guard case let HomeSectionItem.todayQuestionSectionItem(question) = item else { return nil }
                     return question
                 })
         )
-        
         
         
         let output = self.viewModel.transform(from: input)
@@ -207,7 +215,13 @@ final class HomeViewController: BaseViewController {
             .debug()
             .do {
                 [weak self] homeInfo in
-                self?.pointLabel.text = "\(homeInfo.user.point) P"
+                guard let self = self else { return }
+                self.pointLabel.text = "\(homeInfo.user.point) P"
+                if homeInfo.cafes.isEmpty {
+                    self.homeCollectionView.collectionViewLayout = self.createMyCafeEmptyLayout()
+                } else {
+                    self.homeCollectionView.collectionViewLayout = self.createLayout()
+                }
             }
             .map(self.convertToSectionModel(_:))
             .drive(self.homeCollectionView.rx.items(dataSource: datasource))
@@ -252,17 +266,34 @@ private extension HomeViewController {
         }
     }
     
+    func createMyCafeEmptyLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { [weak self] section, environment -> NSCollectionLayoutSection? in
+            guard let self = self else { return nil }
+            
+            switch section {
+            case 0:
+                return self.createTitleLayout()
+            case 1:
+                return self.createTodayQuestionLayout()
+            case 2:
+                return self.createMyCafeEmptySectionLayout()
+            default:
+                return nil
+            }
+        }
+    }
+    
     func createTitleLayout() -> NSCollectionLayoutSection {
         //item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.9))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 10.0, leading: 20.0, bottom: 0, trailing: 20.0)
+        item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .estimated(60.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.0763))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10.0, leading: 0, bottom: 10.0, trailing: 0)
+        section.contentInsets = .init(top: 18.0, leading: 0, bottom: 6.0, trailing: 0)
         
         return section
     }
@@ -271,9 +302,9 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
+        item.contentInsets = .init(top: 6.0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.251))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -289,15 +320,37 @@ private extension HomeViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 20.0, bottom: 10, trailing: 0)
+        
+
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.45))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        group.contentInsets = .init(top: 0, leading: 16.0, bottom: 16.0, trailing: 0)
+        group.interItemSpacing = .fixed(16.0)
+        
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [createSectionHeader(),createSectionFooter()]
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 16.0, trailing: 0)
+        section.contentInsets = .init(top: 6.0, leading: 0, bottom: 0, trailing: 0)
+        
+        return section
+    }
+    
+    func createMyCafeEmptySectionLayout() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.29))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [createSectionHeader()]
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
@@ -349,10 +402,6 @@ private extension HomeViewController {
                 cell.update(with: question)
                 return cell
             case.myCafeSectionItem(cafe: let cafe):
-                //TODO: 일단 테스트를 위한 코드 ... 꼭 바꾸자 이 로직
-//                if group.name == "마지막" {
-//                    return collectionView.dequeueReusableCell(withReuseIdentifier: AddCafeCell.identifier, for: indexPath)
-//                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeCell.identifier, for: indexPath) as! MyCafeCell
                 cell.update(with: cafe)
                 return cell
@@ -360,25 +409,41 @@ private extension HomeViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayQuestionCell.identifier, for: indexPath) as! TodayQuestionCell
                 cell.emptyView.isHidden = false
                 return cell
+            case .MyCafeEmptySectionItem:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeEmptyCell.identifier, for: indexPath) as! MyCafeEmptyCell
+                cell.delegate = self
+                return cell
             }
         }
     }
     
     
     func convertToSectionModel(_ homeInfo: HomeInfo) -> [HomeSectionModel] {
+        var models: [HomeSectionModel] = []
         let titleItem = HomeSectionItem.titleSectionItem(user: homeInfo.user)
         var questionItem = homeInfo.questions.map { HomeSectionItem.todayQuestionSectionItem(question: $0) }
-        let groupItem = homeInfo.cafes.map { HomeSectionItem.myCafeSectionItem(cafe: $0)}
-        
         if questionItem.isEmpty {
             questionItem = [HomeSectionItem.todayQuestionSectionEmptyItem]
         }
-        
-        return [
+        models = [
             HomeSectionModel.titleSection(title: "", items: [titleItem]),
             HomeSectionModel.todayQuestionSection(title: "오늘의 질문", items: questionItem),
-            HomeSectionModel.myCafeSection(title: "나의 카페", items: groupItem)
         ]
+        
+        if homeInfo.cafes.isEmpty {
+            models.append(HomeSectionModel.myCafeSection(title: "나의 카페", items: [HomeSectionItem.MyCafeEmptySectionItem]))
+        } else {
+            models.append(HomeSectionModel.myCafeSection(title: "나의 카페", items: homeInfo.cafes.map {
+                HomeSectionItem.myCafeSectionItem(cafe: $0)
+            }))
+        }
+        return models
     }
 }
 
+extension HomeViewController: MyCafeEmptyCellButtonDelegate {
+    @objc dynamic func didTapEmptyCellAddCafeButton() { }
+    
+    @objc dynamic func didTapEmptyCellJoinCafeButton() { }
+    
+}

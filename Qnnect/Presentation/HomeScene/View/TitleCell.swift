@@ -14,8 +14,8 @@ final class TitleCell: UICollectionViewCell {
     
     private let profileImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 25.0
-        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 31.0
+        $0.layer.masksToBounds = true
     }
     
     private let titleLabel = UILabel().then {
@@ -44,12 +44,13 @@ final class TitleCell: UICollectionViewCell {
         
         self.profileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.width.height.equalTo(50.0)
+            make.width.height.equalTo(62.0)
             make.centerY.equalToSuperview()
         }
         
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.profileImageView.snp.trailing).offset(12.0)
+            make.trailing.equalToSuperview().inset(12.0)
             make.centerY.equalTo(self.profileImageView)
         }
     }
