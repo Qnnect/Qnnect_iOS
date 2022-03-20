@@ -323,7 +323,7 @@ private extension HomeViewController {
         
 
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(1.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.45))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.contentInsets = .init(top: 0, leading: 16.0, bottom: 16.0, trailing: 0)
         group.interItemSpacing = .fixed(16.0)

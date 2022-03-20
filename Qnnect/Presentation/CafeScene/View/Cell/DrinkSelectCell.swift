@@ -13,7 +13,7 @@ final class DrinkSelectCell: UICollectionViewCell {
     static let identifier = "DrinkSelectCell"
     
     private let drinkImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     private let drinkLabel = UILabel().then {
@@ -24,8 +24,8 @@ final class DrinkSelectCell: UICollectionViewCell {
     
     var isChecked: Bool = false {
         didSet {
-            contentView.layer.borderColor = isChecked ? UIColor.p_brown?.cgColor : UIColor.secondaryBackground?.cgColor
-            contentView.layer.borderWidth = isChecked ? 2.5 : 0.0
+            contentView.layer.borderColor = isChecked ? UIColor.p_brown?.cgColor : UIColor.groupDrinksBorder?.cgColor
+            contentView.layer.borderWidth = isChecked ? 2.5 : 1.0
         }
     }
     
@@ -67,5 +67,20 @@ final class DrinkSelectCell: UICollectionViewCell {
     
     func update(with drink: Drink) {
         drinkLabel.text = drink.name
+        
+        switch drink.id {
+        case 1:
+            drinkImageView.image = Constants.strawberryLatte_step_3
+        case 2:
+            drinkImageView.image = Constants.lemonade_step_3
+        case 3:
+            drinkImageView.image = Constants.mintChoco_step_3
+        case 4:
+            drinkImageView.image = Constants.chocoLatte_step_3
+        case 5:
+            drinkImageView.image = Constants.summerLatte_step_3
+        default:
+            drinkImageView.image = Constants.drinkEmptyImage
+        }
     }
 }
