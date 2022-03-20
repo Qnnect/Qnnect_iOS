@@ -35,7 +35,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         super.init()
-        navigationController.delegate = self
+        //navigationController.delegate = self
     }
     
     func start() { }
@@ -82,7 +82,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     func showCafeQuestionScene(_ questionId: Int) {
         let coordinator = DefaultQuestionCoordinator(navigationController: navigationController)
         coordinator.showCafeQuestionScene(questionId)
-        coordinator.parentCoordinator = self
+        coordinator.parentCoordinator = parentCoordinator
         self.childCoordinators.append(coordinator)
     }
     

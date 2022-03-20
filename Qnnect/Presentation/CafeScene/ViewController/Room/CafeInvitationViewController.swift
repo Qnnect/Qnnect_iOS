@@ -67,8 +67,8 @@ final class CafeInvitationViewController: BaseViewController {
     }
     
     private let cardDrinkImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-        $0.image = Constants.cafeinvitationDrinkImage
+        $0.contentMode = .scaleAspectFit
+        $0.image = Constants.invitationImage
     }
     
     private let invitaionLinkCopyButton = UIButton().then {
@@ -144,11 +144,13 @@ final class CafeInvitationViewController: BaseViewController {
         self.mainLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(self.view.safeAreaLayoutGuide).inset(20.0)
         }
+        mainLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         self.secondaryLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.mainLabel)
             make.top.equalTo(self.mainLabel.snp.bottom).offset(10.0)
         }
+        secondaryLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         self.invitationCardBackgroundView.snp.makeConstraints { make in
             make.edges.equalTo(self.invitationCardView)
@@ -157,7 +159,7 @@ final class CafeInvitationViewController: BaseViewController {
         self.invitationCardBackgroundView.transform = .init(rotationAngle: CGFloat.pi + 0.1)
         
         self.invitationCardView.snp.makeConstraints { make in
-            make.top.equalTo(self.secondaryLabel.snp.bottom).offset(33.0)
+            make.top.equalTo(self.secondaryLabel.snp.bottom).offset(43.0)
             make.leading.trailing.equalToSuperview().inset(26.0)
         }
         
@@ -165,29 +167,33 @@ final class CafeInvitationViewController: BaseViewController {
             make.top.equalTo(self.invitationCardView.snp.bottom).offset(48.0)
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.height.equalTo(Constants.bottomButtonHeight)
+            make.bottom.equalToSuperview().inset(60.0)
         }
         
         self.cardTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(25.0)
             make.centerX.equalToSuperview()
         }
+        cardTitleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         self.cardMainLabel.snp.makeConstraints { make in
             make.top.equalTo(self.cardTitleLabel.snp.bottom).offset(18.0)
             make.leading.trailing.equalToSuperview().inset(26.0)
         }
+        cardMainLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         self.cardSecondaryLabel.snp.makeConstraints { make in
             make.top.equalTo(self.cardMainLabel.snp.bottom).offset(2.0)
             make.leading.trailing.equalTo(self.cardMainLabel)
         }
+        cardSecondaryLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         self.cardDrinkImageView.snp.makeConstraints { make in
-            make.top.equalTo(self.cardSecondaryLabel.snp.bottom).offset(5.0)
-            make.trailing.equalToSuperview().inset(16.0)
-            make.bottom.equalToSuperview().inset(24.0)
-            make.width.equalTo(130.0)
+            make.top.equalTo(self.cardSecondaryLabel.snp.bottom).offset(43.0)
+            make.leading.trailing.equalToSuperview().inset(27.0)
+            make.bottom.equalToSuperview().inset(46.0)
         }
+        
     }
     
     override func bind() {
