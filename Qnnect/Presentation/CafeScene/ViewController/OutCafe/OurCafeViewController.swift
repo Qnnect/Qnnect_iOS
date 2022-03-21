@@ -448,10 +448,7 @@ final class OurCafeViewController: BaseViewController {
         output.showSelectDrinkScene
             .emit(onNext: coordinator.showDrinkSelectBottomSheet(_:))
             .disposed(by: self.disposeBag)
-        
-        output.drinkCompletion
-            .emit(onNext: coordinator.showCompleteDrinkScene)
-            .disposed(by: self.disposeBag)
+
     }
 }
 

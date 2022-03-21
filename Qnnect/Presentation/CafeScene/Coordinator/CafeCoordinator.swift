@@ -235,9 +235,9 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
         
         if let vc = fromViewController as? OurCafeViewController {
             childDidFinish(vc.coordinator)
-            if let presentedVC = navigationController.viewControllers.last {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
+//            if let presentedVC = navigationController.viewControllers.last {
+//                presentedVC.tabBarController?.tabBar.isHidden = false
+//            }
         }
     }
 }

@@ -80,11 +80,13 @@ final class CompleteDrinkViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(100.0)
             make.top.equalTo(twinkleImageView.snp.bottom).offset(20.0)
         }
+        drinkImageView.image = curStep.getDrinkImage(drinkName)
         
         mainLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(36.0)
             make.top.equalToSuperview().inset(20.0)
         }
+        mainLabel.text = "\(drinkName) 완성!"
         
         secondaryLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16.0)

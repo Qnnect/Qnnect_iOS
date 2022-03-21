@@ -89,6 +89,10 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         let viewModel = RightStepAlertViewModel(ourCafeUseCase: ourCafeUseCase)
         let vc = RightStepAlertViewController.create(with: viewModel, self, ingredient, userDrinkSelectedId)
         vc.modalPresentationStyle = .overCurrentContext
+        
+        if let insertIngredientVC = navigationController.viewControllers.last as? InsertIngredientViewController {
+            vc.delegate = insertIngredientVC
+        }
         navigationController.present(vc, animated: true, completion: nil)
     }
     
@@ -101,6 +105,7 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     
     func showCompleteDrinkScene(_ step: DrinkStep, drinkName: String) {
         let vc = CompleteDrinkViewController.create(with: step, drinkName, self)
+        vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true, completion: nil)
     }
     

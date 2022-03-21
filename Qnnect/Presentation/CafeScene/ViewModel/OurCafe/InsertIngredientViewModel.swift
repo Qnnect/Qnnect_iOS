@@ -12,12 +12,13 @@ import RxCocoa
 final class InsertIngredientViewModel: ViewModelType {
     
     struct Input {
-        let viewWillAppear: Observable<Void>
+        let viewDidLoad: Observable<Void>
         let cafeId: Observable<Int>
         let didTapRecipeButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
         let didTapFullViewButton: Observable<Void>
         let didTapIngredientCell: Observable<MyIngredient>
+        let didInsert: Observable<Void>
     }
     
     struct Output {
@@ -30,6 +31,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let showIngredientStorageScene: Signal<Void>
         let showWrongStepAlertView: Signal<Void>
         let showRightStepAlertView: Signal<(ingredient: MyIngredient,userDrinkSelectedId: Int)>
+        let showCompleteDrinkScene: Signal<(DrinkStep, String)>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -40,7 +42,10 @@ final class InsertIngredientViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let myCafeDrinkWithIngredients = input.viewWillAppear
+        let myCafeDrinkWithIngredients = Observable.merge(
+            input.viewDidLoad,
+            input.didInsert
+        )
             .withLatestFrom(input.cafeId)
             .flatMap(ourCafeUseCase.fetchMyCafeDrink(_:))
             .compactMap { result -> (cafeDrink: CafeDrink, ingredients: [MyIngredient])? in
@@ -49,8 +54,20 @@ final class InsertIngredientViewModel: ViewModelType {
             }
             .share()
         
-        let curStep = myCafeDrinkWithIngredients.map { $0.cafeDrink }
+        let curStepWithCompletion = myCafeDrinkWithIngredients.map { $0.cafeDrink }
             .map(ourCafeUseCase.getCurStep(_:))
+            .scan(into: (DrinkStep.ice, false)) { lastState, newStep in
+                if lastState.0 != newStep, lastState.0 == .topping, newStep == .completed {
+                    lastState = (newStep, true)
+                } else {
+                    lastState = (newStep, false)
+                }
+            }
+        
+        let curStep = curStepWithCompletion.map { $0.0 }
+        
+        let drinkCompletion = curStepWithCompletion.map { $0.1 }
+            .filter{ $0 }
         
         let drinkState = myCafeDrinkWithIngredients.map { $0.cafeDrink }
             .map {
@@ -78,7 +95,7 @@ final class InsertIngredientViewModel: ViewModelType {
             .map { $0.ingredient }
             .withLatestFrom(myCafeDrinkWithIngredients.compactMap{ $0.cafeDrink.userDrinkSelectedId },
                             resultSelector: { (ingredient: $0, userDrinkSelectedId: $1)})
-           
+        
         
         let showWrongStepAlertView = input.didTapIngredientCell
             .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
@@ -87,6 +104,15 @@ final class InsertIngredientViewModel: ViewModelType {
                 self?.ourCafeUseCase.isRightIngredientBuy($0, curStep: $1) == false
             }
             .mapToVoid()
+        
+        let showCompleteDrinkScene = drinkCompletion
+            .mapToVoid()
+            .withLatestFrom(
+                Observable.zip(
+                    curStep,
+                    myCafeDrinkWithIngredients.compactMap { $0.cafeDrink.userDrinkName }
+                )
+            )
         
         return Output(
             ingredients: myCafeDrinkWithIngredients.map { $0.ingredients}.asDriver(onErrorJustReturn: []) ,
@@ -97,7 +123,8 @@ final class InsertIngredientViewModel: ViewModelType {
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
             showIngredientStorageScene: input.didTapFullViewButton.asSignal(onErrorSignalWith: .empty()),
             showWrongStepAlertView: showWrongStepAlertView.asSignal(onErrorSignalWith: .empty()),
-            showRightStepAlertView: showRightStepAlertView.asSignal(onErrorSignalWith: .empty())
+            showRightStepAlertView: showRightStepAlertView.asSignal(onErrorSignalWith: .empty()),
+            showCompleteDrinkScene: showCompleteDrinkScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

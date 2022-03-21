@@ -18,7 +18,7 @@ final class RightStepAlertViewModel: ViewModelType {
     }
     
     struct Output {
-        let completion: Signal<Void>
+        let insert: Signal<Void>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -28,15 +28,15 @@ final class RightStepAlertViewModel: ViewModelType {
     }
     func transform(from input: Input) -> Output {
         
-        let completion = input.didTapOkButton
+        let insert = input.didTapOkButton
             .withLatestFrom(
                 Observable.combineLatest(
                     input.userDrinkSelectedId,
                     input.ingredientsId,
                     resultSelector: {(userDrinkSelectedId: $0, ingredientId: $1)})
             ).flatMap(ourCafeUseCase.insertIngredient)
-            .mapToVoid()
+            
         
-        return Output(completion: completion.asSignal(onErrorSignalWith: .empty()))
+        return Output(insert: insert.mapToVoid().asSignal(onErrorSignalWith: .empty()))
     }
 }

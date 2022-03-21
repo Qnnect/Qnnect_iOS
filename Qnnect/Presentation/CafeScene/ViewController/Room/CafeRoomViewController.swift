@@ -75,7 +75,7 @@ final class CafeRoomViewController: BaseViewController {
                 forElementKind: UICollectionView.elementKindSectionFooter,
                 at: IndexPath(row: 0, section: 2)) as? PageControlFooterView
             else { return }
-          
+            
             if view.pageControl.numberOfPages > 0 {
                 view.pageControl.currentPage = self.todayQuestionCurPage
             }
@@ -117,7 +117,6 @@ final class CafeRoomViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,6 +124,7 @@ final class CafeRoomViewController: BaseViewController {
         if self.mainCollectionView.numberOfSections > 1 {
             self.setDrinksEmptyView(self.mainCollectionView.numberOfItems(inSection: 1) == 0)
         }
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func configureUI() {
@@ -186,8 +186,9 @@ final class CafeRoomViewController: BaseViewController {
                 },
             didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable(),
             didTapDrinkSection: mainCollectionView.rx.itemSelected
-                .filter { $0.section == 1 }
-                .mapToVoid()
+                        .filter { $0.section == 1 }
+                        .mapToVoid()
+                
         )
         
         let output = self.viewModel.transform(from: input)
@@ -448,4 +449,3 @@ private extension CafeRoomViewController {
     }
     
 }
-

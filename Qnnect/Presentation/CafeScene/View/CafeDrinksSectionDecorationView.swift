@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
+
+
 final class CafeDrinksSectionDecorationView: UICollectionReusableView {
     static let identifier = "CafeDrinksSectionBackgroundView"
     

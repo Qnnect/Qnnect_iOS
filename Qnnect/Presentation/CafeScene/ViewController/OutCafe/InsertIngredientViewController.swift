@@ -204,13 +204,14 @@ final class InsertIngredientViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         let input = InsertIngredientViewModel.Input(
-            viewWillAppear: rx.viewWillAppear.mapToVoid(),
+            viewDidLoad: rx.viewDidLoad.mapToVoid(),
             cafeId: Observable.just(cafeId),
             didTapRecipeButton: viewRecipeButton.rx.tap.asObservable(),
             didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid(),
             didTapFullViewButton: fullViewButton.rx.tap.asObservable(),
             didTapIngredientCell: ingredientCollectionView.rx.modelSelected(MyIngredient.self)
-                .asObservable()
+                .asObservable(),
+            didInsert: rx.methodInvoked(#selector(didInsert)).mapToVoid()
         )
         
         let output = viewModel.transform(from: input)
@@ -281,6 +282,10 @@ final class InsertIngredientViewController: BaseViewController {
         output.showRightStepAlertView
             .emit(onNext: coordinator.showRightStepAlertView)
             .disposed(by: self.disposeBag)
+        
+        output.showCompleteDrinkScene
+            .emit(onNext: coordinator.showCompleteDrinkScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -331,4 +336,8 @@ private extension InsertIngredientViewController {
     
     @objc dynamic func didTapStoreButton() { }
     
+}
+
+extension InsertIngredientViewController: InsertIngredientDelegate {
+    @objc dynamic func didInsert() { }
 }

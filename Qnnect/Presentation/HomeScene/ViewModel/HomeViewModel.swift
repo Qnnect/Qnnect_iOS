@@ -55,7 +55,7 @@ final class HomeViewModel: ViewModelType {
                 guard case let .success(homeInfo) = result else { return nil }
                 return homeInfo
             }
-        
+
         let showJoinCafeBottomSheet = input.didTapJoinCafeButton
 
         
@@ -74,7 +74,6 @@ final class HomeViewModel: ViewModelType {
                 return cafe
             }
         
-    
         let alreadyInRoom = joinCafeResult
             .compactMap { result -> JoinCafeError? in
                 guard case let .failure(error) = result else { return nil }
@@ -85,13 +84,11 @@ final class HomeViewModel: ViewModelType {
                 }
             }
         
-        
         let showCafeRoom = Observable.merge(
             joinCafe,
             input.didTapMyCafe
                 .map {$0.id}
         )
-        
         
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),

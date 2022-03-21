@@ -11,6 +11,11 @@ import SnapKit
 import Then
 import RxSwift
 
+@objc
+protocol InsertIngredientDelegate: AnyObject {
+    func didInsert()
+}
+
 final class RightStepAlertViewController: BaseViewController {
     
     private let ingredientsImageView = UIImageView().then {
@@ -65,6 +70,8 @@ final class RightStepAlertViewController: BaseViewController {
     private var userDrinkSelectedId: Int!
     private var viewModel: RightStepAlertViewModel!
     
+    weak var delegate: InsertIngredientDelegate?
+    
     static func create(
         with viewModel: RightStepAlertViewModel,
         _ coordinator: OurCafeCoordinator,
@@ -88,7 +95,7 @@ final class RightStepAlertViewController: BaseViewController {
         if let navigationVC = presentingViewController as? UINavigationController {
             navigationVC.viewControllers.last?.viewWillAppear(true)
         } else {
-            presentingViewController?.viewWillAppear(true)
+            delegate?.didInsert()
         }
     }
     
@@ -170,7 +177,7 @@ final class RightStepAlertViewController: BaseViewController {
         
         guard let coordinator = coordinator else { return }
 
-        output.completion
+        output.insert
             .emit(onNext: coordinator.dismiss)
             .disposed(by: self.disposeBag)
     }

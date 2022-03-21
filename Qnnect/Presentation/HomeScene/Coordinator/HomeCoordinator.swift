@@ -114,9 +114,9 @@ extension DefaultHomeCoordinator: UINavigationControllerDelegate {
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? CafeQuestionViewController {
             childDidFinish(vc.coordinator)
-            if let presentedVC = navigationController.viewControllers.last {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
+//            if let presentedVC = navigationController.viewControllers.last {
+//                presentedVC.tabBarController?.tabBar.isHidden = false
+//            }
         }
         
         if let vc = fromViewController as? CafeRoomViewController {
