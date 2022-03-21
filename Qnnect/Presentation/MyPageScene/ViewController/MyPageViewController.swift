@@ -73,7 +73,12 @@ final class MyPageViewController: BaseViewController {
                 .filter{ $0.section == 0}
                 .mapToVoid(),
             viewWillAppear: self.rx.viewWillAppear.mapToVoid(),
-            viewDidLoad: Observable.just(())
+            viewDidLoad: Observable.just(()),
+            didTapMyDrinkStampButton: rx.methodInvoked(#selector(pointCell))
+                .filter {
+                    let kind = $0[0] as! String
+                    return kind == PointCell.myDrinkStamp
+                }.mapToVoid()
         )
         
         self.mainTableView.rx.setDelegate(self)
@@ -103,6 +108,10 @@ final class MyPageViewController: BaseViewController {
         output.showEditProfileScene
             .emit(onNext: coordinator.showEditProfileScene(user:))
             .disposed(by: self.disposeBag)
+        
+        output.showMyDrinkStampButton
+            .emit(onNext: coordinator.showMyDrinkStampScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -117,6 +126,7 @@ private extension MyPageViewController {
             case .pointSectionItem(let point):
                 let cell = tableView.dequeueReusableCell(withIdentifier: PointCell.identifier, for: indexPath) as! PointCell
                 cell.update(with: point)
+                cell.delegate = self
                 return cell
             case .itemListSectionItem(let item):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MyPageItemCell.identifier, for: indexPath) as! MyPageItemCell
@@ -152,4 +162,7 @@ extension MyPageViewController: UITableViewDelegate {
 }
 
 
+extension MyPageViewController: PointCellDelegate {
+    dynamic func pointCell(didTapButton kind: String) { }
+}
 

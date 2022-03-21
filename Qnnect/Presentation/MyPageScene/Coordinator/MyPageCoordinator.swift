@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyPageCoordinator: Coordinator {
     func showEditProfileScene(user: User)
+    func showMyDrinkStampScene(user: User)
     func pop()
 }
 
@@ -46,6 +47,12 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         )
         let vc = EditProfileViewController.create(with: viewModel,user, self)
         self.navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showMyDrinkStampScene(user: User) {
+        let vc = MyDrinkStampViewController.create(with: self, user)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func pop() {

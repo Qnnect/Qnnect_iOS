@@ -9,16 +9,17 @@ import Foundation
 import RxDataSources
 
 enum MyPageItem: String, CaseIterable {
-    case setNoti
+    //case setNoti
     case notice
     case instagram
     case premium
     case logout
+    case withdrawal
     
     var title:String {
         switch self {
-        case .setNoti:
-            return "알림 설정"
+//        case .setNoti:
+//            return "알림 설정"
         case .notice:
             return "공지사항"
         case .instagram:
@@ -27,6 +28,8 @@ enum MyPageItem: String, CaseIterable {
             return "프리미엄 (준비중)"
         case .logout:
             return "로그아웃"
+        case .withdrawal:
+            return "회원탈퇴"
         }
     }
 }

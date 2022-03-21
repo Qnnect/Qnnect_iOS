@@ -49,10 +49,12 @@ extension UIColor {
     class var cardBackground: UIColor? { return UIColor(named: "cardBackground") }
     class var redLabel: UIColor? { return UIColor(named: "redLabel") }
     class var reply_border: UIColor? { return UIColor(named: "reply_border") }
+    class var brown60: UIColor? { return UIColor(named: "BROWN60" )}
     
     class var diary_red: UIColor? { return UIColor(named: "diary_red")}
     class var diary_blue: UIColor? { return UIColor(named: "diary_blue")}
     class var diary_pink: UIColor? { return UIColor(named: "diary_pink")}
     class var diary_yellow: UIColor? { return UIColor(named: "diary_yellow")}
     class var diary_brown: UIColor? { return UIColor(named: "diary_brown")}
+    
 }

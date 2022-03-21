@@ -17,12 +17,14 @@ final class MyPageViewModel: ViewModelType {
         let didTapProfileCell: Observable<Void>
         let viewWillAppear: Observable<Void>
         let viewDidLoad: Observable<Void>
+        let didTapMyDrinkStampButton: Observable<Void>
     }
     
     struct Output {
         let showEditProfileScene: Signal<User>
         let user: Driver<User>
         let loginType: Driver<LoginType>
+        let showMyDrinkStampButton: Signal<User>
     }
     
     private let userUseCase: UserUseCase
@@ -48,10 +50,14 @@ final class MyPageViewModel: ViewModelType {
         let loginType = input.viewDidLoad
             .map(self.userUseCase.fetchLoginType)
         
+        let showMyDrinkStampButton = input.didTapMyDrinkStampButton
+            .withLatestFrom(fetchedUser)
+        
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
             user: fetchedUser.asDriver(onErrorDriveWith: .empty()),
-            loginType: loginType.asDriver(onErrorJustReturn: .unknown)
+            loginType: loginType.asDriver(onErrorJustReturn: .unknown),
+            showMyDrinkStampButton: showMyDrinkStampButton.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

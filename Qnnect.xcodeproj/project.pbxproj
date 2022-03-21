@@ -116,6 +116,10 @@
 		AE767F9B27E874E100BD5496 /* CompleteDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9A27E874E100BD5496 /* CompleteDrinkViewController.swift */; };
 		AE767F9D27E8CED800BD5496 /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */; };
 		AE767F9F27E8CFA900BD5496 /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9E27E8CFA900BD5496 /* NotificationListViewModel.swift */; };
+		AE767FA127E8D4CD00BD5496 /* MyDrinkStampViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA027E8D4CD00BD5496 /* MyDrinkStampViewController.swift */; };
+		AE767FA327E8D60800BD5496 /* MyDrinkStampCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */; };
+		AE767FA527E8E58B00BD5496 /* MyDrinkStampTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */; };
+		AE767FA727E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */; };
 		AE77C82527D887F700E8D0EC /* WriteCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */; };
 		AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */; };
 		AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */; };
@@ -437,6 +441,10 @@
 		AE767F9A27E874E100BD5496 /* CompleteDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteDrinkViewController.swift; sourceTree = "<group>"; };
 		AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
 		AE767F9E27E8CFA900BD5496 /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
+		AE767FA027E8D4CD00BD5496 /* MyDrinkStampViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampViewController.swift; sourceTree = "<group>"; };
+		AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampCell.swift; sourceTree = "<group>"; };
+		AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampTitleCell.swift; sourceTree = "<group>"; };
+		AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampSectionModel.swift; sourceTree = "<group>"; };
 		AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentViewModel.swift; sourceTree = "<group>"; };
 		AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachingImageCell.swift; sourceTree = "<group>"; };
 		AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewController.swift; sourceTree = "<group>"; };
@@ -1161,6 +1169,7 @@
 			children = (
 				AE6964D027BCDD7D00BF2A80 /* MyPageViewController.swift */,
 				AEEF362B27C3501200D0A127 /* EditProfileViewController.swift */,
+				AE767FA027E8D4CD00BD5496 /* MyDrinkStampViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1710,6 +1719,9 @@
 				AEEF362427C315AA00D0A127 /* ProfileCell.swift */,
 				AEEF362627C319F900D0A127 /* PointCell.swift */,
 				AEEF362927C326BD00D0A127 /* MyPageItemCell.swift */,
+				AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */,
+				AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */,
+				AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1898,6 +1910,7 @@
 				AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */,
 				AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
+				AE767FA327E8D60800BD5496 /* MyDrinkStampCell.swift in Sources */,
 				AE33A4FD27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift in Sources */,
 				AE02404B27E31F7300017F77 /* OurCafeViewController.swift in Sources */,
 				AE02409427E3C56F00017F77 /* StorageCoordinator.swift in Sources */,
@@ -1967,6 +1980,7 @@
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
+				AE767FA727E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */,
 				AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */,
@@ -1979,6 +1993,7 @@
 				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AEA14D4827D47E8D0009EEC6 /* Cafe.swift in Sources */,
+				AE767FA127E8D4CD00BD5496 /* MyDrinkStampViewController.swift in Sources */,
 				AEA14D4227D47CD70009EEC6 /* CafeNetworkService.swift in Sources */,
 				AEBC9EC127C5F44F0070399A /* PageControlFooterView.swift in Sources */,
 				AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */,
@@ -2057,6 +2072,7 @@
 				AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */,
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
 				AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */,
+				AE767FA527E8E58B00BD5496 /* MyDrinkStampTitleCell.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
 				AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
