@@ -10,13 +10,13 @@ import Foundation
 struct CafeDrink {
     let base: Int
     let baseFilled: Int
-    let currentDrinkIngredientsFilled: [String]
+    let currentDrinkIngredientsFilled: [String]?
     let ice: Int
     let iceFilled: Int
     let main: Int
     let mainFilled: Int
     let topping: Int
     let toppingFilled: Int
-    let userDrinkSelectedId: Int
-    let userDrinkName: String
+    let userDrinkSelectedId: Int?
+    let userDrinkName: String?
 }

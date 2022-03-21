@@ -20,9 +20,8 @@ struct Cafe {
 }
 
 struct CafeUser {
-    let filledIngredients: [String]
+    let drinkInfo: CafeDrink
     let userInfo: User
-    let userDrinkSelected: String?
 }
 
 

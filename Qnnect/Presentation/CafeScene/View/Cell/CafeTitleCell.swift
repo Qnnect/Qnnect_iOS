@@ -85,7 +85,7 @@ final class CafeTitleCell: UICollectionViewCell {
     func update(with cafe: Cafe) {
         self.nameLabel.text = cafe.title
         self.createdDateLabel.text = "\(cafe.createdAt)~"
-        self.setCurrentUserDrink(isSelected: cafe.currentUser.userDrinkSelected != nil)
+        self.setCurrentUserDrink(isSelected: cafe.currentUser.drinkInfo.userDrinkSelectedId != nil)
     }
     
 }

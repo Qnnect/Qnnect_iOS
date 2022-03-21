@@ -53,7 +53,7 @@ final class CafeDrinkCell: UICollectionViewCell {
     }
     
     func update(with cafeUser: CafeUser) {
-        self.drinkImageView.image = cafeUser.userDrinkSelected != nil ? Constants.basicDrinkImage : Constants.notSelectDrinkImage
+        self.drinkImageView.image = cafeUser.drinkInfo.userDrinkSelectedId != nil ? Constants.basicDrinkImage : Constants.notSelectDrinkImage
         self.userNameLabel.text = cafeUser.userInfo.name
     }
 }

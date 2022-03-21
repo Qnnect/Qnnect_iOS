@@ -66,6 +66,77 @@ enum DrinkStep: Int, CaseIterable {
         }
     }
     
+    func getDrinkImage(_ name: String) -> UIImage? {
+        switch name {
+        case "딸기라뗴":
+            switch self {
+            case .ice:
+                return Constants.drinkEmptyImage
+            case .base:
+                return  Constants.drinkIceStepImage
+            case .main:
+                return Constants.strawberryLatte_step_1
+            case .topping:
+                return Constants.strawberryLatte_step_2
+            case .completed:
+                return Constants.strawberryLatte_step_4
+            }
+        case "민트초코":
+            switch self {
+            case .ice:
+                return Constants.drinkEmptyImage
+            case .base:
+                return  Constants.drinkIceStepImage
+            case .main:
+                return Constants.mintChoco_step_1
+            case .topping:
+                return Constants.mintChoco_step_2
+            case .completed:
+                return Constants.mintChoco_step_4
+            }
+        case "초코라뗴":
+            switch self {
+            case .ice:
+                return Constants.drinkEmptyImage
+            case .base:
+                return Constants.drinkIceStepImage
+            case .main:
+                return Constants.chocoLatte_step_1
+            case .topping:
+                return Constants.chocoLatte_step_2
+            case .completed:
+                return Constants.chocoLatte_step_4
+            }
+        case "썸머라떼":
+            switch self {
+            case .ice:
+                return Constants.drinkEmptyImage
+            case .base:
+                return Constants.drinkIceStepImage
+            case .main:
+                return Constants.summerLatte_step_1
+            case .topping:
+                return Constants.summerLatte_step_2
+            case .completed:
+                return Constants.summerLatte_step_4
+            }
+        case "레몬에이드":
+            switch self {
+            case .ice:
+                return Constants.drinkEmptyImage
+            case .base:
+                return Constants.drinkIceStepImage
+            case .main:
+                return Constants.lemonade_step_1
+            case .topping:
+                return Constants.lemonade_step_2
+            case .completed:
+                return Constants.lemonade_step_4
+            }
+        default:
+            return Constants.drinkEmptyImage
+        }
+    }
 }
 
 final class OurCafeViewController: BaseViewController {
@@ -378,6 +449,9 @@ final class OurCafeViewController: BaseViewController {
             .emit(onNext: coordinator.showDrinkSelectBottomSheet(_:))
             .disposed(by: self.disposeBag)
         
+        output.drinkCompletion
+            .emit(onNext: coordinator.showCompleteDrinkScene)
+            .disposed(by: self.disposeBag)
     }
 }
 

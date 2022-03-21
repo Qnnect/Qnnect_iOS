@@ -24,21 +24,21 @@ struct OurCafeFetchResponseDTO: Decodable {
 struct CafeDrinkInfoResponseDTO: Decodable {
     let base: Int
     let baseFilled: Int
-    let currentDrinkIngredientsFilled: [DrinkIngredientsFilledResponseDTO]
+    let currentDrinkIngredientsFilled: [DrinkIngredientsFilledResponseDTO]?
     let ice: Int
     let iceFilled: Int
     let main: Int
     let mainFilled: Int
     let topping: Int
     let toppingFilled: Int
-    let userDrinkSelectedId: Int
-    let userDrinkName: String
+    let userDrinkSelectedId: Int?
+    let userDrinkName: String?
     
     func toDomain() -> CafeDrink {
         CafeDrink(
             base: base,
             baseFilled: baseFilled,
-            currentDrinkIngredientsFilled: currentDrinkIngredientsFilled.map { $0.toDomain()} ,
+            currentDrinkIngredientsFilled: currentDrinkIngredientsFilled?.map { $0.toDomain()} ,
             ice: ice,
             iceFilled: iceFilled,
             main: main,

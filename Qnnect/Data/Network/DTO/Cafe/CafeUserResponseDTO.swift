@@ -8,15 +8,13 @@
 import Foundation
 
 struct CafeUserResponseDTO: Decodable {
-    let drinkIngredientsFilledResponseList: [DrinkIngredientsFilledResponseDTO]
+    let cafeDrinkCommonResponse: CafeDrinkInfoResponseDTO
     let user: ProfileResponseDTO
-    let userDrinkSelected: String?
     
     func toDomain() -> CafeUser {
         return CafeUser(
-            filledIngredients: drinkIngredientsFilledResponseList.map { $0.toDomain() },
-            userInfo: self.user.toDomain(),
-            userDrinkSelected: self.userDrinkSelected
+            drinkInfo: cafeDrinkCommonResponse.toDomain(),
+            userInfo: self.user.toDomain()
         )
     }
 }

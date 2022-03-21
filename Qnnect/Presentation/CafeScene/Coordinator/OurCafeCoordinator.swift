@@ -15,6 +15,7 @@ protocol OurCafeCoordinator: Coordinator {
     func showRightStepAlertView(_ ingredient: MyIngredient, _ userDrinkSelectedId: Int)
     func showStoreScene()
     func showDrinkSelectBottomSheet(_ cafeId: Int)
+    func showCompleteDrinkScene(_ step: DrinkStep, drinkName: String)
     func dismiss()
 }
 
@@ -96,6 +97,11 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start(cafeId)
+    }
+    
+    func showCompleteDrinkScene(_ step: DrinkStep, drinkName: String) {
+        let vc = CompleteDrinkViewController.create(with: step, drinkName, self)
+        navigationController.present(vc, animated: true, completion: nil)
     }
     
     func dismiss() {

@@ -38,7 +38,7 @@ final class SettingBottomSheetViewModel: ViewModelType {
         
         let cafeId = input.cafe.map { $0.cafeId }
         
-        let isDrinkEmpty = input.cafe.map{ $0.currentUser.filledIngredients.isEmpty }
+        let isDrinkEmpty = input.cafe.map{ $0.currentUser.drinkInfo.currentDrinkIngredientsFilled?.isEmpty ?? true }
     
         let showInvitationScene = input.didTapSettingItem
             .filter { $0 == .invite}

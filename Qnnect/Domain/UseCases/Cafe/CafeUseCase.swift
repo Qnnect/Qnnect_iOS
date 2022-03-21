@@ -51,7 +51,7 @@ final class DefaultCafeUseCase: CafeUseCase {
     }
     
     func isDrinkSelected(_ cafeUser: CafeUser) -> Bool {
-        return cafeUser.userDrinkSelected != nil
+        return cafeUser.drinkInfo.userDrinkSelectedId != nil
     }
     
     func isValidName(_ name: String) -> Bool {

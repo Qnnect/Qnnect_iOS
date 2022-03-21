@@ -67,7 +67,7 @@ final class InsertIngredientViewModel: ViewModelType {
             .withLatestFrom(
                 Observable.combineLatest(
                     input.cafeId,
-                    myCafeDrinkWithIngredients.map { $0.cafeDrink.userDrinkSelectedId },
+                    myCafeDrinkWithIngredients.compactMap { $0.cafeDrink.userDrinkSelectedId },
                     resultSelector: { (cafeId: $0, userDrinkSelectedId: $1)}
                 )
             )
@@ -76,8 +76,9 @@ final class InsertIngredientViewModel: ViewModelType {
             .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
             .filter(ourCafeUseCase.isRightIngredientBuy)
             .map { $0.ingredient }
-            .withLatestFrom(myCafeDrinkWithIngredients.map{ $0.cafeDrink.userDrinkSelectedId },
+            .withLatestFrom(myCafeDrinkWithIngredients.compactMap{ $0.cafeDrink.userDrinkSelectedId },
                             resultSelector: { (ingredient: $0, userDrinkSelectedId: $1)})
+           
         
         let showWrongStepAlertView = input.didTapIngredientCell
             .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
@@ -86,11 +87,6 @@ final class InsertIngredientViewModel: ViewModelType {
                 self?.ourCafeUseCase.isRightIngredientBuy($0, curStep: $1) == false
             }
             .mapToVoid()
-        
-        
-        
-          
-            
         
         return Output(
             ingredients: myCafeDrinkWithIngredients.map { $0.ingredients}.asDriver(onErrorJustReturn: []) ,
