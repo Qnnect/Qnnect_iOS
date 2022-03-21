@@ -122,7 +122,12 @@ final class HomeViewController: BaseViewController {
             UIBarButtonItem(customView: self.pointView)
         ]
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.notificationIcon, style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.notificationIcon,
+            style: .plain,
+            target: self,
+            action: #selector(didTapNotificationButton)
+        )
         self.navigationItem.rightBarButtonItem?.tintColor = .black
         self.navigationController?.navigationBar.barTintColor = self.view.backgroundColor
         
@@ -214,7 +219,8 @@ final class HomeViewController: BaseViewController {
                     return question
                 }),
             inviteCafeCode: Observable.just(inviteCafeCode)
-                .compactMap{ $0 }
+                .compactMap{ $0 },
+            didTapNotificationButton: rx.methodInvoked(#selector(didTapNotificationButton)).mapToVoid()
         )
         
         
@@ -264,6 +270,10 @@ final class HomeViewController: BaseViewController {
                 [weak self] error in
                 self?.view.makeToast("카페에 이미 들어가있습니다")
             }).disposed(by: self.disposeBag)
+        
+        output.showNotificationListScene
+            .emit(onNext: coordinator.showNotificationListScene)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -466,4 +476,5 @@ extension HomeViewController: MyCafeEmptyCellButtonDelegate {
     
     @objc dynamic func didTapEmptyCellJoinCafeButton() { }
     
+    @objc dynamic func didTapNotificationButton() { }
 }

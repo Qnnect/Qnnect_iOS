@@ -114,6 +114,8 @@
 		AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */; };
 		AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */; };
 		AE767F9B27E874E100BD5496 /* CompleteDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9A27E874E100BD5496 /* CompleteDrinkViewController.swift */; };
+		AE767F9D27E8CED800BD5496 /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */; };
+		AE767F9F27E8CFA900BD5496 /* NotificationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767F9E27E8CFA900BD5496 /* NotificationListViewModel.swift */; };
 		AE77C82527D887F700E8D0EC /* WriteCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */; };
 		AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */; };
 		AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */; };
@@ -433,6 +435,8 @@
 		AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCycleSlider.swift; sourceTree = "<group>"; };
 		AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewModel.swift; sourceTree = "<group>"; };
 		AE767F9A27E874E100BD5496 /* CompleteDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteDrinkViewController.swift; sourceTree = "<group>"; };
+		AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
+		AE767F9E27E8CFA900BD5496 /* NotificationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewModel.swift; sourceTree = "<group>"; };
 		AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentViewModel.swift; sourceTree = "<group>"; };
 		AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachingImageCell.swift; sourceTree = "<group>"; };
 		AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewController.swift; sourceTree = "<group>"; };
@@ -1622,6 +1626,7 @@
 				AECC133F27BA45C0006866FC /* HomeViewModel.swift */,
 				AE717B5C27C4BCC0008278D3 /* AddCafeViewModel.swift */,
 				AE33A4FC27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift */,
+				AE767F9E27E8CFA900BD5496 /* NotificationListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1632,6 +1637,7 @@
 				AECC133B27BA41DD006866FC /* HomeViewController.swift */,
 				AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */,
 				AEA7265927DDAF3400F48CB8 /* JoinCafeBottomSheet.swift */,
+				AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1912,6 +1918,7 @@
 				AE02408527E3A19700017F77 /* RecipeIngredientResponseDTO.swift in Sources */,
 				AEA14D3227D464A50009EEC6 /* QuestionCycle.swift in Sources */,
 				AE77C84127DB221A00E8D0EC /* DrinkAPI.swift in Sources */,
+				AE767F9D27E8CED800BD5496 /* NotificationListViewController.swift in Sources */,
 				AEB5AAF527E0B14B0096376B /* Rx+UIImageView.swift in Sources */,
 				AE02D80E27D5E1D30019D955 /* UserBehaviorType.swift in Sources */,
 				AE02408727E3A1D200017F77 /* RecipeIngredient.swift in Sources */,
@@ -2062,6 +2069,7 @@
 				AEB5AB0C27E0F8B50096376B /* CommentCoordinator.swift in Sources */,
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
+				AE767F9F27E8CFA900BD5496 /* NotificationListViewModel.swift in Sources */,
 				AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */,

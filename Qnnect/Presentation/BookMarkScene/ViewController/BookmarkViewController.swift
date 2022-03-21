@@ -97,9 +97,9 @@ final class BookmarkViewController: BaseViewController {
         
         
         self.bookmarkTableView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
+        
         self.bookmarkTableView.sectionHeaderHeight = 60.0
         
         self.headerView.addSubview(self.tagCollectionView)

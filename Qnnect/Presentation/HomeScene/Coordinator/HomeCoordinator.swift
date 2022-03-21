@@ -13,6 +13,7 @@ protocol HomeCoordinator: Coordinator {
     func showJoinCafeBottomSheet()
     func showCafeQuestionScene(_ questionId: Int)
     func startInviteFlow(_ inviteCafeCode: String?)
+    func showNotificationListScene()
 }
 
 final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
@@ -96,6 +97,12 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
         coordinator.showCafeQuestionScene(questionId)
+    }
+    
+    func showNotificationListScene() {
+        let viewModel = NotificationListViewModel()
+        let vc = NotificationListViewController.create(with: viewModel, self)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 

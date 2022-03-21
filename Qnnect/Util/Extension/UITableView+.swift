@@ -31,12 +31,14 @@ extension UITableView {
             make.top.equalToSuperview().inset(219.0)
             make.bottom.equalTo(messageLabel.snp.top).offset(-25.0)
         }
+        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
         
         messageLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(198.0)
-            make.leading.trailing.equalToSuperview().inset(16.0)
+            make.bottom.equalToSuperview().inset(198.0).priority(.low)
+            make.centerX.equalToSuperview()
         }
-        messageLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
         
         self.backgroundView = backgroudView
 
