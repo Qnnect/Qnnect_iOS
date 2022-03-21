@@ -153,7 +153,7 @@ final class RecipeViewController: BaseViewController {
                 ingredients.forEach { ingredient in
                     let view = UIView().then {
                         $0.layer.cornerRadius = 13.0
-                        $0.backgroundColor = .secondaryBackground
+                        $0.backgroundColor = .myPageButtonBackgroud
                     }
                     let imageView = UIImageView(image: UIImage(named: ingredient.name))
                     imageView.contentMode = .scaleAspectFit

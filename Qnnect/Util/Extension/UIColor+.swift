@@ -42,13 +42,13 @@ extension UIColor {
     class var addGroupCellBorder: UIColor? { return UIColor(named: "addGroupBorder") }
     class var profileImageBorder: UIColor? { return UIColor(named: "profileImageBorder") }
     class var secondaryBorder: UIColor? { return UIColor(named: "secondaryBorder") }
-    class var myPageButtonBackgroud: UIColor? { return UIColor(named: "myPageButtonBackgroud") }
+    class var myPageButtonBackgroud: UIColor? { return UIColor(named: "myPageButtonBackground") }
     class var shadowBackground: UIColor? { return UIColor(named: "shadowBackground") }
     class var ORANGE01: UIColor? { return UIColor(named: "ORANGE01") }
     class var groupDrinksBorder: UIColor? { return UIColor(named: "GroupDrinksBorder") }
     class var cardBackground: UIColor? { return UIColor(named: "cardBackground") }
     class var redLabel: UIColor? { return UIColor(named: "redLabel") }
-    class var reply_border: UIColor? { return UIColor(named: "reply_border") }
+    class var reply_border: UIColor? { return UIColor(named: "reply_border") } 
     class var brown60: UIColor? { return UIColor(named: "BROWN60" )}
     
     class var diary_red: UIColor? { return UIColor(named: "diary_red")}
