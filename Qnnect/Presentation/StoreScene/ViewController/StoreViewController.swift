@@ -117,13 +117,15 @@ final class StoreViewController: BaseViewController {
         self.ingredientCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
         ingredientCollectionView.delegate = self
         
+        let bottomOffset: CGFloat = navigationController?.viewControllers.count == 1 ? 0.0 : 60.0
+        
         floatingContainerView.snp.makeConstraints { make in
             make.width.equalTo(48.0)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(bottomOffset)
             make.height.equalTo(150.0)
             make.trailing.equalToSuperview().inset(24.0)
         }
@@ -239,7 +241,7 @@ extension StoreViewController: UIScrollViewDelegate, UICollectionViewDelegate {
                 [weak self] in
                 guard let self = self else { return }
                 self.floatingButton.snp.updateConstraints({ make in
-                    make.bottom.equalToSuperview().inset(100.0)
+                    make.bottom.equalToSuperview().inset(102)
                 })
                 self.floatingContainerView.layoutIfNeeded()
             }

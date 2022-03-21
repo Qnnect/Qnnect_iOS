@@ -149,6 +149,7 @@ final class OurCafeViewController: BaseViewController {
         $0.textColor = .BLACK_121212
         $0.text = "xxxx 완성"
         $0.textAlignment = .center
+        $0.sizeToFit()
     }
     
     private let completionImageView = UIImageView().then {
@@ -267,10 +268,10 @@ final class OurCafeViewController: BaseViewController {
         
         completionImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(120.0)
-            make.top.equalTo(completionLabel.snp.bottom).offset(8.0)
-            make.bottom.equalTo(selectDrinkButton.snp.top)
+            make.top.equalTo(completionLabel.snp.bottom).offset(30.0)
+            make.bottom.equalTo(selectDrinkButton.snp.top).priority(.high)
         }
-        
+        completionImageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         navigationItem.titleView = navigationTitleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(
