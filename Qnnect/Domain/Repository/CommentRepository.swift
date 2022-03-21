@@ -16,7 +16,7 @@ protocol CommentRepository: AnyObject {
     ) -> Observable<Result<Void,Error>>
     
     func fetchComment(_ commentId: Int) -> Observable<
-        Result<(comment: Comment, replies: [Reply], isWriter: Bool),Error>
+        Result<(comment: Comment, replies: [Reply]),Error>
     >
     func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>>
     func modifyComment(_ commentId: Int, _ images: [Data], _ content: String) -> Observable<Result<Void,Error>>

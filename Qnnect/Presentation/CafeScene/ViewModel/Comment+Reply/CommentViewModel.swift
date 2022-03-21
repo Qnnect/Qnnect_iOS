@@ -51,7 +51,7 @@ final class CommentViewModel: ViewModelType {
         let fetchedCommentWithReplies = Observable.merge(input.viewWillAppear, createReply)
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.fetchComment)
-            .compactMap({ result -> (comment: Comment, replies: [Reply], isWriter: Bool)? in
+            .compactMap({ result -> (comment: Comment, replies: [Reply])? in
                 guard case let .success(data) = result else { return nil }
                 return data
             })
@@ -78,7 +78,7 @@ final class CommentViewModel: ViewModelType {
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),
             replies: fetchedCommentWithReplies.map { $0.replies}.asDriver(onErrorJustReturn: []),
-            isWriter: fetchedCommentWithReplies.map { $0.isWriter }.asDriver(onErrorDriveWith: .empty()),
+            isWriter: fetchedCommentWithReplies.compactMap { $0.comment.writer }.asDriver(onErrorDriveWith: .empty()),
             showCommentMoreMenuBottomSheet: showCommentMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showReplyMoreMenuBottomSheet: showReplyMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty())
         )

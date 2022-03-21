@@ -1,22 +1,19 @@
 //
-//  MoreMenuBottomSheet.swift
+//  QuestionMoreMenuBottomSheet.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/03/16.
+//  Created by 재영신 on 2022/03/22.
 //
-
 import UIKit
 import SnapKit
 import Then
 import RxSwift
 import RxCocoa
 
-class CommentMoreMenuBottomSheet: BottomSheetViewController {
+
+class QuestionMoreMenuBottomSheet : BottomSheetViewController {
     
-    private let modifyButton = MoreMenuItem(title: "답변 수정")
     
-    private let deleteButton = MoreMenuItem(title: "답변 삭제")
-    private let reportButton = MoreMenuItem(title: "신고 하기")
     private let buttonStackView = UIStackView().then {
         $0.spacing = 30.0
         $0.axis = .vertical
@@ -24,23 +21,21 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         $0.alignment = .leading
     }
     
-    private let deleteAlertView = DeleteAlertView().then {
-        $0.modalPresentationStyle = .overCurrentContext
-    }
+    private lazy var modifyButton = MoreMenuItem(title: "질문 수정")
+    private lazy var deleteButton = MoreMenuItem(title: "질문 삭제")
+    private lazy var reportButton = MoreMenuItem(title: "신고 하기")
+    private lazy var deleteAlertView = DeleteAlertView()
     
-    private var comment: Comment!
+    private var viewModel: QuestionMoreMenuViewModel!
+    weak var coordinator: QuestionCoordinator?
     private var question: Question!
-    private var viewModel: CommentMoreMenuViewModel!
-    weak var coordinator: CommentCoordinator?
     
     static func create(
-        with comment: Comment,
-        _ viewModel: CommentMoreMenuViewModel,
-        _ coordinator: CommentCoordinator,
-        _ question : Question
-    ) -> CommentMoreMenuBottomSheet {
-        let view = CommentMoreMenuBottomSheet()
-        view.comment = comment
+        with viewModel: QuestionMoreMenuViewModel,
+        _ coordinator: QuestionCoordinator,
+        _ question: Question
+    ) -> QuestionMoreMenuBottomSheet {
+        let view = QuestionMoreMenuBottomSheet()
         view.viewModel = viewModel
         view.coordinator = coordinator
         view.question = question
@@ -57,14 +52,9 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         topPadding = UIScreen.main.bounds.height * 0.75
         
         dismissButton.isHidden = true
-        
-        if let writer = comment.writer, writer {
-            [
-                modifyButton,
-                deleteButton
-            ].forEach {
-                buttonStackView.addArrangedSubview($0)
-            }
+        if question.writer {
+            buttonStackView.addArrangedSubview(modifyButton)
+            buttonStackView.addArrangedSubview(deleteButton)
         } else {
             buttonStackView.addArrangedSubview(reportButton)
         }
@@ -80,15 +70,20 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
     override func bind() {
         super.bind()
         
-        let input = CommentMoreMenuViewModel.Input(
-            comment: Observable.just(comment),
+        let input = QuestionMoreMenuViewModel.Input(
             question: Observable.just(question),
-            didTapDeleteButton: deleteButton.rx.tap.asObservable(),
             didTapModifyButton: modifyButton.rx.tap.asObservable(),
+            didTapDeleteButton: deleteButton.rx.tap.asObservable(),
             didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
         )
         
         let output = viewModel.transform(from: input)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.showModeifyQuestionScene
+            .emit(onNext: coordinator.showModifyQuestionScene(_:))
+            .disposed(by: self.disposeBag)
         
         output.showDeleteAlertView
             .emit(onNext: {
@@ -97,19 +92,8 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
                 self.present(self.deleteAlertView, animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
         
-        guard let coordinator = coordinator else { return}
-
         output.delete
-            .map { CommentMoreMenuItem.delete }
-            .emit(onNext: coordinator.dismissCommentMoreMenu)
-            .disposed(by: self.disposeBag)
-        
-        output.modify
-            .emit()
-            .disposed(by: self.disposeBag)
-        
-        output.showWriteCommentScene
-            .emit(onNext: coordinator.showWriteCommentScene)
+            .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
         
     }

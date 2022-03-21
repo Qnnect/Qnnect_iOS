@@ -38,6 +38,10 @@ final class CafeQuestionViewController: BaseViewController {
         $0.setImage(Constants.navigationScrapIcon, for: .normal)
     }
     
+    private let moreMenuButton = UIButton().then {
+        $0.setImage(Constants.navagation_more, for: .normal)
+    }
+    
     private let deleteAlertView = DeleteAlertView().then {
         $0.modalPresentationStyle = .overCurrentContext
     }
@@ -76,7 +80,10 @@ final class CafeQuestionViewController: BaseViewController {
         }
         
         self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: moreMenuButton),
+            UIBarButtonItem.fixedSpace(15.0),
             UIBarButtonItem(customView: self.scrapButton),
+            UIBarButtonItem.fixedSpace(15.0),
             UIBarButtonItem(customView: self.likeButton)
         ]
     }
@@ -120,15 +127,7 @@ final class CafeQuestionViewController: BaseViewController {
                     [weak self] in
                     self?.setLikeButton(!$0)
                 },
-            didTapModifyButton: rx.methodInvoked(#selector(questionCellButton(didTap:)))
-                .compactMap{ $0[0] as? String}
-                .filter { $0 == CafeAnswerQuestionCell.modify }
-                .mapToVoid(),
-            didTapDeleteButton: rx.methodInvoked(#selector(questionCellButton(didTap:)))
-                .compactMap{ $0[0] as? String }
-                .filter { $0 == CafeAnswerQuestionCell.delete }
-                .mapToVoid(),
-            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
+            didTapMoreMenuButton: moreMenuButton.rx.tap.asObservable()
         )
         
         
@@ -184,15 +183,9 @@ final class CafeQuestionViewController: BaseViewController {
             .emit()
             .disposed(by: self.disposeBag)
         
-        output.showDeleteAlertView
-            .emit(onNext: {
-                [weak self] _ in
-                guard let self = self else { return }
-                self.present(self.deleteAlertView, animated: true, completion: nil)
-            }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
-
+        
         output.showWriteCommentScene
             .emit(onNext: coordinator.showWriteCommentScene)
             .disposed(by: self.disposeBag)
@@ -201,13 +194,10 @@ final class CafeQuestionViewController: BaseViewController {
             .emit(onNext: coordinator.showCommentScene)
             .disposed(by: self.disposeBag)
         
-        output.delete
-            .emit(onNext: coordinator.pop)
+        output.showMoreMenu
+            .emit(onNext: coordinator.showMoreMenu(_:))
             .disposed(by: self.disposeBag)
-        
-        output.showModeifyQuestionScene
-            .emit(onNext: coordinator.showModifyQuestionScene(_:))
-            .disposed(by: self.disposeBag)
+    
     }
 }
 
@@ -232,7 +222,6 @@ private extension CafeQuestionViewController {
                     for: indexPath
                 ) as! CafeAnswerQuestionCell
                 cell.update(with: question)
-                cell.delegate = self
                 return cell
             case .answerWritingSectionItem(user: let user):
                 let cell = tableView.dequeueReusableCell(
@@ -263,8 +252,4 @@ private extension CafeQuestionViewController {
         isScraped ? scrapButton.setImage(Constants.navigationScrapIcon, for: .normal) :
         scrapButton.setImage(Constants.navigationScrapIcon, for: .normal)
     }
-}
-
-extension CafeQuestionViewController: QuestionCellButtonDelegate {
-    func questionCellButton(didTap kind: String) { }
 }

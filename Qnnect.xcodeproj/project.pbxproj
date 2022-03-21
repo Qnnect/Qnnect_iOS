@@ -120,6 +120,9 @@
 		AE767FA327E8D60800BD5496 /* MyDrinkStampCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */; };
 		AE767FA527E8E58B00BD5496 /* MyDrinkStampTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */; };
 		AE767FA727E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */; };
+		AE767FA927E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FA827E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift */; };
+		AE767FAB27E904CC00BD5496 /* QuestionMoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FAA27E904CC00BD5496 /* QuestionMoreMenuViewModel.swift */; };
+		AE767FAF27E9065800BD5496 /* MoreMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */; };
 		AE77C82527D887F700E8D0EC /* WriteCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */; };
 		AE77C82727D895F600E8D0EC /* AttachingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */; };
 		AE77C82927D8A93500E8D0EC /* CafeModifyingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */; };
@@ -445,6 +448,9 @@
 		AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampCell.swift; sourceTree = "<group>"; };
 		AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampTitleCell.swift; sourceTree = "<group>"; };
 		AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkStampSectionModel.swift; sourceTree = "<group>"; };
+		AE767FA827E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionMoreMenuBottomSheet.swift; sourceTree = "<group>"; };
+		AE767FAA27E904CC00BD5496 /* QuestionMoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionMoreMenuViewModel.swift; sourceTree = "<group>"; };
+		AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuItem.swift; sourceTree = "<group>"; };
 		AE77C82427D887F700E8D0EC /* WriteCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentViewModel.swift; sourceTree = "<group>"; };
 		AE77C82627D895F600E8D0EC /* AttachingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachingImageCell.swift; sourceTree = "<group>"; };
 		AE77C82827D8A93500E8D0EC /* CafeModifyingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeModifyingViewController.swift; sourceTree = "<group>"; };
@@ -792,6 +798,7 @@
 				AEB5AB0D27E111890096376B /* DeleteAlertView.swift */,
 				AEB5AB3B27E259FC0096376B /* IndicatorView.swift */,
 				AE02404C27E31FDB00017F77 /* NavigationTitleLabel.swift */,
+				AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1462,6 +1469,7 @@
 			children = (
 				AE02D82027D75C0D0019D955 /* CafeQuestionViewController.swift */,
 				AEB5AB2127E1E9800096376B /* ModifyQuestionViewController.swift */,
+				AE767FA827E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift */,
 			);
 			path = "Question+Comment(Answer)";
 			sourceTree = "<group>";
@@ -1506,6 +1514,7 @@
 			children = (
 				AE02D82227D75CDB0019D955 /* CafeQuestionViewModel.swift */,
 				AEB5AB2327E1EA030096376B /* ModifyQuestionViewModel.swift */,
+				AE767FAA27E904CC00BD5496 /* QuestionMoreMenuViewModel.swift */,
 			);
 			path = "Question+Comment(Answer)";
 			sourceTree = "<group>";
@@ -1909,6 +1918,7 @@
 				AE6964CD27BCDB9000BF2A80 /* StoreViewModel.swift in Sources */,
 				AE77C86427DB6C7300E8D0EC /* CafesFetchResponseDTO.swift in Sources */,
 				AEB5AABB27DEFEF20096376B /* QuestionFetchResponseDTO.swift in Sources */,
+				AE767FAF27E9065800BD5496 /* MoreMenuItem.swift in Sources */,
 				AE0D336627B4C37400C4B955 /* Observable+.swift in Sources */,
 				AE767FA327E8D60800BD5496 /* MyDrinkStampCell.swift in Sources */,
 				AE33A4FD27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift in Sources */,
@@ -1991,6 +2001,8 @@
 				AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
+				AE767FA927E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift in Sources */,
+				AE767FAB27E904CC00BD5496 /* QuestionMoreMenuViewModel.swift in Sources */,
 				AEA56B0A27BF51800029A6CB /* HomeSectionModel.swift in Sources */,
 				AEA14D4827D47E8D0009EEC6 /* Cafe.swift in Sources */,
 				AE767FA127E8D4CD00BD5496 /* MyDrinkStampViewController.swift in Sources */,

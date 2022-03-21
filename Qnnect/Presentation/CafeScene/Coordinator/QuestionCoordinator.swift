@@ -12,7 +12,9 @@ protocol QuestionCoordinator: Coordinator {
     func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?)
     func showCommentScene(_ commentId: Int, _ question: Question)
     func showModifyQuestionScene(_  question: Question)
+    func showMoreMenu(_ question: Question)
     func pop()
+    func dismiss()
 }
 
 extension QuestionCoordinator {
@@ -86,8 +88,29 @@ final class DefaultQuestionCoordinator: QuestionCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
+    func showMoreMenu(_ question: Question) {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = QuestionMoreMenuViewModel(questionUseCase: questionUseCase)
+        let vc = QuestionMoreMenuBottomSheet.create(
+            with: viewModel,
+            self,
+            question
+        )
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController.present(vc, animated: false, completion: nil)
+    }
+    
     func pop() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func dismiss() {
+        navigationController.presentedViewController?.dismiss(animated: false, completion: nil)
     }
 }
 

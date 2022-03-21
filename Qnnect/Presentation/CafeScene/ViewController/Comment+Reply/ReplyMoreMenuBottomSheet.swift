@@ -12,19 +12,9 @@ import RxSwift
 
 class ReplyMoreMenuBottomSheet: BottomSheetViewController {
     
-    private let modifyButton = UIButton().then {
-        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
-        $0.setTitleColor(.GRAY01, for: .normal)
-        $0.setTitle("댓글 수정", for: .normal)
-        $0.sizeToFit()
-    }
-    
-    private let deleteButton = UIButton().then {
-        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
-        $0.setTitleColor(.GRAY01, for: .normal)
-        $0.setTitle("댓글 삭제", for: .normal)
-        $0.sizeToFit()
-    }
+    private let modifyButton = MoreMenuItem(title: "댓글 수정")
+    private let deleteButton = MoreMenuItem(title: "댓글 삭제")
+    private let reportButton = MoreMenuItem(title: "신고 하기")
     
     private let buttonStackView = UIStackView().then {
         $0.spacing = 30.0
@@ -63,20 +53,26 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
     override func configureUI() {
         super.configureUI()
         
-        topPadding = 653.0
+        topPadding = UIScreen.main.bounds.height * 0.75
         dismissButton.isHidden = true
-        [
-            modifyButton,
-            deleteButton
-        ].forEach {
-            buttonStackView.addArrangedSubview($0)
+        
+        if reply.writer {
+            [
+                modifyButton,
+                deleteButton
+            ].forEach {
+                buttonStackView.addArrangedSubview($0)
+            }
+        } else {
+            buttonStackView.addArrangedSubview(reportButton)
         }
+       
         
         bottomSheetView.addSubview(buttonStackView)
         
         buttonStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
-            make.top.bottom.equalToSuperview().inset(44.0)
+            make.top.equalToSuperview().inset(44.0)
         }
     }
     
