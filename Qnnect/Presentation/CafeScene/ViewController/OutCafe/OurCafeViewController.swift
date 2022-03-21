@@ -357,6 +357,12 @@ final class OurCafeViewController: BaseViewController {
             .emit(onNext: setBottomLayout)
             .disposed(by: self.disposeBag)
         
+        output.drinkName
+            .drive(onNext: {
+                [weak self] drinkName in
+                self?.completionLabel.text = "\(drinkName) 완성"
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
         
         output.showInsertIngredientScene

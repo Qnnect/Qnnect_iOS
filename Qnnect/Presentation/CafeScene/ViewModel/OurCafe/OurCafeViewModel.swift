@@ -34,6 +34,7 @@ final class OurCafeViewModel: ViewModelType {
         let isDrinkCompleted: Signal<Bool>
         /// Int: CafeId
         let showSelectDrinkScene: Signal<Int>
+        let drinkName: Driver<String>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -130,6 +131,8 @@ final class OurCafeViewModel: ViewModelType {
         let showSelectDrinkScene = input.didTapSelectDrinkButton
             .withLatestFrom(input.cafeId)
         
+        let drinkName = ourCafe.map { $0.selectedUserDrinkInfo.userDrinkName }
+        
         return Output(
             userInfos: firstLoadUserInfos
                 .withLatestFrom(input.cafeUserId, resultSelector: { ($0, $1) })
@@ -155,7 +158,8 @@ final class OurCafeViewModel: ViewModelType {
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),
             isUserDrinkFetched: isUserDrinkFetched.asSignal(onErrorSignalWith: .empty()),
             isDrinkCompleted: isDrinkCompleted.asSignal(onErrorSignalWith: .empty()),
-            showSelectDrinkScene: showSelectDrinkScene.asSignal(onErrorSignalWith: .empty())
+            showSelectDrinkScene: showSelectDrinkScene.asSignal(onErrorSignalWith: .empty()),
+            drinkName: drinkName.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

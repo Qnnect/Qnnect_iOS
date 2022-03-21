@@ -32,6 +32,7 @@ struct CafeDrinkInfoResponseDTO: Decodable {
     let topping: Int
     let toppingFilled: Int
     let userDrinkSelectedId: Int
+    let userDrinkName: String
     
     func toDomain() -> CafeDrink {
         CafeDrink(
@@ -44,7 +45,8 @@ struct CafeDrinkInfoResponseDTO: Decodable {
             mainFilled: mainFilled,
             topping: topping,
             toppingFilled: toppingFilled,
-            userDrinkSelectedId: userDrinkSelectedId
+            userDrinkSelectedId: userDrinkSelectedId,
+            userDrinkName: userDrinkName
         )
     }
 }

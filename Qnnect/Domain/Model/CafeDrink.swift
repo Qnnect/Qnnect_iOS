@@ -18,4 +18,5 @@ struct CafeDrink {
     let topping: Int
     let toppingFilled: Int
     let userDrinkSelectedId: Int
+    let userDrinkName: String
 }
