@@ -23,7 +23,7 @@ final class AddCafeViewModel: ViewModelType {
         let questionCycle: Driver<QuestionCycle>
         let isValidName: Signal<Bool>
         let isCompleted: Signal<Bool>
-        let showGroupScene: Signal<(Int, Bool)>
+        let showGroupScene: Signal<Int>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -61,7 +61,6 @@ final class AddCafeViewModel: ViewModelType {
                 guard case let .success(cafeId) = result else { return nil }
                 return cafeId
             })
-            .map { ($0, true)}
             
         
         return Output(

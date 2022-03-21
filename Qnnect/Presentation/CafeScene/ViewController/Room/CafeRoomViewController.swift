@@ -97,19 +97,16 @@ final class CafeRoomViewController: BaseViewController {
     
     private var viewModel: CafeRoomViewModel!
     private var cafeId: Int!
-    private var isFirst: Bool!
     weak var coordinator: CafeCoordinator?
     
     static func create(
         with viewModel: CafeRoomViewModel,
         _ cafeId: Int,
-        _ isFirst: Bool = false,
         _ coordinator: CafeCoordinator
     ) -> CafeRoomViewController{
         let vc = CafeRoomViewController()
         vc.viewModel = viewModel
         vc.cafeId = cafeId
-        vc.isFirst = isFirst
         vc.coordinator = coordinator
         return vc
     }
@@ -177,7 +174,6 @@ final class CafeRoomViewController: BaseViewController {
             cafeId: Observable.just(self.cafeId),
             didTapQuestionButton: self.questionButton.rx.tap.asObservable(),
             didTapDrinkSelectButton: didTapDrinkSelectButton.asObservable(),
-            isFirst: Observable.just(self.isFirst),
             viewDidAppear: self.rx.viewDidAppear.mapToVoid(),
             didTapNavigationMenu: self.navigationMenuButton.rx.tap.asObservable(),
             didTapQuestionCell: self.mainCollectionView.rx.modelSelected(CafeRoomSectionItem.self)

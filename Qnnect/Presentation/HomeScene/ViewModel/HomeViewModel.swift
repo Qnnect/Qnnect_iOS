@@ -24,7 +24,7 @@ final class HomeViewModel: ViewModelType {
     struct Output {
         let showAddGroupBottomSheet: Signal<Void>
         let curQuestionPage: Driver<Int>
-        let showCafeRoom: Signal<(Int, Bool)>
+        let showCafeRoom: Signal<Int>
         let homeInfo: Driver<HomeInfo>
         let showJoinCafeBottomSheet: Signal<Void>
         ///Int: QuestionId
@@ -79,7 +79,7 @@ final class HomeViewModel: ViewModelType {
             .compactMap { result -> JoinCafeError? in
                 guard case let .failure(error) = result else { return nil }
                 if error == .alreadyIn {
-                    return error
+                    return error 
                 } else {
                     return nil
                 }
@@ -87,9 +87,9 @@ final class HomeViewModel: ViewModelType {
         
         
         let showCafeRoom = Observable.merge(
-            joinCafe.map { ($0, true) },
+            joinCafe,
             input.didTapMyCafe
-                .map {($0.id,false)}
+                .map {$0.id}
         )
         
         

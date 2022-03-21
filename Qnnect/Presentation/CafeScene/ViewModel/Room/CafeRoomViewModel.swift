@@ -17,7 +17,6 @@ final class CafeRoomViewModel: ViewModelType {
         let cafeId: Observable<Int>
         let didTapQuestionButton: Observable<Void>
         let didTapDrinkSelectButton: Observable<Void>
-        let isFirst: Observable<Bool>
         let viewDidAppear: Observable<Void>
         let didTapNavigationMenu: Observable<Void>
         let didTapQuestionCell: Observable<Question>
@@ -62,13 +61,7 @@ final class CafeRoomViewModel: ViewModelType {
             }
             .share()
         
-        let showDrinkSelectBottomSheet = Observable.merge(
-            input.didTapDrinkSelectButton,
-            Observable.zip(
-                input.isFirst.filter{$0}.mapToVoid(),
-                input.viewDidAppear.delay(RxTimeInterval.milliseconds(5), scheduler: MainScheduler.instance)
-            ).mapToVoid()
-            )
+        let showDrinkSelectBottomSheet = input.didTapDrinkSelectButton
             .withLatestFrom(input.cafeId)
             
         

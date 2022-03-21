@@ -17,7 +17,8 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
     }
     
     struct Output {
-        let showCafeRoomScene: Signal<(cafeId: Int, isFirst: Bool)>
+        ///Int: CafeId
+        let showCafeRoomScene: Signal<Int>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -36,7 +37,7 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
             result -> Int? in
             guard case let .success(cafeId) = result else { return nil }
             return cafeId
-        }.map { (cafeId: $0, isFirst: true) }
+        }
         
         return Output(showCafeRoomScene: joinedCafeId.asSignal(onErrorSignalWith: .empty()))
     }

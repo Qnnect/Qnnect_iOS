@@ -10,7 +10,7 @@ import UIKit
 
 protocol CafeCoordinator: Coordinator {
     func showSelectDrinkBottomSheet(_ cafeId: Int)
-    func start(with cafeId: Int, _ isFirst: Bool)
+    func start(with cafeId: Int)
     func showDrinkSelectGuideAlertView(_ type: UserBehaviorType, _ cafeId: Int)
     func showSettingBottomSheet(_ cafe: Cafe)
     func showInvitationScene(_ cafe: Cafe)
@@ -40,11 +40,11 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     
     func start() { }
     
-    func start(with cafeId: Int, _ isFirst: Bool = false) {
+    func start(with cafeId: Int) {
         let cafeRepository = DefaultCafeRepository(cafeNetworkService: CafeNetworkService())
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = CafeRoomViewModel(cafeUseCase: cafeUseCase)
-        let vc = CafeRoomViewController.create(with: viewModel, cafeId, isFirst, self)
+        let vc = CafeRoomViewController.create(with: viewModel, cafeId, self)
         self.navigationController.pushViewController(vc, animated: true)
     }
     

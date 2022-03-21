@@ -9,7 +9,7 @@ import UIKit
 
 protocol HomeCoordinator: Coordinator {
     func showAddGroupBottomSheet()
-    func showGroupScene(with cafeId: Int, _ isFirst: Bool)
+    func showGroupScene(with cafeId: Int)
     func showJoinCafeBottomSheet()
     func showCafeQuestionScene(_ questionId: Int)
     func startInviteFlow(_ inviteCafeCode: String?)
@@ -67,16 +67,16 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         self.navigationController.present(vc, animated: false, completion: nil)
     }
     
-    func showGroupScene(with cafeId: Int, _ isFirst: Bool = false) {
+    func showGroupScene(with cafeId: Int) {
         
         /// 방 생성, 그룹 참여 팝업으로 참여 했을 경우
-        if isFirst == true, let vc = navigationController.presentedViewController {
+        if let vc = navigationController.presentedViewController {
             vc.dismiss(animated: false, completion: nil)
         }
         let coordinator = DefaultCafeCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
         self.childCoordinators.append(coordinator)
-        coordinator.start(with: cafeId,isFirst)
+        coordinator.start(with: cafeId)
     }
     
     func showJoinCafeBottomSheet() {
