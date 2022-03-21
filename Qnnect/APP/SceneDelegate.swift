@@ -23,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
         UITabBar.appearance().tintColor = .p_brown
-        
-        
+        UITabBar.appearance().backgroundColor = .p_ivory
+        //UITabBar.appearance().isTranslucent = false
 
         self.scene(scene, openURLContexts: connectionOptions.urlContexts)
         

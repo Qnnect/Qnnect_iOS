@@ -51,6 +51,13 @@ final class StoreViewController: BaseViewController {
         )
     }
     
+    private let floatingButton = UIImageView().then {
+        $0.image = Constants.floatingButtonImage
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private let floatingContainerView = UIView()
+    
     private var viewModel: StoreViewModel!
     weak var coordinator: StoreCoordinator?
     
@@ -80,37 +87,51 @@ final class StoreViewController: BaseViewController {
     override func configureUI() {
         
         [
-            self.ingredientCollectionView
+            ingredientCollectionView,
+            floatingContainerView
         ].forEach {
-            self.view.addSubview($0)
+            view.addSubview($0)
         }
+        floatingContainerView.addSubview(floatingButton)
         
         self.view.backgroundColor = .p_ivory
         
         if navigationController?.viewControllers.count == 1 {
             self.navigationItem.leftBarButtonItems =
-                [
-                    Constants.navigationLeftPadding,
-                    UIBarButtonItem(customView: self.navigationTitleView)
-                ]
+            [
+                Constants.navigationLeftPadding,
+                UIBarButtonItem(customView: self.navigationTitleView)
+            ]
         } else  {
             self.navigationItem.titleView = navigationTitleLabel
         }
-       
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Constants.store_navigation_bar_icon,
             style: .plain,
             target: self,
             action: #selector(didTapStorageButton)
         )
-
+        
         
         self.ingredientCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
+        ingredientCollectionView.delegate = self
         
+        floatingContainerView.snp.makeConstraints { make in
+            make.width.equalTo(48.0)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(150.0)
+            make.trailing.equalToSuperview().inset(24.0)
+        }
+        
+        floatingButton.snp.makeConstraints { make in
+            make.width.height.equalTo(48.0)
+            make.bottom.equalToSuperview()
+        }
     }
     
     override func bind() {
@@ -136,13 +157,13 @@ final class StoreViewController: BaseViewController {
                         return IngredientType.allCases[index - 1]
                     }.subscribe(selectedTag)
                     .disposed(by: self.disposeBag)
-
+                
                 return view
             } else {
                 return UICollectionReusableView()
             }
         }
-
+        
         
         let input = StoreViewModel.Input(
             didTapIngredient: self.ingredientCollectionView.rx.modelSelected(StoreSectionItem.self)
@@ -163,14 +184,21 @@ final class StoreViewController: BaseViewController {
         
         output.ingredients
             .map {
-                 ingredients -> [StoreSectionModel] in
+                ingredients -> [StoreSectionModel] in
                 let items = ingredients.map { StoreSectionItem.IngredientSectionItem(ingredient: $0)}
                 return [StoreSectionModel.IngredientSection(title: "", items: items)]
             }.drive(self.ingredientCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
         
+        floatingButton.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.ingredientCollectionView.setContentOffset(.zero, animated: true)
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return}
-
+        
         output.showIngredientBuyAlert
             .emit(onNext: coordinator.showIngredientBuyAlertView(with:))
             .disposed(by: self.disposeBag)
@@ -196,3 +224,40 @@ private extension StoreViewController {
     @objc dynamic func didTapStorageButton() { }
 }
 
+
+extension StoreViewController: UIScrollViewDelegate, UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 50.0 {
+            
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview().inset(100.0)
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        } else if scrollView.contentOffset.y <= 50.0 {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview()
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        }
+    }
+}

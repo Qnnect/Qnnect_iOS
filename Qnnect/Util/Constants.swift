@@ -123,6 +123,7 @@ struct Constants {
     static let invitationImage: UIImage? = UIImage(named: "초대이미지")
     static let listEmptyImage: UIImage? = UIImage(named: "listEmptyImage")
     static let addCafeImage: UIImage? = UIImage(named: "addCafeImage")
+    static let floatingButtonImage: UIImage? = UIImage(named: "floatingButton")
     
     // MARK: -  Drinks
     static let drinkEmptyImage: UIImage? = UIImage(named: "drink_empty")

@@ -36,6 +36,14 @@ final class BookmarkViewController: BaseViewController {
         $0.setImage(Constants.navigation_search, for: .normal)
     }
     
+    private let floatingButton = UIImageView().then {
+        $0.image = Constants.floatingButtonImage
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private let floatingContainerView = UIView()
+    
+    
     private var viewModel: BookmarkViewModel!
     weak var coordinator: BookmarkCoordinator?
     
@@ -65,7 +73,14 @@ final class BookmarkViewController: BaseViewController {
     }
     override func configureUI() {
         
-        self.view.addSubview(self.bookmarkTableView)
+        [
+            bookmarkTableView,
+            floatingContainerView
+        ].forEach {
+            view.addSubview($0)
+        }
+        
+        floatingContainerView.addSubview(floatingButton)
         self.view.backgroundColor = .p_ivory
         
         self.navigationItem.leftBarButtonItems = [
@@ -83,8 +98,7 @@ final class BookmarkViewController: BaseViewController {
         
         self.bookmarkTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(8.0)
+            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         self.bookmarkTableView.sectionHeaderHeight = 60.0
         
@@ -96,10 +110,23 @@ final class BookmarkViewController: BaseViewController {
             make.centerY.equalToSuperview()
         }
         
+        
+        floatingContainerView.snp.makeConstraints { make in
+            make.width.equalTo(48.0)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(150.0)
+            make.trailing.equalToSuperview().inset(24.0)
+        }
+        
+        floatingButton.snp.makeConstraints { make in
+            make.width.height.equalTo(48.0)
+            make.bottom.equalToSuperview()
+        }
+        
     }
     
     override func bind() {
-   
+        
         self.bookmarkTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
@@ -121,6 +148,13 @@ final class BookmarkViewController: BaseViewController {
         
         
         let output = self.viewModel.transform(from: input)
+        
+        floatingButton.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.bookmarkTableView.setContentOffset(.zero, animated: true)
+            }).disposed(by: self.disposeBag)
         
         output.cafes
             .map { cafes -> [CafeTag] in
@@ -161,7 +195,7 @@ final class BookmarkViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
-
+        
         output.showCafeQuestionScene
             .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
@@ -199,6 +233,40 @@ extension BookmarkViewController {
                 fetchMore(curPage)
             }
         }
+        
+        if scrollView.contentOffset.y > 50.0 {
+            
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview().inset(100.0)
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        } else if scrollView.contentOffset.y <= 50.0 {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview()
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        }
+        
     }
     
     @objc dynamic func fetchMore(_ page: Int) {
