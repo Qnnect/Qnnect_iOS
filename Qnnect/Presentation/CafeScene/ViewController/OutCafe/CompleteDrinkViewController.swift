@@ -33,6 +33,7 @@ final class CompleteDrinkViewController: BaseViewController {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .GRAY02
         $0.text = "마이페이지에서 음료 스탬프를 확인해보세요!"
+        $0.textAlignment = .center
     }
     
     private let celebrationImageView = UIImageView().then {
@@ -71,41 +72,69 @@ final class CompleteDrinkViewController: BaseViewController {
         
         view.backgroundColor = .SECONDARY01
     
-        twinkleImageView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(102.0)
-            make.top.equalToSuperview().inset(130.0)
+        celebrationImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(120.0)
+            //make.top.equalTo(secondaryLabel.snp.bottom).offset(57.0)
+            make.bottom.equalToSuperview().inset(100.0)
         }
-        
-        drinkImageView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(100.0)
-            make.top.equalTo(twinkleImageView.snp.bottom).offset(20.0)
+       
+        secondaryLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16.0)
+            make.bottom.equalTo(celebrationImageView.snp.top).offset(-57.0)
+           // make.top.equalTo(mainLabel.snp.bottom).offset(3.0)
         }
-        drinkImageView.image = userDrink.getDrinkCompletionImage()
         
         mainLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(36.0)
-            make.top.equalToSuperview().inset(20.0)
+            make.bottom.equalTo(secondaryLabel.snp.top).offset(-4.0)
+            //make.top.equalTo(drinkImageView.snp.bottom).inset(20.0)
         }
         mainLabel.text = "\(userDrink.rawValue) 완성!"
         
-        secondaryLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16.0)
-            make.top.equalTo(mainLabel.snp.bottom).offset(3.0)
+        drinkImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(95.5)
+            make.bottom.equalTo(mainLabel.snp.top).offset(-20.0)
+            make.top.equalTo(twinkleImageView.snp.bottom).offset(20.0)
         }
+        drinkImageView.image = userDrink.getDrinkStepImage(.completed) //twinkle 이미지
+        drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
-        celebrationImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(secondaryLabel.snp.bottom).offset(57.0)
-            make.bottom.equalToSuperview().inset(100.0)
+        twinkleImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(102.0)
+            make.top.equalToSuperview().inset(97.0)
         }
         
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.dismiss(animated: true, completion: nil)
+        coordinator?.disMissCompleteDrinkScene()
     }
     
     override func bind() {
         super.bind()
     }
 }
+
+
+import SwiftUI
+struct ViewController_Priviews: PreviewProvider {
+    static var previews: some View {
+        Contatiner().edgesIgnoringSafeArea(.all)
+    }
+    struct Contatiner: UIViewControllerRepresentable {
+        func makeUIViewController(context: Context) -> UIViewController {
+            let vc = CompleteDrinkViewController.create(
+                with: .completed,
+                .chocoLatte,
+                DefaultOurCafeCoordinator(navigationController: UINavigationController())
+            ) //보고 싶은 뷰컨 객체
+            return vc
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+            
+        }
+        typealias UIViewControllerType =  UIViewController
+    }
+}
+

@@ -15,15 +15,11 @@ final class RecipeViewController: BaseViewController {
     
     private let drinkImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        //TODO: 유저가 선택한 음료의 결과물 로 change
-        $0.image = Constants.strawberryLatte_step_3
     }
     
     private let drinkNameLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 16.0)
         $0.textColor = .BLACK_121212
-        //TODO: Change
-        $0.text = "딸기라떼"
     }
     
     private let progressBar = UIImageView().then {

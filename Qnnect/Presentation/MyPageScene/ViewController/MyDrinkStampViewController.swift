@@ -12,7 +12,7 @@ import RxSwift
 import RxDataSources
 
 enum DrinkType: String {
-    case strawberryLatte = "딸기라뗴"
+    case strawberryLatte = "딸기라떼"
     case mintChocoLatte = "민트초코"
     case chocoLatte = "초코라떼"
     case summnerLatte = "썸머라떼"

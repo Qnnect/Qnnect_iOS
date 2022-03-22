@@ -17,6 +17,7 @@ protocol OurCafeCoordinator: Coordinator {
     func showDrinkSelectBottomSheet(_ cafeId: Int)
     func showCompleteDrinkScene(_ step: DrinkStep, userDrink: DrinkType)
     func dismiss()
+    func disMissCompleteDrinkScene()
 }
 
 final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
@@ -107,6 +108,13 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     
     func dismiss() {
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func disMissCompleteDrinkScene() {
+        navigationController.presentedViewController?.dismiss(animated: true, completion: {
+            [weak self] in
+            self?.navigationController.popViewController(animated: false)
+        })
     }
 }
 
