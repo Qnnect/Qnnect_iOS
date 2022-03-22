@@ -254,11 +254,7 @@ final class OurCafeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
+
     override func configureUI() {
         super.configureUI()
         

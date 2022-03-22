@@ -124,7 +124,6 @@ final class CafeRoomViewController: BaseViewController {
         if self.mainCollectionView.numberOfSections > 1 {
             self.setDrinksEmptyView(self.mainCollectionView.numberOfItems(inSection: 1) == 0)
         }
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func configureUI() {

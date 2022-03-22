@@ -40,8 +40,8 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
             cafeId: cafeId,
             cafeUserId: cafeUserId
         )
+        vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
-        navigationController.tabBarController?.tabBar.isHidden = true
     }
     
     func showInsertIngredientScene(_ cafeId: Int) {
