@@ -42,7 +42,9 @@ final class RecipeViewController: BaseViewController {
     }
     
     private let recipeInfoLabelStackView = UIStackView().then {
-        $0.distribution = .equalCentering
+        $0.distribution = .fillEqually
+        $0.spacing = 15.0
+        $0.alignment = .top
     }
     
     private let navigationTitleLabel = NavigationTitleLabel(title: "레시피 보기")
@@ -123,8 +125,8 @@ final class RecipeViewController: BaseViewController {
         }
         
         recipeInfoLabelStackView.snp.makeConstraints { make in
-            make.top.equalTo(ingredientImageStackView.snp.bottom).offset(18.0)
-            make.leading.trailing.equalTo(stepLabelStackView)
+            make.top.equalTo(ingredientImageStackView.snp.bottom).offset(10.0)
+            make.leading.trailing.equalTo(ingredientImageStackView)
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -164,10 +166,11 @@ final class RecipeViewController: BaseViewController {
                     
                     let label = UILabel().then {
                         $0.font = .IM_Hyemin(.bold, size: 12.0)
-                        $0.numberOfLines = 2
+                        $0.numberOfLines = 0
                         $0.textColor = .BLACK_121212
                         let paragraphStyle = NSMutableParagraphStyle()
                         paragraphStyle.lineHeightMultiple = 1.23
+                        paragraphStyle.lineBreakStrategy = .hangulWordPriority
                         paragraphStyle.alignment = .center
                         $0.attributedText = NSAttributedString(
                             string: "\(ingredient.name)\nx\(ingredient.count)",

@@ -204,7 +204,7 @@ final class InsertIngredientViewController: BaseViewController {
             }).disposed(by: self.disposeBag)
         
         let input = InsertIngredientViewModel.Input(
-            viewDidLoad: rx.viewDidLoad.mapToVoid(),
+            viewDidLoad: Observable.just(()),
             cafeId: Observable.just(cafeId),
             didTapRecipeButton: viewRecipeButton.rx.tap.asObservable(),
             didTapStoreButton: rx.methodInvoked(#selector(didTapStoreButton)).mapToVoid(),
