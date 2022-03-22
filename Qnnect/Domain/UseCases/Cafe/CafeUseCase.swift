@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-protocol CafeUseCase: AnyObject {
+protocol CafeUseCase: DrinkStepUseCase {
     func fetchCafe(forId id: Int) -> Observable<Result<Cafe,Error>>
     func isDrinkSelected(_ cafeUser: CafeUser) -> Bool
     func isValidName(_ name: String) -> Bool

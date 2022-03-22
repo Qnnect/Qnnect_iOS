@@ -20,6 +20,7 @@ final class CafeDrinkCell: UICollectionViewCell {
         $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textColor = .GRAY01
         $0.textAlignment = .center
+        $0.text = "fdsfa"
         $0.sizeToFit()
     }
     
@@ -42,18 +43,28 @@ final class CafeDrinkCell: UICollectionViewCell {
             self.contentView.addSubview($0)
         }
         
-        self.drinkImageView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-        }
         
         self.userNameLabel.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.drinkImageView.snp.bottom).offset(10.0)
         }
+        userNameLabel.setContentHuggingPriority(.required, for: .vertical)
+        userNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        
+        self.drinkImageView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalTo(userNameLabel.snp.top).offset(-10.0)
+        }
+        
     }
     
-    func update(with cafeUser: CafeUser) {
-        self.drinkImageView.image = cafeUser.drinkInfo.userDrinkSelectedId != nil ? Constants.basicDrinkImage : Constants.notSelectDrinkImage
-        self.userNameLabel.text = cafeUser.userInfo.name
+    func update(with curStep: DrinkStep?, _ drink: DrinkType?, _ name: String) {
+        self.userNameLabel.text = name
+        
+        guard let curStep = curStep, let drink = drink else {
+            drinkImageView.image = Constants.notSelectDrinkImage
+            return
+        }
+        
+        drinkImageView.image = drink.getDrinkStepImage(curStep)
     }
 }

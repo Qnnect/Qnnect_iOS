@@ -52,7 +52,7 @@ final class InsertIngredientViewModel: ViewModelType {
         
         let curStepWithCompletion = myCafeDrinkWithIngredients.map { $0.cafeDrink }
             .map(ourCafeUseCase.getCurStepWithCafeDrink(_:))
-            .map { $0.curStep }
+            .compactMap { $0?.curStep }
             .scan(into: (DrinkStep.ice, false)) { lastState, newStep in
                 if lastState.0 != newStep, lastState.0 == .topping, newStep == .completed {
                     lastState = (newStep, true)
@@ -63,9 +63,9 @@ final class InsertIngredientViewModel: ViewModelType {
         
         let userDrinkInfoWithStep = myCafeDrinkWithIngredients
             .map { $0.cafeDrink }
-            .map (ourCafeUseCase.getCurStepWithCafeDrink)
+            .compactMap (ourCafeUseCase.getCurStepWithCafeDrink)
         
-        let curStep = userDrinkInfoWithStep.map { $0.curStep }
+        let curStep = userDrinkInfoWithStep.compactMap { $0.curStep }
         
         let drinkCompletion = curStepWithCompletion.map { $0.1 }
             .filter{ $0 }

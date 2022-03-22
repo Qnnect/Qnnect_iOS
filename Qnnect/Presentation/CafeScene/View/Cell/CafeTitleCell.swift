@@ -25,7 +25,7 @@ final class CafeTitleCell: UICollectionViewCell {
     }
     
     private let drinkImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     private(set) var drinkSelectButton = UIButton().then {
@@ -60,19 +60,20 @@ final class CafeTitleCell: UICollectionViewCell {
         }
         
         self.createdDateLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.leading.equalToSuperview()
         }
         
         self.nameLabel.snp.makeConstraints { make in
             make.top.equalTo(self.createdDateLabel.snp.bottom).offset(5.0)
             make.leading.equalToSuperview()
-            make.trailing.equalTo(self.drinkImageView.snp.leading).inset(16.0)
+            make.trailing.equalTo(self.drinkImageView.snp.leading).offset(-16.0)
         }
         
         self.drinkImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(17.0)
-            make.trailing.equalToSuperview().inset(75.0)
-            make.top.equalToSuperview().inset(20.0)
+            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().inset(55.0)
+            make.width.equalToSuperview().multipliedBy(0.195)
+            make.top.equalToSuperview()
         }
         
         self.drinkSelectButton.snp.makeConstraints { make in
@@ -82,22 +83,18 @@ final class CafeTitleCell: UICollectionViewCell {
         }
     }
     
-    func update(with cafe: Cafe) {
+    func update(with cafe: Cafe, drinkInfo: (curStep: DrinkStep, drink: DrinkType)?) {
         self.nameLabel.text = cafe.title
         self.createdDateLabel.text = "\(cafe.createdAt)~"
-        self.setCurrentUserDrink(isSelected: cafe.currentUser.drinkInfo.userDrinkSelectedId != nil)
+       
+        guard let drinkInfo = drinkInfo else {
+            drinkImageView.image = Constants.notSelectDrinkImage
+            return
+        }
+        
+        drinkSelectButton.isHidden = true
+        drinkImageView.image = drinkInfo.drink.getDrinkStepImage(drinkInfo.curStep)
     }
-    
 }
 
-private extension CafeTitleCell {
-    func setCurrentUserDrink(isSelected: Bool) {
-        if isSelected {
-            self.drinkImageView.image = Constants.basicDrinkImage
-            self.drinkSelectButton.isHidden = true
-        } else {
-            self.drinkImageView.image = Constants.notSelectDrinkImage
-            self.drinkSelectButton.isHidden = false
-        }
-    }
-}
+

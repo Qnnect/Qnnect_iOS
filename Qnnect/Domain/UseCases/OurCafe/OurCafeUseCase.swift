@@ -14,9 +14,8 @@ enum InsertWrongType {
     /// 이전
     case backward(curStep: DrinkStep, ingredientName: String)
 }
-protocol OurCafeUseCase: AnyObject {
+protocol OurCafeUseCase: DrinkStepUseCase {
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe, Error>>
-    func getCurStepWithCafeDrink(_ drink: CafeDrink) -> (curStep: DrinkStep, drink: DrinkType)
     func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
     func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>>
     func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> InsertWrongType?
@@ -42,20 +41,7 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
     func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>> {
         ourCafeRepository.fetchRecipe(userDrinkSelectedId, cafeId)
     }
-    
-    func getCurStepWithCafeDrink(_ drink: CafeDrink) -> (curStep: DrinkStep, drink: DrinkType) {
-        if drink.topping == drink.toppingFilled {
-            return (DrinkStep.completed, drink.userDrink ?? .strawberryLatte)
-        } else if drink.main == drink.mainFilled {
-            return (DrinkStep.topping, drink.userDrink ?? .strawberryLatte)
-        } else if drink.base == drink.baseFilled {
-            return (DrinkStep.main, drink.userDrink ?? .strawberryLatte)
-        } else if drink.ice == drink.iceFilled {
-            return (DrinkStep.base, drink.userDrink ?? .strawberryLatte)
-        }
-        return (DrinkStep.ice, drink.userDrink ?? .strawberryLatte)
-    }
-    
+        
     /// nil 이면 올바른 단계면 nil
     func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> InsertWrongType? {
         

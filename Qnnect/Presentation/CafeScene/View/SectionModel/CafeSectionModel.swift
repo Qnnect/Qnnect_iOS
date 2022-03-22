@@ -14,8 +14,8 @@ enum CafeRoomSectionModel {
     case todayQuestionSection(title: String, items: [CafeRoomSectionItem])
 }
 enum CafeRoomSectionItem {
-    case titleSectionItem(cafe: Cafe)
-    case cafeDrinksSectionItem(cafeUser: CafeUser)
+    case titleSectionItem(cafe: Cafe, drinkInfo: (curStep: DrinkStep, drink: DrinkType)?)
+    case cafeDrinksSectionItem(curStpe: DrinkStep?, drink: DrinkType?, name: String)
     case todayQuestionSectionItem(question: Question)
     case questionEmptySectionItem
 }

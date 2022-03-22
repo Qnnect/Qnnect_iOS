@@ -85,8 +85,7 @@ enum DrinkType: String {
             case .completed:
                 return Constants.lemonade_step_4
             }
-        default:
-            return Constants.drinkEmptyImage
+      
         }
     }
     

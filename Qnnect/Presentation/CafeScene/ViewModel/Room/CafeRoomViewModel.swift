@@ -39,6 +39,9 @@ final class CafeRoomViewModel: ViewModelType {
         ///Int: CafeId
         let showCafeQuestionListScene: Signal<Int>
         let showOurCafeScene: Signal<(cafeId: Int, cafeUserId: Int)>
+        let currentDrinkInfo: Driver<(curStep: DrinkStep, drink: DrinkType)?>
+        let userDrinkInfos: Driver<[(curStep: DrinkStep?, drink: DrinkType?, name: String)]>
+        let cafeQuestions: Driver<[Question]>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -60,6 +63,24 @@ final class CafeRoomViewModel: ViewModelType {
                 return cafe
             }
             .share()
+        
+        let currentDrinkInfo = roomInfo.map { $0.currentUser.drinkInfo }
+            .map(cafeUseCase.getCurStepWithCafeDrink(_:))
+        
+        let userDrinkInfos = roomInfo.compactMap {
+            [weak self] roomInfo -> [(curStep: DrinkStep?, drink: DrinkType?, name: String)]? in
+            guard let self = self else { return nil }
+            return roomInfo.cafeUsers.map {
+                let curStepWithCafeDrink = self.cafeUseCase.getCurStepWithCafeDrink($0.drinkInfo)
+                return (
+                    curStep: curStepWithCafeDrink?.curStep,
+                    drink: curStepWithCafeDrink?.drink,
+                    name: $0.userInfo.name
+                )
+            }
+        }
+        
+        let cafeQuestions = roomInfo.map { $0.questions }
         
         let showDrinkSelectBottomSheet = input.didTapDrinkSelectButton
             .withLatestFrom(input.cafeId)
@@ -102,7 +123,10 @@ final class CafeRoomViewModel: ViewModelType {
             showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showWriteQuestionScene: showWriteQuestionScene.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionListScene: showCafeQuestionListScene.asSignal(onErrorSignalWith: .empty()),
-            showOurCafeScene: showOurCafeScene.asSignal(onErrorSignalWith: .empty())
+            showOurCafeScene: showOurCafeScene.asSignal(onErrorSignalWith: .empty()),
+            currentDrinkInfo: currentDrinkInfo.asDriver(onErrorDriveWith: .empty()),
+            userDrinkInfos: userDrinkInfos.asDriver(onErrorDriveWith: .empty()),
+            cafeQuestions: cafeQuestions.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

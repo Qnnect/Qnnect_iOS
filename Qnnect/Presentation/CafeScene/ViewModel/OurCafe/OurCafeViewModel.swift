@@ -25,7 +25,7 @@ final class OurCafeViewModel: ViewModelType {
     struct Output {
         let userInfos: Driver<[OurCafeUser]>
         let isCurrentUser: Driver<(Bool, String)>
-        let userDrinkInfoWithStep: Driver< (curStep: DrinkStep, drink: DrinkType)>
+        let userDrinkInfoWithStep: Driver<(curStep: DrinkStep, drink: DrinkType)>
         let drinkState: Driver<[(target: Int, filled: Int)]>
         ///Int: CafeId
         let showInsertIngredientScene: Signal<Int>
@@ -112,7 +112,7 @@ final class OurCafeViewModel: ViewModelType {
         
         
         let userDrinkInfoWithStep = ourCafe.map { $0.selectedUserDrinkInfo }
-            .map(ourCafeUseCase.getCurStepWithCafeDrink(_:))
+            .compactMap(ourCafeUseCase.getCurStepWithCafeDrink(_:))
         
         let drinkState = ourCafe.map { $0.selectedUserDrinkInfo }
             .map {

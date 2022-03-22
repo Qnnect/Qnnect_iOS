@@ -194,28 +194,36 @@ final class CafeRoomViewController: BaseViewController {
         
         let dataSource = self.createDataSource(drinkSelectButtonObserver: didTapDrinkSelectButton.asObserver())
         
-        output.roomInfo
-            .do {
+        Observable.zip(
+            output.currentDrinkInfo.asObservable(),
+            output.userDrinkInfos.asObservable(),
+            output.roomInfo.asObservable().do {
                 [weak self] cafe in
                 self?.navigationTitleView.text = cafe.title
                 self?.navigationItem.titleView = self?.navigationTitleView
             }
-            .map({ cafe -> [CafeRoomSectionModel] in
-                let cafeTitleSectionItem = CafeRoomSectionItem.titleSectionItem(cafe: cafe)
-                let cafeDrinksSectionItems = cafe.cafeUsers.map { CafeRoomSectionItem.cafeDrinksSectionItem(cafeUser: $0)}
-                var cafeToDayQuestionSectionItems = cafe.questions.map{ CafeRoomSectionItem.todayQuestionSectionItem(question: $0)}
-                
-                if cafeToDayQuestionSectionItems.isEmpty {
-                    cafeToDayQuestionSectionItems = [CafeRoomSectionItem.questionEmptySectionItem]
-                }
-                return [
-                    CafeRoomSectionModel.titleSection(title: "", items: [cafeTitleSectionItem]),
-                    CafeRoomSectionModel.cafeDrinksSection(title: "", items: cafeDrinksSectionItems),
-                    CafeRoomSectionModel.todayQuestionSection(title: "", items: cafeToDayQuestionSectionItems)
-                ]
-            })
-            .drive(self.mainCollectionView.rx.items(dataSource: dataSource))
-            .disposed(by: self.disposeBag)
+        ).map({
+            currentDrinkInfo, userDrinkInfos, cafe -> [CafeRoomSectionModel] in
+            let cafeTitleSectionItem = CafeRoomSectionItem.titleSectionItem(
+                cafe: cafe,
+                drinkInfo: currentDrinkInfo
+            )
+            let cafeDrinksSectionItems = userDrinkInfos.map {
+                CafeRoomSectionItem.cafeDrinksSectionItem(curStpe: $0.curStep, drink: $0.drink, name: $0.name)
+            }
+            var cafeToDayQuestionSectionItems = cafe.questions.map{ CafeRoomSectionItem.todayQuestionSectionItem(question: $0)}
+            
+            if cafeToDayQuestionSectionItems.isEmpty {
+                cafeToDayQuestionSectionItems = [CafeRoomSectionItem.questionEmptySectionItem]
+            }
+            return [
+                CafeRoomSectionModel.titleSection(title: "", items: [cafeTitleSectionItem]),
+                CafeRoomSectionModel.cafeDrinksSection(title: "", items: cafeDrinksSectionItems),
+                CafeRoomSectionModel.todayQuestionSection(title: "", items: cafeToDayQuestionSectionItems)
+            ]
+        })
+            .bind(to:self.mainCollectionView.rx.items(dataSource: dataSource))
+        .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
         
@@ -362,22 +370,22 @@ private extension CafeRoomViewController {
     func createDataSource(drinkSelectButtonObserver: AnyObserver<Void>) -> RxCollectionViewSectionedReloadDataSource<CafeRoomSectionModel> {
         return RxCollectionViewSectionedReloadDataSource { dataSoruce, collectionView, indexPath, item in
             switch item {
-            case .titleSectionItem(cafe: let cafe):
+            case .titleSectionItem(cafe: let cafe, drinkInfo: let drinkInfo):
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CafeTitleCell.identifier,
                     for: indexPath
                 ) as! CafeTitleCell
-                cell.update(with: cafe)
+                cell.update(with: cafe, drinkInfo: drinkInfo)
                 cell.drinkSelectButton.rx.tap
                     .bind(to: drinkSelectButtonObserver)
                     .disposed(by: self.disposeBag)
                 return cell
-            case .cafeDrinksSectionItem(cafeUser: let cafeUser):
+            case .cafeDrinksSectionItem(curStpe: let curStep, drink: let drink, name: let name):
                 let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CafeDrinkCell.identifier,
                     for: indexPath
                 ) as! CafeDrinkCell
-                cell.update(with: cafeUser)
+                cell.update(with: curStep, drink, name)
                 return cell
             case .todayQuestionSectionItem(question: let question):
                 let cell = collectionView.dequeueReusableCell(
