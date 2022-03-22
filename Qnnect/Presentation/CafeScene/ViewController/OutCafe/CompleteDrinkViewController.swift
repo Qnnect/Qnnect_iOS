@@ -41,13 +41,13 @@ final class CompleteDrinkViewController: BaseViewController {
     }
     
     private var curStep: DrinkStep!
-    private var drinkName: String!
+    private var userDrink: DrinkType!
     weak var coordinator: OurCafeCoordinator?
     
-    static func create(with curStep: DrinkStep, _ drinkName: String, _ coordinator: OurCafeCoordinator) -> CompleteDrinkViewController {
+    static func create(with curStep: DrinkStep, _ userDrink: DrinkType, _ coordinator: OurCafeCoordinator) -> CompleteDrinkViewController {
         let vc = CompleteDrinkViewController()
         vc.curStep = curStep
-        vc.drinkName = drinkName
+        vc.userDrink = userDrink
         vc.coordinator = coordinator
         return vc
     }
@@ -80,13 +80,13 @@ final class CompleteDrinkViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(100.0)
             make.top.equalTo(twinkleImageView.snp.bottom).offset(20.0)
         }
-        drinkImageView.image = curStep.getDrinkImage(drinkName)
+        drinkImageView.image = userDrink.getDrinkCompletionImage()
         
         mainLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(36.0)
             make.top.equalToSuperview().inset(20.0)
         }
-        mainLabel.text = "\(drinkName) 완성!"
+        mainLabel.text = "\(userDrink.rawValue) 완성!"
         
         secondaryLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16.0)

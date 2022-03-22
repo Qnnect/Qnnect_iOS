@@ -31,7 +31,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let showIngredientStorageScene: Signal<Void>
         let showWrongStepAlertView: Signal<Void>
         let showRightStepAlertView: Signal<(ingredient: MyIngredient,userDrinkSelectedId: Int)>
-        let showCompleteDrinkScene: Signal<(DrinkStep, String)>
+        let showCompleteDrinkScene: Signal<(DrinkStep, DrinkType)>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -110,7 +110,7 @@ final class InsertIngredientViewModel: ViewModelType {
             .withLatestFrom(
                 Observable.zip(
                     curStep,
-                    myCafeDrinkWithIngredients.compactMap { $0.cafeDrink.userDrinkName }
+                    myCafeDrinkWithIngredients.compactMap { $0.cafeDrink.userDrink }
                 )
             )
         

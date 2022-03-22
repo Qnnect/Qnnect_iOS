@@ -46,7 +46,7 @@ struct CafeDrinkInfoResponseDTO: Decodable {
             topping: topping,
             toppingFilled: toppingFilled,
             userDrinkSelectedId: userDrinkSelectedId,
-            userDrinkName: userDrinkName
+            userDrink: DrinkType(rawValue: userDrinkName ?? "")
         )
     }
 }

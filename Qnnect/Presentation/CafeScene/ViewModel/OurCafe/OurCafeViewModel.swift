@@ -131,7 +131,7 @@ final class OurCafeViewModel: ViewModelType {
         let showSelectDrinkScene = input.didTapSelectDrinkButton
             .withLatestFrom(input.cafeId)
         
-        let drinkName = ourCafe.compactMap { $0.selectedUserDrinkInfo.userDrinkName }
+        let drinkName = ourCafe.compactMap { $0.selectedUserDrinkInfo.userDrink?.rawValue }
             
         return Output(
             userInfos: firstLoadUserInfos

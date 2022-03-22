@@ -182,6 +182,13 @@ final class RecipeViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        output.cafeDrink
+            .drive(onNext: {
+                [weak self] cafeDrink in
+                self?.drinkImageView.image = cafeDrink.userDrink?.getDrinkCompletionImage()
+                self?.drinkNameLabel.text = cafeDrink.userDrink?.rawValue
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
 
         output.showStoreScene
