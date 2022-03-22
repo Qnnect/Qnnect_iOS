@@ -64,9 +64,7 @@ final class RightStepAlertViewController: BaseViewController {
     weak var coordinator: OurCafeCoordinator?
     private var userDrinkSelectedId: Int!
     private var viewModel: RightStepAlertViewModel!
-    
-    weak var delegate: InsertIngredientDelegate?
-    
+
     static func create(
         with viewModel: RightStepAlertViewModel,
         _ coordinator: OurCafeCoordinator,

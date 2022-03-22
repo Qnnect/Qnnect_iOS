@@ -25,7 +25,7 @@ final class OurCafeViewModel: ViewModelType {
     struct Output {
         let userInfos: Driver<[OurCafeUser]>
         let isCurrentUser: Driver<(Bool, String)>
-        let curStep: Driver<DrinkStep>
+        let userDrinkInfoWithStep: Driver< (curStep: DrinkStep, drink: DrinkType)>
         let drinkState: Driver<[(target: Int, filled: Int)]>
         ///Int: CafeId
         let showInsertIngredientScene: Signal<Int>
@@ -91,8 +91,8 @@ final class OurCafeViewModel: ViewModelType {
             .map {
                 [weak self] result -> Bool in
                 if case let .success(cafe) = result {
-                    if let curStep = self?.ourCafeUseCase.getCurStep(cafe.selectedUserDrinkInfo),
-                       curStep == .completed {
+                    if let userDrinkInfoWithStep = self?.ourCafeUseCase.getCurStepWithCafeDrink(cafe.selectedUserDrinkInfo),
+                       userDrinkInfoWithStep.curStep == .completed {
                         return true
                     }
                 }
@@ -111,8 +111,8 @@ final class OurCafeViewModel: ViewModelType {
         
         
         
-        let curStep = ourCafe.map { $0.selectedUserDrinkInfo }
-            .map(ourCafeUseCase.getCurStep(_:))
+        let userDrinkInfoWithStep = ourCafe.map { $0.selectedUserDrinkInfo }
+            .map(ourCafeUseCase.getCurStepWithCafeDrink(_:))
         
         let drinkState = ourCafe.map { $0.selectedUserDrinkInfo }
             .map {
@@ -152,7 +152,7 @@ final class OurCafeViewModel: ViewModelType {
                     ,resultSelector: { ($0,$1)}
                 )
                 .asDriver(onErrorDriveWith: .empty()),
-            curStep: curStep.asDriver(onErrorJustReturn: .ice),
+            userDrinkInfoWithStep: userDrinkInfoWithStep.asDriver(onErrorDriveWith: .empty()),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showInsertIngredientScene: showInsertIngredientScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),

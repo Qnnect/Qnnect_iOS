@@ -23,7 +23,7 @@ final class InsertIngredientViewModel: ViewModelType {
     struct Output {
         let ingredients: Driver<[MyIngredient]>
         let cafeDrink: Driver<CafeDrink>
-        let curStep: Driver<DrinkStep>
+        let userDrinkInfoWithStep: Driver<(curStep: DrinkStep, drink: DrinkType)>
         let drinkState: Driver<[(target: Int, filled: Int)]>
         let showRecipeScene: Signal<(cafeId: Int, userDrinkSelectedId: Int)>
         let showStoreScene: Signal<Void>
@@ -51,7 +51,8 @@ final class InsertIngredientViewModel: ViewModelType {
             .share()
         
         let curStepWithCompletion = myCafeDrinkWithIngredients.map { $0.cafeDrink }
-            .map(ourCafeUseCase.getCurStep(_:))
+            .map(ourCafeUseCase.getCurStepWithCafeDrink(_:))
+            .map { $0.curStep }
             .scan(into: (DrinkStep.ice, false)) { lastState, newStep in
                 if lastState.0 != newStep, lastState.0 == .topping, newStep == .completed {
                     lastState = (newStep, true)
@@ -60,7 +61,11 @@ final class InsertIngredientViewModel: ViewModelType {
                 }
             }
         
-        let curStep = curStepWithCompletion.map { $0.0 }
+        let userDrinkInfoWithStep = myCafeDrinkWithIngredients
+            .map { $0.cafeDrink }
+            .map (ourCafeUseCase.getCurStepWithCafeDrink)
+        
+        let curStep = userDrinkInfoWithStep.map { $0.curStep }
         
         let drinkCompletion = curStepWithCompletion.map { $0.1 }
             .filter{ $0 }
@@ -113,7 +118,7 @@ final class InsertIngredientViewModel: ViewModelType {
         return Output(
             ingredients: myCafeDrinkWithIngredients.map { $0.ingredients}.asDriver(onErrorJustReturn: []) ,
             cafeDrink: myCafeDrinkWithIngredients.map { $0.cafeDrink}.asDriver(onErrorDriveWith: .empty()),
-            curStep: curStep.asDriver(onErrorJustReturn: .ice),
+            userDrinkInfoWithStep: userDrinkInfoWithStep.asDriver(onErrorDriveWith: .empty()),
             drinkState: drinkState.asDriver(onErrorJustReturn: []),
             showRecipeScene: showRecipeScene.asSignal(onErrorSignalWith: .empty()),
             showStoreScene: input.didTapStoreButton.asSignal(onErrorSignalWith: .empty()),

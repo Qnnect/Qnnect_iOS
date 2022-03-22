@@ -51,21 +51,6 @@ enum DrinkStep: Int, CaseIterable {
         }
     }
     
-    var drinkImage: UIImage? {
-        switch self {
-        case .ice:
-            return Constants.drinkEmptyImage
-        case .base:
-            return Constants.drinkIceStepImage
-        case .main:
-            return Constants.strawberryLatte_step_1
-        case .topping:
-            return Constants.strawberryLatte_step_2
-        case .completed:
-            return Constants.strawberryLatte_step_4
-        }
-    }
-    
     func getDrinkImage(_ name: String) -> UIImage? {
         switch name {
         case "딸기라뗴":
@@ -393,14 +378,14 @@ final class OurCafeViewController: BaseViewController {
                 self?.userCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .left)
             }).disposed(by: self.disposeBag)
         
-        output.curStep
+        output.userDrinkInfoWithStep
             .debug()
             .drive(onNext: {
-                [weak self] curStep in
-                self?.progressBar.image = curStep.progressBarImage
-                self?.drinkImageView.image = curStep.drinkImage
-                self?.setDrinkImageViewLayout(curStep)
-                self?.setCurStepLabelColor(curStep)
+                [weak self] userDrinkInfoWithStep in
+                self?.progressBar.image = userDrinkInfoWithStep.curStep.progressBarImage
+                self?.drinkImageView.image = userDrinkInfoWithStep.drink.getDrinkStepImage(userDrinkInfoWithStep.curStep)
+                self?.setDrinkImageViewLayout(userDrinkInfoWithStep.curStep)
+                self?.setCurStepLabelColor(userDrinkInfoWithStep.curStep)
             }).disposed(by: self.disposeBag)
         
         output.drinkState

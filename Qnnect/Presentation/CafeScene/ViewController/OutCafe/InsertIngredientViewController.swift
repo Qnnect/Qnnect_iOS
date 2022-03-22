@@ -234,13 +234,14 @@ final class InsertIngredientViewController: BaseViewController {
                 cell.update(with: ingredient)
             }.disposed(by: self.disposeBag)
         
-        output.curStep
+        output.userDrinkInfoWithStep
             .debug()
             .drive(onNext: {
-                [weak self] curStep in
-                self?.progressBar.image = curStep.progressBarImage
-                self?.drinkImageView.image = curStep.drinkImage
-                self?.setCurStepLabelColor(curStep)
+                [weak self] userDrinkInfoWithStep in
+                self?.progressBar.image = userDrinkInfoWithStep.0.progressBarImage
+                self?.drinkImageView.image = userDrinkInfoWithStep.1.getDrinkStepImage(userDrinkInfoWithStep.0)
+                self?.setCurStepLabelColor(userDrinkInfoWithStep.0)
+                self?.setDrinkImageViewLayout(userDrinkInfoWithStep.0)
             }).disposed(by: self.disposeBag)
         
         output.drinkState
@@ -335,4 +336,15 @@ private extension InsertIngredientViewController {
     
     @objc dynamic func didTapStoreButton() { }
     
+    func setDrinkImageViewLayout(_ curStep: DrinkStep) {
+        if curStep == .completed {
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(130.0 - 34.5)
+            }
+        } else {
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(130.0)
+            }
+        }
+    }
 }
