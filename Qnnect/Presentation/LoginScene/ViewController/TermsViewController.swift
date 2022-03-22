@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxGesture
 import RxSwift
+import SafariServices
 
 final class TermsViewController: BaseViewController {
     
@@ -209,6 +210,22 @@ final class TermsViewController: BaseViewController {
         output.inviteFlowNextScene
             .emit(onNext: coordinator.showSetProfileScene)
             .disposed(by: self.disposeBag)
+        
+        personalInfoAgreementView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                let safari = SFSafariViewController(url: URL(string: APP.personalInfoProcessingPolicyURL)!)
+                self?.present(safari, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
+        
+        serviceAgreementView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                let safari = SFSafariViewController(url: URL(string: APP.termsOfUseURL)!)
+                self?.present(safari, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
 }
 
