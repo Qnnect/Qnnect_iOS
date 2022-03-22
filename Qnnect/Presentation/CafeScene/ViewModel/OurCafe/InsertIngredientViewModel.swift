@@ -28,7 +28,7 @@ final class InsertIngredientViewModel: ViewModelType {
         let showRecipeScene: Signal<(cafeId: Int, userDrinkSelectedId: Int)>
         let showStoreScene: Signal<Void>
         let showIngredientStorageScene: Signal<Void>
-        let showWrongStepAlertView: Signal<Void>
+        let showWrongStepAlertView: Signal<InsertWrongType>
         let showRightStepAlertView: Signal<(ingredient: MyIngredient,userDrinkSelectedId: Int)>
         let showCompleteDrinkScene: Signal<(DrinkStep, DrinkType)>
     }
@@ -92,7 +92,14 @@ final class InsertIngredientViewModel: ViewModelType {
         
         let showRightStepAlertView = input.didTapIngredientCell
             .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
-            .filter(ourCafeUseCase.isRightIngredientBuy)
+            .filter {
+                [weak self] ingredient, curStep in
+                if (self?.ourCafeUseCase.isRightIngredientBuy(ingredient, curStep: curStep)) != nil {
+                    return false
+                } else {
+                    return true
+                }
+            }
             .map { $0.ingredient }
             .withLatestFrom(myCafeDrinkWithIngredients.compactMap{ $0.cafeDrink.userDrinkSelectedId },
                             resultSelector: { (ingredient: $0, userDrinkSelectedId: $1)})
@@ -100,11 +107,8 @@ final class InsertIngredientViewModel: ViewModelType {
         
         let showWrongStepAlertView = input.didTapIngredientCell
             .withLatestFrom(curStep, resultSelector: { (ingredient: $0, curStep: $1 )})
-            .filter{
-                [weak self] in
-                self?.ourCafeUseCase.isRightIngredientBuy($0, curStep: $1) == false
-            }
-            .mapToVoid()
+            .compactMap(ourCafeUseCase.isRightIngredientBuy)
+
         
         let showCompleteDrinkScene = drinkCompletion
             .mapToVoid()

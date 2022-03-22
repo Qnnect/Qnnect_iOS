@@ -8,12 +8,18 @@
 import Foundation
 import RxSwift
 
+enum InsertWrongType {
+    /// 이후
+    case forward(curStep: DrinkStep)
+    /// 이전
+    case backward(curStep: DrinkStep, ingredientName: String)
+}
 protocol OurCafeUseCase: AnyObject {
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafe, Error>>
     func getCurStepWithCafeDrink(_ drink: CafeDrink) -> (curStep: DrinkStep, drink: DrinkType)
     func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
     func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>>
-    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> Bool
+    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> InsertWrongType?
     func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>>
 }
 
@@ -50,25 +56,20 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
         return (DrinkStep.ice, drink.userDrink ?? .strawberryLatte)
     }
     
-    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> Bool {
-        switch ingredient.type {
-        case .ice_base:
-            if ingredient.name == "얼음" , curStep == .ice {
-                return true
-            }
-            if ingredient.name != "얼음" , curStep == .base {
-                return true
-            }
-        case .main:
-            if curStep == .main {
-                return true
-            }
-        case .topping:
-            if curStep == .topping {
-                return true
-            }
+    /// nil 이면 올바른 단계면 nil
+    func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> InsertWrongType? {
+        
+        let index = ingredient.name == "얼음" ? ingredient.type.index - 1 : ingredient.type.index
+        
+        guard curStep.rawValue != index else { return nil }
+        
+        // 넣어야 하는 단계 보다 앞의 단계를 넣었을 때
+        if curStep.rawValue < index {
+            return .forward(curStep: curStep)
+        } else {
+            return .backward(curStep: curStep, ingredientName: ingredient.name)
         }
-        return false
+        
     }
     
     func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {

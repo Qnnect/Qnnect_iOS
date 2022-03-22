@@ -77,10 +77,6 @@ final class InsertIngredientViewController: BaseViewController {
         )
     }
     
-    private lazy var wrongStepAlertView = WrongStepAlertView().then {
-        $0.modalPresentationStyle = .overCurrentContext
-    }
-    
     weak var coordinator: OurCafeCoordinator?
     private var viewModel: InsertIngredientViewModel!
     private var cafeId: Int!
@@ -273,11 +269,8 @@ final class InsertIngredientViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showWrongStepAlertView
-            .emit(onNext: {
-                [weak self] _ in
-                guard let self = self else { return }
-                self.navigationController?.present(self.wrongStepAlertView, animated: true)
-            }).disposed(by: self.disposeBag)
+            .emit(onNext: coordinator.showWrongStepAlertView(_:))
+            .disposed(by: self.disposeBag)
         
         output.showRightStepAlertView
             .emit(onNext: coordinator.showRightStepAlertView)

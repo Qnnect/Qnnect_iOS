@@ -685,6 +685,7 @@
 		AE02404927E31E7500017F77 /* OutCafe */ = {
 			isa = PBXGroup;
 			children = (
+				AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */,
 				AE02409727E3D56400017F77 /* RightStepAlertViewController.swift */,
 				AE02404A27E31F7300017F77 /* OurCafeViewController.swift */,
 				AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */,
@@ -1070,7 +1071,6 @@
 				AEA14D4F27D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift */,
 				AE77C85627DB524600E8D0EC /* DrinkSelectCollectionView.swift */,
 				AEB5AAE127E043500096376B /* CommentDateHeaderView.swift */,
-				AE02409527E3D0BA00017F77 /* WrongStepAlertView.swift */,
 				AE33A4F627E74452000130B3 /* NotModifyDrinkAlertView.swift */,
 			);
 			path = View;

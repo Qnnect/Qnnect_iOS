@@ -44,8 +44,10 @@ final class WrongStepAlertView: BaseViewController {
         $0.layer.cornerRadius = 16.0
     }
     
-    static func create() -> WrongStepAlertView {
+    private var wrongType: InsertWrongType!
+    static func create(with wrongType: InsertWrongType) -> WrongStepAlertView {
         let view = WrongStepAlertView()
+        view.wrongType = wrongType
         return view
     }
     
@@ -73,7 +75,8 @@ final class WrongStepAlertView: BaseViewController {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(25.0)
+            //make.top.equalToSuperview().inset(25.0)
+            make.centerY.equalToSuperview().multipliedBy(0.585)
             make.centerX.equalToSuperview()
         }
         
@@ -88,6 +91,7 @@ final class WrongStepAlertView: BaseViewController {
             make.height.equalTo(50.0)
         }
         
+        setLabelsLayout(wrongType)
     }
     
     override func bind() {
@@ -98,5 +102,19 @@ final class WrongStepAlertView: BaseViewController {
                 [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
+    }
+        
+    private func setLabelsLayout(_ wrongType: InsertWrongType) {
+        switch wrongType {
+        case .forward(let curStep):
+            secondaryLabel.isHidden = true
+            titleLabel.text = "\(curStep.title)을 넣을 단계에요."
+        case .backward(let curStep, let ingredientName):
+            titleLabel.attributedText = NSMutableAttributedString(
+                string: "\(DrinkStep(rawValue: curStep.rawValue - 1)?.title ?? "")까지 완성해서\n\(ingredientName)은 더 넣으실 수 없어요.",
+                attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
+            )
+            secondaryLabel.text = "\(curStep.title)을 넣어주세요"
+        }
     }
 }

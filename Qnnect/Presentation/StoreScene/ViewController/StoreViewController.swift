@@ -28,6 +28,17 @@ enum IngredientType: String, CaseIterable, Codable {
             return "토핑"
         }
     }
+    
+    var index: Int {
+        switch self {
+        case .ice_base:
+            return 1
+        case .main:
+            return 2
+        case .topping:
+            return 3
+        }
+    }
 }
 // MARK: - 상점 Scene
 final class StoreViewController: BaseViewController {

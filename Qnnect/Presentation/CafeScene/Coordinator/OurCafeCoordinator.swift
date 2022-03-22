@@ -16,6 +16,7 @@ protocol OurCafeCoordinator: Coordinator {
     func showStoreScene()
     func showDrinkSelectBottomSheet(_ cafeId: Int)
     func showCompleteDrinkScene(_ step: DrinkStep, userDrink: DrinkType)
+    func showWrongStepAlertView(_ wrongType: InsertWrongType)
     func dismiss()
     func disMissCompleteDrinkScene()
 }
@@ -104,6 +105,12 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         let vc = CompleteDrinkViewController.create(with: step, userDrink, self)
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true, completion: nil)
+    }
+    
+    func showWrongStepAlertView(_ wrongType: InsertWrongType) {
+        let view = WrongStepAlertView.create(with: wrongType)
+        view.modalPresentationStyle = .overCurrentContext
+        navigationController.present(view, animated: true, completion: nil)
     }
     
     func dismiss() {
