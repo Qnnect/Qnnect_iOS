@@ -111,6 +111,10 @@ struct Constants {
     }
     static let navi_store: UIImage? = UIImage(named: "navi_store")?.withRenderingMode(.alwaysOriginal)
     
+    //login Button logo
+    static let appleLogo: UIImage? = UIImage(named: "appleLogo")?.withRenderingMode(.alwaysOriginal)
+    static let kakaoLogo: UIImage? = UIImage(named: "kakaoLogo")?.withRenderingMode(.alwaysOriginal)
+    
     //DrinkProgressBar
     static let drinkProgressBar_step_0: UIImage? = UIImage(named: "drinkProgressBar_step_0")
     static let drinkProgressBar_step_1: UIImage? = UIImage(named: "drinkProgressBar_step_1")

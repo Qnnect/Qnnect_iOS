@@ -310,6 +310,7 @@
 		AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133B27BA41DD006866FC /* HomeViewController.swift */; };
 		AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133D27BA4256006866FC /* HomeCoordinator.swift */; };
 		AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133F27BA45C0006866FC /* HomeViewModel.swift */; };
+		AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A33C27EA26920076E863 /* UIImage+.swift */; };
 		AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */; };
 		AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */; };
 		AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362427C315AA00D0A127 /* ProfileCell.swift */; };
@@ -638,6 +639,7 @@
 		AECC133B27BA41DD006866FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AECC133D27BA4256006866FC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		AECC133F27BA45C0006866FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AEE1A33C27EA26920076E863 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworkService.swift; sourceTree = "<group>"; };
 		AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionModel.swift; sourceTree = "<group>"; };
 		AEEF362427C315AA00D0A127 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 				AEA7265B27DDB22400F48CB8 /* UITextField+.swift */,
 				AEA7266327DDF4A400F48CB8 /* UIPageControl+.swift */,
 				AE33A4F827E750B3000130B3 /* UITableView+.swift */,
+				AEE1A33C27EA26920076E863 /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1999,6 +2002,7 @@
 				AE02407F27E39B5B00017F77 /* RecipeViewController.swift in Sources */,
 				AE02408327E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift in Sources */,
 				AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */,
+				AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */,
 				AE717B5B27C4A5F2008278D3 /* QuestionCycleSlider.swift in Sources */,
 				AEB5AAE827E06BEB0096376B /* ScrapSearchRequestDTO.swift in Sources */,
 				AE767FA927E9046700BD5496 /* QuestionMoreMenuBottomSheet.swift in Sources */,

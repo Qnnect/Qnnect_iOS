@@ -50,6 +50,7 @@ extension UIColor {
     class var redLabel: UIColor? { return UIColor(named: "redLabel") }
     class var reply_border: UIColor? { return UIColor(named: "reply_border") } 
     class var brown60: UIColor? { return UIColor(named: "BROWN60" )}
+    class var kakaoContainer: UIColor? { return UIColor(named: "kakaoContainer") }
     
     class var diary_red: UIColor? { return UIColor(named: "diary_red")}
     class var diary_blue: UIColor? { return UIColor(named: "diary_blue")}

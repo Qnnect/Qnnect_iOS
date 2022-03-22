@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>ko_KR</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사용자의 사진에 접근하기위해 권한을 허용해주세요.</string>
 	<key>CFBundleURLTypes</key>
