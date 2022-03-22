@@ -35,7 +35,9 @@ final class LoginViewController: BaseViewController {
     }
     
     private let secondaryLabel = UILabel().then {
-        
+        $0.font = .KOTRA_HOPE(size: 21.0)
+        $0.textColor = .BLACK_121212
+        $0.textAlignment = .center
         $0.text = "공유 Q&A 다이어리 서비스, 큐넥트"
     }
     private let kakaoButton = LeftAlignButton().then {
@@ -51,23 +53,15 @@ final class LoginViewController: BaseViewController {
     }
     
     
-    //TODO: Apple Login button custom
-///    private let appleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     private let appleButton = LeftAlignButton().then {
-
-//        let pointSize: CGFloat = 52.0
-//        let imageConfig = UIImage.SymbolConfiguration(pointSize: pointSize)
-
-       // $0.setImage(resizeImage(image: Constants.appleLogo!, targetHeight: 52.0), for: .normal)
         $0.setImage(Constants.appleLogo, for: .normal)
         $0.setTitle("Apple로 로그인", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10.0
-
         $0.titleLabel?.font = .Roboto(.regular, size: 22.36) // 22.36
         $0.contentHorizontalAlignment = .left
-        //$0.contentVerticalAlignment = .fill
+        $0.contentVerticalAlignment = .fill
     }
     
     
@@ -101,6 +95,7 @@ final class LoginViewController: BaseViewController {
         
         [
             self.loginBackgroundView,
+            secondaryLabel,
             self.kakaoButton,
             self.appleButton
         ].forEach {
@@ -110,6 +105,11 @@ final class LoginViewController: BaseViewController {
         
         self.loginBackgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        secondaryLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16.0)
+            make.top.equalTo(view.snp.bottom).multipliedBy(0.29)
         }
         
         self.kakaoButton.snp.makeConstraints { make in

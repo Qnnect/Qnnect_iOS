@@ -311,6 +311,7 @@
 		AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133D27BA4256006866FC /* HomeCoordinator.swift */; };
 		AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133F27BA45C0006866FC /* HomeViewModel.swift */; };
 		AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A33C27EA26920076E863 /* UIImage+.swift */; };
+		AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */; };
 		AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */; };
 		AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */; };
 		AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362427C315AA00D0A127 /* ProfileCell.swift */; };
@@ -640,6 +641,7 @@
 		AECC133D27BA4256006866FC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		AECC133F27BA45C0006866FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AEE1A33C27EA26920076E863 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOTRA_HOPE_TTF.ttf; sourceTree = "<group>"; };
 		AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworkService.swift; sourceTree = "<group>"; };
 		AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionModel.swift; sourceTree = "<group>"; };
 		AEEF362427C315AA00D0A127 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -1625,6 +1627,7 @@
 			isa = PBXGroup;
 			children = (
 				AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */,
+				AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */,
 				AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */,
 				AECC131227B9EE03006866FC /* BMJUA.ttf */,
 				AECC131027B9ED12006866FC /* Roboto-Regular.ttf */,
@@ -1825,6 +1828,7 @@
 				AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */,
 				AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */,
 				AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */,
+				AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

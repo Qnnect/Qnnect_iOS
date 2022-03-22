@@ -71,4 +71,8 @@ extension UIFont {
     static func BM_JUA(size: CGFloat) -> UIFont {
         return UIFont(name: "BMJUA", size: size)!
     }
+    
+    static func KOTRA_HOPE(size: CGFloat) -> UIFont {
+        return UIFont(name: "KOTRA-HOPE", size: size)!
+    }
 }
