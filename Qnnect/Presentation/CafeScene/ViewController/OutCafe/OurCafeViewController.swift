@@ -403,6 +403,7 @@ final class OurCafeViewController: BaseViewController {
                 [weak self] curStep in
                 self?.progressBar.image = curStep.progressBarImage
                 self?.drinkImageView.image = curStep.drinkImage
+                self?.setDrinkImageViewLayout(curStep)
                 self?.setCurStepLabelColor(curStep)
             }).disposed(by: self.disposeBag)
         
@@ -571,6 +572,17 @@ private extension OurCafeViewController {
         titleLabel.text = isCurrentUser ? "내 음료" : "\(name) 음료"
     }
     
+    func setDrinkImageViewLayout(_ curStep: DrinkStep) {
+        if curStep == .completed {
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(130.0 - 34.5)
+            }
+        } else {
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(130.0)
+            }
+        }
+    }
 }
 
 
