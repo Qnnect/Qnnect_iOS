@@ -11,11 +11,6 @@ import SnapKit
 import Then
 import RxSwift
 
-@objc
-protocol InsertIngredientDelegate: AnyObject {
-    func didInsert()
-}
-
 final class RightStepAlertViewController: BaseViewController {
     
     private let ingredientsImageView = UIImageView().then {
@@ -94,9 +89,7 @@ final class RightStepAlertViewController: BaseViewController {
         super.viewWillDisappear(animated)
         if let navigationVC = presentingViewController as? UINavigationController {
             navigationVC.viewControllers.last?.viewWillAppear(true)
-        } else {
-            delegate?.didInsert()
-        }
+        } 
     }
     
     override func configureUI() {

@@ -89,10 +89,6 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
         let viewModel = RightStepAlertViewModel(ourCafeUseCase: ourCafeUseCase)
         let vc = RightStepAlertViewController.create(with: viewModel, self, ingredient, userDrinkSelectedId)
         vc.modalPresentationStyle = .overCurrentContext
-        
-        if let insertIngredientVC = navigationController.viewControllers.last as? InsertIngredientViewController {
-            vc.delegate = insertIngredientVC
-        }
         navigationController.present(vc, animated: true, completion: nil)
     }
     

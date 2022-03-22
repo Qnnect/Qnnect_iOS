@@ -12,13 +12,12 @@ import RxCocoa
 final class InsertIngredientViewModel: ViewModelType {
     
     struct Input {
-        let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let cafeId: Observable<Int>
         let didTapRecipeButton: Observable<Void>
         let didTapStoreButton: Observable<Void>
         let didTapFullViewButton: Observable<Void>
         let didTapIngredientCell: Observable<MyIngredient>
-        let didInsert: Observable<Void>
     }
     
     struct Output {
@@ -42,10 +41,7 @@ final class InsertIngredientViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let myCafeDrinkWithIngredients = Observable.merge(
-            input.viewDidLoad,
-            input.didInsert
-        )
+        let myCafeDrinkWithIngredients = input.viewWillAppear
             .withLatestFrom(input.cafeId)
             .flatMap(ourCafeUseCase.fetchMyCafeDrink(_:))
             .compactMap { result -> (cafeDrink: CafeDrink, ingredients: [MyIngredient])? in
