@@ -11,6 +11,8 @@ import Moya
 enum AuthAPI {
     case login(request: LoginRequestDTO)
     case reissue(request: ReissueRequestDTO)
+    case logout
+    case withdrawl
 }
 
 extension AuthAPI: TargetType {
@@ -24,6 +26,10 @@ extension AuthAPI: TargetType {
             return "api/v1/auth/login"
         case .reissue(_):
             return "api/v1/auth/reissue"
+        case .logout:
+            return "api/v1/auth/logout"
+        case .withdrawl:
+            return "api/v1/auth/withdrawl"
         }
     }
     
@@ -33,6 +39,8 @@ extension AuthAPI: TargetType {
             return .post
         case .reissue(_):
             return .post
+        case .logout, .withdrawl:
+            return .get
         }
     }
     
@@ -42,6 +50,8 @@ extension AuthAPI: TargetType {
             return .requestJSONEncodable(loginRequestDTO)
         case .reissue(let reissueRequestDTO):
             return .requestJSONEncodable(reissueRequestDTO)
+        case .logout, .withdrawl:
+            return .requestPlain
         }
     }
     

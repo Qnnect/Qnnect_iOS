@@ -17,6 +17,8 @@ protocol AuthUseCase: InputUseCase {
     func reissueToken(token: Token) -> Observable<Result<Token, Error>>
     func updateFirstAccess()
     func saveLoginType(_ type: LoginType)
+    func logout() -> Observable<Result<Void,Error>>
+    func withdraw() -> Observable<Result<Void,Error>>
 }
 
 final class DefaultAuthUseCase: AuthUseCase {
@@ -57,5 +59,13 @@ final class DefaultAuthUseCase: AuthUseCase {
     
     func saveLoginType(_ type: LoginType) {
         self.authRepository.saveLoginType(type)
+    }
+    
+    func logout() -> Observable<Result<Void,Error>> {
+        authRepository.logout()
+    }
+    
+    func withdraw() -> Observable<Result<Void,Error>> {
+        authRepository.withdraw()
     }
 }

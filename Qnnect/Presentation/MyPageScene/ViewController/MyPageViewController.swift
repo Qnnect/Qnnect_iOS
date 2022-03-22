@@ -78,7 +78,16 @@ final class MyPageViewController: BaseViewController {
                 .filter {
                     let kind = $0[0] as! String
                     return kind == PointCell.myDrinkStamp
-                }.mapToVoid()
+                }.mapToVoid(),
+            didTapMyPagaItem: mainTableView.rx.modelSelected(MyPageSectionItem.self)
+                .compactMap {
+                    item -> MyPageItem? in
+                    guard case let MyPageSectionItem.itemListSectionItem(myPageItem) = item else {
+                        return nil
+                    }
+                    return myPageItem
+                }
+                .asObservable()
         )
         
         self.mainTableView.rx.setDelegate(self)
@@ -111,6 +120,10 @@ final class MyPageViewController: BaseViewController {
         
         output.showMyDrinkStampButton
             .emit(onNext: coordinator.showMyDrinkStampScene)
+            .disposed(by: self.disposeBag)
+        
+        output.showMyPageAlertView
+            .emit(onNext: coordinator.showMyPageAlertView(myPageItem:))
             .disposed(by: self.disposeBag)
     }
 }

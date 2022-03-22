@@ -313,6 +313,8 @@
 		AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A33C27EA26920076E863 /* UIImage+.swift */; };
 		AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */; };
 		AEE1A34227EA49E40076E863 /* DrinkStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */; };
+		AEE1A34427EA5CEB0076E863 /* MyPageAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A34327EA5CEB0076E863 /* MyPageAlertViewController.swift */; };
+		AEE1A34627EA5D460076E863 /* MyPageAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A34527EA5D460076E863 /* MyPageAlertViewModel.swift */; };
 		AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */; };
 		AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */; };
 		AEEF362527C315AA00D0A127 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF362427C315AA00D0A127 /* ProfileCell.swift */; };
@@ -644,6 +646,8 @@
 		AEE1A33C27EA26920076E863 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOTRA_HOPE_TTF.ttf; sourceTree = "<group>"; };
 		AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkStepUseCase.swift; sourceTree = "<group>"; };
+		AEE1A34327EA5CEB0076E863 /* MyPageAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAlertViewController.swift; sourceTree = "<group>"; };
+		AEE1A34527EA5D460076E863 /* MyPageAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAlertViewModel.swift; sourceTree = "<group>"; };
 		AEE4750727CB85AA00A3449B /* AuthNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworkService.swift; sourceTree = "<group>"; };
 		AEEF362227C3136000D0A127 /* MyPageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionModel.swift; sourceTree = "<group>"; };
 		AEEF362427C315AA00D0A127 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -1185,6 +1189,7 @@
 				AE6964D027BCDD7D00BF2A80 /* MyPageViewController.swift */,
 				AEEF362B27C3501200D0A127 /* EditProfileViewController.swift */,
 				AE767FA027E8D4CD00BD5496 /* MyDrinkStampViewController.swift */,
+				AEE1A34327EA5CEB0076E863 /* MyPageAlertViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1194,6 +1199,7 @@
 			children = (
 				AE6964D227BCDDCD00BF2A80 /* MyPageViewModel.swift */,
 				AEEF362D27C3503000D0A127 /* EditProfileViewModel.swift */,
+				AEE1A34527EA5D460076E863 /* MyPageAlertViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2054,6 +2060,7 @@
 				AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */,
 				AEA14D3827D46A3A0009EEC6 /* CafeUserResponseDTO.swift in Sources */,
 				AE02406127E33A8C00017F77 /* OurCafe.swift in Sources */,
+				AEE1A34427EA5CEB0076E863 /* MyPageAlertViewController.swift in Sources */,
 				AEA14D1D27D33A460009EEC6 /* QuestionResponseDTO.swift in Sources */,
 				AEA7266927DE448400F48CB8 /* CommentRepository.swift in Sources */,
 				AE0B2BF627BC80AC00E164BC /* Term.swift in Sources */,
@@ -2111,6 +2118,7 @@
 				AE02406F27E3408F00017F77 /* OurCafeUseCase.swift in Sources */,
 				AE02406327E33C7800017F77 /* OurCafeAPI.swift in Sources */,
 				AECC133327BA35DA006866FC /* Rx+UILabel.swift in Sources */,
+				AEE1A34627EA5D460076E863 /* MyPageAlertViewModel.swift in Sources */,
 				AE02407327E37A7B00017F77 /* InsertIngredientViewController.swift in Sources */,
 				AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */,
 				AEB5AABF27DF1BD40096376B /* CommentViewController.swift in Sources */,

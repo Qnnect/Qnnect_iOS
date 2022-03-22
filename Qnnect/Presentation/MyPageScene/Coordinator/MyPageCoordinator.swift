@@ -10,7 +10,9 @@ import UIKit
 protocol MyPageCoordinator: Coordinator {
     func showEditProfileScene(user: User)
     func showMyDrinkStampScene(user: User)
+    func showMyPageAlertView(myPageItem: MyPageItem)
     func pop()
+    func showLoginScene()
 }
 
 final class DefaultMyPageCoordinator: MyPageCoordinator {
@@ -53,6 +55,25 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         let vc = MyDrinkStampViewController.create(with: self, user)
         vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showMyPageAlertView(myPageItem: MyPageItem) {
+        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let viewModel = MyPageAlertViewModel(authUseCase: authUseCase)
+        let view = MyPageAlertViewController.create(with: viewModel, self, myPageItem)
+        view.modalPresentationStyle = .overCurrentContext
+        navigationController.present(view, animated: true, completion: nil)
+    }
+    
+    func showLoginScene() {
+        if let appCoordinator = parentCoordinator?.parentCoordinator as? AppCoordinator {
+            let coordinator = DefaultAuthCoordinator(navigationController: appCoordinator.navigationController)
+            print("appCoordinator navigationController viewControllers \(appCoordinator.navigationController.viewControllers)")
+            appCoordinator.childCoordinators.append(coordinator)
+            coordinator.parentCoordinator = appCoordinator
+            coordinator.start()
+            appCoordinator.childCoordinators.removeAll(where: { $0 !== coordinator })
+        }
     }
     
     func pop() {

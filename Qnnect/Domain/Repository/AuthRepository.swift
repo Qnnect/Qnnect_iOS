@@ -15,5 +15,7 @@ protocol AuthRepository: AnyObject {
     func saveToken(access: String, refresh: String)
     func reissueToken(token: Token) -> Observable<Result<Token,Error>>
     func updateFirstAccess()
-    func saveLoginType(_ type: LoginType) 
+    func saveLoginType(_ type: LoginType)
+    func logout() -> Observable<Result<Void,Error>>
+    func withdraw() -> Observable<Result<Void,Error>>
 }

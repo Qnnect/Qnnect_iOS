@@ -9,12 +9,10 @@ import Foundation
 import Moya
 import RxSwift
 
-final class AuthNetworkService: Networkable {
-    typealias Target = AuthAPI
-    let provider = makeProvider()
+final class AuthNetworkService: BaseNetworkService<AuthAPI> {
     
     func login(request: LoginRequestDTO) -> Observable<Result<LoginResponseDTO, LoginError>> {
-        return self.provider.rx.request(.login(request: request))
+        return self.request(.login(request: request))
             .map {
                 response -> Result<LoginResponseDTO, LoginError> in
                 switch response.statusCode {
@@ -35,11 +33,27 @@ final class AuthNetworkService: Networkable {
     }
     
     func reissueToken(request: ReissueRequestDTO) -> Observable<Result<ReissueResponseDTO, Error>> {
-        return self.provider.rx.request(.reissue(request: request))
+        return self.request(.reissue(request: request))
             .filter(statusCode: 200)
             .map(ReissueResponseDTO.self)
             .do { print("Reissue Token !!! \($0)")}
             .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func logout() -> Observable<Result<Void,Error>> {
+        request(.logout)
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func withdraw() -> Observable<Result<Void,Error>> {
+        request(.withdrawl)
+            .filter(statusCodes: 200...300)
+            .map { _ in Result.success(())}
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }

@@ -81,4 +81,12 @@ final class DefaultAuthRepository: AuthRepository {
     func saveLoginType(_ type: LoginType) {
         self.localStorage.loginType = type
     }
+    
+    func logout() -> Observable<Result<Void,Error>> {
+        authNetworkService.logout()
+    }
+    
+    func withdraw() -> Observable<Result<Void,Error>> {
+        authNetworkService.withdraw()
+    }
 }

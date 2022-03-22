@@ -18,6 +18,7 @@ final class MyPageViewModel: ViewModelType {
         let viewWillAppear: Observable<Void>
         let viewDidLoad: Observable<Void>
         let didTapMyDrinkStampButton: Observable<Void>
+        let didTapMyPagaItem: Observable<MyPageItem>
     }
     
     struct Output {
@@ -25,6 +26,7 @@ final class MyPageViewModel: ViewModelType {
         let user: Driver<User>
         let loginType: Driver<LoginType>
         let showMyDrinkStampButton: Signal<User>
+        let showMyPageAlertView: Signal<MyPageItem>
     }
     
     private let userUseCase: UserUseCase
@@ -53,11 +55,15 @@ final class MyPageViewModel: ViewModelType {
         let showMyDrinkStampButton = input.didTapMyDrinkStampButton
             .withLatestFrom(fetchedUser)
         
+        let showMyPageAlertView = input.didTapMyPagaItem
+            .filter{ $0 == .logout || $0 == .withdrawal }
+        
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
             user: fetchedUser.asDriver(onErrorDriveWith: .empty()),
             loginType: loginType.asDriver(onErrorJustReturn: .unknown),
-            showMyDrinkStampButton: showMyDrinkStampButton.asSignal(onErrorSignalWith: .empty())
+            showMyDrinkStampButton: showMyDrinkStampButton.asSignal(onErrorSignalWith: .empty()),
+            showMyPageAlertView: showMyPageAlertView.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
