@@ -41,6 +41,10 @@ final class DefaultUserRepositry: UserRepository {
             }
     }
     
+    func setDefaultImage() -> Observable<Result<Void,Error>> {
+        userNetworkService.setDefaultImage()
+    }
+    
     func fetchUser() -> Observable<Result<User, Error>> {
         return self.userNetworkService.fetchUser()
             .map {

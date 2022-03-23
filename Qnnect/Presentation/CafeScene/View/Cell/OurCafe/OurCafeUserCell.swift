@@ -68,7 +68,7 @@ final class OurCafeUserCell: UICollectionViewCell {
     
     func update(with user: OurCafeUser) {
         profileImageView.kf.setImage(
-            with: URL(string: user.profileImage),
+            with: URL(string: user.profileImage ?? ""),
             placeholder: Constants.profileDefaultImage)
         
         nameLabel.text = user.nickName

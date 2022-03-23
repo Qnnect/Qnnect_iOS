@@ -10,5 +10,5 @@ import Foundation
 struct OurCafeUser {
     let cafeUserId: Int
     let nickName: String
-    let profileImage: String
+    let profileImage: String?
 }

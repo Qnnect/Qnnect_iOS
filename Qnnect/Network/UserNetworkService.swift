@@ -35,4 +35,12 @@ final class UserNetworkService: BaseNetworkService<UserAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func setDefaultImage() -> Observable<Result<Void,Error>> {
+        request(.setDefaultImage)
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

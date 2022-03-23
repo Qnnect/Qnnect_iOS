@@ -152,6 +152,10 @@ final class EditProfileViewController: BaseViewController {
             .emit(onNext: self.showBottomSheet)
             .disposed(by: self.disposeBag)
         
+        output.setDefaultImage
+            .emit()
+            .disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
 
         output.pop

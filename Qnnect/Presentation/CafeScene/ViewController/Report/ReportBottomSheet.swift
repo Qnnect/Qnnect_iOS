@@ -109,7 +109,7 @@ private extension ReportBottomSheet {
             if let presentingVC = presentingViewController  {
                 let compseVC = MFMailComposeViewController()
                 compseVC.mailComposeDelegate = delegate
-                compseVC.setToRecipients(["xornjs1423@gmail.com"])
+                compseVC.setToRecipients([APP.reportEmail])
                 compseVC.setSubject("유저 신고하기")
                 compseVC.setMessageBody("신고하려는 유저 이름 : \(user.name)\n신고 내용 : ",
                                         isHTML: false)

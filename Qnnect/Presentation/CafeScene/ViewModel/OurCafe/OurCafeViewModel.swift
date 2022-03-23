@@ -80,6 +80,7 @@ final class OurCafeViewModel: ViewModelType {
         
         
         let fetchedResult = Observable.merge(load, firstLoad)
+            .debug()
         
         let ourCafe = fetchedResult
             .compactMap { result -> OurCafe? in

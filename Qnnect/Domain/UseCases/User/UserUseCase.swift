@@ -14,6 +14,7 @@ protocol UserUseCase: AnyObject {
     func fetchUser() -> Observable<Result<User,Error>>
     func isModifiedName(inputName: String, originalUser: User) -> Bool
     func fetchLoginType() -> LoginType
+    func setDefaultImage() -> Observable<Result<Void,Error>>
 }
 
 final class DefaultUserUseCase: UserUseCase {
@@ -41,5 +42,9 @@ final class DefaultUserUseCase: UserUseCase {
     
     func fetchLoginType() -> LoginType {
         return self.userRepository.fetchLoginType() ?? .unknown
+    }
+    
+    func setDefaultImage() -> Observable<Result<Void,Error>> {
+        userRepository.setDefaultImage()
     }
 }

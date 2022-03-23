@@ -24,6 +24,7 @@ final class EditProfileViewModel: ViewModelType {
         let nameLength: Driver<Int>
         let showBottomSheet: Signal<Void>
         let pop: Signal<Void>
+        let setDefaultImage: Signal<Void>
     }
     
     private let authUseCase: AuthUseCase
@@ -64,10 +65,27 @@ final class EditProfileViewModel: ViewModelType {
                 .mapToVoid()
         )
         
-        let updateProfile = input.didTapCompletionButton
+        let updateInfo = input.didTapCompletionButton
             .skip(until: inputChanging)
             .withLatestFrom(userInfo)
             .map{($0.0 , $0.1)}
+        
+        let setDefaultImage = updateInfo.filter { $0.0 == nil}
+            .mapToVoid()
+            .flatMap(userUseCase.setDefaultImage)
+            .mapToVoid()
+        
+        let updateProfile = updateInfo
+            .flatMap {
+                [weak self] imageData, name -> Observable<Result<Void,Error>> in
+                guard let self = self else { return .just(.success(Void())) }
+                if imageData == nil {
+                    return self.userUseCase.setDefaultImage()
+                } else {
+                    return .just(.success(Void()))
+                }
+            }
+            .withLatestFrom(updateInfo)
             .flatMap(self.userUseCase.setProfile)
             .mapToVoid()
             .share()
@@ -80,7 +98,8 @@ final class EditProfileViewModel: ViewModelType {
             isVaildName: isValidName.asSignal(onErrorJustReturn: false),
             nameLength: nameLength.asDriver(onErrorDriveWith: .empty()),
             showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty()),
-            pop: pop.asSignal(onErrorSignalWith: .empty())
+            pop: pop.asSignal(onErrorSignalWith: .empty()),
+            setDefaultImage: setDefaultImage.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

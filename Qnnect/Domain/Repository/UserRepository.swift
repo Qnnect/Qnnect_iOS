@@ -13,4 +13,5 @@ protocol UserRepository: AnyObject {
     func setProfile(profileImage: Data?, name: String) -> Observable<Result<User,Error>>
     func fetchUser() -> Observable<Result<User,Error>>
     func fetchLoginType() -> LoginType?
+    func setDefaultImage() -> Observable<Result<Void,Error>>
 }

@@ -12,6 +12,7 @@ enum UserAPI {
     case setProfile(request: ProfileRequestDTO)
     case setEnableNotification(request: SetEnableNotificationRequestDTO)
     case fetchUser(Void)
+    case setDefaultImage
 }
 
 extension UserAPI: TargetType, AccessTokenAuthorizable {
@@ -27,12 +28,14 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/user/enablenotification"
         case .fetchUser():
             return "api/v1/user"
+        case .setDefaultImage:
+            return "api/v1/user/profile/default_image"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .setProfile(_):
+        case .setProfile(_), .setDefaultImage:
             return .patch
         case .setEnableNotification(_):
             return .patch
@@ -54,7 +57,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
         case .setEnableNotification(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-        case .fetchUser():
+        case .fetchUser(), .setDefaultImage:
             return .requestPlain
         }
     }
@@ -66,7 +69,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
                 "Content-Type": "multipart/form-data"
                
             ]
-        case .setEnableNotification(_), .fetchUser():
+        case .setEnableNotification(_), .fetchUser(), .setDefaultImage:
             return [
                 "Content-Type": "application/json"
             ]
