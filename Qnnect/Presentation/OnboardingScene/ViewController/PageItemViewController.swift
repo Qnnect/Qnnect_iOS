@@ -12,7 +12,7 @@ import Then
 final class PageItemViewController: BaseViewController {
     
     private(set) var mainImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
     }
     
     private(set) var mainLabel = UILabel().then {

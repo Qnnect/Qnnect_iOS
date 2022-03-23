@@ -137,7 +137,7 @@ final class HomeViewController: BaseViewController {
         }
         
         self.homeCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         normalLayout = createLayout()
@@ -325,7 +325,7 @@ private extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.0763))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.096))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -339,8 +339,10 @@ private extension HomeViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 6.0, leading: 20.0, bottom: 0, trailing: 20.0)
-        //group
-        let groupSize = NSCollectionLayoutSize(widthDimension:                                                                                        .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.251))
+        //group 0.35
+        let heightRadio = 0.096 + ((view.frame.width * 0.9 / 2.0) + 16.0) / view.frame.height
+        print(heightRadio)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 - heightRadio - 0.33))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)

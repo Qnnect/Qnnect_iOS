@@ -39,18 +39,19 @@ final class TitleCell: UICollectionViewCell {
         ].forEach {
             self.contentView.addSubview($0)
         }
-        
-        self.profileImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.width.height.equalTo(62.0)
-            make.centerY.equalToSuperview()
-        }
-        
+            
         self.titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.profileImageView.snp.trailing).offset(12.0)
             make.trailing.equalToSuperview().inset(12.0)
             make.centerY.equalTo(self.profileImageView)
         }
+        
+        self.profileImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(contentView.frame.height)
+            make.trailing.equalTo(titleLabel.snp.leading).offset(-12.0)
+        }
+   
     }
     
     func update(with user: User) {

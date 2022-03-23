@@ -140,14 +140,12 @@ final class CafeRoomViewController: BaseViewController {
             make.height.equalTo(36.0)
             make.leading.trailing.equalToSuperview().inset(20.0)
         }
-        
-        questionButton.setContentCompressionResistancePriority(.required, for: .vertical)
-        
+
         self.mainCollectionView.snp.makeConstraints { make in
-            make.top.trailing.leading.equalToSuperview()
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(questionButton.snp.top).offset(-8.0)
         }
-        mainCollectionView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
+
         
         let layout = self.createLayout()
         
@@ -288,7 +286,7 @@ private extension CafeRoomViewController {
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.232))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.255))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -305,7 +303,7 @@ private extension CafeRoomViewController {
         //item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.148))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.17))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
         group.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
         //section
@@ -333,7 +331,7 @@ private extension CafeRoomViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.387))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.45))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -345,7 +343,7 @@ private extension CafeRoomViewController {
             let env = environment
             self.todayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
         }
-        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 8.0, trailing: 0)
+        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 16.0, trailing: 0)
         
         
         return section
