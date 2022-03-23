@@ -85,14 +85,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-       // tabBarController?.tabBar.isHidden = false
         inviteCafeCode = nil
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        print("viewDidAppear!!!")
-        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {

@@ -122,7 +122,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.view.layoutIfNeeded()
         }) { _ in
             if self.presentingViewController != nil {
-//                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
+                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
 //                self.presentingViewController!.view.setNeedsLayout()
                 self.dismiss(animated: false, completion: completion)
             }

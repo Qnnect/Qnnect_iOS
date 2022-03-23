@@ -123,6 +123,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         let cafeUseCase = DefaultCafeUseCase(cafeRepository: cafeRepository)
         let viewModel = WriteQuestionViewModel(cafeUseCase: cafeUseCase)
         let vc = WriteQuestionViewController.create(with: viewModel, cafeId, self)
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(vc, animated: true)
     }
     
