@@ -73,6 +73,7 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     
     func showStoreScene() {
         let coordinator = DefaultStoreCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
@@ -80,6 +81,7 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     
     func showIngredientStorageScene() {
         let coordinator = DefaultStorageCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
@@ -96,6 +98,7 @@ final class DefaultOurCafeCoordinator: NSObject, OurCafeCoordinator {
     
     func showDrinkSelectBottomSheet(_ cafeId: Int) {
         let coordinator = DefaultSelectDrinkCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start(cafeId)
@@ -136,12 +139,24 @@ extension DefaultOurCafeCoordinator: UINavigationControllerDelegate {
            return
         }
 
+        guard let parentCoordinator = parentCoordinator as? UINavigationControllerDelegate else {
+            return
+        }
+        
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? StoreViewController {
             childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
         }
+        
         if let vc = fromViewController as? IngredientStorageViewController {
             childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
+        }
+        
+        if let vc = fromViewController as? DrinkSelectViewController {
+            childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
         }
     }
 }

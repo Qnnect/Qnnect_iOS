@@ -49,6 +49,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     }
     
     func showSelectDrinkBottomSheet(_ cafeId: Int) {
+        navigationController.delegate = self
         if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
             bottomSheet.hideBottomSheetAndGoBack {
                 [weak self] in
@@ -98,6 +99,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     
     func showCafeQuestionScene(_ questionId: Int) {
         let coordinator = DefaultQuestionCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
         coordinator.showCafeQuestionScene(questionId)
         coordinator.parentCoordinator = parentCoordinator
         self.childCoordinators.append(coordinator)
@@ -169,9 +171,11 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     
     func showOurCafeScene(cafeId: Int, cafeUserId: Int) {
         let coordinator = DefaultOurCafeCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start(cafeId: cafeId, cafeUserId: cafeUserId)
+        
     }
     
     func dismissQuestionCompletionAlertView(_ type: QuestionCompletionBehaviorType) {
@@ -230,13 +234,24 @@ extension DefaultCafeCoordinator: UINavigationControllerDelegate {
             return
         }
         
+        guard let parentCoordinator = parentCoordinator as? UINavigationControllerDelegate else {
+            return
+        }
+        
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? CafeQuestionViewController {
             childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
         }
         
         if let vc = fromViewController as? OurCafeViewController {
             childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
+        }
+        
+        if let vc = fromViewController as? DrinkSelectViewController {
+            childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
         }
     }
 }

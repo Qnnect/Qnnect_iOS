@@ -34,6 +34,7 @@ final class DefaultBookmarkCoordinator: NSObject, BookmarkCoordinator {
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = BookmarkViewModel(questionUseCase: questionUseCase)
         let vc = BookmarkViewController.create(with: viewModel, self)
+        navigationController.delegate = self
         self.navigationController.pushViewController(vc, animated: true)
     }
     
@@ -73,24 +74,7 @@ extension DefaultBookmarkCoordinator: UINavigationControllerDelegate {
         // child coordinator 가 일을 끝냈다고 알림.
         if let vc = fromViewController as? CafeQuestionViewController {
             childDidFinish(vc.coordinator)
-            print("TEst!@#!@#")
-            if let presentedVC = navigationController.viewControllers.last {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
         }
         
-        if let vc = fromViewController as? CommentViewController {
-            childDidFinish(vc.coordinator)
-            if let presentedVC = navigationController.viewControllers.last {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
-        }
-        
-        if let vc = fromViewController as? WriteCommentViewController {
-            childDidFinish(vc.coordinator)
-            if let presentedVC = navigationController.viewControllers.last {
-                presentedVC.tabBarController?.tabBar.isHidden = false
-            }
-        }
     }
 }

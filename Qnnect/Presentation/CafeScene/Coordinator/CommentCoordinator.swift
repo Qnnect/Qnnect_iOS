@@ -107,16 +107,18 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     func showWriteCommentScene(_ question: Question, _ user: User?, _ comment: Comment) {
         dismissCommentMoreMenu(.modify)
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
-        coordinator.start(question, user, comment)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
+        coordinator.start(question, user, comment)
     }
     
     func showReportBottomSheet(_ reportUser: User) {
         let coordinator = DefaultReportCoordinator(navigationController: navigationController)
-        coordinator.start(reportUser)
+        navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
+        coordinator.start(reportUser)
     }
     
     func dismissCommentMoreMenu(_ type: CommentMoreMenuItem) {
@@ -141,5 +143,33 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     }
 }
 
-
-
+extension DefaultCommentCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool)
+    {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+            return
+        }
+        
+        guard let parentCoordinator = parentCoordinator as? UINavigationControllerDelegate else {
+            return
+        }
+        
+        
+        // child coordinator 가 일을 끝냈다고 알림.
+        if let vc = fromViewController as? WriteCommentViewController {
+            childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
+        }
+        
+        if let vc = fromViewController as? ReportBottomSheet {
+            childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
+        }
+    }
+}
+    
