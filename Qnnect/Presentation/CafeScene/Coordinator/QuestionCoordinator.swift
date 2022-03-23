@@ -12,7 +12,7 @@ protocol QuestionCoordinator: Coordinator {
     func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?)
     func showCommentScene(_ commentId: Int, _ question: Question)
     func showModifyQuestionScene(_  question: Question)
-    func showReportMenuBottomSheet()
+    func showReportMenuBottomSheet(_ reportUser: User)
     func pop()
     func dismiss()
 }
@@ -89,9 +89,9 @@ final class DefaultQuestionCoordinator: QuestionCoordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showReportMenuBottomSheet() {
+    func showReportMenuBottomSheet(_ reportUser: User) {
         let coordinator = DefaultReportCoordinator(navigationController: navigationController)
-        coordinator.start()
+        coordinator.start(reportUser)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }

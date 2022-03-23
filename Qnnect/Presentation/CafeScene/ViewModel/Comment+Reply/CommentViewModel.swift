@@ -30,7 +30,7 @@ final class CommentViewModel: ViewModelType {
         /// Int: CommentId
         let showCommentMoreMenuBottomSheet: Signal<(question: Question, comment: Comment)>
         let showReplyMoreMenuBottomSheet: Signal<(commentId: Int, reply: Reply)>
-        let showReportBottomSheet: Signal<Void>
+        let showReportBottomSheet: Signal<User>
     }
     
     private let commentUseCase: CommentUseCase
@@ -78,7 +78,7 @@ final class CommentViewModel: ViewModelType {
             .withLatestFrom(input.commentId,resultSelector: { (commentId: $1, reply: $0) })
         
         let showReportBottomSheet = input.didTapProfile
-            .mapToVoid()
+
         
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),

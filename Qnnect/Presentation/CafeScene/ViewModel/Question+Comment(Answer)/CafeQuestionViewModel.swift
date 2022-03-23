@@ -41,7 +41,7 @@ final class CafeQuestionViewModel: ViewModelType {
         let showDeleteAlertView: Signal<Void>
         let delete: Signal<Void>
         let showModeifyQuestionScene: Signal<Question>
-        let showReportBottomSheet: Signal<Void>
+        let showReportBottomSheet: Signal<User>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -140,7 +140,7 @@ final class CafeQuestionViewModel: ViewModelType {
             .withLatestFrom(fetchedQuestionWithComments.map { $0.question} )
         
         let showReportBottomSheet = input.didTapProfile
-            .mapToVoid()
+           
         
         return Output(
             showWriteCommentScene: showWriteCommentScene.asSignal(onErrorSignalWith: .empty()),

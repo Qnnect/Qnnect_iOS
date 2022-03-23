@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxDataSources
+import MessageUI
 
 final class CafeQuestionViewController: BaseViewController {
     
@@ -281,4 +282,10 @@ private extension CafeQuestionViewController {
 
 extension CafeQuestionViewController: QuestionCellButtonDelegate {
     func questionCellButton(didTap kind: String) { }
+}
+
+extension CafeQuestionViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }

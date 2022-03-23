@@ -14,17 +14,22 @@ final class ReportBottomSheetViewModel: ViewModelType {
     struct Input {
         let didTapReportButton: Observable<Void>
         let didTapblockButton: Observable<Void>
+        let reportUser: Observable<User>
     }
     
     struct Output {
-        let report: Signal<Void>
+        let report: Signal<User>
     }
     
     
     
     func transform(from input: Input) -> Output {
+        
+        let report = input.didTapReportButton
+            .withLatestFrom(input.reportUser)
+        
         return Output(
-            report: input.didTapReportButton.asSignal(onErrorSignalWith: .empty())
+            report: report.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

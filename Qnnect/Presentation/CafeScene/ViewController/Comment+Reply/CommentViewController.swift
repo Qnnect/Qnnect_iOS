@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxDataSources
+import MessageUI
 
 final class CommentViewController: BaseViewController {
     
@@ -459,5 +460,11 @@ private extension CommentViewController {
 extension CommentViewController: ReplyMoreButtonDelegate {
     func moreButton(didTap cell: UICollectionViewCell, _ replyId: Int) {
         print("test", replyId)
+    }
+}
+
+extension CommentViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MessageUI
+
 
 protocol ReportCoordinator: Coordinator {
 }
@@ -20,10 +22,14 @@ final class DefaultReportCoordinator: ReportCoordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start() { }
+    
+    func start(_ reportUser: User) {
         let viewModel = ReportBottomSheetViewModel()
-        let view = ReportBottomSheet.create(with: viewModel, self)
-        view.modalPresentationStyle = .overCurrentContext
-        navigationController.present(view, animated: false, completion: nil)
+        if let delegate = navigationController.viewControllers.last! as? MFMailComposeViewControllerDelegate{
+            let view = ReportBottomSheet.create(with: viewModel, self, reportUser, delegate)
+            view.modalPresentationStyle = .overCurrentContext
+            navigationController.present(view, animated: false, completion: nil)
+        }
     }
 }

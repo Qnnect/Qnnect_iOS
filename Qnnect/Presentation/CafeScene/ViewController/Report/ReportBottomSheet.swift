@@ -10,6 +10,12 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import MessageUI
+
+protocol ReportBottomSheetDelegate: AnyObject {
+    func sendMail(reportUser: User)
+}
+
 
 class ReportBottomSheet: BottomSheetViewController {
     
@@ -27,17 +33,23 @@ class ReportBottomSheet: BottomSheetViewController {
         $0.modalPresentationStyle = .overCurrentContext
     }
     
-  
+    
     private var viewModel: ReportBottomSheetViewModel!
     weak var coordinator: ReportCoordinator?
+    private var user: User!
+    private weak var delegate: MFMailComposeViewControllerDelegate?
     
     static func create(
         with viewModel: ReportBottomSheetViewModel,
-        _ coordinator: ReportCoordinator
+        _ coordinator: ReportCoordinator,
+        _ user: User,
+        _ delegate: MFMailComposeViewControllerDelegate
     ) -> ReportBottomSheet {
         let view = ReportBottomSheet()
         view.viewModel = viewModel
         view.coordinator = coordinator
+        view.user = user
+        view.delegate = delegate
         return view
     }
     
@@ -74,13 +86,55 @@ class ReportBottomSheet: BottomSheetViewController {
         
         let input = ReportBottomSheetViewModel.Input(
             didTapReportButton: reportButton.rx.tap.asObservable(),
-            didTapblockButton: blockButton.rx.tap.asObservable()
+            didTapblockButton: blockButton.rx.tap.asObservable(),
+            reportUser: Observable.just(user)
         )
         
         let output = viewModel.transform(from: input)
         
-        guard let coordinator = coordinator else { return}
-
+        output.report
+            .emit(onNext: sendEmail)
+            .disposed(by: self.disposeBag)
         
+        guard let coordinator = coordinator else { return}
+        
+        
+    }
+}
+
+private extension ReportBottomSheet {
+    func sendEmail(_ user: User) {
+        // 이메일 사용가능한지 체크하는 if문
+        if MFMailComposeViewController.canSendMail() {
+            if let presentingVC = presentingViewController  {
+                let compseVC = MFMailComposeViewController()
+                compseVC.mailComposeDelegate = delegate
+                compseVC.setToRecipients(["xornjs1423@gmail.com"])
+                compseVC.setSubject("유저 신고하기")
+                compseVC.setMessageBody("신고하려는 유저 이름 : \(user.name)\n신고 내용 : ",
+                                        isHTML: false)
+                dismiss(animated: false, completion: {
+                    presentingVC.present(compseVC, animated: true, completion: nil)
+                })
+            }
+            
+        }
+        else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertController(title: "메일을 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) {
+            (action) in
+            print("확인")
+        }
+        sendMailErrorAlert.addAction(confirmAction)
+        if let presentingVC = presentingViewController {
+            dismiss(animated: false, completion: {
+                presentingVC.present(sendMailErrorAlert, animated: true, completion: nil)
+            })
+        }
     }
 }
