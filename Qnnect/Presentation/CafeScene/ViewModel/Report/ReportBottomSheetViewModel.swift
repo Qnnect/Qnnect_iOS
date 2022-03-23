@@ -19,17 +19,32 @@ final class ReportBottomSheetViewModel: ViewModelType {
     
     struct Output {
         let report: Signal<User>
+        let block: Signal<Void>
     }
     
+    private let reportUseCase: ReportUseCase
     
+    init(reportUseCase: ReportUseCase) {
+        self.reportUseCase = reportUseCase
+    }
     
     func transform(from input: Input) -> Output {
         
         let report = input.didTapReportButton
             .withLatestFrom(input.reportUser)
+            .map { $0.reportId }
+            .flatMap(reportUseCase.report(_:))
+            .withLatestFrom(input.reportUser)
+        
+        let block = input.didTapblockButton
+            .withLatestFrom(input.reportUser)
+            .map { $0.reportId }
+            .flatMap(reportUseCase.report(_:))
+            .mapToVoid()
         
         return Output(
-            report: report.asSignal(onErrorSignalWith: .empty())
+            report: report.asSignal(onErrorSignalWith: .empty()),
+            block: block.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

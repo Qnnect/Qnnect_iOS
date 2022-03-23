@@ -340,7 +340,7 @@ private extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 6.0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.251))
+        let groupSize = NSCollectionLayoutSize(widthDimension:                                                                                        .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.251))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)

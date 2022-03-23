@@ -10,6 +10,7 @@ import MessageUI
 
 
 protocol ReportCoordinator: Coordinator {
+    func dismiss()
 }
 
 final class DefaultReportCoordinator: ReportCoordinator {
@@ -25,11 +26,17 @@ final class DefaultReportCoordinator: ReportCoordinator {
     func start() { }
     
     func start(_ reportUser: User) {
-        let viewModel = ReportBottomSheetViewModel()
+        let reportRepository = DefaultReportRepository(reportNetworkService: ReportNetworkService())
+        let reportUseCase = DefaultReportUseCase(reportRepository: reportRepository)
+        let viewModel = ReportBottomSheetViewModel(reportUseCase: reportUseCase)
         if let delegate = navigationController.viewControllers.last! as? MFMailComposeViewControllerDelegate{
             let view = ReportBottomSheet.create(with: viewModel, self, reportUser, delegate)
             view.modalPresentationStyle = .overCurrentContext
             navigationController.present(view, animated: false, completion: nil)
         }
+    }
+    
+    func dismiss() {
+        navigationController.presentedViewController?.dismiss(animated: false, completion: nil)
     }
 }

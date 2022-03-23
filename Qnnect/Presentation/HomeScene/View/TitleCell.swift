@@ -12,10 +12,8 @@ import Then
 final class TitleCell: UICollectionViewCell {
     static let identifier = "TitleCell"
     
-    private let profileImageView = UIImageView().then {
+    private let profileImageView = CircleImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 31.0
-        $0.layer.masksToBounds = true
     }
     
     private let titleLabel = UILabel().then {

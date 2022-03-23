@@ -96,9 +96,12 @@ class ReportBottomSheet: BottomSheetViewController {
             .emit(onNext: sendEmail)
             .disposed(by: self.disposeBag)
         
+        
         guard let coordinator = coordinator else { return}
         
-        
+        output.block
+            .emit(onNext: coordinator.dismiss)
+            .disposed(by: self.disposeBag)
     }
 }
 

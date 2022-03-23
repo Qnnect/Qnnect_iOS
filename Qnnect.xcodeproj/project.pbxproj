@@ -332,6 +332,14 @@
 		AEEF4AF127EB19B500DB4184 /* ReportBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */; };
 		AEEF4AF327EB2B2300DB4184 /* ReportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */; };
 		AEEF4AFB27EB5C0700DB4184 /* SentQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AFA27EB5C0700DB4184 /* SentQuestionListViewController.swift */; };
+		AEEF4AFD27EB69BB00DB4184 /* ReportRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AFC27EB69BB00DB4184 /* ReportRequestDTO.swift */; };
+		AEEF4AFF27EB6A2A00DB4184 /* ReportAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AFE27EB6A2A00DB4184 /* ReportAPI.swift */; };
+		AEEF4B0127EB6B6700DB4184 /* ReportResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0027EB6B6700DB4184 /* ReportResponseDTO.swift */; };
+		AEEF4B0327EB6B9A00DB4184 /* ReportNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0227EB6B9A00DB4184 /* ReportNetworkService.swift */; };
+		AEEF4B0527EB6C0B00DB4184 /* ReportUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0427EB6C0B00DB4184 /* ReportUser.swift */; };
+		AEEF4B0727EB6CAB00DB4184 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */; };
+		AEEF4B0927EB6CFD00DB4184 /* DefaultReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */; };
+		AEEF4B0C27EB6D9600DB4184 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0B27EB6D9600DB4184 /* ReportUseCase.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -670,6 +678,14 @@
 		AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCoordinator.swift; sourceTree = "<group>"; };
 		AEEF4AFA27EB5C0700DB4184 /* SentQuestionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentQuestionListViewController.swift; sourceTree = "<group>"; };
+		AEEF4AFC27EB69BB00DB4184 /* ReportRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRequestDTO.swift; sourceTree = "<group>"; };
+		AEEF4AFE27EB6A2A00DB4184 /* ReportAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPI.swift; sourceTree = "<group>"; };
+		AEEF4B0027EB6B6700DB4184 /* ReportResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportResponseDTO.swift; sourceTree = "<group>"; };
+		AEEF4B0227EB6B9A00DB4184 /* ReportNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportNetworkService.swift; sourceTree = "<group>"; };
+		AEEF4B0427EB6C0B00DB4184 /* ReportUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUser.swift; sourceTree = "<group>"; };
+		AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
+		AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultReportRepository.swift; sourceTree = "<group>"; };
+		AEEF4B0B27EB6D9600DB4184 /* ReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUseCase.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -885,6 +901,7 @@
 				AE02406027E33A8C00017F77 /* OurCafe.swift */,
 				AE02407A27E3872900017F77 /* MyIngredient.swift */,
 				AE02408627E3A1D200017F77 /* RecipeIngredient.swift */,
+				AEEF4B0427EB6C0B00DB4184 /* ReportUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -892,6 +909,7 @@
 		AE176A3327B24F660040A4C3 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF4B0A27EB6D8E00DB4184 /* Report */,
 				AEE1A34027EA49BC0076E863 /* Common */,
 				AE02406D27E3408700017F77 /* OurCafe */,
 				AEA7266527DE444900F48CB8 /* Comment */,
@@ -918,6 +936,7 @@
 				AEA7266A27DE44C000F48CB8 /* DefaultCommentRepository.swift */,
 				AEB5AACE27DF39320096376B /* DefaultStoreRepository.swift */,
 				AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */,
+				AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -955,6 +974,7 @@
 				AEA7266827DE448400F48CB8 /* CommentRepository.swift */,
 				AEB5AACC27DF38D60096376B /* StoreRepository.swift */,
 				AE02406927E33FF900017F77 /* OurCafeRepository.swift */,
+				AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1367,6 +1387,8 @@
 				AEA14CFB27CF74A70009EEC6 /* ProfileResponseDTO.swift */,
 				AEA14D0127CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift */,
 				AEA14D0D27D210ED0009EEC6 /* FetchUserResponseDTO.swift */,
+				AEEF4AFC27EB69BB00DB4184 /* ReportRequestDTO.swift */,
+				AEEF4B0027EB6B6700DB4184 /* ReportResponseDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1582,6 +1604,7 @@
 				AEB5AADD27DFC0780096376B /* ReplyAPI.swift */,
 				AEB5AAED27E0A71B0096376B /* LikeAPI.swift */,
 				AE02406227E33C7800017F77 /* OurCafeAPI.swift */,
+				AEEF4AFE27EB6A2A00DB4184 /* ReportAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1755,6 +1778,7 @@
 				AEB5AADF27DFC14D0096376B /* ReplyNetworkService.swift */,
 				AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */,
 				AE02406727E33F2200017F77 /* OurCafeNetworkService.swift */,
+				AEEF4B0227EB6B9A00DB4184 /* ReportNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1785,6 +1809,14 @@
 			isa = PBXGroup;
 			children = (
 				AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		AEEF4B0A27EB6D8E00DB4184 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF4B0B27EB6D9600DB4184 /* ReportUseCase.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -1953,6 +1985,7 @@
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AEB5AADA27DF960E0096376B /* ReplyCell.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
+				AEEF4B0127EB6B6700DB4184 /* ReportResponseDTO.swift in Sources */,
 				AE77C85927DB56C100E8D0EC /* DrinkSelectRequestDTO.swift in Sources */,
 				AEB5AAFA27E0E6770096376B /* ReplyMoreMenuBottomSheet.swift in Sources */,
 				AE02405D27E3387D00017F77 /* OurCafeUserResponseDTO.swift in Sources */,
@@ -1988,6 +2021,7 @@
 				AEB5AB2227E1E9800096376B /* ModifyQuestionViewController.swift in Sources */,
 				AEB5AAB827DEFDC80096376B /* CommentResponseDTO.swift in Sources */,
 				AEB5AAC927DF37810096376B /* IngredientResponseDTO.swift in Sources */,
+				AEEF4AFD27EB69BB00DB4184 /* ReportRequestDTO.swift in Sources */,
 				AEA14D1627D323530009EEC6 /* CafeDrinkCell.swift in Sources */,
 				AEA14CFC27CF74A70009EEC6 /* ProfileResponseDTO.swift in Sources */,
 				AEB5AAE227E043500096376B /* CommentDateHeaderView.swift in Sources */,
@@ -2093,6 +2127,7 @@
 				AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */,
 				AEA14D3827D46A3A0009EEC6 /* CafeUserResponseDTO.swift in Sources */,
 				AE02406127E33A8C00017F77 /* OurCafe.swift in Sources */,
+				AEEF4AFF27EB6A2A00DB4184 /* ReportAPI.swift in Sources */,
 				AEE1A34427EA5CEB0076E863 /* MyPageAlertViewController.swift in Sources */,
 				AEA14D1D27D33A460009EEC6 /* QuestionResponseDTO.swift in Sources */,
 				AEA7266927DE448400F48CB8 /* CommentRepository.swift in Sources */,
@@ -2137,6 +2172,7 @@
 				AEEF4AF127EB19B500DB4184 /* ReportBottomSheetViewModel.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
+				AEEF4B0727EB6CAB00DB4184 /* ReportRepository.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
 				AEB5AAD627DF929B0096376B /* CommentCell.swift in Sources */,
 				AEB5AABD27DEFF050096376B /* Comment.swift in Sources */,
@@ -2160,6 +2196,7 @@
 				AEA14D4427D47E0E0009EEC6 /* DefaultCafeRespository.swift in Sources */,
 				AE02D81027D5EB990019D955 /* DrinkSelectViewModel.swift in Sources */,
 				AE767F9F27E8CFA900BD5496 /* NotificationListViewModel.swift in Sources */,
+				AEEF4B0C27EB6D9600DB4184 /* ReportUseCase.swift in Sources */,
 				AEB5AAFC27E0EE7D0096376B /* CommentMoreMenuViewModel.swift in Sources */,
 				AE7F483C27CCCC4F00954971 /* CafeCoordinator.swift in Sources */,
 				AEB5AAF827E0E48E0096376B /* CommentMoreMenuBottomSheet.swift in Sources */,
@@ -2175,6 +2212,7 @@
 				AE02404D27E31FDB00017F77 /* NavigationTitleLabel.swift in Sources */,
 				AE02409C27E43DD300017F77 /* UserSelectSectionModel.swift in Sources */,
 				AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */,
+				AEEF4B0327EB6B9A00DB4184 /* ReportNetworkService.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE02405B27E3384200017F77 /* OurCafeFetchResponseDTO.swift in Sources */,
@@ -2221,6 +2259,7 @@
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AE77C83427DA057600E8D0EC /* ScrapRequestDTO.swift in Sources */,
 				AE33A4F727E74452000130B3 /* NotModifyDrinkAlertView.swift in Sources */,
+				AEEF4B0527EB6C0B00DB4184 /* ReportUser.swift in Sources */,
 				AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */,
 				AE02406827E33F2200017F77 /* OurCafeNetworkService.swift in Sources */,
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
@@ -2236,6 +2275,7 @@
 				AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
+				AEEF4B0927EB6CFD00DB4184 /* DefaultReportRepository.swift in Sources */,
 				AEEF4AF327EB2B2300DB4184 /* ReportCoordinator.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,

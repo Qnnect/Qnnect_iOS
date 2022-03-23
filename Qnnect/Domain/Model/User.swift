@@ -12,4 +12,5 @@ struct User {
     let name: String
     let point: Int
     let profileImage: String?
+    let reportId: Int
 }
