@@ -15,7 +15,16 @@ enum AuthAPI {
     case withdrawl
 }
 
-extension AuthAPI: TargetType {
+extension AuthAPI: TargetType, AccessTokenAuthorizable {
+    var authorizationType: AuthorizationType? {
+        switch self {
+        case .logout, .withdrawl:
+            return .bearer
+        case .login(_), .reissue(_):
+            return .none
+        }
+    }
+    
     var baseURL: URL {
         return APP.baseURL
     }
@@ -40,7 +49,7 @@ extension AuthAPI: TargetType {
         case .reissue(_):
             return .post
         case .logout, .withdrawl:
-            return .get
+            return .patch
         }
     }
     

@@ -20,7 +20,9 @@ final class CafeQuestionViewModel: ViewModelType {
         let didTapAnswerCell: Observable<Comment>
         /// Bool: true: 좋아요 취소 , false: 좋아요 하기
         let didTapLikeButton: Observable<Bool>
-        let didTapMoreMenuButton: Observable<Void>
+        let didTapModifyButton: Observable<Void>
+        let didTapDeleteButton: Observable<Void>
+        let didTapDeleteAlertOkButton: Observable<Void>
     }
     
     struct Output {
@@ -35,7 +37,9 @@ final class CafeQuestionViewModel: ViewModelType {
         let currentUserComment: Driver<Comment?>
         let like: Signal<Void>
         let liked: Driver<Bool>
-        let showMoreMenu: Signal<Question>
+        let showDeleteAlertView: Signal<Void>
+        let delete: Signal<Void>
+        let showModeifyQuestionScene: Signal<Question>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -97,11 +101,11 @@ final class CafeQuestionViewModel: ViewModelType {
             .withLatestFrom(fetchedQuestion.map{ $0.id })
             .flatMap(self.questionUseCase.cancleScrap)
             .compactMap {
-                 result -> Void? in
+                result -> Void? in
                 guard case .success(_) = result else { return nil }
                 return Void()
             }
-            
+        
         
         let showCommentScene = input.didTapAnswerCell
             .map { $0.id }
@@ -117,8 +121,16 @@ final class CafeQuestionViewModel: ViewModelType {
                 return Void()
             }
         
-        let showMoreMenu = input.didTapMoreMenuButton
-            .withLatestFrom(fetchedQuestion)
+        let showDeleteAlertView = input.didTapDeleteButton
+        
+        //TODO: 에러든 성공이든 화면전환을 위해 mapToVoid 나중에 에러처리 필요
+        let deleteQuestion = input.didTapDeleteAlertOkButton
+            .withLatestFrom(input.questionId)
+            .flatMap(questionUseCase.deleteQuestion(_:))
+            .mapToVoid()
+        
+        let showModifyQuestionScene = input.didTapModifyButton
+            .withLatestFrom(fetchedQuestionWithComments.map { $0.question} )
         
         return Output(
             showWriteCommentScene: showWriteCommentScene.asSignal(onErrorSignalWith: .empty()),
@@ -134,7 +146,9 @@ final class CafeQuestionViewModel: ViewModelType {
             currentUserComment: currentUserComment.asDriver(onErrorDriveWith: .empty()),
             like: like.asSignal(onErrorSignalWith: .empty()),
             liked: liked.asDriver(onErrorDriveWith: .empty()),
-            showMoreMenu: showMoreMenu.asSignal(onErrorSignalWith: .empty())
+            showDeleteAlertView: showDeleteAlertView.asSignal(onErrorSignalWith: .empty()),
+            delete: deleteQuestion.asSignal(onErrorSignalWith: .empty()),
+            showModeifyQuestionScene: showModifyQuestionScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         KeyChain.delete(key: Constants.accessTokenKey)
         KeyChain.delete(key: Constants.refreshTokenKey)
-        
+
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
         UITabBar.appearance().tintColor = .p_brown
         UITabBar.appearance().backgroundColor = .p_ivory

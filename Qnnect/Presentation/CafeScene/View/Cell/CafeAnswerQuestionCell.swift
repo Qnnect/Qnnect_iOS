@@ -10,6 +10,11 @@ import SnapKit
 import Then
 
 
+@objc
+protocol QuestionCellButtonDelegate: AnyObject {
+    dynamic func questionCellButton(didTap kind: String)
+}
+
 final class CafeAnswerQuestionCell: UITableViewCell {
     
     static let identifier = "CafeAnswerQuestionCell"
@@ -48,6 +53,21 @@ final class CafeAnswerQuestionCell: UITableViewCell {
         $0.layer.borderColor = UIColor.brownBorderColor?.cgColor
     }
     
+    private let modifyButton = UIButton().then {
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 10.0)
+        $0.setTitle("수정", for: .normal)
+        $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
+    }
+    
+    private let deleteButton = UIButton().then {
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 10.0)
+        $0.setTitle("삭제", for: .normal)
+        $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
+    }
+    
+    weak var delegate: QuestionCellButtonDelegate?
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureUI()
@@ -65,6 +85,8 @@ final class CafeAnswerQuestionCell: UITableViewCell {
             self.questionerLabel,
             self.daysLeftLabel,
             self.contentLabel,
+            modifyButton,
+            deleteButton
         ].forEach {
             self.outerView.addSubview($0)
         }
@@ -100,6 +122,17 @@ final class CafeAnswerQuestionCell: UITableViewCell {
             make.trailing.bottom.lessThanOrEqualToSuperview().inset(8.0)
         }
         
+        deleteButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(3.0)
+        }
+        deleteButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)
+
+        modifyButton.snp.makeConstraints { make in
+            make.trailing.equalTo(deleteButton.snp.leading).inset(10.0)
+            make.bottom.equalTo(deleteButton)
+        }
+        modifyButton.addTarget(self, action: #selector(didTapButton(sender:)), for: .touchUpInside)
     }
     
     func update(with question: Question) {
@@ -113,6 +146,19 @@ final class CafeAnswerQuestionCell: UITableViewCell {
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
         self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
+        setQuestionButtons(question.writer)
     }
     
+    private func setQuestionButtons(_ isWriter: Bool) {
+        self.deleteButton.isHidden = !isWriter
+        self.modifyButton.isHidden = !isWriter
+    }
+    
+    @objc func didTapButton(sender: UIButton) {
+        if sender == modifyButton {
+            delegate?.questionCellButton(didTap: CafeAnswerQuestionCell.modify)
+        } else {
+            delegate?.questionCellButton(didTap: CafeAnswerQuestionCell.delete)
+        }
+    }
 }

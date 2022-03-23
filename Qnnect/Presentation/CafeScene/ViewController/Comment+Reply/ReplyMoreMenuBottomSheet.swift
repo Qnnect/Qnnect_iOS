@@ -56,17 +56,15 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
         topPadding = UIScreen.main.bounds.height * 0.75
         dismissButton.isHidden = true
         
-        if reply.writer {
-            [
-                modifyButton,
-                deleteButton
-            ].forEach {
-                buttonStackView.addArrangedSubview($0)
-            }
-        } else {
-            buttonStackView.addArrangedSubview(reportButton)
+        
+        [
+            modifyButton,
+            deleteButton
+        ].forEach {
+            buttonStackView.addArrangedSubview($0)
         }
-       
+        
+        
         
         bottomSheetView.addSubview(buttonStackView)
         
@@ -97,11 +95,11 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
             }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return}
-
+        
         output.delete
             .emit(onNext: coordinator.dismissReplyMoreMenu)
             .disposed(by: self.disposeBag)
-
+        
         
         output.showModifyReplyScene
             .emit(onNext: coordinator.showModifyReplyScene)

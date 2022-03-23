@@ -126,7 +126,7 @@ final class BookmarkViewModel: ViewModelType {
         
         return Output(
             cafes: cafes.asDriver(onErrorJustReturn: []),
-            scrapedQuestions: scrapedQuestions.asDriver(onErrorJustReturn: []),
+            scrapedQuestions: scrapedQuestions.asDriver(onErrorDriveWith: .empty()),
             newLoad: newLoad.mapToVoid().asSignal(onErrorSignalWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),

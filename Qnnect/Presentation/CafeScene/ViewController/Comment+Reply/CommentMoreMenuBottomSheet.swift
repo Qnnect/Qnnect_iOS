@@ -58,16 +58,14 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         
         dismissButton.isHidden = true
         
-        if let writer = comment.writer, writer {
-            [
-                modifyButton,
-                deleteButton
-            ].forEach {
-                buttonStackView.addArrangedSubview($0)
-            }
-        } else {
-            buttonStackView.addArrangedSubview(reportButton)
+        
+        [
+            modifyButton,
+            deleteButton
+        ].forEach {
+            buttonStackView.addArrangedSubview($0)
         }
+        
         
         bottomSheetView.addSubview(buttonStackView)
         
@@ -98,7 +96,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
             }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return}
-
+        
         output.delete
             .map { CommentMoreMenuItem.delete }
             .emit(onNext: coordinator.dismissCommentMoreMenu)
