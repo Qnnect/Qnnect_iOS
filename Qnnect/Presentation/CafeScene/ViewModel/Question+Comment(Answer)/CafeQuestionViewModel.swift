@@ -79,7 +79,12 @@ final class CafeQuestionViewModel: ViewModelType {
         let fetchedQuestion = fetchedQuestionWithComments.map { $0.question }
         let liked = fetchedQuestionWithComments.map { $0.liked }
         let scraped = fetchedQuestionWithComments.map { $0.scraped }
-        let currentUserComment = fetchedQuestionWithComments.map { $0.currentUserComment }
+        let currentUserComment = fetchedQuestionWithComments.map {
+            question -> Comment? in
+            var comment = question.currentUserComment
+            comment?.writer = true
+            return comment
+        }
         
         let showWriteCommentScene = input.didTapAnswerWritingCell
             .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))

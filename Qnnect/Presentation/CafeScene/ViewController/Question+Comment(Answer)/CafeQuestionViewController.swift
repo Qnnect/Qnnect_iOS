@@ -260,9 +260,7 @@ private extension CafeQuestionViewController {
                     for: indexPath
                 ) as! CafeAnswerCell
                 cell.update(with: comment)
-                if indexPath.row != 0 {
-                    cell.bind(with: didTapProfile)
-                }
+                cell.bind(with: didTapProfile)
                 return cell
             }
         }

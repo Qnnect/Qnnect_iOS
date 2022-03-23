@@ -18,7 +18,7 @@ struct Comment {
     let imageUrl5: String?
     let writerInfo: User
     /// 질문과 함께 가져오는 답변에는 response에 writer가 없어서 nil, 댓글과 가져올때는 값이 있다
-    let writer: Bool?
+    var writer: Bool?
     let replyCount: Int
     
     func getImageURLs() -> [String] {
