@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "circle.svg",
+      "filename" : "kong.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "kong@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "kong@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

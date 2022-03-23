@@ -71,7 +71,7 @@ struct Constants {
     static let cameraImage: UIImage? = UIImage(named: "camera")
     static let pointImage: UIImage? = UIImage(named: "kong")
     static let notificationIcon: UIImage? = UIImage(named: "notification")
-    static let priceImage: UIImage? = UIImage(named: "price")
+    static let priceImage: UIImage? = UIImage(named: "pointIcon")
     static let groupPlusImage: UIImage? = UIImage(named: "group_plus")
     static let notSelectDrinkImage: UIImage? = UIImage(named: "not_select_drink")?.withRenderingMode(.alwaysOriginal)
     static let basicDrinkImage: UIImage? = UIImage(named: "basic_drink")?.withRenderingMode(.alwaysOriginal)
