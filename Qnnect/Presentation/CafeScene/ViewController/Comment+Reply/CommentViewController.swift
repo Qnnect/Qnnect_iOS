@@ -11,6 +11,7 @@ import Then
 import RxSwift
 import RxDataSources
 import MessageUI
+import ImageSlideshow
 
 final class CommentViewController: BaseViewController {
     

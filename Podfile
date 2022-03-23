@@ -21,4 +21,5 @@ target 'Qnnect' do
   pod 'NVActivityIndicatorView'
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/Kingfisher"
 end

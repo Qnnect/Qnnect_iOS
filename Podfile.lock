@@ -53,6 +53,9 @@ PODS:
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
   - ImageSlideshow/Core (1.9.2)
+  - ImageSlideshow/Kingfisher (1.9.2):
+    - ImageSlideshow/Core
+    - Kingfisher (> 3.0)
   - KakaoSDKAuth (2.8.5):
     - KakaoSDKCommon (= 2.8.5)
   - KakaoSDKCommon (2.8.5):
@@ -156,6 +159,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Messaging
   - ImageSlideshow (~> 1.9.0)
+  - ImageSlideshow/Kingfisher
   - Kingfisher (~> 7.0)
   - Moya/RxSwift (~> 15.0)
   - NVActivityIndicatorView
@@ -257,6 +261,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: e6a6776ea9193a4de116d347fd436f07141d0540
+PODFILE CHECKSUM: 0985a7df83dc11d578a55e82c952daa33d50c0fb
 
 COCOAPODS: 1.11.2
