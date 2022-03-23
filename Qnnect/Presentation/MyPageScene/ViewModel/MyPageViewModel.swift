@@ -32,6 +32,7 @@ final class MyPageViewModel: ViewModelType {
         let showTermsOfService: Signal<Void>
         let showQnnectInstagram: Signal<Void>
         let showSendedQuestionListScene: Signal<Void>
+        let showBloackedFriendListScene: Signal<Void>
     }
     
     private let userUseCase: UserUseCase
@@ -77,8 +78,11 @@ final class MyPageViewModel: ViewModelType {
         
         let showSendedQuestionListScene = input.didTapSendedQuestionButton
             
-        
-        return Output(
+        let showBloackedFriendListScene = input.didTapMyPagaItem
+            .filter { $0 == .reportManagement }
+            .mapToVoid()
+
+         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
             user: fetchedUser.asDriver(onErrorDriveWith: .empty()),
             loginType: loginType.asDriver(onErrorJustReturn: .unknown),
@@ -87,7 +91,8 @@ final class MyPageViewModel: ViewModelType {
             showPersonalPolicy: showPersonalPolicy.asSignal(onErrorSignalWith: .empty()),
             showTermsOfService: showTermsOfServce.asSignal(onErrorSignalWith: .empty()),
             showQnnectInstagram: showQnnectInstagram.asSignal(onErrorSignalWith: .empty()),
-            showSendedQuestionListScene: showSendedQuestionListScene.asSignal(onErrorSignalWith: .empty())
+            showSendedQuestionListScene: showSendedQuestionListScene.asSignal(onErrorSignalWith: .empty()),
+            showBloackedFriendListScene: showBloackedFriendListScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

@@ -154,6 +154,11 @@ final class MyPageViewController: BaseViewController {
         output.showSendedQuestionListScene
             .emit(onNext: coordinator.showSentQuestionListScene)
             .disposed(by: self.disposeBag)
+        
+        output.showBloackedFriendListScene
+            .emit(onNext: coordinator.showBlockedFriendListScene)
+            .disposed(by: self.disposeBag)
+        
     }
 }
 

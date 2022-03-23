@@ -8,10 +8,10 @@
 import Foundation
 
 struct ReportResponseDTO: Decodable {
-    let nickname: String
+    let nickName: String
     let reportId: Int
     
     func toDomain() -> ReportUser {
-        ReportUser(reportId: reportId, nickName: nickname)
+        ReportUser(reportId: reportId, nickName: nickName)
     }
 }

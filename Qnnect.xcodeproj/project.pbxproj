@@ -340,6 +340,9 @@
 		AEEF4B0727EB6CAB00DB4184 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */; };
 		AEEF4B0927EB6CFD00DB4184 /* DefaultReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */; };
 		AEEF4B0C27EB6D9600DB4184 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0B27EB6D9600DB4184 /* ReportUseCase.swift */; };
+		AEEF4B0E27EB70C300DB4184 /* BlockedFriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */; };
+		AEEF4B1027EB711800DB4184 /* BlockedFriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */; };
+		AEEF4B1227EB721400DB4184 /* BlockedFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B1127EB721400DB4184 /* BlockedFriendCell.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -686,6 +689,9 @@
 		AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
 		AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultReportRepository.swift; sourceTree = "<group>"; };
 		AEEF4B0B27EB6D9600DB4184 /* ReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUseCase.swift; sourceTree = "<group>"; };
+		AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendListViewController.swift; sourceTree = "<group>"; };
+		AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendListViewModel.swift; sourceTree = "<group>"; };
+		AEEF4B1127EB721400DB4184 /* BlockedFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendCell.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -1225,6 +1231,7 @@
 				AE767FA027E8D4CD00BD5496 /* MyDrinkStampViewController.swift */,
 				AEE1A34327EA5CEB0076E863 /* MyPageAlertViewController.swift */,
 				AEEF4AFA27EB5C0700DB4184 /* SentQuestionListViewController.swift */,
+				AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1235,6 +1242,7 @@
 				AE6964D227BCDDCD00BF2A80 /* MyPageViewModel.swift */,
 				AEEF362D27C3503000D0A127 /* EditProfileViewModel.swift */,
 				AEE1A34527EA5D460076E863 /* MyPageAlertViewModel.swift */,
+				AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1793,6 +1801,7 @@
 				AE767FA227E8D60800BD5496 /* MyDrinkStampCell.swift */,
 				AE767FA427E8E58B00BD5496 /* MyDrinkStampTitleCell.swift */,
 				AE767FA627E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift */,
+				AEEF4B1127EB721400DB4184 /* BlockedFriendCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2040,6 +2049,7 @@
 				AEA14D1227D28C3C0009EEC6 /* TabBarController.swift in Sources */,
 				AEA14D3A27D476D30009EEC6 /* CafeAPI.swift in Sources */,
 				AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */,
+				AEEF4B1027EB711800DB4184 /* BlockedFriendListViewModel.swift in Sources */,
 				AE02407B27E3872900017F77 /* MyIngredient.swift in Sources */,
 				AEEF4AED27EB071800DB4184 /* CafeJoinAlertViewController.swift in Sources */,
 				AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */,
@@ -2150,6 +2160,7 @@
 				AEA14CFE27CF76220009EEC6 /* UserAPI.swift in Sources */,
 				AEBC9ECA27C619FB0070399A /* OnboardingViewController.swift in Sources */,
 				AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */,
+				AEEF4B0E27EB70C300DB4184 /* BlockedFriendListViewController.swift in Sources */,
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
@@ -2213,6 +2224,7 @@
 				AE02409C27E43DD300017F77 /* UserSelectSectionModel.swift in Sources */,
 				AEB5AAEA27E090F90096376B /* NotBuyAlertViewController.swift in Sources */,
 				AEEF4B0327EB6B9A00DB4184 /* ReportNetworkService.swift in Sources */,
+				AEEF4B1227EB721400DB4184 /* BlockedFriendCell.swift in Sources */,
 				AE6FA49A27BDFD8E00FA2154 /* StoreUseCase.swift in Sources */,
 				AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */,
 				AE02405B27E3384200017F77 /* OurCafeFetchResponseDTO.swift in Sources */,

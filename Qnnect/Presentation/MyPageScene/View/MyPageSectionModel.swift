@@ -11,6 +11,7 @@ import RxDataSources
 enum MyPageItem: String, CaseIterable {
     //case setNoti
     //case notice
+    case reportManagement
     case instagram
     //case premium
     case privacyPolicy
@@ -24,6 +25,8 @@ enum MyPageItem: String, CaseIterable {
 //            return "알림 설정"
 //        case .notice:
 //            return "공지사항"
+        case .reportManagement:
+            return "신고/차단친구 관리"
         case .instagram:
             return "큐넥트 인스타그램"
 //        case .premium:

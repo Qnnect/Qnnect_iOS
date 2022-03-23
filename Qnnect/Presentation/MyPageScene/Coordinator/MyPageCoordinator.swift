@@ -15,6 +15,7 @@ protocol MyPageCoordinator: Coordinator {
     func showPersonalPolicy()
     func showTermsOfService()
     func showSentQuestionListScene()
+    func showBlockedFriendListScene()
     func pop()
     func showLoginScene()
 }
@@ -92,6 +93,18 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     
     func showSentQuestionListScene() {
         let vc = SentQuestionListViewController.create()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showBlockedFriendListScene() {
+        let reportRepository = DefaultReportRepository(reportNetworkService: ReportNetworkService())
+        let reportUseCase = DefaultReportUseCase(reportRepository: reportRepository)
+        let viewModel = BlockedFriendListViewModel(reportUseCase: reportUseCase)
+        let vc = BlockFriendListViewController.create(
+            with: viewModel,
+            self
+        )
         vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
