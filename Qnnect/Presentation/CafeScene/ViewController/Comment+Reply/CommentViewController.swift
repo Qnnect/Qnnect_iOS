@@ -49,6 +49,11 @@ final class CommentViewController: BaseViewController {
         $0.setImage(Constants.sendButtonImage, for: .normal)
     }
     
+    private let imageSlider = ImageSlideshow().then {
+        $0.contentScaleMode = .scaleAspectFill
+        //$0.pageIndicatorPosition = .init(horizontal: .center, vertical: .bottom)
+    }
+    
     private var viewModel: CommentViewModel!
     private var commentId: Int!
     weak var coordinator: CommentCoordinator?
@@ -164,6 +169,9 @@ final class CommentViewController: BaseViewController {
                 
                 models.append(CommentSectionModel.commentSection(title: "", items: [commentSectionItem]))
                 if comment.getImageURLs().count > 0 {
+                    self.imageSlider.setImageInputs(comment.getImageURLs().map {
+                        KingfisherSource(urlString: $0)!
+                    })
                     let attachImageSectionItems = comment.getImageURLs().map { CommentSectionItem.attachImageSectionItem(imageURL: $0) }
                     models.append( CommentSectionModel.attachImageSection(title: "", items: attachImageSectionItems))
                     if comment.getImageURLs().count == 1 {
@@ -363,6 +371,7 @@ private extension CommentViewController {
                     for: indexPath
                 ) as! CommentAttachImageCell
                 cell.update(with: imageURL)
+                cell.delegate = self
                 return cell
             case .replySectionItem(reply: let reply):
                 let cell = collectionView.dequeueReusableCell(
@@ -467,5 +476,11 @@ extension CommentViewController: ReplyMoreButtonDelegate {
 extension CommentViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CommentViewController: CommentAttachImageCellDelegate {
+    func didTapAttachImageCell(didTap cell: UICollectionViewCell) {
+        imageSlider.presentFullScreenController(from: self, completion: nil)
     }
 }

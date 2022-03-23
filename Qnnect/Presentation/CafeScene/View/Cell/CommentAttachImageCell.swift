@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 import Then
 
+@objc
+protocol CommentAttachImageCellDelegate: AnyObject {
+    func didTapAttachImageCell(didTap cell: UICollectionViewCell)
+}
 final class CommentAttachImageCell: UICollectionViewCell {
     static let identifier = "CommentAttachImageCell"
     
@@ -16,6 +20,13 @@ final class CommentAttachImageCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 16.0
         $0.clipsToBounds = true
+        $0.isUserInteractionEnabled = true
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        imageView.gestureRecognizers = nil
     }
     
     override init(frame: CGRect) {
@@ -27,6 +38,8 @@ final class CommentAttachImageCell: UICollectionViewCell {
         super.init(coder: coder)
         configureUI()
     }
+    
+    weak var delegate: CommentAttachImageCellDelegate?
     
     private func configureUI() {
         contentView.addSubview(imageView)
@@ -41,5 +54,12 @@ final class CommentAttachImageCell: UICollectionViewCell {
             with: URL(string: imageURL),
             placeholder: Constants.commentEmptyImage
         )
+        
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
+        imageView.addGestureRecognizer(tapgesture)
+    }
+    
+    @objc func didTapImageView() {
+        delegate?.didTapAttachImageCell(didTap: self)
     }
 }
