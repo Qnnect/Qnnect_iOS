@@ -78,6 +78,7 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.top.equalTo(mainLabel.snp.bottom).offset(20.0)
         }
+        inputTextField.delegate = self
         
         completionButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Constants.bottomSheetHorizontalMargin)
@@ -102,7 +103,7 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
         let output = viewModel.transform(from: input)
         
         guard let coordinator = coordinator else { return }
-
+        
         output.showCafeRoomScene
             .emit(onNext: coordinator.showGroupScene)
             .disposed(by: self.disposeBag)
@@ -127,4 +128,15 @@ extension JoinCafeBottomSheet {
     @objc func bottomBarMoveDown(_ notification: NSNotification) {
         self.bottomSheetView.transform = .identity
     }
+}
+
+extension JoinCafeBottomSheet: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.isEmpty {
+            return true
+        }
+        guard textField.text!.count < 8 else { return false }
+        return true
+    }
+    
 }
