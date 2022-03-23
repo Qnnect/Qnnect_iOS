@@ -24,6 +24,7 @@ final class DefaultStorageCoordinator: StorageCoordinator {
         let storeUseCase = DefaultStoreUseCase(storeRepository: storeRepository)
         let viewModel = IngredientStorageViewModel(storeUseCase: storeUseCase)
         let vc = IngredientStorageViewController.create(with: viewModel, self)
+        vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
 }

@@ -147,6 +147,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
             self,
             cafeId
         )
+        vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
     

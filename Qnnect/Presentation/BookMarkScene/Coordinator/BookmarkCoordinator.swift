@@ -53,6 +53,7 @@ final class DefaultBookmarkCoordinator: NSObject, BookmarkCoordinator {
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = BookmarkSearchViewModel(questionUseCase: questionUseCase)
         let vc = BookmarkSearchViewController.create(with: viewModel, self)
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(vc, animated: true)
     }
     
