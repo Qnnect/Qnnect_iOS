@@ -183,8 +183,11 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
                     self?.navigationController.popViewController(animated: true)
                 case .goMyQuestion:
                     self?.navigationController.popToRootViewController(animated: false)
-                    //TODO: 내가 보낸질문으로 이동으로 바까야 함
                     self?.navigationController.tabBarController?.selectedIndex = 3
+                    if let naviVC = self?.navigationController.tabBarController?.selectedViewController as? UINavigationController,
+                       let vc = naviVC.viewControllers.last as? MyPageViewController {
+                        vc.coordinator?.showSentQuestionListScene()
+                    }
                 }
             })
         }
