@@ -50,6 +50,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - ImageSlideshow (1.9.2):
+    - ImageSlideshow/Core (= 1.9.2)
+  - ImageSlideshow/Core (1.9.2)
   - KakaoSDKAuth (2.8.5):
     - KakaoSDKCommon (= 2.8.5)
   - KakaoSDKCommon (2.8.5):
@@ -152,6 +155,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Messaging
+  - ImageSlideshow (~> 1.9.0)
   - Kingfisher (~> 7.0)
   - Moya/RxSwift (~> 15.0)
   - NVActivityIndicatorView
@@ -177,6 +181,7 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - ImageSlideshow
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKLink
@@ -219,6 +224,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 02e248e8997f71fa8cc9d78e9d49ec1a701ba14a
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   KakaoSDKAuth: a9033bd3fbbb9a8c74dcd0dbd7705f7a2bc50ff1
   KakaoSDKCommon: b98d08cf838effdc9b82aca7dee3e50c048880ca
   KakaoSDKLink: 0c93cf5ad2bf73c4e2cb8db5820cd71a9c97feb8
@@ -251,6 +257,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TTGTagCollectionView: a2a8668c659b39e7a6ffd6590475ea53a7ae95f7
 
-PODFILE CHECKSUM: 070afb35639027d63a22b14b726e6f6e3b37def3
+PODFILE CHECKSUM: e6a6776ea9193a4de116d347fd436f07141d0540
 
 COCOAPODS: 1.11.2

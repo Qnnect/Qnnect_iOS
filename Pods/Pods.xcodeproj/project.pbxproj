@@ -17,6 +17,7 @@
 				7CEB99D627602E0C0E8F3804C5B2842D /* PBXTargetDependency */,
 			);
 			name = Firebase;
+			productName = Firebase;
 		};
 		9B1FDE8A94A6E7A622F5F70338F01152 /* RxKakaoSDK */ = {
 			isa = PBXAggregateTarget;
@@ -34,6 +35,7 @@
 				5AD2A48CCCDF25D25744BB0FFE18BE45 /* PBXTargetDependency */,
 			);
 			name = RxKakaoSDK;
+			productName = RxKakaoSDK;
 		};
 /* End PBXAggregateTarget section */
 
@@ -2049,7 +2051,7 @@
 		1B948F74062670BBB09387ED6AAC0430 /* NVActivityIndicatorAnimationBlank.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationBlank.swift; path = Sources/Base/Animations/NVActivityIndicatorAnimationBlank.swift; sourceTree = "<group>"; };
 		1BC811CB05DCB3D7E86E9F1A58663210 /* Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Sources/Differentiator/Utilities.swift; sourceTree = "<group>"; };
 		1C22C25909201D0F22069C8A8315AE10 /* FIRMessagingPersistentSyncMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FIRMessagingPersistentSyncMessage.m; path = FirebaseMessaging/Sources/FIRMessagingPersistentSyncMessage.m; sourceTree = "<group>"; };
-		1C4B9AA9E7B44919F60700FE125CE6EC /* Pods-Qnnect */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Qnnect"; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C4B9AA9E7B44919F60700FE125CE6EC /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C834B0D7C05F878375426EB11963AAB /* CompositeDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompositeDisposable.swift; path = RxSwift/Disposables/CompositeDisposable.swift; sourceTree = "<group>"; };
 		1D06438767C498C15D3D853D9B7635B6 /* FIRMessagingTokenManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FIRMessagingTokenManager.m; path = FirebaseMessaging/Sources/Token/FIRMessagingTokenManager.m; sourceTree = "<group>"; };
 		1D072577ADCA70468BC75CFEB4DAE909 /* RxTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxTarget.swift; path = RxCocoa/Common/RxTarget.swift; sourceTree = "<group>"; };
@@ -2209,7 +2211,7 @@
 		3A89BC2330EA4A3B004365656EB036A5 /* RxKakaoSDKTalk-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxKakaoSDKTalk-prefix.pch"; sourceTree = "<group>"; };
 		3AEFFE1E3214326550DBE24ECED27BF3 /* Generate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Generate.swift; path = RxSwift/Observables/Generate.swift; sourceTree = "<group>"; };
 		3AF8DC0588A02C31E064E489C3B94B5E /* SerialDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerialDisposable.swift; path = RxSwift/Disposables/SerialDisposable.swift; sourceTree = "<group>"; };
-		3B395E539E1C943609FB0DC832E1E9C9 /* me.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; name = me.nanopb.c; path = FirebaseMessaging/Sources/Protogen/nanopb/me.nanopb.c; sourceTree = "<group>"; };
+		3B395E539E1C943609FB0DC832E1E9C9 /* me.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = me.nanopb.c; path = FirebaseMessaging/Sources/Protogen/nanopb/me.nanopb.c; sourceTree = "<group>"; };
 		3B40BF715ED740E3256D1A0CFA07EAE0 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		3C519E1F15C15A8A369858930EFB25D6 /* GestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "GestureRecognizer+RxGesture.swift"; path = "Pod/Classes/GestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
 		3D0FF57171C0EAA08C495652705BE633 /* GULNetwork.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULNetwork.h; path = GoogleUtilities/Network/Public/GoogleUtilities/GULNetwork.h; sourceTree = "<group>"; };
@@ -2398,7 +2400,7 @@
 		5F55535A329AB6401433A850C152F6F2 /* KakaoSDKTalk-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KakaoSDKTalk-Info.plist"; sourceTree = "<group>"; };
 		5F7F2BECF1BD574B5DC09206C9F9FDFC /* FIRInstallationsStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FIRInstallationsStore.m; path = FirebaseInstallations/Source/Library/InstallationsStore/FIRInstallationsStore.m; sourceTree = "<group>"; };
 		5F8E7869A7BD15BE24A5B2388C7E0797 /* Queue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Queue.swift; path = Platform/DataStructures/Queue.swift; sourceTree = "<group>"; };
-		5FA9C212EA8079EEDCC16628E64DF52B /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_encode.c; sourceTree = "<group>"; };
+		5FA9C212EA8079EEDCC16628E64DF52B /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_encode.c; sourceTree = "<group>"; };
 		5FB983AD99EF9F1696C1FAF7DC9CF28C /* FIRInstallationsStoredItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FIRInstallationsStoredItem.m; path = FirebaseInstallations/Source/Library/InstallationsStore/FIRInstallationsStoredItem.m; sourceTree = "<group>"; };
 		605FC2234C348A573B552838BD12BC87 /* Runtime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Runtime.swift; path = Sources/Utility/Runtime.swift; sourceTree = "<group>"; };
 		60673B5FF5005E1DC6226AD5E19C5946 /* GULSecureCoding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULSecureCoding.m; path = GoogleUtilities/Environment/GULSecureCoding.m; sourceTree = "<group>"; };
@@ -2684,7 +2686,7 @@
 		9C745760639EC145034C0BFB1892546D /* Then.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Then.debug.xcconfig; sourceTree = "<group>"; };
 		9D0E56404A234C3736519ADFC2F9CF78 /* KakaoSDKNavi */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KakaoSDKNavi; path = KakaoSDKNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2629C93C8018B17317A06CA5300FB1 /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DAEF201BEC4F41B8E7BB47FC9FFAF7C /* Then.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Then.modulemap; sourceTree = "<group>"; };
 		9DBC3187187B4C5ABD53C971B79DA5CA /* ObservableConvertibleType+Driver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableConvertibleType+Driver.swift"; path = "RxCocoa/Traits/Driver/ObservableConvertibleType+Driver.swift"; sourceTree = "<group>"; };
 		9DD6ECD5980662FBA0F4314DAE606BED /* Do.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Do.swift; path = RxSwift/Observables/Do.swift; sourceTree = "<group>"; };
@@ -2750,7 +2752,7 @@
 		A86A1706F91F972258976D56B0205D67 /* KakaoSDKNavi-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KakaoSDKNavi-Info.plist"; sourceTree = "<group>"; };
 		A88A054C3A26FF2DCCADDFCFF6E57C2E /* AnimatableSectionModelType+ItemPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "AnimatableSectionModelType+ItemPath.swift"; path = "Sources/Differentiator/AnimatableSectionModelType+ItemPath.swift"; sourceTree = "<group>"; };
 		A8D0A853366CFC458D5A670F2B7B5014 /* Concat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Concat.swift; path = RxSwift/Observables/Concat.swift; sourceTree = "<group>"; };
-		A8EA324A600B3863F12119F7A84E1F0E /* cct.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; name = cct.nanopb.c; path = GoogleDataTransport/GDTCCTLibrary/Protogen/nanopb/cct.nanopb.c; sourceTree = "<group>"; };
+		A8EA324A600B3863F12119F7A84E1F0E /* cct.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = cct.nanopb.c; path = GoogleDataTransport/GDTCCTLibrary/Protogen/nanopb/cct.nanopb.c; sourceTree = "<group>"; };
 		A8EC9A11B27ECB83A603965E940D121D /* FIRMessagingTokenManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRMessagingTokenManager.h; path = FirebaseMessaging/Sources/Token/FIRMessagingTokenManager.h; sourceTree = "<group>"; };
 		A8F92C58BBB1B8D16F9CD3E615D9573E /* Moya-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Moya-Info.plist"; sourceTree = "<group>"; };
 		A908D893756B767F86FE8560E6C6F4B7 /* Debug.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debug.swift; path = RxSwift/Observables/Debug.swift; sourceTree = "<group>"; };
@@ -2856,7 +2858,7 @@
 		BD5800153E919F00B61ECE45AE1B85C3 /* FBLPromise+Do.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Do.h"; path = "Sources/FBLPromises/include/FBLPromise+Do.h"; sourceTree = "<group>"; };
 		BD693EB678DD9F45D48E05E5F6C52445 /* RxKakaoSDKUser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxKakaoSDKUser-prefix.pch"; sourceTree = "<group>"; };
 		BD99CE3C16D32549DF13227BE8C85FCC /* AsyncLock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncLock.swift; path = RxSwift/Concurrency/AsyncLock.swift; sourceTree = "<group>"; };
-		BDA26C7FDF7201FB2D42F66FAF3EEC65 /* firebasecore.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; name = firebasecore.nanopb.c; path = Firebase/CoreDiagnostics/FIRCDLibrary/Protogen/nanopb/firebasecore.nanopb.c; sourceTree = "<group>"; };
+		BDA26C7FDF7201FB2D42F66FAF3EEC65 /* firebasecore.nanopb.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = firebasecore.nanopb.c; path = Firebase/CoreDiagnostics/FIRCDLibrary/Protogen/nanopb/firebasecore.nanopb.c; sourceTree = "<group>"; };
 		BDB361CDE7B2EDFE6F56D5B09E9A60CF /* GULSceneDelegateSwizzler_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULSceneDelegateSwizzler_Private.h; path = GoogleUtilities/AppDelegateSwizzler/Internal/GULSceneDelegateSwizzler_Private.h; sourceTree = "<group>"; };
 		BDE40BBAE805B848A75E405CFF9DF29A /* MemoryStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryStorage.swift; path = Sources/Cache/MemoryStorage.swift; sourceTree = "<group>"; };
 		BE1FE3BBE980D61B9B38868C7F222F07 /* GoogleDataTransport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleDataTransport.release.xcconfig; sourceTree = "<group>"; };
@@ -2886,7 +2888,7 @@
 		C192F6B0FF3D919C4A7AF069F9E223D6 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Image/Filter.swift; sourceTree = "<group>"; };
 		C1E0F65E526FA5D78447C8061616DC4C /* AuthenticationChallengeResponsable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationChallengeResponsable.swift; path = Sources/Networking/AuthenticationChallengeResponsable.swift; sourceTree = "<group>"; };
 		C1FDCD866BC26B351E2F7F52209DB492 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NVActivityIndicatorAnimationTriangleSkewSpin.swift; path = Sources/Base/Animations/NVActivityIndicatorAnimationTriangleSkewSpin.swift; sourceTree = "<group>"; };
-		C2182ECE89F2B1415541FF6423402E1A /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_decode.c; sourceTree = "<group>"; };
+		C2182ECE89F2B1415541FF6423402E1A /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_decode.c; sourceTree = "<group>"; };
 		C248D5FE3202F262934B75164867A85D /* FIRAppInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRAppInternal.h; path = FirebaseCore/Sources/Private/FIRAppInternal.h; sourceTree = "<group>"; };
 		C2A0296B6571F4F1C2D5483E297B1CB2 /* NVActivityIndicatorView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NVActivityIndicatorView-dummy.m"; sourceTree = "<group>"; };
 		C2A22428E026D72579C1046AE0753666 /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
@@ -3047,7 +3049,7 @@
 		E2B63D462DB7F827C4B11FD51E4F8E2D /* FirebaseCore */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FirebaseCore; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E342778CCAA009C31B481D64A7648075 /* GoogleUtilities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleUtilities.release.xcconfig; sourceTree = "<group>"; };
 		E3787221A0F015024B3C20A3059143D3 /* Differentiator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Differentiator-dummy.m"; sourceTree = "<group>"; };
-		E3A42D3452034C1CDD8F28D8535D8ADB /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_common.c; sourceTree = "<group>"; };
+		E3A42D3452034C1CDD8F28D8535D8ADB /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_common.c; sourceTree = "<group>"; };
 		E3E3541D2205F8A03BFEF693E9393F1C /* FBLPromise+Do.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Do.m"; path = "Sources/FBLPromises/FBLPromise+Do.m"; sourceTree = "<group>"; };
 		E3FA6D3805F96273C3E6CDDB624772E0 /* KakaoSDKTalk-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KakaoSDKTalk-umbrella.h"; sourceTree = "<group>"; };
 		E451F748AAD2F3D1090D2C8F1CA5A3BE /* WKInterfaceImage+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "WKInterfaceImage+Kingfisher.swift"; path = "Sources/Extensions/WKInterfaceImage+Kingfisher.swift"; sourceTree = "<group>"; };
@@ -3551,7 +3553,6 @@
 				35866C6E3B6425C9CB23B4AC2874049E /* Then.swift */,
 				1D6304A47DA7B6FBA3094FDECBC36D8E /* Support Files */,
 			);
-			name = Then;
 			path = Then;
 			sourceTree = "<group>";
 		};
@@ -3617,7 +3618,6 @@
 				8598C2109338802BE4AD877DE66F684D /* FIRVersion.m */,
 				3C0C621724D115E2AB3318B1A25F67DD /* Support Files */,
 			);
-			name = FirebaseCore;
 			path = FirebaseCore;
 			sourceTree = "<group>";
 		};
@@ -3629,7 +3629,6 @@
 				E77086CE392CD13ED622AA534226B8D2 /* NaviModels.swift */,
 				F6F53D3EEFCEE109AAC45309F40EAAE9 /* Support Files */,
 			);
-			name = KakaoSDKNavi;
 			path = KakaoSDKNavi;
 			sourceTree = "<group>";
 		};
@@ -3668,7 +3667,6 @@
 				ABEC7540847C34021CCC986BBA39BB57 /* firebasecore.nanopb.h */,
 				49AB41FAF0E022FB6760443A8B7447F4 /* Support Files */,
 			);
-			name = FirebaseCoreDiagnostics;
 			path = FirebaseCoreDiagnostics;
 			sourceTree = "<group>";
 		};
@@ -3909,7 +3907,6 @@
 				E451F748AAD2F3D1090D2C8F1CA5A3BE /* WKInterfaceImage+Kingfisher.swift */,
 				A6887D4178D973A472A0A0E49444E677 /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
@@ -3928,7 +3925,6 @@
 				264C86A5504023B134245F96D0A560F0 /* TokenManager.swift */,
 				BB8E0E677E1081C5A8C0104C84DEBFB4 /* Support Files */,
 			);
-			name = KakaoSDKAuth;
 			path = KakaoSDKAuth;
 			sourceTree = "<group>";
 		};
@@ -3956,7 +3952,6 @@
 				B2479AA6A0CF26756D87DB9CABDE8DA7 /* RxKakaoSDKAuth.h */,
 				94DFD9C61728E5685E6455F4C05BB8E1 /* Support Files */,
 			);
-			name = RxKakaoSDKAuth;
 			path = RxKakaoSDKAuth;
 			sourceTree = "<group>";
 		};
@@ -3967,7 +3962,6 @@
 				0E43E4A7D53F118ADC2C96AE6EF2595A /* UIViewController+Rx.swift */,
 				5329800DB681716A62BA9EC81A3A7C73 /* Support Files */,
 			);
-			name = RxAppState;
 			path = RxAppState;
 			sourceTree = "<group>";
 		};
@@ -4101,7 +4095,6 @@
 				0AFAB0B6D1B0A10A8702701990FE1BFF /* WKWebView+Rx.swift */,
 				9F8D5A00DED5F50267820A4E80048AE8 /* Support Files */,
 			);
-			name = RxCocoa;
 			path = RxCocoa;
 			sourceTree = "<group>";
 		};
@@ -4116,7 +4109,6 @@
 				AD5DB2DA1A9E261FC0980736464C840C /* TalkProfile.swift */,
 				2584F8C19D9960306E976B7CFD3418D1 /* Support Files */,
 			);
-			name = KakaoSDKTalk;
 			path = KakaoSDKTalk;
 			sourceTree = "<group>";
 		};
@@ -4127,7 +4119,6 @@
 				6ACC56CB1E010670D0D59FB9630BA705 /* Network */,
 				185FCC2BA30EA85A6C89AEB2D88529CB /* Support Files */,
 			);
-			name = RxKakaoSDKCommon;
 			path = RxKakaoSDKCommon;
 			sourceTree = "<group>";
 		};
@@ -4219,7 +4210,6 @@
 				42506C63457B2EEAB13C5D71C3BB2C27 /* Toast.swift */,
 				2922D01B9BE43586A847E83DA981CB8A /* Support Files */,
 			);
-			name = "Toast-Swift";
 			path = "Toast-Swift";
 			sourceTree = "<group>";
 		};
@@ -4261,7 +4251,6 @@
 				9F2632875F6015F83384C657E05ED5BA /* View+RxGesture.swift */,
 				69ECF61409C27C17975ED0E4FAADBC87 /* Support Files */,
 			);
-			name = RxGesture;
 			path = RxGesture;
 			sourceTree = "<group>";
 		};
@@ -4297,7 +4286,6 @@
 				1BC811CB05DCB3D7E86E9F1A58663210 /* Utilities.swift */,
 				CFA1A5C81F787953C3CA978002F14B47 /* Support Files */,
 			);
-			name = Differentiator;
 			path = Differentiator;
 			sourceTree = "<group>";
 		};
@@ -4347,7 +4335,6 @@
 				B477C3A840FA6FCC2B8EEA9A1E67FE87 /* UserShippingAddresses.swift */,
 				388CDE3DC51BCEDAD05A160EDAF7D9CA /* Support Files */,
 			);
-			name = KakaoSDKUser;
 			path = KakaoSDKUser;
 			sourceTree = "<group>";
 		};
@@ -4414,7 +4401,6 @@
 				2C5D51FE144F9E9CCA0CA38A3F86809A /* StoryProfile.swift */,
 				03765FDC9E3CAA7D35EBB28ABCBFC8D8 /* Support Files */,
 			);
-			name = KakaoSDKStory;
 			path = KakaoSDKStory;
 			sourceTree = "<group>";
 		};
@@ -4552,7 +4538,6 @@
 				70B22938BD13B57D846AD696148CD175 /* NSError+FIRMessaging.m */,
 				697AD057ADD9D547DC8CE92E3D918D25 /* Support Files */,
 			);
-			name = FirebaseMessaging;
 			path = FirebaseMessaging;
 			sourceTree = "<group>";
 		};
@@ -4568,7 +4553,6 @@
 				C8FDFEE811E5AE406205D4E44A2DAB4D /* Support Files */,
 				F9F869526FD728D5BB8A161B2CDA60A9 /* UserDefaults */,
 			);
-			name = GoogleUtilities;
 			path = GoogleUtilities;
 			sourceTree = "<group>";
 		};
@@ -4615,7 +4599,6 @@
 				407274A8C9AA836720136096FAA546CD /* CoreOnly */,
 				EB849EEFD05C62AE86A7114103B678EE /* Support Files */,
 			);
-			name = Firebase;
 			path = Firebase;
 			sourceTree = "<group>";
 		};
@@ -4664,7 +4647,6 @@
 				1B29FB6E2E3C44B06E75F895328F6D55 /* Network */,
 				B37B43E528B60069A9BBC7F87255CD56 /* Support Files */,
 			);
-			name = KakaoSDKCommon;
 			path = KakaoSDKCommon;
 			sourceTree = "<group>";
 		};
@@ -4700,7 +4682,6 @@
 				AE150F7EB8392AAA35A73F9ABA8DA1F6 /* StoryApi+Rx.swift */,
 				C71A72CDF81E04A7F5230805089BE685 /* Support Files */,
 			);
-			name = RxKakaoSDKStory;
 			path = RxKakaoSDKStory;
 			sourceTree = "<group>";
 		};
@@ -4745,7 +4726,6 @@
 				145539041167EDC82D9C7533E9AD89A7 /* UILayoutSupport+Extensions.swift */,
 				F00178E0E4E0781E7C60006033FDC045 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -4756,7 +4736,6 @@
 				E8276937ABAFC4E4E666CA41FD8412C4 /* TalkApi+Rx.swift */,
 				175038AFACE90B1A8DF7C9DDAB61D25D /* Support Files */,
 			);
-			name = RxKakaoSDKTalk;
 			path = RxKakaoSDKTalk;
 			sourceTree = "<group>";
 		};
@@ -4774,7 +4753,6 @@
 				0039850DB609BB2ED6584CD433D85733 /* encode */,
 				E10E06B54FB3173E7CB7B11946D47C7A /* Support Files */,
 			);
-			name = nanopb;
 			path = nanopb;
 			sourceTree = "<group>";
 		};
@@ -4834,7 +4812,6 @@
 				E221E646A3D275B93C184290F2358DE9 /* Validation.swift */,
 				41AD5D6813215A5C8D22F282C94E9EE5 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -5003,7 +4980,6 @@
 				7EAFC507C078EF49E3FCE39EDBB45D43 /* Zip+Collection.swift */,
 				E567A6324CE04A23F318B401D02A1006 /* Support Files */,
 			);
-			name = RxSwift;
 			path = RxSwift;
 			sourceTree = "<group>";
 		};
@@ -5030,7 +5006,7 @@
 				3756A9BBE41ABEE8DCBF5BCA6972C4DA /* Moya */,
 				06FC5C9CF96D60C50FCD47D339C91951 /* nanopb */,
 				A1B9F27862201CD82B398E0B35B14128 /* NVActivityIndicatorView */,
-				1C4B9AA9E7B44919F60700FE125CE6EC /* Pods-Qnnect */,
+				1C4B9AA9E7B44919F60700FE125CE6EC /* Pods_Qnnect.framework */,
 				3347A1AB6546F0A3977529B8F199DC41 /* PromisesObjC */,
 				82F1475AA0F9C33F7EA4A1459305D2AB /* RxAlamofire */,
 				ED208E682DFD1434E270075258C18E51 /* RxAppState */,
@@ -5123,7 +5099,6 @@
 				2C8D96E1A3C369193D9366A9599FE152 /* FIROptionsInternal.h */,
 				7EC074F0D7F3627CAF6DB4A2AB2E4872 /* Support Files */,
 			);
-			name = FirebaseInstallations;
 			path = FirebaseInstallations;
 			sourceTree = "<group>";
 		};
@@ -5148,7 +5123,6 @@
 				6D32105B92E5B379572A14772E1A7A6A /* Base */,
 				0040728834AD03CE7737BE8F4E48F333 /* Support Files */,
 			);
-			name = NVActivityIndicatorView;
 			path = NVActivityIndicatorView;
 			sourceTree = "<group>";
 		};
@@ -5159,7 +5133,6 @@
 				E4F7247AFC4E45E58CFBC1D324EA8B8A /* TemplateModels.swift */,
 				246615E227FB0BC26EC95584EAF0FFE2 /* Support Files */,
 			);
-			name = KakaoSDKTemplate;
 			path = KakaoSDKTemplate;
 			sourceTree = "<group>";
 		};
@@ -5184,7 +5157,6 @@
 				62183712B8D7A8DF799BCF8C1D8F7CFA /* ViewTransition.swift */,
 				EC3110667A6F415DDC38D650778947BA /* Support Files */,
 			);
-			name = RxDataSources;
 			path = RxDataSources;
 			sourceTree = "<group>";
 		};
@@ -5305,7 +5277,6 @@
 				EC4ED24E0997D517956B12B4B6E745E7 /* GoogleDataTransport.h */,
 				563D899B54ED75E6AFBD0DFD7C3AD6F9 /* Support Files */,
 			);
-			name = GoogleDataTransport;
 			path = GoogleDataTransport;
 			sourceTree = "<group>";
 		};
@@ -5329,7 +5300,6 @@
 			children = (
 				55A12D9457318D8632308976F7FDF2B1 /* Support Files */,
 			);
-			name = RxKakaoSDK;
 			path = RxKakaoSDK;
 			sourceTree = "<group>";
 		};
@@ -5369,7 +5339,6 @@
 				BA9619CC4CA5E383B59D6E23719F8FAB /* RxKakaoSDKLink.h */,
 				1A2120FB73BFC0B4418D0773D8AED5A9 /* Support Files */,
 			);
-			name = RxKakaoSDKLink;
 			path = RxKakaoSDKLink;
 			sourceTree = "<group>";
 		};
@@ -5409,7 +5378,6 @@
 				7273E493E8A36A54B09229F65059637D /* UserApi+Rx.swift */,
 				764327B007F5C5E517732364DCE9943B /* Support Files */,
 			);
-			name = RxKakaoSDKUser;
 			path = RxKakaoSDKUser;
 			sourceTree = "<group>";
 		};
@@ -5438,7 +5406,6 @@
 				E0546EB144C030D54015C287D7DB11EC /* Utils.swift */,
 				E0056EDFDF2CBB1FEBC131F1D086AFDB /* Support Files */,
 			);
-			name = RxRelay;
 			path = RxRelay;
 			sourceTree = "<group>";
 		};
@@ -5448,7 +5415,6 @@
 				25D9A7EF767D57B0D263CF2366879E0F /* Core */,
 				FC6D8F99B64A09C6D4DA2E165D523CCE /* Support Files */,
 			);
-			name = RxAlamofire;
 			path = RxAlamofire;
 			sourceTree = "<group>";
 		};
@@ -5523,7 +5489,6 @@
 				0D6A74F828E80E49C2C035A1C396245C /* FBLPromises.h */,
 				7D956787F9A948CDAFD4362861DF374D /* Support Files */,
 			);
-			name = PromisesObjC;
 			path = PromisesObjC;
 			sourceTree = "<group>";
 		};
@@ -5604,7 +5569,6 @@
 				7E63C735AEB68E208C0AD9493C519D7B /* RxSwift */,
 				CB5273F7E5DB82B9A937974BAA91B973 /* Support Files */,
 			);
-			name = Moya;
 			path = Moya;
 			sourceTree = "<group>";
 		};
@@ -5633,7 +5597,6 @@
 				2DFE9E4E053EFC9E46A469A2C3299B34 /* ValidationResult.swift */,
 				1006CB100B6F2B244AD6BE733893158B /* Support Files */,
 			);
-			name = KakaoSDKLink;
 			path = KakaoSDKLink;
 			sourceTree = "<group>";
 		};
@@ -5665,7 +5628,6 @@
 				DF3C239197AA63DB2CFECDBA147410D0 /* TTGTextTagStyle.m */,
 				66EDA00F8ECC630431F59469DE79CA10 /* Support Files */,
 			);
-			name = TTGTagCollectionView;
 			path = TTGTagCollectionView;
 			sourceTree = "<group>";
 		};
@@ -6674,7 +6636,7 @@
 			);
 			name = "Pods-Qnnect";
 			productName = Pods_Qnnect;
-			productReference = 1C4B9AA9E7B44919F60700FE125CE6EC /* Pods-Qnnect */;
+			productReference = 1C4B9AA9E7B44919F60700FE125CE6EC /* Pods_Qnnect.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7AD0C6DCDC9CEC8A3C7C10C7FEE07BE6 /* RxCocoa */ = {
