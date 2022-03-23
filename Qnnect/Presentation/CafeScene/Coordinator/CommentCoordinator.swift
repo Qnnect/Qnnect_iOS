@@ -14,6 +14,7 @@ protocol CommentCoordinator: Coordinator {
     func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
     func showWriteCommentScene(_ question: Question, _ user: User?, _ comment: Comment)
+    func showReportBottomSheet()
     func dismissCommentMoreMenu(_ type: CommentMoreMenuItem)
     func dismissReplyMoreMenu()
     func pop()
@@ -107,6 +108,13 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         dismissCommentMoreMenu(.modify)
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
         coordinator.start(question, user, comment)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+    }
+    
+    func showReportBottomSheet() {
+        let coordinator = DefaultReportCoordinator(navigationController: navigationController)
+        coordinator.start()
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }

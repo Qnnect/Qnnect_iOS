@@ -121,6 +121,8 @@ final class CommentViewController: BaseViewController {
     override func bind() {
         super.bind()
         
+        let didTapProfile = PublishSubject<User>()
+        
         let input = CommentViewModel.Input(
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             commentId: Observable.just(commentId),
@@ -137,12 +139,13 @@ final class CommentViewController: BaseViewController {
             didTapReplyMoreButton: rx.methodInvoked(#selector(moreButton(didTap:_:)))
                 .map {
                     return $0[1] as! Int
-                }
+                },
+            didTapProfile: didTapProfile.asObservable()
         )
         
         let output = viewModel.transform(from: input)
         
-        let dataSource = createDataSource()
+        let dataSource = createDataSource(didTapProfile: didTapProfile.asObserver())
         
         Observable.zip(
             output.comment.asObservable(),
@@ -198,6 +201,10 @@ final class CommentViewController: BaseViewController {
         
         output.showReplyMoreMenuBottomSheet
             .emit(onNext: coordinator.showReplyMoreMenuBottomSheet)
+            .disposed(by: self.disposeBag)
+        
+        output.showReportBottomSheet
+            .emit(onNext: coordinator.showReportBottomSheet)
             .disposed(by: self.disposeBag)
     }
 }
@@ -335,7 +342,7 @@ private extension CommentViewController {
         return section
     }
     
-    func createDataSource() -> RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
+    func createDataSource(didTapProfile: AnyObserver<User>) -> RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
         return RxCollectionViewSectionedReloadDataSource<CommentSectionModel> {
             dataSource, collectionView, indexPath, item in
             print(dataSource.sectionModels)
@@ -346,6 +353,7 @@ private extension CommentViewController {
                     for: indexPath
                 ) as! CommentCell
                 cell.update(with: comment)
+                cell.bind(with: didTapProfile)
                 return cell
             case .attachImageSectionItem(imageURL: let imageURL):
                 let cell = collectionView.dequeueReusableCell(
@@ -361,6 +369,7 @@ private extension CommentViewController {
                 ) as! ReplyCell
                 cell.update(with: reply)
                 cell.delegate = self
+                cell.bind(with: didTapProfile)
                 return cell
             case .createAtSectionItem(date: let date):
                 let cell = collectionView.dequeueReusableCell(

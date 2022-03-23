@@ -20,7 +20,6 @@ final class ReplyCell: UICollectionViewCell {
     static let identifier = "ReplyCell"
     
     weak var delegate: ReplyMoreButtonDelegate?
-    private let disposeBag = DisposeBag()
     
     private let arrowImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -73,9 +72,12 @@ final class ReplyCell: UICollectionViewCell {
         configureUI()
     }
     
+    private var disposeBag = DisposeBag()
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         reply = nil
+        disposeBag = DisposeBag()
     }
     
     private func configureUI() {
@@ -151,6 +153,26 @@ final class ReplyCell: UICollectionViewCell {
         )
         dateLabel.text = reply.createdAt
         moreButton.isHidden = !reply.writer
+    }
+    
+    func bind(with profileObserver: AnyObserver<User>) {
+        
+        Observable.merge(
+            writerProfileImageView.rx.tapGesture()
+                .when(.recognized).mapToVoid(),
+            writerNameLabel.rx.tapGesture()
+                .when(.recognized).mapToVoid()
+        ).filter {
+            [weak self] user in
+            if let writer = self?.reply?.writer, writer {
+                return false
+            }
+            return true
+        }.compactMap {
+            [weak self] _ in
+            self?.reply?.writerInfo
+        }.subscribe(profileObserver)
+            .disposed(by: self.disposeBag)
         
         moreButton.rx.tap
             .subscribe(onNext: {
@@ -159,5 +181,4 @@ final class ReplyCell: UICollectionViewCell {
                 self.delegate?.moreButton(didTap: self, id)
             }).disposed(by: self.disposeBag)
     }
-    
 }

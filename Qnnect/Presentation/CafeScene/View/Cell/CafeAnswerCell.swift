@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
+@objc
+protocol CafeAnswerCellDelegate: AnyObject {
+    func didTapProfile()
+}
 final class CafeAnswerCell: UITableViewCell {
     static let identifier = "CafeAnswerCell"
     
@@ -45,6 +50,9 @@ final class CafeAnswerCell: UITableViewCell {
         $0.textColor = .orange
     }
     
+    weak var delegate: CafeAnswerCellDelegate?
+    
+    private var disposeBag = DisposeBag()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -57,14 +65,17 @@ final class CafeAnswerCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: Constants.answerCellSpacing, right: 0))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        disposeBag = DisposeBag()
         attachedImageView.image = nil
+        comment = nil
+        
     }
     
     private func configureUI() {
@@ -119,7 +130,12 @@ final class CafeAnswerCell: UITableViewCell {
         }
     }
     
+    private var comment: Comment?
+    
     func update(with comment: Comment) {
+        
+        self.comment = comment
+        
         if let url = comment.writerInfo.profileImage {
             self.writerProfileImageView.kf.setImage(
                 with: URL(string: url),
@@ -149,7 +165,29 @@ final class CafeAnswerCell: UITableViewCell {
                 make.width.height.equalTo(14.0)
                 make.top.equalTo(contentLabel.snp.bottom).offset(8.0)
             }
-
+            
         }
     }
+    
+    func bind(with profileObserver: AnyObserver<User>) {
+        Observable.merge(
+            writerProfileImageView.rx.tapGesture()
+                .when(.recognized).mapToVoid(),
+            writerNameLabel.rx.tapGesture()
+                .when(.recognized).mapToVoid()
+        ).filter {
+            [weak self] _ in
+            if let writer = self?.comment?.writer, writer {
+                return false
+            }
+            return true
+        }.compactMap {
+            [weak self] _ in
+            self?.comment?.writerInfo
+        }.debug()
+            .subscribe(profileObserver)
+            .disposed(by: self.disposeBag)
+    }
+    
+    
 }

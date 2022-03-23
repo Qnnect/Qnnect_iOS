@@ -90,7 +90,9 @@ final class CafeQuestionViewController: BaseViewController {
         self.mainTableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
-        let dataSource = self.createDataSource()
+        let didTapProfile = PublishSubject<User>()
+        
+        let dataSource = self.createDataSource(didTapProfile: didTapProfile.asObserver())
         
         dataSource.animationConfiguration = .init(
             insertAnimation: .left,
@@ -132,7 +134,8 @@ final class CafeQuestionViewController: BaseViewController {
                 .compactMap{ $0[0] as? String }
                 .filter { $0 == CafeAnswerQuestionCell.delete }
                 .mapToVoid(),
-            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton
+            didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton,
+            didTapProfile: didTapProfile.asObservable()
         )
         
         
@@ -213,6 +216,11 @@ final class CafeQuestionViewController: BaseViewController {
         output.showModeifyQuestionScene
             .emit(onNext: coordinator.showModifyQuestionScene(_:))
             .disposed(by: self.disposeBag)
+        
+        output.showReportBottomSheet
+            .emit(onNext: coordinator.showReportMenuBottomSheet)
+            .disposed(by: self.disposeBag)
+    
     }
 }
 
@@ -226,7 +234,7 @@ extension CafeQuestionViewController: UITableViewDelegate {
 }
 
 private extension CafeQuestionViewController {
-    func createDataSource() -> RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
+    func createDataSource(didTapProfile: AnyObserver<User>) -> RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
         return RxTableViewSectionedAnimatedDataSource<CafeAnswerSectionModel> {
             datasource, tableView, indexPath, item in
             
@@ -252,6 +260,9 @@ private extension CafeQuestionViewController {
                     for: indexPath
                 ) as! CafeAnswerCell
                 cell.update(with: comment)
+                if indexPath.row != 0 {
+                    cell.bind(with: didTapProfile)
+                }
                 return cell
             }
         }

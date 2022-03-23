@@ -23,6 +23,7 @@ final class CafeQuestionViewModel: ViewModelType {
         let didTapModifyButton: Observable<Void>
         let didTapDeleteButton: Observable<Void>
         let didTapDeleteAlertOkButton: Observable<Void>
+        let didTapProfile: Observable<User>
     }
     
     struct Output {
@@ -40,6 +41,7 @@ final class CafeQuestionViewModel: ViewModelType {
         let showDeleteAlertView: Signal<Void>
         let delete: Signal<Void>
         let showModeifyQuestionScene: Signal<Question>
+        let showReportBottomSheet: Signal<Void>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -132,6 +134,9 @@ final class CafeQuestionViewModel: ViewModelType {
         let showModifyQuestionScene = input.didTapModifyButton
             .withLatestFrom(fetchedQuestionWithComments.map { $0.question} )
         
+        let showReportBottomSheet = input.didTapProfile
+            .mapToVoid()
+        
         return Output(
             showWriteCommentScene: showWriteCommentScene.asSignal(onErrorSignalWith: .empty()),
             scrap: Observable.merge(
@@ -148,7 +153,8 @@ final class CafeQuestionViewModel: ViewModelType {
             liked: liked.asDriver(onErrorDriveWith: .empty()),
             showDeleteAlertView: showDeleteAlertView.asSignal(onErrorSignalWith: .empty()),
             delete: deleteQuestion.asSignal(onErrorSignalWith: .empty()),
-            showModeifyQuestionScene: showModifyQuestionScene.asSignal(onErrorSignalWith: .empty())
+            showModeifyQuestionScene: showModifyQuestionScene.asSignal(onErrorSignalWith: .empty()),
+            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

@@ -20,6 +20,7 @@ final class CommentViewModel: ViewModelType {
         let didTapCommentMoreButton: Observable<Void>
         /// Int: replyId
         let didTapReplyMoreButton: Observable<Int>
+        let didTapProfile: Observable<User>
     }
     
     struct Output {
@@ -29,6 +30,7 @@ final class CommentViewModel: ViewModelType {
         /// Int: CommentId
         let showCommentMoreMenuBottomSheet: Signal<(question: Question, comment: Comment)>
         let showReplyMoreMenuBottomSheet: Signal<(commentId: Int, reply: Reply)>
+        let showReportBottomSheet: Signal<Void>
     }
     
     private let commentUseCase: CommentUseCase
@@ -75,12 +77,16 @@ final class CommentViewModel: ViewModelType {
             }
             .withLatestFrom(input.commentId,resultSelector: { (commentId: $1, reply: $0) })
         
+        let showReportBottomSheet = input.didTapProfile
+            .mapToVoid()
+        
         return Output(
             comment: fetchedCommentWithReplies.map { $0.comment}.asDriver(onErrorDriveWith: .empty()),
             replies: fetchedCommentWithReplies.map { $0.replies}.asDriver(onErrorJustReturn: []),
             isWriter: fetchedCommentWithReplies.compactMap { $0.comment.writer }.asDriver(onErrorDriveWith: .empty()),
             showCommentMoreMenuBottomSheet: showCommentMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            showReplyMoreMenuBottomSheet: showReplyMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showReplyMoreMenuBottomSheet: showReplyMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty()),
+            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

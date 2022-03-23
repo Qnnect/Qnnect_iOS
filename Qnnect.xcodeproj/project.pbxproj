@@ -328,6 +328,9 @@
 		AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */; };
 		AEEF4AEB27EB04F000DB4184 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */; };
 		AEEF4AED27EB071800DB4184 /* CafeJoinAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEC27EB071800DB4184 /* CafeJoinAlertViewController.swift */; };
+		AEEF4AEF27EB190800DB4184 /* ReportBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEE27EB190800DB4184 /* ReportBottomSheet.swift */; };
+		AEEF4AF127EB19B500DB4184 /* ReportBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */; };
+		AEEF4AF327EB2B2300DB4184 /* ReportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -662,6 +665,9 @@
 		AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSectionHeaderView.swift; sourceTree = "<group>"; };
 		AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		AEEF4AEC27EB071800DB4184 /* CafeJoinAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeJoinAlertViewController.swift; sourceTree = "<group>"; };
+		AEEF4AEE27EB190800DB4184 /* ReportBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBottomSheet.swift; sourceTree = "<group>"; };
+		AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBottomSheetViewModel.swift; sourceTree = "<group>"; };
+		AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCoordinator.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -1040,6 +1046,7 @@
 		AE538ED627C4688C00670FAF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF4AF927EB2BDC00DB4184 /* Report */,
 				AE02405527E331C600017F77 /* OurCafe */,
 				AEB5AB1827E1B67D0096376B /* Common */,
 				AEB5AB1727E1B66C0096376B /* Comment+Reply */,
@@ -1058,6 +1065,7 @@
 				AEB5AB3927E22FAC0096376B /* WriteCommentCoordinator.swift */,
 				AE02405327E3316200017F77 /* OurCafeCoordinator.swift */,
 				AE33A4F427E726CF000130B3 /* SelectDrinkCoordinator.swift */,
+				AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1065,6 +1073,7 @@
 		AE538ED827C4689400670FAF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AEEF4AF827EB2BD200DB4184 /* Report */,
 				AE02404927E31E7500017F77 /* OutCafe */,
 				AEB5AB1227E1B6260096376B /* Room */,
 				AEB5AB0F27E1B5DB0096376B /* Question+Comment(Answer) */,
@@ -1761,6 +1770,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AEEF4AF827EB2BD200DB4184 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF4AEE27EB190800DB4184 /* ReportBottomSheet.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		AEEF4AF927EB2BDC00DB4184 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF4AF027EB19B500DB4184 /* ReportBottomSheetViewModel.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
 		AEF294AD27B01864004EFE4D /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -1993,6 +2018,7 @@
 				AE02409E27E461AE00017F77 /* LeaveCafeAlertView.swift in Sources */,
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
+				AEEF4AEF27EB190800DB4184 /* ReportBottomSheet.swift in Sources */,
 				AE33A4FF27E79B81000130B3 /* InviteCafeViewModel.swift in Sources */,
 				AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
@@ -2105,6 +2131,7 @@
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AEB5AB3627E212D00096376B /* SearchCafeQuestionViewController.swift in Sources */,
 				AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */,
+				AEEF4AF127EB19B500DB4184 /* ReportBottomSheetViewModel.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */,
@@ -2205,6 +2232,7 @@
 				AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
+				AEEF4AF327EB2B2300DB4184 /* ReportCoordinator.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,
 				AECC133127BA341B006866FC /* Rx+UIButton.swift in Sources */,
 				AEB5AACF27DF39320096376B /* DefaultStoreRepository.swift in Sources */,
@@ -2361,7 +2389,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HWBJNMY98D;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";
@@ -2397,7 +2425,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HWBJNMY98D;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";

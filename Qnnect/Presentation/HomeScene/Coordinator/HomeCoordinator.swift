@@ -112,6 +112,7 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         vc.modalPresentationStyle = .overCurrentContext
         navigationController.presentedViewController?.dismiss(animated: false, completion: {
             [weak self] in
+            self?.navigationController.tabBarController?.tabBar.isHidden = false
             self?.navigationController.present(vc, animated: true, completion: nil)
         })
     }

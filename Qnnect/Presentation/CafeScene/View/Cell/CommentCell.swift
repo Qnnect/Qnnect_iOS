@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class CommentCell: UICollectionViewCell {
     static let identifier = "CommentCell"
@@ -30,6 +31,14 @@ final class CommentCell: UICollectionViewCell {
         $0.sizeToFit()
     }
     
+    private var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        comment = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -40,8 +49,11 @@ final class CommentCell: UICollectionViewCell {
         configureUI()
     }
     
+    private var comment: Comment?
+ 
+    
     private func configureUI() {
-        
+
         [
             writerProfileImageView,
             writerNameLabel,
@@ -70,6 +82,7 @@ final class CommentCell: UICollectionViewCell {
     }
     
     func update(with comment: Comment) {
+        self.comment = comment
         writerProfileImageView.kf.setImage(
             with: URL(string: comment.writerInfo.profileImage ?? ""),
             placeholder: Constants.profileDefaultImage
@@ -82,5 +95,24 @@ final class CommentCell: UICollectionViewCell {
             string: comment.content,
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
+    }
+    func bind(with profileObserver: AnyObserver<User>) {
+        Observable.merge(
+            writerProfileImageView.rx.tapGesture()
+                .when(.recognized).mapToVoid(),
+            writerNameLabel.rx.tapGesture()
+                .when(.recognized).mapToVoid()
+        ).filter {
+            [weak self] user in
+            if let writer = self?.comment?.writer, writer {
+                return false
+            }
+            return true
+        }.compactMap {
+            [weak self] _ in
+            self?.comment?.writerInfo
+        }
+            .subscribe(profileObserver)
+            .disposed(by: self.disposeBag)
     }
 }
