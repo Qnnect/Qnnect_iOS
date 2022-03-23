@@ -15,7 +15,7 @@ protocol WriteCommentCoordinator: Coordinator {
 final class DefaultWriteCommentCoordinator: WriteCommentCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

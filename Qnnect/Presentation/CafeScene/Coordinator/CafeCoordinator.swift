@@ -30,7 +30,7 @@ protocol CafeCoordinator: Coordinator {
 final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

@@ -30,6 +30,7 @@ final class DefaultMainCoordinator: MainCoordinator {
             let coordinator = $0.coordinator
             let vc = coordinator.navigationController
             self.childCoordinators.append(coordinator)
+            coordinator.parentCoordinator = self
             coordinator.start()
             vc.tabBarItem = UITabBarItem(
                 title: $0.title,
@@ -49,6 +50,7 @@ final class DefaultMainCoordinator: MainCoordinator {
             let coordinator = $0.element.coordinator
             let vc = coordinator.navigationController
             self.childCoordinators.append(coordinator)
+            coordinator.parentCoordinator = self
             if $0.offset == 0, let cor = coordinator as? HomeCoordinator {
                 cor.startInviteFlow(inviteCode)
             } else {

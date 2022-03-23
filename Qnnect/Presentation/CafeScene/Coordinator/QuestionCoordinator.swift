@@ -25,7 +25,7 @@ extension QuestionCoordinator {
 final class DefaultQuestionCoordinator: QuestionCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

@@ -14,9 +14,8 @@ import RxCocoa
 class CommentMoreMenuBottomSheet: BottomSheetViewController {
     
     private let modifyButton = MoreMenuItem(title: "답변 수정")
-    
     private let deleteButton = MoreMenuItem(title: "답변 삭제")
-    private let reportButton = MoreMenuItem(title: "신고 하기")
+    
     private let buttonStackView = UIStackView().then {
         $0.spacing = 30.0
         $0.axis = .vertical

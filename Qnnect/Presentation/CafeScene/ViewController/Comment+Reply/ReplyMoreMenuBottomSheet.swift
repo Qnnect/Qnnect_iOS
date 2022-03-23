@@ -14,7 +14,6 @@ class ReplyMoreMenuBottomSheet: BottomSheetViewController {
     
     private let modifyButton = MoreMenuItem(title: "댓글 수정")
     private let deleteButton = MoreMenuItem(title: "댓글 삭제")
-    private let reportButton = MoreMenuItem(title: "신고 하기")
     
     private let buttonStackView = UIStackView().then {
         $0.spacing = 30.0

@@ -22,7 +22,7 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var parentCoordinator: Coordinator?
+    weak var parentCoordinator: Coordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -69,6 +69,8 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
     
     func showLoginScene() {
+        print("showLoginScene!!!")
+        print(parentCoordinator?.parentCoordinator)
         if let appCoordinator = parentCoordinator?.parentCoordinator as? AppCoordinator {
             let coordinator = DefaultAuthCoordinator(navigationController: appCoordinator.navigationController)
             print("appCoordinator navigationController viewControllers \(appCoordinator.navigationController.viewControllers)")
