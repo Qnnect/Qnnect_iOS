@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol MyPageCoordinator: Coordinator {
     func showEditProfileScene(user: User)
     func showMyDrinkStampScene(user: User)
     func showMyPageAlertView(myPageItem: MyPageItem)
+    func showPersonalPolicy()
+    func showTermsOfService()
     func pop()
     func showLoginScene()
 }
@@ -74,6 +77,16 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             coordinator.start()
             appCoordinator.childCoordinators.removeAll(where: { $0 !== coordinator })
         }
+    }
+    
+    func showPersonalPolicy() {
+        let safari = SFSafariViewController(url: URL(string: APP.personalInfoProcessingPolicyURL)!)
+        navigationController.present(safari, animated: true, completion: nil)
+    }
+    
+    func showTermsOfService() {
+        let safari = SFSafariViewController(url: URL(string: APP.termsOfUseURL)!)
+        navigationController.present(safari, animated: true, completion: nil)
     }
     
     func pop() {

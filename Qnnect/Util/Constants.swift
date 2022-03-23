@@ -19,7 +19,6 @@ struct Constants {
     static let TermsSceneTitle = "시작 전에\n약관에 동의해주세요"
     static let loginTypeText = "\(UserDefaults.standard.value(forKey: "loginType") ?? "알수없음")으로 로그인하셨어요!"
     static let titleCaution = "제목은 2~10자 이하입니다"
-    
     // MARK: - Layout
     static let nameMaxLength = 8
     static let bottomButtonHeight = 52.0

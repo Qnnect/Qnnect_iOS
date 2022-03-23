@@ -27,6 +27,9 @@ final class MyPageViewModel: ViewModelType {
         let loginType: Driver<LoginType>
         let showMyDrinkStampButton: Signal<User>
         let showMyPageAlertView: Signal<MyPageItem>
+        let showPersonalPolicy: Signal<Void>
+        let showTermsOfService: Signal<Void>
+        let showQnnectInstagram: Signal<Void>
     }
     
     private let userUseCase: UserUseCase
@@ -58,12 +61,28 @@ final class MyPageViewModel: ViewModelType {
         let showMyPageAlertView = input.didTapMyPagaItem
             .filter{ $0 == .logout || $0 == .withdrawal }
         
+        let showPersonalPolicy = input.didTapMyPagaItem
+            .filter { $0 == .privacyPolicy }
+            .mapToVoid()
+        
+        let showTermsOfServce = input.didTapMyPagaItem
+            .filter { $0 == .termsOfService }
+            .mapToVoid()
+        
+        let showQnnectInstagram = input.didTapMyPagaItem
+            .filter{ $0 == .instagram }
+            .mapToVoid()
+        
+        
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
             user: fetchedUser.asDriver(onErrorDriveWith: .empty()),
             loginType: loginType.asDriver(onErrorJustReturn: .unknown),
             showMyDrinkStampButton: showMyDrinkStampButton.asSignal(onErrorSignalWith: .empty()),
-            showMyPageAlertView: showMyPageAlertView.asSignal(onErrorSignalWith: .empty())
+            showMyPageAlertView: showMyPageAlertView.asSignal(onErrorSignalWith: .empty()),
+            showPersonalPolicy: showPersonalPolicy.asSignal(onErrorSignalWith: .empty()),
+            showTermsOfService: showTermsOfServce.asSignal(onErrorSignalWith: .empty()),
+            showQnnectInstagram: showQnnectInstagram.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

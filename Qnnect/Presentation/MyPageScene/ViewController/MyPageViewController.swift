@@ -125,6 +125,26 @@ final class MyPageViewController: BaseViewController {
         output.showMyPageAlertView
             .emit(onNext: coordinator.showMyPageAlertView(myPageItem:))
             .disposed(by: self.disposeBag)
+        
+        output.showPersonalPolicy
+            .emit(onNext: coordinator.showPersonalPolicy)
+            .disposed(by: self.disposeBag)
+        
+        output.showTermsOfService
+            .emit(onNext: coordinator.showTermsOfService)
+            .disposed(by: self.disposeBag)
+        
+        output.showQnnectInstagram
+            .emit(onNext: {
+                 _ in
+                let appURL = URL(string: APP.instagramAppURL)!
+                let webURL = URL(string: APP.instagramWepURL)!
+                if UIApplication.shared.canOpenURL(appURL) {
+                    UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+                }
+            }).disposed(by: self.disposeBag)
     }
 }
 
