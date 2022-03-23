@@ -79,6 +79,11 @@ final class MyPageViewController: BaseViewController {
                     let kind = $0[0] as! String
                     return kind == PointCell.myDrinkStamp
                 }.mapToVoid(),
+            didTapSendedQuestionButton: rx.methodInvoked(#selector(pointCell))
+                .filter {
+                    let kind = $0[0] as! String
+                    return kind == PointCell.sendedQuestion
+                }.mapToVoid(),
             didTapMyPagaItem: mainTableView.rx.modelSelected(MyPageSectionItem.self)
                 .compactMap {
                     item -> MyPageItem? in
@@ -145,6 +150,10 @@ final class MyPageViewController: BaseViewController {
                     UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
                 }
             }).disposed(by: self.disposeBag)
+        
+        output.showSendedQuestionListScene
+            .emit(onNext: coordinator.showSentQuestionListScene)
+            .disposed(by: self.disposeBag)
     }
 }
 

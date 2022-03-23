@@ -18,6 +18,7 @@ final class MyPageViewModel: ViewModelType {
         let viewWillAppear: Observable<Void>
         let viewDidLoad: Observable<Void>
         let didTapMyDrinkStampButton: Observable<Void>
+        let didTapSendedQuestionButton: Observable<Void>
         let didTapMyPagaItem: Observable<MyPageItem>
     }
     
@@ -30,6 +31,7 @@ final class MyPageViewModel: ViewModelType {
         let showPersonalPolicy: Signal<Void>
         let showTermsOfService: Signal<Void>
         let showQnnectInstagram: Signal<Void>
+        let showSendedQuestionListScene: Signal<Void>
     }
     
     private let userUseCase: UserUseCase
@@ -73,6 +75,8 @@ final class MyPageViewModel: ViewModelType {
             .filter{ $0 == .instagram }
             .mapToVoid()
         
+        let showSendedQuestionListScene = input.didTapSendedQuestionButton
+            
         
         return Output(
             showEditProfileScene: showEditProfileScene.asSignal(onErrorSignalWith: .empty()),
@@ -82,7 +86,8 @@ final class MyPageViewModel: ViewModelType {
             showMyPageAlertView: showMyPageAlertView.asSignal(onErrorSignalWith: .empty()),
             showPersonalPolicy: showPersonalPolicy.asSignal(onErrorSignalWith: .empty()),
             showTermsOfService: showTermsOfServce.asSignal(onErrorSignalWith: .empty()),
-            showQnnectInstagram: showQnnectInstagram.asSignal(onErrorSignalWith: .empty())
+            showQnnectInstagram: showQnnectInstagram.asSignal(onErrorSignalWith: .empty()),
+            showSendedQuestionListScene: showSendedQuestionListScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

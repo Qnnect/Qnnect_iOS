@@ -14,6 +14,7 @@ protocol MyPageCoordinator: Coordinator {
     func showMyPageAlertView(myPageItem: MyPageItem)
     func showPersonalPolicy()
     func showTermsOfService()
+    func showSentQuestionListScene()
     func pop()
     func showLoginScene()
 }
@@ -51,6 +52,7 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             userUseCase: userUseCase
         )
         let vc = EditProfileViewController.create(with: viewModel,user, self)
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(vc, animated: true)
     }
     
@@ -69,11 +71,8 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
     
     func showLoginScene() {
-        print("showLoginScene!!!")
-        print(parentCoordinator?.parentCoordinator)
         if let appCoordinator = parentCoordinator?.parentCoordinator as? AppCoordinator {
             let coordinator = DefaultAuthCoordinator(navigationController: appCoordinator.navigationController)
-            print("appCoordinator navigationController viewControllers \(appCoordinator.navigationController.viewControllers)")
             appCoordinator.childCoordinators.append(coordinator)
             coordinator.parentCoordinator = appCoordinator
             coordinator.start()
@@ -91,6 +90,11 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         navigationController.present(safari, animated: true, completion: nil)
     }
     
+    func showSentQuestionListScene() {
+        let vc = SentQuestionListViewController.create()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(vc, animated: true)
+    }
     func pop() {
         self.navigationController.popViewController(animated: true)
     }
