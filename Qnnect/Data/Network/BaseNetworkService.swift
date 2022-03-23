@@ -22,7 +22,7 @@ class BaseNetworkService<EndPoint: TargetType>: Networkable {
         return self.provider.rx.request(endPoint)
             .flatMap {
                 // 403(Unauthorized) 발생 시 자동으로 토큰을 재발급 받는다
-                if $0.statusCode == 401 {
+                if $0.statusCode == 403 {
                     throw TokenError.tokenExpired
                 } else {
                     return Single.just($0)

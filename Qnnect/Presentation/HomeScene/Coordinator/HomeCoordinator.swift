@@ -14,6 +14,7 @@ protocol HomeCoordinator: Coordinator {
     func showCafeQuestionScene(_ questionId: Int)
     func startInviteFlow(_ inviteCafeCode: String?)
     func showNotificationListScene()
+    func showCafeJoinErrorAlertView(_ message: String)
 }
 
 final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
@@ -103,6 +104,16 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         let viewModel = NotificationListViewModel()
         let vc = NotificationListViewController.create(with: viewModel, self)
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showCafeJoinErrorAlertView(_ message: String) {
+        let vc = CafeJoinErrorAlertViewController.create(with: message)
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController.presentedViewController?.dismiss(animated: false, completion: {
+            [weak self] in
+            self?.navigationController.present(vc, animated: true, completion: nil)
+        })
     }
 }
 

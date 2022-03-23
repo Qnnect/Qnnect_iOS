@@ -11,7 +11,22 @@ import RxSwift
 
 enum JoinCafeError: Int, Error {
     case alreadyIn = 500
+    case notExisted = 401
+    case isFull = 406
     case defaultError
+    
+    var meessage: String {
+        switch self {
+        case .alreadyIn:
+            return "카페에 이미 들어가 있습니다."
+        case .notExisted:
+            return "존재하지 않는 카페 코드입니다."
+        case .isFull:
+            return "카페가 이미 다 찼어요!\n5명까지 카페 참여가 가능합니다."
+        case .defaultError:
+            return ""
+        }
+    }
 }
 
 final class CafeNetworkService: BaseNetworkService<CafeAPI> {
@@ -67,5 +82,6 @@ final class CafeNetworkService: BaseNetworkService<CafeAPI> {
                 JoinCafeError(rawValue:($0 as? MoyaError)?.response?.statusCode ?? -1) ?? .defaultError
             ))}
             .asObservable()
+            .debug()
     }
 }

@@ -279,6 +279,7 @@ final class HomeViewController: BaseViewController {
         output.showNotificationListScene
             .emit(onNext: coordinator.showNotificationListScene)
             .disposed(by: self.disposeBag)
+
     }
 }
 

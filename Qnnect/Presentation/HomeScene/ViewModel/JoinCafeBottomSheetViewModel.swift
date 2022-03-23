@@ -19,6 +19,7 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
     struct Output {
         ///Int: CafeId
         let showCafeRoomScene: Signal<Int>
+        let showCafeJoinErrorAlertView: Signal<String>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -39,6 +40,19 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
             return cafeId
         }
         
-        return Output(showCafeRoomScene: joinedCafeId.asSignal(onErrorSignalWith: .empty()))
+        let showCafeJoinErrorAlertView = joinCafe
+            .compactMap { result -> JoinCafeError? in
+                guard case let .failure(error) = result else { return nil }
+                if error == .alreadyIn {
+                    return nil
+                } else {
+                    return error
+                }
+            }.map { $0.meessage }
+        
+        return Output(
+            showCafeRoomScene: joinedCafeId.asSignal(onErrorSignalWith: .empty()),
+            showCafeJoinErrorAlertView: showCafeJoinErrorAlertView.asSignal(onErrorSignalWith: .empty())
+        )
     }
 }

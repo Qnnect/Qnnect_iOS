@@ -106,6 +106,10 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
         output.showCafeRoomScene
             .emit(onNext: coordinator.showGroupScene)
             .disposed(by: self.disposeBag)
+        
+        output.showCafeJoinErrorAlertView
+            .emit(onNext: coordinator.showCafeJoinErrorAlertView(_:))
+            .disposed(by: self.disposeBag)
     }
     
 }

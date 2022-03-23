@@ -327,6 +327,7 @@
 		AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363527C3785700D0A127 /* StoreSectionModel.swift */; };
 		AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */; };
 		AEEF4AEB27EB04F000DB4184 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */; };
+		AEEF4AED27EB071800DB4184 /* CafeJoinAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEC27EB071800DB4184 /* CafeJoinAlertViewController.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -660,6 +661,7 @@
 		AEEF363527C3785700D0A127 /* StoreSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSectionModel.swift; sourceTree = "<group>"; };
 		AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSectionHeaderView.swift; sourceTree = "<group>"; };
 		AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		AEEF4AEC27EB071800DB4184 /* CafeJoinAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeJoinAlertViewController.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -1671,6 +1673,7 @@
 				AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */,
 				AEA7265927DDAF3400F48CB8 /* JoinCafeBottomSheet.swift */,
 				AE767F9C27E8CED800BD5496 /* NotificationListViewController.swift */,
+				AEEF4AEC27EB071800DB4184 /* CafeJoinAlertViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1976,6 +1979,7 @@
 				AEA14D3A27D476D30009EEC6 /* CafeAPI.swift in Sources */,
 				AEA14D2D27D463F80009EEC6 /* CafeCreateRequestDTO.swift in Sources */,
 				AE02407B27E3872900017F77 /* MyIngredient.swift in Sources */,
+				AEEF4AED27EB071800DB4184 /* CafeJoinAlertViewController.swift in Sources */,
 				AE02D7FB27D5C4A00019D955 /* HomeUseCase.swift in Sources */,
 				AEA14D1F27D33BBE0009EEC6 /* Question.swift in Sources */,
 				AE02D82127D75C0D0019D955 /* CafeQuestionViewController.swift in Sources */,
