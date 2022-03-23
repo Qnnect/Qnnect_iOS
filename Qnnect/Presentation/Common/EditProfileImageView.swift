@@ -69,7 +69,7 @@ final class EditProfileImageView: UIView {
                 if image == Constants.profileDefaultImage {
                     return nil
                 } else {
-                    return image?.pngData()
+                    return image?.jpegData(compressionQuality: 0.9)
                 }
             }
     }

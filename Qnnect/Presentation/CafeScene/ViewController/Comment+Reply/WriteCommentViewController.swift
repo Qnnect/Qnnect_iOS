@@ -370,7 +370,7 @@ private extension WriteCommentViewController {
     }
     
     func getImages() -> [Data?] {
-        return images.sorted(by: { $0.key < $1.key }).map { $0.value?.pngData() }
+        return images.sorted(by: { $0.key < $1.key }).map { $0.value?.jpegData(compressionQuality: 1.0) }
     }
     
     func setScene(by type: WriteCommentType) {
