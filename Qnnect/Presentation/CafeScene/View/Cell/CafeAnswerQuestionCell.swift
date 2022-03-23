@@ -145,7 +145,7 @@ final class CafeAnswerQuestionCell: UITableViewCell {
             string: question.content,
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
-        self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
+        self.outerView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .PINK01
         setQuestionButtons(question.writer)
     }
     

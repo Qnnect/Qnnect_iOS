@@ -326,6 +326,7 @@
 		AEEF363427C36CF100D0A127 /* InputUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363327C36CF100D0A127 /* InputUseCase.swift */; };
 		AEEF363627C3785700D0A127 /* StoreSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363527C3785700D0A127 /* StoreSectionModel.swift */; };
 		AEEF363827C379BC00D0A127 /* StoreSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */; };
+		AEEF4AEB27EB04F000DB4184 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -658,6 +659,7 @@
 		AEEF363327C36CF100D0A127 /* InputUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUseCase.swift; sourceTree = "<group>"; };
 		AEEF363527C3785700D0A127 /* StoreSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSectionModel.swift; sourceTree = "<group>"; };
 		AEEF363727C379BC00D0A127 /* StoreSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSectionHeaderView.swift; sourceTree = "<group>"; };
+		AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				AEB5AB3B27E259FC0096376B /* IndicatorView.swift */,
 				AE02404C27E31FDB00017F77 /* NavigationTitleLabel.swift */,
 				AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */,
+				AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2043,6 +2046,7 @@
 				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,
 				AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */,
 				AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */,
+				AEEF4AEB27EB04F000DB4184 /* CircleView.swift in Sources */,
 				AECC131727BA1033006866FC /* SetProfileViewController.swift in Sources */,
 				AE33A4F927E750B3000130B3 /* UITableView+.swift in Sources */,
 				AEEF362327C3136000D0A127 /* MyPageSectionModel.swift in Sources */,

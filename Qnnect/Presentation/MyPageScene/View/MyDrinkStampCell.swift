@@ -9,14 +9,6 @@ import UIKit
 import SnapKit
 import Then
 
-class CircleView: UIView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = frame.height / 2.0
-        layer.masksToBounds = true
-    }
-}
-
 final class MyDrinkStampCell: UICollectionViewCell {
     static let identifier = "MyDrinkStampCell"
     

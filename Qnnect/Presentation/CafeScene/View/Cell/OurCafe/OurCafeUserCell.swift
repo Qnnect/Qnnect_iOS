@@ -14,10 +14,8 @@ final class OurCafeUserCell: UICollectionViewCell {
     
     static let identifier = "OurCafeUserCell"
     
-    private(set) var profileImageView = UIImageView().then {
+    private(set) var profileImageView = CircleImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 30.6
     }
     
     private let nameLabel = UILabel().then {
