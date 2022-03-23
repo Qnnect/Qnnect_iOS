@@ -83,6 +83,9 @@ final class HomeViewController: BaseViewController {
         return vc
     }
     
+    private var normalLayout: UICollectionViewLayout?
+    private var emptySectionLayout: UICollectionViewLayout?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         inviteCafeCode = nil
@@ -137,8 +140,9 @@ final class HomeViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         
-        self.homeCollectionView.collectionViewLayout = self.createLayout()
-        
+        normalLayout = createLayout()
+        emptySectionLayout = createMyCafeEmptyLayout()
+        self.homeCollectionView.collectionViewLayout = normalLayout ?? UICollectionViewLayout()
     }
     
     override func bind() {
@@ -230,10 +234,18 @@ final class HomeViewController: BaseViewController {
                 [weak self] homeInfo in
                 guard let self = self else { return }
                 self.pointLabel.text = "\(homeInfo.user.point) P"
-                if homeInfo.cafes.isEmpty {
-                    self.homeCollectionView.collectionViewLayout = self.createMyCafeEmptyLayout()
-                } else {
-                    self.homeCollectionView.collectionViewLayout = self.createLayout()
+                if homeInfo.cafes.isEmpty,
+                   self.homeCollectionView.collectionViewLayout !== self.emptySectionLayout {
+                    self.homeCollectionView.setCollectionViewLayout(
+                        self.emptySectionLayout ?? UICollectionViewLayout(),
+                        animated: false
+                    )
+                } else if !homeInfo.cafes.isEmpty,
+                          self.homeCollectionView.collectionViewLayout !== self.normalLayout{
+                    self.homeCollectionView.setCollectionViewLayout(
+                        self.normalLayout ?? UICollectionViewLayout(),
+                        animated: false
+                    )
                 }
             }
             .map(self.convertToSectionModel(_:))
