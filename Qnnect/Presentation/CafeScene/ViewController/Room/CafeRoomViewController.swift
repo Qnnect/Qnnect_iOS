@@ -135,16 +135,19 @@ final class CafeRoomViewController: BaseViewController {
             self.view.addSubview($0)
         }
         
-        self.mainCollectionView.snp.makeConstraints { make in
-            make.top.trailing.leading.equalToSuperview()
-        }
-        
         self.questionButton.snp.makeConstraints { make in
-            make.top.equalTo(self.mainCollectionView.snp.bottom).offset(5.0)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(11.0)
             make.height.equalTo(36.0)
             make.leading.trailing.equalToSuperview().inset(20.0)
         }
+        
+        questionButton.setContentCompressionResistancePriority(.required, for: .vertical)
+        
+        self.mainCollectionView.snp.makeConstraints { make in
+            make.top.trailing.leading.equalToSuperview()
+            make.bottom.equalTo(questionButton.snp.top).offset(-8.0)
+        }
+        mainCollectionView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
         let layout = self.createLayout()
         
@@ -285,12 +288,12 @@ private extension CafeRoomViewController {
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(140.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.232))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 26.0, leading: 0, bottom: 18.0, trailing: 0)
+        section.contentInsets = .init(top: 26.0, leading: 0, bottom: 0.0, trailing: 0)
         
         return section
     }
@@ -299,11 +302,12 @@ private extension CafeRoomViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
+        //item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(100.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.148))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
+        group.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.decorationItems = [
@@ -329,7 +333,7 @@ private extension CafeRoomViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(246.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.387))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
