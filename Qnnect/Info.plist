@@ -2,21 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-       <key>NSExceptionDomains</key>
-       <dict>
-           <key>qnnect.shop</key>
-           <dict>
-               <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-               <true/>
-           </dict>
-       </dict>
-    </dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사용자의 사진에 접근하기위해 권한을 허용해주세요.</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -33,6 +20,17 @@
 		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>qnnect.shop</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BMJUA.ttf</string>

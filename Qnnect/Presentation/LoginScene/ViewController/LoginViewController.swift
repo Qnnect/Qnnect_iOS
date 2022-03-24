@@ -12,6 +12,7 @@ import AuthenticationServices
 import RxSwift
 import RxCocoa
 import CryptoKit
+import KakaoSDKCommon
 
 
 class LeftAlignButton: UIButton {
@@ -40,31 +41,32 @@ final class LoginViewController: BaseViewController {
         $0.textAlignment = .center
         $0.text = "공유 Q&A 다이어리 서비스, 큐넥트"
     }
+    
     private let kakaoButton = LeftAlignButton().then {
-        $0.setImage(Constants.kakaoLogo?.with(.init(top: 0, left: 5.0, bottom: 0, right: 0)), for: .normal)
+        $0.setImage(Constants.kakaoLogo?.with(.init(top: 0, left: 10.0, bottom: 0, right: 0)), for: .normal)
         $0.setTitle("카카오로 로그인", for: .normal)
-        $0.setTitleColor(.black.withAlphaComponent(0.85), for: .normal)
+        $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .kakaoContainer
         $0.layer.cornerRadius = 10.0
-        $0.titleLabel?.font = .systemFont(ofSize: 22.36, weight: .regular)
+        $0.titleLabel?.font = .Roboto(.regular, size: 20.0)
         $0.contentHorizontalAlignment = .left
-        $0.imageView?.contentMode = .scaleAspectFit
         $0.contentHorizontalAlignment = .fill
     }
     
-
+    
     private let appleButton = LeftAlignButton().then {
-        $0.setImage(Constants.appleLogo, for: .normal)
+        let logo = UIImage.resizeImage(image: Constants.appleLogo, targetHeight: 52.0)
+        $0.setImage(logo, for: .normal)
         $0.setTitle("Apple로 로그인", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10.0
-        $0.titleLabel?.font = .Roboto(.regular, size: 22.36) // 22.36
+        $0.titleLabel?.font = .Roboto(.regular, size: 20.0) // 22.36
         $0.contentHorizontalAlignment = .left
         $0.contentVerticalAlignment = .fill
+        $0.adjustsImageWhenHighlighted = false
     }
 
-   // private let appleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     private var viewModel: LoginViewModel!
     weak var coordinator: AuthCoordinator?
     private var inviteCode: String?

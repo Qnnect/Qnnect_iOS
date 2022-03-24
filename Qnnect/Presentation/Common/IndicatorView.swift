@@ -15,7 +15,6 @@ class LoadingIndicator {
             // 최상단에 있는 window 객체 획득
             guard let window = UIApplication.shared.windows.last else { return }
             
-            print("showLoading!!!")
             let loadingIndicatorView: NVActivityIndicatorView
             if let existedView = window.subviews.first(where: { $0 is NVActivityIndicatorView } ) as? NVActivityIndicatorView {
                 loadingIndicatorView = existedView

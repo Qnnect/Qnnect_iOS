@@ -104,7 +104,6 @@ final class DeleteAlertView: BaseViewController {
             okButton.rx.tap.asObservable()
         ).subscribe(onNext: {
             [weak self] _ in
-            print("dismiss")
             self?.dismiss(animated: true, completion: nil)
         }).disposed(by: self.disposeBag)
         

@@ -42,6 +42,7 @@ final class CafeRoomViewModel: ViewModelType {
         let currentDrinkInfo: Driver<(curStep: DrinkStep, drink: DrinkType)?>
         let userDrinkInfos: Driver<[(curStep: DrinkStep?, drink: DrinkType?, name: String)]>
         let cafeQuestions: Driver<[Question]>
+        let enterError: Signal<Void>
     }
     
     private let cafeUseCase: CafeUseCase
@@ -112,8 +113,15 @@ final class CafeRoomViewModel: ViewModelType {
             .withLatestFrom(input.cafeId)
         
         let showOurCafeScene = input.didTapDrinkSection
+            .withLatestFrom(currentDrinkInfo)
+            .filter{ $0 != nil }
             .withLatestFrom(roomInfo)
             .map { (cafeId: $0.cafeId, cafeUserId: $0.cafeUserId) }
+        
+        let enterError = input.didTapDrinkSection
+            .withLatestFrom(currentDrinkInfo)
+            .filter { $0 == nil }
+            .mapToVoid()
         
         return Output(
             roomInfo: roomInfo.asDriver(onErrorDriveWith: .empty()),
@@ -126,7 +134,8 @@ final class CafeRoomViewModel: ViewModelType {
             showOurCafeScene: showOurCafeScene.asSignal(onErrorSignalWith: .empty()),
             currentDrinkInfo: currentDrinkInfo.asDriver(onErrorDriveWith: .empty()),
             userDrinkInfos: userDrinkInfos.asDriver(onErrorDriveWith: .empty()),
-            cafeQuestions: cafeQuestions.asDriver(onErrorDriveWith: .empty())
+            cafeQuestions: cafeQuestions.asDriver(onErrorDriveWith: .empty()),
+            enterError: enterError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

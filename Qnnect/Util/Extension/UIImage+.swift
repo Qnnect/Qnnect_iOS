@@ -21,7 +21,7 @@ extension UIImage {
           }.withRenderingMode(renderingMode)
       }
     
-    fileprivate func resizeImage(image: UIImage!, targetHeight: CGFloat) -> UIImage {
+    static func resizeImage(image: UIImage!, targetHeight: CGFloat) -> UIImage {
         // Get current image size
         let size = image.size
 

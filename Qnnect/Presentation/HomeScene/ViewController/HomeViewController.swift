@@ -340,9 +340,8 @@ private extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 6.0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group 0.35
-        let heightRadio = 0.096 + ((view.frame.width * 0.9 / 2.0) + 16.0) / view.frame.height
-        print(heightRadio)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 - heightRadio - 0.33))
+        //let heightRadio = 0.096 + (((view.frame.width * 0.9) / 2.0) + 16.0 ) / view.frame.height
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.34))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -382,13 +381,12 @@ private extension HomeViewController {
         
 
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.29))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.35))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }

@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxDataSources
-import simd
+import Toast_Swift
 import Alamofire
 
 final class CafeRoomViewController: BaseViewController {
@@ -226,6 +226,16 @@ final class CafeRoomViewController: BaseViewController {
             .bind(to:self.mainCollectionView.rx.items(dataSource: dataSource))
         .disposed(by: self.disposeBag)
         
+        output.enterError
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.view.makeToast(
+                    "음료를 선택해야 카페에 입장할 수 있습니다.",
+                    position: .bottom
+                )
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
         
         
@@ -331,7 +341,7 @@ private extension CafeRoomViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 20.0, bottom: 0, trailing: 20.0)
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.45))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.44))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         //section
         let section = NSCollectionLayoutSection(group: group)
@@ -343,7 +353,7 @@ private extension CafeRoomViewController {
             let env = environment
             self.todayQuestionCurPage = Int(max(0, round(point.x / env.container.contentSize.width)))
         }
-        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 16.0, trailing: 0)
+        section.contentInsets = .init(top: 12.0, leading: 0, bottom: 0, trailing: 0)
         
         
         return section
@@ -356,6 +366,7 @@ private extension CafeRoomViewController {
         //Section Footer layout
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
         
+        sectionFooter.contentInsets = .init(top: 8.0, leading: 0, bottom: 0, trailing: 0)
         return sectionFooter
     }
     
@@ -416,6 +427,8 @@ private extension CafeRoomViewController {
                     if case CafeRoomSectionItem.questionEmptySectionItem = item {
                         view.pageControl.isHidden = true
                         return view
+                    } else {
+                        view.pageControl.isHidden = false
                     }
                 }
                 let pageCount = dataSource.sectionModels[2].items.count

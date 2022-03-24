@@ -41,7 +41,7 @@ final class TitleCell: UICollectionViewCell {
         }
             
         self.titleLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(12.0)
+            make.trailing.equalToSuperview()
             make.centerY.equalTo(self.profileImageView)
         }
         

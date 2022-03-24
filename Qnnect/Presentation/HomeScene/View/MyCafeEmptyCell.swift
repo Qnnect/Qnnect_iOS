@@ -48,7 +48,7 @@ final class MyCafeEmptyCell: UICollectionViewCell {
     private let buttonStackView = UIStackView().then {
         $0.distribution = .fillEqually
         $0.axis = .vertical
-        $0.spacing = 16.0
+        $0.spacing = 12.0
     }
     
     override init(frame: CGRect) {
@@ -79,13 +79,14 @@ final class MyCafeEmptyCell: UICollectionViewCell {
         
         buttonStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(107.0)
-            make.bottom.equalToSuperview().inset(65.0).priority(.high)
+            make.centerY.equalToSuperview()
             make.height.equalTo(84)
         }
        
         buttonBackimageView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(buttonStackView).inset(34.0)
-            make.top.equalToSuperview().inset(35.0)
+            make.leading.equalTo(buttonStackView).offset(34.0)
+            make.trailing.equalTo(buttonStackView).offset(-34.0)
+            make.top.equalToSuperview().offset(24.0)
             make.bottom.equalTo(addCafeButton.snp.centerY)
         }
         

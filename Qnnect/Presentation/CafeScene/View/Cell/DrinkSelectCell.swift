@@ -60,7 +60,6 @@ final class DrinkSelectCell: UICollectionViewCell {
         drinkLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(26.0)
-            //TODO: Change
             make.top.equalTo(self.drinkImageView.snp.bottom).offset(20.0)
         }
     }

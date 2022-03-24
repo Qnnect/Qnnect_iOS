@@ -288,6 +288,7 @@ final class OurCafeViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(33.0)
         }
         titleLabel.setContentHuggingPriority(.required, for: .vertical)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         
         drinkImageView.snp.makeConstraints { make in
             make.bottom.equalTo(progressBar.snp.top).offset(-30.0)
@@ -572,7 +573,8 @@ private extension OurCafeViewController {
             drinkImageView.snp.updateConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(130.0 - 34.5)
                 make.top.equalTo(titleLabel.snp.bottom).offset(20.0)
-            }
+            } // 0.486
+            //0.745
             drinkShadowImageView.snp.updateConstraints { make in
                 make.leading.equalTo(drinkImageView).offset(43.0)
                 make.trailing.equalTo(drinkImageView).offset(-41.0)
