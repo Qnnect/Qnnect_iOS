@@ -115,11 +115,12 @@ final class TermsViewController: BaseViewController {
         }
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(21.0)
-            make.top.equalToSuperview().inset(194.0)
+            make.top.equalToSuperview().inset(60.0).priority(.low)
+            make.bottom.equalTo(allAgreementView.snp.top).offset(-18.0)
         }
         
         self.allAgreementView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(31.0)
+            make.bottom.equalTo(dividingLine).offset(-8.0)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(48.0)
         }
