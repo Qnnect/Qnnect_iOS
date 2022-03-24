@@ -24,6 +24,7 @@ final class MyPageViewController: BaseViewController {
         $0.register(PointCell.self, forCellReuseIdentifier: PointCell.identifier)
         $0.register(MyPageItemCell.self, forCellReuseIdentifier: MyPageItemCell.identifier)
         $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
     }
     
     private var viewModel: MyPageViewModel!

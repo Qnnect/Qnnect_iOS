@@ -65,6 +65,6 @@ final class CafeDrinkCell: UICollectionViewCell {
             return
         }
         
-        drinkImageView.image = drink.getDrinkStepImage(curStep)
+        drinkImageView.image = curStep == .completed ? drink.getDrinkCompletionImage() : drink.getDrinkStepImage(curStep)
     }
 }

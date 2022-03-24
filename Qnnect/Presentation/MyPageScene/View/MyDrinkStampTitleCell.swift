@@ -59,15 +59,15 @@ final class MyDrinkStampTitleCell: UICollectionViewCell {
             make.leading.equalToSuperview().inset(20)
             make.top.equalToSuperview()
         }
-        mainLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        mainLabel.setContentHuggingPriority(.required, for: .vertical)
         
         secondaryLabel.snp.makeConstraints { make in
             make.top.equalTo(mainLabel.snp.bottom).offset(6.0)
             make.leading.equalTo(mainLabel)
             make.bottom.equalToSuperview()
         }
-       
-        secondaryLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        secondaryLabel.setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
         
         characterImageView.snp.makeConstraints { make in
             make.top.equalTo(mainLabel)

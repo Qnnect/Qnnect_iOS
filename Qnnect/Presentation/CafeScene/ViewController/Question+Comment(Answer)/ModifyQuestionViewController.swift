@@ -22,12 +22,12 @@ final class ModifyQuestionViewController: BaseViewController {
         $0.isScrollEnabled = false
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .BLACK_121212
-        $0.backgroundColor = .ORANGE01
+        $0.backgroundColor = .PINK01
         $0.textAlignment = .center
     }
     
     private let outerView = UIView().then {
-        $0.backgroundColor = .ORANGE01
+        $0.backgroundColor = .PINK01
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
         $0.layer.cornerRadius = 24.0

@@ -71,7 +71,7 @@ final class SettingBottomSheet: BottomSheetViewController {
         
         self.bottomSheetView.addSubview(self.menuTableView)
         
-        self.topPadding = 446.0
+        self.topPadding = UIScreen.main.bounds.height * 0.55
         self.titleLabel.text = "설정"
         
         self.menuTableView.snp.makeConstraints { make in

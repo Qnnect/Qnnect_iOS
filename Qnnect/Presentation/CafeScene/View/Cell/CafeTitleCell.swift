@@ -60,7 +60,8 @@ final class CafeTitleCell: UICollectionViewCell {
         }
         
         self.createdDateLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
+            make.top.equalToSuperview().inset(26.0)
+            make.leading.equalToSuperview()
         }
         
         self.nameLabel.snp.makeConstraints { make in
@@ -70,14 +71,15 @@ final class CafeTitleCell: UICollectionViewCell {
         }
         
         self.drinkImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(35.23)
             make.trailing.equalToSuperview().inset(55.0)
-            make.width.equalToSuperview().multipliedBy(0.195)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(50.0)
+            make.width.equalTo(100.0)
         }
         
         self.drinkSelectButton.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.centerY.equalTo(drinkImageView.snp.bottom)
             make.height.equalTo(34.0)
             make.width.equalTo(94.0)
         }
@@ -89,11 +91,27 @@ final class CafeTitleCell: UICollectionViewCell {
        
         guard let drinkInfo = drinkInfo else {
             drinkImageView.image = Constants.notSelectDrinkImage
+            drinkImageView.snp.updateConstraints { make in
+                make.top.equalToSuperview().inset(50.0)
+                make.width.equalTo((contentView.frame.height - 50.0 - 35.23) / 1.48)
+            }
             return
         }
         
         drinkSelectButton.isHidden = true
-        drinkImageView.image = drinkInfo.drink.getDrinkStepImage(drinkInfo.curStep)
+        drinkImageView.image =
+        drinkInfo.curStep == .completed ?
+        drinkInfo.drink.getDrinkCompletionImage() : drinkInfo.drink.getDrinkStepImage(drinkInfo.curStep)
+        
+        drinkImageView.snp.updateConstraints { make in
+            if drinkInfo.curStep == .completed {
+                make.top.equalToSuperview().inset(26.5)
+                make.width.equalTo((contentView.frame.height - 26.5 - 35.23) / 1.95)
+            } else {
+                make.top.equalToSuperview().inset(50.0)
+                make.width.equalTo((contentView.frame.height - 50.0 - 35.23) / 1.48)
+            }
+        }
     }
 }
 

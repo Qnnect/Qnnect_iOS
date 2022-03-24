@@ -80,7 +80,9 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         
         self.questionLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(76.0)
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(36.0)
+           // make.top.equalTo(self.titleLabel.snp.bottom).offset(36.0)
+            make.centerY.equalToSuperview().multipliedBy(1.1)
+           // make.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(18.0)
             make.bottom.lessThanOrEqualToSuperview().inset(16.0)
         }
         
