@@ -234,21 +234,17 @@ private extension MyDrinkStampViewController {
     
     func createStampSectionLayout() -> NSCollectionLayoutSection {
         //item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
      
         //group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(36.0)
-        
-        let nestedGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
-        let nestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: nestedGroupSize, subitem: group, count: 3)
-        nestedGroup.contentInsets = .init(top: 25.0, leading: 0, bottom: 0, trailing: 0)
-        nestedGroup.interItemSpacing = .fixed(25.0)
-        //section
-        let section = NSCollectionLayoutSection(group: nestedGroup)
+
+        let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 19.0, leading: 20.0, bottom: 0, trailing: 20.0)
+        section.interGroupSpacing = 25.0
         
         return section
     }

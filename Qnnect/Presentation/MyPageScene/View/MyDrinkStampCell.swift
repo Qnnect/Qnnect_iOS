@@ -57,6 +57,18 @@ final class MyDrinkStampCell: UICollectionViewCell {
         ].forEach {
             contentView.addSubview($0)
         }
+        outerView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(contentView.frame.width)
+        }
+        
+        outerView.setContentHuggingPriority(.required, for: .vertical)
+        
+        drinkImageView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(28.0)
+            make.top.bottom.equalToSuperview().inset(13.0)
+        }
+        
         
         cafeNameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -65,19 +77,11 @@ final class MyDrinkStampCell: UICollectionViewCell {
         
         drinkNameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
+            make.top.equalTo(outerView.snp.bottom)
             make.bottom.equalTo(cafeNameLabel.snp.top).offset(-5.0)
         }
         
-        outerView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalToSuperview().multipliedBy(0.657)
-        }
-        
-        
-        drinkImageView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(28.0)
-            make.top.bottom.equalToSuperview().inset(13.0)
-        }
+       
         
         //drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
 
