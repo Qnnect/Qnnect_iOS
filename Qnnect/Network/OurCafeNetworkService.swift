@@ -9,6 +9,18 @@ import Foundation
 import Moya
 import RxSwift
 
+enum IngredientError: Int, Error {
+    case WRONG_INGREDIENT_SAME_LEVEL = 406
+    case defaultError = -1
+    var message: String {
+        switch self {
+        case .WRONG_INGREDIENT_SAME_LEVEL:
+            return "앗! 잘못 넣었어요.\n레시피를 한번 더 확인해보세요."
+        case .defaultError:
+            return "error"
+        }
+    }
+}
 final class OurCafeNetworkService: BaseNetworkService<OurCafeAPI> {
     
     func fetchOurCafe(cafeId: Int, cafeUserId: Int) -> Observable<Result<OurCafeFetchResponseDTO,Error>> {
@@ -38,11 +50,14 @@ final class OurCafeNetworkService: BaseNetworkService<OurCafeAPI> {
             .asObservable()
     }
     
-    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,IngredientError>> {
         request(.insertIngredient(userDrinkSelectedId: userDrinkSelectedId, ingredientsId: ingredientsId))
             .filter(statusCodes: 200 ... 300)
             .map{ _ in Result.success(())}
-            .catch{ .just(Result.failure($0))}
+            .catch{ .just(Result.failure(
+                IngredientError(rawValue:($0 as? MoyaError)?.response?.statusCode ?? -1) ?? .defaultError
+            ))}
+           
             .asObservable()
     }
 }

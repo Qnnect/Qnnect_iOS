@@ -111,7 +111,6 @@ final class OurCafeViewModel: ViewModelType {
             }
         
         
-        
         let userDrinkInfoWithStep = ourCafe.map { $0.selectedUserDrinkInfo }
             .compactMap(ourCafeUseCase.getCurStepWithCafeDrink(_:))
         

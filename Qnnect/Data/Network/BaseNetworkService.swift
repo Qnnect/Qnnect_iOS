@@ -33,7 +33,7 @@ class BaseNetworkService<EndPoint: TargetType>: Networkable {
                     TokenService.reissueToken()
                 }
             }
-            .filterSuccessfulStatusCodes()
-            .retry(2)
+//            .filterSuccessfulStatusCodes()
+//            .retry(2)
     }
 }

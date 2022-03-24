@@ -19,7 +19,7 @@ protocol OurCafeUseCase: DrinkStepUseCase {
     func fetchMyCafeDrink(_ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [MyIngredient]), Error>>
     func fetchRecipe(_ userDrinkSelectedId: Int, _ cafeId: Int) -> Observable<Result<(cafeDrink: CafeDrink, ingredients: [RecipeIngredient]),Error>>
     func isRightIngredientBuy(_ ingredient: MyIngredient, curStep: DrinkStep) -> InsertWrongType?
-    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>>
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,IngredientError>>
 }
 
 final class DefaultOurCafeUseCase: OurCafeUseCase {
@@ -58,7 +58,7 @@ final class DefaultOurCafeUseCase: OurCafeUseCase {
         
     }
     
-    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,IngredientError>> {
         ourCafeRepository.insertIngredient(userDrinkSelectedId, ingredientsId)
     }
 }

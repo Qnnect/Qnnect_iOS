@@ -343,6 +343,7 @@
 		AEEF4B0E27EB70C300DB4184 /* BlockedFriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */; };
 		AEEF4B1027EB711800DB4184 /* BlockedFriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */; };
 		AEEF4B1227EB721400DB4184 /* BlockedFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B1127EB721400DB4184 /* BlockedFriendCell.swift */; };
+		AEEF4B1627EC6A7D00DB4184 /* InsertErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF4B1527EC6A7D00DB4184 /* InsertErrorAlertView.swift */; };
 		AEF0FD3C27C3BBE300721D86 /* HomeSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */; };
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
@@ -692,6 +693,7 @@
 		AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendListViewController.swift; sourceTree = "<group>"; };
 		AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendListViewModel.swift; sourceTree = "<group>"; };
 		AEEF4B1127EB721400DB4184 /* BlockedFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedFriendCell.swift; sourceTree = "<group>"; };
+		AEEF4B1527EC6A7D00DB4184 /* InsertErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertErrorAlertView.swift; sourceTree = "<group>"; };
 		AEF0FD3B27C3BBE300721D86 /* HomeSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionFooterView.swift; sourceTree = "<group>"; };
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				AE02407227E37A7B00017F77 /* InsertIngredientViewController.swift */,
 				AE02407E27E39B5B00017F77 /* RecipeViewController.swift */,
 				AE767F9A27E874E100BD5496 /* CompleteDrinkViewController.swift */,
+				AEEF4B1527EC6A7D00DB4184 /* InsertErrorAlertView.swift */,
 			);
 			path = OutCafe;
 			sourceTree = "<group>";
@@ -2115,6 +2118,7 @@
 				AEB5AAE427E062B80096376B /* BookmarkSearchViewController.swift in Sources */,
 				AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */,
 				AEA7265C27DDB22400F48CB8 /* UITextField+.swift in Sources */,
+				AEEF4B1627EC6A7D00DB4184 /* InsertErrorAlertView.swift in Sources */,
 				AE0D336427B4B01600C4B955 /* APP.swift in Sources */,
 				AE02405F27E339B300017F77 /* CafeDrink.swift in Sources */,
 				AE02407127E369EC00017F77 /* Rx+UICollectionView.swift in Sources */,

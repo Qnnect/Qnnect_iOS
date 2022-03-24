@@ -56,7 +56,7 @@ final class DefaultOurCafeRepository: OurCafeRepository {
             }
     }
     
-    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,Error>> {
+    func insertIngredient(_ userDrinkSelectedId: Int, _ ingredientsId: Int) -> Observable<Result<Void,IngredientError>> {
         ourCafeNetworkService.insertIngredient(userDrinkSelectedId, ingredientsId)
     }
 }

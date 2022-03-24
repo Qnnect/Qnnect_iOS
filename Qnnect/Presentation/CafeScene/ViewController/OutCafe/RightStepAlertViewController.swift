@@ -176,5 +176,17 @@ final class RightStepAlertViewController: BaseViewController {
         output.insert
             .emit(onNext: coordinator.dismiss)
             .disposed(by: self.disposeBag)
+        
+        output.insertError
+            .emit(onNext: {
+                [weak self] msg in
+                guard let self = self , let pvc = self.presentingViewController else { return }
+                self.dismiss(animated: false, completion: {
+                    let view = InsertErrorAlertView.create(with: msg)
+                    view.modalPresentationStyle = .overCurrentContext
+                    pvc.present(view, animated: true, completion: nil)
+                })
+            })
+            .disposed(by: self.disposeBag)
     }
 }

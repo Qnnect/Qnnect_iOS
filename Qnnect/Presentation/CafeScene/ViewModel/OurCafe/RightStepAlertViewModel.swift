@@ -19,6 +19,7 @@ final class RightStepAlertViewModel: ViewModelType {
     
     struct Output {
         let insert: Signal<Void>
+        let insertError: Signal<String>
     }
     
     private let ourCafeUseCase: OurCafeUseCase
@@ -36,7 +37,17 @@ final class RightStepAlertViewModel: ViewModelType {
                     resultSelector: {(userDrinkSelectedId: $0, ingredientId: $1)})
             ).flatMap(ourCafeUseCase.insertIngredient)
             
+        let insertError = insert.compactMap { result -> IngredientError? in
+            guard case let .failure(error) = result else { return nil }
+            if error == .WRONG_INGREDIENT_SAME_LEVEL {
+                return error
+            }
+            return nil
+        }
         
-        return Output(insert: insert.mapToVoid().asSignal(onErrorSignalWith: .empty()))
+        return Output(
+            insert: insert.mapToVoid().asSignal(onErrorSignalWith: .empty()),
+            insertError: insertError.map{ $0.message }.asSignal(onErrorSignalWith: .empty())
+        )
     }
 }
