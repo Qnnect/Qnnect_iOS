@@ -95,6 +95,22 @@ final class IngredientCell: UICollectionViewCell {
     
     func update(with ingredient: Ingredient) {
         self.icon.image = UIImage(named:ingredient.name)
+        if ingredient.name == "얼음" {
+            icon.snp.updateConstraints { make in
+                make.height.equalTo(110.0)
+            }
+            title.snp.updateConstraints { make in
+                make.top.equalTo(icon.snp.bottom).offset(-2.0)
+            }
+        } else {
+            icon.snp.updateConstraints { make in
+                make.height.equalTo(90.0)
+            }
+            title.snp.updateConstraints { make in
+                make.top.equalTo(icon.snp.bottom).offset(18.0)
+            }
+        }
+        
         self.price.text = "\(ingredient.price)"
         self.title.text = ingredient.name
     }

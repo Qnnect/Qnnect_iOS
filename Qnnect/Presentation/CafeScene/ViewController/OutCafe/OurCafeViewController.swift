@@ -213,6 +213,10 @@ final class OurCafeViewController: BaseViewController {
         $0.contentMode = .scaleAspectFit
     }
     
+    private let drinkShadowImageView = UIImageView().then {
+        $0.image = Constants.drinkShadow
+        $0.contentMode = .scaleToFill
+    }
     
     private var viewModel: OurCafeViewModel!
     weak var coordinator: OurCafeCoordinator?
@@ -244,6 +248,7 @@ final class OurCafeViewController: BaseViewController {
         super.configureUI()
         
         [
+            drinkShadowImageView,
             userCollectionView,
             titleLabel,
             drinkImageView,
@@ -282,10 +287,12 @@ final class OurCafeViewController: BaseViewController {
             make.top.equalTo(userCollectionView.snp.bottom).offset(34.0)
             make.leading.trailing.equalToSuperview().inset(33.0)
         }
+        titleLabel.setContentHuggingPriority(.required, for: .vertical)
         
         drinkImageView.snp.makeConstraints { make in
             make.bottom.equalTo(progressBar.snp.top).offset(-30.0)
             make.leading.trailing.equalToSuperview().inset(130.0)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20.0)
         }
         
         progressBar.snp.makeConstraints { make in
@@ -324,6 +331,13 @@ final class OurCafeViewController: BaseViewController {
             make.bottom.equalTo(selectDrinkButton.snp.top).priority(.high)
         }
         completionImageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        drinkShadowImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(drinkImageView).offset(5.0)
+            make.leading.equalTo(drinkImageView).offset(9.12)
+            make.trailing.equalTo(drinkImageView).offset(-9.81)
+            make.height.equalToSuperview().multipliedBy(0.03694)
+        }
         
         navigationItem.titleView = navigationTitleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -499,7 +513,7 @@ private extension OurCafeViewController {
             insertIngredientButton.isHidden = true
             progressBar.isHidden = true
             stepLabelStackView.isHidden = true
-            drinkImageView.image = Constants.drinkEmptyImage
+            drinkImageView.image = Constants.notSelectDrinkImage
             notSelectLabel.isHidden = false
             completionLabel.isHidden = true
             completionImageView.isHidden = true
@@ -557,10 +571,20 @@ private extension OurCafeViewController {
         if curStep == .completed {
             drinkImageView.snp.updateConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(130.0 - 34.5)
+                make.top.equalTo(titleLabel.snp.bottom).offset(20.0)
+            }
+            drinkShadowImageView.snp.updateConstraints { make in
+                make.leading.equalTo(drinkImageView).offset(43.0)
+                make.trailing.equalTo(drinkImageView).offset(-41.0)
             }
         } else {
             drinkImageView.snp.updateConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(130.0)
+                make.top.equalTo(titleLabel.snp.bottom).offset(20.0 + UIScreen.main.bounds.height * 0.02159)
+            }
+            drinkShadowImageView.snp.updateConstraints { make in
+                make.leading.equalTo(drinkImageView).offset(9.12)
+                make.trailing.equalTo(drinkImageView).offset(-9.81)
             }
         }
     }

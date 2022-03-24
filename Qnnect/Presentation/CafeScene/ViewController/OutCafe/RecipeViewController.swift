@@ -43,6 +43,11 @@ final class RecipeViewController: BaseViewController {
         $0.alignment = .top
     }
     
+    private let drinkShadowImageView = UIImageView().then {
+        $0.image = Constants.drinkShadow
+        $0.contentMode = .scaleToFill
+    }
+    
     private let navigationTitleLabel = NavigationTitleLabel(title: "레시피 보기")
     
     weak var coordinator: OurCafeCoordinator?
@@ -72,6 +77,7 @@ final class RecipeViewController: BaseViewController {
         super.configureUI()
         
         [
+            drinkShadowImageView,
             drinkImageView,
             drinkNameLabel,
             progressBar,
@@ -83,23 +89,26 @@ final class RecipeViewController: BaseViewController {
         }
         
         drinkImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().multipliedBy(0.6)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(70.0)
             make.leading.trailing.equalToSuperview().inset(130.0)
+            make.bottom.equalTo(drinkNameLabel.snp.top).offset(-32.0)
         }
+        drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
         drinkNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(drinkImageView.snp.bottom).offset(27.0)
+            make.bottom.equalTo(progressBar.snp.top).offset(-80.0)
         }
         
         progressBar.snp.makeConstraints { make in
             make.top.equalTo(drinkNameLabel.snp.bottom).offset(46.0)
             make.leading.trailing.equalToSuperview().inset(50.0)
+            make.bottom.equalTo(stepLabelStackView.snp.top).offset(-8.0)
         }
         
         stepLabelStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(45.0)
-            make.top.equalTo(progressBar.snp.bottom).offset(8.0)
+            make.bottom.equalTo(ingredientImageStackView.snp.top).offset(-10.0)
         }
         
         var steps = DrinkStep.allCases
@@ -116,13 +125,22 @@ final class RecipeViewController: BaseViewController {
         }
         ingredientImageStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30.0)
-            make.top.equalTo(stepLabelStackView.snp.bottom).offset(10.0)
+            //make.top.equalTo(stepLabelStackView.snp.bottom).offset(10.0)
             make.height.equalTo((UIScreen.main.bounds.width - 105.0) / 4.0)
+            make.bottom.equalTo(recipeInfoLabelStackView.snp.top).offset(-10.0)
         }
         
         recipeInfoLabelStackView.snp.makeConstraints { make in
-            make.top.equalTo(ingredientImageStackView.snp.bottom).offset(10.0)
+            //make.top.equalTo(ingredientImageStackView.snp.bottom).offset(10.0)
             make.leading.trailing.equalTo(ingredientImageStackView)
+            make.bottom.equalToSuperview().inset(132.0)
+        }
+        
+        drinkShadowImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(drinkImageView).offset(5.0)
+            make.leading.equalTo(drinkImageView).offset(9.12)
+            make.trailing.equalTo(drinkImageView).offset(-9.81)
+            make.height.equalToSuperview().multipliedBy(0.03694)
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(

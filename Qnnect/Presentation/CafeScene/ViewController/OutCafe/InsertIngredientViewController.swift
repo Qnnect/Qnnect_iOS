@@ -77,6 +77,11 @@ final class InsertIngredientViewController: BaseViewController {
         )
     }
     
+    private let drinkShadowImageView = UIImageView().then {
+        $0.image = Constants.drinkShadow
+        $0.contentMode = .scaleToFill
+    }
+    
     weak var coordinator: OurCafeCoordinator?
     private var viewModel: InsertIngredientViewModel!
     private var cafeId: Int!
@@ -105,6 +110,7 @@ final class InsertIngredientViewController: BaseViewController {
         super.configureUI()
         
         [
+            drinkShadowImageView,
             viewRecipeButton,
             drinkImageView,
             progressBar,
@@ -128,18 +134,22 @@ final class InsertIngredientViewController: BaseViewController {
         
         drinkImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(130.0)
-            make.centerY.equalToSuperview().multipliedBy(0.68)
+            make.top.equalTo(viewRecipeButton.snp.bottom).offset(20.0)
+            make.bottom.equalTo(progressBar.snp.top).offset(-30.0)
         }
+        drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
         progressBar.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(50.0)
-            make.top.equalTo(drinkImageView.snp.bottom).offset(30.0)
+            make.bottom.equalTo(stepLabelStackView.snp.top).offset(-8.0)
         }
         
         stepLabelStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(45.0)
-            make.top.equalTo(progressBar.snp.bottom).offset(8.0)
+            //make.top.equalTo(progressBar.snp.bottom).offset(8.0)
+            make.bottom.equalTo(ingredientStorageLabel.snp.top).offset(-47.0)
         }
+        
         var steps = DrinkStep.allCases
         steps.removeLast()
         steps.forEach { step in
@@ -175,6 +185,13 @@ final class InsertIngredientViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.bottom.equalToSuperview().inset(57.0)
             make.top.equalTo(ingredientStorageLabel.snp.bottom).offset(15.0)
+        }
+        
+        drinkShadowImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(drinkImageView).offset(5.0)
+            make.leading.equalTo(drinkImageView).offset(9.12)
+            make.trailing.equalTo(drinkImageView).offset(-9.81)
+            make.height.equalToSuperview().multipliedBy(0.03694)
         }
         
         navigationItem.titleView = navigationTitleLabel
@@ -333,10 +350,20 @@ private extension InsertIngredientViewController {
         if curStep == .completed {
             drinkImageView.snp.updateConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(130.0 - 34.5)
+                make.top.equalTo(viewRecipeButton.snp.bottom).offset(10.0)
+            }
+            drinkShadowImageView.snp.updateConstraints { make in
+                make.leading.equalTo(drinkImageView).offset(43.0)
+                make.trailing.equalTo(drinkImageView).offset(-41.0)
             }
         } else {
             drinkImageView.snp.updateConstraints { make in
                 make.leading.trailing.equalToSuperview().inset(130.0)
+                make.top.equalTo(viewRecipeButton.snp.bottom).offset(10.0 + UIScreen.main.bounds.height * 0.02159)
+            }
+            drinkShadowImageView.snp.updateConstraints { make in
+                make.leading.equalTo(drinkImageView).offset(9.12)
+                make.trailing.equalTo(drinkImageView).offset(-9.81)
             }
         }
     }

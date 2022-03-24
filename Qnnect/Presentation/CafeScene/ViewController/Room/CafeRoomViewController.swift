@@ -305,7 +305,7 @@ private extension CafeRoomViewController {
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.17))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-        group.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
+        //group.contentInsets = .init(top: 24.0, leading: 0, bottom: 0, trailing: 0)
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.decorationItems = [

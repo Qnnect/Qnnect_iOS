@@ -52,7 +52,7 @@ final class LoginViewController: BaseViewController {
         $0.contentHorizontalAlignment = .fill
     }
     
-    
+
     private let appleButton = LeftAlignButton().then {
         $0.setImage(Constants.appleLogo, for: .normal)
         $0.setTitle("Apple로 로그인", for: .normal)
@@ -63,8 +63,8 @@ final class LoginViewController: BaseViewController {
         $0.contentHorizontalAlignment = .left
         $0.contentVerticalAlignment = .fill
     }
-    
-    
+
+   // private let appleButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     private var viewModel: LoginViewModel!
     weak var coordinator: AuthCoordinator?
     private var inviteCode: String?

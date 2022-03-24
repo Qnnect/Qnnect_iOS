@@ -51,10 +51,11 @@ final class CafeDrinkCell: UICollectionViewCell {
         userNameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         
         self.drinkImageView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(17.0)
+            make.top.equalToSuperview()
             make.bottom.equalTo(userNameLabel.snp.top).offset(-10.0)
         }
-        
+        drinkImageView.setContentHuggingPriority(.required, for: .vertical)
     }
     
     func update(with curStep: DrinkStep?, _ drink: DrinkType?, _ name: String) {
@@ -64,7 +65,6 @@ final class CafeDrinkCell: UICollectionViewCell {
             drinkImageView.image = Constants.notSelectDrinkImage
             return
         }
-        
         drinkImageView.image = curStep == .completed ? drink.getDrinkCompletionImage() : drink.getDrinkStepImage(curStep)
     }
 }

@@ -41,6 +41,11 @@ final class CompleteDrinkViewController: BaseViewController {
         $0.image = Constants.completionCelebrateImage
     }
     
+    private let drinkShadowImageView = UIImageView().then {
+        $0.image = Constants.drinkShadow
+        $0.contentMode = .scaleToFill
+    }
+    
     private var curStep: DrinkStep!
     private var userDrink: DrinkType!
     weak var coordinator: OurCafeCoordinator?
@@ -61,6 +66,7 @@ final class CompleteDrinkViewController: BaseViewController {
         super.configureUI()
         
         [
+            drinkShadowImageView,
             twinkleImageView,
             drinkImageView,
             mainLabel,
@@ -96,6 +102,14 @@ final class CompleteDrinkViewController: BaseViewController {
             make.bottom.equalTo(mainLabel.snp.top).offset(-20.0)
             make.top.equalTo(twinkleImageView.snp.bottom).offset(20.0)
         }
+        
+        drinkShadowImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(drinkImageView).offset(5.0)
+            make.leading.equalTo(drinkImageView).offset(43.0)
+            make.trailing.equalTo(drinkImageView).offset(-41.0)
+            make.height.equalToSuperview().multipliedBy(0.03694)
+        }
+        
         drinkImageView.image = userDrink.getDrinkStepImage(.completed) //twinkle 이미지
         drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         

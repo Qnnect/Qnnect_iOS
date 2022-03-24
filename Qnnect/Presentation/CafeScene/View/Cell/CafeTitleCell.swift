@@ -73,8 +73,8 @@ final class CafeTitleCell: UICollectionViewCell {
         self.drinkImageView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(35.23)
             make.trailing.equalToSuperview().inset(55.0)
-            make.top.equalToSuperview().inset(50.0)
-            make.width.equalTo(100.0)
+            make.top.equalToSuperview().inset(25.6)
+            make.width.equalTo((contentView.frame.height - 35.23 - 25.6) / 2.05)
         }
         
         self.drinkSelectButton.snp.makeConstraints { make in
@@ -91,10 +91,7 @@ final class CafeTitleCell: UICollectionViewCell {
        
         guard let drinkInfo = drinkInfo else {
             drinkImageView.image = Constants.notSelectDrinkImage
-            drinkImageView.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(50.0)
-                make.width.equalTo((contentView.frame.height - 50.0 - 35.23) / 1.48)
-            }
+
             return
         }
         
@@ -102,16 +99,7 @@ final class CafeTitleCell: UICollectionViewCell {
         drinkImageView.image =
         drinkInfo.curStep == .completed ?
         drinkInfo.drink.getDrinkCompletionImage() : drinkInfo.drink.getDrinkStepImage(drinkInfo.curStep)
-        
-        drinkImageView.snp.updateConstraints { make in
-            if drinkInfo.curStep == .completed {
-                make.top.equalToSuperview().inset(26.5)
-                make.width.equalTo((contentView.frame.height - 26.5 - 35.23) / 1.95)
-            } else {
-                make.top.equalToSuperview().inset(50.0)
-                make.width.equalTo((contentView.frame.height - 50.0 - 35.23) / 1.48)
-            }
-        }
+    
     }
 }
 
