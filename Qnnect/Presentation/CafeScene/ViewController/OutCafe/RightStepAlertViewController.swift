@@ -116,6 +116,11 @@ final class RightStepAlertViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(110.0)
         }
         ingredientsImageView.image = UIImage(named: ingredient.name)
+        if ingredient.name == "얼음" {
+            ingredientsImageView.contentMode = .scaleAspectFill
+        } else {
+            ingredientsImageView.contentMode = .scaleAspectFit
+        }
         
         alertView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

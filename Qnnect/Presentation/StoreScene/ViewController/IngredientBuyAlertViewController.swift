@@ -18,7 +18,7 @@ final class IngredientBuyAlertViewController: BaseViewController {
     }
     
     private let iconImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     private let buyInfoLabel = UILabel().then {
@@ -85,6 +85,12 @@ final class IngredientBuyAlertViewController: BaseViewController {
         }
         
         self.iconImageView.image = UIImage(named: ingredient.name)
+        
+        if ingredient.name == "얼음" {
+            iconImageView.contentMode = .scaleAspectFill
+        } else {
+            iconImageView.contentMode = .scaleAspectFit
+        }
         
         self.buyInfoLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(93.0)
