@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Toast_Swift
 
 protocol MyPageCoordinator: Coordinator {
     func showEditProfileScene(user: User)
@@ -17,7 +18,7 @@ protocol MyPageCoordinator: Coordinator {
     func showSentQuestionListScene()
     func showBlockedFriendListScene()
     func pop()
-    func showLoginScene()
+    func showLoginScene(_ leaveType: LeaveType)
 }
 
 final class DefaultMyPageCoordinator: MyPageCoordinator {
@@ -71,12 +72,17 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         navigationController.present(view, animated: true, completion: nil)
     }
     
-    func showLoginScene() {
+    func showLoginScene(_ leaveType: LeaveType) {
         if let appCoordinator = parentCoordinator?.parentCoordinator as? AppCoordinator {
             let coordinator = DefaultAuthCoordinator(navigationController: appCoordinator.navigationController)
             appCoordinator.childCoordinators.append(coordinator)
             coordinator.parentCoordinator = appCoordinator
             coordinator.start()
+            coordinator.navigationController.view.makeToast(
+                leaveType.message,
+                duration: 3.0,
+                position: .bottom
+            )
             appCoordinator.childCoordinators.removeAll(where: { $0 !== coordinator })
         }
     }

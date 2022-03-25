@@ -10,6 +10,20 @@ import SnapKit
 import Then
 import RxSwift
 
+enum LeaveType {
+    case logout
+    case withdrawl
+    
+    var message: String {
+        switch self {
+        case .logout:
+            return "로그아웃 되었습니다."
+        case .withdrawl:
+            return "회원탈퇴 되었습니다."
+        }
+    }
+}
+
 final class MyPageAlertViewController: BaseViewController {
     
     private let titleLabel = UILabel().then {
@@ -126,10 +140,12 @@ final class MyPageAlertViewController: BaseViewController {
         guard let coordinator = coordinator else { return }
 
         output.logout
+            .map { LeaveType.logout }
             .emit(onNext: coordinator.showLoginScene)
             .disposed(by: self.disposeBag)
         
         output.withdrawl
+            .map { LeaveType.withdrawl }
             .emit(onNext: coordinator.showLoginScene)
             .disposed(by: self.disposeBag)
         
