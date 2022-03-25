@@ -35,7 +35,13 @@ final class SocialLoginManager: NSObject {
     func getUserProfileImageInKakao() -> Observable<URL?> {
         return UserApi.shared.rx.me()
             .asObservable()
-            .map { $0.kakaoAccount?.profile?.profileImageUrl }
+            .map {
+                if $0.kakaoAccount?.profile?.isDefaultImage ?? true {
+                    return nil
+                } else {
+                    return $0.kakaoAccount?.profile?.profileImageUrl
+                }
+            }
     }
     
     func appleLogin() -> Observable<String> {
