@@ -25,12 +25,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .p_brown
         UITabBar.appearance().backgroundColor = .p_ivory
         //UITabBar.appearance().isTranslucent = false
-
+        
         self.scene(scene, openURLContexts: connectionOptions.urlContexts)
         
 //        UserDefaults.standard.removeObject(forKey: "isFirstAccess")
 
-
+        
     
     }
     

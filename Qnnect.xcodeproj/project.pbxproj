@@ -2448,11 +2448,11 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진 접근 허용을 누르시면 회원님의 프로필 사진을 갤러리의 사진으로 설정할 수 있어요.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사용자의 사진에 접근하기위해 권한을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2485,11 +2485,11 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용해주세요.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진 접근 허용을 누르시면 회원님의 프로필 사진을 갤러리의 사진으로 설정할 수 있어요.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "갤러리 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사용자의 사진에 접근하기위해 권한을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

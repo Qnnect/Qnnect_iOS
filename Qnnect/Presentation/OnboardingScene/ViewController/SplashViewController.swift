@@ -59,6 +59,7 @@ final class SplashViewController: BaseViewController {
             print("abc")
         }
         
+        
         let input = SplashViewModel.Input(
             didEndSplash: didEndSplash.asObservable(),
             inviteCode: Observable.just(inviteCode)
