@@ -22,6 +22,7 @@ final class LoginViewModel: ViewModelType {
         let showHomeScene: Signal<Void>
         let inviteFlowTermScene: Signal<(Token, LoginType, String)>
         let inviteFlowHomeScene: Signal<String>
+        let loginError: Signal<Void>
     }
     
     var socialLoginManager: SocialLoginManager!
@@ -38,16 +39,23 @@ final class LoginViewModel: ViewModelType {
         let kakaoLogin = input.didTapKakaoButton
             .flatMap(self.socialLoginManager.kakaoLogin)
             .flatMap(self.kakaoLogin(_:))
-            .compactMap(self.convertToUserLoginInfo)
-            .map { ($0,LoginType.kakao) }
         
         let appleLogin = input.didTapAppleButton
             .flatMap(self.socialLoginManager.appleLogin)
             .flatMap(self.appleLogin(_:))
-            .compactMap(self.convertToUserLoginInfo)
-            .map { ($0,LoginType.apple) }
         
-        let isSuccess = Observable.merge(kakaoLogin,appleLogin)
+        let kakaoLoginSuccess = kakaoLogin.compactMap(self.convertToUserLoginInfo)
+            .map { ($0,LoginType.kakao) }
+        
+        let appleLoginSucess = appleLogin.compactMap(convertToUserLoginInfo(_:))
+            .map{ ($0, LoginType.apple) }
+        
+        let loginError = Observable.merge(
+            kakaoLogin.compactMap(convertToError(_:)),
+            appleLogin.compactMap(convertToError(_:))
+        ).mapToVoid()
+        
+        let isSuccess = Observable.merge(kakaoLoginSuccess, appleLoginSucess)
             .do{
                 [weak self] userLoginInfo,loginType in
                 if !userLoginInfo.isNewMember, userLoginInfo.userSettingDone {
@@ -75,21 +83,22 @@ final class LoginViewModel: ViewModelType {
         let showHomeScene = isSuccess
             .take(until: input.inviteCode)
             .filter{
-            [weak self] in
-            self?.isNeedToSetting($0, $1) == false
-        }.mapToVoid()
+                [weak self] in
+                self?.isNeedToSetting($0, $1) == false
+            }.mapToVoid()
         
         let inviteFlowHomeScene = isSuccess
             .filter{
-            [weak self] in
-            self?.isNeedToSetting($0, $1) == false
+                [weak self] in
+                self?.isNeedToSetting($0, $1) == false
             }.withLatestFrom(input.inviteCode)
         
         return Output(
             showTermsScene: showTermsScene.asSignal(onErrorSignalWith: .empty()),
             showHomeScene: showHomeScene.asSignal(onErrorSignalWith: .empty()),
             inviteFlowTermScene: inviteFlowTermsScene.asSignal(onErrorSignalWith: .empty()),
-            inviteFlowHomeScene: inviteFlowHomeScene.asSignal(onErrorSignalWith: .empty())
+            inviteFlowHomeScene: inviteFlowHomeScene.asSignal(onErrorSignalWith: .empty()),
+            loginError: loginError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
@@ -110,6 +119,11 @@ private extension LoginViewModel {
     func convertToUserLoginInfo(_ result: Result<UserLoginInfo, LoginError>) -> UserLoginInfo? {
         guard case let .success(userLoginInfo) = result  else { return nil }
         return userLoginInfo
+    }
+    
+    func convertToError(_ result: Result<UserLoginInfo, LoginError>) -> Error? {
+        guard case let .failure(error) = result else { return nil }
+        return error
     }
     
 }

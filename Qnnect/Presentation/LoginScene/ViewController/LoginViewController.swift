@@ -136,6 +136,12 @@ final class LoginViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
+        output.loginError
+            .emit(onNext: {
+                [weak self] _ in
+                self?.view.makeToast("로그인 오류", duration: 3.0, position: .bottom)
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
         output.showHomeScene
             .emit(onNext: coordinator.showMain)
