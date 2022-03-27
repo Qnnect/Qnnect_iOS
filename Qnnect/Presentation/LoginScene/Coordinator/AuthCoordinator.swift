@@ -101,11 +101,10 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         //TODO: 탭바 세팅, push HomeVC
         self.navigationController.isNavigationBarHidden = true
         let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: TabBarController())
-        coordinator.start(inviteCode: inviteCode)
         coordinator.parentCoordinator = parentCoordinator
-        print("authCoordianator parentCoordinator \(parentCoordinator)")
         self.parentCoordinator?.childCoordinators.append(coordinator)
         self.parentCoordinator?.childCoordinators.removeAll(where: { $0 === self})
+        coordinator.start(inviteCode: inviteCode)
     }
     
     func start() {

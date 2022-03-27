@@ -34,6 +34,6 @@ class BaseNetworkService<EndPoint: TargetType>: Networkable {
                 }
             }
 //            .filterSuccessfulStatusCodes()
-//            .retry(2)
+            .retry(2)
     }
 }
