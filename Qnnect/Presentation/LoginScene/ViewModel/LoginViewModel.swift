@@ -38,6 +38,10 @@ final class LoginViewModel: ViewModelType {
         //TODO: 기존회원일 경우 -> Main , 기존회원이지만 프로필 설정안했거나 새로운회원인 경우 -> Term
         let kakaoLogin = input.didTapKakaoButton
             .flatMap(self.socialLoginManager.kakaoLogin)
+            .compactMap({ result -> String? in
+                guard case let .success(token) = result else { return nil }
+                return token
+            })
             .flatMap(self.kakaoLogin(_:))
         
         let appleLogin = input.didTapAppleButton
@@ -63,6 +67,7 @@ final class LoginViewModel: ViewModelType {
                     self?.authUseCase.saveLoginType(loginType)
                 }
             }
+            .debug()
             .share()
         
         let showTermsScene = isSuccess.filter(isNeedToSetting)

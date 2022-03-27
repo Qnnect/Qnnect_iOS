@@ -19,15 +19,19 @@ final class SocialLoginManager: NSObject {
         self.vc = vc
     }
     
-    func kakaoLogin() -> Observable<String>{
-        
+    func kakaoLogin() -> Observable<Result<String,Error>>{
+    
         if (UserApi.isKakaoTalkLoginAvailable()) {
             return UserApi.shared.rx.loginWithKakaoTalk()
-                .map { $0.accessToken }
+                .map { Result.success($0.accessToken) }
+                .catch { .just(Result.failure($0)) }
+                .debug()
+               
             
         } else {
             return UserApi.shared.rx.loginWithKakaoAccount(prompts: [.Login])
-                .map{ $0.accessToken }
+                .map { Result.success($0.accessToken) }
+                .catch { .just(Result.failure($0)) }
                 .debug()
         }
     }

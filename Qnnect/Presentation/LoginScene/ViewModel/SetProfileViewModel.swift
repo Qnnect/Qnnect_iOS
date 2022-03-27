@@ -55,6 +55,7 @@ final class SetProfileViewModel: ViewModelType {
             .map(self.authUseCase.getNameLength(_:))
         
         let userInfo = Observable.combineLatest(input.token, input.isAgreedNoti, input.profileImageData, input.inputName.compactMap{$0})
+            .debug()
         
         let setting = input.didTapCompletionButton
             .withLatestFrom(userInfo)

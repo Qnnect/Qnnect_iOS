@@ -71,8 +71,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             print("homeCoordinator 존재")
                             print(mainCoordinator.childCoordinators)
                             mainCoordinator.childCoordinators.forEach {
-                                print("navigation viewControllers", $0.navigationController.viewControllers)
-                                print("navigation presentedVC ", $0.navigationController.presentedViewController)
                                 $0.navigationController.popToRootViewController(animated: false)
                                 if let vc = $0.navigationController.presentedViewController {
                                     vc.presentingViewController?.dismiss(animated: false)
