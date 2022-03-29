@@ -18,6 +18,7 @@ final class TokenService: Networkable {
               let refreshToken = KeyChain.read(key: Constants.refreshTokenKey) else { return Single.just(Response(statusCode: 600, data: Data())) }
         let request = ReissueRequestDTO(accessToken: accessToken, refreshToken: refreshToken)
         return self.provider.rx.request(.reissue(request: request))
+            .handleTokenResponse()
     }
 }
 

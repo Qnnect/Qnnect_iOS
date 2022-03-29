@@ -30,13 +30,15 @@ final class RightStepAlertViewModel: ViewModelType {
     func transform(from input: Input) -> Output {
         
         let insert = input.didTapOkButton
+        
             .withLatestFrom(
                 Observable.combineLatest(
                     input.userDrinkSelectedId,
                     input.ingredientsId,
                     resultSelector: {(userDrinkSelectedId: $0, ingredientId: $1)})
             ).flatMap(ourCafeUseCase.insertIngredient)
-            
+            .share()
+        
         let insertError = insert.compactMap { result -> IngredientError? in
             guard case let .failure(error) = result else { return nil }
             if error == .WRONG_INGREDIENT_SAME_LEVEL {

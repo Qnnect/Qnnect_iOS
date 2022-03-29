@@ -50,7 +50,6 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     }
     
     func start(inviteCode: String?) {
-        print("inviteCode \(inviteCode)")
         let repository =  DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
             authNetworkService: AuthNetworkService()
@@ -76,7 +75,6 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     }
     
     func showMain(_ inviteCode: String?) {
-        print("show Main inviteCode \(inviteCode)")
         let coordinator = DefaultMainCoordinator(navigationController: self.navigationController, tabbarController: UITabBarController())
         self.parentCoordinator?.childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self.parentCoordinator

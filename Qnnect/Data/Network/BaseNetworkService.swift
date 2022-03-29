@@ -28,13 +28,12 @@ class BaseNetworkService<EndPoint: TargetType>: Networkable {
                     return Single.just($0)
                 }
             }
-            .retry { (error: Observable<TokenError>) in
+            .retry(when: { (error: Observable<TokenError>) in
                 error.flatMap { error -> Single<Response> in
                     TokenService.reissueToken()
                 }
-            }
-            .handleTokenResponse()
-//            .filterSuccessfulStatusCodes()
+            })
+            .filterSuccessfulStatusCodes()
             .retry(2)
     }
 }
@@ -43,13 +42,15 @@ extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
   func handleTokenResponse() -> Single<Element> {
     return flatMap { response in
       // 토큰 재발급 받았을 때 토큰 변경함
-      if let newToken = try? response.map(Token.self) {
-          KeyChain.create(key: Constants.accessTokenKey, token: newToken.access)
-          KeyChain.create(key: Constants.refreshTokenKey, token: newToken.refresh)
+      if let newToken = try? response.map(ReissueResponseDTO.self) {
+          KeyChain.create(key: Constants.accessTokenKey, token: newToken.accessToken)
+          KeyChain.create(key: Constants.refreshTokenKey, token: newToken.refreshToken)
           if let accessToken = KeyChain.read(key: Constants.accessTokenKey),
              let refreshToken = KeyChain.read(key: Constants.refreshTokenKey) {
               print("token save success 😎  access: \(accessToken), refresh: \(refreshToken)")
           }
+      } else {
+          print("token decode error")
       }
                     
 //      if (200 ... 299) ~= response.statusCode {
