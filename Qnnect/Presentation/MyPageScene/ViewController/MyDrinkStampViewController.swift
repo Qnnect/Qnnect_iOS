@@ -190,10 +190,17 @@ final class MyDrinkStampViewController: BaseViewController {
             .map {
                 stamps, user -> [MyDrinkStampSectionModel] in
                 let titleSectionItem = MyDrinkStampSectionItem.titleSectionItem(user: user!)
-                let stampSectionItem = stamps.map { MyDrinkStampSectionItem.stampSectionItem(stamp: $0)}
+                var stampSectionItems = stamps.map { MyDrinkStampSectionItem.stampSectionItem(stamp: $0)}
+                let stampSectionItemCount = stampSectionItems.count
+                if stampSectionItemCount < 9 {
+                    for _ in 0 ..< (9 - stampSectionItemCount) {
+                        stampSectionItems.append(MyDrinkStampSectionItem.stampSectionItem(stamp: Stamp.empty))
+                    }
+                }
+                
                 return [
                     MyDrinkStampSectionModel.titleSection(items: [titleSectionItem]),
-                    MyDrinkStampSectionModel.stampSection(items: stampSectionItem)
+                    MyDrinkStampSectionModel.stampSection(items: stampSectionItems)
                 ]
             }
             .bind(to: stampCollectionView.rx.items(dataSource: dataSource))
@@ -227,7 +234,7 @@ private extension MyDrinkStampViewController {
         group.interItemSpacing = .fixed(36.0)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 19.0, leading: 20.0, bottom: 0, trailing: 20.0)
+        section.contentInsets = .init(top: 44.0, leading: 20.0, bottom: 0, trailing: 20.0)
         section.interGroupSpacing = 25.0
         
         return section

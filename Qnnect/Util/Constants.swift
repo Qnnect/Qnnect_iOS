@@ -129,6 +129,7 @@ struct Constants {
     static let floatingButtonImage: UIImage? = UIImage(named: "floatingButton")
     static let completionTwinkle: UIImage? = UIImage(named: "completionTwinkle")
     static let drinkShadow: UIImage? = UIImage(named: "drinkShadow")
+    static let stampDefaultImage: UIImage? = UIImage(named: "stampDefaultImage")
     
     // MARK: -  Drinks
     static let drinkEmptyImage: UIImage? = UIImage(named: "drink_empty")

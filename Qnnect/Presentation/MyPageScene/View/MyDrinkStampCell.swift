@@ -25,6 +25,7 @@ final class MyDrinkStampCell: UICollectionViewCell {
         $0.textColor = .BLACK_121212
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textAlignment = .center
+        $0.text = "  "
         $0.sizeToFit()
     }
     
@@ -32,6 +33,7 @@ final class MyDrinkStampCell: UICollectionViewCell {
         $0.textColor = .secondaryBorder
         $0.font = .IM_Hyemin(.bold, size: 12.0)
         $0.textAlignment = .center
+        $0.text = "  "
         $0.sizeToFit()
     }
     
@@ -63,6 +65,7 @@ final class MyDrinkStampCell: UICollectionViewCell {
         }
         
         outerView.setContentHuggingPriority(.required, for: .vertical)
+        //outerView.setContentHuggingPriority(.required, for: .horizontal)
         
         drinkImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(28.0)
@@ -84,10 +87,26 @@ final class MyDrinkStampCell: UICollectionViewCell {
     }
     
     func update(with stamp: Stamp) {
-        let drink = DrinkType(rawValue: stamp.drinkName) ?? .strawberryLatte
-        outerView.backgroundColor = drink.stampBackGroundColor
-        drinkImageView.image = drink.getDrinkCompletionImage()
-        drinkNameLabel.text = drink.rawValue
-        cafeNameLabel.text = stamp.cafeName
+        if stamp == Stamp.empty {
+            drinkImageView.image = Constants.stampDefaultImage
+            drinkNameLabel.text = "  "
+            cafeNameLabel.text = "  "
+            outerView.backgroundColor = UIColor.p_ivory
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(17.0)
+                make.top.bottom.equalToSuperview().inset(21.0)
+            }
+        } else {
+            let drink = DrinkType(rawValue: stamp.drinkName) ?? .strawberryLatte
+            outerView.backgroundColor = drink.stampBackGroundColor
+            drinkImageView.image = drink.getDrinkCompletionImage()
+            drinkNameLabel.text = drink.rawValue
+            cafeNameLabel.text = stamp.cafeName
+            drinkImageView.snp.updateConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(28.0)
+                make.top.bottom.equalToSuperview().inset(13.0)
+            }
+        }
+        
     }
 }
