@@ -14,4 +14,5 @@ protocol UserRepository: AnyObject {
     func fetchUser() -> Observable<Result<User,Error>>
     func fetchLoginType() -> LoginType?
     func setDefaultImage() -> Observable<Result<Void,Error>>
+    func fetchStamps() -> Observable<Result<[Stamp],Error>>
 }

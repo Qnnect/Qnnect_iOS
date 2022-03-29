@@ -61,4 +61,17 @@ final class DefaultUserRepositry: UserRepository {
     func fetchLoginType() -> LoginType? {
         return self.localStorage.loginType
     }
+    
+    func fetchStamps() -> Observable<Result<[Stamp], Error>> {
+        userNetworkService.fetchStamps()
+            .map {
+                result -> Result<[Stamp],Error> in
+                switch result {
+                case .success(let responseDTOs):
+                    return .success(responseDTOs.map{ $0.toDomain() })
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
+    }
 }

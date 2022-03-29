@@ -85,7 +85,7 @@ enum DrinkType: String {
             case .completed:
                 return Constants.lemonade_step_4
             }
-      
+            
         }
     }
     
@@ -140,29 +140,24 @@ final class MyDrinkStampViewController: BaseViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
+    private var viewModel: MyDrinkStampViewModel!
     private var user: User!
     weak var coordinator: MyPageCoordinator?
     
     static func create(
-        with coordinator: MyPageCoordinator,
+        with viewModel: MyDrinkStampViewModel,
+        _ coordinator: MyPageCoordinator,
         _ user: User
     ) -> MyDrinkStampViewController {
         let vc = MyDrinkStampViewController()
         vc.user = user
         vc.coordinator = coordinator
+        vc.viewModel = viewModel
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     override func configureUI() {
@@ -181,39 +176,28 @@ final class MyDrinkStampViewController: BaseViewController {
     override func bind() {
         super.bind()
         
-        let dummyData = [
-            StampTestModel(drink: .strawberryLatte, cafeName: "신사고5인방"),
-            StampTestModel(drink: .chocoLatte, cafeName: "아아메어벤져스"),
-            StampTestModel(drink: .lemonade, cafeName: "큐넥트등산회"),
-            StampTestModel(drink: .summnerLatte, cafeName: "할리갈리4인방"),
-            StampTestModel(drink: .mintChocoLatte, cafeName: "공덕F4"),
-            StampTestModel(drink: .lemonade, cafeName: "도농술꾼3인방"),
-            StampTestModel(drink: .strawberryLatte, cafeName: "카페죽돌이2명"),
-            StampTestModel(drink: .mintChocoLatte, cafeName: "고딩3인방"),
-            StampTestModel(drink: .lemonade, cafeName: "달달한커플2인"),
-            StampTestModel(drink: .strawberryLatte, cafeName: "화목한가족4인"),
-            StampTestModel(drink: .lemonade, cafeName: "주식회사3인"),
-            StampTestModel(drink: .mintChocoLatte, cafeName: "회사사무회"),
-            StampTestModel(drink: .strawberryLatte, cafeName: "테니스동호회"),
-            StampTestModel(drink: .summnerLatte, cafeName: "조기축구협회"),
-            StampTestModel(drink: .lemonade, cafeName: "강남얼짱3인방"),
-            StampTestModel(drink: .summnerLatte, cafeName: "맘카페4인"),
-        ]
+        let dataSource = createDataSource()
         
-        Observable.just(dummyData)
-            .withLatestFrom(Observable.just(user), resultSelector: {($0, $1)})
+        let input = MyDrinkStampViewModel.Input(
+            viewDidLoad: Observable.just(())
+        )
+        
+        let output = viewModel.transform(from: input)
+        
+        output.stamps
+            .asObservable()
+            .withLatestFrom(Observable.just(user), resultSelector: { ($0, $1)})
             .map {
-                data, user -> [MyDrinkStampSectionModel] in
+                stamps, user -> [MyDrinkStampSectionModel] in
                 let titleSectionItem = MyDrinkStampSectionItem.titleSectionItem(user: user!)
-                let stampSectionItem = data.map { MyDrinkStampSectionItem.stampSectionItem(model: $0)}
+                let stampSectionItem = stamps.map { MyDrinkStampSectionItem.stampSectionItem(stamp: $0)}
                 return [
                     MyDrinkStampSectionModel.titleSection(items: [titleSectionItem]),
                     MyDrinkStampSectionModel.stampSection(items: stampSectionItem)
                 ]
             }
-            .bind(to: stampCollectionView.rx.items(dataSource: createDataSource()))
+            .bind(to: stampCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
-        
     }
 }
 
@@ -236,12 +220,12 @@ private extension MyDrinkStampViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-     
+        
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         group.interItemSpacing = .fixed(36.0)
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 19.0, leading: 20.0, bottom: 0, trailing: 20.0)
         section.interGroupSpacing = 25.0
@@ -268,9 +252,9 @@ private extension MyDrinkStampViewController {
         return RxCollectionViewSectionedReloadDataSource<MyDrinkStampSectionModel> {
             dataSource, collectionView, indexPath, item in
             switch item {
-            case .stampSectionItem(model: let model):
+            case .stampSectionItem(stamp: let stamp):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyDrinkStampCell.identifier, for: indexPath) as! MyDrinkStampCell
-                cell.update(with: model)
+                cell.update(with: stamp)
                 return cell
             case .titleSectionItem(user: let user):
                 let cell = collectionView.dequeueReusableCell(

@@ -80,18 +80,14 @@ final class MyDrinkStampCell: UICollectionViewCell {
             make.top.equalTo(outerView.snp.bottom)
             make.bottom.equalTo(cafeNameLabel.snp.top).offset(-5.0)
         }
-        
-       
-        
-        //drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
 
-        
     }
     
-    func update(with testModel: StampTestModel) {
-        outerView.backgroundColor = testModel.drink.stampBackGroundColor
-        drinkImageView.image = testModel.drink.getDrinkCompletionImage()
-        drinkNameLabel.text = testModel.drink.rawValue
-        cafeNameLabel.text = testModel.cafeName
+    func update(with stamp: Stamp) {
+        let drink = DrinkType(rawValue: stamp.drinkName) ?? .strawberryLatte
+        outerView.backgroundColor = drink.stampBackGroundColor
+        drinkImageView.image = drink.getDrinkCompletionImage()
+        drinkNameLabel.text = drink.rawValue
+        cafeNameLabel.text = stamp.cafeName
     }
 }

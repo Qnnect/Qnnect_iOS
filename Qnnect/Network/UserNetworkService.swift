@@ -43,4 +43,13 @@ final class UserNetworkService: BaseNetworkService<UserAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchStamps() -> Observable<Result<[StampResponseDTO],Error>> {
+        request(.fetchStamps)
+            .filter(statusCode: 200)
+            .map([StampResponseDTO].self)
+            .map{ Result.success($0) }
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

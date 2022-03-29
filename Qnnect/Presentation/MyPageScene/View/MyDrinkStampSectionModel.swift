@@ -15,7 +15,7 @@ enum MyDrinkStampSectionModel {
 
 enum MyDrinkStampSectionItem {
     case titleSectionItem(user: User)
-    case stampSectionItem(model: StampTestModel)
+    case stampSectionItem(stamp: Stamp)
 }
 
 extension MyDrinkStampSectionModel: SectionModelType {

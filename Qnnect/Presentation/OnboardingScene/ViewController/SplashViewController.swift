@@ -92,18 +92,10 @@ final class SplashViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.inviteFlowShowLogin
-            .do {
-                [weak self] _ in
-                NSLog("showLogin", [])
-            }
             .emit(onNext: coordinator.showLogin(_:))
             .disposed(by: self.disposeBag)
         
         output.inviteFloswOnboarding
-            .do {
-                [weak self] _ in
-                NSLog("showOnboarding", [])
-            }
             .emit(onNext: coordinator.showOnboarding(_:))
             .disposed(by: self.disposeBag)
         

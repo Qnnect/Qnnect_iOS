@@ -60,7 +60,13 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
     }
     
     func showMyDrinkStampScene(user: User) {
-        let vc = MyDrinkStampViewController.create(with: self, user)
+        let userRepository = DefaultUserRepositry(
+            userNetworkService: UserNetworkService(),
+            localStorage: DefaultUserDefaultManager()
+        )
+        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
+        let viewModel = MyDrinkStampViewModel(userUseCase: userUseCase)
+        let vc = MyDrinkStampViewController.create(with: viewModel, self, user)
         vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }

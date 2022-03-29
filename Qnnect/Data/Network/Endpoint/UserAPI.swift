@@ -13,6 +13,7 @@ enum UserAPI {
     case setEnableNotification(request: SetEnableNotificationRequestDTO)
     case fetchUser(Void)
     case setDefaultImage
+    case fetchStamps
 }
 
 extension UserAPI: TargetType, AccessTokenAuthorizable {
@@ -30,6 +31,8 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/user"
         case .setDefaultImage:
             return "api/v1/user/profile/default_image"
+        case .fetchStamps:
+            return "api/v1/user/stamp"
         }
     }
     
@@ -39,7 +42,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
             return .patch
         case .setEnableNotification(_):
             return .patch
-        case .fetchUser():
+        case .fetchUser(), .fetchStamps:
             return .get
         }
     }
@@ -57,7 +60,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
         case .setEnableNotification(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-        case .fetchUser(), .setDefaultImage:
+        case .fetchUser(), .setDefaultImage, .fetchStamps:
             return .requestPlain
         }
     }
@@ -69,7 +72,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
                 "Content-Type": "multipart/form-data"
                
             ]
-        case .setEnableNotification(_), .fetchUser(), .setDefaultImage:
+        case .setEnableNotification(_), .fetchUser(), .setDefaultImage, .fetchStamps:
             return [
                 "Content-Type": "application/json"
             ]
