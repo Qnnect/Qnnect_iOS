@@ -33,7 +33,41 @@ class BaseNetworkService<EndPoint: TargetType>: Networkable {
                     TokenService.reissueToken()
                 }
             }
+            .handleTokenResponse()
 //            .filterSuccessfulStatusCodes()
             .retry(2)
     }
+}
+
+extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
+  func handleTokenResponse() -> Single<Element> {
+    return flatMap { response in
+      // 토큰 재발급 받았을 때 토큰 변경함
+      if let newToken = try? response.map(Token.self) {
+          KeyChain.create(key: Constants.accessTokenKey, token: newToken.access)
+          KeyChain.create(key: Constants.refreshTokenKey, token: newToken.refresh)
+          if let accessToken = KeyChain.read(key: Constants.accessTokenKey),
+             let refreshToken = KeyChain.read(key: Constants.refreshTokenKey) {
+              print("token save success 😎  access: \(accessToken), refresh: \(refreshToken)")
+          }
+      }
+                    
+//      if (200 ... 299) ~= response.statusCode {
+//        return Single.just(response)
+//      }
+//
+//      if var error = try? response.map(ResponseError.self) {
+//        error.statusCode = response.statusCode
+//        return Single.error(error)
+//      }
+//
+//      // Its an error and can't decode error details from server, push generic message
+//      let genericError = ResponseError(statusCode: response.statusCode
+//                                       serverName: "unknown Server Name",
+//                                       error: "unknown error",
+//                                       message: "empty message")
+//      return Single.error(genericError)
+        return Single.just(response)
+    }
+  }
 }
