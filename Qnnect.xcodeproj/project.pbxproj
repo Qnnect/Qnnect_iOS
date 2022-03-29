@@ -313,6 +313,16 @@
 		AECC133C27BA41DD006866FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133B27BA41DD006866FC /* HomeViewController.swift */; };
 		AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133D27BA4256006866FC /* HomeCoordinator.swift */; };
 		AECC134027BA45C0006866FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC133F27BA45C0006866FC /* HomeViewModel.swift */; };
+		AECE641527F31CCF00BB14B2 /* NotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641427F31CCF00BB14B2 /* NotificationInfo.swift */; };
+		AECE641727F31E5700BB14B2 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641627F31E5700BB14B2 /* NotificationAPI.swift */; };
+		AECE641A27F31E8200BB14B2 /* NotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641927F31E8200BB14B2 /* NotificationRequestDTO.swift */; };
+		AECE641C27F31EA900BB14B2 /* NotificationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641B27F31EA900BB14B2 /* NotificationResponseDTO.swift */; };
+		AECE641E27F31F9B00BB14B2 /* NotificationNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641D27F31F9B00BB14B2 /* NotificationNetworkService.swift */; };
+		AECE642027F3202800BB14B2 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE641F27F3202800BB14B2 /* NotificationRepository.swift */; };
+		AECE642227F3205700BB14B2 /* DefaultNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642127F3205700BB14B2 /* DefaultNotificationRepository.swift */; };
+		AECE642527F320E600BB14B2 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642427F320E600BB14B2 /* NotificationUseCase.swift */; };
+		AECE642727F322F900BB14B2 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642627F322F900BB14B2 /* NotificationCell.swift */; };
+		AECE642A27F324EA00BB14B2 /* NotificationType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642927F324EA00BB14B2 /* NotificationType+.swift */; };
 		AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A33C27EA26920076E863 /* UIImage+.swift */; };
 		AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */; };
 		AEE1A34227EA49E40076E863 /* DrinkStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */; };
@@ -667,6 +677,16 @@
 		AECC133B27BA41DD006866FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AECC133D27BA4256006866FC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		AECC133F27BA45C0006866FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AECE641427F31CCF00BB14B2 /* NotificationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInfo.swift; sourceTree = "<group>"; };
+		AECE641627F31E5700BB14B2 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		AECE641927F31E8200BB14B2 /* NotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestDTO.swift; sourceTree = "<group>"; };
+		AECE641B27F31EA900BB14B2 /* NotificationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponseDTO.swift; sourceTree = "<group>"; };
+		AECE641D27F31F9B00BB14B2 /* NotificationNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNetworkService.swift; sourceTree = "<group>"; };
+		AECE641F27F3202800BB14B2 /* NotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepository.swift; sourceTree = "<group>"; };
+		AECE642127F3205700BB14B2 /* DefaultNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationRepository.swift; sourceTree = "<group>"; };
+		AECE642427F320E600BB14B2 /* NotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCase.swift; sourceTree = "<group>"; };
+		AECE642627F322F900BB14B2 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		AECE642927F324EA00BB14B2 /* NotificationType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationType+.swift"; sourceTree = "<group>"; };
 		AEE1A33C27EA26920076E863 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOTRA_HOPE_TTF.ttf; sourceTree = "<group>"; };
 		AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkStepUseCase.swift; sourceTree = "<group>"; };
@@ -920,6 +940,7 @@
 				AE02408627E3A1D200017F77 /* RecipeIngredient.swift */,
 				AEEF4B0427EB6C0B00DB4184 /* ReportUser.swift */,
 				AE158BE627F30AA000CB1F3E /* Stamp.swift */,
+				AECE641427F31CCF00BB14B2 /* NotificationInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -955,6 +976,7 @@
 				AEB5AACE27DF39320096376B /* DefaultStoreRepository.swift */,
 				AE02406B27E3403400017F77 /* DefaultOurCafeRepository.swift */,
 				AEEF4B0827EB6CFD00DB4184 /* DefaultReportRepository.swift */,
+				AECE642127F3205700BB14B2 /* DefaultNotificationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -993,6 +1015,7 @@
 				AEB5AACC27DF38D60096376B /* StoreRepository.swift */,
 				AE02406927E33FF900017F77 /* OurCafeRepository.swift */,
 				AEEF4B0627EB6CAB00DB4184 /* ReportRepository.swift */,
+				AECE641F27F3202800BB14B2 /* NotificationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1021,6 +1044,7 @@
 		AE176A3C27B252E20040A4C3 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				AECE642827F324E200BB14B2 /* Common */,
 				AEA56AF827BF34580029A6CB /* View */,
 				AECC133827BA41C5006866FC /* Coordinator */,
 				AECC133727BA41C2006866FC /* ViewController */,
@@ -1420,6 +1444,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA14D0927CFB9790009EEC6 /* UserUseCase.swift */,
+				AECE642427F320E600BB14B2 /* NotificationUseCase.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1465,6 +1490,7 @@
 				AE717B5A27C4A5F2008278D3 /* QuestionCycleSlider.swift */,
 				AEBC9EBA27C5B6B40070399A /* DiaryColorCollectionView.swift */,
 				AE33A4FA27E76BE8000130B3 /* MyCafeEmptyCell.swift */,
+				AECE642627F322F900BB14B2 /* NotificationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1628,6 +1654,7 @@
 				AEB5AAED27E0A71B0096376B /* LikeAPI.swift */,
 				AE02406227E33C7800017F77 /* OurCafeAPI.swift */,
 				AEEF4AFE27EB6A2A00DB4184 /* ReportAPI.swift */,
+				AECE641627F31E5700BB14B2 /* NotificationAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1635,6 +1662,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AECE641827F31E7600BB14B2 /* Notification */,
 				AE02406427E33D5C00017F77 /* OurCafe */,
 				AEB5AAEF27E0A7C60096376B /* Like */,
 				AEB5AAD027DF44840096376B /* Reply */,
@@ -1777,6 +1805,23 @@
 			path = MyPageScene;
 			sourceTree = "<group>";
 		};
+		AECE641827F31E7600BB14B2 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				AECE641927F31E8200BB14B2 /* NotificationRequestDTO.swift */,
+				AECE641B27F31EA900BB14B2 /* NotificationResponseDTO.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		AECE642827F324E200BB14B2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AECE642927F324EA00BB14B2 /* NotificationType+.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		AEE1A34027EA49BC0076E863 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1802,6 +1847,7 @@
 				AEB5AAF227E0A8A80096376B /* LikeNetworkService.swift */,
 				AE02406727E33F2200017F77 /* OurCafeNetworkService.swift */,
 				AEEF4B0227EB6B9A00DB4184 /* ReportNetworkService.swift */,
+				AECE641D27F31F9B00BB14B2 /* NotificationNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2081,6 +2127,7 @@
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AE02409E27E461AE00017F77 /* LeaveCafeAlertView.swift in Sources */,
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
+				AECE642A27F324EA00BB14B2 /* NotificationType+.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AEEF4AEF27EB190800DB4184 /* ReportBottomSheet.swift in Sources */,
 				AE33A4FF27E79B81000130B3 /* InviteCafeViewModel.swift in Sources */,
@@ -2106,9 +2153,11 @@
 				AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */,
 				AE77C84327DB234A00E8D0EC /* DrinkNetworkService.swift in Sources */,
 				AE02D80A27D5DA430019D955 /* DrinkSelectGuideAlertView.swift in Sources */,
+				AECE642027F3202800BB14B2 /* NotificationRepository.swift in Sources */,
 				AEA56B0E27BF69FF0029A6CB /* HomeSectionHeaderView.swift in Sources */,
 				AE6964D327BCDDCD00BF2A80 /* MyPageViewModel.swift in Sources */,
 				AEEF362E27C3503000D0A127 /* EditProfileViewModel.swift in Sources */,
+				AECE641527F31CCF00BB14B2 /* NotificationInfo.swift in Sources */,
 				AE767FA727E8E6BE00BD5496 /* MyDrinkStampSectionModel.swift in Sources */,
 				AE6FA49C27BE03AD00FA2154 /* CustomTagCollectionview.swift in Sources */,
 				AEA14D1427D320530009EEC6 /* CafeTitleCell.swift in Sources */,
@@ -2138,6 +2187,7 @@
 				AE02407127E369EC00017F77 /* Rx+UICollectionView.swift in Sources */,
 				AE02D82927D767B80019D955 /* CafeAnswerWritingCell.swift in Sources */,
 				AEB5AB2827E1F32A0096376B /* CafeQuestionListCell.swift in Sources */,
+				AECE641A27F31E8200BB14B2 /* NotificationRequestDTO.swift in Sources */,
 				AE77C83127DA053E00E8D0EC /* ScrapAPI.swift in Sources */,
 				AEB5AAB627DEFD8C0096376B /* QuestionNetworkService.swift in Sources */,
 				AE02409A27E3D9F100017F77 /* RightStepAlertViewModel.swift in Sources */,
@@ -2152,6 +2202,8 @@
 				AEB5AACB27DF37FA0096376B /* StoreNetworkService.swift in Sources */,
 				AEBC9ECE27C6294A0070399A /* SplashViewModel.swift in Sources */,
 				AEB5AB3C27E259FC0096376B /* IndicatorView.swift in Sources */,
+				AECE642727F322F900BB14B2 /* NotificationCell.swift in Sources */,
+				AECE642227F3205700BB14B2 /* DefaultNotificationRepository.swift in Sources */,
 				AE02D80427D5C94C0019D955 /* HomeInfo.swift in Sources */,
 				AEA14D3827D46A3A0009EEC6 /* CafeUserResponseDTO.swift in Sources */,
 				AE02406127E33A8C00017F77 /* OurCafe.swift in Sources */,
@@ -2200,6 +2252,7 @@
 				AEB5AB3627E212D00096376B /* SearchCafeQuestionViewController.swift in Sources */,
 				AE77C85127DB2AF400E8D0EC /* DrinkSelectCell.swift in Sources */,
 				AEEF4AF127EB19B500DB4184 /* ReportBottomSheetViewModel.swift in Sources */,
+				AECE642527F320E600BB14B2 /* NotificationUseCase.swift in Sources */,
 				AE02D81827D632E70019D955 /* SettingBottomSheetViewModel.swift in Sources */,
 				AE6FA49F27BE07AC00FA2154 /* BookmarkCell.swift in Sources */,
 				AEEF4B0727EB6CAB00DB4184 /* ReportRepository.swift in Sources */,
@@ -2236,6 +2289,7 @@
 				AEA14D5027D4D1430009EEC6 /* CafeDrinksSectionDecorationView.swift in Sources */,
 				AEA7266727DE445500F48CB8 /* CommentUseCase.swift in Sources */,
 				AEA7266D27DE44EB00F48CB8 /* CommentAPI.swift in Sources */,
+				AECE641C27F31EA900BB14B2 /* NotificationResponseDTO.swift in Sources */,
 				AE77C84627DB266500E8D0EC /* DrinkFetchResponseDTO.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AEB5AB3827E213560096376B /* SearchCafeQuestionViewModel.swift in Sources */,
@@ -2283,6 +2337,7 @@
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,
 				AE02408927E3B5E400017F77 /* IngredientStorageViewController.swift in Sources */,
 				AEA56B0C27BF639C0029A6CB /* BasePaddingLabel.swift in Sources */,
+				AECE641727F31E5700BB14B2 /* NotificationAPI.swift in Sources */,
 				AE7BAA5227BA9AA400EF2F46 /* MainCoordinator.swift in Sources */,
 				AEA14D0627CFB7B10009EEC6 /* User.swift in Sources */,
 				AEA14D2727D397E10009EEC6 /* BaseNetworkService.swift in Sources */,
@@ -2297,6 +2352,7 @@
 				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEEF4AFB27EB5C0700DB4184 /* SentQuestionListViewController.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
+				AECE641E27F31F9B00BB14B2 /* NotificationNetworkService.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,
 				AE02D7FF27D5C6950019D955 /* HomeNetworkService.swift in Sources */,
 				AE02D81B27D729D60019D955 /* CafeQuestionEmptyCell.swift in Sources */,

@@ -101,7 +101,9 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
     }
     
     func showNotificationListScene() {
-        let viewModel = NotificationListViewModel()
+        let notificationRepository = DefaultNotificationRepository(notificationNetworkService: NotificationNetworkService())
+        let notificationUseCase = DefaultNotificationUseCase(notificationRepository: notificationRepository)
+        let viewModel = NotificationListViewModel(notificationUseCase: notificationUseCase)
         let vc = NotificationListViewController.create(with: viewModel, self)
         navigationController.pushViewController(vc, animated: true)
     }

@@ -70,7 +70,7 @@ struct Constants {
     static let profileDefaultImage: UIImage? = UIImage(named: "ProfileDefaultImage")
     static let cameraImage: UIImage? = UIImage(named: "camera")
     static let pointImage: UIImage? = UIImage(named: "kong")
-    static let notificationIcon: UIImage? = UIImage(named: "notification")
+    static let notificationIcon: UIImage? = UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal)
     static let priceImage: UIImage? = UIImage(named: "pointIcon")
     static let groupPlusImage: UIImage? = UIImage(named: "group_plus")
     static let notSelectDrinkImage: UIImage? = UIImage(named: "notSelectDrinkImage")?.withRenderingMode(.alwaysOriginal)
@@ -163,6 +163,12 @@ struct Constants {
     static let chocoLatte_step_2: UIImage? = UIImage(named: "초코라떼_step_2")
     static let chocoLatte_step_3: UIImage? = UIImage(named: "초코라떼_step_3")
     static let chocoLatte_step_4: UIImage? = UIImage(named: "초코라떼_step_4")
+    
+    
+    //Notification
+    static let noti_question_icon: UIImage? = UIImage(named: "noti_question_icon")
+    static let noti_comment_icon: UIImage? = UIImage(named: "noti_comment_icon")
+    static let noti_reply_icon: UIImage? = UIImage(named: "noti_reply_icon")
     
     // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {

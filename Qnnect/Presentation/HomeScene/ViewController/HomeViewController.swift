@@ -118,7 +118,13 @@ final class HomeViewController: BaseViewController {
             UIBarButtonItem(customView: self.pointView)
         ]
         
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        //self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Constants.notificationIcon,
+            style: .plain,
+            target: self,
+            action: #selector(didTapNotificationButton)
+        )
         self.navigationController?.navigationBar.barTintColor = self.view.backgroundColor
         
         self.pointImageView.snp.makeConstraints { make in
