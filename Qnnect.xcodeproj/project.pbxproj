@@ -2448,8 +2448,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 69F5355JYF;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = HWBJNMY98D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 허용을 누르시면 찍은 사진으로 회원님의 프로필 사진을 설정할 수 있어요.";
@@ -2485,8 +2485,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = 69F5355JYF;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = HWBJNMY98D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 허용을 누르시면 찍은 사진으로 회원님의 프로필 사진을 설정할 수 있어요.";

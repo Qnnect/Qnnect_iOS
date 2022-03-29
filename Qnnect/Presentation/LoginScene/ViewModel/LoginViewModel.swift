@@ -43,16 +43,20 @@ final class LoginViewModel: ViewModelType {
                 return token
             })
             .flatMap(self.kakaoLogin(_:))
+            .share()
         
         let appleLogin = input.didTapAppleButton
             .flatMap(self.socialLoginManager.appleLogin)
             .flatMap(self.appleLogin(_:))
+            .share()
+            .debug()
         
         let kakaoLoginSuccess = kakaoLogin.compactMap(self.convertToUserLoginInfo)
             .map { ($0,LoginType.kakao) }
         
         let appleLoginSucess = appleLogin.compactMap(convertToUserLoginInfo(_:))
             .map{ ($0, LoginType.apple) }
+            .debug()
         
         let loginError = Observable.merge(
             kakaoLogin.compactMap(convertToError(_:)),
