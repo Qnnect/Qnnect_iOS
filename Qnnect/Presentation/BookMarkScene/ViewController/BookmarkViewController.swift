@@ -68,9 +68,7 @@ final class BookmarkViewController: BaseViewController {
         super.viewWillAppear(true)
         tabBarController?.tabBar.isHidden = false
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+
     override func configureUI() {
         
         [

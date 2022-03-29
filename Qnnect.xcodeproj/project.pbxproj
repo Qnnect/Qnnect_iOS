@@ -77,6 +77,7 @@
 		AE0D337027B4CD1800C4B955 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D336F27B4CD1800C4B955 /* AuthCoordinator.swift */; };
 		AE0D337227B4CDB500C4B955 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337127B4CDB500C4B955 /* LoginViewController.swift */; };
 		AE0D337A27B4D7D200C4B955 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */; };
+		AE158BE327F2F00600CB1F3E /* SentQuestionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE158BE227F2F00600CB1F3E /* SentQuestionListViewModel.swift */; };
 		AE33A4F527E726CF000130B3 /* SelectDrinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4F427E726CF000130B3 /* SelectDrinkCoordinator.swift */; };
 		AE33A4F727E74452000130B3 /* NotModifyDrinkAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4F627E74452000130B3 /* NotModifyDrinkAlertView.swift */; };
 		AE33A4F927E750B3000130B3 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4F827E750B3000130B3 /* UITableView+.swift */; };
@@ -424,6 +425,7 @@
 		AE0D336F27B4CD1800C4B955 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		AE0D337127B4CDB500C4B955 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE0D337927B4D7D200C4B955 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AE158BE227F2F00600CB1F3E /* SentQuestionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentQuestionListViewModel.swift; sourceTree = "<group>"; };
 		AE33A4F427E726CF000130B3 /* SelectDrinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrinkCoordinator.swift; sourceTree = "<group>"; };
 		AE33A4F627E74452000130B3 /* NotModifyDrinkAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotModifyDrinkAlertView.swift; sourceTree = "<group>"; };
 		AE33A4F827E750B3000130B3 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -1246,6 +1248,7 @@
 				AEEF362D27C3503000D0A127 /* EditProfileViewModel.swift */,
 				AEE1A34527EA5D460076E863 /* MyPageAlertViewModel.swift */,
 				AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */,
+				AE158BE227F2F00600CB1F3E /* SentQuestionListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2287,6 +2290,7 @@
 				AE02D81B27D729D60019D955 /* CafeQuestionEmptyCell.swift in Sources */,
 				AEB5AADE27DFC0780096376B /* ReplyAPI.swift in Sources */,
 				AE02D81627D62C710019D955 /* InviteCafeViewController.swift in Sources */,
+				AE158BE327F2F00600CB1F3E /* SentQuestionListViewModel.swift in Sources */,
 				AE02D82B27D76B160019D955 /* CafeAnswerSectionModel.swift in Sources */,
 				AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,

@@ -22,4 +22,6 @@ protocol QuestionRepository: AnyObject {
     
     func fetchCafeQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
     func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>>
+    func fetchAllUserQuestion(page:Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
+    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
 }

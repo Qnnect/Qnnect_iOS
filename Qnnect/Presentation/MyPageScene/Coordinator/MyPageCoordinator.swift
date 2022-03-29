@@ -17,11 +17,12 @@ protocol MyPageCoordinator: Coordinator {
     func showTermsOfService()
     func showSentQuestionListScene()
     func showBlockedFriendListScene()
+    func showCafeQuestionScene(_ cafeQuestionId: Int)
     func pop()
     func showLoginScene(_ leaveType: LeaveType)
 }
 
-final class DefaultMyPageCoordinator: MyPageCoordinator {
+final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -98,7 +99,17 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     }
     
     func showSentQuestionListScene() {
-        let vc = SentQuestionListViewController.create()
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = SentQuestionListViewModel(questionUseCase: questionUseCase)
+        let vc = SentQuestionListViewController.create(
+            with: viewModel,
+            self
+        )
         vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
@@ -114,7 +125,34 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
+    
+    func showCafeQuestionScene(_ cafeQuestionId: Int) {
+        let coordinator = DefaultQuestionCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.showCafeQuestionScene(cafeQuestionId)
+    }
+    
     func pop() {
         self.navigationController.popViewController(animated: true)
+    }
+}
+
+extension DefaultMyPageCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        // 이동 전 ViewController
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+           return
+        }
+
+        // child coordinator 가 일을 끝냈다고 알림.
+        if let vc = fromViewController as? CafeQuestionViewController {
+            childDidFinish(vc.coordinator)
+        }
+        
     }
 }

@@ -14,6 +14,8 @@ enum QuestionAPI {
     case deleteQuestion(questionId: Int)
     case fetchCafeQuestions(cafeId: Int, request: CafeQuestionsFetchRequestDTO)
     case searchCafeQuestion(cafeId: Int, request: CafeQuestionSearchRequestDTO)
+    case fetchAllUserQuestion(request: CafeQuestionsFetchRequestDTO)
+    case fetchUserQuestions(cafeId: Int, request: CafeQuestionsFetchRequestDTO)
 }
 
 extension QuestionAPI: TargetType, AccessTokenAuthorizable {
@@ -29,12 +31,20 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/question/cafes/\(cafeId)/all"
         case .searchCafeQuestion(let cafeId, _):
             return "api/v1/question/cafes/\(cafeId)/search"
+        case .fetchAllUserQuestion(_):
+            return "api/v1/user/question/all"
+        case .fetchUserQuestions(let cafeId, _):
+            return "api/v1/user/question/\(cafeId)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchQuestion(_), .fetchCafeQuestions(_, _), .searchCafeQuestion(_, _):
+        case .fetchQuestion(_),
+                .fetchCafeQuestions(_, _),
+                .searchCafeQuestion(_, _),
+                .fetchAllUserQuestion(_),
+                .fetchUserQuestions(_, request: _):
             return .get
         case .modifyQuestion(_, _):
             return .patch
@@ -49,7 +59,7 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
             return .requestPlain
         case .modifyQuestion(_, let content):
             return .requestData(content.data(using: .utf8)!)
-        case .fetchCafeQuestions(_, let request):
+        case .fetchCafeQuestions(_, let request), .fetchUserQuestions(_, let request), .fetchAllUserQuestion(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .searchCafeQuestion(_, let request):

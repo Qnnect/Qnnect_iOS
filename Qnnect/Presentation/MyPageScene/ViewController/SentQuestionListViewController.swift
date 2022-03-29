@@ -12,31 +12,56 @@ import RxSwift
 
 final class SentQuestionListViewController: BaseViewController {
     
-    private let mainTableView = UITableView().then {
+    private let mainTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.backgroundColor = .p_ivory
-        $0.setEmptyView(message: "준비중 입니다.")
         $0.register(BookmarkCell.self, forCellReuseIdentifier: BookmarkCell.identifier)
+        $0.showsVerticalScrollIndicator = false
+        $0.separatorInsetReference = .fromCellEdges
+        $0.separatorInset = .init(top: 0, left: 23.0, bottom: 0, right: 23.0)
+        $0.estimatedRowHeight = UITableView.automaticDimension
     }
     
     private let navigationTitleLabel = NavigationTitleLabel(title: "내가 보낸 질문")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private let tagCollectionView = BookmarkTagCollectionView()
+    private let headerView = UIView()
+    
+    private var viewModel: SentQuestionListViewModel!
+    weak var coordinator: MyPageCoordinator?
+    
+    static func create(
+        with viewModel: SentQuestionListViewModel,
+        _ coordinator: MyPageCoordinator
+    ) -> SentQuestionListViewController {
+        let vc = SentQuestionListViewController()
+        vc.viewModel = viewModel
+        vc.coordinator = coordinator
+        return vc
     }
     
+    private var curPage = 0
+    private var isFetched = true
     
-    static func create() -> SentQuestionListViewController {
-        let vc = SentQuestionListViewController()
-        return vc
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func configureUI() {
         super.configureUI()
         
         view.addSubview(mainTableView)
+        headerView.addSubview(tagCollectionView)
         
         mainTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        mainTableView.sectionHeaderHeight = 60.0
+        mainTableView.delegate = self
+        
+        tagCollectionView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().inset(21.0)
+            make.centerY.equalToSuperview()
         }
         
         navigationItem.titleView = navigationTitleLabel
@@ -45,43 +70,140 @@ final class SentQuestionListViewController: BaseViewController {
     override func bind() {
         super.bind()
         
-        let data: [QuestionShortInfo] = [
-            QuestionShortInfo(
-                cafeQuestionId: -1,
-                cafeTitle: "신사고 4인방",
-                createdAt: "2022.3.21",
-                content: "가족과 함께 가고싶은 외국여행지는 어디인가요?"
-            ),
-            QuestionShortInfo(
-                cafeQuestionId: -1,
-                cafeTitle: "아아메 4인방",
-                createdAt: "2022.3.22",
-                content: "서로가 가장 듣고싶은 칭찬은 무엇인가요?"
-            ),
-            QuestionShortInfo(
-                cafeQuestionId: -1,
-                cafeTitle: "우리 가족",
-                createdAt: "2022.3.29",
-                content: "우리 가족이 모두 ‘이거 하나는 지켜줬으면 좋겠다’ 하는것이 있나요?"
-            )
-        ]
+        let input = SentQuestionListViewModel.Input(
+            viewDidLoad: Observable.just(()),
+            didTapCafeTag: self.tagCollectionView.rx.methodInvoked(#selector(self.tagCollectionView.textTagCollectionView(_:didTap:at:)))
+                .map {
+                    [weak self] param -> CafeTag in
+                    let index = param[2] as! Int
+                    return self?.tagCollectionView.cafes?[index] ?? CafeTag(cafeId: 0, cafeTitle: "전체")
+                }.startWith(CafeTag(cafeId: 0, cafeTitle: "전체")),
+            moreFetch: self.rx.methodInvoked(#selector(fetchMore))
+                .map{ $0[0] as! Int},
+            didTapQuestion: mainTableView.rx.modelSelected(QuestionShortInfo.self)
+                .map { $0.cafeQuestionId }
+        )
         
-        Observable.just(data)
+        
+        let output = self.viewModel.transform(from: input)
+        
+//        floatingButton.rx.tapGesture()
+//            .when(.recognized)
+//            .subscribe(onNext: {
+//                [weak self] _ in
+//                self?.bookmarkTableView.setContentOffset(.zero, animated: true)
+//            }).disposed(by: self.disposeBag)
+//
+        output.cafes
+            .map { cafes -> [CafeTag] in
+                let newCafes = [CafeTag(cafeId: 0, cafeTitle: "전체")] + cafes
+                return newCafes
+            }.drive(onNext: {
+                [weak self] cafes in
+                self?.tagCollectionView.update(with: cafes)
+                self?.tagCollectionView.updateTag(at: 0, selected: true)
+            }).disposed(by: self.disposeBag)
+        
+        output.sentQuestions
             .do {
-                [weak self] data in
-                if data.isEmpty {
-                    self?.mainTableView.setEmptyView(message: "질문이 없습니다.")
+                [weak self] questions in
+                if questions.isEmpty {
+                    self?.mainTableView.setEmptyView(message: "아직 보낸 질문이 없어요.")
                 } else {
                     self?.mainTableView.reset()
                 }
             }
-            .bind(to: mainTableView.rx.items(
-                cellIdentifier: BookmarkCell.identifier,
-                cellType: BookmarkCell.self
-            )) { index, model, cell in
+            .drive(mainTableView.rx.items(cellIdentifier: BookmarkCell.identifier, cellType: BookmarkCell.self)) { index, model, cell in
                 cell.update(with: model)
             }.disposed(by: self.disposeBag)
+        
+        output.newLoad
+            .debug()
+            .emit(onNext: {
+                [weak self] _ in
+                self?.curPage = 0
+            }).disposed(by: self.disposeBag)
+        
+        output.canLoad
+            .emit(onNext: {
+                [weak self] flag in
+                if flag {
+                    self?.isFetched = true
+                }
+            }).disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+        
+        output.showCafeQuestionScene
+            .emit(onNext: coordinator.showCafeQuestionScene(_:))
+            .disposed(by: self.disposeBag)
+    }
+    
+}
+
+extension SentQuestionListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return headerView
+    }
+    
+    // section 의 separator 지우는 기능
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let border = CALayer()
+        border.backgroundColor = tableView.backgroundColor?.cgColor
+        border.frame = CGRect(x: 0, y: view.frame.size.height, width: view.frame.size.width, height: 1)
+        view.layer.addSublayer(border)
     }
 }
 
-
+extension SentQuestionListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == mainTableView else { return }
+        
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.size.height {
+            if(isFetched){
+                isFetched = false
+                curPage += 1
+                fetchMore(curPage)
+            }
+        }
+        
+//        if scrollView.contentOffset.y > 50.0 {
+//
+//            UIView.animate(
+//                withDuration: 0.5,
+//                delay: 0.1,
+//                usingSpringWithDamping: 0.5,
+//                initialSpringVelocity: 0.5,
+//                options: [.curveEaseInOut]
+//            ) {
+//                [weak self] in
+//                guard let self = self else { return }
+//                self.floatingButton.snp.updateConstraints({ make in
+//                    make.bottom.equalToSuperview().inset(100.0)
+//                })
+//                self.floatingContainerView.layoutIfNeeded()
+//            }
+//        } else if scrollView.contentOffset.y <= 50.0 {
+//            UIView.animate(
+//                withDuration: 0.5,
+//                delay: 0.1,
+//                usingSpringWithDamping: 0.5,
+//                initialSpringVelocity: 0.5,
+//                options: [.curveEaseInOut]
+//            ) {
+//                [weak self] in
+//                guard let self = self else { return }
+//                self.floatingButton.snp.updateConstraints({ make in
+//                    make.bottom.equalToSuperview()
+//                })
+//                self.floatingContainerView.layoutIfNeeded()
+//            }
+//        }
+        
+    }
+    
+    @objc dynamic func fetchMore(_ page: Int) {
+        
+    }
+}
