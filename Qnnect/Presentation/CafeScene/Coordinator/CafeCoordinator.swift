@@ -94,6 +94,7 @@ final class DefaultCafeCoordinator: NSObject, CafeCoordinator {
         if let bottomSheet = self.navigationController.presentedViewController as? SettingBottomSheet {
             bottomSheet.hideBottomSheetAndGoBack(nil)
         }
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(vc, animated: true)
     }
     

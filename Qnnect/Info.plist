@@ -35,6 +35,17 @@
                     <key>NSExceptionRequiresForwardSecrecy</key>
                     <true/>
                 </dict>
+                <key>kakao.com</key>
+                <dict>
+                    <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                    <true/>
+                    <key>NSIncludesSubdomains</key>
+                    <true/>
+                    <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                    <true/>
+                    <key>NSExceptionRequiresForwardSecrecy</key>
+                    <true/>
+                </dict>
             </dict>
         </dict>
         <key>UIAppFonts</key>

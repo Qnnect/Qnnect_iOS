@@ -93,6 +93,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         } else {
             presentingViewController?.viewWillAppear(true)
         }
+        presentingViewController?.tabBarController?.tabBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -122,8 +123,6 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
             self.view.layoutIfNeeded()
         }) { _ in
             if self.presentingViewController != nil {
-                self.presentingViewController?.tabBarController?.tabBar.isHidden = false
-//                self.presentingViewController!.view.setNeedsLayout()
                 self.dismiss(animated: false, completion: completion)
             }
         }

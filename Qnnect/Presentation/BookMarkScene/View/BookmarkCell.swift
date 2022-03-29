@@ -63,7 +63,7 @@ final class BookmarkCell: UITableViewCell {
         
         dateLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(22.0)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4.0)
             make.bottom.equalToSuperview()
         }
     }
