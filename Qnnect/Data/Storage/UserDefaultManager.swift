@@ -12,6 +12,7 @@ import Foundation
 protocol UserDefaultManager: AnyObject {
     var isFirstAccess: Bool? { get set }
     var loginType: LoginType? { get set }
+    var isFirstLaunch: Bool? { get set }
 }
 
 final class DefaultUserDefaultManager: UserDefaultManager {
@@ -35,6 +36,17 @@ final class DefaultUserDefaultManager: UserDefaultManager {
         
         set {
             UserDefaults.standard.setValue(newValue?.rawValue, forKey: "LoginType")
+        }
+    }
+    
+    var isFirstLaunch: Bool? {
+        
+        get {
+            return UserDefaults.standard.value(forKey: "isFirstLaunch") as? Bool
+        }
+        
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "isFirstLaunch")
         }
     }
 }

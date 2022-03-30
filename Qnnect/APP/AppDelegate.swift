@@ -16,7 +16,7 @@ import Photos
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
+    private let userDefaultManager = DefaultUserDefaultManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,7 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // KAKAO
         KakaoSDK.initSDK(appKey: APP.KAKAO_NATIVE_APP_KEY)
     
-
+        // 앱 재설치 시 저장된 토크 정보 삭제
+        if userDefaultManager.isFirstLaunch == nil {
+            userDefaultManager.isFirstLaunch = false
+            KeyChain.delete(key: Constants.accessTokenKey)
+            KeyChain.delete(key: Constants.refreshTokenKey)
+        }
         
         //FCM 현재 등록 토큰 확인
         Messaging.messaging().token { token, error in
