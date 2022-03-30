@@ -99,6 +99,7 @@
 		AE5B1C1F27BB42DB00F24981 /* IM_Hyemin-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */; };
 		AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */; };
 		AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */; };
+		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
 		AE6964C827BCD9EC00BF2A80 /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C727BCD9EC00BF2A80 /* BookmarkCoordinator.swift */; };
@@ -463,6 +464,7 @@
 		AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Regular.otf"; sourceTree = "<group>"; };
 		AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
 		AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementItemView.swift; sourceTree = "<group>"; };
+		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		AE6964C727BCD9EC00BF2A80 /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 		AE176A3A27B252CB0040A4C3 /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE5C260327F45F4100BB5432 /* Common */,
 				AEBC9EC627C60DE60070399A /* ViewModel */,
 				AEBC9EC527C60DD70070399A /* ViewController */,
 				AEBC9EC427C60DD20070399A /* Coordinator */,
@@ -1201,6 +1204,14 @@
 				AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AE5C260327F45F4100BB5432 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		AE6964B827BCD8E600BF2A80 /* ViewController */ = {
@@ -2130,6 +2141,7 @@
 				AECE642A27F324EA00BB14B2 /* NotificationType+.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,
 				AEEF4AEF27EB190800DB4184 /* ReportBottomSheet.swift in Sources */,
+				AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */,
 				AE33A4FF27E79B81000130B3 /* InviteCafeViewModel.swift in Sources */,
 				AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
@@ -2520,8 +2532,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = HWBJNMY98D;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 허용을 누르시면 찍은 사진으로 회원님의 프로필 사진을 설정할 수 있어요.";
@@ -2538,7 +2550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iame.qnnect.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2557,8 +2569,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qnnect/Qnnect.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = HWBJNMY98D;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Qnnect/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 허용을 누르시면 찍은 사진으로 회원님의 프로필 사진을 설정할 수 있어요.";
@@ -2575,7 +2587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iame.qnnect.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
