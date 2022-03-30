@@ -185,6 +185,10 @@ final class InviteCafeViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(26.0)
         }
         cardMainLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        cardMainLabel.attributedText = NSMutableAttributedString(
+            string: "\(cafe.title) 카페에 \n초대합니다!",
+            attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
+        )
         
         self.cardSecondaryLabel.snp.makeConstraints { make in
             make.top.equalTo(self.cardMainLabel.snp.bottom).offset(2.0)
