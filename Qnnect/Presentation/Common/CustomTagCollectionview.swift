@@ -16,12 +16,14 @@ class CustomTagCollectionView: TTGTextTagCollectionView {
         $0.borderWidth = Constants.tagBorderWidth
         $0.borderColor = .tagBorderColor ?? .black
         $0.extraSpace = Constants.tagExtraSpace
+        $0.shadowOpacity = 0.0
     }
     
     private let selectedStyle = TTGTextTagStyle().then {
         $0.backgroundColor = .p_brown ?? .brown
         $0.cornerRadius = Constants.tagCornerRadius
         $0.extraSpace = Constants.tagExtraSpace
+        $0.shadowOpacity = 0.0
     }
     
     private let tagFont: UIFont = .IM_Hyemin(.bold, size: 14.0)
