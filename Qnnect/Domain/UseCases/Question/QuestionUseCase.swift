@@ -21,8 +21,8 @@ protocol QuestionUseCase: AnyObject {
     func like(_ questionId: Int, _ isUserLiked: Bool) -> Observable<Result<Void,Error>>
     func fetchCafeQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo],Error>>
     func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>>
-    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>>
-    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>>
+    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>>
+    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>>
 }
 
 final class DefaultQuestionUseCase: QuestionUseCase {
@@ -81,11 +81,11 @@ final class DefaultQuestionUseCase: QuestionUseCase {
         questionRepository.searchCafeQuestion(cafeId: cafeId, page: page, size: size, searchWord)
     }
     
-    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
+    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>> {
         questionRepository.fetchAllUserQuestion(page: page, size: size)
     }
     
-    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
+    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>> {
         questionRepository.fetchUserQuestions(cafeId: cafeId, page: page, size: size)
     }
 }

@@ -73,4 +73,10 @@ final class BookmarkCell: UITableViewCell {
         titleLabel.text = question.content
         cafeNameLabel.text = question.cafeTitle
     }
+    
+    func update(with question: UserQuestion) {
+        dateLabel.text = question.createdAt
+        titleLabel.text = question.content
+        cafeNameLabel.text = question.cafeTitle
+    }
 }

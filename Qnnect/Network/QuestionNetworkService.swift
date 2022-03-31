@@ -56,19 +56,19 @@ final class QuestionNetworkService: BaseNetworkService<QuestionAPI> {
             .asObservable()
     }
     
-    func fetchAllUserQuestion(request: CafeQuestionsFetchRequestDTO) -> Observable<Result<CafeQuestionsResponseDTO,Error>> {
+    func fetchAllUserQuestion(request: CafeQuestionsFetchRequestDTO) -> Observable<Result<[UserQuestionResponseDTO],Error>> {
         self.request(.fetchAllUserQuestion(request: request))
             .filter(statusCode: 200)
-            .map(CafeQuestionsResponseDTO.self)
+            .map([UserQuestionResponseDTO].self)
             .map{ Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
     
-    func fetchUserQuestions(_ cafeId: Int, request: CafeQuestionsFetchRequestDTO) -> Observable<Result<CafeQuestionsResponseDTO,Error>> {
+    func fetchUserQuestions(_ cafeId: Int, request: CafeQuestionsFetchRequestDTO) -> Observable<Result<[UserQuestionResponseDTO],Error>> {
         self.request(.fetchUserQuestions(cafeId: cafeId, request: request))
             .filter(statusCode: 200)
-            .map(CafeQuestionsResponseDTO.self)
+            .map([UserQuestionResponseDTO].self)
             .map{ Result.success($0)}
             .catch{ .just(Result.failure($0))}
             .asObservable()

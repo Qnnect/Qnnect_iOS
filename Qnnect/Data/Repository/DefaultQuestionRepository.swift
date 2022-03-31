@@ -146,28 +146,28 @@ final class DefaultQuestionRepository: QuestionRepository {
             }
     }
     
-    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
+    func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>> {
         let request = CafeQuestionsFetchRequestDTO(page: page, size: size)
         return questionNetworkService.fetchAllUserQuestion(request: request)
             .map {
-                result -> Result<[QuestionShortInfo],Error> in
+                result -> Result<[UserQuestion],Error> in
                 switch result {
-                case .success(let responseDTO):
-                    return .success(responseDTO.toDomain())
+                case .success(let responseDTOs):
+                    return .success(responseDTOs.map{$0.toDomain()})
                 case .failure(let error):
                     return .failure(error)
                 }
             }
     }
     
-    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[QuestionShortInfo], Error>> {
+    func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>> {
         let request = CafeQuestionsFetchRequestDTO(page: page, size: size)
         return questionNetworkService.fetchUserQuestions(cafeId,request: request)
             .map {
-                result -> Result<[QuestionShortInfo],Error> in
+                result -> Result<[UserQuestion],Error> in
                 switch result {
-                case .success(let responseDTO):
-                    return .success(responseDTO.toDomain())
+                case .success(let responseDTOs):
+                    return .success(responseDTOs.map{ $0.toDomain()})
                 case .failure(let error):
                     return .failure(error)
                 }

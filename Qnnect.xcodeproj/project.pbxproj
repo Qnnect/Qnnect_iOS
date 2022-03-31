@@ -87,6 +87,8 @@
 		AE33A4FB27E76BE8000130B3 /* MyCafeEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4FA27E76BE8000130B3 /* MyCafeEmptyCell.swift */; };
 		AE33A4FD27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4FC27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift */; };
 		AE33A4FF27E79B81000130B3 /* InviteCafeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE33A4FE27E79B81000130B3 /* InviteCafeViewModel.swift */; };
+		AE363EE627F5B33E000DF2BA /* UserQuestionResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE363EE527F5B33E000DF2BA /* UserQuestionResponseDTO.swift */; };
+		AE363EE827F5B377000DF2BA /* UserQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE363EE727F5B377000DF2BA /* UserQuestion.swift */; };
 		AE45938C27BD23D1009737B2 /* PointBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45938B27BD23D1009737B2 /* PointBar.swift */; };
 		AE538EDB27C4690D00670FAF /* CafeRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */; };
 		AE538EDD27C4693C00670FAF /* CafeRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE538EDC27C4693C00670FAF /* CafeRoomViewModel.swift */; };
@@ -449,6 +451,8 @@
 		AE33A4FA27E76BE8000130B3 /* MyCafeEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCafeEmptyCell.swift; sourceTree = "<group>"; };
 		AE33A4FC27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCafeBottomSheetViewModel.swift; sourceTree = "<group>"; };
 		AE33A4FE27E79B81000130B3 /* InviteCafeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCafeViewModel.swift; sourceTree = "<group>"; };
+		AE363EE527F5B33E000DF2BA /* UserQuestionResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestionResponseDTO.swift; sourceTree = "<group>"; };
+		AE363EE727F5B377000DF2BA /* UserQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuestion.swift; sourceTree = "<group>"; };
 		AE3EC3E227B7E7440067E062 /* Qnnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qnnect.entitlements; sourceTree = "<group>"; };
 		AE45938B27BD23D1009737B2 /* PointBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBar.swift; sourceTree = "<group>"; };
 		AE538EDA27C4690D00670FAF /* CafeRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRoomViewController.swift; sourceTree = "<group>"; };
@@ -943,6 +947,7 @@
 				AEEF4B0427EB6C0B00DB4184 /* ReportUser.swift */,
 				AE158BE627F30AA000CB1F3E /* Stamp.swift */,
 				AECE641427F31CCF00BB14B2 /* NotificationInfo.swift */,
+				AE363EE727F5B377000DF2BA /* UserQuestion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1447,6 +1452,7 @@
 				AEEF4AFC27EB69BB00DB4184 /* ReportRequestDTO.swift */,
 				AEEF4B0027EB6B6700DB4184 /* ReportResponseDTO.swift */,
 				AE158BE427F30A6200CB1F3E /* StampResponseDTO.swift */,
+				AE363EE527F5B33E000DF2BA /* UserQuestionResponseDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2227,6 +2233,7 @@
 				AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */,
 				AEA56B0827BF4E940029A6CB /* Group.swift in Sources */,
 				AE02409827E3D56400017F77 /* RightStepAlertViewController.swift in Sources */,
+				AE363EE627F5B33E000DF2BA /* UserQuestionResponseDTO.swift in Sources */,
 				AE02D80C27D5DF8D0019D955 /* DrinkSelectGuideAlertViewModel.swift in Sources */,
 				AEBC9ECC27C61A790070399A /* PageItemViewController.swift in Sources */,
 				AEA7267227DE58B100F48CB8 /* CommentNetworkService.swift in Sources */,
@@ -2375,6 +2382,7 @@
 				AEB5AB3A27E22FAC0096376B /* WriteCommentCoordinator.swift in Sources */,
 				AE77C86627DB6FD000E8D0EC /* BookmarkTagCollectionView.swift in Sources */,
 				AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */,
+				AE363EE827F5B377000DF2BA /* UserQuestion.swift in Sources */,
 				AEEF4B0927EB6CFD00DB4184 /* DefaultReportRepository.swift in Sources */,
 				AEEF4AF327EB2B2300DB4184 /* ReportCoordinator.swift in Sources */,
 				AEBC9EBD27C5C3710070399A /* DrinkSelectViewController.swift in Sources */,

@@ -9,6 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum SentQuestionFetchAction {
+    case load(questions: [UserQuestion])
+    case loadMore(questions: [UserQuestion])
+}
+
 final class SentQuestionListViewModel: ViewModelType {
     
     struct Input {
@@ -22,7 +27,7 @@ final class SentQuestionListViewModel: ViewModelType {
     
     struct Output {
         let cafes: Driver<[CafeTag]>
-        let sentQuestions: Driver<[QuestionShortInfo]>
+        let sentQuestions: Driver<[UserQuestion]>
         let newLoad: Signal<Void>
         let canLoad: Signal<Bool>
         ///Int: QuestionId
@@ -49,20 +54,20 @@ final class SentQuestionListViewModel: ViewModelType {
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchAllUserQuestion)
             .map {
-                result -> [QuestionShortInfo] in
+                result -> [UserQuestion] in
                 guard case let .success(questions) = result else { return [] }
                 return questions
-            }.map { QuestionsFetchAction.load(questions: $0)}
+            }.map { SentQuestionFetchAction.load(questions: $0)}
         
         let loadOne = input.didTapCafeTag
             .filter {$0.cafeId != 0}
             .map { (cafeId: $0.cafeId, page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchUserQuestions)
             .map {
-                result -> [QuestionShortInfo] in
+                result -> [UserQuestion] in
                 guard case let .success(questions) = result else { return [] }
                 return questions
-            }.map { QuestionsFetchAction.load(questions: $0)}
+            }.map { SentQuestionFetchAction.load(questions: $0)}
         
         let newLoad = Observable.merge(loadAll, loadOne)
             .share()
@@ -73,10 +78,10 @@ final class SentQuestionListViewModel: ViewModelType {
             .map { (page: $0.page, size: Constants.scrapFetchSize) }
             .flatMap(questionUseCase.fetchAllUserQuestion)
             .map {
-                result -> [QuestionShortInfo] in
+                result -> [UserQuestion] in
                 guard case let .success(questions) = result else { return [] }
                 return questions
-            }.map { QuestionsFetchAction.loadMore(questions: $0)}
+            }.map { SentQuestionFetchAction.loadMore(questions: $0)}
         
         let loadMoreOne = input.moreFetch
             .withLatestFrom(input.didTapCafeTag,resultSelector: { (cafeId: $1.cafeId, page: $0)})
@@ -84,10 +89,10 @@ final class SentQuestionListViewModel: ViewModelType {
             .map { (cafeId: $0.cafeId, page: $0.page, size: Constants.scrapFetchSize) }
             .flatMap(questionUseCase.fetchUserQuestions)
             .map {
-                result -> [QuestionShortInfo] in
+                result -> [UserQuestion] in
                 guard case let .success(questions) = result else { return [] }
                 return questions
-            }.map { QuestionsFetchAction.loadMore(questions: $0)}
+            }.map { SentQuestionFetchAction.loadMore(questions: $0)}
         
         let loadMore = Observable.merge(loadMoreAll, loadMoreOne)
             .share()
@@ -96,7 +101,7 @@ final class SentQuestionListViewModel: ViewModelType {
             .share()
         
         let sentQuestions = load
-            .scan(into: [QuestionShortInfo]()) { questions, action in
+            .scan(into: [UserQuestion]()) { questions, action in
                 switch action {
                 case .load(let newQuestions):
                     questions = newQuestions
@@ -107,7 +112,7 @@ final class SentQuestionListViewModel: ViewModelType {
         
         let canLoad = loadMore
             .compactMap {
-                action -> [QuestionShortInfo]? in
+                action -> [UserQuestion]? in
                 guard case let .loadMore(questions) = action else { return nil}
                 return questions
             }
