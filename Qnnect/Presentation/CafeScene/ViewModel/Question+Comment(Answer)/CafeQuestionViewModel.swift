@@ -91,6 +91,7 @@ final class CafeQuestionViewModel: ViewModelType {
         
         
         let scrapTrigger = input.didTapScrapButton
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
             .share()
         
         let scrap = scrapTrigger
@@ -119,6 +120,7 @@ final class CafeQuestionViewModel: ViewModelType {
             .withLatestFrom(fetchedQuestionWithComments.map { $0.question }, resultSelector: { ($0, $1)})
         
         let like = input.didTapLikeButton
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
             .debug()
             .withLatestFrom(input.questionId, resultSelector: { ($1, $0)})
             .flatMap(self.questionUseCase.like)
