@@ -33,6 +33,7 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
         let joinCafe = input.didTapCompletionButton
             .withLatestFrom(input.cafeCode)
             .flatMap(cafeUseCase.joinCafe(_:))
+            .share()
         
         let joinedCafeId = joinCafe.compactMap{
             result -> Int? in
@@ -49,6 +50,7 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
                     return error
                 }
             }.map { $0.meessage }
+        
         
         return Output(
             showCafeRoomScene: joinedCafeId.asSignal(onErrorSignalWith: .empty()),

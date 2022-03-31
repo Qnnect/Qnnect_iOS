@@ -64,11 +64,6 @@ final class BookmarkViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tabBarController?.tabBar.isHidden = false
-    }
-
     override func configureUI() {
         
         [
@@ -130,6 +125,7 @@ final class BookmarkViewController: BaseViewController {
         
         let input = BookmarkViewModel.Input(
             viewDidLoad: Observable.just(()),
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapCafeTag: self.tagCollectionView.rx.methodInvoked(#selector(self.tagCollectionView.textTagCollectionView(_:didTap:at:)))
                 .map {
                     [weak self] param -> CafeTag in

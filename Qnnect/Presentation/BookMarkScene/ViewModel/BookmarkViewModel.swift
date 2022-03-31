@@ -17,6 +17,7 @@ final class BookmarkViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let didTapCafeTag: Observable<CafeTag>
         /// Int: Page
         let moreFetch: Observable<Int>
@@ -51,7 +52,10 @@ final class BookmarkViewModel: ViewModelType {
                 return cafes
             }
         
-        let loadAll = input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid()
+        let loadAll = Observable.merge(
+            input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid(),
+            input.viewWillAppear.skip(1)
+            )
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchAllScrap)
             .compactMap {
