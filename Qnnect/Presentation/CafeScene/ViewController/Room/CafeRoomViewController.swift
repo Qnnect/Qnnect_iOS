@@ -186,10 +186,6 @@ final class CafeRoomViewController: BaseViewController {
                 },
             didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable(),
             didTapDrinkSection: rx.methodInvoked(#selector(didTapDrinkSection)).mapToVoid()
-//                mainCollectionView.rx.itemSelected
-//                        .filter { $0.section == 1 }
-//                        .mapToVoid()
-//
         )
         
         let output = self.viewModel.transform(from: input)
@@ -467,8 +463,12 @@ private extension CafeRoomViewController {
                 forElementKind: UICollectionView.elementKindSectionFooter,
                 at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
         else { return }
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDrinkSection))
-        decoView.addGestureRecognizer(tapGesture)
+        
+        if decoView.gestureRecognizers == nil || decoView.gestureRecognizers?.isEmpty ?? true {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDrinkSection))
+            decoView.addGestureRecognizer(tapGesture)
+        }
+        
         decoView.emptyLabel.isHidden = !isEmpty
         footerView.pageControl.isHidden = isEmpty
     }
