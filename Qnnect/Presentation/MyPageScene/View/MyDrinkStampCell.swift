@@ -80,7 +80,7 @@ final class MyDrinkStampCell: UICollectionViewCell {
         
         drinkNameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(outerView.snp.bottom)
+            make.top.equalTo(outerView.snp.bottom).offset(11.0)
             make.bottom.equalTo(cafeNameLabel.snp.top).offset(-5.0)
         }
 
