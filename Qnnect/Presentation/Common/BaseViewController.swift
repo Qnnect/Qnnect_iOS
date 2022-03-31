@@ -109,6 +109,12 @@ extension BaseViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         self.imagePicker(picker, didFinishPicking: results)
     }
-    
-    
+}
+
+extension BaseViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let vc = navigationController?.presentedViewController {
+            vc.dismiss(animated: false, completion: nil)
+        }
+    }
 }

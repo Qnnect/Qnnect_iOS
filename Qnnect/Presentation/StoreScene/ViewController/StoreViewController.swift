@@ -95,6 +95,7 @@ final class StoreViewController: BaseViewController {
         layout.headerReferenceSize = CGSize(width: ingredientCollectionView.frame.width, height: 60.0)
         ingredientCollectionView.collectionViewLayout = layout
     }
+    
     override func configureUI() {
         
         [
@@ -145,6 +146,8 @@ final class StoreViewController: BaseViewController {
             make.width.height.equalTo(48.0)
             make.bottom.equalToSuperview()
         }
+        
+        tabBarController?.delegate = self
     }
     
     override func bind() {
