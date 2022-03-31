@@ -102,7 +102,7 @@ final class IngredientBuyAlertViewController: BaseViewController {
         paragraphStyle.lineBreakStrategy = .hangulWordPriority
         paragraphStyle.alignment = .center
         self.buyInfoLabel.attributedText = NSAttributedString(
-            string: "\(ingredient.price)P \(ingredient.name)를 구매하시겠나여?",
+            string: "\(ingredient.price)P \(ingredient.name)를 구매하시겠나요?",
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
         
