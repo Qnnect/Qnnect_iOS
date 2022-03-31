@@ -84,6 +84,7 @@ final class SetProfileViewModel: ViewModelType {
             .do {
                 [weak self] loginType in
                 self?.authUseCase.saveLoginType(loginType)
+                self?.authUseCase.updateFirstAccess()
             }
             .mapToVoid()
         

@@ -69,6 +69,7 @@ final class LoginViewModel: ViewModelType {
                 if !userLoginInfo.isNewMember, userLoginInfo.userSettingDone {
                     self?.authUseCase.saveToken(access: userLoginInfo.accessToken, refresh: userLoginInfo.refreshToken)
                     self?.authUseCase.saveLoginType(loginType)
+                    self?.authUseCase.updateFirstAccess()
                 }
             }
             .debug()

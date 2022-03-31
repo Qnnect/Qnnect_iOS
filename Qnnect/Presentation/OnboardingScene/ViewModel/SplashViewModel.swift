@@ -43,20 +43,14 @@ final class SplashViewModel: ViewModelType {
             .take(until: input.inviteCode)
             .filter{ $0 }
             .mapToVoid()
-            .do{
-                [weak self] _ in
-                self?.authUseCase.updateFirstAccess()
-            }
+
         
         
         let inviteFlowFirstAccess = isFirstAccess
             .filter { $0 }
             .mapToVoid()
             .withLatestFrom(input.inviteCode)
-            .do {
-                [weak self] _ in
-                self?.authUseCase.updateFirstAccess()
-            }
+
     
         
         let reissueToken = input.didEndSplash
