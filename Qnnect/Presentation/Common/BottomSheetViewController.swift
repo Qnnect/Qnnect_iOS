@@ -90,11 +90,14 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         super.viewWillDisappear(animated)
         if let navigationVC = presentingViewController as? UINavigationController {
             navigationVC.viewControllers.last?.viewWillAppear(true)
+            if navigationVC.viewControllers.last is HomeViewController || navigationVC.viewControllers.last is CafeRoomViewController {
+                presentingViewController?.tabBarController?.tabBar.isHidden = false
+            }
         } else {
             presentingViewController?.viewWillAppear(true)
         }
-        presentingViewController?.tabBarController?.tabBar.isHidden = false
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.showBottomSheet()

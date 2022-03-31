@@ -156,12 +156,12 @@ class CafeInfoInputViewController: BottomSheetViewController {
         }
         
         self.questionCycleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.diaryColorCollectionView.snp.bottom).offset(28.0)
+            make.top.equalTo(self.diaryColorCollectionView.snp.bottom).offset(16.0)
             make.leading.trailing.equalTo(self.inputTitleLabel)
         }
         
         self.questionCycleSlider.snp.makeConstraints { make in
-            make.top.equalTo(self.questionCycleLabel.snp.bottom).offset(16.0)
+            make.top.equalTo(self.questionCycleLabel.snp.bottom).offset(22.0)
             make.leading.trailing.equalTo(self.inputTitleLabel)
             make.height.equalTo(55.0)
         }
