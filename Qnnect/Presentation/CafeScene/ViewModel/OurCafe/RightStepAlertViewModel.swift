@@ -30,7 +30,7 @@ final class RightStepAlertViewModel: ViewModelType {
     func transform(from input: Input) -> Output {
         
         let insert = input.didTapOkButton
-        
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .withLatestFrom(
                 Observable.combineLatest(
                     input.userDrinkSelectedId,

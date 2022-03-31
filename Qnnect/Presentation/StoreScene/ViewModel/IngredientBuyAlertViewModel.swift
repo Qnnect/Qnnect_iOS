@@ -33,6 +33,7 @@ final class IngredientBuyAlertViewModel: ViewModelType {
         
           
         let buy = input.didTapBuyButton
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .map { $0.id }
             .flatMap(storeUseCase.buyIngredient(_:))
             .share()
