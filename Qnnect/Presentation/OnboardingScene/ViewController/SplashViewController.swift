@@ -64,6 +64,7 @@ final class SplashViewController: BaseViewController {
             didEndSplash: didEndSplash.asObservable(),
             inviteCode: Observable.just(inviteCode)
                 .compactMap{ $0 }
+                .debug()
         )
         
         guard let coordinator = coordinator else { return }

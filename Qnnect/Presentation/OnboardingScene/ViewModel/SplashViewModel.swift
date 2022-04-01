@@ -44,8 +44,6 @@ final class SplashViewModel: ViewModelType {
             .filter{ $0 }
             .mapToVoid()
 
-        
-        
         let inviteFlowFirstAccess = isFirstAccess
             .filter { $0 }
             .mapToVoid()
@@ -84,13 +82,15 @@ final class SplashViewModel: ViewModelType {
                 guard case .failure(_) = $0 else { return false }
                 return true
             }//TODO: 500에러로 변경
+            .debug()
             .mapToVoid()
         
         let showLogin = isFirstAccess
             .take(until: input.inviteCode)
             .filter{ !$0 }
-            .withLatestFrom(Observable.merge(tokenNil,needToLogin))
             .mapToVoid()
+            .concat(Observable.merge(tokenNil,needToLogin))
+            
         
         let inviteFlowShowLogin = isFirstAccess
             .filter{ !$0 }

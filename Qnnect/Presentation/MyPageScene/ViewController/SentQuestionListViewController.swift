@@ -134,9 +134,9 @@ final class SentQuestionListViewController: BaseViewController {
         
         guard let coordinator = coordinator else { return }
         
-        output.showCafeQuestionScene
-            .emit(onNext: coordinator.showCafeQuestionScene(_:))
-            .disposed(by: self.disposeBag)
+//        output.showCafeQuestionScene
+//            .emit(onNext: coordinator.showCafeQuestionScene(_:))
+//            .disposed(by: self.disposeBag)
     }
     
 }

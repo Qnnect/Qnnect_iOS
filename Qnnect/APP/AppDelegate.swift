@@ -94,6 +94,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         //TODO: 푸시알림 응답 처리
         let userInfo = response.notification.request.content.userInfo
+        print("Push Noti!!!")
         print(userInfo)
         completionHandler()
         
