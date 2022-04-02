@@ -12,6 +12,8 @@ enum QuestionAPI {
     case fetchQuestion(questionId: Int)
     case modifyQuestion(questionId: Int, content: String)
     case deleteQuestion(questionId: Int)
+    case modifyUserQuestion(questionId: Int, request: ModifyUserQuestionRequestDTO)
+    case deleteUserQuestion(questionId: Int)
     case fetchCafeQuestions(cafeId: Int, request: CafeQuestionsFetchRequestDTO)
     case searchCafeQuestion(cafeId: Int, request: CafeQuestionSearchRequestDTO)
     case fetchAllUserQuestion(request: CafeQuestionsFetchRequestDTO)
@@ -35,6 +37,9 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/user/question/all"
         case .fetchUserQuestions(let cafeId, _):
             return "api/v1/user/question/\(cafeId)"
+        case .deleteUserQuestion(let questionId), .modifyUserQuestion(let questionId, _):
+            return "api/v1/my/question/\(questionId)"
+            
         }
     }
     
@@ -46,16 +51,16 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
                 .fetchAllUserQuestion(_),
                 .fetchUserQuestions(_, request: _):
             return .get
-        case .modifyQuestion(_, _):
+        case .modifyQuestion(_, _), .modifyUserQuestion(_, _):
             return .patch
-        case .deleteQuestion(_):
+        case .deleteQuestion(_), .deleteUserQuestion(_):
             return .delete
         }
     }
     
     var task: Task {
         switch self {
-        case .fetchQuestion(_), .deleteQuestion(_):
+        case .fetchQuestion(_), .deleteQuestion(_), .deleteUserQuestion(_):
             return .requestPlain
         case .modifyQuestion(_, let content):
             return .requestData(content.data(using: .utf8)!)
@@ -65,6 +70,8 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
         case .searchCafeQuestion(_, let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .modifyUserQuestion(_, let request):
+            return .requestJSONEncodable(request)
         }
     }
     

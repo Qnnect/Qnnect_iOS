@@ -72,6 +72,7 @@ final class SentQuestionListViewController: BaseViewController {
         
         let input = SentQuestionListViewModel.Input(
             viewDidLoad: Observable.just(()),
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
             didTapCafeTag: self.tagCollectionView.rx.methodInvoked(#selector(self.tagCollectionView.textTagCollectionView(_:didTap:at:)))
                 .map {
                     [weak self] param -> CafeTag in
@@ -80,8 +81,7 @@ final class SentQuestionListViewController: BaseViewController {
                 }.startWith(CafeTag(cafeId: 0, cafeTitle: "전체")),
             moreFetch: self.rx.methodInvoked(#selector(fetchMore))
                 .map{ $0[0] as! Int},
-            didTapQuestion: mainTableView.rx.modelSelected(QuestionShortInfo.self)
-                .map { $0.cafeQuestionId }
+            didTapQuestion: mainTableView.rx.modelSelected(UserQuestion.self).asObservable()
         )
         
         
@@ -134,9 +134,13 @@ final class SentQuestionListViewController: BaseViewController {
         
         guard let coordinator = coordinator else { return }
         
-//        output.showCafeQuestionScene
-//            .emit(onNext: coordinator.showCafeQuestionScene(_:))
-//            .disposed(by: self.disposeBag)
+        output.showCafeQuestionScene
+            .emit(onNext: coordinator.showCafeQuestionScene(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.showWaitingQuestionScene
+            .emit(onNext: coordinator.showWaitingQuestionScene(_:))
+            .disposed(by: self.disposeBag)
     }
     
 }

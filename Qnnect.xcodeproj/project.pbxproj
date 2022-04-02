@@ -301,6 +301,14 @@
 		AEBC9ED927C62E9E0070399A /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9ED827C62E9E0070399A /* AuthRepository.swift */; };
 		AEBC9EDB27C62EB90070399A /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */; };
 		AEBC9EDD27C62EF40070399A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */; };
+		AEC83E7927F85CBF007AFB61 /* WaitingQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E7827F85CBF007AFB61 /* WaitingQuestionViewController.swift */; };
+		AEC83E7B27F85D92007AFB61 /* WaitingQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E7A27F85D92007AFB61 /* WaitingQuestionViewModel.swift */; };
+		AEC83E7D27F86152007AFB61 /* ModifyQuestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E7C27F86152007AFB61 /* ModifyQuestionCoordinator.swift */; };
+		AEC83E7F27F8639B007AFB61 /* WaitingQuestionBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E7E27F8639B007AFB61 /* WaitingQuestionBottomSheet.swift */; };
+		AEC83E8127F864B5007AFB61 /* WaitingQuestionBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E8027F864B5007AFB61 /* WaitingQuestionBottomSheetViewModel.swift */; };
+		AEC83E8327F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E8227F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift */; };
+		AEC83E8527F86DDB007AFB61 /* ModifyWaitingQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E8427F86DDB007AFB61 /* ModifyWaitingQuestionViewController.swift */; };
+		AEC83E8727F86E0B007AFB61 /* ModifyWaitingQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC83E8627F86E0B007AFB61 /* ModifyWaitingQuestionViewModel.swift */; };
 		AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC12FA27B9DCCD006866FC /* SocialLoginManager.swift */; };
 		AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */; };
 		AECC130F27B9EAC2006866FC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECC130E27B9EAC2006866FC /* UIFont+.swift */; };
@@ -668,6 +676,14 @@
 		AEBC9ED827C62E9E0070399A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDA27C62EB90070399A /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
 		AEBC9EDC27C62EF40070399A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		AEC83E7827F85CBF007AFB61 /* WaitingQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQuestionViewController.swift; sourceTree = "<group>"; };
+		AEC83E7A27F85D92007AFB61 /* WaitingQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQuestionViewModel.swift; sourceTree = "<group>"; };
+		AEC83E7C27F86152007AFB61 /* ModifyQuestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyQuestionCoordinator.swift; sourceTree = "<group>"; };
+		AEC83E7E27F8639B007AFB61 /* WaitingQuestionBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQuestionBottomSheet.swift; sourceTree = "<group>"; };
+		AEC83E8027F864B5007AFB61 /* WaitingQuestionBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingQuestionBottomSheetViewModel.swift; sourceTree = "<group>"; };
+		AEC83E8227F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyUserQuestionRequestDTO.swift; sourceTree = "<group>"; };
+		AEC83E8427F86DDB007AFB61 /* ModifyWaitingQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWaitingQuestionViewController.swift; sourceTree = "<group>"; };
+		AEC83E8627F86E0B007AFB61 /* ModifyWaitingQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWaitingQuestionViewModel.swift; sourceTree = "<group>"; };
 		AECC12FA27B9DCCD006866FC /* SocialLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginManager.swift; sourceTree = "<group>"; };
 		AECC130627B9E3F1006866FC /* Rx+ASAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+ASAuthorizationController.swift"; sourceTree = "<group>"; };
 		AECC130E27B9EAC2006866FC /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -912,9 +928,9 @@
 		AE176A3127B24F590040A4C3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				AE176A3227B24F610040A4C3 /* Model */,
 				AE176A3927B2526B0040A4C3 /* Repository */,
 				AE176A3327B24F660040A4C3 /* UseCases */,
-				AE176A3227B24F610040A4C3 /* Model */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1138,6 +1154,7 @@
 				AE02405327E3316200017F77 /* OurCafeCoordinator.swift */,
 				AE33A4F427E726CF000130B3 /* SelectDrinkCoordinator.swift */,
 				AEEF4AF227EB2B2300DB4184 /* ReportCoordinator.swift */,
+				AEC83E7C27F86152007AFB61 /* ModifyQuestionCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1284,6 +1301,9 @@
 				AEE1A34327EA5CEB0076E863 /* MyPageAlertViewController.swift */,
 				AEEF4AFA27EB5C0700DB4184 /* SentQuestionListViewController.swift */,
 				AEEF4B0D27EB70C300DB4184 /* BlockedFriendListViewController.swift */,
+				AEC83E7827F85CBF007AFB61 /* WaitingQuestionViewController.swift */,
+				AEC83E7E27F8639B007AFB61 /* WaitingQuestionBottomSheet.swift */,
+				AEC83E8427F86DDB007AFB61 /* ModifyWaitingQuestionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1297,6 +1317,9 @@
 				AEEF4B0F27EB711800DB4184 /* BlockedFriendListViewModel.swift */,
 				AE158BE227F2F00600CB1F3E /* SentQuestionListViewModel.swift */,
 				AE158BE827F30BF200CB1F3E /* MyDrinkStampViewModel.swift */,
+				AEC83E7A27F85D92007AFB61 /* WaitingQuestionViewModel.swift */,
+				AEC83E8027F864B5007AFB61 /* WaitingQuestionBottomSheetViewModel.swift */,
+				AEC83E8627F86E0B007AFB61 /* ModifyWaitingQuestionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1539,6 +1562,7 @@
 				AEB5AB2D27E204EE0096376B /* CafeQuestionSearchRequestDTO.swift */,
 				AEB5AB2F27E205CE0096376B /* CafeQuestionsResponseDTO.swift */,
 				AEB5AB3327E206FE0096376B /* CafeQuestionResponseDTO.swift */,
+				AEC83E8227F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift */,
 			);
 			path = Question;
 			sourceTree = "<group>";
@@ -2086,6 +2110,7 @@
 				AEB5AAE627E062EA0096376B /* BookmarkSearchViewModel.swift in Sources */,
 				AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */,
 				AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */,
+				AEC83E7927F85CBF007AFB61 /* WaitingQuestionViewController.swift in Sources */,
 				AEB5AAFE27E0F4A10096376B /* ReplyMoreMenuViewModel.swift in Sources */,
 				AE02406627E33D7A00017F77 /* RecipeFetchRequestDTO.swift in Sources */,
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
@@ -2101,6 +2126,7 @@
 				AE33A4FD27E78FF0000130B3 /* JoinCafeBottomSheetViewModel.swift in Sources */,
 				AE02404B27E31F7300017F77 /* OurCafeViewController.swift in Sources */,
 				AE02409427E3C56F00017F77 /* StorageCoordinator.swift in Sources */,
+				AEC83E8527F86DDB007AFB61 /* ModifyWaitingQuestionViewController.swift in Sources */,
 				AE767F9B27E874E100BD5496 /* CompleteDrinkViewController.swift in Sources */,
 				AEEF362727C319FA00D0A127 /* PointCell.swift in Sources */,
 				AE77C82F27D8BBE800E8D0EC /* CafeUpdateRequestDTO.swift in Sources */,
@@ -2155,6 +2181,7 @@
 				AE02409627E3D0BA00017F77 /* WrongStepAlertView.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,
 				AEB8FCFF27C6659F002BDBCD /* LoginResponseDTO.swift in Sources */,
+				AEC83E7D27F86152007AFB61 /* ModifyQuestionCoordinator.swift in Sources */,
 				AEB5AAC127DF1C4F0096376B /* CommentViewModel.swift in Sources */,
 				AEA14D3027D4648A0009EEC6 /* QuestionType.swift in Sources */,
 				AE02D82727D763F90019D955 /* CafeAnswerCell.swift in Sources */,
@@ -2266,6 +2293,7 @@
 				AEA7266227DDE1AF00F48CB8 /* QuestionCraeteRequestDTO.swift in Sources */,
 				AEB5AB0E27E111890096376B /* DeleteAlertView.swift in Sources */,
 				AE02409027E3BF7C00017F77 /* StorageSectionModel.swift in Sources */,
+				AEC83E8327F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift in Sources */,
 				AEB5AB0A27E0F6060096376B /* QuestionCoordinator.swift in Sources */,
 				AECC12FB27B9DCCD006866FC /* SocialLoginManager.swift in Sources */,
 				AEB5AB3627E212D00096376B /* SearchCafeQuestionViewController.swift in Sources */,
@@ -2284,6 +2312,7 @@
 				AEA14D0E27D210ED0009EEC6 /* FetchUserResponseDTO.swift in Sources */,
 				AE77C85727DB524600E8D0EC /* DrinkSelectCollectionView.swift in Sources */,
 				AE767FA527E8E58B00BD5496 /* MyDrinkStampTitleCell.swift in Sources */,
+				AEC83E8727F86E0B007AFB61 /* ModifyWaitingQuestionViewModel.swift in Sources */,
 				AEB8FCFA27C65CB4002BDBCD /* Networkable.swift in Sources */,
 				AE77C84F27DB283000E8D0EC /* DrinkUseCase.swift in Sources */,
 				AEBC9EBB27C5B6B40070399A /* DiaryColorCollectionView.swift in Sources */,
@@ -2310,6 +2339,7 @@
 				AEA7266D27DE44EB00F48CB8 /* CommentAPI.swift in Sources */,
 				AECE641C27F31EA900BB14B2 /* NotificationResponseDTO.swift in Sources */,
 				AE77C84627DB266500E8D0EC /* DrinkFetchResponseDTO.swift in Sources */,
+				AEC83E7F27F8639B007AFB61 /* WaitingQuestionBottomSheet.swift in Sources */,
 				AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */,
 				AEB5AB3827E213560096376B /* SearchCafeQuestionViewModel.swift in Sources */,
 				AE02404D27E31FDB00017F77 /* NavigationTitleLabel.swift in Sources */,
@@ -2339,6 +2369,7 @@
 				AEB5AAD227DF448C0096376B /* ReplyResponseDTO.swift in Sources */,
 				AEA7266027DDDFFF00F48CB8 /* WriteQuestionViewModel.swift in Sources */,
 				AE0D336827B4C3B000C4B955 /* Coordinator.swift in Sources */,
+				AEC83E8127F864B5007AFB61 /* WaitingQuestionBottomSheetViewModel.swift in Sources */,
 				AE77C83627DA068700E8D0EC /* ScrapNetworkService.swift in Sources */,
 				AEE4750827CB85AA00A3449B /* AuthNetworkService.swift in Sources */,
 				AE7BAA4F27BA92C200EF2F46 /* TermsViewModel.swift in Sources */,
@@ -2351,6 +2382,7 @@
 				AEBC9EB927C5B5BC0070399A /* UICollectionView+.swift in Sources */,
 				AE02D81F27D749110019D955 /* DiaryColorType+.swift in Sources */,
 				AEA7266427DDF4A400F48CB8 /* UIPageControl+.swift in Sources */,
+				AEC83E7B27F85D92007AFB61 /* WaitingQuestionViewModel.swift in Sources */,
 				AEA56B0027BF37F60029A6CB /* TodayQuestionCell.swift in Sources */,
 				AEB5AAEE27E0A71B0096376B /* LikeAPI.swift in Sources */,
 				AEA14D0227CFA35A0009EEC6 /* SetEnableNotificationRequestDTO.swift in Sources */,

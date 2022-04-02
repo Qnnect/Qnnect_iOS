@@ -18,8 +18,12 @@ protocol MyPageCoordinator: Coordinator {
     func showSentQuestionListScene()
     func showBlockedFriendListScene()
     func showCafeQuestionScene(_ cafeQuestionId: Int)
+    func showWaitingQuestionScene(_ question: UserQuestion)
+    func showModifyQuestionScene(_ question: UserQuestion)
+    func showWaitingQuestionBottomSheet(_ question: UserQuestion)
     func pop()
     func showLoginScene(_ leaveType: LeaveType)
+    func dismissMoreMenu(_ completion: (() -> Void)?)
 }
 
 final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
@@ -139,8 +143,46 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
         coordinator.showCafeQuestionScene(cafeQuestionId)
     }
     
+    func showWaitingQuestionScene(_ question: UserQuestion) {
+        let viewModel = WaitingQuestionViewModel()
+        let vc = WaitingQuestionViewController.create(with: viewModel, self, question)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showModifyQuestionScene(_ question: UserQuestion) {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = ModifyWaitingQuestionViewModel(questionUseCase: questionUseCase)
+        let vc = ModifyWaitingQuestionViewController.create(with: viewModel, self, question)
+        dismissMoreMenu(nil)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showWaitingQuestionBottomSheet(_ question: UserQuestion) {
+        let questionRepository = DefaultQuestionRepository(
+            scrapNetworkService: ScrapNetworkService(),
+            questionNetworkService: QuestionNetworkService(),
+            likeNetworkService: LikeNetworkService()
+        )
+        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+        let viewModel = WaitingQuestionBottomSheetViewModel(questionUseCase: questionUseCase)
+        let vc = WaitingQuestionBottomSheet.create(with: viewModel, self, question)
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController.present(vc, animated: false, completion: nil)
+    }
+    
     func pop() {
         self.navigationController.popViewController(animated: true)
+    }
+    
+    func dismissMoreMenu(_ completion: (()->Void)?) {
+        if let vc = navigationController.presentedViewController as? WaitingQuestionBottomSheet {
+            vc.hideBottomSheetAndGoBack(completion)
+        }
     }
 }
 

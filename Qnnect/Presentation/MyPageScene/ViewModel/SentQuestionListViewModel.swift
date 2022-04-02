@@ -18,11 +18,12 @@ final class SentQuestionListViewModel: ViewModelType {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let didTapCafeTag: Observable<CafeTag>
         /// Int: Page
         let moreFetch: Observable<Int>
         /// Int: questionId
-        let didTapQuestion: Observable<Int>
+        let didTapQuestion: Observable<UserQuestion>
     }
     
     struct Output {
@@ -32,6 +33,7 @@ final class SentQuestionListViewModel: ViewModelType {
         let canLoad: Signal<Bool>
         ///Int: QuestionId
         let showCafeQuestionScene: Signal<Int>
+        let showWaitingQuestionScene: Signal<UserQuestion>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -50,7 +52,10 @@ final class SentQuestionListViewModel: ViewModelType {
                 return cafes
             }
         
-        let loadAll = input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid()
+        let loadAll = Observable.merge(
+            input.didTapCafeTag.filter {$0.cafeId == 0}.mapToVoid(),
+            input.viewWillAppear.skip(1)
+            )
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(questionUseCase.fetchAllUserQuestion)
             .map {
@@ -119,13 +124,19 @@ final class SentQuestionListViewModel: ViewModelType {
             .map { $0.count == Constants.scrapFetchSize }
         
         let showCafeQuestionScene = input.didTapQuestion
+            .filter { !$0.waitingList }
+            .map { $0.id }
+        
+        let showWaitingQuestionScene = input.didTapQuestion
+            .filter{ $0.waitingList }
         
         return Output(
             cafes: cafes.asDriver(onErrorJustReturn: []),
             sentQuestions: sentQuestions.asDriver(onErrorJustReturn: []),
             newLoad: newLoad.mapToVoid().asSignal(onErrorSignalWith: .empty()),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
-            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty())
+            showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
+            showWaitingQuestionScene: showWaitingQuestionScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

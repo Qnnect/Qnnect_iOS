@@ -76,19 +76,24 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
     }
     
     func showModifyQuestionScene(_ question: Question) {
-        let questionRepository = DefaultQuestionRepository(
-            scrapNetworkService: ScrapNetworkService(),
-            questionNetworkService: QuestionNetworkService(),
-            likeNetworkService: LikeNetworkService()
-        )
-        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
-        let viewModel = ModifyQuestionViewModel(questionUseCase: questionUseCase)
-        let vc = ModifyQuestionViewController.create(
-            with: viewModel,
-            self,
-            question
-        )
-        navigationController.pushViewController(vc, animated: true)
+//        let questionRepository = DefaultQuestionRepository(
+//            scrapNetworkService: ScrapNetworkService(),
+//            questionNetworkService: QuestionNetworkService(),
+//            likeNetworkService: LikeNetworkService()
+//        )
+//        let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
+//        let viewModel = ModifyQuestionViewModel(questionUseCase: questionUseCase)
+//        let vc = ModifyQuestionViewController.create(
+//            with: viewModel,
+//            self,
+//            question
+//        )
+//        navigationController.pushViewController(vc, animated: true)
+        let coordinator = DefaultModifyQuestionCoordinator(navigationController: navigationController)
+        navigationController.delegate = self
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start(question)
     }
     
     func showReportMenuBottomSheet(_ reportUser: User) {
@@ -135,6 +140,11 @@ extension DefaultQuestionCoordinator: UINavigationControllerDelegate {
         }
         
         if let vc = fromViewController as? ReportBottomSheet {
+            childDidFinish(vc.coordinator)
+            navigationController.delegate = parentCoordinator
+        }
+        
+        if let vc = fromViewController as? ModifyQuestionViewController {
             childDidFinish(vc.coordinator)
             navigationController.delegate = parentCoordinator
         }

@@ -1,8 +1,8 @@
 //
-//  ModifyQuestionViewController.swift
+//  ModifyWaitingQuestionViewController.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/03/16.
+//  Created by 재영신 on 2022/04/02.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 
-final class ModifyQuestionViewController: BaseViewController {
+final class ModifyWaitingQuestionViewController: BaseViewController {
     
     private let completionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
@@ -22,12 +22,12 @@ final class ModifyQuestionViewController: BaseViewController {
         $0.isScrollEnabled = false
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .BLACK_121212
-        $0.backgroundColor = .PINK01
+        $0.backgroundColor = .cardBackground
         $0.textAlignment = .center
     }
     
     private let outerView = UIView().then {
-        $0.backgroundColor = .PINK01
+        $0.backgroundColor = .cardBackground
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
         $0.layer.cornerRadius = 24.0
@@ -39,16 +39,16 @@ final class ModifyQuestionViewController: BaseViewController {
         $0.text = "내 질문 수정"
     }
     
-    private var viewModel: ModifyQuestionViewModel!
-    weak var coordinator: ModifyQuestionCoordinator?
-    private var question: Question!
+    private var viewModel: ModifyWaitingQuestionViewModel!
+    weak var coordinator: MyPageCoordinator?
+    private var question: UserQuestion!
     
     static func create(
-        with viewModel: ModifyQuestionViewModel,
-        _ coordinator: ModifyQuestionCoordinator,
-        _ question: Question
-    ) -> ModifyQuestionViewController {
-        let vc = ModifyQuestionViewController()
+        with viewModel: ModifyWaitingQuestionViewModel,
+        _ coordinator: MyPageCoordinator,
+        _ question: UserQuestion
+    ) -> ModifyWaitingQuestionViewController {
+        let vc = ModifyWaitingQuestionViewController()
         vc.viewModel = viewModel
         vc.coordinator = coordinator
         vc.question = question
@@ -85,7 +85,7 @@ final class ModifyQuestionViewController: BaseViewController {
     override func bind() {
         super.bind()
         
-        let input = ModifyQuestionViewModel.Input(
+        let input = ModifyWaitingQuestionViewModel.Input(
             question: Observable.just(question),
             didTapCompletionButton: completionButton.rx.tap.asObservable(),
             content: contentTextView.rx.text.orEmpty.asObservable()
@@ -107,7 +107,7 @@ final class ModifyQuestionViewController: BaseViewController {
     
 }
 
-private extension ModifyQuestionViewController {
+private extension ModifyWaitingQuestionViewController {
     func setCompletionButton(_ isCompleted: Bool) {
         if isCompleted {
             completionButton.setTitleColor(.ORANGE01, for: .normal)

@@ -173,4 +173,13 @@ final class DefaultQuestionRepository: QuestionRepository {
                 }
             }
     }
+    
+    func modifyUserQuestion(_ questionId: Int, _ content: String) -> Observable<Result<Void,Error>> {
+        let request = ModifyUserQuestionRequestDTO(content: content)
+        return questionNetworkService.modifyUserQuestion(questionId, request)
+    }
+    
+    func deleteUserQuestion(_ questionId: Int) -> Observable<Result<Void,Error>> {
+        questionNetworkService.deleteUserQuestion(questionId)
+    }
 }

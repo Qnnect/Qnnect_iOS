@@ -73,4 +73,20 @@ final class QuestionNetworkService: BaseNetworkService<QuestionAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func modifyUserQuestion(_ questionId: Int, _ request: ModifyUserQuestionRequestDTO) -> Observable<Result<Void,Error>> {
+        self.request(.modifyUserQuestion(questionId: questionId, request: request))
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
+    
+    func deleteUserQuestion(_ questionId: Int) -> Observable<Result<Void,Error>> {
+        self.request(.deleteUserQuestion(questionId: questionId))
+            .filter(statusCodes: 200 ... 300)
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }
