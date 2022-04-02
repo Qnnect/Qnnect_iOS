@@ -48,6 +48,7 @@ final class BookmarkCell: UITableViewCell {
         }
         
         contentView.backgroundColor = .p_ivory
+        selectionStyle = .none
         
         cafeNameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(25.0)
