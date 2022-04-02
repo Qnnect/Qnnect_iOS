@@ -43,13 +43,11 @@ final class SplashViewModel: ViewModelType {
             .take(until: input.inviteCode)
             .filter{ $0 }
             .mapToVoid()
-
+        
         let inviteFlowFirstAccess = isFirstAccess
             .filter { $0 }
             .mapToVoid()
             .withLatestFrom(input.inviteCode)
-
-    
         
         let reissueToken = input.didEndSplash
             .map(self.authUseCase.fetchToken)
@@ -76,6 +74,7 @@ final class SplashViewModel: ViewModelType {
             .map(self.authUseCase.fetchToken)
             .filter { $0 == nil }
             .mapToVoid()
+            .debug()
         
         let needToLogin = reissueToken
             .filter {
@@ -85,12 +84,14 @@ final class SplashViewModel: ViewModelType {
             .debug()
             .mapToVoid()
         
-        let showLogin = isFirstAccess
-            .take(until: input.inviteCode)
-            .filter{ !$0 }
+        let showLogin = Observable.zip(
+            isFirstAccess
+                .take(until: input.inviteCode)
+                .filter{ !$0 },
+            Observable.merge(tokenNil,needToLogin)
+        )
             .mapToVoid()
-            .concat(Observable.merge(tokenNil,needToLogin))
-            
+            .debug()
         
         let inviteFlowShowLogin = isFirstAccess
             .filter{ !$0 }
@@ -111,7 +112,6 @@ final class SplashViewModel: ViewModelType {
 
 
 private extension SplashViewModel {
-    
     func isExistedUser(_ userLoginInfo: UserLoginInfo) -> Bool {
         return (!userLoginInfo.isNewMember && userLoginInfo.userSettingDone)
     }
