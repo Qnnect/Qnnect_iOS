@@ -18,7 +18,7 @@ enum JoinCafeError: Int, Error {
     var meessage: String {
         switch self {
         case .alreadyIn:
-            return "카페에 이미 들어가 있습니다."
+            return "카페에 들어갈 수 없습니다."
         case .notExisted:
             return "존재하지 않는 카페 코드입니다."
         case .isFull:

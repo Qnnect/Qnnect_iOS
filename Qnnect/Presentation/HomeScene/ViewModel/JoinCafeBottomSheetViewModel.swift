@@ -44,11 +44,7 @@ final class JoinCafeBottomSheetViewModel: ViewModelType {
         let showCafeJoinErrorAlertView = joinCafe
             .compactMap { result -> JoinCafeError? in
                 guard case let .failure(error) = result else { return nil }
-                if error == .alreadyIn {
-                    return nil
-                } else {
-                    return error
-                }
+                return error
             }.map { $0.meessage }
         
         
