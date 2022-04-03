@@ -29,4 +29,9 @@ final class DefaultNotificationRepository: NotificationRepository {
                 }
             }
     }
+    
+    func readNotification(_ notificationId: Int) -> Observable<Result<Void, Error>> {
+        let request = ReadNotificationRequestDTO(notificationId: notificationId)
+        return notificationNetworkService.readNotification(request: request)
+    }
 }

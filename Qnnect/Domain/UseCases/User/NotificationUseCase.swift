@@ -10,6 +10,7 @@ import RxSwift
 
 protocol NotificationUseCase: AnyObject {
     func fetchNotifications(page: Int, size: Int) -> Observable<Result<[NotificationInfo],Error>>
+    func readNotification(_ notificationId: Int) -> Observable<Result<Void,Error>>
 }
 
 final class DefaultNotificationUseCase: NotificationUseCase {
@@ -22,5 +23,9 @@ final class DefaultNotificationUseCase: NotificationUseCase {
     
     func fetchNotifications(page: Int, size: Int) -> Observable<Result<[NotificationInfo], Error>> {
         notificationRepository.fetchNotifications(page: page, size: size)
+    }
+    
+    func readNotification(_ notificationId: Int) -> Observable<Result<Void, Error>> {
+        notificationRepository.readNotification(notificationId)
     }
 }

@@ -101,6 +101,7 @@
 		AE5B1C1F27BB42DB00F24981 /* IM_Hyemin-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */; };
 		AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */; };
 		AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */; };
+		AE5BEFA027F98F6800561237 /* ReadNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -479,6 +480,7 @@
 		AE5B1C1C27BB42DB00F24981 /* IM_Hyemin-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Regular.otf"; sourceTree = "<group>"; };
 		AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
 		AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementItemView.swift; sourceTree = "<group>"; };
+		AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationRequestDTO.swift; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -1859,6 +1861,7 @@
 			children = (
 				AECE641927F31E8200BB14B2 /* NotificationRequestDTO.swift */,
 				AECE641B27F31EA900BB14B2 /* NotificationResponseDTO.swift */,
+				AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -2197,6 +2200,7 @@
 				AE33A4FF27E79B81000130B3 /* InviteCafeViewModel.swift in Sources */,
 				AE02406C27E3403400017F77 /* DefaultOurCafeRepository.swift in Sources */,
 				AEB8FCF027C6575A002BDBCD /* NetworkLoggerPlugin.swift in Sources */,
+				AE5BEFA027F98F6800561237 /* ReadNotificationRequestDTO.swift in Sources */,
 				AEB5AB1C27E1B9630096376B /* QuestionCompletionAlertViewModel.swift in Sources */,
 				AE02409627E3D0BA00017F77 /* WrongStepAlertView.swift in Sources */,
 				AECC131D27BA1266006866FC /* UIColor+.swift in Sources */,

@@ -15,6 +15,7 @@ protocol HomeCoordinator: Coordinator {
     func startInviteFlow(_ inviteCafeCode: String?)
     func showNotificationListScene()
     func showCafeJoinErrorAlertView(_ message: String)
+    //func showCommentScene(_ commentId: Int)
 }
 
 final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
@@ -118,6 +119,13 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
             self?.navigationController.present(vc, animated: true, completion: nil)
         })
     }
+    
+//    func showCommentScene(_ commentId: Int) {
+//        let coordinator = DefaultCommentCoordinator(navigationController: navigationController)
+//        coordinator.parentCoordinator = self
+//        self.childCoordinators.append(coordinator)
+//        coordinator.showco
+//    }
 }
 
 extension DefaultHomeCoordinator: UINavigationControllerDelegate {

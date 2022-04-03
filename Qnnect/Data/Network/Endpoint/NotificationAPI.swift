@@ -10,6 +10,7 @@ import Moya
 
 enum NotificationAPI {
     case fetchNotifications(request: NotificationRequestDTO)
+    case readNotification(request: ReadNotificationRequestDTO)
 }
 
 extension NotificationAPI: TargetType, AccessTokenAuthorizable {
@@ -19,7 +20,7 @@ extension NotificationAPI: TargetType, AccessTokenAuthorizable {
     
     var path: String {
         switch self {
-        case .fetchNotifications(_):
+        case .fetchNotifications(_), .readNotification(_):
             return "api/v1/notification"
         }
     }
@@ -28,12 +29,17 @@ extension NotificationAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .fetchNotifications(_):
             return .get
+        case .readNotification(_):
+            return .patch
         }
     }
     
     var task: Task {
         switch self {
         case .fetchNotifications(let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .readNotification(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }

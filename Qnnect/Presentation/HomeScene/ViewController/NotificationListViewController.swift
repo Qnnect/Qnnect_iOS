@@ -60,9 +60,10 @@ final class NotificationListViewController: BaseViewController {
         super.bind()
         
         let input = NotificationListViewModel.Input(
-            viewDidLoad: Observable.just(()),
+            viewWillAppear: rx.viewWillAppear.mapToVoid(),
             moreFetch: rx.methodInvoked(#selector(fetchMore))
-                .map{ $0[0] as! Int}
+                .map{ $0[0] as! Int},
+            didTapNotification: notiListTableView.rx.modelSelected(NotificationInfo.self).asObservable()
         )
         
         let output = viewModel.transform(from: input)
@@ -90,6 +91,16 @@ final class NotificationListViewController: BaseViewController {
                     self?.isFetched = true
                 }
             }).disposed(by: self.disposeBag)
+        
+        output.readNoti
+            .emit()
+            .disposed(by: self.disposeBag)
+        
+        guard let coordinator = coordinator else { return }
+
+        output.showQuestionScene
+            .emit(onNext: coordinator.showCafeQuestionScene(_:))
+            .disposed(by: self.disposeBag)
         
     }
 }

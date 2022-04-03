@@ -16,7 +16,7 @@ enum NotiFetchAction {
 final class NotificationListViewModel: ViewModelType {
     
     struct Input {
-        let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
         let moreFetch: Observable<Int>
         let didTapNotification: Observable<NotificationInfo>
     }
@@ -24,6 +24,7 @@ final class NotificationListViewModel: ViewModelType {
     struct Output {
         let notis: Driver<[NotificationInfo]>
         let canLoad: Signal<Bool>
+        let readNoti: Signal<Void>
         /// Int; QuestionId
         let showQuestionScene: Signal<Int>
         /// Int: CommentId
@@ -38,7 +39,7 @@ final class NotificationListViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let newLoad = input.viewDidLoad
+        let newLoad = input.viewWillAppear
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(notificationUseCase.fetchNotifications)
             .debug()
@@ -49,7 +50,7 @@ final class NotificationListViewModel: ViewModelType {
             }.map { NotiFetchAction.load(notis: $0)}
             .share()
         
-
+        
         let moreLoad = input.moreFetch
             .map { (page: $0, size: Constants.scrapFetchSize) }
             .flatMap(notificationUseCase.fetchNotifications)
@@ -79,11 +80,28 @@ final class NotificationListViewModel: ViewModelType {
                 return notis
             }
             .map { $0.count == Constants.scrapFetchSize }
-          
+        
+        let readNoti = input.didTapNotification
+            .filter{ !$0.userRead }
+            .map { $0.id }
+            .flatMap(notificationUseCase.readNotification(_:))
+            .mapToVoid()
+        
+        let showQuestionScene = input.didTapNotification
+            .filter { $0.type == .question }
+            .map { $0.contentId }
+        
+        let showCommentScene = input.didTapNotification
+            .filter { $0.type == .reply || $0.type == .comment }
+            .map { $0.contentId }
+        
         
         return Output(
             notis: notis.asDriver(onErrorJustReturn: []),
-            canLoad: canLoad.asSignal(onErrorSignalWith: .empty())
+            canLoad: canLoad.asSignal(onErrorSignalWith: .empty()),
+            readNoti: readNoti.asSignal(onErrorSignalWith: .empty()),
+            showQuestionScene: showQuestionScene.asSignal(onErrorSignalWith: .empty()),
+            showCommentScene: showCommentScene.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
