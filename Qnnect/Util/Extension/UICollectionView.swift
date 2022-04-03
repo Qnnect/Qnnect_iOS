@@ -1,8 +1,8 @@
 //
-//  UICollectionView+.swift
+//  UICollectionView.swift
 //  Qnnect
 //
-//  Created by 재영신 on 2022/02/23.
+//  Created by 재영신 on 2022/04/03.
 //
 
 import UIKit
@@ -41,7 +41,7 @@ extension UICollectionView {
         
         
         self.backgroundView = backgroudView
-        
+
     }
     
     func reset() {

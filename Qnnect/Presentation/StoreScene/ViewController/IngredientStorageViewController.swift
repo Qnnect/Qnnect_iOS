@@ -30,6 +30,14 @@ final class IngredientStorageViewController: BaseViewController {
         )
     }
     
+    private let layout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        let width = UIScreen.main.bounds.width / 2.0 - 8.0 - 20.0
+        let height = width * 1.08
+        $0.itemSize = .init(width: width, height: height)
+        $0.sectionInset = .init(top: 0, left: 20.0, bottom: 0, right: 20.0)
+    }
+    
     private var viewModel: IngredientStorageViewModel!
     weak var coordinator: StorageCoordinator?
     
@@ -47,25 +55,12 @@ final class IngredientStorageViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let width = UIScreen.main.bounds.width / 2.0 - 8.0 - 20.0
-        let height = width * 1.08
-        layout.itemSize = .init(width: width, height: height)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20.0, bottom: 0, right: 20.0)
-        layout.headerReferenceSize = CGSize(width: ingredientCollectionView.frame.width, height: 60.0)
-        ingredientCollectionView.collectionViewLayout = layout
-    }
     override func configureUI() {
         
         view.addSubview(ingredientCollectionView)
         
         ingredientCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         navigationItem.titleView = navigationTitleLabel
@@ -112,6 +107,19 @@ final class IngredientStorageViewController: BaseViewController {
         let output = viewModel.transform(from: input)
         
         output.ingredients
+            .do {
+                [weak self] ingredients in
+                guard let self = self else { return }
+                if ingredients.isEmpty, self.ingredientCollectionView.backgroundView == nil {
+                    self.layout.headerReferenceSize = .init(width: UIScreen.main.bounds.width, height: 0)
+                    self.ingredientCollectionView.collectionViewLayout = self.layout
+                    self.ingredientCollectionView.setEmptyView(message: "구매한 재료가 없어요")
+                } else {
+                    self.layout.headerReferenceSize = .init(width: UIScreen.main.bounds.width, height: 60.0)
+                    self.ingredientCollectionView.collectionViewLayout = self.layout
+                    self.ingredientCollectionView.reset()
+                }
+            }
             .map {
                  ingredients -> [StorageSectionModel] in
                 let items = ingredients.map { StorageSectionItem.IngredientSectionItem(ingredient: $0)}
@@ -134,3 +142,4 @@ private extension IngredientStorageViewController {
         }
     }
 }
+
