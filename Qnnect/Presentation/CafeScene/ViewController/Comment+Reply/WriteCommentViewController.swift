@@ -242,6 +242,9 @@ final class WriteCommentViewController: BaseViewController {
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
+                .do {
+                    LoadingIndicator.showLoading()
+                }
                 .map(getImages),
             question: Observable.just(question),
             type: Observable.just(
@@ -289,8 +292,8 @@ final class WriteCommentViewController: BaseViewController {
        
         for i in 0 ..< result.count {
             imageDatas.append((result[i],nil))
+            attachingImageCollectionView.insertItems(at: [IndexPath(row: imageDatas.count - 1, section: 0)])
         }
-        attachingImageCollectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -326,16 +329,18 @@ extension WriteCommentViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: AttachingImageCell.identifier, for: indexPath) as! AttachingImageCell
 
+        let key = Date().timeIntervalSince1970
         //let asset = self.fetchedAssets[indexPath.row]
         if let asset = imageDatas[indexPath.row].0 {
+            
             cell.update(with: asset) {
                 [weak self] image in
-                self?.images[Date().timeIntervalSince1970] = image
+                self?.images[key] = image
             }
         } else if let url = imageDatas[indexPath.row].1 {
             cell.update(with: url) {
                 [weak self] image in
-                self?.images[Date().timeIntervalSince1970] = image
+                self?.images[key] = image
             }
         }
         
