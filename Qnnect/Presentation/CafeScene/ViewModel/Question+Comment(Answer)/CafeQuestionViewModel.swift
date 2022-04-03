@@ -27,13 +27,14 @@ final class CafeQuestionViewModel: ViewModelType {
     }
     
     struct Output {
+        ///Int: CafeQuestionId
         let showWriteCommentScene: Signal<(Int,User)>
         let scrap: Signal<Void>
         let cancleScrap: Signal<Void>
         let comments: Driver<[Comment]>
         let question: Driver<Question>
-        ///Int: CommentId, Int: CafeQuestionId
-        let showCommentScene: Signal<(commentId: Int, cafeQuestionId: Int)>
+        ///Int: CommentId
+        let showCommentScene: Signal<Int>
         let user: Driver<User>
         let currentUserComment: Driver<Comment?>
         let like: Signal<Void>
@@ -117,9 +118,7 @@ final class CafeQuestionViewModel: ViewModelType {
         
         let showCommentScene = input.didTapAnswerCell
             .map { $0.id }
-            .withLatestFrom(fetchedQuestionWithComments.map { $0.question.id },
-                            resultSelector: { (commentId: $0, cafeQuestionId: $1)}
-            )
+            
         
         let like = input.didTapLikeButton
             .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)

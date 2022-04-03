@@ -102,6 +102,10 @@ final class NotificationListViewController: BaseViewController {
             .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
         
+        output.showCommentScene
+            .emit(onNext: coordinator.showCommentScene(_:))
+            .disposed(by: self.disposeBag)
+
     }
 }
 

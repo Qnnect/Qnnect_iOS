@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol CommentCoordinator: Coordinator {
-    func start(_ commentId: Int, _ cafeQuestionId: Int)
+    func start(_ commentId: Int)
     func showCommentMoreMenuBottomSheet(_ cafeQuestionId: Int, _ comment: Comment)
     func showReplyMoreMenuBottomSheet(_ commentId: Int,_ reply: Reply)
     func showModifyReplyScene(_ commentId: Int,_ reply: Reply)
@@ -38,7 +38,7 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
     
     func start() { }
     
-    func start(_ commentId: Int, _ cafeQuestionId: Int) {
+    func start(_ commentId: Int) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
             replyNetworkService: ReplyNetworkService(),
@@ -49,8 +49,7 @@ final class DefaultCommentCoordinator: NSObject, CommentCoordinator {
         let vc = CommentViewController.create(
             with: viewModel,
             commentId,
-            self,
-            cafeQuestionId
+            self
         )
         self.navigationController.pushViewController(vc, animated: true)
     }

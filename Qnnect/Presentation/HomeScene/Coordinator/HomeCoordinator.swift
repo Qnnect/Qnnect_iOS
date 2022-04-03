@@ -15,7 +15,7 @@ protocol HomeCoordinator: Coordinator {
     func startInviteFlow(_ inviteCafeCode: String?)
     func showNotificationListScene()
     func showCafeJoinErrorAlertView(_ message: String)
-    //func showCommentScene(_ commentId: Int)
+    func showCommentScene(_ commentId: Int)
 }
 
 final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
@@ -106,6 +106,7 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         let notificationUseCase = DefaultNotificationUseCase(notificationRepository: notificationRepository)
         let viewModel = NotificationListViewModel(notificationUseCase: notificationUseCase)
         let vc = NotificationListViewController.create(with: viewModel, self)
+        vc.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(vc, animated: true)
     }
     
@@ -120,12 +121,12 @@ final class DefaultHomeCoordinator: NSObject, HomeCoordinator {
         })
     }
     
-//    func showCommentScene(_ commentId: Int) {
-//        let coordinator = DefaultCommentCoordinator(navigationController: navigationController)
-//        coordinator.parentCoordinator = self
-//        self.childCoordinators.append(coordinator)
-//        coordinator.showco
-//    }
+    func showCommentScene(_ commentId: Int) {
+        let coordinator = DefaultCommentCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        self.childCoordinators.append(coordinator)
+        coordinator.start(commentId)
+    }
 }
 
 extension DefaultHomeCoordinator: UINavigationControllerDelegate {
@@ -145,6 +146,10 @@ extension DefaultHomeCoordinator: UINavigationControllerDelegate {
         }
         
         if let vc = fromViewController as? CafeRoomViewController {
+            childDidFinish(vc.coordinator)
+        }
+        
+        if let vc = fromViewController as? CommentViewController {
             childDidFinish(vc.coordinator)
         }
     }

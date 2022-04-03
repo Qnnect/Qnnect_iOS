@@ -14,7 +14,6 @@ final class CommentViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Void>
         let commentId: Observable<Int>
-        let cafeQuestionId: Observable<Int>
         /// string: inputText
         let didTapSendButton: Observable<String>
         let didTapCommentMoreButton: Observable<Void>
@@ -60,13 +59,8 @@ final class CommentViewModel: ViewModelType {
             .share()
         
         let showCommentMoreMenuBottomSheet = input.didTapCommentMoreButton
-            .withLatestFrom(
-                Observable.combineLatest(
-                    input.cafeQuestionId,
-                    fetchedCommentWithReplies.map { $0.comment },
-                    resultSelector: { (cafeQuestionId: $0, comment: $1)}
-                )
-            )
+            .withLatestFrom(fetchedCommentWithReplies)
+            .map { (cafeQuestionId: $0.cafeQuestionId, comment: $0.comment) }
            
         
         let showReplyMoreMenuBottomSheet = input.didTapReplyMoreButton

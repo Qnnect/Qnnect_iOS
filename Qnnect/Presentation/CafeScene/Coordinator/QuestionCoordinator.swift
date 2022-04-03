@@ -10,7 +10,7 @@ import UIKit
 protocol QuestionCoordinator: Coordinator {
     func showCafeQuestionScene(_ questionId: Int)
     func showWriteCommentScene(_ cafeQuestionId: Int, _ user: User, _ comment: Comment?)
-    func showCommentScene(_ commentId: Int, _ cafeQuestionId: Int)
+    func showCommentScene(_ commentId: Int)
     func showModifyQuestionScene(_  question: Question)
     func showReportMenuBottomSheet(_ reportUser: User)
     func pop()
@@ -67,12 +67,12 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
         coordinator.start(cafeQuestionId, user, comment)
     }
     
-    func showCommentScene(_ commentId: Int, _ cafeQuestionId: Int) {
+    func showCommentScene(_ commentId: Int) {
         let coordinator = DefaultCommentCoordinator(navigationController: navigationController)
         navigationController.delegate = self
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self
-        coordinator.start(commentId, cafeQuestionId)
+        coordinator.start(commentId)
     }
     
     func showModifyQuestionScene(_ question: Question) {
