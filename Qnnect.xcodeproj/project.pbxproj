@@ -334,6 +334,9 @@
 		AECE642527F320E600BB14B2 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642427F320E600BB14B2 /* NotificationUseCase.swift */; };
 		AECE642727F322F900BB14B2 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642627F322F900BB14B2 /* NotificationCell.swift */; };
 		AECE642A27F324EA00BB14B2 /* NotificationType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE642927F324EA00BB14B2 /* NotificationType+.swift */; };
+		AEE0004A27F9658E00ADBFA9 /* VersionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE0004927F9658E00ADBFA9 /* VersionAPI.swift */; };
+		AEE0004D27F9668A00ADBFA9 /* VersionRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE0004C27F9668A00ADBFA9 /* VersionRequestDTO.swift */; };
+		AEE0004F27F966C600ADBFA9 /* VersionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE0004E27F966C600ADBFA9 /* VersionNetworkService.swift */; };
 		AEE1A33D27EA26920076E863 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A33C27EA26920076E863 /* UIImage+.swift */; };
 		AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */; };
 		AEE1A34227EA49E40076E863 /* DrinkStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */; };
@@ -709,6 +712,9 @@
 		AECE642427F320E600BB14B2 /* NotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCase.swift; sourceTree = "<group>"; };
 		AECE642627F322F900BB14B2 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		AECE642927F324EA00BB14B2 /* NotificationType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationType+.swift"; sourceTree = "<group>"; };
+		AEE0004927F9658E00ADBFA9 /* VersionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionAPI.swift; sourceTree = "<group>"; };
+		AEE0004C27F9668A00ADBFA9 /* VersionRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionRequestDTO.swift; sourceTree = "<group>"; };
+		AEE0004E27F966C600ADBFA9 /* VersionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNetworkService.swift; sourceTree = "<group>"; };
 		AEE1A33C27EA26920076E863 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		AEE1A33E27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOTRA_HOPE_TTF.ttf; sourceTree = "<group>"; };
 		AEE1A34127EA49E40076E863 /* DrinkStepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkStepUseCase.swift; sourceTree = "<group>"; };
@@ -1696,6 +1702,7 @@
 				AE02406227E33C7800017F77 /* OurCafeAPI.swift */,
 				AEEF4AFE27EB6A2A00DB4184 /* ReportAPI.swift */,
 				AECE641627F31E5700BB14B2 /* NotificationAPI.swift */,
+				AEE0004927F9658E00ADBFA9 /* VersionAPI.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1703,6 +1710,7 @@
 		AEB8FCFB27C661CC002BDBCD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AEE0004B27F9668300ADBFA9 /* Version */,
 				AECE641827F31E7600BB14B2 /* Notification */,
 				AE02406427E33D5C00017F77 /* OurCafe */,
 				AEB5AAEF27E0A7C60096376B /* Like */,
@@ -1863,6 +1871,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		AEE0004B27F9668300ADBFA9 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				AEE0004C27F9668A00ADBFA9 /* VersionRequestDTO.swift */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
 		AEE1A34027EA49BC0076E863 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1889,6 +1905,7 @@
 				AE02406727E33F2200017F77 /* OurCafeNetworkService.swift */,
 				AEEF4B0227EB6B9A00DB4184 /* ReportNetworkService.swift */,
 				AECE641D27F31F9B00BB14B2 /* NotificationNetworkService.swift */,
+				AEE0004E27F966C600ADBFA9 /* VersionNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2112,6 +2129,7 @@
 				AECC130727B9E3F1006866FC /* Rx+ASAuthorizationController.swift in Sources */,
 				AEC83E7927F85CBF007AFB61 /* WaitingQuestionViewController.swift in Sources */,
 				AEB5AAFE27E0F4A10096376B /* ReplyMoreMenuViewModel.swift in Sources */,
+				AEE0004D27F9668A00ADBFA9 /* VersionRequestDTO.swift in Sources */,
 				AE02406627E33D7A00017F77 /* RecipeFetchRequestDTO.swift in Sources */,
 				AECC133E27BA4256006866FC /* HomeCoordinator.swift in Sources */,
 				AEA14D1B27D33A160009EEC6 /* CafeResponseDTO.swift in Sources */,
@@ -2169,6 +2187,8 @@
 				AE02407727E380A400017F77 /* MyCafeDrinkFetchResponseDTO.swift in Sources */,
 				AE0D336A27B4C88500C4B955 /* AppCoordinator.swift in Sources */,
 				AE02409E27E461AE00017F77 /* LeaveCafeAlertView.swift in Sources */,
+				AEE0004A27F9658E00ADBFA9 /* VersionAPI.swift in Sources */,
+				AEE0004F27F966C600ADBFA9 /* VersionNetworkService.swift in Sources */,
 				AEA7267027DE54DC00F48CB8 /* CommentCreateRequestDTO.swift in Sources */,
 				AECE642A27F324EA00BB14B2 /* NotificationType+.swift in Sources */,
 				AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */,

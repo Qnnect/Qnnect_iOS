@@ -41,7 +41,8 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     func start() {
         let repository =  DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
-            authNetworkService: AuthNetworkService()
+            authNetworkService: AuthNetworkService(),
+            versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = SplashViewModel(authUseCase: useCase)
@@ -52,7 +53,8 @@ final class DefaultSplashCoordinator: SplashCoordinator {
     func start(inviteCode: String?) {
         let repository =  DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
-            authNetworkService: AuthNetworkService()
+            authNetworkService: AuthNetworkService(),
+            versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = SplashViewModel(authUseCase: useCase)

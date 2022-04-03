@@ -19,6 +19,7 @@ protocol AuthUseCase: InputUseCase {
     func saveLoginType(_ type: LoginType)
     func logout() -> Observable<Result<Void,Error>>
     func withdraw() -> Observable<Result<Void,Error>>
+    func checkVersion() -> Observable<Result<Bool,Error>>
 }
 
 final class DefaultAuthUseCase: AuthUseCase {
@@ -67,5 +68,14 @@ final class DefaultAuthUseCase: AuthUseCase {
     
     func withdraw() -> Observable<Result<Void,Error>> {
         authRepository.withdraw()
+    }
+    
+    func checkVersion() -> Observable<Result<Bool, Error>> {
+        if let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            print("currentVersion!!! \(currentVersion)")
+            return authRepository.checkVersion(currentVersion: currentVersion)
+        } else {
+            return .empty()
+        }
     }
 }

@@ -14,6 +14,7 @@ final class SplashViewModel: ViewModelType {
     struct Input {
         let didEndSplash: Observable<Void>
         let inviteCode: Observable<String>
+        let viewDidLoad: Observable<Void>
     }
     
     struct Output {
@@ -23,6 +24,7 @@ final class SplashViewModel: ViewModelType {
         let inviteFloswOnboarding: Signal<String>
         let inviteFlowShowLogin: Signal<String>
         let inviteFlowAutoLogin: Signal<String>
+        let showUpdateAlert: Signal<Void>
     }
     
     private let authUseCase: AuthUseCase
@@ -98,13 +100,23 @@ final class SplashViewModel: ViewModelType {
             .withLatestFrom(Observable.merge(tokenNil,needToLogin))
             .withLatestFrom(input.inviteCode)
         
+        let needToUpdate = input.viewDidLoad
+            .flatMap(authUseCase.checkVersion)
+            .debug()
+            .filter {
+                guard case let .success(flag) = $0 else { return false }
+                return !flag
+            }
+            .mapToVoid()
+        
         return Output(
             showOnboarding: firstAccess.asSignal(onErrorSignalWith: .empty()),
             showLogin: showLogin.asSignal(onErrorSignalWith: .empty()),
             showMain: autoLogin.asSignal(onErrorSignalWith: .empty()),
             inviteFloswOnboarding: inviteFlowFirstAccess.asSignal(onErrorSignalWith: .empty()),
             inviteFlowShowLogin: inviteFlowShowLogin.asSignal(onErrorSignalWith: .empty()),
-            inviteFlowAutoLogin: inviteFlowAutoLogin.asSignal(onErrorSignalWith: .empty())
+            inviteFlowAutoLogin: inviteFlowAutoLogin.asSignal(onErrorSignalWith: .empty()),
+            showUpdateAlert: needToUpdate.asSignal(onErrorSignalWith: .empty())
         )
     }
     

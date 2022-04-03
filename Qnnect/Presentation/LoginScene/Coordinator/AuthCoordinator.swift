@@ -63,7 +63,13 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         loginType: LoginType,
         inviteCode: String?
     ) {
-        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let authUseCase = DefaultAuthUseCase(
+            authRepository:
+                DefaultAuthRepository(
+                    localStorage: DefaultUserDefaultManager(),
+                    authNetworkService: AuthNetworkService(),
+                    versionNetworkService: VersionNetworkService())
+        )
         let userRepository = DefaultUserRepositry(
             userNetworkService: UserNetworkService(),
             localStorage: DefaultUserDefaultManager()
@@ -91,7 +97,13 @@ final class DefaultAuthCoordinator: AuthCoordinator {
         loginType: LoginType,
         inviteCode: String?
     ) {
-        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let authUseCase = DefaultAuthUseCase(
+            authRepository: DefaultAuthRepository(
+                localStorage: DefaultUserDefaultManager(),
+                authNetworkService: AuthNetworkService(),
+                versionNetworkService: VersionNetworkService()
+            )
+        )
         let viewModel = TermsViewModel(authUseCase: authUseCase)
         let vc = TermsViewController.create(with: viewModel,token,loginType,self, inviteCode)
         self.navigationController.pushViewController(vc, animated: true)
@@ -110,7 +122,8 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     func start() {
         let repository = DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
-            authNetworkService: AuthNetworkService()
+            authNetworkService: AuthNetworkService(),
+            versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = LoginViewModel(authUseCase: useCase)
@@ -124,7 +137,8 @@ final class DefaultAuthCoordinator: AuthCoordinator {
     func start(inviteCode: String?) {
         let repository = DefaultAuthRepository(
             localStorage: DefaultUserDefaultManager(),
-            authNetworkService: AuthNetworkService()
+            authNetworkService: AuthNetworkService(),
+            versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
         let viewModel = LoginViewModel(authUseCase: useCase)

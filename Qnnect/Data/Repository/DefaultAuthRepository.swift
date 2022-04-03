@@ -13,13 +13,16 @@ final class DefaultAuthRepository: AuthRepository {
 
     private let localStorage: UserDefaultManager
     private let authNetworkService: AuthNetworkService
+    private let versionNetworkService: VersionNetworkService
     
     init(
         localStorage: UserDefaultManager,
-        authNetworkService: AuthNetworkService
+        authNetworkService: AuthNetworkService,
+        versionNetworkService: VersionNetworkService
     ) {
         self.localStorage = localStorage
         self.authNetworkService = authNetworkService
+        self.versionNetworkService = versionNetworkService
     }
     
     func fetchIsFirstAccess() -> Bool {
@@ -88,5 +91,10 @@ final class DefaultAuthRepository: AuthRepository {
     
     func withdraw() -> Observable<Result<Void,Error>> {
         authNetworkService.withdraw()
+    }
+    
+    func checkVersion(currentVersion: String) -> Observable<Result<Bool, Error>> {
+        let request = VersionRequestDTO(currentVersion: currentVersion)
+        return versionNetworkService.checkVersion(request: request)
     }
 }

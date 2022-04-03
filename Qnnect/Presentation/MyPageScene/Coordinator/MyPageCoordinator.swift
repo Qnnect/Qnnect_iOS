@@ -48,7 +48,13 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
     }
         
     func showEditProfileScene(user: User) {
-        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let authUseCase = DefaultAuthUseCase(
+            authRepository: DefaultAuthRepository(
+                localStorage: DefaultUserDefaultManager(),
+                authNetworkService: AuthNetworkService(),
+                versionNetworkService: VersionNetworkService()
+             )
+        )
         let userRepository = DefaultUserRepositry(
             userNetworkService: UserNetworkService(),
             localStorage: DefaultUserDefaultManager()
@@ -76,7 +82,12 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
     }
     
     func showMyPageAlertView(myPageItem: MyPageItem) {
-        let authUseCase = DefaultAuthUseCase(authRepository: DefaultAuthRepository(localStorage: DefaultUserDefaultManager(), authNetworkService: AuthNetworkService()))
+        let authUseCase = DefaultAuthUseCase(
+            authRepository: DefaultAuthRepository(
+                localStorage: DefaultUserDefaultManager(),
+                authNetworkService: AuthNetworkService(),
+                versionNetworkService: VersionNetworkService()
+            ))
         let viewModel = MyPageAlertViewModel(authUseCase: authUseCase)
         let view = MyPageAlertViewController.create(with: viewModel, self, myPageItem)
         view.modalPresentationStyle = .overCurrentContext

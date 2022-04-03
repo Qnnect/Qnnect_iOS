@@ -18,4 +18,5 @@ protocol AuthRepository: AnyObject {
     func saveLoginType(_ type: LoginType)
     func logout() -> Observable<Result<Void,Error>>
     func withdraw() -> Observable<Result<Void,Error>>
+    func checkVersion(currentVersion: String) -> Observable<Result<Bool,Error>>
 }

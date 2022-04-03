@@ -64,7 +64,8 @@ final class SplashViewController: BaseViewController {
             didEndSplash: didEndSplash.asObservable(),
             inviteCode: Observable.just(inviteCode)
                 .compactMap{ $0 }
-                .debug()
+                .debug(),
+            viewDidLoad: Observable.just(())
         )
         
         guard let coordinator = coordinator else { return }
@@ -102,6 +103,10 @@ final class SplashViewController: BaseViewController {
         
         output.inviteFlowAutoLogin
             .emit(onNext: coordinator.showMain(_:))
+            .disposed(by: self.disposeBag)
+        
+        output.showUpdateAlert
+            .emit()
             .disposed(by: self.disposeBag)
     }
 }
