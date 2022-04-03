@@ -36,6 +36,7 @@ final class NotificationListViewModel: ViewModelType {
         let newLoad = input.viewDidLoad
             .map { (page: 0,size: Constants.scrapFetchSize)}
             .flatMap(notificationUseCase.fetchNotifications)
+            .debug()
             .compactMap {
                 result -> [NotificationInfo]? in
                 guard case let .success(notis) = result else { return nil }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NotificationType: Decodable {
+enum NotificationType: String, Decodable {
     case comment
     case question
     case reply
@@ -20,4 +20,5 @@ struct NotificationInfo {
     let id: Int
     let type: NotificationType
     let userRead: Bool
+    let contentId: Int
 }

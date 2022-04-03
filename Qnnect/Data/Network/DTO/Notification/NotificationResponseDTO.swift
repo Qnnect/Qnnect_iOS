@@ -14,6 +14,7 @@ struct NotificationResponseDTO: Decodable {
     let notificationId: Int
     let notificationType: NotificationType
     let userRead: Bool
+    let contentId: Int
     
     func toDomain() -> NotificationInfo {
         NotificationInfo(
@@ -22,7 +23,8 @@ struct NotificationResponseDTO: Decodable {
             groupName: groupName,
             id: notificationId,
             type: notificationType,
-            userRead: userRead
+            userRead: userRead,
+            contentId: contentId
         )
     }
 }
