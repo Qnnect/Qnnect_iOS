@@ -19,8 +19,9 @@ struct CommentFetchResponseDTO: Decodable {
     let replies: [ReplyResponseDTO]
     let writerInfo: ProfileResponseDTO
     let writer: Bool
+    let cafeQuestionId: Int
     
-    func toDomain() -> (comment: Comment, replies: [Reply]) {
+    func toDomain() -> (comment: Comment, replies: [Reply], cafeQuestionId: Int) {
         (
             Comment(
             id: commentId,
@@ -35,7 +36,8 @@ struct CommentFetchResponseDTO: Decodable {
             writer: writer,
             replyCount: replies.count
             ),
-            replies.map { $0.toDomain() }
+            replies.map { $0.toDomain() },
+            cafeQuestionId: cafeQuestionId
         )
     }
 }

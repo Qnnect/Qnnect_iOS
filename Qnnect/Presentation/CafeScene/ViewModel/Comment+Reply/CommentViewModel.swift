@@ -53,7 +53,7 @@ final class CommentViewModel: ViewModelType {
         let fetchedCommentWithReplies = Observable.merge(input.viewWillAppear, createReply)
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.fetchComment)
-            .compactMap({ result -> (comment: Comment, replies: [Reply])? in
+            .compactMap({ result -> (comment: Comment, replies: [Reply], cafeQuestionId: Int)? in
                 guard case let .success(data) = result else { return nil }
                 return data
             })
