@@ -477,6 +477,7 @@ extension CommentViewController: MFMailComposeViewControllerDelegate {
 
 extension CommentViewController: CommentAttachImageCellDelegate {
     func didTapAttachImageCell(didTap cell: UICollectionViewCell) {
+        imageSlider.setCurrentPage(mainCollectionView.indexPath(for: cell)?.row ?? 0, animated: false)
         imageSlider.presentFullScreenController(from: self, completion: nil)
     }
 }
