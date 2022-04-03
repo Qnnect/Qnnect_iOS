@@ -436,6 +436,9 @@ private extension HomeViewController {
             case .todayQuestionSectionItem(question: let question):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayQuestionCell.identifier, for: indexPath) as! TodayQuestionCell
                 cell.update(with: question)
+                if cell.emptyView.isHidden == false {
+                    cell.emptyView.isHidden = true
+                }
                 return cell
             case.myCafeSectionItem(cafe: let cafe):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCafeCell.identifier, for: indexPath) as! MyCafeCell
