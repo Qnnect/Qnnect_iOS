@@ -18,11 +18,16 @@ final class NotificationListViewModel: ViewModelType {
     struct Input {
         let viewDidLoad: Observable<Void>
         let moreFetch: Observable<Int>
+        let didTapNotification: Observable<NotificationInfo>
     }
     
     struct Output {
         let notis: Driver<[NotificationInfo]>
         let canLoad: Signal<Bool>
+        /// Int; QuestionId
+        let showQuestionScene: Signal<Int>
+        /// Int: CommentId
+        let showCommentScene: Signal<Int>
     }
     
     private let notificationUseCase: NotificationUseCase
@@ -75,6 +80,7 @@ final class NotificationListViewModel: ViewModelType {
             }
             .map { $0.count == Constants.scrapFetchSize }
           
+        
         return Output(
             notis: notis.asDriver(onErrorJustReturn: []),
             canLoad: canLoad.asSignal(onErrorSignalWith: .empty())

@@ -18,4 +18,16 @@ extension NotificationType {
             return Constants.noti_reply_icon
         }
     }
+    
+    var readIcon: UIImage? {
+        switch self {
+        case .comment:
+            return Constants.noti_comment_read_icon
+        case .question:
+            return Constants.noti_question_read_icon
+        case .reply:
+            return Constants.noti_reply_read_icon
+        
+        }
+    }
 }

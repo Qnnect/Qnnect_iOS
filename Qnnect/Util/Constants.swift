@@ -169,6 +169,9 @@ struct Constants {
     static let noti_question_icon: UIImage? = UIImage(named: "noti_question_icon")
     static let noti_comment_icon: UIImage? = UIImage(named: "noti_comment_icon")
     static let noti_reply_icon: UIImage? = UIImage(named: "noti_reply_icon")
+    static let noti_question_read_icon: UIImage? = UIImage(named: "noti_question_read_icon")
+    static let noti_comment_read_icon: UIImage? = UIImage(named: "noti_comment_read_icon")
+    static let noti_reply_read_icon: UIImage? = UIImage(named: "noti_reply_read_icon")
     
     // MARK: - BarButton
     static let navigationLeftPadding: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil).then {

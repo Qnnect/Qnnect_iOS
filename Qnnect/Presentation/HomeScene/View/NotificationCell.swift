@@ -23,7 +23,7 @@ final class NotificationCell: UITableViewCell {
     private let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .black
-        $0.numberOfLines = 2
+        $0.numberOfLines = 0
     }
     
     private let dateLabel = UILabel().then {
@@ -34,10 +34,12 @@ final class NotificationCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureUI()
     }
     
     private func configureUI() {
@@ -49,16 +51,18 @@ final class NotificationCell: UITableViewCell {
         ].forEach {
             contentView.addSubview($0)
         }
+        contentView.backgroundColor = .p_ivory
+        selectionStyle = .none
         
         iconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(24.0)
             make.centerY.equalToSuperview()
         }
-        iconImageView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
+        iconImageView.setContentHuggingPriority(.required, for: .horizontal)
         
         cafeNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(iconImageView.snp.trailing).offset(10.0)
-            make.trailing.equalToSuperview().inset(25.0)
+            make.trailing.equalToSuperview().inset(20.0)
             make.top.equalToSuperview().inset(21.0)
         }
         cafeNameLabel.setContentHuggingPriority(.required, for: .vertical)
@@ -71,7 +75,7 @@ final class NotificationCell: UITableViewCell {
         
         dateLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(22.0)
-            make.top.equalTo(titleLabel.snp.bottom).offset(4.0).priority(.low)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4.0)
             make.bottom.equalToSuperview()
         }
         dateLabel.setContentHuggingPriority(.required, for: .vertical)
@@ -81,16 +85,15 @@ final class NotificationCell: UITableViewCell {
         cafeNameLabel.text = notification.groupName
         dateLabel.text = notification.createdAt
         titleLabel.text = notification.content
-        iconImageView.image = notification.type.icon
         
         if notification.userRead {
             cafeNameLabel.textColor = .GRAY03
             titleLabel.textColor = .GRAY03
-            iconImageView.tintColor = .GRAY03
+            iconImageView.image = notification.type.readIcon
         } else {
             cafeNameLabel.textColor = .BLACK_121212
             titleLabel.textColor = .BLACK_121212
-            iconImageView.tintColor = .ORANGE01
+            iconImageView.image = notification.type.icon
         }
     }
 }
