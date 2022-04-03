@@ -26,6 +26,14 @@ final class SentQuestionListViewController: BaseViewController {
     private let tagCollectionView = BookmarkTagCollectionView()
     private let headerView = UIView()
     
+    private let floatingButton = UIImageView().then {
+        $0.image = Constants.floatingButtonImage
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private let floatingContainerView = UIView()
+    
+    
     private var viewModel: SentQuestionListViewModel!
     weak var coordinator: MyPageCoordinator?
     
@@ -49,7 +57,14 @@ final class SentQuestionListViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         
-        view.addSubview(mainTableView)
+        [
+            mainTableView,
+            floatingContainerView
+        ].forEach{
+            view.addSubview($0)
+        }
+        
+        floatingContainerView.addSubview(floatingButton)
         headerView.addSubview(tagCollectionView)
         
         mainTableView.snp.makeConstraints { make in
@@ -62,6 +77,18 @@ final class SentQuestionListViewController: BaseViewController {
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview().inset(21.0)
             make.centerY.equalToSuperview()
+        }
+        
+        floatingContainerView.snp.makeConstraints { make in
+            make.width.equalTo(48.0)
+            make.bottom.equalToSuperview().offset(60.0)
+            make.height.equalTo(150.0)
+            make.trailing.equalToSuperview().inset(24.0)
+        }
+        
+        floatingButton.snp.makeConstraints { make in
+            make.width.height.equalTo(48.0)
+            make.bottom.equalToSuperview()
         }
         
         navigationItem.titleView = navigationTitleLabel
@@ -87,13 +114,13 @@ final class SentQuestionListViewController: BaseViewController {
         
         let output = self.viewModel.transform(from: input)
         
-//        floatingButton.rx.tapGesture()
-//            .when(.recognized)
-//            .subscribe(onNext: {
-//                [weak self] _ in
-//                self?.bookmarkTableView.setContentOffset(.zero, animated: true)
-//            }).disposed(by: self.disposeBag)
-//
+        floatingButton.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.mainTableView.setContentOffset(.zero, animated: true)
+            }).disposed(by: self.disposeBag)
+
         output.cafes
             .map { cafes -> [CafeTag] in
                 let newCafes = [CafeTag(cafeId: 0, cafeTitle: "전체")] + cafes
@@ -176,38 +203,38 @@ extension SentQuestionListViewController {
             }
         }
         
-//        if scrollView.contentOffset.y > 50.0 {
-//
-//            UIView.animate(
-//                withDuration: 0.5,
-//                delay: 0.1,
-//                usingSpringWithDamping: 0.5,
-//                initialSpringVelocity: 0.5,
-//                options: [.curveEaseInOut]
-//            ) {
-//                [weak self] in
-//                guard let self = self else { return }
-//                self.floatingButton.snp.updateConstraints({ make in
-//                    make.bottom.equalToSuperview().inset(100.0)
-//                })
-//                self.floatingContainerView.layoutIfNeeded()
-//            }
-//        } else if scrollView.contentOffset.y <= 50.0 {
-//            UIView.animate(
-//                withDuration: 0.5,
-//                delay: 0.1,
-//                usingSpringWithDamping: 0.5,
-//                initialSpringVelocity: 0.5,
-//                options: [.curveEaseInOut]
-//            ) {
-//                [weak self] in
-//                guard let self = self else { return }
-//                self.floatingButton.snp.updateConstraints({ make in
-//                    make.bottom.equalToSuperview()
-//                })
-//                self.floatingContainerView.layoutIfNeeded()
-//            }
-//        }
+        if scrollView.contentOffset.y > UIScreen.main.bounds.height / 2.0 {
+            
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview().inset(100.0)
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        } else if scrollView.contentOffset.y <= 50.0 {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0.1,
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.5,
+                options: [.curveEaseInOut]
+            ) {
+                [weak self] in
+                guard let self = self else { return }
+                self.floatingButton.snp.updateConstraints({ make in
+                    make.bottom.equalToSuperview()
+                })
+                self.floatingContainerView.layoutIfNeeded()
+            }
+        }
         
     }
     
