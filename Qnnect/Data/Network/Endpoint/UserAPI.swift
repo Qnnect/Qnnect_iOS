@@ -11,6 +11,7 @@ import Moya
 enum UserAPI {
     case setProfile(request: ProfileRequestDTO)
     case setEnableNotification(request: SetEnableNotificationRequestDTO)
+    case fetchIsEnableNotification
     case fetchUser(Void)
     case setDefaultImage
     case fetchStamps
@@ -25,7 +26,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .setProfile(_):
             return "api/v1/user/profile"
-        case .setEnableNotification(_):
+        case .setEnableNotification(_), .fetchIsEnableNotification:
             return "api/v1/user/enablenotification"
         case .fetchUser():
             return "api/v1/user"
@@ -42,7 +43,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
             return .patch
         case .setEnableNotification(_):
             return .patch
-        case .fetchUser(), .fetchStamps:
+        case .fetchUser(), .fetchStamps, .fetchIsEnableNotification:
             return .get
         }
     }
@@ -60,7 +61,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
         case .setEnableNotification(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-        case .fetchUser(), .setDefaultImage, .fetchStamps:
+        case .fetchUser(), .setDefaultImage, .fetchStamps, .fetchIsEnableNotification:
             return .requestPlain
         }
     }
@@ -72,7 +73,7 @@ extension UserAPI: TargetType, AccessTokenAuthorizable {
                 "Content-Type": "multipart/form-data"
                
             ]
-        case .setEnableNotification(_), .fetchUser(), .setDefaultImage, .fetchStamps:
+        case .setEnableNotification(_), .fetchUser(), .setDefaultImage, .fetchStamps, .fetchIsEnableNotification:
             return [
                 "Content-Type": "application/json"
             ]

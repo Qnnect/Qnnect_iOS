@@ -30,7 +30,8 @@ final class TermsViewModel: ViewModelType {
     
     private weak var coordinator: AuthCoordinator?
     private let authUseCase: AuthUseCase
-    init( authUseCase: AuthUseCase) {
+    
+    init(authUseCase: AuthUseCase) {
         self.authUseCase = authUseCase
     }
     

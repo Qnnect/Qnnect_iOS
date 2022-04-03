@@ -91,7 +91,7 @@ final class UpdateAlertViewController: BaseViewController {
         }
     
         self.secondaryLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(6.0)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(12.0)
             make.centerX.equalToSuperview()
         }
         

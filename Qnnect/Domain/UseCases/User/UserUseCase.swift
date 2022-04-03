@@ -16,6 +16,7 @@ protocol UserUseCase: AnyObject {
     func fetchLoginType() -> LoginType
     func setDefaultImage() -> Observable<Result<Void,Error>>
     func fetchStamps() -> Observable<Result<[Stamp],Error>>
+    func fetchIsEnableNotification() -> Observable<Result<Bool,Error>>
 }
 
 final class DefaultUserUseCase: UserUseCase {
@@ -51,5 +52,9 @@ final class DefaultUserUseCase: UserUseCase {
     
     func fetchStamps() -> Observable<Result<[Stamp], Error>> {
         userRepository.fetchStamps()
+    }
+    
+    func fetchIsEnableNotification() -> Observable<Result<Bool, Error>> {
+        userRepository.fetchIsEnableNotification()
     }
 }

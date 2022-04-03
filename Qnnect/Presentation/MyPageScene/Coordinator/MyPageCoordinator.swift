@@ -23,6 +23,7 @@ protocol MyPageCoordinator: Coordinator {
     func showWaitingQuestionBottomSheet(_ question: UserQuestion)
     func pop()
     func showLoginScene(_ leaveType: LeaveType)
+    func showSetNotificationScene()
     func dismissMoreMenu(_ completion: (() -> Void)?)
 }
 
@@ -186,6 +187,17 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
         navigationController.present(vc, animated: false, completion: nil)
     }
     
+    func showSetNotificationScene() {
+        let userRepository = DefaultUserRepositry(
+            userNetworkService: UserNetworkService(),
+            localStorage: DefaultUserDefaultManager()
+        )
+        let userUseCase = DefaultUserUseCase(userRepository: userRepository)
+        let viewModel = SetNotificationViewModel(userUseCase: userUseCase)
+        let vc = SetNotificationViewController.create(with: viewModel, self)
+        vc.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(vc, animated: true)
+    }
     func pop() {
         self.navigationController.popViewController(animated: true)
     }

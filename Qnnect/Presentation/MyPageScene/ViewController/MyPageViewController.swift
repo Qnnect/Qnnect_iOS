@@ -160,6 +160,10 @@ final class MyPageViewController: BaseViewController {
             .emit(onNext: coordinator.showBlockedFriendListScene)
             .disposed(by: self.disposeBag)
         
+        output.showSetNotificationScene
+            .emit(onNext: coordinator.showSetNotificationScene)
+            .disposed(by: self.disposeBag)
+        
     }
 }
 

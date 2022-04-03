@@ -52,4 +52,13 @@ final class UserNetworkService: BaseNetworkService<UserAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchIsEnableNotification() -> Observable<Result<Bool,Error>> {
+        request(.fetchIsEnableNotification)
+            .filterSuccessfulStatusCodes()
+            .map(Bool.self)
+            .map{ Result.success($0) }
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

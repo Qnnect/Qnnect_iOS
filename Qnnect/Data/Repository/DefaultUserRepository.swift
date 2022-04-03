@@ -74,4 +74,8 @@ final class DefaultUserRepositry: UserRepository {
                 }
             }
     }
+    
+    func fetchIsEnableNotification() -> Observable<Result<Bool, Error>> {
+        userNetworkService.fetchIsEnableNotification()
+    }
 }
