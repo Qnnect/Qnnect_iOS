@@ -204,7 +204,11 @@ final class BookmarkViewController: BaseViewController {
 extension BookmarkViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.headerView
+        if tableView.backgroundView == nil {
+            return self.headerView
+        } else {
+            return nil
+        }
     }
     
     // section 의 separator 지우는 기능

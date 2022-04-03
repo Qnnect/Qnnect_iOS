@@ -148,7 +148,11 @@ final class SentQuestionListViewController: BaseViewController {
 extension SentQuestionListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
+        if tableView.backgroundView == nil {
+            return self.headerView
+        } else {
+            return nil
+        }
     }
     
     // section 의 separator 지우는 기능
