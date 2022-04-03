@@ -28,7 +28,7 @@ final class OurCafeUserCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             nameLabel.textColor = isSelected ? .black : .GRAY03
-            profileImageView.layer.borderWidth = isSelected ? 1.0 : 0.0
+            profileImageView.layer.borderWidth = isSelected ? 2.0 : 0.0
             profileImageView.layer.borderColor = isSelected ? UIColor.p_brown?.cgColor : nil
         }
     }
@@ -61,7 +61,7 @@ final class OurCafeUserCell: UICollectionViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().priority(.high)
+            make.bottom.equalToSuperview()
         }
         
     }

@@ -145,6 +145,7 @@ final class OurCafeViewController: BaseViewController {
     
     private let drinkImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.image = Constants.drinkEmptyImage
     }
     
     private let progressBar = UIImageView().then {
@@ -164,6 +165,7 @@ final class OurCafeViewController: BaseViewController {
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
         $0.layer.cornerRadius = 10.0
+        $0.isHidden = true
     }
     
     // 음료를 선택하지 않은 유저 일 경우 보이는 라벨
@@ -206,11 +208,13 @@ final class OurCafeViewController: BaseViewController {
         $0.text = "xxxx 완성"
         $0.textAlignment = .center
         $0.sizeToFit()
+        $0.isHidden = true
     }
     
     private let completionImageView = UIImageView().then {
         $0.image = Constants.completionCelebrateImage
         $0.contentMode = .scaleAspectFit
+        $0.isHidden = true
     }
     
     private let drinkShadowImageView = UIImageView().then {
@@ -284,7 +288,7 @@ final class OurCafeViewController: BaseViewController {
         userCollectionView.collectionViewLayout = createLayout()
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(userCollectionView.snp.bottom).offset(34.0)
+            make.top.equalTo(userCollectionView.snp.bottom).offset(18.0)
             make.leading.trailing.equalToSuperview().inset(33.0)
         }
         titleLabel.setContentHuggingPriority(.required, for: .vertical)
@@ -295,6 +299,7 @@ final class OurCafeViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(130.0)
             make.top.equalTo(titleLabel.snp.bottom).offset(20.0)
         }
+        drinkImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
         progressBar.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(50.0)
