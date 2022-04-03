@@ -243,7 +243,7 @@ private extension StoreViewController {
 
 extension StoreViewController: UIScrollViewDelegate, UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 50.0 {
+        if scrollView.contentOffset.y > UIScreen.main.bounds.height / 2.0 {
             
             UIView.animate(
                 withDuration: 0.5,

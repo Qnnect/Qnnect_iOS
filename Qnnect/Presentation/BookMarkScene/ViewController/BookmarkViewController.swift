@@ -228,7 +228,7 @@ extension BookmarkViewController {
             }
         }
         
-        if scrollView.contentOffset.y > 50.0 {
+        if scrollView.contentOffset.y > UIScreen.main.bounds.height / 2.0 {
             
             UIView.animate(
                 withDuration: 0.5,
