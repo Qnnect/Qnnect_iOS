@@ -42,7 +42,10 @@ final class WriteCommentViewModel: ViewModelType {
         let isInputCompleted = input.content
             .map { $0.count >= 10 }
         
-        let create = input.didTapCompletionButton
+        let completionTrigger = input.didTapCompletionButton
+            .share()
+        
+        let create = completionTrigger
             .withLatestFrom(input.type, resultSelector: { (ImageDatas: $0, writeCommentYype: $1)})
             .filter{ $0.writeCommentYype == WriteCommentType.create }
             .map { $0.ImageDatas }
@@ -60,7 +63,7 @@ final class WriteCommentViewModel: ViewModelType {
                 return Void()
             }
         
-        let modify = input.didTapCompletionButton
+        let modify = completionTrigger
             .withLatestFrom(input.type, resultSelector: { (ImageDatas: $0, writeCommentYype: $1)})
             .filter{ $0.writeCommentYype == WriteCommentType.modify }
             .map { $0.ImageDatas }

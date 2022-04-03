@@ -242,7 +242,10 @@ final class WriteCommentViewController: BaseViewController {
                 .asObservable(),
             didTapAttachingImageButton: self.attachingImageButton.rx.tap.asObservable(),
             didTapCompletionButton: navigationCompletionButton.rx.tap
+                .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
+                .debug()
                 .do {
+                    _ in
                     LoadingIndicator.showLoading()
                 }
                 .map(getImages),
@@ -273,6 +276,7 @@ final class WriteCommentViewController: BaseViewController {
 
         //TODO: 화면전환
         output.completion
+            .debug()
             .do {
                 _ in
                 LoadingIndicator.hideLoading()
