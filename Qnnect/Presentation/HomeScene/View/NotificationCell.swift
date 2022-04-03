@@ -23,13 +23,17 @@ final class NotificationCell: UITableViewCell {
     private let titleLabel = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .black
-        $0.numberOfLines = 0
+        $0.numberOfLines = 2
     }
     
     private let dateLabel = UILabel().then {
         $0.font = .Roboto(.regular, size: 12.0)
         $0.textColor = .GRAY04
         $0.textAlignment = .right
+    }
+    
+    private let paragraphStyle = Constants.paragraphStyle.with {
+        $0.alignment = .left
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -82,9 +86,13 @@ final class NotificationCell: UITableViewCell {
     }
     
     func update(with notification: NotificationInfo) {
+        
         cafeNameLabel.text = notification.groupName
         dateLabel.text = notification.createdAt
-        titleLabel.text = notification.content
+        titleLabel.attributedText = NSMutableAttributedString(
+            string: notification.content,
+            attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
+        )
         
         if notification.userRead {
             cafeNameLabel.textColor = .GRAY03
