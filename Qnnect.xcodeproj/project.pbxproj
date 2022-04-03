@@ -102,6 +102,7 @@
 		AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */; };
 		AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */; };
 		AE5BEFA027F98F6800561237 /* ReadNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */; };
+		AE5BEFA327F99F9200561237 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE5BEFA527F99F9200561237 /* InfoPlist.strings */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -481,6 +482,8 @@
 		AE5B1C1E27BB42DB00F24981 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
 		AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementItemView.swift; sourceTree = "<group>"; };
 		AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationRequestDTO.swift; sourceTree = "<group>"; };
+		AE5BEFA427F99F9200561237 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE5BEFA627F99FC000561237 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -1224,6 +1227,7 @@
 				AE176A3127B24F590040A4C3 /* Domain */,
 				AE176A2F27B24F380040A4C3 /* Presentation */,
 				AEF294AD27B01864004EFE4D /* Util */,
+				AE5BEFA527F99F9200561237 /* InfoPlist.strings */,
 			);
 			path = Qnnect;
 			sourceTree = "<group>";
@@ -2016,6 +2020,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = AE59A5E927AEAE890081A0FA;
 			productRefGroup = AE59A5F327AEAE890081A0FA /* Products */;
@@ -2039,6 +2044,7 @@
 				AE59A60C27AEB8390081A0FA /* GoogleService-Info.plist in Resources */,
 				AE5B1C2127BB42DB00F24981 /* IM_Hyemin-Bold.otf in Resources */,
 				AE59A5FF27AEAE890081A0FA /* Assets.xcassets in Resources */,
+				AE5BEFA327F99F9200561237 /* InfoPlist.strings in Resources */,
 				AEE1A33F27EA279D0076E863 /* KOTRA_HOPE_TTF.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2468,6 +2474,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		AE5BEFA527F99F9200561237 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE5BEFA427F99F9200561237 /* en */,
+				AE5BEFA627F99FC000561237 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2475,6 +2490,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2536,6 +2552,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
