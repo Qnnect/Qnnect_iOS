@@ -22,4 +22,6 @@ target 'Qnnect' do
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'ImageSlideshow', '~> 1.9.0'
   pod "ImageSlideshow/Kingfisher"
+  pod 'Firebase/DynamicLinks'
+  
 end
