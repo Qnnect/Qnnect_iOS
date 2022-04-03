@@ -104,6 +104,8 @@
 		AE5BEFA027F98F6800561237 /* ReadNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */; };
 		AE5BEFA327F99F9200561237 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE5BEFA527F99F9200561237 /* InfoPlist.strings */; };
 		AE5BEFA827F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFA727F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift */; };
+		AE5BEFAC27F9E25800561237 /* UpdateAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFAB27F9E25800561237 /* UpdateAlertViewController.swift */; };
+		AE5BEFAE27F9E3D200561237 /* UpdateAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFAD27F9E3D200561237 /* UpdateAlertViewModel.swift */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -486,6 +488,8 @@
 		AE5BEFA427F99F9200561237 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE5BEFA627F99FC000561237 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE5BEFA727F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchQuestionSimpleInfoRequestDTO.swift; sourceTree = "<group>"; };
+		AE5BEFAB27F9E25800561237 /* UpdateAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAlertViewController.swift; sourceTree = "<group>"; };
+		AE5BEFAD27F9E3D200561237 /* UpdateAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAlertViewModel.swift; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -1752,6 +1756,7 @@
 				AEBC9EC227C604210070399A /* SplashViewController.swift */,
 				AEBC9EC927C619FB0070399A /* OnboardingViewController.swift */,
 				AEBC9ECB27C61A790070399A /* PageItemViewController.swift */,
+				AE5BEFAB27F9E25800561237 /* UpdateAlertViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1761,6 +1766,7 @@
 			children = (
 				AEBC9ECD27C6294A0070399A /* SplashViewModel.swift */,
 				AEB8FD0427C66F0E002BDBCD /* OnboardingViewModel.swift */,
+				AE5BEFAD27F9E3D200561237 /* UpdateAlertViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2123,6 +2129,7 @@
 				AEA14D2927D39D320009EEC6 /* TokenService.swift in Sources */,
 				AE6FA49727BDEA7600FA2154 /* Rx+TTGTextTagCollectionView.swift in Sources */,
 				AE02D81227D621950019D955 /* SettingBottomSheet.swift in Sources */,
+				AE5BEFAE27F9E3D200561237 /* UpdateAlertViewModel.swift in Sources */,
 				AEEF363227C3579300D0A127 /* NameTextField.swift in Sources */,
 				AEB5AADA27DF960E0096376B /* ReplyCell.swift in Sources */,
 				AE717B5D27C4BCC0008278D3 /* AddCafeViewModel.swift in Sources */,
@@ -2429,6 +2436,7 @@
 				AE7F484227CE7DB400954971 /* LoginError.swift in Sources */,
 				AE77C83427DA057600E8D0EC /* ScrapRequestDTO.swift in Sources */,
 				AE33A4F727E74452000130B3 /* NotModifyDrinkAlertView.swift in Sources */,
+				AE5BEFAC27F9E25800561237 /* UpdateAlertViewController.swift in Sources */,
 				AEEF4B0527EB6C0B00DB4184 /* ReportUser.swift in Sources */,
 				AE77C85327DB3E7E00E8D0EC /* DrinkSelectSectionModel.swift in Sources */,
 				AE02406827E33F2200017F77 /* OurCafeNetworkService.swift in Sources */,

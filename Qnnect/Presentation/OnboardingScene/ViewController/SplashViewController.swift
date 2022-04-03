@@ -106,7 +106,7 @@ final class SplashViewController: BaseViewController {
             .disposed(by: self.disposeBag)
         
         output.showUpdateAlert
-            .emit()
+            .emit(onNext: coordinator.showUpdateAlertView)
             .disposed(by: self.disposeBag)
     }
 }

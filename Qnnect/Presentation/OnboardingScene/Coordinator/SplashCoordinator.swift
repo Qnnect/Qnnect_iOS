@@ -11,6 +11,8 @@ protocol SplashCoordinator: Coordinator {
     func showOnboarding(_ inviteCode: String?)
     func showLogin(_ inviteCode: String?)
     func showMain(_ inviteCode: String?)
+    func showUpdateAlertView()
+    func dismiss()
 }
 
 extension SplashCoordinator {
@@ -82,5 +84,17 @@ final class DefaultSplashCoordinator: SplashCoordinator {
         coordinator.parentCoordinator = self.parentCoordinator
         coordinator.start(inviteCode: inviteCode)
         self.parentCoordinator?.childCoordinators.removeAll(where: { $0 === self })
+    }
+    
+    func showUpdateAlertView() {
+        let viewModel = UpdateAlertViewModel()
+        let vc = UpdateAlertViewController.create(with: viewModel, self)
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController.present(vc, animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }
