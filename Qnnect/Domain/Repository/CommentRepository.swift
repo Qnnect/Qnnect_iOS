@@ -25,4 +25,5 @@ protocol CommentRepository: AnyObject {
     func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void,Error>>
     func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void,Error>>
     
+    func fetchQuestionSimpleInfo(_ cafeQuestionId: Int) -> Observable<Result<Question, Error>>
 }

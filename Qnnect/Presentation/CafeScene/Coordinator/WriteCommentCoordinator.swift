@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WriteCommentCoordinator: Coordinator {
-    func start(_ question: Question, _ user: User?, _ comment: Comment?)
+    func start(_ cafeQuestionId: Int, _ user: User?, _ comment: Comment?)
     func pop()
 }
 
@@ -23,15 +23,16 @@ final class DefaultWriteCommentCoordinator: WriteCommentCoordinator {
     
     func start() { }
     
-    func start(_ question: Question, _ user: User?, _ comment: Comment? = nil) {
+    func start(_ cafeQuestionId: Int, _ user: User?, _ comment: Comment? = nil) {
         let commentRepository = DefaultCommentRepository(
             commentNetworkService: CommentNetworkService(),
-            replyNetworkService: ReplyNetworkService()
+            replyNetworkService: ReplyNetworkService(),
+            questionNetworkService: QuestionNetworkService()
         )
         let commentUseCase = DefaultCommentUseCase(commentRepository: commentRepository)
         let viewModel = WriteCommentViewModel(commentUseCase: commentUseCase)
         let vc = WriteCommentViewController.create(
-            with: question,
+            with: cafeQuestionId,
             user,
             viewModel,
             self,

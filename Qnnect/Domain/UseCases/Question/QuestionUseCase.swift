@@ -23,7 +23,7 @@ protocol QuestionUseCase: AnyObject {
     func searchCafeQuestion(cafeId: Int, page: Int, size: Int, _ searchWord: String) -> Observable<Result<[QuestionShortInfo],Error>>
     func fetchAllUserQuestion(page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>>
     func fetchUserQuestions(cafeId: Int, page: Int, size: Int) -> Observable<Result<[UserQuestion], Error>>
-    func modifyUserQuestion(_ questionId: Int, content: String) -> Observable<Result<Void,Error>>
+    func modifyUserQuestion(_ questionId: Int, content: String) -> Observable<Result<Void, Error>>
     func deleteUserQuestion(_ questionId: Int) -> Observable<Result<Void,Error>>
 }
 

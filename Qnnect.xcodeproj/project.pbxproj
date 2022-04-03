@@ -103,6 +103,7 @@
 		AE5B1C2327BB600D00F24981 /* AgreementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B1C2227BB600D00F24981 /* AgreementItemView.swift */; };
 		AE5BEFA027F98F6800561237 /* ReadNotificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */; };
 		AE5BEFA327F99F9200561237 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE5BEFA527F99F9200561237 /* InfoPlist.strings */; };
+		AE5BEFA827F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFA727F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -484,6 +485,7 @@
 		AE5BEF9F27F98F6800561237 /* ReadNotificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationRequestDTO.swift; sourceTree = "<group>"; };
 		AE5BEFA427F99F9200561237 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE5BEFA627F99FC000561237 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE5BEFA727F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchQuestionSimpleInfoRequestDTO.swift; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -1575,6 +1577,7 @@
 				AEB5AB2F27E205CE0096376B /* CafeQuestionsResponseDTO.swift */,
 				AEB5AB3327E206FE0096376B /* CafeQuestionResponseDTO.swift */,
 				AEC83E8227F866AC007AFB61 /* ModifyUserQuestionRequestDTO.swift */,
+				AE5BEFA727F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift */,
 			);
 			path = Question;
 			sourceTree = "<group>";
@@ -2432,6 +2435,7 @@
 				AEB8FCFD27C661E8002BDBCD /* LoginRequestDTO.swift in Sources */,
 				AEA14D1827D326D40009EEC6 /* CafeToDayQuestionCell.swift in Sources */,
 				AEEF4AFB27EB5C0700DB4184 /* SentQuestionListViewController.swift in Sources */,
+				AE5BEFA827F9BE5600561237 /* FetchQuestionSimpleInfoRequestDTO.swift in Sources */,
 				AEBC9ED227C62B3B0070399A /* AuthUseCase.swift in Sources */,
 				AECE641E27F31F9B00BB14B2 /* NotificationNetworkService.swift in Sources */,
 				AE538EDF27C4928E00670FAF /* DiaryColorCell.swift in Sources */,

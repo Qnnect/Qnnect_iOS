@@ -9,8 +9,8 @@ import UIKit
 
 protocol QuestionCoordinator: Coordinator {
     func showCafeQuestionScene(_ questionId: Int)
-    func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?)
-    func showCommentScene(_ commentId: Int, _ question: Question)
+    func showWriteCommentScene(_ cafeQuestionId: Int, _ user: User, _ comment: Comment?)
+    func showCommentScene(_ commentId: Int, _ cafeQuestionId: Int)
     func showModifyQuestionScene(_  question: Question)
     func showReportMenuBottomSheet(_ reportUser: User)
     func pop()
@@ -18,8 +18,8 @@ protocol QuestionCoordinator: Coordinator {
 }
 
 extension QuestionCoordinator {
-    func showWriteCommentScene(_ question: Question, _ user: User) {
-        showWriteCommentScene(question, user, nil)
+    func showWriteCommentScene(_ cafeQuestionId: Int, _ user: User) {
+        showWriteCommentScene(cafeQuestionId, user, nil)
     }
 }
 
@@ -59,20 +59,20 @@ final class DefaultQuestionCoordinator: NSObject, QuestionCoordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func showWriteCommentScene(_ question: Question, _ user: User, _ comment: Comment?) {
+    func showWriteCommentScene(_ cafeQuestionId: Int, _ user: User, _ comment: Comment?) {
         let coordinator = DefaultWriteCommentCoordinator(navigationController: navigationController)
         navigationController.delegate = self
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
-        coordinator.start(question, user, comment)
+        coordinator.start(cafeQuestionId, user, comment)
     }
     
-    func showCommentScene(_ commentId: Int, _ question: Question) {
+    func showCommentScene(_ commentId: Int, _ cafeQuestionId: Int) {
         let coordinator = DefaultCommentCoordinator(navigationController: navigationController)
         navigationController.delegate = self
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self
-        coordinator.showCommentScene(commentId, question)
+        coordinator.start(commentId, cafeQuestionId)
     }
     
     func showModifyQuestionScene(_ question: Question) {

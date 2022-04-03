@@ -20,7 +20,7 @@ final class WriteCommentViewModel: ViewModelType {
         let content: Observable<String>
         let didTapAttachingImageButton: Observable<Void>
         let didTapCompletionButton: Observable<[Data?]>
-        let question: Observable<Question>
+        let cafeQuestionId: Observable<Int>
         let type: Observable<WriteCommentType>
         let comment: Observable<Comment?>
     }
@@ -29,11 +29,14 @@ final class WriteCommentViewModel: ViewModelType {
         let isInputCompleted: Driver<Bool>
         let showImagePickerView: Signal<Void>
         let completion: Signal<Void>
+        let question: Driver<Question>
     }
     
     private let commentUseCase: CommentUseCase
     
-    init(commentUseCase: CommentUseCase) {
+    init(
+        commentUseCase: CommentUseCase
+    ) {
         self.commentUseCase = commentUseCase
     }
     
@@ -52,7 +55,7 @@ final class WriteCommentViewModel: ViewModelType {
             .debug()
             .withLatestFrom(
                 Observable.combineLatest(
-                    input.question.map { $0.id },
+                    input.cafeQuestionId,
                     input.content
                 ),
                 resultSelector: { ($1.0, $0, $1.1) })
@@ -83,10 +86,18 @@ final class WriteCommentViewModel: ViewModelType {
         let completion = Observable.merge(create,modify)
             .mapToVoid()
         
+        let question = input.cafeQuestionId
+            .flatMap(commentUseCase.fetchQuestionSimpleInfo(_:))
+            .compactMap { result -> Question? in
+                guard case let .success(question) = result else { return nil }
+                return question
+            }
+        
         return Output(
             isInputCompleted: isInputCompleted.asDriver(onErrorJustReturn: false),
             showImagePickerView: input.didTapAttachingImageButton.asSignal(onErrorSignalWith: .empty()),
-            completion: completion.asSignal(onErrorSignalWith: .empty())
+            completion: completion.asSignal(onErrorSignalWith: .empty()),
+            question: question.asDriver(onErrorDriveWith: .empty())
         )
     }
 }

@@ -12,12 +12,16 @@ final class DefaultCommentRepository: CommentRepository {
     
     private let commentNetworkService: CommentNetworkService
     private let replyNetworkService: ReplyNetworkService
+    private let questionNetworkService: QuestionNetworkService
+    
     init(
         commentNetworkService: CommentNetworkService,
-        replyNetworkService: ReplyNetworkService
+        replyNetworkService: ReplyNetworkService,
+        questionNetworkService: QuestionNetworkService
     ) {
         self.commentNetworkService = commentNetworkService
         self.replyNetworkService = replyNetworkService
+        self.questionNetworkService = questionNetworkService
     }
     
     func createComment(
@@ -61,5 +65,18 @@ final class DefaultCommentRepository: CommentRepository {
     
     func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>> {
         replyNetworkService.modifyReply(commentId, replyId, content)
+    }
+    
+    func fetchQuestionSimpleInfo(_ cafeQuestionId: Int) -> Observable<Result<Question, Error>> {
+        questionNetworkService.fetchQuestionSimpleInfo(cafeQuestionId)
+            .map {
+                result -> Result<Question,Error> in
+                switch result {
+                case .success(let responseDTO):
+                    return .success(responseDTO.toDomain())
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
     }
 }

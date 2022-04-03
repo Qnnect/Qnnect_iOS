@@ -18,7 +18,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
     
     struct Input {
         let comment: Observable<Comment>
-        let question: Observable<Question>
+        let cafeQuestionId: Observable<Int>
         let didTapDeleteButton: Observable<Void>
         let didTapModifyButton: Observable<Void>
         let didTapDeleteAlertOkButton: Observable<Void>
@@ -28,7 +28,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let delete: Signal<Void>
         let modify: Signal<Void>
         let showDeleteAlertView: Signal<Void>
-        let showWriteCommentScene: Signal<(Question,Comment)>
+        let showWriteCommentScene: Signal<(Int,Comment)>
     }
     
     private let commentUseCase: CommentUseCase
@@ -52,7 +52,7 @@ final class CommentMoreMenuViewModel: ViewModelType {
         let showWriteCommentScene = input.didTapModifyButton
             .withLatestFrom(
                 Observable.combineLatest(
-                    input.question,
+                    input.cafeQuestionId,
                     input.comment
                 )
             )

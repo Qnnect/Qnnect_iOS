@@ -28,7 +28,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
     }
     
     private var comment: Comment!
-    private var question: Question!
+    private var cafeQuestionId: Int!
     private var viewModel: CommentMoreMenuViewModel!
     weak var coordinator: CommentCoordinator?
     
@@ -36,13 +36,13 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         with comment: Comment,
         _ viewModel: CommentMoreMenuViewModel,
         _ coordinator: CommentCoordinator,
-        _ question : Question
+        _ cafeQuestionId : Int
     ) -> CommentMoreMenuBottomSheet {
         let view = CommentMoreMenuBottomSheet()
         view.comment = comment
         view.viewModel = viewModel
         view.coordinator = coordinator
-        view.question = question
+        view.cafeQuestionId = cafeQuestionId
         return view
     }
     
@@ -79,7 +79,7 @@ class CommentMoreMenuBottomSheet: BottomSheetViewController {
         
         let input = CommentMoreMenuViewModel.Input(
             comment: Observable.just(comment),
-            question: Observable.just(question),
+            cafeQuestionId: Observable.just(cafeQuestionId),
             didTapDeleteButton: deleteButton.rx.tap.asObservable(),
             didTapModifyButton: modifyButton.rx.tap.asObservable(),
             didTapDeleteAlertOkButton: deleteAlertView.didTapOkButton

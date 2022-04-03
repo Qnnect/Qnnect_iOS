@@ -104,7 +104,7 @@ final class WriteCommentViewController: BaseViewController {
     
     private var fetchedAssets: [PHAsset] = []
     
-    private var question: Question!
+    private var cafeQuestionId: Int!
     //private var cafeId: Int!
     private var user: User?
     private var viewModel: WriteCommentViewModel!
@@ -112,14 +112,14 @@ final class WriteCommentViewController: BaseViewController {
     private var comment: Comment?
     
     static func create(
-        with question: Question,
+        with cafeQuestionId: Int,
         _ user: User?,
         _ viewModel: WriteCommentViewModel,
         _ coordinator: WriteCommentCoordinator,
         _ comment: Comment? = nil
     ) -> WriteCommentViewController {
         let vc = WriteCommentViewController()
-        vc.question = question
+        vc.cafeQuestionId = cafeQuestionId
         vc.user = user
         vc.viewModel = viewModel
         vc.coordinator = coordinator
@@ -161,36 +161,27 @@ final class WriteCommentViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.height.equalTo(152.0)
         }
-        self.questionView.backgroundColor = self.question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
         
         self.dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(24.0)
             make.centerX.equalToSuperview()
         }
-        self.dateLabel.text = self.question.createdAt
         
         self.questionerLabel.snp.makeConstraints { make in
             make.top.equalTo(self.dateLabel.snp.bottom).offset(1.0)
             make.centerX.equalToSuperview()
         }
         
-        self.questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
-        
         self.daysLeftLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16.0)
             make.trailing.equalToSuperview().inset(19.0)
         }
-        self.daysLeftLabel.text = "D-\(self.question.daysLeft)"
         
         self.contentLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.leading.top.greaterThanOrEqualToSuperview().offset(8.0)
             make.trailing.bottom.lessThanOrEqualToSuperview().offset(8.0)
         }
-        self.contentLabel.attributedText = NSAttributedString(
-            string: self.question.content,
-            attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
-        )
         
         self.writerProfileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20.0)
@@ -249,7 +240,7 @@ final class WriteCommentViewController: BaseViewController {
                     LoadingIndicator.showLoading()
                 }
                 .map(getImages),
-            question: Observable.just(question),
+            cafeQuestionId: Observable.just(cafeQuestionId),
             type: Observable.just(
                 comment == nil ? WriteCommentType.create : WriteCommentType.modify
             ),
@@ -271,6 +262,9 @@ final class WriteCommentViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        output.question
+            .drive(onNext: setQuestionLayout(_:))
+            .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
 
@@ -411,6 +405,17 @@ private extension WriteCommentViewController {
             inputTextView.text = comment.content
             inputTextView.textColor = .BLACK_121212
         }
+    }
+    
+    func setQuestionLayout(_ question: Question) {
+        questionView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
+        dateLabel.text = question.createdAt
+        questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
+        daysLeftLabel.text = "D-\(question.daysLeft)"
+        contentLabel.attributedText = NSAttributedString(
+            string: question.content,
+            attributes: [NSAttributedString.Key.paragraphStyle: Constants.paragraphStyle]
+        )
     }
 }
 

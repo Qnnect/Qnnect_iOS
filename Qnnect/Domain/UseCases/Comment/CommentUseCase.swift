@@ -24,6 +24,7 @@ protocol CommentUseCase: AnyObject {
     func createReply(_ commentId: Int, _ content: String) -> Observable<Result<Void,Error>>
     func deleteReply(_ commentId: Int, _ replyId: Int) -> Observable<Result<Void, Error>>
     func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>>
+    func fetchQuestionSimpleInfo(_ cafeQuestionId: Int) -> Observable<Result<Question, Error>>
 }
 
 final class DefaultCommentUseCase: CommentUseCase {
@@ -71,5 +72,9 @@ final class DefaultCommentUseCase: CommentUseCase {
     
     func modifyReply(_ commentId: Int, _ replyId: Int, _ content: String) -> Observable<Result<Void, Error>> {
         commentRepository.modifyReply(commentId, replyId, content)
+    }
+    
+    func fetchQuestionSimpleInfo(_ cafeQuestionId: Int) -> Observable<Result<Question, Error>> {
+        commentRepository.fetchQuestionSimpleInfo(cafeQuestionId)
     }
 }

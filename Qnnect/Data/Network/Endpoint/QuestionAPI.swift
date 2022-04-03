@@ -18,6 +18,7 @@ enum QuestionAPI {
     case searchCafeQuestion(cafeId: Int, request: CafeQuestionSearchRequestDTO)
     case fetchAllUserQuestion(request: CafeQuestionsFetchRequestDTO)
     case fetchUserQuestions(cafeId: Int, request: CafeQuestionsFetchRequestDTO)
+    case fetchQuestionSimpleInfo(cafeQuestionId: Int)
 }
 
 extension QuestionAPI: TargetType, AccessTokenAuthorizable {
@@ -39,7 +40,8 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
             return "api/v1/user/question/\(cafeId)"
         case .deleteUserQuestion(let questionId), .modifyUserQuestion(let questionId, _):
             return "api/v1/my/question/\(questionId)"
-            
+        case .fetchQuestionSimpleInfo(let cafeQuestionId):
+            return "api/v1/question/one/\(cafeQuestionId)"
         }
     }
     
@@ -49,7 +51,8 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
                 .fetchCafeQuestions(_, _),
                 .searchCafeQuestion(_, _),
                 .fetchAllUserQuestion(_),
-                .fetchUserQuestions(_, request: _):
+                .fetchUserQuestions(_, request: _),
+                .fetchQuestionSimpleInfo(_):
             return .get
         case .modifyQuestion(_, _), .modifyUserQuestion(_, _):
             return .patch
@@ -60,7 +63,7 @@ extension QuestionAPI: TargetType, AccessTokenAuthorizable {
     
     var task: Task {
         switch self {
-        case .fetchQuestion(_), .deleteQuestion(_), .deleteUserQuestion(_):
+        case .fetchQuestion(_), .deleteQuestion(_), .deleteUserQuestion(_), .fetchQuestionSimpleInfo(_):
             return .requestPlain
         case .modifyQuestion(_, let content):
             return .requestData(content.data(using: .utf8)!)

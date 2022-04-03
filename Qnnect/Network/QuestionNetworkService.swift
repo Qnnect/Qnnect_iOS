@@ -89,4 +89,13 @@ final class QuestionNetworkService: BaseNetworkService<QuestionAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func fetchQuestionSimpleInfo(_ cafeQuestionId: Int) -> Observable<Result<QuestionResponseDTO,Error>> {
+        request(.fetchQuestionSimpleInfo(cafeQuestionId: cafeQuestionId))
+            .filter(statusCode: 200)
+            .map(QuestionResponseDTO.self)
+            .map{ Result.success($0)}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

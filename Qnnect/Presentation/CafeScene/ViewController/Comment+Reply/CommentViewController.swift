@@ -57,19 +57,19 @@ final class CommentViewController: BaseViewController {
     private var viewModel: CommentViewModel!
     private var commentId: Int!
     weak var coordinator: CommentCoordinator?
-    private var question: Question!
+    private var cafeQuestionId: Int!
     
     static func create(
         with viewModel: CommentViewModel,
         _ commentId: Int,
         _ coordinator: CommentCoordinator,
-        _ question: Question
+        _ cafeQuestionId: Int
     ) -> CommentViewController {
         let vc = CommentViewController()
         vc.viewModel = viewModel
         vc.commentId = commentId
         vc.coordinator = coordinator
-        vc.question = question
+        vc.cafeQuestionId = cafeQuestionId
         return vc
     }
     
@@ -133,7 +133,7 @@ final class CommentViewController: BaseViewController {
         let input = CommentViewModel.Input(
             viewWillAppear: rx.viewWillAppear.mapToVoid(),
             commentId: Observable.just(commentId),
-            question: Observable.just(question),
+            cafeQuestionId: Observable.just(cafeQuestionId),
             didTapSendButton: sendButton.rx.tap
                 .do {
                     [weak self] _ in

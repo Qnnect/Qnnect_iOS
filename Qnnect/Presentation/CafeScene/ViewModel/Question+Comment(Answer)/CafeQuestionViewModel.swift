@@ -27,13 +27,13 @@ final class CafeQuestionViewModel: ViewModelType {
     }
     
     struct Output {
-        let showWriteCommentScene: Signal<(Question,User)>
+        let showWriteCommentScene: Signal<(Int,User)>
         let scrap: Signal<Void>
         let cancleScrap: Signal<Void>
         let comments: Driver<[Comment]>
         let question: Driver<Question>
-        ///Int: CommentId
-        let showCommentScene: Signal<(Int,Question)>
+        ///Int: CommentId, Int: CafeQuestionId
+        let showCommentScene: Signal<(commentId: Int, cafeQuestionId: Int)>
         let user: Driver<User>
         let currentUserComment: Driver<Comment?>
         let like: Signal<Void>
@@ -87,7 +87,7 @@ final class CafeQuestionViewModel: ViewModelType {
         }
         
         let showWriteCommentScene = input.didTapAnswerWritingCell
-            .withLatestFrom(Observable.combineLatest(fetchedQuestion, user))
+            .withLatestFrom(Observable.combineLatest(fetchedQuestion.map { $0.id }, user))
         
         
         let scrapTrigger = input.didTapScrapButton
@@ -117,7 +117,9 @@ final class CafeQuestionViewModel: ViewModelType {
         
         let showCommentScene = input.didTapAnswerCell
             .map { $0.id }
-            .withLatestFrom(fetchedQuestionWithComments.map { $0.question }, resultSelector: { ($0, $1)})
+            .withLatestFrom(fetchedQuestionWithComments.map { $0.question.id },
+                            resultSelector: { (commentId: $0, cafeQuestionId: $1)}
+            )
         
         let like = input.didTapLikeButton
             .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
