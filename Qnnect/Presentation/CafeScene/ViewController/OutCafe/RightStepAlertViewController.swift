@@ -174,6 +174,11 @@ final class RightStepAlertViewController: BaseViewController {
         guard let coordinator = coordinator else { return }
 
         output.insert
+            .do {
+                _ in
+                guard let window = UIApplication.shared.windows.first else { return }
+                window.rootViewController?.view.makeToast("재료 넣기 성공!", duration: 2.0, position: .bottom)
+            }
             .emit(onNext: coordinator.dismiss)
             .disposed(by: self.disposeBag)
         

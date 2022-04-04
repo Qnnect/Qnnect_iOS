@@ -20,6 +20,7 @@ final class IngredientBuyAlertViewModel: ViewModelType {
     struct Output {
         let dismiss: Signal<Void>
         let error: Signal<Void>
+        let success: Signal<Void>
     }
     
     private let storeUseCase: StoreUseCase
@@ -42,7 +43,8 @@ final class IngredientBuyAlertViewModel: ViewModelType {
             result -> Void? in
             guard case .success(_) = result else { return nil }
             return Void()
-        }
+        }.share()
+        
         
         let dismiss = Observable.merge(input.didTapDismissButton,success)
         
@@ -55,7 +57,8 @@ final class IngredientBuyAlertViewModel: ViewModelType {
         
         return Output(
             dismiss: dismiss.asSignal(onErrorSignalWith: .empty()),
-            error: error.asSignal(onErrorSignalWith: .empty())
+            error: error.asSignal(onErrorSignalWith: .empty()),
+            success: success.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

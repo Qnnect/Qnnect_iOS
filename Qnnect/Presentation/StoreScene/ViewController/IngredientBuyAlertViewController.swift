@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import RxSwift
+import Toast_Swift
 
 final class IngredientBuyAlertViewController: BaseViewController {
     
@@ -129,6 +130,13 @@ final class IngredientBuyAlertViewController: BaseViewController {
         )
         
         let output = self.viewModel.transform(from: input)
+        
+        output.success
+            .emit(onNext: {
+                _ in
+                guard let window = UIApplication.shared.windows.first else { return }
+                window.rootViewController?.view.makeToast("재료 구매 완료!", duration: 2.0, position: .bottom)
+            }).disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
 
