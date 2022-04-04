@@ -114,7 +114,7 @@ class CafeInfoInputViewController: BottomSheetViewController {
             self.bottomSheetView.addSubview($0)
         }
         
-        self.topPadding = 121.0
+        self.topPadding = UIScreen.main.bounds.height * 0.149
         
         //self.view.backgroundColor = .black.withAlphaComponent(0.5)
         self.inputTitleLabel.snp.makeConstraints { make in
@@ -169,7 +169,12 @@ class CafeInfoInputViewController: BottomSheetViewController {
         self.completionButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.inputTitleLabel)
             make.height.equalTo(Constants.bottomButtonHeight)
-            make.top.equalTo(self.questionCycleSlider.snp.bottom).offset(69.0)
+        
+            if UIScreen.main.bounds.height < 700.0 {
+                make.top.equalTo(questionCycleSlider.snp.bottom).offset(16.0)
+            } else {
+                make.top.equalTo(questionCycleSlider.snp.bottom).offset((UIScreen.main.bounds.height*0.0738))
+            }
         }
         
     }
