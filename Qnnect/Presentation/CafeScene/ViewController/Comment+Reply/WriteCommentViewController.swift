@@ -150,8 +150,8 @@ final class WriteCommentViewController: BaseViewController {
             self.writerProfileImageView,
             self.writerNameLabel,
             self.inputTextView,
-            self.bottomBar,
-            self.attachingImageCollectionView
+            self.attachingImageCollectionView,
+            self.bottomBar
         ].forEach {
             self.view.addSubview($0)
         }
@@ -203,7 +203,7 @@ final class WriteCommentViewController: BaseViewController {
         
         self.bottomBar.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(50.0)
+            make.height.equalTo(70.0)
         }
         
         self.attachingImageCollectionView.snp.makeConstraints { make in
@@ -368,11 +368,17 @@ private extension WriteCommentViewController {
                 self.bottomBar.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
             }
             )
+            bottomBar.snp.updateConstraints { make in
+                make.height.equalTo(50.0)
+            }
         }
     }
     
     @objc func bottomBarMoveDown(_ notification: NSNotification) {
         self.bottomBar.transform = .identity
+        bottomBar.snp.updateConstraints { make in
+            make.height.equalTo(70.0)
+        }
     }
     
     func setCompletionButton(_ isCompleted: Bool) {
