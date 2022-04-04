@@ -105,6 +105,11 @@ final class JoinCafeBottomSheet: BottomSheetViewController {
         guard let coordinator = coordinator else { return }
         
         output.showCafeRoomScene
+            .do {
+                _ in
+                guard let window = UIApplication.shared.windows.first else { return }
+                window.rootViewController?.view.makeToast("카페 입장 완료!", duration: 2.0, position: .bottom)
+            }
             .emit(onNext: coordinator.showGroupScene)
             .disposed(by: self.disposeBag)
         

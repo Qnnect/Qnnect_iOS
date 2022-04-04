@@ -30,9 +30,11 @@ final class HomeViewModel: ViewModelType {
         let showJoinCafeBottomSheet: Signal<Void>
         ///Int: QuestionId
         let showCafeQuestionScene: Signal<Int>
-        let alreadyInRoom: Signal<JoinCafeError>
+        let joinCafeError: Signal<JoinCafeError>
         let showNotificationListScene: Signal<Void>
         let hasUnreadNotification: Driver<Bool>
+        ///Int: CafeId
+        let joinCafe: Signal<Int>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -77,21 +79,15 @@ final class HomeViewModel: ViewModelType {
                 return cafe
             }
         
-        let alreadyInRoom = joinCafeResult
+        let joinCafeError = joinCafeResult
             .compactMap { result -> JoinCafeError? in
                 guard case let .failure(error) = result else { return nil }
-                if error == .alreadyIn {
-                    return error 
-                } else {
-                    return nil
-                }
+                return error
             }
         
-        let showCafeRoom = Observable.merge(
-            joinCafe,
-            input.didTapMyCafe
+        let showCafeRoom = input.didTapMyCafe
                 .map {$0.id}
-        )
+        
         
         let showNotificationListScene = input.didTapNotificationButton
         
@@ -104,9 +100,10 @@ final class HomeViewModel: ViewModelType {
             homeInfo: homeInfo.asDriver(onErrorDriveWith: .empty()),
             showJoinCafeBottomSheet: showJoinCafeBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
-            alreadyInRoom: alreadyInRoom.asSignal(onErrorSignalWith: .empty()),
+            joinCafeError: joinCafeError.asSignal(onErrorSignalWith: .empty()),
             showNotificationListScene: showNotificationListScene.asSignal(onErrorSignalWith: .empty()),
-            hasUnreadNotification: hasUnreadNotification.asDriver(onErrorJustReturn: false)
+            hasUnreadNotification: hasUnreadNotification.asDriver(onErrorJustReturn: false),
+            joinCafe: joinCafe.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

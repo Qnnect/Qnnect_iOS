@@ -273,16 +273,22 @@ final class HomeViewController: BaseViewController {
             .emit(onNext: coordinator.showCafeQuestionScene(_:))
             .disposed(by: self.disposeBag)
         
-        output.alreadyInRoom
-            .emit(onNext: {
-                [weak self] error in
-                self?.view.makeToast("카페에 이미 들어가있습니다")
-            }).disposed(by: self.disposeBag)
+        output.joinCafeError
+            .map { $0.meessage }
+            .emit(onNext: coordinator.showCafeJoinErrorAlertView(_:))
+            .disposed(by: self.disposeBag)
         
         output.showNotificationListScene
             .emit(onNext: coordinator.showNotificationListScene)
             .disposed(by: self.disposeBag)
 
+        output.joinCafe
+            .do {
+                _ in
+                guard let window = UIApplication.shared.windows.first else { return }
+                window.rootViewController?.view.makeToast("카페 입장 완료!", duration: 2.0, position: .bottom)
+            }.emit(onNext: coordinator.showGroupScene(with:))
+            .disposed(by: self.disposeBag)
         
         NotificationCenter.default.rx.notification(.didTapPushNoti)
             .debug()
@@ -291,7 +297,6 @@ final class HomeViewController: BaseViewController {
             .emit(onNext: coordinator.showNotificationListScene)
             .disposed(by: disposeBag)
         
-        print("main Coordinator \(coordinator.parentCoordinator)")
     }
 }
 
