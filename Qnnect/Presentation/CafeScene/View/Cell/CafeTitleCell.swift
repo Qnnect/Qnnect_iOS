@@ -60,7 +60,7 @@ final class CafeTitleCell: UICollectionViewCell {
         }
         
         self.createdDateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(26.0)
+            make.top.equalToSuperview().inset(44.0)
             make.leading.equalToSuperview()
         }
         

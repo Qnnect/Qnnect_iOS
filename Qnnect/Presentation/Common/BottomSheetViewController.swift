@@ -62,7 +62,7 @@ class BottomSheetViewController: BaseViewController, BottomSheetable {
         }
         
         self.dismissButton.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(8.0)
+            make.trailing.top.equalToSuperview().inset(8.0)
             make.width.height.equalTo(48.0)
         }
         
