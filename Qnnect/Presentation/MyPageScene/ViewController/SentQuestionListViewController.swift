@@ -87,7 +87,8 @@ final class SentQuestionListViewController: BaseViewController {
         }
         
         floatingButton.snp.makeConstraints { make in
-            make.width.height.equalTo(48.0)
+            make.height.equalTo(48.0)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         
