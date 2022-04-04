@@ -84,6 +84,7 @@ final class IngredientBuyAlertViewController: BaseViewController {
             make.top.equalToSuperview().inset(51.0)
             make.bottom.equalTo(self.buyInfoLabel.snp.top).offset(-28.0)
         }
+        iconImageView.setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
         
         self.iconImageView.image = UIImage(named: ingredient.name)
         
@@ -97,6 +98,7 @@ final class IngredientBuyAlertViewController: BaseViewController {
             make.leading.trailing.equalToSuperview().inset(93.0)
             make.bottom.equalTo(self.buyButton.snp.top).offset(-34.0)
         }
+        buyInfoLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.17
