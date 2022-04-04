@@ -103,7 +103,7 @@ final class PageItemViewController: BaseViewController {
             self.mainImageView.snp.makeConstraints { make in
                 make.top.equalToSuperview().inset(119.0)
                 make.leading.trailing.equalToSuperview()
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.centerY).multipliedBy(1.195)
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.centerY).multipliedBy(1.1428)
             }
             
             self.mainLabel.snp.makeConstraints { make in
