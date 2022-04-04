@@ -75,7 +75,7 @@ final class InviteCafeViewController: BaseViewController {
     }
     
     private let invitaionLinkCopyButton = UIButton().then {
-        $0.setTitle("초대링크 복사", for: .normal)
+        $0.setTitle("초대코드 복사", for: .normal)
         $0.setTitleColor(.BLACK_121212, for: .normal)
         $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
         $0.layer.cornerRadius = 10.0
