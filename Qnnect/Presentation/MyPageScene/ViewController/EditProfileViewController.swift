@@ -53,6 +53,10 @@ final class EditProfileViewController: BaseViewController {
         return sheet
     }()
     
+    private lazy var errorAlertView = ErrorAlertView.create(with: "이미지 크기가 5MB를 초과 했습니다.").then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
     private var viewModel: EditProfileViewModel!
     weak var coordinator: MyPageCoordinator?
     private var user: User!
@@ -161,6 +165,13 @@ final class EditProfileViewController: BaseViewController {
         output.pop
             .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
+        
+        output.updateError
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.errorAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
     
     override func imagePicker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

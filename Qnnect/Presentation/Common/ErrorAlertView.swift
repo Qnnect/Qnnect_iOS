@@ -32,6 +32,8 @@ final class ErrorAlertView: BaseViewController {
     
     private var message: String!
     
+    private var isPop: Bool = true
+    
     static func create(with message: String) -> ErrorAlertView {
         let vc = ErrorAlertView()
         vc.message = message
@@ -92,7 +94,10 @@ final class ErrorAlertView: BaseViewController {
                 [weak self] _ in
                 let pvc = self?.presentingViewController as? UINavigationController
                 self?.dismiss(animated: true, completion: {
-                    pvc?.popViewController(animated: true)
+                    [weak self]  in
+                    if let isPop = self?.isPop, isPop {
+                        pvc?.popViewController(animated: true)
+                    }
                 })
             }).disposed(by: self.disposeBag)
         

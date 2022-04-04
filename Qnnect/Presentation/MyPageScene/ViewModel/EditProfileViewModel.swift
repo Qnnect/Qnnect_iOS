@@ -25,6 +25,7 @@ final class EditProfileViewModel: ViewModelType {
         let showBottomSheet: Signal<Void>
         let pop: Signal<Void>
         let setDefaultImage: Signal<Void>
+        let updateError: Signal<Void>
     }
     
     private let authUseCase: AuthUseCase
@@ -87,11 +88,20 @@ final class EditProfileViewModel: ViewModelType {
             }
             .withLatestFrom(updateInfo)
             .flatMap(self.userUseCase.setProfile)
-            .mapToVoid()
             .share()
         
+        let updateSuccess = updateProfile.filter({ result in
+            guard case .success(_) = result else { return false}
+            return true
+        }).mapToVoid()
+        
+        let updateError = updateProfile.filter({ result in
+            guard case .failure(_) = result else { return false}
+            return true
+        }).mapToVoid()
+        
         let pop = Observable.merge(input.didTapCompletionButton
-            .take(until: inputChanging),updateProfile)
+            .take(until: inputChanging),updateSuccess)
             
         
         return Output(
@@ -99,7 +109,8 @@ final class EditProfileViewModel: ViewModelType {
             nameLength: nameLength.asDriver(onErrorDriveWith: .empty()),
             showBottomSheet: input.didTapProfileImageView.asSignal(onErrorSignalWith: .empty()),
             pop: pop.asSignal(onErrorSignalWith: .empty()),
-            setDefaultImage: setDefaultImage.asSignal(onErrorSignalWith: .empty())
+            setDefaultImage: setDefaultImage.asSignal(onErrorSignalWith: .empty()),
+            updateError: updateError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }
