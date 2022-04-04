@@ -11,4 +11,5 @@ import RxSwift
 protocol NotificationRepository: AnyObject {
     func fetchNotifications(page: Int, size: Int) -> Observable<Result<[NotificationInfo],Error>>
     func readNotification(_ notificationId: Int) -> Observable<Result<Void,Error>>
+    func storeDeviceToken(_ deviceToken: String) -> Observable<Result<Void,Error>>
 }

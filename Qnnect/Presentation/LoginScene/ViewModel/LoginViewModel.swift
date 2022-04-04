@@ -23,13 +23,19 @@ final class LoginViewModel: ViewModelType {
         let inviteFlowTermScene: Signal<(Token, LoginType, String)>
         let inviteFlowHomeScene: Signal<String>
         let loginError: Signal<Void>
+        let storeDeviceToken: Signal<Void>
     }
     
     var socialLoginManager: SocialLoginManager!
     private let authUseCase: AuthUseCase
+    private let notificationUseCase: NotificationUseCase
     
-    init(authUseCase: AuthUseCase) {
+    init(
+        authUseCase: AuthUseCase,
+        notificationUseCase: NotificationUseCase
+    ) {
         self.authUseCase = authUseCase
+        self.notificationUseCase = notificationUseCase
     }
     
     func transform(from input: Input) -> Output {
@@ -75,6 +81,10 @@ final class LoginViewModel: ViewModelType {
             .debug()
             .share()
         
+        let storeDeviceToken = isSuccess.mapToVoid()
+            .flatMap(notificationUseCase.storeDeviceToken)
+            .mapToVoid()
+        
         let showTermsScene = isSuccess.filter(isNeedToSetting)
             .map {
                 userLoginInfo, type -> (token: Token, loginType: LoginType) in
@@ -108,7 +118,8 @@ final class LoginViewModel: ViewModelType {
             showHomeScene: showHomeScene.asSignal(onErrorSignalWith: .empty()),
             inviteFlowTermScene: inviteFlowTermsScene.asSignal(onErrorSignalWith: .empty()),
             inviteFlowHomeScene: inviteFlowHomeScene.asSignal(onErrorSignalWith: .empty()),
-            loginError: loginError.asSignal(onErrorSignalWith: .empty())
+            loginError: loginError.asSignal(onErrorSignalWith: .empty()),
+            storeDeviceToken: storeDeviceToken.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

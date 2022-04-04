@@ -27,4 +27,12 @@ final class NotificationNetworkService: BaseNetworkService<NotificationAPI> {
             .catch{ .just(Result.failure($0))}
             .asObservable()
     }
+    
+    func storeDeviceToken(request: StoreDeviceTokenRequestDTO) -> Observable<Result<Void,Error>> {
+        self.request(.storeDeviceToken(request: request))
+            .filterSuccessfulStatusCodes()
+            .map{ _ in Result.success(())}
+            .catch{ .just(Result.failure($0))}
+            .asObservable()
+    }
 }

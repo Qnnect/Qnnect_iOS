@@ -34,4 +34,9 @@ final class DefaultNotificationRepository: NotificationRepository {
         let request = ReadNotificationRequestDTO(notificationId: notificationId)
         return notificationNetworkService.readNotification(request: request)
     }
+    
+    func storeDeviceToken(_ deviceToken: String) -> Observable<Result<Void, Error>> {
+        let request = StoreDeviceTokenRequestDTO(fcmToken: deviceToken)
+        return notificationNetworkService.storeDeviceToken(request: request)
+    }
 }

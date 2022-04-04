@@ -7,10 +7,12 @@
 
 import Foundation
 import RxSwift
+import FirebaseMessaging
 
 protocol NotificationUseCase: AnyObject {
     func fetchNotifications(page: Int, size: Int) -> Observable<Result<[NotificationInfo],Error>>
     func readNotification(_ notificationId: Int) -> Observable<Result<Void,Error>>
+    func storeDeviceToken() -> Observable<Result<Void,Error>>
 }
 
 final class DefaultNotificationUseCase: NotificationUseCase {
@@ -27,5 +29,13 @@ final class DefaultNotificationUseCase: NotificationUseCase {
     
     func readNotification(_ notificationId: Int) -> Observable<Result<Void, Error>> {
         notificationRepository.readNotification(notificationId)
+    }
+    
+    func storeDeviceToken() -> Observable<Result<Void, Error>> {
+        if let token =  Messaging.messaging().fcmToken {
+            return notificationRepository.storeDeviceToken(token)
+        } else {
+            return .empty()
+        }
     }
 }

@@ -126,7 +126,12 @@ final class DefaultAuthCoordinator: AuthCoordinator {
             versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
-        let viewModel = LoginViewModel(authUseCase: useCase)
+        let notiRepository = DefaultNotificationRepository(notificationNetworkService: NotificationNetworkService())
+        let notiUseCase = DefaultNotificationUseCase(notificationRepository: notiRepository)
+        let viewModel = LoginViewModel(
+            authUseCase: useCase,
+            notificationUseCase: notiUseCase
+        )
         let vc = LoginViewController.create(with: viewModel,self, nil)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.socialLoginManager = socialLoginManager
@@ -141,7 +146,9 @@ final class DefaultAuthCoordinator: AuthCoordinator {
             versionNetworkService: VersionNetworkService()
         )
         let useCase = DefaultAuthUseCase(authRepository: repository)
-        let viewModel = LoginViewModel(authUseCase: useCase)
+        let notiRepository = DefaultNotificationRepository(notificationNetworkService: NotificationNetworkService())
+        let notiUseCase = DefaultNotificationUseCase(notificationRepository: notiRepository)
+        let viewModel = LoginViewModel(authUseCase: useCase,notificationUseCase: notiUseCase)
         let vc = LoginViewController.create(with: viewModel,self, inviteCode)
         let socialLoginManager = SocialLoginManager(vc: vc)
         viewModel.socialLoginManager = socialLoginManager

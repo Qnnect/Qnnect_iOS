@@ -11,6 +11,7 @@ import Moya
 enum NotificationAPI {
     case fetchNotifications(request: NotificationRequestDTO)
     case readNotification(request: ReadNotificationRequestDTO)
+    case storeDeviceToken(request: StoreDeviceTokenRequestDTO)
 }
 
 extension NotificationAPI: TargetType, AccessTokenAuthorizable {
@@ -22,6 +23,8 @@ extension NotificationAPI: TargetType, AccessTokenAuthorizable {
         switch self {
         case .fetchNotifications(_), .readNotification(_):
             return "api/v1/notification"
+        case .storeDeviceToken(_):
+            return "api/v1/notification/token"
         }
     }
     
@@ -31,6 +34,8 @@ extension NotificationAPI: TargetType, AccessTokenAuthorizable {
             return .get
         case .readNotification(_):
             return .patch
+        case .storeDeviceToken(_):
+            return .post
         }
     }
     
@@ -40,6 +45,9 @@ extension NotificationAPI: TargetType, AccessTokenAuthorizable {
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .readNotification(let request):
+            let param = request.toDictionary() ?? [:]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .storeDeviceToken(let request):
             let param = request.toDictionary() ?? [:]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
