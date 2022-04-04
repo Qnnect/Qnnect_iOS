@@ -11,6 +11,7 @@ struct HomeInfo {
     let cafes: [MyCafe]
     let questions: [ToDayQuestion]
     let user: User
+    let hasUnreadNotification: Bool
 }
 
 struct MyCafe {

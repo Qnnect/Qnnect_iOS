@@ -118,7 +118,6 @@ final class HomeViewController: BaseViewController {
             UIBarButtonItem(customView: self.pointView)
         ]
         
-        //self.navigationItem.rightBarButtonItem?.tintColor = .black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Constants.notificationIcon,
             style: .plain,
@@ -250,6 +249,10 @@ final class HomeViewController: BaseViewController {
             }
             .map(self.convertToSectionModel(_:))
             .drive(self.homeCollectionView.rx.items(dataSource: datasource))
+            .disposed(by: self.disposeBag)
+        
+        output.hasUnreadNotification
+            .drive(onNext: setRightNavigationBarItem(_:))
             .disposed(by: self.disposeBag)
         
         guard let coordinator = coordinator else { return }
@@ -477,6 +480,15 @@ private extension HomeViewController {
             }))
         }
         return models
+    }
+    
+    func setRightNavigationBarItem(_ hasUnreadNotification: Bool) {
+        if hasUnreadNotification {
+            self.navigationItem.rightBarButtonItem?.image = Constants.notification_unread
+        } else {
+            self.navigationItem.rightBarButtonItem?.image = Constants.notificationIcon
+        }
+        
     }
 }
 

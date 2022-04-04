@@ -32,6 +32,7 @@ final class HomeViewModel: ViewModelType {
         let showCafeQuestionScene: Signal<Int>
         let alreadyInRoom: Signal<JoinCafeError>
         let showNotificationListScene: Signal<Void>
+        let hasUnreadNotification: Driver<Bool>
     }
     
     private weak var coordinator: HomeCoordinator?
@@ -56,7 +57,7 @@ final class HomeViewModel: ViewModelType {
             .compactMap { result -> HomeInfo? in
                 guard case let .success(homeInfo) = result else { return nil }
                 return homeInfo
-            }
+            }.share()
 
         let showJoinCafeBottomSheet = input.didTapJoinCafeButton
 
@@ -94,6 +95,8 @@ final class HomeViewModel: ViewModelType {
         
         let showNotificationListScene = input.didTapNotificationButton
         
+        let hasUnreadNotification = homeInfo.map { $0.hasUnreadNotification }
+        
         return Output(
             showAddGroupBottomSheet: showAddGroupBottomSheet.asSignal(onErrorSignalWith: .empty()),
             curQuestionPage: input.curQuestionPage.asDriver(onErrorJustReturn: 0),
@@ -102,7 +105,8 @@ final class HomeViewModel: ViewModelType {
             showJoinCafeBottomSheet: showJoinCafeBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showCafeQuestionScene: showCafeQuestionScene.asSignal(onErrorSignalWith: .empty()),
             alreadyInRoom: alreadyInRoom.asSignal(onErrorSignalWith: .empty()),
-            showNotificationListScene: showNotificationListScene.asSignal(onErrorSignalWith: .empty())
+            showNotificationListScene: showNotificationListScene.asSignal(onErrorSignalWith: .empty()),
+            hasUnreadNotification: hasUnreadNotification.asDriver(onErrorJustReturn: false)
         )
     }
 }

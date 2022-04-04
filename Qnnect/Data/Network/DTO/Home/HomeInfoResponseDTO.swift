@@ -11,12 +11,14 @@ struct HomeInfoResponseDTO: Decodable {
     let cafeMainResponseList: [HomeInfoCafeResponseDTO]
     let questionTodayList: [HomeInfoQuestionResponseDTO?]
     let user: FetchUserResponseDTO
+    let hasUnreadNotification: Bool
     
     func toDomain() -> HomeInfo {
         return HomeInfo(
             cafes: self.cafeMainResponseList.map { $0.toDomain() },
             questions: self.questionTodayList.map { $0?.toDomain() ?? ToDayQuestion(cafeQuestionId: 0, cafeTitle: "null", content: "null", daysLeft: 7)},
-            user: self.user.toDomain()
+            user: self.user.toDomain(),
+            hasUnreadNotification: hasUnreadNotification
         )
     }
 }
