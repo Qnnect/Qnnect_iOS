@@ -43,6 +43,7 @@ final class CafeQuestionViewModel: ViewModelType {
         let delete: Signal<Void>
         let showModeifyQuestionScene: Signal<Question>
         let showReportBottomSheet: Signal<User>
+        let fetchError: Signal<Void>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -58,16 +59,20 @@ final class CafeQuestionViewModel: ViewModelType {
     
     func transform(from input: Input) -> Output {
         
-        let fetchedQuestionWithComments = input.viewWillAppear
+        let fetchedResult = input.viewWillAppear
             .withLatestFrom(input.questionId)
             .flatMap(questionUseCase.fetchQuestion(_:))
-            .debug("fetchedQuestionwithComments", trimOutput: true)
-            .compactMap { result -> CafeQuestion? in
-                guard case let .success(cafeQuestion) = result else { return nil }
-                return cafeQuestion
-            }
             .share()
-            .debug()
+        
+        let fetchedQuestionWithComments = fetchedResult.compactMap { result -> CafeQuestion? in
+            guard case let .success(cafeQuestion) = result else { return nil }
+            return cafeQuestion
+        }
+       
+        let fetchError = fetchedResult.filter { result in
+            guard case .failure(_) = result else { return false }
+            return true
+        }.mapToVoid()
         
         let user = input.viewWillAppear
             .flatMap(userUseCase.fetchUser)
@@ -162,7 +167,8 @@ final class CafeQuestionViewModel: ViewModelType {
             showDeleteAlertView: showDeleteAlertView.asSignal(onErrorSignalWith: .empty()),
             delete: deleteQuestion.asSignal(onErrorSignalWith: .empty()),
             showModeifyQuestionScene: showModifyQuestionScene.asSignal(onErrorSignalWith: .empty()),
-            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty()),
+            fetchError: fetchError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

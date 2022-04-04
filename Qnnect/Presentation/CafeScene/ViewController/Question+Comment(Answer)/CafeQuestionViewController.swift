@@ -47,6 +47,10 @@ final class CafeQuestionViewController: BaseViewController {
         $0.modalPresentationStyle = .overCurrentContext
     }
     
+    private lazy var enterErrorAlertView = EnterErrorAlertView.create(with: "질문을 찾을 수 없습니다").then {
+        $0.modalPresentationStyle = .overCurrentContext
+    }
+    
     private var questionId: Int!
     private var viewModel: CafeQuestionViewModel!
     weak var coordinator: QuestionCoordinator?
@@ -199,6 +203,13 @@ final class CafeQuestionViewController: BaseViewController {
                 self.present(self.deleteAlertView, animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
         
+        output.fetchError
+            .emit(onNext: {
+                [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.enterErrorAlertView, animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
         
         output.showWriteCommentScene
@@ -209,7 +220,6 @@ final class CafeQuestionViewController: BaseViewController {
             .emit(onNext: coordinator.showCommentScene)
             .disposed(by: self.disposeBag)
         
-
         output.delete
             .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
