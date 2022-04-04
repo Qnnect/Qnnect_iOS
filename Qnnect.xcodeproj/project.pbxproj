@@ -109,6 +109,7 @@
 		AE5BEFB027F9EB2A00561237 /* SetNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFAF27F9EB2A00561237 /* SetNotificationViewController.swift */; };
 		AE5BEFB227F9EB5500561237 /* SetNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB127F9EB5500561237 /* SetNotificationViewModel.swift */; };
 		AE5BEFB527F9EC3100561237 /* MyPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB427F9EC3100561237 /* MyPageItem.swift */; };
+		AE5BEFB727FA20FF00561237 /* EnterErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -384,12 +385,11 @@
 		AEF0FD3E27C3CB0200721D86 /* AddCafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */; };
 		AEF294B027B01898004EFE4D /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294AF27B01898004EFE4D /* ViewModelType.swift */; };
 		AEF294B227B018AB004EFE4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF294B127B018AB004EFE4D /* BaseViewController.swift */; };
-		E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */; };
+		ECBBB9AD507DECB22C2FB62A /* Pods_Qnnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C656A12F402243FF4EC36B /* Pods_Qnnect.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.debug.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
-		7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.release.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.release.xcconfig"; sourceTree = "<group>"; };
+		525CA2068FD16117DA374405 /* Pods-Qnnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.release.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.release.xcconfig"; sourceTree = "<group>"; };
 		AE02404A27E31F7300017F77 /* OurCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCafeViewController.swift; sourceTree = "<group>"; };
 		AE02404C27E31FDB00017F77 /* NavigationTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleLabel.swift; sourceTree = "<group>"; };
 		AE02404F27E329F500017F77 /* OurCafeUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurCafeUserCell.swift; sourceTree = "<group>"; };
@@ -496,6 +496,7 @@
 		AE5BEFAF27F9EB2A00561237 /* SetNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationViewController.swift; sourceTree = "<group>"; };
 		AE5BEFB127F9EB5500561237 /* SetNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationViewModel.swift; sourceTree = "<group>"; };
 		AE5BEFB427F9EC3100561237 /* MyPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageItem.swift; sourceTree = "<group>"; };
+		AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterErrorAlertView.swift; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -771,7 +772,8 @@
 		AEF0FD3D27C3CB0200721D86 /* AddCafeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCafeViewController.swift; sourceTree = "<group>"; };
 		AEF294AF27B01898004EFE4D /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		AEF294B127B018AB004EFE4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0D88AE9B33E68B17867754B /* Pods-Qnnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qnnect.debug.xcconfig"; path = "Target Support Files/Pods-Qnnect/Pods-Qnnect.debug.xcconfig"; sourceTree = "<group>"; };
+		D9C656A12F402243FF4EC36B /* Pods_Qnnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qnnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -779,18 +781,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E09F1A5371DF862326366238 /* Pods_Qnnect.framework in Frameworks */,
+				ECBBB9AD507DECB22C2FB62A /* Pods_Qnnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031CC0EAE9FF4039C23CACB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9C656A12F402243FF4EC36B /* Pods_Qnnect.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A4364C452EF739FF2E14DFFA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */,
-				7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */,
+				D0D88AE9B33E68B17867754B /* Pods-Qnnect.debug.xcconfig */,
+				525CA2068FD16117DA374405 /* Pods-Qnnect.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -919,6 +929,7 @@
 				AE02404C27E31FDB00017F77 /* NavigationTitleLabel.swift */,
 				AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */,
 				AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */,
+				AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1213,7 +1224,7 @@
 				AE59A5F427AEAE890081A0FA /* Qnnect */,
 				AE59A5F327AEAE890081A0FA /* Products */,
 				A4364C452EF739FF2E14DFFA /* Pods */,
-				C68BB39B5478E078B9326607 /* Frameworks */,
+				031CC0EAE9FF4039C23CACB3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1991,14 +2002,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		C68BB39B5478E078B9326607 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C85337F50590B613DC347BC4 /* Pods_Qnnect.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2006,11 +2009,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE59A60627AEAE890081A0FA /* Build configuration list for PBXNativeTarget "Qnnect" */;
 			buildPhases = (
-				A416EF904868B15AD5294600 /* [CP] Check Pods Manifest.lock */,
+				DE2369F32374C9B68E9CD859 /* [CP] Check Pods Manifest.lock */,
 				AE59A5EE27AEAE890081A0FA /* Sources */,
 				AE59A5EF27AEAE890081A0FA /* Frameworks */,
 				AE59A5F027AEAE890081A0FA /* Resources */,
-				588D4692F4164B8D60AF1E43 /* [CP] Embed Pods Frameworks */,
+				6C479A7213CDF466D1B9BCF0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2078,7 +2081,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		588D4692F4164B8D60AF1E43 /* [CP] Embed Pods Frameworks */ = {
+		6C479A7213CDF466D1B9BCF0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2095,7 +2098,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qnnect/Pods-Qnnect-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A416EF904868B15AD5294600 /* [CP] Check Pods Manifest.lock */ = {
+		DE2369F32374C9B68E9CD859 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2338,6 +2341,7 @@
 				AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */,
 				AEEF4B0E27EB70C300DB4184 /* BlockedFriendListViewController.swift in Sources */,
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
+				AE5BEFB727FA20FF00561237 /* EnterErrorAlertView.swift in Sources */,
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */,
@@ -2638,7 +2642,7 @@
 		};
 		AE59A60727AEAE890081A0FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59BB36F2E850CF0864F12658 /* Pods-Qnnect.debug.xcconfig */;
+			baseConfigurationReference = D0D88AE9B33E68B17867754B /* Pods-Qnnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2675,7 +2679,7 @@
 		};
 		AE59A60827AEAE890081A0FA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B0A87398948EA32E11D7650 /* Pods-Qnnect.release.xcconfig */;
+			baseConfigurationReference = 525CA2068FD16117DA374405 /* Pods-Qnnect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

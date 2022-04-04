@@ -46,8 +46,7 @@ extension Reactive where Base: LinkApi {
                                            "lcba":serverCallbackArgs?.toJsonString()
                         ].filterNil()
                     
-                    let linkParameters = ["appkey" : try! KakaoSDK.shared.appKey(),
-                                          "target_app_key" : targetAppKey,
+                    let linkParameters = ["appkey" : (targetAppKey != nil) ? targetAppKey! : try! KakaoSDK.shared.appKey(),
                                           "appver" : Constants.appVersion(),
                                           "linkver" : "4.0",
                                           "template_json" : validationResult.templateMsg.toJsonString(),

@@ -35,7 +35,8 @@ extension Reactive where Base: AuthController {
     
     /// :nodoc:
     public func authorizeWithTalk(channelPublicIds: [String]? = nil,
-                                  serviceTerms: [String]? = nil) -> Observable<OAuthToken> {
+                                  serviceTerms: [String]? = nil,
+                                  nonce: String? = nil) -> Observable<OAuthToken> {
         return Observable<String>.create { observer in
             AUTH_CONTROLLER.authorizeWithTalkCompletionHandler = { (callbackUrl) in
                 let parseResult = callbackUrl.oauthResult()
@@ -49,7 +50,8 @@ extension Reactive where Base: AuthController {
             }
             
             let parameters = AUTH_CONTROLLER.makeParametersForTalk(channelPublicIds:channelPublicIds,
-                                                                   serviceTerms:serviceTerms)
+                                                                   serviceTerms:serviceTerms,
+                                                                   nonce: nonce)
 
             guard let url = SdkUtils.makeUrlWithParameters(Urls.compose(.TalkAuth, path:Paths.authTalk), parameters: parameters) else {
                 SdkLog.e("Bad Parameter.")
@@ -110,31 +112,35 @@ extension Reactive where Base: AuthController {
     }
     
     /// :nodoc:
-    public func authorizeWithAuthenticationSession(prompts : [Prompt]? = nil) -> Observable<OAuthToken> {
+    public func authorizeWithAuthenticationSession(prompts : [Prompt]? = nil,
+                                                   nonce: String? = nil) -> Observable<OAuthToken> {
         return self.authorizeWithAuthenticationSession(prompts: prompts,
                                                        agtToken: nil,
                                                        scopes: nil,
                                                        channelPublicIds: nil,
-                                                       serviceTerms:nil)
+                                                       serviceTerms:nil,
+                                                       nonce:nonce)
     }
     
     /// :nodoc: 카카오싱크 전용입니다. 자세한 내용은 카카오싱크 전용 개발가이드를 참고하시기 바랍니다.
     public func authorizeWithAuthenticationSession(prompts : [Prompt]? = nil,
                                                    channelPublicIds: [String]? = nil,
                                                    serviceTerms: [String]? = nil,
-                                                   loginHint: String? = nil) -> Observable<OAuthToken> {
+                                                   loginHint: String? = nil,
+                                                   nonce: String? = nil) -> Observable<OAuthToken> {
         return self.authorizeWithAuthenticationSession(prompts: prompts,
                                                        agtToken: nil,
                                                        scopes: nil,
                                                        channelPublicIds: channelPublicIds,
                                                        serviceTerms:serviceTerms,
-                                                       loginHint: loginHint)
+                                                       loginHint: loginHint,
+                                                       nonce:nonce)
     }
     
     
     // MARK: New Agreement
     /// :nodoc:
-    public func authorizeWithAuthenticationSession(scopes:[String]) -> Observable<OAuthToken> {
+    public func authorizeWithAuthenticationSession(scopes:[String], nonce: String? = nil) -> Observable<OAuthToken> {
         return AuthApi.shared.rx.agt().asObservable().flatMap({ agtToken -> Observable<OAuthToken> in
             return self.authorizeWithAuthenticationSession(agtToken: agtToken, scopes: scopes).flatMap({ oauthToken in
                 return Observable<OAuthToken>.create { observer in
@@ -169,7 +175,8 @@ extension Reactive where Base: AuthController {
                                             channelPublicIds: [String]? = nil,
                                             serviceTerms: [String]? = nil,
                                             loginHint: String? = nil,
-                                            accountParameters: [String:String]? = nil) -> Observable<OAuthToken> {
+                                            accountParameters: [String:String]? = nil,
+                                            nonce: String? = nil) -> Observable<OAuthToken> {
         return Observable<String>.create { observer in
             let authenticationSessionCompletionHandler : (URL?, Error?) -> Void = {
                 (callbackUrl:URL?, error:Error?) in
@@ -209,7 +216,8 @@ extension Reactive where Base: AuthController {
                                                             scopes: scopes,
                                                             channelPublicIds: channelPublicIds,
                                                             serviceTerms: serviceTerms,
-                                                            loginHint: loginHint)
+                                                            loginHint: loginHint,
+                                                            nonce: nonce)
             
             var url: URL? = nil
             if let accountParameters = accountParameters, !accountParameters.isEmpty {
@@ -263,7 +271,8 @@ extension Reactive where Base: AuthController {
     public func certAuthorizeWithTalk(prompts : [Prompt]? = nil,
                                       state: String? = nil,
                                       channelPublicIds: [String]? = nil,
-                                      serviceTerms: [String]? = nil) -> Observable<CertTokenInfo> {
+                                      serviceTerms: [String]? = nil,
+                                      nonce: String? = nil) -> Observable<CertTokenInfo> {
         return Observable<String>.create { observer in
             AUTH_CONTROLLER.authorizeWithTalkCompletionHandler = { (callbackUrl) in
                 let parseResult = callbackUrl.oauthResult()
@@ -284,7 +293,8 @@ extension Reactive where Base: AuthController {
             let parameters = AUTH_CONTROLLER.makeParametersForTalk(prompts:certPrompts,
                                                                    state:state,
                                                                    channelPublicIds: channelPublicIds,
-                                                                   serviceTerms: serviceTerms)
+                                                                   serviceTerms: serviceTerms,
+                                                                   nonce: nonce)
 
             guard let url = SdkUtils.makeUrlWithParameters(Urls.compose(.TalkAuth, path:Paths.authTalk), parameters: parameters) else {
                 SdkLog.e("Bad Parameter.")
@@ -318,7 +328,8 @@ extension Reactive where Base: AuthController {
                                                        scopes:[String]? = nil,
                                                        channelPublicIds: [String]? = nil,
                                                        serviceTerms: [String]? = nil,
-                                                       loginHint: String? = nil) -> Observable<CertTokenInfo> {
+                                                       loginHint: String? = nil,
+                                                       nonce: String? = nil) -> Observable<CertTokenInfo> {
         return Observable<String>.create { observer in
             let authenticationSessionCompletionHandler : (URL?, Error?) -> Void = {
                 (callbackUrl:URL?, error:Error?) in
@@ -364,7 +375,8 @@ extension Reactive where Base: AuthController {
                                                             scopes: scopes,
                                                             channelPublicIds: channelPublicIds,
                                                             serviceTerms: serviceTerms,
-                                                            loginHint: loginHint)
+                                                            loginHint: loginHint,
+                                                            nonce: nonce)
             
             if let url = SdkUtils.makeUrlWithParameters(Urls.compose(.Kauth, path:Paths.authAuthorize), parameters:parameters) {
                 SdkLog.d("\n===================================================================================================")
@@ -424,7 +436,8 @@ extension Reactive where Base: AuthApi {
                                                 refreshTokenExpiresIn: certOauthToken.refreshTokenExpiresIn,
                                                 refreshTokenExpiredAt: certOauthToken.refreshTokenExpiredAt,
                                                 scope: certOauthToken.scope,
-                                                scopes: certOauthToken.scopes)
+                                                scopes: certOauthToken.scopes,
+                                                idToken: certOauthToken.idToken)
                     
                     
                     if let txId = certOauthToken.txId {

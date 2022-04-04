@@ -83,10 +83,12 @@ extension Reactive where Base: UserApi {
     /// 카카오톡 간편로그인을 실행합니다.
     /// - note: UserApi.isKakaoTalkLoginAvailable() 메소드로 실행 가능한 상태인지 확인이 필요합니다. 카카오톡을 실행할 수 없을 경우 loginWithKakaoAccount() 메소드로 웹 로그인을 시도할 수 있습니다.
     public func loginWithKakaoTalk(channelPublicIds: [String]? = nil,
-                                   serviceTerms: [String]? = nil) -> Observable<OAuthToken> {
+                                   serviceTerms: [String]? = nil,
+                                   nonce: String? = nil) -> Observable<OAuthToken> {
         
         return AuthController.shared.rx.authorizeWithTalk(channelPublicIds: channelPublicIds,
-                                                          serviceTerms: serviceTerms)
+                                                          serviceTerms: serviceTerms,
+                                                          nonce: nonce)
         
     }
     
@@ -98,11 +100,13 @@ extension Reactive where Base: UserApi {
     public func certLoginWithKakaoTalk(prompts: [Prompt]? = nil,
                                        state: String? = nil,
                                        channelPublicIds: [String]? = nil,
-                                       serviceTerms: [String]? = nil) -> Observable<CertTokenInfo> {
+                                       serviceTerms: [String]? = nil,
+                                       nonce: String? = nil) -> Observable<CertTokenInfo> {
         return AuthController.shared.rx.certAuthorizeWithTalk(prompts:prompts,
                                                               state:state,
                                                               channelPublicIds: channelPublicIds,
-                                                              serviceTerms: serviceTerms)
+                                                              serviceTerms: serviceTerms,
+                                                              nonce: nonce)
     }
     
     // MARK: Login with Kakao Account
@@ -113,8 +117,11 @@ extension Reactive where Base: UserApi {
     ///   - loginHint 카카오계정 로그인 페이지의 ID에 자동 입력할 이메일 또는 전화번호
     
     public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
-                                      loginHint: String? = nil) -> Observable<OAuthToken> {
-        return AuthController.shared.rx.authorizeWithAuthenticationSession(prompts: prompts, loginHint:loginHint)
+                                      loginHint: String? = nil,
+                                      nonce: String? = nil) -> Observable<OAuthToken> {
+        return AuthController.shared.rx.authorizeWithAuthenticationSession(prompts: prompts,
+                                                                           loginHint:loginHint,
+                                                                           nonce: nonce)
     }
     
     /// 채널 메시지 방식 카카오톡 인증 로그인을 실행합니다.
@@ -127,8 +134,11 @@ extension Reactive where Base: UserApi {
     
     public func certLoginWithKakaoAccount(prompts : [Prompt]? = nil,
                                           state: String? = nil,
-                                          loginHint: String? = nil) -> Observable<CertTokenInfo> {
-        return AuthController.shared.rx.certAuthorizeWithAuthenticationSession(prompts: prompts, state: state, loginHint:loginHint)
+                                          loginHint: String? = nil,
+                                          nonce: String? = nil) -> Observable<CertTokenInfo> {
+        return AuthController.shared.rx.certAuthorizeWithAuthenticationSession(prompts: prompts, state: state,
+                                                                               loginHint:loginHint,
+                                                                               nonce: nonce)
     }
     
     // MARK: New Agreement
@@ -149,23 +159,25 @@ extension Reactive where Base: UserApi {
     /// ## 추가 항목 동의 받기 시 주의사항
     /// **선택 동의** 으로 설정된 동의항목에 대한 **추가 항목 동의 받기**는, 반드시 **사용자가 동의를 거부하더라도 서비스 이용이 지장이 없는** 시나리오에서 요청해야 합니다.
     
-    public func loginWithKakaoAccount(scopes:[String]) -> Observable<OAuthToken> {
-        return AuthController.shared.rx.authorizeWithAuthenticationSession(scopes:scopes)
+    public func loginWithKakaoAccount(scopes:[String], nonce: String? = nil) -> Observable<OAuthToken> {
+        return AuthController.shared.rx.authorizeWithAuthenticationSession(scopes:scopes, nonce:nonce)
     }
     
     /// :nodoc: 카카오싱크 전용입니다. 자세한 내용은 카카오싱크 전용 개발가이드를 참고하시기 바랍니다.
     public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
                                       channelPublicIds: [String]? = nil,
-                                      serviceTerms: [String]? = nil) -> Observable<OAuthToken> {
+                                      serviceTerms: [String]? = nil,
+                                      nonce: String? = nil) -> Observable<OAuthToken> {
         
         return AuthController.shared.rx.authorizeWithAuthenticationSession(prompts: prompts,
                                                                            channelPublicIds: channelPublicIds,
-                                                                           serviceTerms: serviceTerms)
+                                                                           serviceTerms: serviceTerms,
+                                                                           nonce: nonce)
     }
     
-    /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 사용자 아이디가 반환됩니다.
-    public func signup() -> Single<Int64?> {
-        return AUTH.rx.responseData(.post, Urls.compose(path:Paths.signup))
+    /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 회원번호가 반환됩니다.
+    public func signup(properties: [String:String]? = nil) -> Single<Int64?> {
+        return AUTH.rx.responseData(.post, Urls.compose(path:Paths.signup), parameters:["properties": properties?.toJsonString()].filterNil())
             .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
             .map({ (response, data) -> Int64? in
                 if let json = (try? JSONSerialization.jsonObject(with:data, options:[])) as? [String: Any] {

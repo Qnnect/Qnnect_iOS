@@ -30,6 +30,7 @@ final class CommentViewModel: ViewModelType {
         let showCommentMoreMenuBottomSheet: Signal<(cafeQuestionId: Int, comment: Comment)>
         let showReplyMoreMenuBottomSheet: Signal<(commentId: Int, reply: Reply)>
         let showReportBottomSheet: Signal<User>
+        let fetchError: Signal<Void>
     }
     
     private let commentUseCase: CommentUseCase
@@ -49,14 +50,21 @@ final class CommentViewModel: ViewModelType {
                 return Void()
             }
         
-        let fetchedCommentWithReplies = Observable.merge(input.viewWillAppear, createReply)
+        let fetchedCommentResult = Observable.merge(input.viewWillAppear, createReply)
             .withLatestFrom(input.commentId)
             .flatMap(commentUseCase.fetchComment)
-            .compactMap({ result -> (comment: Comment, replies: [Reply], cafeQuestionId: Int)? in
-                guard case let .success(data) = result else { return nil }
-                return data
-            })
             .share()
+        
+        let fetchedCommentWithReplies = fetchedCommentResult.compactMap(
+            { result -> (comment: Comment, replies: [Reply], cafeQuestionId: Int)? in
+            guard case let .success(data) = result else { return nil }
+            return data
+        })
+        
+        let fetchError = fetchedCommentResult.compactMap { result -> Void? in
+            guard case .failure(_) = result else { return nil }
+            return Void()
+        }
         
         let showCommentMoreMenuBottomSheet = input.didTapCommentMoreButton
             .withLatestFrom(fetchedCommentWithReplies)
@@ -80,7 +88,8 @@ final class CommentViewModel: ViewModelType {
             isWriter: fetchedCommentWithReplies.compactMap { $0.comment.writer }.asDriver(onErrorDriveWith: .empty()),
             showCommentMoreMenuBottomSheet: showCommentMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty()),
             showReplyMoreMenuBottomSheet: showReplyMoreMenuBottomSheet.asSignal(onErrorSignalWith: .empty()),
-            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty())
+            showReportBottomSheet: showReportBottomSheet.asSignal(onErrorSignalWith: .empty()),
+            fetchError: fetchError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

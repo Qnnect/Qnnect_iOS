@@ -199,6 +199,16 @@ final class CommentViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
+        let enterErrorAlertView = EnterErrorAlertView.create(with: "답변을 찾을 수 없습니다")
+        enterErrorAlertView.modalPresentationStyle = .overCurrentContext
+        output.fetchError
+            .debug()
+            .emit(onNext: {
+                [weak self] _ in
+                self?.present(enterErrorAlertView, animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
         
         output.showCommentMoreMenuBottomSheet

@@ -118,7 +118,8 @@ extension Reactive where Base: AuthApi {
                                             refreshToken: newRefreshToken,
                                             refreshTokenExpiresIn: newRefreshTokenExpiresIn,
                                             scope: newToken.scope,
-                                            scopes: newToken.scopes)
+                                            scopes: newToken.scopes,
+                                            idToken: newToken.idToken)
                 return oauthToken
             })
             .do (

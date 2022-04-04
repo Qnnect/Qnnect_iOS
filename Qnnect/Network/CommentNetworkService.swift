@@ -23,13 +23,14 @@ final class CommentNetworkService: BaseNetworkService<CommentAPI> {
             .asObservable()
     }
     
-    func fetchComment(_ commentId: Int) -> Observable<Result<CommentFetchResponseDTO,Error>> {
+    func fetchComment(_ commentId: Int) -> Observable<Result<CommentFetchResponseDTO, Error>> {
         request(.fetchComment(commentId: commentId))
-            .filter(statusCode: 200)
+            .filterSuccessfulStatusCodes()
             .map(CommentFetchResponseDTO.self)
             .map{ Result.success($0)}
-            .catch{ .just(Result.failure($0))}
+            .catch{ .just(Result.failure($0)) }
             .asObservable()
+        
     }
     
     func deleteComment(_ commentId: Int) -> Observable<Result<Void,Error>> {

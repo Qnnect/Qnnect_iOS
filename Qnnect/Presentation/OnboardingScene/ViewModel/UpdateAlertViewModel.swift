@@ -23,6 +23,7 @@ final class UpdateAlertViewModel: ViewModelType {
         
         let showAppStore = input.didTapAppStoreButton
             .do {
+                _ in
                 if UIApplication.shared.canOpenURL(URL(string: APP.appStoreLink)!) {
                     UIApplication.shared.open(URL(string: APP.appStoreLink)!, options: [:], completionHandler: nil)
                 } else {
