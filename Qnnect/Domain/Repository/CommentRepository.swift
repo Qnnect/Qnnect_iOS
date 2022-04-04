@@ -13,7 +13,7 @@ protocol CommentRepository: AnyObject {
         _ questionId: Int,
         _ images: [Data],
         _ content: String
-    ) -> Observable<Result<Void,Error>>
+    ) -> Observable<Result<Void,CommentCreateError>>
     
     func fetchComment(_ commentId: Int) -> Observable<
         Result<(comment: Comment, replies: [Reply], cafeQuestionId: Int),Error>

@@ -266,6 +266,19 @@ final class WriteCommentViewController: BaseViewController {
             .drive(onNext: setQuestionLayout(_:))
             .disposed(by: self.disposeBag)
         
+        output.createError
+            .do {
+                _ in
+                LoadingIndicator.hideLoading()
+            }
+            .emit(onNext: {
+                [weak self] error in
+                let errorAlertView = ErrorAlertView.create(with: error.message)
+                errorAlertView.modalPresentationStyle = .overCurrentContext
+                self?.present(errorAlertView, animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+        
         guard let coordinator = coordinator else { return }
 
         //TODO: 화면전환

@@ -15,11 +15,11 @@ final class CommentNetworkService: BaseNetworkService<CommentAPI> {
         _ questionId: Int,
         _ images: [Data],
         _ content: String
-    ) -> Observable<Result<Void,Error>> {
+    ) -> Observable<Result<Void,CommentCreateError>> {
         request(.createComment(questionId: questionId, images: images, content: content))
             .filter(statusCodes: 200...300)
             .map { _ in Result.success(())}
-            .catch{ .just(Result.failure($0))}
+            .catch{ .just(Result.failure(CommentCreateError(statusCode: ($0 as? MoyaError)?.response?.statusCode ?? 0)))}
             .asObservable()
     }
     

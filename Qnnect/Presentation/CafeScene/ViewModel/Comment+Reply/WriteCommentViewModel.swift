@@ -30,6 +30,7 @@ final class WriteCommentViewModel: ViewModelType {
         let showImagePickerView: Signal<Void>
         let completion: Signal<Void>
         let question: Driver<Question>
+        let createError: Signal<CommentCreateError>
     }
     
     private let commentUseCase: CommentUseCase
@@ -60,11 +61,18 @@ final class WriteCommentViewModel: ViewModelType {
                 ),
                 resultSelector: { ($1.0, $0, $1.1) })
             .flatMap(commentUseCase.createComment)
-            .compactMap{
-                result -> Void? in
-                guard case .success(_) = result else { return nil }
-                return Void()
-            }
+            .share()
+        
+        let createSuccess = create.compactMap{
+            result -> Void? in
+            guard case .success(_) = result else { return nil }
+            return Void()
+        }
+        
+        let createError = create.compactMap { result -> CommentCreateError? in
+            guard case let .failure(error) = result else { return nil }
+            return error
+        }
         
         let modify = completionTrigger
             .withLatestFrom(input.type, resultSelector: { (ImageDatas: $0, writeCommentYype: $1)})
@@ -83,7 +91,7 @@ final class WriteCommentViewModel: ViewModelType {
                 return Void()
             }
         
-        let completion = Observable.merge(create,modify)
+        let completion = Observable.merge(createSuccess,modify)
             .mapToVoid()
         
         let question = input.cafeQuestionId
@@ -97,7 +105,8 @@ final class WriteCommentViewModel: ViewModelType {
             isInputCompleted: isInputCompleted.asDriver(onErrorJustReturn: false),
             showImagePickerView: input.didTapAttachingImageButton.asSignal(onErrorSignalWith: .empty()),
             completion: completion.asSignal(onErrorSignalWith: .empty()),
-            question: question.asDriver(onErrorDriveWith: .empty())
+            question: question.asDriver(onErrorDriveWith: .empty()),
+            createError: createError.asSignal(onErrorSignalWith: .empty())
         )
     }
 }

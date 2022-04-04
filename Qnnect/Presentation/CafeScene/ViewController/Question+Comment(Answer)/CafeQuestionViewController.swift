@@ -47,7 +47,7 @@ final class CafeQuestionViewController: BaseViewController {
         $0.modalPresentationStyle = .overCurrentContext
     }
     
-    private lazy var enterErrorAlertView = EnterErrorAlertView.create(with: "질문을 찾을 수 없습니다").then {
+    private lazy var enterErrorAlertView = ErrorAlertView.create(with: "질문을 찾을 수 없습니다").then {
         $0.modalPresentationStyle = .overCurrentContext
     }
     

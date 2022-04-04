@@ -109,7 +109,8 @@
 		AE5BEFB027F9EB2A00561237 /* SetNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFAF27F9EB2A00561237 /* SetNotificationViewController.swift */; };
 		AE5BEFB227F9EB5500561237 /* SetNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB127F9EB5500561237 /* SetNotificationViewModel.swift */; };
 		AE5BEFB527F9EC3100561237 /* MyPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB427F9EC3100561237 /* MyPageItem.swift */; };
-		AE5BEFB727FA20FF00561237 /* EnterErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */; };
+		AE5BEFB727FA20FF00561237 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB627FA20FF00561237 /* ErrorAlertView.swift */; };
+		AE5BEFB927FAC2EC00561237 /* CommentCreateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEFB827FAC2EC00561237 /* CommentCreateError.swift */; };
 		AE5C260527F45F5300BB5432 /* OnboardingSceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */; };
 		AE6964C427BCD91E00BF2A80 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */; };
 		AE6964C627BCD9C200BF2A80 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */; };
@@ -496,7 +497,8 @@
 		AE5BEFAF27F9EB2A00561237 /* SetNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationViewController.swift; sourceTree = "<group>"; };
 		AE5BEFB127F9EB5500561237 /* SetNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationViewModel.swift; sourceTree = "<group>"; };
 		AE5BEFB427F9EC3100561237 /* MyPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageItem.swift; sourceTree = "<group>"; };
-		AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterErrorAlertView.swift; sourceTree = "<group>"; };
+		AE5BEFB627FA20FF00561237 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
+		AE5BEFB827FAC2EC00561237 /* CommentCreateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCreateError.swift; sourceTree = "<group>"; };
 		AE5C260427F45F5300BB5432 /* OnboardingSceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSceneType.swift; sourceTree = "<group>"; };
 		AE6964C327BCD91E00BF2A80 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		AE6964C527BCD9C200BF2A80 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
@@ -929,7 +931,7 @@
 				AE02404C27E31FDB00017F77 /* NavigationTitleLabel.swift */,
 				AE767FAE27E9065800BD5496 /* MoreMenuItem.swift */,
 				AEEF4AEA27EB04EF00DB4184 /* CircleView.swift */,
-				AE5BEFB627FA20FF00561237 /* EnterErrorAlertView.swift */,
+				AE5BEFB627FA20FF00561237 /* ErrorAlertView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1487,6 +1489,7 @@
 		AE7F484027CE7DAB00954971 /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				AE5BEFB827FAC2EC00561237 /* CommentCreateError.swift */,
 				AE7F484127CE7DB400954971 /* LoginError.swift */,
 			);
 			path = Error;
@@ -2269,6 +2272,7 @@
 				AEB5AAD827DF95650096376B /* CommentAttachImageCell.swift in Sources */,
 				AE02405427E3316200017F77 /* OurCafeCoordinator.swift in Sources */,
 				AE7F483F27CE679300954971 /* Token.swift in Sources */,
+				AE5BEFB927FAC2EC00561237 /* CommentCreateError.swift in Sources */,
 				AE02407F27E39B5B00017F77 /* RecipeViewController.swift in Sources */,
 				AE02408327E3A12300017F77 /* CafeDrinkRecipeResponseDTO.swift in Sources */,
 				AEB5AAF327E0A8A80096376B /* LikeNetworkService.swift in Sources */,
@@ -2341,7 +2345,7 @@
 				AE02407927E383C500017F77 /* IngredientStorageCell.swift in Sources */,
 				AEEF4B0E27EB70C300DB4184 /* BlockedFriendListViewController.swift in Sources */,
 				AEA14CFA27CF749D0009EEC6 /* ProfileRequestDTO.swift in Sources */,
-				AE5BEFB727FA20FF00561237 /* EnterErrorAlertView.swift in Sources */,
+				AE5BEFB727FA20FF00561237 /* ErrorAlertView.swift in Sources */,
 				AE02D80627D5CCF70019D955 /* HomeRepository.swift in Sources */,
 				AEA56AFE27BF37E70029A6CB /* TitleCell.swift in Sources */,
 				AE77C83A27DA078400E8D0EC /* DefaultQuestionRepository.swift in Sources */,

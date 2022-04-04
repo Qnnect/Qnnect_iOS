@@ -28,7 +28,7 @@ final class DefaultCommentRepository: CommentRepository {
         _ questionId: Int,
         _ images: [Data],
         _ content: String
-    ) -> Observable<Result<Void,Error>> {
+    ) -> Observable<Result<Void,CommentCreateError>> {
         commentNetworkService.createComment(questionId, images, content)
     }
     

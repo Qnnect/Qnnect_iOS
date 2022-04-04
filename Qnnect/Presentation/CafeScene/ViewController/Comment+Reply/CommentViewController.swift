@@ -199,7 +199,7 @@ final class CommentViewController: BaseViewController {
                 }
             }).disposed(by: self.disposeBag)
         
-        let enterErrorAlertView = EnterErrorAlertView.create(with: "답변을 찾을 수 없습니다")
+        let enterErrorAlertView = ErrorAlertView.create(with: "답변을 찾을 수 없습니다")
         enterErrorAlertView.modalPresentationStyle = .overCurrentContext
         output.fetchError
             .debug()
