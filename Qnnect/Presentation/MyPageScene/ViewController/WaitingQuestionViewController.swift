@@ -10,15 +10,18 @@ import SnapKit
 import Then
 import RxSwift
 
+protocol ModifyWaitingQuestionDelegate: AnyObject {
+    func didModify(content: String)
+}
+
 final class WaitingQuestionViewController: BaseViewController {
     
     
-    private let contentTextView = UITextView().then {
-        $0.isScrollEnabled = false
+    private let contentTextView = UILabel().then {
         $0.font = .IM_Hyemin(.bold, size: 14.0)
         $0.textColor = .BLACK_121212
         $0.backgroundColor = .cardBackground
-        $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     
     private let outerView = UIView().then {
@@ -26,6 +29,10 @@ final class WaitingQuestionViewController: BaseViewController {
         $0.layer.borderWidth = 1.0
         $0.layer.borderColor = UIColor.secondaryBorder?.cgColor
         $0.layer.cornerRadius = 24.0
+    }
+    
+    private let paragraphStyle = Constants.paragraphStyle.with {
+        $0.alignment = .center
     }
     
     private var viewModel: WaitingQuestionViewModel!
@@ -65,7 +72,11 @@ final class WaitingQuestionViewController: BaseViewController {
             make.leading.top.greaterThanOrEqualToSuperview().inset(16.0)
             make.trailing.bottom.lessThanOrEqualToSuperview().inset(16.0)
         }
-        contentTextView.text = question.content
+        
+        contentTextView.attributedText = NSMutableAttributedString(
+            string: question.content,
+            attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        )
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.navagation_more, style: .plain, target: self, action: #selector(self.didTapMoreButton))
     }
@@ -74,7 +85,10 @@ final class WaitingQuestionViewController: BaseViewController {
         super.bind()
         
         let input = WaitingQuestionViewModel.Input(
-            question: Observable.just(question),
+            question: rx.viewWillAppear.compactMap{
+                [weak self] _ in
+                self?.question
+            },
             didTapMoreButton: rx.methodInvoked(#selector(didTapMoreButton)).mapToVoid()
         )
         
@@ -94,3 +108,19 @@ extension WaitingQuestionViewController {
     @objc dynamic func didTapMoreButton() { }
 }
 
+extension WaitingQuestionViewController: ModifyWaitingQuestionDelegate {
+    func didModify(content: String) {
+        let question = UserQuestion(
+            id: question.id,
+            cafeTitle: question.cafeTitle,
+            createdAt: question.createdAt,
+            content: content,
+            waitingList: question.waitingList
+        )
+        self.question = question
+        contentTextView.attributedText = NSMutableAttributedString(
+            string: question.content,
+            attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        )
+    }
+}

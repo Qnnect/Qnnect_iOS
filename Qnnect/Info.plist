@@ -13,6 +13,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -78,7 +80,5 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-    <key>FirebaseAppDelegateProxyEnabled</key>
-        <false/>
 </dict>
 </plist>

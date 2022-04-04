@@ -170,6 +170,9 @@ final class DefaultMyPageCoordinator: NSObject, MyPageCoordinator {
         let questionUseCase = DefaultQuestionUseCase(questionRepository: questionRepository)
         let viewModel = ModifyWaitingQuestionViewModel(questionUseCase: questionUseCase)
         let vc = ModifyWaitingQuestionViewController.create(with: viewModel, self, question)
+        if let waitingQuestionVC = navigationController.viewControllers.last as? WaitingQuestionViewController {
+            vc.delegate = waitingQuestionVC
+        }
         dismissMoreMenu(nil)
         navigationController.pushViewController(vc, animated: true)
     }

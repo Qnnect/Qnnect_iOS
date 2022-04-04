@@ -42,6 +42,7 @@ final class ModifyWaitingQuestionViewController: BaseViewController {
     private var viewModel: ModifyWaitingQuestionViewModel!
     weak var coordinator: MyPageCoordinator?
     private var question: UserQuestion!
+    weak var delegate: ModifyWaitingQuestionDelegate?
     
     static func create(
         with viewModel: ModifyWaitingQuestionViewModel,
@@ -100,6 +101,11 @@ final class ModifyWaitingQuestionViewController: BaseViewController {
         guard let coordinator = coordinator else { return }
 
         output.completion
+            .do {
+                [weak self] content in
+                self?.delegate?.didModify(content: content)
+            }
+            .map { _ in () }
             .emit(onNext: coordinator.pop)
             .disposed(by: self.disposeBag)
         

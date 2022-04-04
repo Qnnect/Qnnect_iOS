@@ -19,7 +19,7 @@ final class ModifyWaitingQuestionViewModel: ViewModelType {
     
     struct Output {
         let isCompleted: Driver<Bool>
-        let completion: Signal<Void>
+        let completion: Signal<String>
     }
     
     private let questionUseCase: QuestionUseCase
@@ -60,7 +60,7 @@ final class ModifyWaitingQuestionViewModel: ViewModelType {
                 .withLatestFrom(isContentEqualed)
                 .filter { $0 }
                 .mapToVoid()
-        )
+        ).withLatestFrom(input.content)
         
         return Output(
             isCompleted: isCompleted.asDriver(onErrorDriveWith: .empty()),
