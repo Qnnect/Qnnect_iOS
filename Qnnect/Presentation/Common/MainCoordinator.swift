@@ -68,4 +68,28 @@ final class DefaultMainCoordinator: MainCoordinator {
         self.tabbarController.viewControllers = viewControllers
         self.navigationController.pushViewController(tabbarController, animated: true)
     }
+    
+    func start(didTapPushNoti: Bool?) {
+        let viewControllers: [UIViewController] = TabbarItem.allCases.map {
+            let coordinator = $0.coordinator
+            let vc = coordinator.navigationController
+            self.childCoordinators.append(coordinator)
+            coordinator.parentCoordinator = self
+            coordinator.start()
+            vc.tabBarItem = UITabBarItem(
+                title: $0.title,
+                image: $0.icon.default,
+                selectedImage: $0.icon.selected
+            )
+            return vc
+        }
+        self.tabbarController.tabBar.layer.borderWidth = 1.0
+        self.tabbarController.tabBar.layer.borderColor = UIColor.brownBorderColor?.cgColor
+        self.tabbarController.viewControllers = viewControllers
+        self.navigationController.pushViewController(tabbarController, animated: true)
+        
+        if let homeCoordinator = childCoordinators.first as? DefaultHomeCoordinator {
+            homeCoordinator.showNotificationListScene()
+        }
+    }
 }

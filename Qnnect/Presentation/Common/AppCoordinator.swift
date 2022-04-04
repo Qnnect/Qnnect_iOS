@@ -39,17 +39,11 @@ final class AppCoordinator: Coordinator {
         coordinator.start(inviteCode: inviteCode)
     }
     
-    /// rootViewController 시작 메소드
-    /// - Parameter isLogin: 로그인 유무(자동로그인)
-    func start(isLogin: Bool) {
-        if isLogin {
-            //TODO: 로그인 화면 건너뛰고 바로 홈화면으로
-        } else {
-            //TODO: 로그인 화면 으로
-            let loginCoordinator = DefaultAuthCoordinator(navigationController: self.navigationController)
-            self.childCoordinators.append(loginCoordinator)
-            loginCoordinator.parentCoordinator = self
-            loginCoordinator.start()
-        }
+    func startPushNoti() {
+        let coordinator = DefaultSplashCoordinator(navigationController: self.navigationController)
+        self.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start(didTapPushNoti: true)
     }
+    
 }

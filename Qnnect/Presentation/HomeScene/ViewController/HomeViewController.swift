@@ -283,6 +283,15 @@ final class HomeViewController: BaseViewController {
             .emit(onNext: coordinator.showNotificationListScene)
             .disposed(by: self.disposeBag)
 
+        
+        NotificationCenter.default.rx.notification(.didTapPushNoti)
+            .debug()
+            .mapToVoid()
+            .asSignal(onErrorSignalWith: .empty())
+            .emit(onNext: coordinator.showNotificationListScene)
+            .disposed(by: disposeBag)
+        
+        print("main Coordinator \(coordinator.parentCoordinator)")
     }
 }
 

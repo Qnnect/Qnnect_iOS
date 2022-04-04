@@ -8,6 +8,7 @@
 import UIKit
 import KakaoSDKAuth
 import Toast_Swift
+import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -24,17 +25,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.IM_Hyemin(.bold, size: 10.0)], for: .normal)
         UITabBar.appearance().tintColor = .p_brown
         UITabBar.appearance().backgroundColor = .p_ivory
-        //UITabBar.appearance().isTranslucent = false
         
-        self.scene(scene, openURLContexts: connectionOptions.urlContexts)
-        
-//        UserDefaults.standard.removeObject(forKey: "isFirstAccess")
-
-        
-    
+        if connectionOptions.notificationResponse != nil {
+            handlePushNoti(scene)
+        } else {
+            self.scene(scene, openURLContexts: connectionOptions.urlContexts)
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        if appCoordinator == nil {
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            
+            let rootVC = UINavigationController()
+            rootVC.isNavigationBarHidden = true
+            
+            
+            self.appCoordinator = AppCoordinator(navigationController: rootVC)
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.backgroundColor = .p_ivory
+            self.window?.rootViewController = rootVC
+            self.window?.makeKeyAndVisible()
+        }
         
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
@@ -42,18 +55,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
             }
         }
-        
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let rootVC = UINavigationController()
-        rootVC.isNavigationBarHidden = true
-        
-        
-        self.appCoordinator = AppCoordinator(navigationController: rootVC)
-        self.window = UIWindow(windowScene: windowScene)
-        self.window?.backgroundColor = .p_ivory
-        self.window?.rootViewController = rootVC
-        self.window?.makeKeyAndVisible()
         
         
         // MARK: - DeepLink
@@ -99,3 +100,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+
+private extension SceneDelegate {
+    func handlePushNoti(_ scene: UIScene) {
+        
+        if appCoordinator == nil {
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            
+            let rootVC = UINavigationController()
+            rootVC.isNavigationBarHidden = true
+            
+            
+            self.appCoordinator = AppCoordinator(navigationController: rootVC)
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.backgroundColor = .p_ivory
+            self.window?.rootViewController = rootVC
+            self.window?.makeKeyAndVisible()
+        }
+        
+        appCoordinator?.startPushNoti()
+        
+    }
+}

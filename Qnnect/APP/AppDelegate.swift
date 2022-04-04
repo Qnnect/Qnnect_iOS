@@ -24,9 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         self.registerRemoteNotification()
         
+        
         // KAKAO
         KakaoSDK.initSDK(appKey: APP.KAKAO_NATIVE_APP_KEY)
-    
+        
         // 앱 재설치 시 저장된 토크 정보 삭제
         if userDefaultManager.isFirstLaunch == nil {
             userDefaultManager.isFirstLaunch = false
@@ -97,8 +98,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         print("Push Noti!!!")
         print(userInfo)
+        handlePushNoti()
         completionHandler()
-        
     }
 }
 
@@ -110,4 +111,39 @@ extension AppDelegate: MessagingDelegate {
 }
 
 
+private extension AppDelegate {
+    func handlePushNoti() {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        
+        //로그인 되어 있고 이미 화면들이 푸쉬되어 있는 상태 홈화면으로 이동후 카페 접속
+        if KeyChain.read(key: Constants.accessTokenKey) != nil {
+            print("login 되어있는 상태")
+            if let appCoordinator = sceneDelegate.appCoordinator {
+                print("appCoordinator 존재")
+                if let mainCoordinator = appCoordinator.childCoordinators.first {
+                    print("mainCoordinator 존재")
+                    if let homeCoordinator = mainCoordinator.childCoordinators.first as? HomeCoordinator {
+                        print("homeCoordinator 존재")
+                        print(mainCoordinator.childCoordinators)
+                        mainCoordinator.childCoordinators.forEach {
+                            $0.navigationController.popToRootViewController(animated: false)
+                            if let vc = $0.navigationController.presentedViewController {
+                                vc.presentingViewController?.dismiss(animated: false)
+                            }
+                        }
+                        homeCoordinator.navigationController.tabBarController?.selectedIndex = 0
+                        homeCoordinator.navigationController.popToRootViewController(animated: true)
+                        print("이미 화면 구성")
+                        NotificationCenter.default.post(name: .didTapPushNoti, object: nil)
+                    }
+                } 
+            }
+        }
+    }
+}
 
+extension Notification.Name {
+    static let didTapPushNoti = Notification.Name("didTapPushNoti")
+}
