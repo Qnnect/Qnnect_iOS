@@ -50,7 +50,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private let pointLabel = UILabel().then {
-        $0.text = "nil"
+        $0.text = "0"
         $0.font = .BM_JUA(size: 18.0)
         $0.textColor = .BLACK_121212
     }

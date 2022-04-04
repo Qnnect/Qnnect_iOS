@@ -65,6 +65,10 @@ class CustomTagCollectionView: TTGTextTagCollectionView {
             )
             self.addTag(tag)
         }
+        
+        if titles.count == 1, titles.first == "전체" {
+            isHidden = true
+        }
     }
     
     func addWholeTag() {
