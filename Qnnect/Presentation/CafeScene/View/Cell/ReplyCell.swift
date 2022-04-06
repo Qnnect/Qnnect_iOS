@@ -123,6 +123,7 @@ final class ReplyCell: UICollectionViewCell {
         
         contentLabel.snp.makeConstraints { make in
             make.leading.equalTo(writerProfileImageView)
+            make.trailing.equalToSuperview().inset(15.0)
             make.top.equalTo(writerProfileImageView.snp.bottom).offset(8.0)
         }
         
