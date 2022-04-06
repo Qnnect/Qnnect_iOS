@@ -160,6 +160,7 @@ final class CafeRoomViewController: BaseViewController {
             UIBarButtonItem(customView: self.navigationMenuButton),
             UIBarButtonItem(customView: self.navigationQuestionListButton)
         ]
+        
     }
     
     override func bind() {
@@ -185,7 +186,10 @@ final class CafeRoomViewController: BaseViewController {
                     return question
                 },
             didTapQuestionListButton: navigationQuestionListButton.rx.tap.asObservable(),
-            didTapDrinkSection: rx.methodInvoked(#selector(didTapDrinkSection)).mapToVoid()
+            didTapDrinkSection: Observable.merge(
+                rx.methodInvoked(#selector(didTapDrinkSection)).mapToVoid(),
+                mainCollectionView.rx.itemSelected.filter{ $0.section == 1}.mapToVoid()
+                )
         )
         
         let output = self.viewModel.transform(from: input)
@@ -463,9 +467,11 @@ private extension CafeRoomViewController {
                 forElementKind: UICollectionView.elementKindSectionFooter,
                 at: IndexPath(row: 0, section: 1)) as? PageControlFooterView
         else { return }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDrinkSection))
         
         if decoView.gestureRecognizers == nil || decoView.gestureRecognizers?.isEmpty ?? true {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDrinkSection))
+            decoView.isUserInteractionEnabled = true
             decoView.addGestureRecognizer(tapGesture)
         }
         
@@ -473,5 +479,7 @@ private extension CafeRoomViewController {
         footerView.pageControl.isHidden = isEmpty
     }
     
-    @objc func didTapDrinkSection() { }
+    @objc func didTapDrinkSection() {
+        print("didTapDrinkSection")
+    }
 }
