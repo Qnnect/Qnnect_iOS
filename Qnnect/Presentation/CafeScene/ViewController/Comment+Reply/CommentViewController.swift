@@ -24,6 +24,7 @@ final class CommentViewController: BaseViewController {
         $0.register(ReplyCell.self, forCellWithReuseIdentifier: ReplyCell.identifier)
         $0.register(CommentDateCell.self, forCellWithReuseIdentifier: CommentDateCell.identifier)
         $0.backgroundColor = .p_ivory
+        $0.showsVerticalScrollIndicator = false
     }
     
     private let bottomView = UIView().then {
@@ -92,7 +93,8 @@ final class CommentViewController: BaseViewController {
         }
         
         mainCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(bottomView.snp.top).offset(-8.0)
         }
         
         
