@@ -7,11 +7,13 @@
 ### 2️⃣ 가족/친구/연인의 답변을 통해 서로에 대해 알아가고, 소통할 수 있어요
 
 ### 3️⃣ 답변을 통해 쌓은 포인트로 우리만의 음료 ☕️ 를 만들어보세요!
-![ex_screenshot](./img/ios_1.jpg) ![ex_screenshot](./img/ios_2.jpg)
-![ex_screenshot](./img/ios_3.jpg)![ex_screenshot](./img/ios_4.jpg)
-![ex_screenshot](./img/ios_5.jpg)![ex_screenshot](./img/ios_6.jpg)
-![ex_screenshot](./img/ios_7.jpg)
-
+<image src = "./img/ios_1.jpg" width = "200" height = "300">
+<image src = "./img/ios_2.jpg" width = "200" height = "300">
+<image src = "./img/ios_3.jpg" width = "200" height = "300">
+<image src = "./img/ios_4.jpg" width = "200" height = "300">
+<image src = "./img/ios_5.jpg" width = "200" height = "300">
+<image src = "./img/ios_6.jpg" width = "200" height = "300">
+<image src = "./img/ios_7.jpg" width = "200" height = "300">
 
 ## stack
 -   Swift
