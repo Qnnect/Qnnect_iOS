@@ -7,13 +7,13 @@
 ### 2️⃣ 가족/친구/연인의 답변을 통해 서로에 대해 알아가고, 소통할 수 있어요
 
 ### 3️⃣ 답변을 통해 쌓은 포인트로 우리만의 음료 ☕️ 를 만들어보세요!
-<image src = "./img/ios_1.jpg" width = "200" height = "300">
-<image src = "./img/ios_2.jpg" width = "200" height = "300">
-<image src = "./img/ios_3.jpg" width = "200" height = "300">
-<image src = "./img/ios_4.jpg" width = "200" height = "300">
-<image src = "./img/ios_5.jpg" width = "200" height = "300">
-<image src = "./img/ios_6.jpg" width = "200" height = "300">
-<image src = "./img/ios_7.jpg" width = "200" height = "300">
+![ios_1](https://user-images.githubusercontent.com/83381672/162394659-6a822c1e-c8ec-4765-9a46-50f1f145869b.jpg)
+![ios_2](https://user-images.githubusercontent.com/83381672/162394592-88f22dd4-1ee2-4a9e-883c-4c929df58ef5.jpg)
+![ios_3](https://user-images.githubusercontent.com/83381672/162394598-b45b80bc-d4e8-475a-aa48-75530ca2ab4b.jpg)
+![ios_4](https://user-images.githubusercontent.com/83381672/162394602-48365302-424d-42b0-8eee-61f82d427452.jpg)
+![ios_5](https://user-images.githubusercontent.com/83381672/162394607-69b9fcf6-3867-4a85-91f6-86fbb7b70150.jpg)
+![ios_6](https://user-images.githubusercontent.com/83381672/162394620-61f62c80-5c91-4cff-b2d8-a3a355286ea6.jpg)
+![ios_7](https://user-images.githubusercontent.com/83381672/162394623-f5dd500b-a0a0-4632-850d-7afae1cc0263.jpg)
 
 ## stack
 -   Swift
