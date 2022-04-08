@@ -7,13 +7,14 @@
 ### 2️⃣ 가족/친구/연인의 답변을 통해 서로에 대해 알아가고, 소통할 수 있어요
 
 ### 3️⃣ 답변을 통해 쌓은 포인트로 우리만의 음료 ☕️ 를 만들어보세요!
-![ios_1](https://user-images.githubusercontent.com/83381672/162394659-6a822c1e-c8ec-4765-9a46-50f1f145869b.jpg)
-![ios_2](https://user-images.githubusercontent.com/83381672/162394592-88f22dd4-1ee2-4a9e-883c-4c929df58ef5.jpg)
-![ios_3](https://user-images.githubusercontent.com/83381672/162394598-b45b80bc-d4e8-475a-aa48-75530ca2ab4b.jpg)
-![ios_4](https://user-images.githubusercontent.com/83381672/162394602-48365302-424d-42b0-8eee-61f82d427452.jpg)
-![ios_5](https://user-images.githubusercontent.com/83381672/162394607-69b9fcf6-3867-4a85-91f6-86fbb7b70150.jpg)
-![ios_6](https://user-images.githubusercontent.com/83381672/162394620-61f62c80-5c91-4cff-b2d8-a3a355286ea6.jpg)
-![ios_7](https://user-images.githubusercontent.com/83381672/162394623-f5dd500b-a0a0-4632-850d-7afae1cc0263.jpg)
+
+![ios_1](https://user-images.githubusercontent.com/83381672/162396140-ce1a4384-8393-4a3a-8794-6edfd3d94467.jpg)
+![ios_2](https://user-images.githubusercontent.com/83381672/162396147-19fd7d1b-191a-434d-9c43-ad4bfdacad4d.jpg)
+![ios_3](https://user-images.githubusercontent.com/83381672/162396150-c6f39804-e695-4cbe-b3ad-868280c8c42a.jpg)
+![ios_4](https://user-images.githubusercontent.com/83381672/162396152-1b0df060-99a1-4ff3-b967-db139b9b6d34.jpg)
+![ios_5](https://user-images.githubusercontent.com/83381672/162396155-3ab44c53-516d-47dc-86ee-5a411526dde2.jpg)
+![ios_6](https://user-images.githubusercontent.com/83381672/162396161-bc475a94-c8e5-4474-8ac8-2eacd64a2078.jpg)
+![ios_7](https://user-images.githubusercontent.com/83381672/162396163-4672b92d-ff2c-4061-b285-bd1ce5abc9e1.jpg)
 
 ## stack
 -   Swift
