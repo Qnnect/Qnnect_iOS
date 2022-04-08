@@ -25,7 +25,7 @@
 
 
 
-![](https://img.shields.io/badge/version-1.0.2-brightgreen)
-[App Store](https://apps.apple.com/kr/app/%ED%81%90%EB%84%A5%ED%8A%B8-qnnect/id1615729809)
+![](https://img.shields.io/badge/version-1.0.2-brightgreen)   
+[App Store](https://apps.apple.com/kr/app/%ED%81%90%EB%84%A5%ED%8A%B8-qnnect/id1615729809)     
 [Google Play Store](https://play.google.com/store/apps/details?id=com.iame.qnnect.android)
 
