@@ -7,10 +7,10 @@
 ### 2️⃣ 가족/친구/연인의 답변을 통해 서로에 대해 알아가고, 소통할 수 있어요
 
 ### 3️⃣ 답변을 통해 쌓은 포인트로 우리만의 음료 ☕️ 를 만들어보세요!
-![ex_screenshot](./img/screenshot1.png) ![ex_screenshot](./img/screenshot2.png)
-![ex_screenshot](./img/screenshot3.png)![ex_screenshot](./img/screenshot4.png)
-![ex_screenshot](./img/screenshot5.png)![ex_screenshot](./img/screenshot6.png)
-![ex_screenshot](./img/screenshot7.png)
+![ex_screenshot](./img/ios_1.png) ![ex_screenshot](./img/ios_2.png)
+![ex_screenshot](./img/ios_3.png)![ex_screenshot](./img/ios_4.png)
+![ex_screenshot](./img/ios_5.png)![ex_screenshot](./img/ios_6.png)
+![ex_screenshot](./img/ios_7.png)
 
 
 ## stack
