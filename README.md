@@ -7,7 +7,7 @@
 ### 2️⃣ 가족/친구/연인의 답변을 통해 서로에 대해 알아가고, 소통할 수 있어요
 
 ### 3️⃣ 답변을 통해 쌓은 포인트로 우리만의 음료 ☕️ 를 만들어보세요!
-<img src = "https://user-images.githubusercontent.com/83381672/162394659-6a822c1e-c8ec-4765-9a46-50f1f145869b.jpg" width = "200" height = "300">
+<img src = "https://user-images.githubusercontent.com/83381672/162394659-6a822c1e-c8ec-4765-9a46-50f1f145869b.jpg" width = "300" height = "500">
 ![ios_1](https://user-images.githubusercontent.com/83381672/162394659-6a822c1e-c8ec-4765-9a46-50f1f145869b.jpg)
 ![ios_2](https://user-images.githubusercontent.com/83381672/162394592-88f22dd4-1ee2-4a9e-883c-4c929df58ef5.jpg)
 ![ios_3](https://user-images.githubusercontent.com/83381672/162394598-b45b80bc-d4e8-475a-aa48-75530ca2ab4b.jpg)
