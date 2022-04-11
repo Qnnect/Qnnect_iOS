@@ -38,6 +38,11 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
         $0.textColor = .BLACK_121212
     }
     
+    private let profileImageView = CircleImageView().then {
+        $0.contentMode = .scaleAspectFill
+        $0.isHidden = true
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureUI()
@@ -46,6 +51,12 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        profileImageView.isHidden = false
     }
     
     private func configureUI() {
@@ -98,6 +109,7 @@ final class CafeToDayQuestionCell: UICollectionViewCell {
             attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
         )
         self.d_dayLabel.text = "D-\(question.daysLeft)"
+        contentView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .PINK01
     }
     
 }
