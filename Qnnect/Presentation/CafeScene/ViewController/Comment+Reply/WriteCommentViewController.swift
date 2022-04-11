@@ -105,7 +105,6 @@ final class WriteCommentViewController: BaseViewController {
     private var fetchedAssets: [PHAsset] = []
     
     private var cafeQuestionId: Int!
-    //private var cafeId: Int!
     private var user: User?
     private var viewModel: WriteCommentViewModel!
     weak var coordinator: WriteCommentCoordinator?
@@ -427,7 +426,7 @@ private extension WriteCommentViewController {
     }
     
     func setQuestionLayout(_ question: Question) {
-        questionView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .ORANGE01
+        questionView.backgroundColor = question.questioner == "넥트" ? .SECONDARY01 : .PINK01
         dateLabel.text = question.createdAt
         questionerLabel.text = question.questioner == "넥트" ? "" : "\(question.questioner)의 질문"
         daysLeftLabel.text = "D-\(question.daysLeft)"
