@@ -41,7 +41,22 @@ final class UpdateAlertViewController: BaseViewController {
         $0.layer.borderColor = UIColor.BLACK_121212?.cgColor
     }
     
+    private let cancleButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.WHITE_FFFFFF, for: .normal)
+        $0.titleLabel?.font = .IM_Hyemin(.bold, size: 16.0)
+        $0.backgroundColor = .GRAY04
+        $0.layer.cornerRadius = 10.0
+        $0.layer.borderWidth = 1.0
+        $0.layer.borderColor = UIColor.GRAY03?.cgColor
+    }
 
+    private let buttonStackView = UIStackView().then {
+        $0.distribution = .fillEqually
+        $0.axis = .horizontal
+        $0.spacing = 12.0
+    }
+    
     private let alertView = UIView().then {
         $0.backgroundColor = .p_ivory
         $0.layer.cornerRadius = 16.0
@@ -66,12 +81,17 @@ final class UpdateAlertViewController: BaseViewController {
     
     override func configureUI() {
         
-       
+        [
+            cancleButton,
+            appStoreButton
+        ].forEach {
+            self.buttonStackView.addArrangedSubview($0)
+        }
         
         [
             titleLabel,
             secondaryLabel,
-            appStoreButton
+            buttonStackView
         ].forEach {
             self.alertView.addSubview($0)
         }
@@ -95,7 +115,7 @@ final class UpdateAlertViewController: BaseViewController {
             make.centerX.equalToSuperview()
         }
         
-        appStoreButton.snp.makeConstraints { make in
+        buttonStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20.0)
             make.bottom.equalToSuperview().inset(25.0)
             make.height.equalTo(50.0)
@@ -115,5 +135,11 @@ final class UpdateAlertViewController: BaseViewController {
         output.showAppStore
             .emit(onNext: coordinator.dismiss)
             .disposed(by: self.disposeBag)
+        
+        cancleButton.rx.tap
+            .subscribe(onNext: {
+                [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
 }
